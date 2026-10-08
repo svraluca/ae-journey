@@ -39,7 +39,7 @@ abstract final class ExplorePipelineConfig {
 
   /// Cards the UI aims to show.
   static int get visibleTarget =>
-      _intEnv('EXPLORE_VISIBLE_TARGET', 4, min: 1, max: 8);
+      _intEnv('EXPLORE_VISIBLE_TARGET', 4, min: 1, max: 4);
 
   /// Max candidates to website-verify per search wave.
   static int get candidateVerifyLimit =>

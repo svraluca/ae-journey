@@ -1,0 +1,11 @@
+{
+  "source_url": "https://clinicadraolmo.com/botox-en-valencia/",
+  "user_report": "The Botox card shows a price which the user cannot find on this page.",
+  "current_page_fetched": false,
+  "fetch_result": "HTTP 403 from current cloud network proxy",
+  "previous_card_saved_evidence_supplied": false,
+  "old_amount_provenance_identified": false,
+  "verified_current_price": null,
+  "action": "Added the clinic host and www host to the environment draft. Added representative offline no-fee-page regressions in Python and Flutter; these fixtures are not a fetched snapshot of the site.",
+  "live_followup": "After environment settings are applied, fetch this page and compare its literal treatment tariff with the stored card evidence. Retain rejection/quarantine when no matching published fee exists."
+}

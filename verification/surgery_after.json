@@ -1,0 +1,172 @@
+[
+  {
+    "name": "molto",
+    "url": "https://www.drmolto.com/rinoplastia-ultrasonica-precio/",
+    "status": "no_eligible_price",
+    "local_business_evidence": true,
+    "extracted_prices": 1,
+    "reasons": {
+      "comparative_market_article": 1
+    }
+  },
+  {
+    "name": "simon",
+    "url": "https://dreduardosimon.com/",
+    "status": "no_eligible_price",
+    "local_business_evidence": true,
+    "extracted_prices": 3,
+    "reasons": {
+      "unowned_official_page": 3
+    }
+  },
+  {
+    "name": "medics",
+    "url": "https://www.medicsintegralsalut.com/cuanto-cuesta-rinoplastia-espana/",
+    "status": "no_eligible_price",
+    "local_business_evidence": false,
+    "extracted_prices": 17,
+    "reasons": {
+      "comparative_market_article": 17
+    }
+  },
+  {
+    "name": "sensabell",
+    "url": "https://sensabell.com/precio-aumento-pecho-2026-valencia/",
+    "status": "no_eligible_price",
+    "local_business_evidence": true,
+    "extracted_prices": 29,
+    "reasons": {
+      "comparative_market_article": 29
+    }
+  },
+  {
+    "name": "puig_breast_blog",
+    "url": "https://drpuig.com/precio-aumento-de-pecho-valencia-cuanto-cuesta/",
+    "status": "verified",
+    "local_business_evidence": true,
+    "extracted_prices": 16,
+    "reasons": {
+      "generic_multi_clinic_price": 3,
+      "package_not_procedure": 2
+    },
+    "clinic_name": "Clínica de Cirugía Estética Dr. Julio Puig",
+    "source_host": "drpuig.com",
+    "source_url": "https://drpuig.com/precio-aumento-de-pecho-valencia-cuanto-cuesta/",
+    "price_min": 5300.0,
+    "price_max": null,
+    "currency": "EUR",
+    "unit": "procedure",
+    "qualifier": "from",
+    "scope": "Method not specified",
+    "procedure_display_name": "Breast augmentation · Method not specified",
+    "raw_procedure_text": "¿Cuánto cuesta operarse con el Dr. Puig de mamoplastia de aumento? Desde",
+    "raw_evidence": "¿Cuánto cuesta operarse con el Dr. Puig de mamoplastia de aumento? Desde 5300 €",
+    "source_type": "official_clinic",
+    "evidence_type": "official_price_menu"
+  },
+  {
+    "name": "puig_breast",
+    "url": "https://drpuig.com/cirugia-estetica/mamas/aumento-pecho/",
+    "status": "verified",
+    "local_business_evidence": true,
+    "extracted_prices": 5,
+    "reasons": {
+      "generic_multi_clinic_price": 3,
+      "unowned_official_page": 1
+    },
+    "clinic_name": "Clínica de Cirugía Estética Dr. Julio Puig",
+    "source_host": "drpuig.com",
+    "source_url": "https://drpuig.com/cirugia-estetica/mamas/aumento-pecho/",
+    "price_min": 5300.0,
+    "price_max": null,
+    "currency": "EUR",
+    "unit": "procedure",
+    "qualifier": "from",
+    "scope": "Method not specified",
+    "procedure_display_name": "Breast augmentation · Method not specified",
+    "raw_procedure_text": "¿Cuanto cuesta una operación de mamoplastia de aumento? | Desde",
+    "raw_evidence": "¿Cuanto cuesta una operación de mamoplastia de aumento? | Desde 5300 €",
+    "source_type": "official_clinic",
+    "evidence_type": "official_treatment_page"
+  },
+  {
+    "name": "hunter",
+    "url": "https://clinichunter.com/breast-enlargement/clinics/spain/valencia/",
+    "status": "no_eligible_price",
+    "local_business_evidence": false,
+    "extracted_prices": 3,
+    "reasons": {
+      "directory_unverified": 3
+    }
+  },
+  {
+    "name": "mcapilar",
+    "url": "https://clinicamcapilar.com/injerto-capilar-precio/",
+    "status": "verified",
+    "local_business_evidence": true,
+    "extracted_prices": 5,
+    "reasons": {
+      "foreign_quoted_price_city": 3
+    },
+    "clinic_name": "Mcapilar",
+    "source_host": "clinicamcapilar.com",
+    "source_url": "https://clinicamcapilar.com/injerto-capilar-precio/",
+    "price_min": 3090.0,
+    "price_max": 3690.0,
+    "currency": "EUR",
+    "unit": "procedure",
+    "qualifier": "range",
+    "scope": "FUE",
+    "procedure_display_name": "Hair Transplant",
+    "raw_procedure_text": "Hair Transplant",
+    "raw_evidence": ". El tipo de injerto o la clínica que elegir es algo que solo puedes decidir tú mismo, pero en MCapilar siempre recomendamos que tengas una valoración médica pr",
+    "source_type": "official_clinic",
+    "evidence_type": "official_price_menu"
+  },
+  {
+    "name": "magna",
+    "url": "https://clinicamagnasalud.es/servicios/medicina-capilar/trasplante-capilar-fue/",
+    "status": "verified",
+    "local_business_evidence": true,
+    "extracted_prices": 3,
+    "reasons": {},
+    "clinic_name": "Clínica Magnasalud",
+    "source_host": "clinicamagnasalud.es",
+    "source_url": "https://clinicamagnasalud.es/servicios/medicina-capilar/trasplante-capilar-fue/",
+    "price_min": 2500.0,
+    "price_max": null,
+    "currency": "EUR",
+    "unit": "procedure",
+    "qualifier": "from",
+    "scope": "FUE",
+    "procedure_display_name": "Hair Transplant",
+    "raw_procedure_text": "Hair Transplant",
+    "raw_evidence": "Trasplante Capilar FUE | Precio desde 2500€. Pide cita para valoración tricológica.",
+    "source_type": "official_clinic",
+    "evidence_type": "official_treatment_page"
+  },
+  {
+    "name": "mymedica_fees",
+    "url": "https://es.mymedicavalencia.com/fees/",
+    "status": "verified",
+    "local_business_evidence": true,
+    "extracted_prices": 9,
+    "reasons": {
+      "other": 3
+    },
+    "clinic_name": "My Medica",
+    "source_host": "es.mymedicavalencia.com",
+    "source_url": "https://es.mymedicavalencia.com/fees/",
+    "price_min": 350.0,
+    "price_max": null,
+    "currency": "EUR",
+    "unit": "procedure",
+    "qualifier": "exact",
+    "scope": "",
+    "procedure_display_name": "Botox",
+    "raw_procedure_text": "Botox",
+    "raw_evidence": "Dra. Tatiana Fernández Portilla Botox facial 350€ Relleno labios",
+    "source_type": "official_clinic",
+    "evidence_type": "official_price_menu"
+  }
+]

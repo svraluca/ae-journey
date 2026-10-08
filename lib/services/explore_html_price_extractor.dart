@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'explore_regex_cache.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart' as html_parser;
@@ -7,6 +9,7 @@ import 'package:html/parser.dart' as html_parser;
 import 'explore_clinic_identity.dart';
 import 'explore_marketplace_discovery.dart';
 import 'explore_price_evidence.dart';
+import 'explore_price_ownership.dart';
 import 'explore_price_sanity.dart';
 import 'explore_procedure_family.dart';
 
@@ -14,26 +17,32 @@ import 'explore_procedure_family.dart';
 const _kCurrencyAlt =
     r'€|eur|euro|£|gbp|\$|usd|ron|lei|mdl|try|tl|pln|zł|aed|درهم|د\.إ';
 
-final _kPriceLike = RegExp(
-  '(?:$_kCurrencyAlt)' r'\s*\d|'
-  r'\d[\d.,\s]*\s*' '(?:$_kCurrencyAlt)' r'|'
+final _kPriceLike = cachedRegExp(
+  '(?:$_kCurrencyAlt)'
+  r'\s*\d|'
+  r'\d[\d.,\s]*\s*'
+  '(?:$_kCurrencyAlt)'
+  r'|'
   r'(?:from|starts?\s+from|desde|de\s+la|a\s+partir\s+de|porneste|pornește|începe|incepe|'
   r'يبدأ من|تبدأ من)\s*(?:aed|usd|eur|gbp|د\.إ|درهم|[€£$])?\s*\d',
   caseSensitive: false,
 );
 
-final _kBarePrice = RegExp(
+final _kBarePrice = cachedRegExp(
   r'(?:from|desde|de\s+la|a\s+partir\s+de)?\s*[€£$]?\s*\d{2,6}(?:[.,]\d{2,3})?'
   r'\s*(?:€|eur|£|gbp|ron|lei|aed|درهم|د\.إ)?',
   caseSensitive: false,
 );
 
 String _listedRawPriceText(String raw, ParsedPrice parsed) {
-  var t = raw.replaceAll(RegExp(r'\s+'), ' ').trim();
-  t = t.replaceAll(RegExp(r'\s*\(\s*was\b[^)]*\)', caseSensitive: false), '');
-  t = t.replaceAll(RegExp(r'\s+'), ' ').trim();
+  var t = raw.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
+  t = t.replaceAll(
+    cachedRegExp(r'\s*\(\s*was\b[^)]*\)', caseSensitive: false),
+    '',
+  );
+  t = t.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
   if (t.isEmpty) return t;
-  final amountSpan = RegExp(
+  final amountSpan = cachedRegExp(
     r'(?:între|intre|de la|from|desde)?\s*\d[\d.,]*'
     r'(?:\s*(?:–|—|-|to|pana la|până la)\s*\+?\s*\d[\d.,]*)?'
     r'\s*(?:€|eur|euro|lei|ron|£|gbp|\$|aed|درهم|د\.إ)?',
@@ -45,7 +54,7 @@ String _listedRawPriceText(String raw, ParsedPrice parsed) {
       t = span;
     }
   }
-  final hasCurrency = RegExp(
+  final hasCurrency = cachedRegExp(
     r'(ron|lei|eur|euro|usd|gbp|aed|try|€|£|\$|درهم|د\.إ)',
     caseSensitive: false,
   ).hasMatch(t);
@@ -64,7 +73,7 @@ bool looksLikeUtf8Mojibake(String raw) {
       raw.contains('\u0082') ||
       raw.contains('\u0083') ||
       raw.contains('\u0093') ||
-      RegExp(r'Ä[\u0080-\u009f]').hasMatch(raw);
+      cachedRegExp(r'Ä[\u0080-\u009f]').hasMatch(raw);
 }
 
 String repairUtf8Mojibake(String raw) {
@@ -82,14 +91,17 @@ String decodeHtmlHttpBody({
 }) {
   if (bodyBytes.isEmpty) return '';
   final declared = contentType.toLowerCase();
-  final declaredLatin = declared.contains('iso-8859-1') ||
+  final declaredLatin =
+      declared.contains('iso-8859-1') ||
       declared.contains('windows-1252') ||
       declared.contains('latin-1') ||
       declared.contains('latin1');
   final headLen = bodyBytes.length < 4096 ? bodyBytes.length : 4096;
   final head = latin1.decode(bodyBytes.sublist(0, headLen), allowInvalid: true);
-  final metaUtf8 = RegExp(
-    r'charset\s*=\s*["' "'" r']?\s*utf-?8',
+  final metaUtf8 = cachedRegExp(
+    r'charset\s*=\s*["'
+    "'"
+    r']?\s*utf-?8',
     caseSensitive: false,
   ).hasMatch(head);
   if (!declaredLatin || metaUtf8) {
@@ -112,6 +124,7 @@ const kExploreMaxEvidenceRowsPerPage = 80;
 /// Hospital menus list hundreds of surgical rows before injectables. Scan
 /// past the visible cap so Botox/filler still make the kept 80.
 const kExploreMaxEvidenceScanRowsPerPage = 400;
+
 /// Spa/peel menus nest thousands of wrapper divs. Walking each with
 /// [_visibleText] is O(n²) on the UI isolate and freezes Compare.
 const _kMaxGenericBlockWalks = 220;
@@ -120,7 +133,7 @@ const _kMaxGenericBlockWalks = 220;
 String explorePrepareHtmlForPriceParse(String html) {
   if (html.trim().isEmpty) return '';
   final jsonLd = <String>[];
-  final ldRe = RegExp(
+  final ldRe = cachedRegExp(
     r'<script[^>]*type="application/ld\+json"[^>]*>[\s\S]*?</script>',
     caseSensitive: false,
   );
@@ -129,26 +142,26 @@ String explorePrepareHtmlForPriceParse(String html) {
     if (jsonLd.length >= 8) break;
   }
   var cleaned = html.replaceAll(
-    RegExp(r'<script[\s\S]*?</script>', caseSensitive: false),
+    cachedRegExp(r'<script[\s\S]*?</script>', caseSensitive: false),
     ' ',
   );
   cleaned = cleaned.replaceAll(
-    RegExp(r'<style[\s\S]*?</style>', caseSensitive: false),
+    cachedRegExp(r'<style[\s\S]*?</style>', caseSensitive: false),
     ' ',
   );
   cleaned = cleaned.replaceAll(
-    RegExp(r'<noscript[\s\S]*?</noscript>', caseSensitive: false),
+    cachedRegExp(r'<noscript[\s\S]*?</noscript>', caseSensitive: false),
     ' ',
   );
   cleaned = cleaned.replaceAll(
-    RegExp(r'<svg[\s\S]*?</svg>', caseSensitive: false),
+    cachedRegExp(r'<svg[\s\S]*?</svg>', caseSensitive: false),
     ' ',
   );
   cleaned = cleaned.replaceAll(
-    RegExp(r'<link[^>]*>', caseSensitive: false),
+    cachedRegExp(r'<link[^>]*>', caseSensitive: false),
     ' ',
   );
-  final body = RegExp(
+  final body = cachedRegExp(
     r'<body[^>]*>([\s\S]*)</body>',
     caseSensitive: false,
   ).firstMatch(cleaned);
@@ -157,10 +170,13 @@ String explorePrepareHtmlForPriceParse(String html) {
   // presentation attributes before the cap; preserve service boundaries,
   // links and structured price attributes for the deterministic extractor.
   if (core.contains('data-testid="services-list-item-root"')) {
-    core = core.replaceAll(RegExp(
-      r'''\s+(?:class|style|id|srcset|sizes|src|data-v-[\w-]+)=(?:"[^"]*"|'[^']*')''',
-      caseSensitive: false,
-    ), '');
+    core = core.replaceAll(
+      cachedRegExp(
+        r'''\s+(?:class|style|id|srcset|sizes|src|data-v-[\w-]+)=(?:"[^"]*"|'[^']*')''',
+        caseSensitive: false,
+      ),
+      '',
+    );
   }
   if (jsonLd.isNotEmpty) {
     core = '${jsonLd.join('\n')}\n<div>$core</div>';
@@ -194,7 +210,7 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
 }) {
   if (html.trim().isEmpty) return const [];
   final jsonLdScripts = [
-    for (final m in RegExp(
+    for (final m in cachedRegExp(
       r'<script[^>]*type="application/ld\+json"[^>]*>([\s\S]*?)</script>',
       caseSensitive: false,
     ).allMatches(html))
@@ -205,8 +221,18 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
   html = repairUtf8Mojibake(html);
   final doc = html_parser.parse(html);
   _stripSiteChrome(doc);
+  // Classify the surrounding page once, before validating its fragments. A
+  // table row in a market guide must not become a clinic quote on its own.
+  final pageContextWire = explorePricePageContextWire(
+    classifyExplorePricePageContext(
+      sourceUrl: sourceUrl,
+      pageText: doc.body?.text ?? doc.documentElement?.text ?? '',
+      title: doc.querySelector('h1')?.text ?? '',
+    ),
+  );
   final out = <ExtractedPriceEvidence>[];
   final seen = <String>{};
+  final headingContext = _PriceHeadingContext();
 
   void add(ExtractedPriceEvidence? row) {
     if (out.length >= kExploreMaxEvidenceScanRowsPerPage) return;
@@ -229,7 +255,9 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
       procedure: row.rawProcedureText,
       sourceUrl: row.sourceUrl,
       priceMax: row.priceMax,
-      structuredOffer: row.extractionMethod == PriceExtractionMethod.jsonLd ||
+      pageContextWire: pageContextWire,
+      structuredOffer:
+          row.extractionMethod == PriceExtractionMethod.jsonLd ||
           row.extractionMethod == PriceExtractionMethod.schemaOffer,
     );
     if (!verdict.accepted) return;
@@ -277,7 +305,8 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
   // The provider's service menu is authoritative within Booksy. Never mix
   // neighbouring services, review labels, or duration text into its amounts.
   final sourceHost = Uri.tryParse(sourceUrl)?.host.toLowerCase() ?? '';
-  final booksyRows = (sourceHost == 'booksy.com' || sourceHost.endsWith('.booksy.com'))
+  final booksyRows =
+      (sourceHost == 'booksy.com' || sourceHost.endsWith('.booksy.com'))
       ? doc.querySelectorAll('[data-testid="services-list-item-root"]')
       : <Element>[];
   if (booksyRows.isNotEmpty) {
@@ -286,20 +315,32 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
       final name = service.querySelector('[data-testid="service-name"]');
       if (name == null) continue;
       final label = _visibleText(name);
-      for (final price in service.querySelectorAll('[data-testid="service-variant-price"]')) {
+      for (final price in service.querySelectorAll(
+        '[data-testid="service-variant-price"]',
+      )) {
         final raw = _visibleText(price);
         final parsed = parsePriceText(raw);
         if (parsed == null || parsed.priceMin <= 0) continue;
-        add(ExtractedPriceEvidence(
-          rawProcedureText: label, rawPriceText: raw,
-          priceMin: parsed.priceMin, priceMax: parsed.priceMax,
-          currency: parsed.currency, sourceUrl: sourceUrl,
-          extractionMethod: PriceExtractionMethod.productCard,
-          rawEvidence: '$label | $raw', confidence: .95,
-          priceType: raw.trim().endsWith('+') ? PriceType.from : parsed.priceType,
-          unit: parsed.unit, quantity: parsed.quantity,
-          providerClinic: provider, sourcePlatform: marketplacePlatformLabel(sourceUrl),
-        ));
+        add(
+          ExtractedPriceEvidence(
+            rawProcedureText: label,
+            rawPriceText: raw,
+            priceMin: parsed.priceMin,
+            priceMax: parsed.priceMax,
+            currency: parsed.currency,
+            sourceUrl: sourceUrl,
+            extractionMethod: PriceExtractionMethod.productCard,
+            rawEvidence: '$label | $raw',
+            confidence: .95,
+            priceType: raw.trim().endsWith('+')
+                ? PriceType.from
+                : parsed.priceType,
+            unit: parsed.unit,
+            quantity: parsed.quantity,
+            providerClinic: provider,
+            sourcePlatform: marketplacePlatformLabel(sourceUrl),
+          ),
+        );
       }
     }
     return _preferFlagshipEvidenceRows(out);
@@ -310,7 +351,7 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
     try {
       _walkJsonLd(jsonDecode(raw), sourceUrl, jsonLdRows);
     } catch (_) {
-      for (final chunk in raw.split(RegExp(r'\}\s*\{'))) {
+      for (final chunk in raw.split(cachedRegExp(r'\}\s*\{'))) {
         var piece = chunk.trim();
         if (!piece.startsWith('{')) piece = '{$piece';
         if (!piece.endsWith('}')) piece = '$piece}';
@@ -326,13 +367,17 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
   for (final row in _extractJsonLd(doc, sourceUrl)) {
     add(row);
   }
-  for (final row in _extractTables(doc, sourceUrl)) {
+  for (final row in _extractTables(doc, sourceUrl, headingContext)) {
     add(row);
   }
-  for (final row in _extractLabeledCostFacts(doc, sourceUrl)) {
+  for (final row in _extractLabeledCostFacts(doc, sourceUrl, headingContext)) {
     add(row);
   }
-  for (final row in _extractProcedurePretSiblingPairs(doc, sourceUrl)) {
+  for (final row in _extractProcedurePretSiblingPairs(
+    doc,
+    sourceUrl,
+    headingContext,
+  )) {
     add(row);
   }
   for (final row in _extractWooCommerce(doc, sourceUrl)) {
@@ -341,8 +386,9 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
   for (final row in _extractShopify(html, sourceUrl)) {
     add(row);
   }
-  for (final row in _extractCardsAndLists(doc, sourceUrl)) {
+  for (final row in _extractCardsAndLists(doc, sourceUrl, headingContext)) {
     add(row);
+    if (out.length >= kExploreMaxEvidenceScanRowsPerPage) break;
   }
   for (final row in _extractHeadingsWithPrices(doc, sourceUrl)) {
     add(row);
@@ -360,10 +406,7 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
   if (out.isEmpty) return out;
   final ranked = _preferFlagshipEvidenceRows(out);
   if (!isMarketplaceOrDirectoryHost(sourceUrl)) return ranked;
-  final provider = extractMarketplaceProviderName(
-    html,
-    sourceUrl: sourceUrl,
-  );
+  final provider = extractMarketplaceProviderName(html, sourceUrl: sourceUrl);
   final platform = marketplacePlatformLabel(sourceUrl);
   return [
     for (final row in ranked)
@@ -376,7 +419,7 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
 }
 
 bool _looksLikeBotoxEvidenceLabel(String label) {
-  return RegExp(
+  return cachedRegExp(
     r'botox|botulin|ботокс|ботулин|dysport|xeomin|toxina|'
     r'anti[- ]?wrinkle|estompare riduri',
     caseSensitive: false,
@@ -384,7 +427,7 @@ bool _looksLikeBotoxEvidenceLabel(String label) {
 }
 
 bool _looksLikeFillerEvidenceLabel(String label) {
-  return RegExp(
+  return cachedRegExp(
     r'filler|hialuron|hyaluron|juvederm|teosyal|stylage|'
     r'acid hialuronic|marire buze',
     caseSensitive: false,
@@ -394,7 +437,7 @@ bool _looksLikeFillerEvidenceLabel(String label) {
 bool _looksLikeFlagshipEvidenceLabel(String label) {
   return _looksLikeBotoxEvidenceLabel(label) ||
       _looksLikeFillerEvidenceLabel(label) ||
-      RegExp(
+      cachedRegExp(
         r'laser|peel|rinoplast|rhinoplast|hair transplant|\bfue\b|'
         r'breast|mamar',
         caseSensitive: false,
@@ -423,16 +466,17 @@ List<ExtractedPriceEvidence> _preferFlagshipEvidenceRows(
       rest.add(r);
     }
   }
-  return [...botox, ...filler, ...flagship, ...rest]
-      .take(kExploreMaxEvidenceRowsPerPage)
-      .toList();
+  return [
+    ...botox,
+    ...filler,
+    ...flagship,
+    ...rest,
+  ].take(kExploreMaxEvidenceRowsPerPage).toList();
 }
 
 List<ExtractedPriceEvidence> _extractJsonLd(Document doc, String sourceUrl) {
   final out = <ExtractedPriceEvidence>[];
-  final scripts = doc.querySelectorAll(
-    'script[type="application/ld+json"]',
-  );
+  final scripts = doc.querySelectorAll('script[type="application/ld+json"]');
   for (final script in scripts) {
     final raw = script.text.trim();
     if (raw.isEmpty) continue;
@@ -441,7 +485,7 @@ List<ExtractedPriceEvidence> _extractJsonLd(Document doc, String sourceUrl) {
       _walkJsonLd(decoded, sourceUrl, out);
     } catch (_) {
       // Some sites concatenate two JSON objects.
-      for (final chunk in raw.split(RegExp(r'\}\s*\{'))) {
+      for (final chunk in raw.split(cachedRegExp(r'\}\s*\{'))) {
         var piece = chunk.trim();
         if (!piece.startsWith('{')) piece = '{$piece';
         if (!piece.endsWith('}')) piece = '$piece}';
@@ -454,7 +498,11 @@ List<ExtractedPriceEvidence> _extractJsonLd(Document doc, String sourceUrl) {
   return out;
 }
 
-void _walkJsonLd(dynamic node, String sourceUrl, List<ExtractedPriceEvidence> out) {
+void _walkJsonLd(
+  dynamic node,
+  String sourceUrl,
+  List<ExtractedPriceEvidence> out,
+) {
   if (node is List) {
     for (final item in node) {
       _walkJsonLd(item, sourceUrl, out);
@@ -498,15 +546,21 @@ void _walkJsonLd(dynamic node, String sourceUrl, List<ExtractedPriceEvidence> ou
     }
     if (offer is! Map) return;
     final o = offer.map((k, v) => MapEntry('$k', v));
-    final currency =
-        '${o['priceCurrency'] ?? o['pricecurrency'] ?? ''}'.trim().toUpperCase();
+    final currency = '${o['priceCurrency'] ?? o['pricecurrency'] ?? ''}'
+        .trim()
+        .toUpperCase();
     final low = '${o['lowPrice'] ?? o['price'] ?? o['highPrice'] ?? ''}'.trim();
     final high = '${o['highPrice'] ?? ''}'.trim();
     if (low.isEmpty && '${o['price'] ?? ''}'.isEmpty) return;
-    final rawPrice = high.isNotEmpty && high != low ? '$low–$high $currency' : '$low $currency';
+    final rawPrice = high.isNotEmpty && high != low
+        ? '$low–$high $currency'
+        : '$low $currency';
     final parsed = parsePriceText(rawPrice);
     if (parsed == null || parsed.priceMin <= 0) return;
-    final proc = offerProcedureLabel(o, procedure.isNotEmpty ? procedure : label);
+    final proc = offerProcedureLabel(
+      o,
+      procedure.isNotEmpty ? procedure : label,
+    );
     if (proc.isEmpty) return;
     final qty = quantityFromLabel(proc);
     final isMarketplace = isMarketplaceOrDirectoryHost(sourceUrl);
@@ -523,8 +577,8 @@ void _walkJsonLd(dynamic node, String sourceUrl, List<ExtractedPriceEvidence> ou
         extractionMethod: isMarketplace
             ? PriceExtractionMethod.schemaOffer
             : (type.contains('offer') && !type.contains('product')
-                ? PriceExtractionMethod.schemaOffer
-                : PriceExtractionMethod.jsonLd),
+                  ? PriceExtractionMethod.schemaOffer
+                  : PriceExtractionMethod.jsonLd),
         rawEvidence: jsonEncode(o),
         confidence: 0.98,
         priceType: parsed.priceType,
@@ -606,16 +660,19 @@ List<String> _tableColumnHeaders(Element tr) {
     table = table.parent;
   }
   if (table == null) return const [];
-  final headerRow = table.querySelector('thead tr') ??
-      table.querySelector('tr');
+  final headerRow =
+      table.querySelector('thead tr') ?? table.querySelector('tr');
   if (headerRow == null) return const [];
   return [
-    for (final cell in headerRow.querySelectorAll('th, td'))
-      _visibleText(cell),
+    for (final cell in headerRow.querySelectorAll('th, td')) _visibleText(cell),
   ];
 }
 
-List<ExtractedPriceEvidence> _extractTables(Document doc, String sourceUrl) {
+List<ExtractedPriceEvidence> _extractTables(
+  Document doc,
+  String sourceUrl,
+  _PriceHeadingContext headingContext,
+) {
   final out = <ExtractedPriceEvidence>[];
   for (final tr in doc.querySelectorAll('tr')) {
     final cells = tr.querySelectorAll('th, td');
@@ -638,9 +695,7 @@ List<ExtractedPriceEvidence> _extractTables(Document doc, String sourceUrl) {
       if (_kPriceLike.hasMatch(t) || _kBarePrice.hasMatch(t)) {
         // Gulf menus often put "Cost (AED)" only in the column header.
         priceCells.add(
-          !hasCurrencySignal(t) && hasCurrencySignal(header)
-              ? '$t $header'
-              : t,
+          !hasCurrencySignal(t) && hasCurrencySignal(header) ? '$t $header' : t,
         );
       } else if (_looksLikeProcedureLabel(t)) {
         if (procedure.isEmpty) {
@@ -660,7 +715,7 @@ List<ExtractedPriceEvidence> _extractTables(Document doc, String sourceUrl) {
         looksLikeCompetitorPriceColumnHeader(procedure)) {
       continue;
     }
-    procedure = _withSectionContext(tr, procedure);
+    procedure = _withSectionContext(tr, procedure, headingContext);
     final hint = _nearestCurrencyHint(tr);
     final parsed = parsePriceText(
       hint.isNotEmpty && !hasCurrencySignal(priceRaw)
@@ -692,10 +747,13 @@ List<ExtractedPriceEvidence> _extractTables(Document doc, String sourceUrl) {
   return out;
 }
 
-List<ExtractedPriceEvidence> _extractWooCommerce(Document doc, String sourceUrl) {
+List<ExtractedPriceEvidence> _extractWooCommerce(
+  Document doc,
+  String sourceUrl,
+) {
   final out = <ExtractedPriceEvidence>[];
   final productTitle = _wooProductTitle(doc);
-  final isProductPage = RegExp(
+  final isProductPage = cachedRegExp(
     r'/product/|/products/|/shop/',
     caseSensitive: false,
   ).hasMatch(sourceUrl);
@@ -710,10 +768,12 @@ List<ExtractedPriceEvidence> _extractWooCommerce(Document doc, String sourceUrl)
       ),
     ],
     if (!isProductPage ||
-        doc.querySelectorAll(
-          '.summary.entry-summary > p.price, .entry-summary > p.price, '
-          '.summary > p.price, .product .summary p.price',
-        ).isEmpty) ...[
+        doc
+            .querySelectorAll(
+              '.summary.entry-summary > p.price, .entry-summary > p.price, '
+              '.summary > p.price, .product .summary p.price',
+            )
+            .isEmpty) ...[
       ...doc.querySelectorAll('p.price'),
       ...doc.querySelectorAll('.summary .price, .entry-summary .price'),
       ...doc.querySelectorAll('.woocommerce-Price-amount'),
@@ -754,7 +814,7 @@ List<ExtractedPriceEvidence> _extractWooCommerce(Document doc, String sourceUrl)
     } else {
       rawPrice = _visibleText(block);
       // Screen-reader "Original price was: … Current price is: …" — keep current.
-      final currentCue = RegExp(
+      final currentCue = cachedRegExp(
         r'Current price is:\s*([\d.,]+\s*[A-Za-z€£$]*)',
         caseSensitive: false,
       ).firstMatch(rawPrice);
@@ -830,17 +890,17 @@ bool _isInsideMainProductSummary(Element node) {
 }
 
 String _cleanWooProcedureLabel(String raw, String productTitle) {
-  var t = raw.replaceAll(RegExp(r'\s+'), ' ').trim();
+  var t = raw.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
   if (productTitle.isNotEmpty &&
       t.toLowerCase().contains(productTitle.toLowerCase())) {
     return productTitle;
   }
   t = t.replaceFirst(
-    RegExp(r'^(home|shop)\s+', caseSensitive: false),
+    cachedRegExp(r'^(home|shop)\s+', caseSensitive: false),
     '',
   );
   // "Breast Augmentation Home Breast Augmentation" → first title segment.
-  final dup = RegExp(
+  final dup = cachedRegExp(
     r'^(.+?)\s+(?:home|shop)\s+\1$',
     caseSensitive: false,
   ).firstMatch(t);
@@ -916,7 +976,7 @@ String _wooProductTitle(Document doc) {
 
 List<ExtractedPriceEvidence> _extractShopify(String html, String sourceUrl) {
   final out = <ExtractedPriceEvidence>[];
-  final jsonBlocks = RegExp(
+  final jsonBlocks = cachedRegExp(
     r'<script[^>]*type="application/json"[^>]*>([\s\S]*?)</script>',
     caseSensitive: false,
   );
@@ -928,7 +988,7 @@ List<ExtractedPriceEvidence> _extractShopify(String html, String sourceUrl) {
       _walkShopifyJson(decoded, sourceUrl, out);
     } catch (_) {}
   }
-  final productJson = RegExp(
+  final productJson = cachedRegExp(
     r'"product"\s*:\s*\{[\s\S]{0,8000}?"title"\s*:\s*"([^"]+)"[\s\S]{0,4000}?"price"\s*:\s*"?(\d+(?:\.\d+)?)"?',
     caseSensitive: false,
   );
@@ -938,7 +998,8 @@ List<ExtractedPriceEvidence> _extractShopify(String html, String sourceUrl) {
     if (name.isEmpty || price.isEmpty) continue;
     final cents = double.tryParse(price);
     if (cents == null) continue;
-    final amount = cents > 1000 && cents == cents.roundToDouble() && cents % 100 == 0
+    final amount =
+        cents > 1000 && cents == cents.roundToDouble() && cents % 100 == 0
         ? cents / 100
         : cents;
     if (amount <= 0) continue;
@@ -1000,7 +1061,9 @@ void _walkShopifyJson(
           extractionMethod: PriceExtractionMethod.shopify,
           rawEvidence: jsonEncode(vm),
           confidence: 0.94,
-          priceType: orig != null && orig > min ? PriceType.sale : PriceType.fixed,
+          priceType: orig != null && orig > min
+              ? PriceType.sale
+              : PriceType.fixed,
         ),
       );
       break;
@@ -1011,7 +1074,11 @@ void _walkShopifyJson(
   }
 }
 
-List<ExtractedPriceEvidence> _extractCardsAndLists(Document doc, String sourceUrl) {
+List<ExtractedPriceEvidence> _extractCardsAndLists(
+  Document doc,
+  String sourceUrl,
+  _PriceHeadingContext headingContext,
+) {
   final out = <ExtractedPriceEvidence>[];
   final blocks = <Element>[
     ...doc.querySelectorAll('li'),
@@ -1040,9 +1107,11 @@ List<ExtractedPriceEvidence> _extractCardsAndLists(Document doc, String sourceUr
       out.addAll(_namedMenuRowsFromText(text, sourceUrl));
       continue;
     }
-    if (el.querySelectorAll(
-          '.price, .woocommerce-Price-amount, ins, del, .service-list--price',
-        ).isEmpty &&
+    if (el
+            .querySelectorAll(
+              '.price, .woocommerce-Price-amount, ins, del, .service-list--price',
+            )
+            .isEmpty &&
         el.querySelectorAll('h1, h2, h3, h4, strong, span, p').length > 12) {
       continue;
     }
@@ -1076,16 +1145,16 @@ List<ExtractedPriceEvidence> _extractCardsAndLists(Document doc, String sourceUr
       procedure = _procedureBeforePublishedPrice(text);
     }
     procedure = stripSurroundingPageCopyFromProcedureTitle(procedure);
-    procedure = _withSectionContext(el, procedure);
+    procedure = _withSectionContext(el, procedure, headingContext);
     if (procedure.isEmpty || procedure == priceRaw) continue;
     final method = el.localName == 'li'
         ? PriceExtractionMethod.listItem
-        : (        el.classes.contains('product') ||
-                el.classes.contains('product-item') ||
-                el.classes.contains('service') ||
-                el.classes.contains('servicio')
-            ? PriceExtractionMethod.productCard
-            : PriceExtractionMethod.domBlock);
+        : (el.classes.contains('product') ||
+                  el.classes.contains('product-item') ||
+                  el.classes.contains('service') ||
+                  el.classes.contains('servicio')
+              ? PriceExtractionMethod.productCard
+              : PriceExtractionMethod.domBlock);
     out.add(
       ExtractedPriceEvidence(
         rawProcedureText: procedure,
@@ -1110,7 +1179,10 @@ List<ExtractedPriceEvidence> _extractCardsAndLists(Document doc, String sourceUr
   return out;
 }
 
-List<ExtractedPriceEvidence> _extractTextProximity(Document doc, String sourceUrl) {
+List<ExtractedPriceEvidence> _extractTextProximity(
+  Document doc,
+  String sourceUrl,
+) {
   final out = <ExtractedPriceEvidence>[];
   for (final el in doc.querySelectorAll('p, li, td')) {
     final text = _visibleText(el);
@@ -1125,17 +1197,26 @@ List<ExtractedPriceEvidence> _extractTextProximity(Document doc, String sourceUr
     }
     parsed ??= parsePriceText(text);
     if (parsed == null) continue;
+    // Keep age claims bound to the same element before shortening its evidence.
+    // A following sentence can mark this otherwise-owned quote as expired.
+    if (looksLikeHairStaleLandingQuote(
+      sourceUrl: sourceUrl,
+      blob: text,
+      priceMin: parsed.priceMin,
+      priceMax: parsed.priceMax,
+    )) {
+      continue;
+    }
     if (looksLikeMarketAveragePriceBlurb(text) &&
-        (own == null ||
-            !publishedAmountMatchesWindow(own, parsed.priceMin))) {
+        (own == null || !publishedAmountMatchesWindow(own, parsed.priceMin))) {
       continue;
     }
     if (looksLikeRoundedMarketPriceSpread(
-          priceMin: parsed.priceMin,
-          priceMax: parsed.priceMax,
-          currency: parsed.currency,
-          procedure: text,
-        )) {
+      priceMin: parsed.priceMin,
+      priceMax: parsed.priceMax,
+      currency: parsed.currency,
+      procedure: text,
+    )) {
       continue;
     }
     if ((looksLikeSearchQuickFactsBlob(text) ||
@@ -1255,7 +1336,10 @@ String _procedureFromBlock(Element el, String priceRaw) {
     if (_looksLikeProcedureLabel(t) && t != priceRaw) return t;
   }
   var text = _visibleText(el);
-  text = text.replaceAll(priceRaw, ' ').replaceAll(RegExp(r'\s+'), ' ').trim();
+  text = text
+      .replaceAll(priceRaw, ' ')
+      .replaceAll(cachedRegExp(r'\s+'), ' ')
+      .trim();
   if (_looksLikeProcedureLabel(text)) return text;
   return _procedureBeforePublishedPrice(_visibleText(el));
 }
@@ -1271,7 +1355,7 @@ String _procedureBeforePublishedPrice(String text) {
     return label;
   }
 
-  final fromCut = RegExp(
+  final fromCut = cachedRegExp(
     r'(?:from|starts?\s+from|starts?\s+at|starting(?:\s+from)?)\s*'
     r'(?:aed|usd|eur|gbp|€|£|\$|درهم|د\.إ)?\s*\d',
     caseSensitive: false,
@@ -1279,20 +1363,20 @@ String _procedureBeforePublishedPrice(String text) {
   if (fromCut != null && fromCut.start >= 3) {
     final procedure = t
         .substring(0, fromCut.start)
-        .replaceAll(RegExp(r'[–—\-:\s]+$'), '')
+        .replaceAll(cachedRegExp(r'[–—\-:\s]+$'), '')
         .trim();
     final label = cleaned(procedure);
     if (label.isNotEmpty) return label;
   }
   if (t.length > 160 ||
-      RegExp(
+      cachedRegExp(
         r'\b(?:offering|clinics? that|ridiculously|typically last|'
         r'consultation|financing|carecredit)\b',
         caseSensitive: false,
       ).hasMatch(t)) {
     return '';
   }
-  final cashCut = RegExp(
+  final cashCut = cachedRegExp(
     r'(?:\$|€|£)\s*\d|'
     r'(?:usd|eur|gbp|aed|ron|lei|درهم|د\.إ)\s*\d|'
     r'\d[\d.,]*\s*(?:usd|eur|gbp|aed|ron|lei|€|£)',
@@ -1301,16 +1385,16 @@ String _procedureBeforePublishedPrice(String text) {
   if (cashCut == null || cashCut.start < 3) return '';
   final procedure = t
       .substring(0, cashCut.start)
-      .replaceAll(RegExp(r'[–—\-:\s]+$'), '')
+      .replaceAll(cachedRegExp(r'[–—\-:\s]+$'), '')
       .trim();
   final label = cleaned(procedure);
   if (label.isEmpty) return '';
-  if (label.split(RegExp(r'\s+')).length > 8) return '';
+  if (label.split(cachedRegExp(r'\s+')).length > 8) return '';
   return label;
 }
 
 bool _looksLikeTypicalMarketSnippet(String raw) {
-  return RegExp(
+  return cachedRegExp(
     r'\btypical(?:ly)?\s+sessions?\s+rang|'
     r'\bprices?\s+vary\s+depending\b|'
     r'\btypical(?:ly)?\s+(?:range|ranges)\s+from\b',
@@ -1327,7 +1411,7 @@ bool _looksLikeSingleNamedMenuLine(String text) {
   return _procedureBeforePublishedPrice(t).isNotEmpty;
 }
 
-final _kNamedMenuPrice = RegExp(
+final _kNamedMenuPrice = cachedRegExp(
   r'([A-Za-zÀ-ÿ®™][A-Za-zÀ-ÿ0-9®™\s/\-+&.]{1,70}?)\s+'
   r'((?:from\s+|starting\s+at\s+)?'
   r'(?:\$|€|£)\s*\d[\d,]*(?:\.\d{2})?'
@@ -1345,7 +1429,7 @@ List<ExtractedPriceEvidence> _namedMenuRowsFromText(
   if (_looksLikeTypicalMarketSnippet(t) && countPriceLikeAmounts(t) <= 2) {
     return const [];
   }
-  if (RegExp(
+  if (cachedRegExp(
     r'\b(?:offering|clinics? that|ridiculously|procedure starts|'
     r'typically last|consultation)\b',
     caseSensitive: false,
@@ -1355,14 +1439,18 @@ List<ExtractedPriceEvidence> _namedMenuRowsFromText(
   final out = <ExtractedPriceEvidence>[];
   for (final m in _kNamedMenuPrice.allMatches(t)) {
     var label = (m.group(1) ?? '').trim();
-    label = label.replaceAll(RegExp(r'^[·•\-–—*]+|[·•\-–—*]+$'), '').trim();
+    label = label
+        .replaceAll(cachedRegExp(r'^[·•\-–—*]+|[·•\-–—*]+$'), '')
+        .trim();
     final priceRaw = (m.group(2) ?? '').trim();
     if (label.length < 3 || priceRaw.isEmpty) continue;
-    if (label.split(RegExp(r'\s+')).length > 8) continue;
+    if (label.split(cachedRegExp(r'\s+')).length > 8) continue;
     if (_looksLikeTypicalMarketSnippet('$label $priceRaw')) continue;
     if (looksLikeCommerceChromeLabel(label)) continue;
-    if (RegExp(r'^(?:from|starting|starts?|and|with|or)$', caseSensitive: false)
-        .hasMatch(label)) {
+    if (cachedRegExp(
+      r'^(?:from|starting|starts?|and|with|or)$',
+      caseSensitive: false,
+    ).hasMatch(label)) {
       continue;
     }
     if (!_looksLikeProcedureLabel(label)) continue;
@@ -1396,24 +1484,41 @@ bool _isGenericSectionHeading(String raw) {
   return looksLikeCatalogSectionHeading(raw);
 }
 
-String _nearestSectionHeading(Element el) {
-  Element? cur = el;
-  for (var i = 0; i < 10; i++) {
-    if (cur == null) break;
-    var sib = cur.previousElementSibling;
-    while (sib != null) {
-      final name = sib.localName ?? '';
-      if (RegExp(r'^h[1-6]$').hasMatch(name)) {
-        final t = _visibleText(sib);
-        if (_looksLikeProcedureLabel(t) && !_isGenericSectionHeading(t)) {
-          return t;
+/// Index each parent's preceding headings once per parse. Walking backwards
+/// through every sibling for every menu row grows quadratically (and sibling
+/// lookup itself scans the child list). Large menus must stay linear here.
+class _PriceHeadingContext {
+  final _preceding = <Element, Map<Element, String>>{};
+
+  String nearest(Element el, {required int maxDepth}) {
+    Element? cur = el;
+    for (var depth = 0; depth < maxDepth && cur != null; depth++) {
+      final parent = cur.parent;
+      if (parent == null) break;
+      final index = _preceding.putIfAbsent(parent, () {
+        final result = <Element, String>{};
+        var heading = '';
+        for (final child in parent.children) {
+          result[child] = heading;
+          final name = child.localName ?? '';
+          if (name.length == 2 &&
+              name[0] == 'h' &&
+              '123456'.contains(name[1])) {
+            final text = _visibleText(child);
+            if (_looksLikeProcedureLabel(text) &&
+                !_isGenericSectionHeading(text)) {
+              heading = text;
+            }
+          }
         }
-      }
-      sib = sib.previousElementSibling;
+        return result;
+      });
+      final heading = index[cur] ?? '';
+      if (heading.isNotEmpty) return heading;
+      cur = parent;
     }
-    cur = cur.parent;
+    return '';
   }
-  return '';
 }
 
 String _nearestCurrencyHint(Element el) {
@@ -1433,15 +1538,15 @@ String _nearestCurrencyHint(Element el) {
       final firstRow = cur.querySelector('tr');
       if (firstRow != null) headerBits.add(_visibleText(firstRow));
       final blob = headerBits.join(' ').toLowerCase();
-      if (RegExp(r'\b(?:aed|dirham|درهم|د\.إ)\b').hasMatch(blob)) {
+      if (cachedRegExp(r'\b(?:aed|dirham|درهم|د\.إ)\b').hasMatch(blob)) {
         return 'AED';
       }
-      if (RegExp(r'€|\beuros?\b|\beur\b').hasMatch(blob) &&
-          !RegExp(r'\b(?:lei|ron)\b').hasMatch(blob)) {
+      if (cachedRegExp(r'€|\beuros?\b|\beur\b').hasMatch(blob) &&
+          !cachedRegExp(r'\b(?:lei|ron)\b').hasMatch(blob)) {
         return 'EUR';
       }
-      if (RegExp(r'\b(?:lei|ron)\b').hasMatch(blob) &&
-          !RegExp(r'€|\beuros?\b|\beur\b').hasMatch(blob)) {
+      if (cachedRegExp(r'\b(?:lei|ron)\b').hasMatch(blob) &&
+          !cachedRegExp(r'€|\beuros?\b|\beur\b').hasMatch(blob)) {
         return 'RON';
       }
     }
@@ -1463,7 +1568,7 @@ List<ExtractedPriceEvidence> _extractHeadingsWithPrices(
     if (parsed == null || parsed.priceMin <= 0) continue;
     if (parsed.currency.isEmpty) continue;
     var procedure = text;
-    final cut = RegExp(
+    final cut = cachedRegExp(
       r'\s*(?:[:–—-]\s*)?(?:între|intre|de la|from|desde|'
       r'porneste(?:\s+de\s+la)?|pornește(?:\s+de\s+la)?|'
       r'începe(?:\s+de\s+la)?|incepe(?:\s+de\s+la)?)\s*[€£$]?\s*\d',
@@ -1506,14 +1611,14 @@ List<ExtractedPriceEvidence> _extractAdjacentHeadingPricePairs(
     '[class*="service-title"], [class*="treatment-title"]',
   );
   if (headings.length < 2) return out;
-  final barePrice = RegExp(
+  final barePrice = cachedRegExp(
     r'^(?:from|de\s+la|desde|a\s+partir\s+de)?\s*'
     r'[€£$]?\s*\d{1,6}(?:[.,]\d{2,3})?\s*'
     r'(?:€|eur|euro|£|gbp|\$|usd|ron|lei|lekë|leke|lek|all|aed|try|tl)?\s*$',
     caseSensitive: false,
   );
-  final ordinalOnly = RegExp(r'^\d{1,2}[.)]?$');
-  final ctaNoise = RegExp(
+  final ordinalOnly = cachedRegExp(r'^\d{1,2}[.)]?$');
+  final ctaNoise = cachedRegExp(
     r'^(?:book|book\s+now|lini\s+nj[eë]\s+takim|appointment|'
     r'regjistrimin|online|contact|more|learn\s+more|read\s+more|'
     r'cmimi\s+sipas|çmimi\s+sipas|on\s+request)$',
@@ -1544,8 +1649,10 @@ List<ExtractedPriceEvidence> _extractAdjacentHeadingPricePairs(
     final parsed = parsePriceText(priceRaw);
     if (parsed == null || parsed.priceMin <= 0) continue;
     if (parsed.currency.isEmpty &&
-        !RegExp(r'[€£$]|eur|lei|ron|lek', caseSensitive: false)
-            .hasMatch(priceRaw)) {
+        !cachedRegExp(
+          r'[€£$]|eur|lei|ron|lek',
+          caseSensitive: false,
+        ).hasMatch(priceRaw)) {
       continue;
     }
     out.add(
@@ -1574,9 +1681,10 @@ List<ExtractedPriceEvidence> _extractAdjacentHeadingPricePairs(
 List<ExtractedPriceEvidence> _extractProcedurePretSiblingPairs(
   Document doc,
   String sourceUrl,
+  _PriceHeadingContext headingContext,
 ) {
   final out = <ExtractedPriceEvidence>[];
-  final pretRe = RegExp(
+  final pretRe = cachedRegExp(
     r'\b(?:pret|preț|tarif|price|cost)\b\s*[:\-]?\s*'
     r'((?:from|de\s+la|desde)?\s*'
     r'(?:ron|lei|eur|€|£|\$)?\s*\d[\d.,\s]*\s*(?:ron|lei|eur|€|£|\$)?)',
@@ -1602,19 +1710,23 @@ List<ExtractedPriceEvidence> _extractProcedurePretSiblingPairs(
     final parsed = parsePriceText(priceRaw);
     if (parsed == null || parsed.priceMin <= 0) continue;
     if (parsed.currency.trim().isEmpty &&
-        !RegExp(r'\b(?:ron|lei|eur|€|£|\$)\b', caseSensitive: false)
-            .hasMatch(priceRaw) &&
-        !RegExp(r'\b(?:ron|lei|eur|€|£|\$)\b', caseSensitive: false)
-            .hasMatch(text)) {
+        !cachedRegExp(
+          r'\b(?:ron|lei|eur|€|£|\$)\b',
+          caseSensitive: false,
+        ).hasMatch(priceRaw) &&
+        !cachedRegExp(
+          r'\b(?:ron|lei|eur|€|£|\$)\b',
+          caseSensitive: false,
+        ).hasMatch(text)) {
       continue;
     }
     var procedure = text.substring(0, pret.start).trim();
     procedure = procedure
-        .replaceAll(RegExp(r'[\s\-–—:|]+$'), '')
-        .replaceAll(RegExp(r'\s+'), ' ')
+        .replaceAll(cachedRegExp(r'[\s\-–—:|]+$'), '')
+        .replaceAll(cachedRegExp(r'\s+'), ' ')
         .trim();
     if (procedure.length < 4) {
-      procedure = _nearestProcedureHeadingForFact(el);
+      procedure = headingContext.nearest(el, maxDepth: 12);
     }
     if (procedure.length < 4) continue;
     if (looksLikeBarePriceLabel(procedure)) continue;
@@ -1628,9 +1740,12 @@ List<ExtractedPriceEvidence> _extractProcedurePretSiblingPairs(
             : parsed.priceMin,
         currency: parsed.currency.isNotEmpty
             ? parsed.currency
-            : (RegExp(r'\b(?:ron|lei)\b', caseSensitive: false).hasMatch(text)
-                ? 'RON'
-                : parsed.currency),
+            : (cachedRegExp(
+                    r'\b(?:ron|lei)\b',
+                    caseSensitive: false,
+                  ).hasMatch(text)
+                  ? 'RON'
+                  : parsed.currency),
         sourceUrl: sourceUrl,
         extractionMethod: PriceExtractionMethod.domBlock,
         rawEvidence: text,
@@ -1647,6 +1762,7 @@ List<ExtractedPriceEvidence> _extractProcedurePretSiblingPairs(
 List<ExtractedPriceEvidence> _extractLabeledCostFacts(
   Document doc,
   String sourceUrl,
+  _PriceHeadingContext headingContext,
 ) {
   final out = <ExtractedPriceEvidence>[];
   final pageHeading = _pageProcedureHeading(doc, sourceUrl);
@@ -1673,7 +1789,7 @@ List<ExtractedPriceEvidence> _extractLabeledCostFacts(
     if (labeled == null) continue;
     final parsed = parsePriceText(labeled);
     if (parsed == null || parsed.priceMin <= 0) continue;
-    var procedure = _nearestProcedureHeadingForFact(el);
+    var procedure = headingContext.nearest(el, maxDepth: 12);
     if (procedure.isEmpty || looksLikeBarePriceLabel(procedure)) {
       procedure = pageHeading;
     }
@@ -1706,13 +1822,13 @@ List<ExtractedPriceEvidence> _extractLabeledCostFacts(
 String? _labeledCostQuote(String text) {
   final t = text.replaceAll('\u00a0', ' ').trim();
   if (!looksLikeClinicLabeledCostFact(t) &&
-      !RegExp(
+      !cachedRegExp(
         r'\b(?:pret|preț|tarif|price|cost)\b',
         caseSensitive: false,
       ).hasMatch(t)) {
     return null;
   }
-  final labeled = RegExp(
+  final labeled = cachedRegExp(
     r'^(?:[\-–—*•]\s*)?(?:cost|price|fee|pret|preț|tarif|starting(?:\s+price)?)\s*[:\-]?\s*(.+)$',
     caseSensitive: false,
   ).firstMatch(t);
@@ -1721,7 +1837,7 @@ String? _labeledCostQuote(String text) {
     if (parsePriceText(rest) != null) return rest;
   }
   // "Pret 1500 Lei" / "Preț: 1500 RON" mid-string.
-  final inline = RegExp(
+  final inline = cachedRegExp(
     r'\b(?:pret|preț|tarif|price|cost)\b\s*[:\-]?\s*'
     r'((?:from|de\s+la|desde)?\s*'
     r'(?:ron|lei|eur|€|£|\$)?\s*\d[\d.,\s]*\s*(?:ron|lei|eur|€|£|\$)?)',
@@ -1731,9 +1847,12 @@ String? _labeledCostQuote(String text) {
     final rest = (inline.group(1) ?? '').trim();
     if (parsePriceText(rest) != null) return rest;
   }
-  final starts = RegExp(
+  final starts = cachedRegExp(
     r'(?:starts?\s+from|starting(?:\s+from)?)\s+'
     r'(?:aed|usd|eur|gbp|€|£|\$|درهم|د\.إ)\s*\d[\d.,]*'
+    r'(?:\s*(?:to|–|—|-)\s*'
+    r'(?:aed|usd|eur|gbp|€|£|\$|درهم|د\.إ)?\s*\d[\d.,]*'
+    r'(?:\s*(?:aed|usd|eur|gbp|€|£|\$|درهم|د\.إ))?)?'
     r'(?:\s*(?:per\s+ml|\/\s*ml))?',
     caseSensitive: false,
   ).firstMatch(t);
@@ -1752,44 +1871,28 @@ String _pageProcedureHeading(Document doc, String sourceUrl) {
   return _procedureHintFromUrl(sourceUrl);
 }
 
-String _nearestProcedureHeadingForFact(Element el) {
-  Element? cur = el;
-  for (var i = 0; i < 12; i++) {
-    if (cur == null) break;
-    var sib = cur.previousElementSibling;
-    while (sib != null) {
-      final name = sib.localName ?? '';
-      if (RegExp(r'^h[1-6]$').hasMatch(name)) {
-        final t = _visibleText(sib);
-        if (_looksLikeProcedureLabel(t) && !_isGenericSectionHeading(t)) {
-          return t;
-        }
-      }
-      sib = sib.previousElementSibling;
-    }
-    cur = cur.parent;
-  }
-  return '';
-}
-
 String _procedureHintFromUrl(String sourceUrl) {
   try {
     final path = Uri.parse(
       sourceUrl.contains('://') ? sourceUrl : 'https://$sourceUrl',
     ).path;
-    return path.replaceAll(RegExp(r'[/_\-]+'), ' ').trim();
+    return path.replaceAll(cachedRegExp(r'[/_\-]+'), ' ').trim();
   } catch (_) {
     return '';
   }
 }
 
-String _withSectionContext(Element el, String procedure) {
+String _withSectionContext(
+  Element el,
+  String procedure,
+  _PriceHeadingContext headingContext,
+) {
   if (procedure.trim().isEmpty) return procedure;
   if (looksLikeCatalogSectionHeading(procedure) &&
       !looksLikeRealTreatmentLabel(procedure)) {
     return procedure;
   }
-  final heading = _nearestSectionHeading(el);
+  final heading = headingContext.nearest(el, maxDepth: 10);
   if (heading.isEmpty) return procedure;
   if (looksLikeCatalogSectionHeading(heading)) return procedure;
   if (procedure.toLowerCase().contains(heading.toLowerCase())) return procedure;
@@ -1804,7 +1907,7 @@ bool _looksLikeProcedureLabel(String raw) {
   if (looksLikePublishedPriceUnitLabel(t)) return false;
   if (looksLikeCommerceChromeLabel(t)) return false;
   if (looksLikePriceMenuHeadingOnly(t)) return false;
-  if (RegExp(r'^\d[\d.,\s]*\s*[€£$]?\s*$').hasMatch(t)) return false;
+  if (cachedRegExp(r'^\d[\d.,\s]*\s*[€£$]?\s*$').hasMatch(t)) return false;
   if (looksLikeRawScrapedProcedureTitle(t)) return false;
   return true;
 }
@@ -1813,7 +1916,7 @@ bool _looksLikeProcedureLabel(String raw) {
 bool looksLikeCommerceChromeLabel(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim().toLowerCase();
   if (t.isEmpty) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'^(sale!?|on\s*sale|hot!?|new!?|promo!?|offer!?|oferta!?|'
     r'description|descripcion|descripci[oó]n|uncategorized|uncategorised|'
     r'related products|you may also like|add to cart|book now|book now\s*>|'
@@ -1834,7 +1937,7 @@ bool looksLikeCommerceChromeLabel(String raw) {
 bool looksLikeProcedureLabelChromeFragment(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim().toLowerCase();
   if (t.isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'^(book\s*now|know\s*more|add\s+to\s+cart|shop\s*now|buy\s*now|'
     r'your\s+saving|you\s+save|save\s+now|saving|sale!?|offer!?)$',
     caseSensitive: false,
@@ -1846,7 +1949,7 @@ String stripExploreProcedureLabelChrome(String raw) {
   var t = raw.replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return '';
   t = t.replaceAll(
-    RegExp(
+    cachedRegExp(
       r'[\s·|,;:]+(?:book\s*now|know\s*more|add\s+to\s+cart|shop\s*now|'
       r'buy\s*now|your\s+saving|you\s+save|save\s+now)\s*$',
       caseSensitive: false,
@@ -1854,7 +1957,7 @@ String stripExploreProcedureLabelChrome(String raw) {
     '',
   );
   t = t.replaceAll(
-    RegExp(
+    cachedRegExp(
       r'^(?:book\s*now|know\s*more|your\s+saving|you\s+save)\s*[:·|-]\s*',
       caseSensitive: false,
     ),
@@ -1866,10 +1969,13 @@ String stripExploreProcedureLabelChrome(String raw) {
 /// Frequency / section copy glued onto a menu row
 /// ("depending on provider discretion PRICING FACE VI PEEL").
 String stripSurroundingPageCopyFromProcedureTitle(String raw) {
-  var t = raw.replaceAll('\u00a0', ' ').replaceAll(RegExp(r'\s+'), ' ').trim();
+  var t = raw
+      .replaceAll('\u00a0', ' ')
+      .replaceAll(cachedRegExp(r'\s+'), ' ')
+      .trim();
   if (t.isEmpty) return '';
   t = t.replaceAll(
-    RegExp(
+    cachedRegExp(
       r'(?:every\s+\d+\s*(?:to|-|–|—)\s*\d+\s+weeks?,?\s*)?'
       r'depending on (?:provider|physician|doctor|practitioner) discretion',
       caseSensitive: false,
@@ -1877,37 +1983,37 @@ String stripSurroundingPageCopyFromProcedureTitle(String raw) {
     ' ',
   );
   t = t.replaceAll(
-    RegExp(
+    cachedRegExp(
       r'\bevery\s+\d+\s*(?:to|-|–|—)\s*\d+\s+weeks?\b',
       caseSensitive: false,
     ),
     ' ',
   );
   t = t.replaceAll(
-    RegExp(r'\bfrequency\s*:?', caseSensitive: false),
+    cachedRegExp(r'\bfrequency\s*:?', caseSensitive: false),
     ' ',
   );
-  t = t.replaceAll(RegExp(r'\s+'), ' ').trim();
+  t = t.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
   t = t.replaceFirst(
-    RegExp(
+    cachedRegExp(
       r'^(?:pricing|prices|price|our pricing|our prices)\s+',
       caseSensitive: false,
     ),
     '',
   );
   t = t.replaceAll(
-    RegExp(
+    cachedRegExp(
       r'\b(?:pricing|prices|price)\s+(?=face\b|vi\s*peel\b|chemical\b)',
       caseSensitive: false,
     ),
     '',
   );
-  return t.replaceAll(RegExp(r'\s+'), ' ').trim();
+  return t.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
 }
 
 /// Arabic/Greek/Cyrillic menus have no Latin letters — still real labels.
 bool _hasLetter(String raw) =>
-    RegExp(r'[A-Za-zÀ-ÿ\u0370-\u04ff\u0600-\u06ff]').hasMatch(raw);
+    cachedRegExp(r'[A-Za-zÀ-ÿ\u0370-\u04ff\u0600-\u06ff]').hasMatch(raw);
 
 /// True when this node wraps other wrappers (typical spa/peel menus).
 /// Checks only two child levels — never walks the whole subtree.
@@ -1950,7 +2056,8 @@ bool _hasBlockChild(Element el) {
 }
 
 String _visibleText(Node node) {
-  if (node is Text) return node.text.replaceAll(RegExp(r'\s+'), ' ').trim();
+  if (node is Text)
+    return node.text.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
   if (node is! Element) return '';
   if (node.localName == 'script' ||
       node.localName == 'style' ||
@@ -1964,8 +2071,12 @@ String _visibleText(Node node) {
     if (buf.isNotEmpty) buf.write(' ');
     buf.write(t);
   }
-  return buf.toString().replaceAll(RegExp(r'\s+'), ' ').trim();
+  return buf.toString().replaceAll(cachedRegExp(r'\s+'), ' ').trim();
 }
+
+List<ExtractedPriceEvidence> _extractPriceEvidenceInBackground(
+  ({String html, String sourceUrl}) input,
+) => extractPriceEvidence(html: input.html, sourceUrl: input.sourceUrl);
 
 /// Session/request cache: one parse per source URL.
 class ExploreHtmlPriceParseCache {
@@ -2029,9 +2140,7 @@ class ExploreHtmlPriceParseCache {
     final rows = extractPriceEvidence(html: html, sourceUrl: url);
     evidenceByUrl[url] = rows;
     _touch(url);
-    debugPrint(
-      '[GP EXTRACT] cached ${rows.length} evidence rows from $url',
-    );
+    debugPrint('[GP EXTRACT] cached ${rows.length} evidence rows from $url');
     return rows;
   }
 
@@ -2057,16 +2166,13 @@ class ExploreHtmlPriceParseCache {
         await pending;
         continue;
       }
-      // Parsed inline, one page per event-loop turn.
-      //
-      // A background isolate was measured at 20s for a page that parses in
-      // 4.6s here: every `compute` spawn re-JITs this regex-heavy code from
-      // cold, and it also loses the [GP MATCH] / [PRICE REJECT] logs. Yielding
-      // between pages keeps taps serviceable without paying that.
-      await Future<void>.delayed(Duration.zero);
-      final fut = Future.value(
-        extractPriceEvidence(html: html, sourceUrl: url),
-      );
+      // Parsing one page synchronously still blocks several frames even
+      // when we yield between pages. Keep DOM and regex work off the frame
+      // isolate; only immutable evidence comes back into this cache.
+      final fut = compute(_extractPriceEvidenceInBackground, (
+        html: html,
+        sourceUrl: url,
+      ), debugLabel: 'explore_price_parse');
       _warmInFlight[url] = fut;
       try {
         final rows = await fut;

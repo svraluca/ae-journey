@@ -1,0 +1,135 @@
+[
+  {
+    "component": "python",
+    "path": "aesthetic_price_discovery_v11_67.py",
+    "baseline": "deliverables/aesthetic_explore_fix_v11_82/python/aesthetic_price_discovery_v11_67.py",
+    "before_sha256": "d3cdb99eb7cc207a838dec01a1c0589af374f1c3cbdb85dc9509a0e190a996e6",
+    "after_sha256": "8e31f19d01934de4afabe96799ef42515363379d88d313ba2ec74e54b52005a7"
+  },
+  {
+    "component": "python",
+    "path": "config/countries_v2_final.json",
+    "baseline": null,
+    "before_sha256": null,
+    "after_sha256": "436e23d9db41b939f9dfb98a4fa36ee417ce68db93f9f9513e4ced8bedaac2e4"
+  },
+  {
+    "component": "python",
+    "path": "config/procedures_v3_expanded.json",
+    "baseline": null,
+    "before_sha256": null,
+    "after_sha256": "352bb48fe2331a7c5926ca7eac5c05537c9a5c1bcb4ca1edfed60cec730dfdb7"
+  },
+  {
+    "component": "python",
+    "path": "explore_index_jobs.py",
+    "baseline": "deliverables/aesthetic_explore_fix_v11_82/python/explore_index_jobs.py",
+    "before_sha256": "f759f8693d2d4686b5972c36ed9b962abe7e88a2e4ecf47e6428453a6ed2adca",
+    "after_sha256": "ea6c23c7d4b0ee55cfaaebb8d3374573c55ee400569f7ad57e09606ec90d6780"
+  },
+  {
+    "component": "python",
+    "path": "tests/test_discovery_coverage.py",
+    "baseline": "deliverables/aesthetic_explore_fix_v11_82/python/tests/test_discovery_coverage.py",
+    "before_sha256": "79780e3de8d3b1e4ef7acd0121ebd1dd628b0f1d9f967df89f407422627830ae",
+    "after_sha256": "8295d0dd1bc0b3f2ab609cef60fa4295436fbad9579d5971b187c114768d1d0f"
+  },
+  {
+    "component": "python",
+    "path": "tests/test_public_price_layouts.py",
+    "baseline": "deliverables/aesthetic_explore_fix_v11_82/python/tests/test_public_price_layouts.py",
+    "before_sha256": "96f9129d319549403813529bba45153af2e7cb65c8e65abc0f0b28919c290e14",
+    "after_sha256": "d3c0005e4b7b6250ea4dd66c8e18a9842c2d837922cd8ed3c42a9f637315adbb"
+  },
+  {
+    "component": "python",
+    "path": "tests/test_valencia_price_binding.py",
+    "baseline": null,
+    "before_sha256": null,
+    "after_sha256": "f019a751c1c9b33349eb0f4245f6b8bfb931a8de158d5fdcbf2bbb6f01641f51"
+  },
+  {
+    "component": "python",
+    "path": "tests/test_vertical_search.py",
+    "baseline": null,
+    "before_sha256": null,
+    "after_sha256": "63e3c82c0d8e8f420e81d7a1b7881378a00fe48a5eae0c5e23bf6d2c4ba60048"
+  },
+  {
+    "component": "python",
+    "path": "vertical_search.py",
+    "baseline": null,
+    "before_sha256": null,
+    "after_sha256": "06f309e02d21db33e6be0a576e868b18eddbdfaf06c53e7b60ef3039c3039051"
+  },
+  {
+    "component": "flutter",
+    "path": "lib/services/explore_clinic_identity.dart",
+    "baseline": "deliverables/aesthetic_explore_fix_v11_82/flutter/lib/services/explore_clinic_identity.dart",
+    "before_sha256": "71efd0446e27de88cf7c29ad92e230571feb7db8b6c8e241a4c8f0b8d063648b",
+    "after_sha256": "a854f6f8e1d9883baa4fe94ea7393d89fa86d8bf884df91c0b0e5abc4774d71e"
+  },
+  {
+    "component": "flutter",
+    "path": "lib/services/explore_compare_mix.dart",
+    "baseline": "supplied-flutter/services/explore_compare_mix.dart",
+    "before_sha256": "4b54e36b32510e01df0dde0a4160310fbab47775da9458f16ec2f142f1fda1e0",
+    "after_sha256": "2e1972ac99b14f650b8e4897e1ed4a7f38462ba8b44f67004d5720efb4125122"
+  },
+  {
+    "component": "flutter",
+    "path": "lib/services/explore_html_price_extractor.dart",
+    "baseline": "supplied-flutter/services/explore_html_price_extractor.dart",
+    "before_sha256": "88cab373d779273aeb5d28a00244834b64b836a705be5e26d3cbe8f47cb5584f",
+    "after_sha256": "669b9302a3dc544b679986785c8a21ba091178afea84cc614e74e43fca881b38"
+  },
+  {
+    "component": "flutter",
+    "path": "lib/services/explore_price_binding.dart",
+    "baseline": "supplied-flutter/services/explore_price_binding.dart",
+    "before_sha256": "c9edbd76946514b0ed0cdfd3f3c7849e62c6715d41f7a8627275e8d12f73165e",
+    "after_sha256": "ac60ea31783c1a805daf827e183fbbb5475fdc72465666c08662de287f591e64"
+  },
+  {
+    "component": "flutter",
+    "path": "lib/services/explore_price_discovery_tool.dart",
+    "baseline": "deliverables/aesthetic_explore_fix_v11_82/flutter/lib/services/explore_price_discovery_tool.dart",
+    "before_sha256": "28ee50fdbd3f491519c76208424d8e66893e47bbb4a5c3679cdad486cb219f1d",
+    "after_sha256": "c4fef5b6d4658d544bbd31b374f03e498478a53226b98da41295b7a9680fef2e"
+  },
+  {
+    "component": "flutter",
+    "path": "lib/services/explore_price_sanity.dart",
+    "baseline": "deliverables/aesthetic_explore_fix_v11_82/flutter/lib/services/explore_price_sanity.dart",
+    "before_sha256": "dc263159f9df9ea30712c140d232dec15b442ed79c6e6d852f70081b4cdf79a8",
+    "after_sha256": "7350ffaaf196391b975705e619dd755a92875e1560f7e533b40106003b75c18e"
+  },
+  {
+    "component": "flutter",
+    "path": "lib/services/explore_procedure_family.dart",
+    "baseline": "supplied-flutter/services/explore_procedure_family.dart",
+    "before_sha256": "b848168869b3400e99fdd39944995790ac6ba938e24d463b9d09f3757e056a42",
+    "after_sha256": "a6ed8c6609c0441a083cdcf4d8241e74382de48728f558abae9093b6e9c5bf10"
+  },
+  {
+    "component": "flutter",
+    "path": "lib/services/explore_search_locale.dart",
+    "baseline": "supplied-flutter/services/explore_search_locale.dart",
+    "before_sha256": "f1128a661cc8977013db72ff65574b6e014fba8d92be69b26ecbc1030778b62b",
+    "after_sha256": "f6b2931687e3277678e0947ae0c94dc9c0f935dc4e998f64127979bc5e0fe1ac"
+  },
+  {
+    "component": "flutter",
+    "path": "lib/services/openai_service.dart",
+    "baseline": "deliverables/aesthetic_explore_fix_v11_82/flutter/lib/services/openai_service.dart",
+    "before_sha256": "edb75d0693760253c01084eab2c0d5f0e3a892e970ca713dc1d07b4b7c3855fe",
+    "after_sha256": "ef012fca05a7fb14d2c47e4b561876de8638a9e7e8e10dfe9c429ee7637c7a44"
+  },
+  {
+    "component": "flutter",
+    "path": "test/explore_valencia_prices_test.dart",
+    "baseline": null,
+    "before_sha256": null,
+    "after_sha256": "2ab3846ed28c26377b1df6c38b3b0d41b3b1ca70d16fc876c204b38fcf445e92"
+  }
+]

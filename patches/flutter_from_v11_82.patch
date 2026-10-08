@@ -1,0 +1,327 @@
+--- a/lib/services/explore_clinic_identity.dart
++++ b/lib/services/explore_clinic_identity.dart
+@@ -79,6 +79,7 @@
+   'medigence.',
+   'mediglobus.',
+   'injectablesbooking.',
++  'clinichunter.',
+   'zavis.',
+   'medifinder.',
+   'salonsindubai.',
+@@ -105,6 +106,7 @@
+ 
+ const kExploreMarketplaceBrandTokens = <String>{
+   'clinicpoint',
++  'clinichunter',
+   'whatclinic',
+   'bookimed',
+   'qunomedical',
+@@ -1173,6 +1175,8 @@
+   final t = decodeExploreHtmlEntities(raw).replaceAll('\u00a0', ' ').trim();
+   if (t.isEmpty) return false;
+   return RegExp(
++    r'\b(?:precio|precios|coste|costo|promedio|desde|cu[aá]nto|entre los|'
++    r'prix|tarifs?|combien|a partir|prezzo|prezzi|quanto|durchschnitt)\b|'
+     r'\bare priced\b|'
+     r'\bis priced\b|'
+     r'\bpriced per unit\b|'
+--- a/lib/services/explore_compare_mix.dart
++++ b/lib/services/explore_compare_mix.dart
+@@ -1,6 +1,7 @@
+ /// Selection rules shared by the Python-first path and the legacy pool planner.
+ /// Kept independent of Flutter and Firebase so partial streams are testable.
+-const kExploreCompareDisplayLimit = 4;
++const kExploreCompareDisplayLimit = 8;
++const kExploreCompareGoodEnough = 6;
+ const kExploreCompareSavedTarget = 2;
+ const kExploreCompareFreshTarget = 2;
+ 
+--- a/lib/services/explore_html_price_extractor.dart
++++ b/lib/services/explore_html_price_extractor.dart
+@@ -153,6 +153,15 @@
+     caseSensitive: false,
+   ).firstMatch(cleaned);
+   var core = body != null ? body.group(1)! : cleaned;
++  // Booking menus can sit after a large photo/layout shell. Compact only
++  // presentation attributes before the cap; preserve service boundaries,
++  // links and structured price attributes for the deterministic extractor.
++  if (core.contains('data-testid="services-list-item-root"')) {
++    core = core.replaceAll(RegExp(
++      r'''\s+(?:class|style|id|srcset|sizes|src|data-v-[\w-]+)=(?:"[^"]*"|'[^']*')''',
++      caseSensitive: false,
++    ), '');
++  }
+   if (jsonLd.isNotEmpty) {
+     core = '${jsonLd.join('\n')}\n<div>$core</div>';
+   }
+@@ -263,6 +272,37 @@
+       hashed = hashed.copyWith(quantity: graftQty);
+     }
+     out.add(hashed);
++  }
++
++  // The provider's service menu is authoritative within Booksy. Never mix
++  // neighbouring services, review labels, or duration text into its amounts.
++  final sourceHost = Uri.tryParse(sourceUrl)?.host.toLowerCase() ?? '';
++  final booksyRows = (sourceHost == 'booksy.com' || sourceHost.endsWith('.booksy.com'))
++      ? doc.querySelectorAll('[data-testid="services-list-item-root"]')
++      : <Element>[];
++  if (booksyRows.isNotEmpty) {
++    final provider = extractMarketplaceProviderName(html, sourceUrl: sourceUrl);
++    for (final service in booksyRows) {
++      final name = service.querySelector('[data-testid="service-name"]');
++      if (name == null) continue;
++      final label = _visibleText(name);
++      for (final price in service.querySelectorAll('[data-testid="service-variant-price"]')) {
++        final raw = _visibleText(price);
++        final parsed = parsePriceText(raw);
++        if (parsed == null || parsed.priceMin <= 0) continue;
++        add(ExtractedPriceEvidence(
++          rawProcedureText: label, rawPriceText: raw,
++          priceMin: parsed.priceMin, priceMax: parsed.priceMax,
++          currency: parsed.currency, sourceUrl: sourceUrl,
++          extractionMethod: PriceExtractionMethod.productCard,
++          rawEvidence: '$label | $raw', confidence: .95,
++          priceType: raw.trim().endsWith('+') ? PriceType.from : parsed.priceType,
++          unit: parsed.unit, quantity: parsed.quantity,
++          providerClinic: provider, sourcePlatform: marketplacePlatformLabel(sourceUrl),
++        ));
++      }
++    }
++    return _preferFlagshipEvidenceRows(out);
+   }
+ 
+   final jsonLdRows = <ExtractedPriceEvidence>[];
+--- a/lib/services/explore_price_binding.dart
++++ b/lib/services/explore_price_binding.dart
+@@ -110,11 +110,49 @@
+     final start = i == 0 ? 0 : prices[i - 1].match.end;
+     final prefix = _bindingFold(evidence.substring(start, price.match.start));
+     final toxin = RegExp(r'\b(?:botox|botulin\w*|neuromodulat\w*)\b').allMatches(prefix).toList();
+-    final filler = RegExp(r'\b(?:hyaluronic\s+acid|acid[ou]\s+hialuronic[ou]?|fillers?)\b').allMatches(prefix).toList();
++    final filler = RegExp(r'\b(?:hyaluronic\s+acid|acid[ou]\s+hialuronic[ou]?|fillers?|aumento\s+(?:labial|de\s+labios)|relleno\s+de\s+labios)\b').allMatches(prefix).toList();
+     if (toxin.isNotEmpty && (filler.isEmpty || toxin.last.start > filler.last.start)) return false;
+     if (filler.isNotEmpty) conflicts++;
+   }
+   return conflicts > 0;
++}
++
++/// Amount-scoped exclusions also apply to saved rows from older extractors.
++String? exploreNonTreatmentPriceReason({
++  required String evidence, required double priceMin, required String currency,
++}) {
++  final folded = _bindingFold(evidence);
++  const months = r'january|february|march|april|may|june|july|august|september|october|november|december|enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre';
++  if (RegExp('\\b(?:promo\\w*|oferta|offer)\\b.{0,110}\\b(?:$months)\\b|'
++      '\\b(?:$months)\\b.{0,45}\\b(?:promo\\w*|offer)\\b|'
++      '\\b(?:durante el mes de|during the month of)\\s+(?:$months)\\b').hasMatch(folded)) {
++    return 'seasonal_offer_unconfirmed';
++  }
++  final prices = _bindingPrices(evidence);
++  String? rejected;
++  for (var i = 0; i < prices.length; i++) {
++    final p = prices[i];
++    if (p.currency != _bindingCurrency(currency) || (p.amount-priceMin).abs() > .011) continue;
++    final start = i == 0 ? 0 : prices[i-1].match.end;
++    final prefix = _bindingFold(evidence.substring(start, p.match.start));
++    final end = i+1 < prices.length ? prices[i+1].match.start : evidence.length;
++    final tail = _bindingFold(evidence.substring(p.match.end, end));
++    if (RegExp(r'\b(?:promedio|(?:precio|coste|costo)s?\s+medi[oa]s?|clinicas? low cost|precio orientativo (?:en|de)|precios orientativos|rangos orientativos)\b').hasMatch(prefix)) {
++      rejected = 'market_average';
++    } else if (RegExp(r'\brinoplastia\s+parcial\b').hasMatch(prefix)) {
++      rejected = 'partial_rhinoplasty';
++    } else if (RegExp(r'\b(?:cuanto cuestan los implantes mamarios|por par de implantes|precio de (?:los )?implantes mamarios en espana)\b').hasMatch(prefix)) {
++      rejected = 'implant_component_price';
++    } else if (RegExp(r'\b(?:en pareja|couples? offer|couples? price|per couple)\b').hasMatch(prefix)) {
++      rejected = 'conditional_offer';
++    } else if (RegExp(r'\b(?:aesthetic medicine appointment|consultation fee|initial consultation|consulta inicial|primera visita)\b').hasMatch(prefix) ||
++        (RegExp(r'\bappointment\b').hasMatch(prefix) && RegExp(r'^.{0,40}\bredeemable\b').hasMatch(tail))) {
++      rejected = 'consultation_fee';
++    } else {
++      return null;
++    }
++  }
++  return rejected;
+ }
+ 
+ String exploreProcedureTitleWithoutPromotion(String raw) => raw
+@@ -249,7 +287,7 @@
+   final folded = _bindingFold(text);
+   if (exploreBreastImplantCostExcluded(text)) return 'Implant cost excluded';
+   final fat = RegExp(
+-    r'fat\s+(?:transfer|graft)|(?:own|autologous|autolog|sajat)\s+(?:fat|zsir)|lipofill|lipotransfer|lipomodel|zsiratultet|zsirtolt|grasso|eigenfett|grasime\s+proprie|transfert\s+de\s+graisse|me\s+yndyre',
++    r'fat\s+(?:transfer|graft)|(?:own|autologous|autolog|sajat)\s+(?:fat|zsir)|lipofill|lipotransfer|lipomodel|zsiratultet|zsirtolt|grasso|eigenfett|grasime\s+proprie|grasa\s+propia|transfert\s+de\s+graisse|me\s+yndyre',
+   ).hasMatch(folded);
+   final implants =
+       RegExp(
+--- a/lib/services/explore_price_discovery_tool.dart
++++ b/lib/services/explore_price_discovery_tool.dart
+@@ -1342,7 +1342,7 @@
+   }
+ 
+   /// Python orders the preferred mix and its verified overflow. Keep that
+-  /// order; OpenAIService validates prices before applying the four-card cap.
++  /// order; OpenAIService validates prices before applying the display cap.
+   /// Capping live_search + live_fallback at two discarded valid fallback slots.
+   static List<ExploreDiscoveryToolRow> _limitMix(
+     List<ExploreDiscoveryToolRow> rows,
+@@ -1363,6 +1363,7 @@
+ 
+   static bool _countryPriceGuide(String url) {
+     final path = Uri.tryParse(url)?.path.toLowerCase().replaceAll('_', '-') ?? '';
++    if (RegExp(r'(?:cuanto-cuesta|precio).{0,65}(?:espana|espanya)(?:/|$)').hasMatch(path)) return true;
+     return RegExp(
+       r'(?:cost|price)s?.{0,48}(?:usa|uk|canada|australia|united-states|united-kingdom)\b',
+     ).hasMatch(path);
+--- a/lib/services/explore_price_sanity.dart
++++ b/lib/services/explore_price_sanity.dart
+@@ -16,7 +16,8 @@
+ /// e18: exact prices stay exact (no auto /ml from "1 ml"); cross-city cache purge.
+ /// e19: page-level clinicOwnPrice / country cost guides; display-title normalization.
+ /// e20: Fresha JSON-LD Offer.itemOffered names; cost-savings URL reject; Fresha/Booksy discovery.
+-const kExplorePriceExtractRevision = 'e20';
++/// e21: service-bound marketplace prices; consultation/market/seasonal exclusions.
++const kExplorePriceExtractRevision = 'e21';
+ 
+ /// Hard gate: a number from clinic HTML is not a procedure price until this
+ /// passes. AI must never invent a replacement amount.
+@@ -1633,6 +1634,7 @@
+   if (t.trim().isEmpty) return false;
+   if (looksLikeGoogleAreaEstimateBlurb(raw)) return true;
+   if (RegExp(
++    r'\bpromedio\b|\b(?:precio|coste|costo)s?\s+medi[oa]s?\b|'
+     r'\baverage\s+(?:price|cost|range)(?:\s+range)?\s+(?:for|in|of)\b|'
+     r'\btypical\s+(price|cost|range)\b|'
+     r'\btypically\s+(?:range|ranging|cost|costs|priced)|'
+@@ -1988,6 +1990,14 @@
+   if (workingMin <= 0) {
+     return const PriceSanityResult.reject('missing_price_semantics');
+   }
++  final nonTreatment = exploreNonTreatmentPriceReason(
++    evidence: rawEvidence.isNotEmpty ? rawEvidence : rawPriceText,
++    priceMin: workingMin, currency: currency,
++  );
++  if (nonTreatment != null) {
++    logReject(nonTreatment);
++    return PriceSanityResult.reject(nonTreatment);
++  }
+   if (looksLikeNonInjectableBotox('$procedure $blob $clinicName $sourceUrl')) {
+     logReject('noninjectable_botox');
+     return const PriceSanityResult.reject('noninjectable_botox');
+--- a/lib/services/explore_procedure_family.dart
++++ b/lib/services/explore_procedure_family.dart
+@@ -63,6 +63,7 @@
+   'voluma',
+   'radiesse',
+   'aumento de labios',
++  'aumento labial',
+   'relleno de labios',
+   'perfilado de labios',
+   'lip filler',
+@@ -883,6 +884,7 @@
+     picked = match;
+     final folded = _fold(blob);
+     if (!looksLikeBarePriceLabel(blob) &&
++        !looksLikePricingProseProcedureTitle(blob) &&
+         blob.trim().length <= 80 &&
+         !folded.contains('typically') &&
+         !folded.contains('average') &&
+--- a/lib/services/explore_search_locale.dart
++++ b/lib/services/explore_search_locale.dart
+@@ -1591,8 +1591,20 @@
+   String url = '',
+   String evidence = '',
+ }) {
++  if (city.trim().isEmpty || city.trim().toLowerCase() == 'worldwide') return false;
+   if (exploreUrlConflictsWithSearchCity(url, city)) return true;
+   if (exploreQuotedPriceDestinationConflicts(evidence, city)) return true;
++  // Explicit tariff headings can name any branch, including cities absent
++  // from the peer-city list. Do not let the URL override that branch.
++  final scope = RegExp(
++    r'(?:precio|coste|costo|price|cost)\b[^|:!?€$]{0,85}\b(?:en|in)\s+([^|:!?€$\d]{1,45})\s*[|:]',
++    caseSensitive: false,
++  ).firstMatch(evidence);
++  if (scope != null &&
++      !exploreCityLabelsAliasMatch(scope.group(1)!.trim(), city) &&
++      !foldExploreCityText(evidence).contains(foldExploreCityText(city))) {
++    return true;
++  }
+   final searchKey = _explorePeerCityKey(city);
+   if (searchKey == null) return false;
+   // An own-city URL must not turn an explicitly foreign-only price quote
+@@ -1614,7 +1626,7 @@
+       if (alias.isEmpty) continue;
+       final a = RegExp.escape(alias);
+       if (RegExp(
+-        '(?:cost|costs|price|prices|pricing|أسعار|تكلفة).{0,48}$a',
++        '(?:precio|coste|costo|cost|costs|price|prices|pricing|أسعار|تكلفة).{0,48}$a',
+         caseSensitive: false,
+       ).hasMatch(blob)) {
+         return true;
+--- a/lib/services/openai_service.dart
++++ b/lib/services/openai_service.dart
+@@ -19778,7 +19778,7 @@
+   'v32',
+ ];
+ 
+-const kExploreCompareMinClinics = ExplorePriceDiscoveryTool.compareDisplayLimit;
++const kExploreCompareMinClinics = kExploreCompareGoodEnough;
+ const kExploreCompareMaxClinics = ExplorePriceDiscoveryTool.compareDisplayLimit;
+ 
+ /// Keep the fill session / progress listener alive while under the visible
+--- /dev/null
++++ b/test/explore_valencia_prices_test.dart
+@@ -0,0 +1,53 @@
++import 'package:flutter_test/flutter_test.dart';
++
++import '../lib/services/explore_clinic_identity.dart';
++import '../lib/services/explore_compare_mix.dart';
++import '../lib/services/explore_html_price_extractor.dart';
++import '../lib/services/explore_price_binding.dart';
++import '../lib/services/explore_search_locale.dart';
++
++void main() {
++  test('market average and consultation fee cannot be cached treatment prices', () {
++    expect(exploreNonTreatmentPriceReason(evidence:
++      'El precio promedio de un aumento de labios entre los 200 € y 400 €',
++      priceMin: 200, currency: 'EUR'), isNotNull);
++    expect(exploreNonTreatmentPriceReason(evidence:
++      'Aesthetic Medicine Appointment 70€ (redeemable against any of the treatments)',
++      priceMin: 70, currency: 'EUR'), isNotNull);
++    expect(exploreNonTreatmentPriceReason(evidence: 'Lip filler 300€ (1 vial)',
++      priceMin: 300, currency: 'EUR'), isNull);
++  });
++
++  test('pricing prose does not become the card treatment name', () {
++    expect(looksLikePricingProseProcedureTitle('Aumento de labios: precio desde'), isTrue);
++    expect(looksLikePricingProseProcedureTitle('Lip filler'), isFalse);
++  });
++
++  test('branch price overrides a local SEO URL', () {
++    expect(exploreQuotedPriceConflictsWithSearchCity(city: 'Valencia',
++      url: 'https://clinic.example/valencia',
++      evidence: 'Precio del injerto capilar en Oviedo | Nuestro trasplante capilar entre 3090€ y 3690€'), isTrue);
++    expect(exploreQuotedPriceConflictsWithSearchCity(city: 'Valencia',
++      evidence: 'Precio del injerto capilar en Valencia | desde 3090€'), isFalse);
++  });
++
++  test('Booksy markup is compacted before truncating the service menu', () {
++    final shell = List.filled(400, '<div class="${List.filled(600, 'x').join()}"></div>').join();
++    final html = '<html><body>$shell'
++      '<div data-testid="services-list-item-root"><h4 data-testid="service-name">Botox 3 zonas</h4>'
++      '<span data-testid="service-variant-price">230,00 €+</span></div>'
++      '<div data-testid="services-list-item-root"><h4 data-testid="service-name">Aumento labial</h4>'
++      '<span data-testid="service-variant-price">260,00 €+</span></div></body></html>';
++    final compact = explorePrepareHtmlForPriceParse(html);
++    expect(compact, contains('Botox 3 zonas'));
++    expect(compact, contains('Aumento labial'));
++    expect(compact.length, lessThan(kExploreMaxHtmlParseChars));
++  });
++
++  test('new eligible cards can fill slots five through eight', () {
++    final rows = stabilizeExploreCompareRows<int>(shown: [1, 2, 3, 4],
++      incoming: [4, 5, 6, 7, 8, 9], stillEligible: (_) => true,
++      sameProvider: (a, b) => a == b);
++    expect(rows, [1, 2, 3, 4, 5, 6, 7, 8]);
++  });
++}

@@ -346,6 +346,10 @@ String exploreInsufficientDataMessage(
         ? 'We could not finish verifying $proc prices in $place. Tap retry — this was a temporary lookup issue, not proof that clinics are missing.'
         : 'We could not finish verifying clinic prices in $place. Tap retry — this was a temporary lookup issue, not proof that clinics are missing.';
   }
+  if (const {'pending', 'queued', 'running', 'searching', 'discovering',
+    'verifying', 'in_progress', 'accepted'}.contains(status)) {
+    return exploreSearchingVerifiedMessage(place);
+  }
   if (status == 'thin' || status == 'partial') {
     return namedProc
         ? 'Limited verified pricing is currently available for this procedure in $place.\nMore official sources will be checked.'
@@ -412,7 +416,49 @@ List<OpenAIClinic> exploreCompareClinics(
 
 /// Clinics shown in the compare list: verified listed prices only.
 /// "Price on request" rows are never painted.
+class _CompareValidationCache {
+  _CompareValidationCache(List<OpenAIClinic> rows)
+      : snapshot = List<OpenAIClinic>.of(rows), created = DateTime.now();
+  final List<OpenAIClinic> snapshot;
+  final DateTime created;
+  final selections = <String, List<OpenAIClinic>>{};
+
+  bool matches(List<OpenAIClinic> rows) {
+    if (DateTime.now().difference(created) >= const Duration(seconds: 30) ||
+        rows.length != snapshot.length) return false;
+    for (var i = 0; i < rows.length; i++) {
+      if (!identical(rows[i], snapshot[i])) return false;
+    }
+    return true;
+  }
+}
+
+final _compareValidationCache = Expando<_CompareValidationCache>();
+
 List<OpenAIClinic> clinicsForCompareDisplay(
+  List<OpenAIClinic> clinics, {
+  String? procedure,
+  String city = '',
+}) {
+  // Clinic records are immutable. Reuse validation across repeated builds,
+  // but invalidate when any row, selection, city, or freshness window changes.
+  var cache = _compareValidationCache[clinics];
+  if (cache == null || !cache.matches(clinics)) {
+    cache = _CompareValidationCache(clinics);
+    _compareValidationCache[clinics] = cache;
+  }
+  final key = '${city.trim().toLowerCase()}|${procedure?.trim().toLowerCase() ?? ''}';
+  final cached = cache.selections[key];
+  if (cached != null) return List<OpenAIClinic>.of(cached);
+  final selected = _clinicsForCompareDisplayUncached(
+    clinics, procedure: procedure, city: city,
+  );
+  if (cache.selections.length >= 8) cache.selections.clear();
+  cache.selections[key] = List<OpenAIClinic>.of(selected);
+  return selected;
+}
+
+List<OpenAIClinic> _clinicsForCompareDisplayUncached(
   List<OpenAIClinic> clinics, {
   String? procedure,
   String city = '',
@@ -525,36 +571,6 @@ String exploreCardProcedureLabel(
       .hasMatch(clinic.procedureDetail)) {
     return 'Dermal filler · Full face rejuvenation';
   }
-  // Backend detail (Crow's feet / Three areas / Partial) beats a bare "Botox".
-  if (clinic.procedureCanonical == 'botox') {
-    final detail = clinic.procedureDetail.trim();
-    if (detail.isNotEmpty) {
-      final short = detail
-          .replaceFirst(
-            RegExp(r'^upper face\s*/\s*forehead\s*/\s*glabella\s*/\s*eyes$',
-                caseSensitive: false),
-            'Upper face',
-          )
-          .replaceFirst(RegExp(r'^full botox$', caseSensitive: false), 'Full face')
-          .replaceFirst(RegExp(r'^single area$', caseSensitive: false), 'Partial')
-          .replaceFirst(RegExp(r'^masseter\s*/\s*bruxism$', caseSensitive: false), 'Masseter')
-          .replaceFirst(RegExp(r'^add-on area$', caseSensitive: false), 'Add-on');
-      if (persisted.isEmpty || genericBotoxTitle) {
-        if (RegExp(r'^baby\s+botox$', caseSensitive: false).hasMatch(short)) {
-          return 'Baby Botox';
-        }
-        return 'Botox · $short';
-      }
-      if (!persisted.toLowerCase().contains(short.toLowerCase().split(' · ').first) &&
-          (_looksLikeBotoxAreaLabel(short) ||
-              RegExp(
-                r'three areas|full face|upper face|partial|single area|masseter|add-on',
-                caseSensitive: false,
-              ).hasMatch(short))) {
-        return '$persisted · $short';
-      }
-    }
-  }
   final isBreastAugmentation =
       pill == 'Boob job' ||
       clinic.procedureCanonical == 'breast_augmentation' ||
@@ -653,6 +669,36 @@ String exploreCardProcedureLabel(
   // Prefer the scraped menu row (clinic-detail treatment.name), then brand.
   for (final candidate in [rawText, evidenceTitle, brand]) {
     if (usableWebsiteName(candidate)) return candidate;
+  }
+  // Backend detail (Crow's feet / Three areas / Partial) beats a bare "Botox".
+  if (clinic.procedureCanonical == 'botox') {
+    final detail = clinic.procedureDetail.trim();
+    if (detail.isNotEmpty) {
+      final short = detail
+          .replaceFirst(
+            RegExp(r'^upper face\s*/\s*forehead\s*/\s*glabella\s*/\s*eyes$',
+                caseSensitive: false),
+            'Upper face',
+          )
+          .replaceFirst(RegExp(r'^full botox$', caseSensitive: false), 'Full face')
+          .replaceFirst(RegExp(r'^single area$', caseSensitive: false), 'Partial')
+          .replaceFirst(RegExp(r'^masseter\s*/\s*bruxism$', caseSensitive: false), 'Masseter')
+          .replaceFirst(RegExp(r'^add-on area$', caseSensitive: false), 'Add-on');
+      if (persisted.isEmpty || genericBotoxTitle) {
+        if (RegExp(r'^baby\s+botox$', caseSensitive: false).hasMatch(short)) {
+          return 'Baby Botox';
+        }
+        return 'Botox · $short';
+      }
+      if (!persisted.toLowerCase().contains(short.toLowerCase().split(' · ').first) &&
+          (_looksLikeBotoxAreaLabel(short) ||
+              RegExp(
+                r'three areas|full face|upper face|partial|single area|masseter|add-on',
+                caseSensitive: false,
+              ).hasMatch(short))) {
+        return '$persisted · $short';
+      }
+    }
   }
   if (genericTariffTitle && persisted.isNotEmpty) return persisted;
 

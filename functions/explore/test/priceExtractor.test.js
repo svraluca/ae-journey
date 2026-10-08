@@ -1068,7 +1068,7 @@ test('London hair package FROM not graft count or effective per-graft', () => {
     blob: 'Our hair transplant treatment fee starts from £5400 to £7600.',
     priceMin: 5400,
     priceMax: 7600,
-  }), true);
+  }), false);
 
   const lhtc = `
     <p>FUE hair transplants in London often cost £2–£3 per graft.</p>
@@ -1079,9 +1079,29 @@ test('London hair package FROM not graft count or effective per-graft', () => {
 
   const tamLanding = `
     <p>Our hair transplant treatment fee starts from £5400 to £7600.</p>`;
-  assert.equal(selectEvidenceForProcedure(
+  const freshLanding = selectEvidenceForProcedure(
       extractPriceEvidence({
         html: tamLanding,
+        sourceUrl: 'https://drmarktam.co.uk/fue-hair-transplant/',
+      }),
+      'hair transplant FUE');
+  assert.ok(freshLanding);
+  assert.equal(freshLanding.priceMin, 5400);
+  assert.equal(freshLanding.priceMax, 7600);
+  assert.equal(freshLanding.currency, 'GBP');
+
+  const expiredLanding = `
+    <p>Our hair transplant treatment fee starts from £5400 to £7600.
+    This price has expired and is no longer available.</p>`;
+  assert.equal(looksLikeHairStaleLandingQuote({
+    sourceUrl: 'https://drmarktam.co.uk/fue-hair-transplant/',
+    blob: expiredLanding,
+    priceMin: 5400,
+    priceMax: 7600,
+  }), true);
+  assert.equal(selectEvidenceForProcedure(
+      extractPriceEvidence({
+        html: expiredLanding,
         sourceUrl: 'https://drmarktam.co.uk/fue-hair-transplant/',
       }),
       'hair transplant FUE'), null);
@@ -1122,13 +1142,23 @@ test('London hair package FROM not graft count or effective per-graft', () => {
     priceMin: 5400,
     priceMax: 7600,
     currency: 'GBP',
-  }), true);
+  }), false);
   assert.equal(exploreCachedPriceNeedsReselect({
     rawProcedureText: 'Hair transplant',
     brand: 'hair transplant FUE',
     sourceUrl: 'https://drmarktam.co.uk/fue-hair-transplant/',
     procedure: 'hair transplant FUE',
     rawPriceText: 'from 5400 £',
+    priceMin: 5400,
+    priceMax: 5400,
+    currency: 'GBP',
+  }), false);
+  assert.equal(exploreCachedPriceNeedsReselect({
+    rawProcedureText: 'Hair transplant',
+    brand: 'hair transplant FUE',
+    sourceUrl: 'https://drmarktam.co.uk/fue-hair-transplant/',
+    procedure: 'hair transplant FUE',
+    rawPriceText: 'Expired price: from 5400 £',
     priceMin: 5400,
     priceMax: 5400,
     currency: 'GBP',

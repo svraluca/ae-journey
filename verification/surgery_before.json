@@ -1,0 +1,185 @@
+[
+  {
+    "control": "molto",
+    "status": "verified",
+    "local_business_evidence": true,
+    "extracted_prices": 5,
+    "reasons": {},
+    "clinic_name": "Cirugía Plástica y Estética Gandía Dr. Moltó",
+    "source_host": "drmolto.com",
+    "source_url": "https://www.drmolto.com/rinoplastia-ultrasonica-precio/",
+    "price_min": 1800.0,
+    "price_max": 3500.0,
+    "currency": "EUR",
+    "unit": "procedure",
+    "qualifier": "range",
+    "scope": "",
+    "procedure_display_name": "Rhinoplasty",
+    "raw_procedure_text": "Rhinoplasty",
+    "raw_evidence": "Rinoplastia parcial Actuación limitada sobre punta, dorso o un detalle concreto. No siempre es viable si la nariz necesita un plan global. 1.800 € – 3.500 € apr",
+    "source_type": "official_clinic",
+    "evidence_type": "official_price_menu"
+  },
+  {
+    "control": "simon",
+    "status": "no_eligible_price",
+    "local_business_evidence": true,
+    "extracted_prices": 3,
+    "reasons": {
+      "unowned_official_page": 3
+    }
+  },
+  {
+    "control": "medics",
+    "status": "verified",
+    "local_business_evidence": true,
+    "extracted_prices": 17,
+    "reasons": {
+      "generic_multi_clinic_price": 3,
+      "unowned_official_page": 8
+    },
+    "clinic_name": "Medics Integral Salut",
+    "source_host": "medicsintegralsalut.com",
+    "source_url": "https://www.medicsintegralsalut.com/cuanto-cuesta-rinoplastia-espana/",
+    "price_min": 3500.0,
+    "price_max": 6000.0,
+    "currency": "EUR",
+    "unit": "procedure",
+    "qualifier": "range",
+    "scope": "",
+    "procedure_display_name": "Rhinoplasty",
+    "raw_procedure_text": "Rhinoplasty",
+    "raw_evidence": "Rinoplastia estética sencilla: 3.500 € – 6.000 €",
+    "source_type": "official_clinic",
+    "evidence_type": "official_treatment_page"
+  },
+  {
+    "control": "sensabell",
+    "status": "verified",
+    "local_business_evidence": true,
+    "extracted_prices": 29,
+    "reasons": {},
+    "clinic_name": "SENSABELL",
+    "source_host": "sensabell.com",
+    "source_url": "https://sensabell.com/precio-aumento-pecho-2026-valencia/",
+    "price_min": 3000.0,
+    "price_max": null,
+    "currency": "EUR",
+    "unit": "procedure",
+    "qualifier": "from",
+    "scope": "Method not specified",
+    "procedure_display_name": "Breast augmentation · Method not specified",
+    "raw_procedure_text": "Aumento de pecho en clínicas low cost (desde",
+    "raw_evidence": "Aumento de pecho en clínicas low cost (desde 3.000 €",
+    "source_type": "official_clinic",
+    "evidence_type": "official_price_menu"
+  },
+  {
+    "control": "puig_breast_blog",
+    "status": "verified",
+    "local_business_evidence": true,
+    "extracted_prices": 12,
+    "reasons": {
+      "generic_multi_clinic_price": 1
+    },
+    "clinic_name": "Clínica de Cirugía Estética Dr. Julio Puig",
+    "source_host": "drpuig.com",
+    "source_url": "https://drpuig.com/precio-aumento-de-pecho-valencia-cuanto-cuesta/",
+    "price_min": 2000.0,
+    "price_max": null,
+    "currency": "EUR",
+    "unit": "procedure",
+    "qualifier": "exact",
+    "scope": "With implants",
+    "procedure_display_name": "Breast augmentation · With implants",
+    "raw_procedure_text": "¿Cuánto cuestan los implantes mamarios en España? Los precios oscilan entre 600 y",
+    "raw_evidence": "¿Cuánto cuestan los implantes mamarios en España? Los precios oscilan entre 600 y 2.000 euros",
+    "source_type": "official_clinic",
+    "evidence_type": "official_price_menu"
+  },
+  {
+    "control": "puig_breast",
+    "status": "no_eligible_price",
+    "local_business_evidence": true,
+    "extracted_prices": 3,
+    "reasons": {
+      "generic_multi_clinic_price": 3
+    }
+  },
+  {
+    "control": "hunter",
+    "status": "no_eligible_price",
+    "local_business_evidence": true,
+    "extracted_prices": 3,
+    "reasons": {
+      "unowned_official_page": 3
+    }
+  },
+  {
+    "control": "mcapilar",
+    "status": "verified",
+    "local_business_evidence": true,
+    "extracted_prices": 4,
+    "reasons": {
+      "third_party_provider_quote": 1
+    },
+    "clinic_name": "Mcapilar",
+    "source_host": "clinicamcapilar.com",
+    "source_url": "https://clinicamcapilar.com/injerto-capilar-precio/",
+    "price_min": 3090.0,
+    "price_max": null,
+    "currency": "EUR",
+    "unit": "procedure",
+    "qualifier": "exact",
+    "scope": "",
+    "procedure_display_name": "Hair Transplant",
+    "raw_procedure_text": "Hair Transplant",
+    "raw_evidence": "Precio del injerto capilar en Oviedo | Nuestro trasplante capilar en Oviedo tiene un precio de entre 3090€ u",
+    "source_type": "official_clinic",
+    "evidence_type": "official_price_menu"
+  },
+  {
+    "control": "magna",
+    "status": "verified",
+    "local_business_evidence": true,
+    "extracted_prices": 3,
+    "reasons": {},
+    "clinic_name": "Clínica Magnasalud",
+    "source_host": "clinicamagnasalud.es",
+    "source_url": "https://clinicamagnasalud.es/servicios/medicina-capilar/trasplante-capilar-fue/",
+    "price_min": 2500.0,
+    "price_max": null,
+    "currency": "EUR",
+    "unit": "procedure",
+    "qualifier": "from",
+    "scope": "FUE",
+    "procedure_display_name": "Hair Transplant",
+    "raw_procedure_text": "Hair Transplant",
+    "raw_evidence": "Trasplante Capilar FUE | Precio desde 2500€. Pide cita para valoración tricológica.",
+    "source_type": "official_clinic",
+    "evidence_type": "official_treatment_page"
+  },
+  {
+    "control": "mymedica_fees",
+    "status": "verified",
+    "local_business_evidence": true,
+    "extracted_prices": 9,
+    "reasons": {
+      "other": 3
+    },
+    "clinic_name": "My Medica",
+    "source_host": "es.mymedicavalencia.com",
+    "source_url": "https://es.mymedicavalencia.com/fees/",
+    "price_min": 350.0,
+    "price_max": null,
+    "currency": "EUR",
+    "unit": "procedure",
+    "qualifier": "exact",
+    "scope": "",
+    "procedure_display_name": "Botox",
+    "raw_procedure_text": "Botox",
+    "raw_evidence": "Dra. Tatiana Fernández Portilla Botox facial 350€ Relleno labios",
+    "source_type": "official_clinic",
+    "evidence_type": "official_price_menu"
+  }
+]

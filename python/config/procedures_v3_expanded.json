@@ -1,0 +1,1713 @@
+{
+  "_meta": {
+    "schema_version": "3.0",
+    "purpose": "Broad aesthetic medicine, cosmetic dermatology and plastic surgery procedure catalog for worldwide price discovery.",
+    "scope_note": "No finite global list can literally contain every branded technique or newly launched device. This catalog covers major canonical procedure families and common subtypes; brands/marketing names should map to canonical keys.",
+    "normalization_rule": "Search may use any synonym/brand/local term, but stored/displayed procedure should normalize to canonical key + display_name_en.",
+    "localization_rule": "English aliases are included for the expanded catalog. Add curated local-language synonyms for high-volume markets first; otherwise translate/search-expand on demand and cache the result."
+  },
+  "categories": [
+    "injectables",
+    "skin_resurfacing_rejuvenation",
+    "energy_based_tightening_contouring",
+    "face_surgery",
+    "breast_surgery",
+    "body_surgery",
+    "hair",
+    "vascular",
+    "genital_aesthetic"
+  ],
+  "procedures": {
+    "botulinum_toxin": {
+      "category": "injectables",
+      "display_name_en": "Botox",
+      "synonyms": {
+        "en": [
+          "botox",
+          "botulinum toxin",
+          "neuromodulator",
+          "anti-wrinkle injections",
+          "Dysport",
+          "Xeomin",
+          "Jeuveau",
+          "Daxxify"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "lip_filler": {
+      "category": "injectables",
+      "display_name_en": "Lip Filler",
+      "synonyms": {
+        "en": [
+          "lip filler",
+          "lip augmentation filler",
+          "lip injections",
+          "Russian lips"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "cheek_filler": {
+      "category": "injectables",
+      "display_name_en": "Cheek Filler",
+      "synonyms": {
+        "en": [
+          "cheek filler",
+          "malar filler",
+          "midface filler",
+          "cheek augmentation filler"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "chin_filler": {
+      "category": "injectables",
+      "display_name_en": "Chin Filler",
+      "synonyms": {
+        "en": [
+          "chin filler",
+          "non-surgical chin augmentation",
+          "mentum filler"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "jawline_filler": {
+      "category": "injectables",
+      "display_name_en": "Jawline Filler",
+      "synonyms": {
+        "en": [
+          "jawline filler",
+          "mandibular filler",
+          "jaw contour filler"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "nasolabial_filler": {
+      "category": "injectables",
+      "display_name_en": "Nasolabial Fold Filler",
+      "synonyms": {
+        "en": [
+          "nasolabial fold filler",
+          "smile line filler"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "marionette_line_filler": {
+      "category": "injectables",
+      "display_name_en": "Marionette Line Filler",
+      "synonyms": {
+        "en": [
+          "marionette line filler",
+          "oral commissure filler"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "tear_trough_filler": {
+      "category": "injectables",
+      "display_name_en": "Tear Trough Filler",
+      "synonyms": {
+        "en": [
+          "tear trough filler",
+          "under eye filler",
+          "infraorbital filler"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "temple_filler": {
+      "category": "injectables",
+      "display_name_en": "Temple Filler",
+      "synonyms": {
+        "en": [
+          "temple filler",
+          "temporal filler"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "forehead_filler": {
+      "category": "injectables",
+      "display_name_en": "Forehead Filler",
+      "synonyms": {
+        "en": [
+          "forehead filler"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "nose_filler": {
+      "category": "injectables",
+      "display_name_en": "Non-Surgical Rhinoplasty",
+      "synonyms": {
+        "en": [
+          "non-surgical rhinoplasty",
+          "liquid rhinoplasty",
+          "nose filler"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "hand_filler": {
+      "category": "injectables",
+      "display_name_en": "Hand Filler",
+      "synonyms": {
+        "en": [
+          "hand filler",
+          "hand rejuvenation filler"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "earlobe_filler": {
+      "category": "injectables",
+      "display_name_en": "Earlobe Filler",
+      "synonyms": {
+        "en": [
+          "earlobe filler"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "dermal_filler_general": {
+      "category": "injectables",
+      "display_name_en": "Dermal Filler",
+      "synonyms": {
+        "en": [
+          "dermal filler",
+          "soft tissue filler",
+          "hyaluronic acid filler"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "sculptra": {
+      "category": "injectables",
+      "display_name_en": "Sculptra",
+      "synonyms": {
+        "en": [
+          "Sculptra",
+          "PLLA",
+          "poly-L-lactic acid"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "radiesse": {
+      "category": "injectables",
+      "display_name_en": "Radiesse",
+      "synonyms": {
+        "en": [
+          "Radiesse",
+          "calcium hydroxylapatite",
+          "CaHA filler"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "skin_booster": {
+      "category": "injectables",
+      "display_name_en": "Skin Booster",
+      "synonyms": {
+        "en": [
+          "skin booster",
+          "injectable skin booster",
+          "hydration injections"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "profhilo": {
+      "category": "injectables",
+      "display_name_en": "Profhilo",
+      "synonyms": {
+        "en": [
+          "Profhilo",
+          "bio-remodelling injection"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "polynucleotides": {
+      "category": "injectables",
+      "display_name_en": "Polynucleotides",
+      "synonyms": {
+        "en": [
+          "polynucleotides",
+          "PN injections",
+          "PDRN",
+          "salmon DNA injections"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "mesotherapy": {
+      "category": "injectables",
+      "display_name_en": "Mesotherapy",
+      "synonyms": {
+        "en": [
+          "mesotherapy",
+          "meso injections"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "prp_face": {
+      "category": "injectables",
+      "display_name_en": "Prp Facial",
+      "synonyms": {
+        "en": [
+          "PRP facial",
+          "platelet rich plasma facial",
+          "vampire facial"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "prf_face": {
+      "category": "injectables",
+      "display_name_en": "Prf Facial",
+      "synonyms": {
+        "en": [
+          "PRF facial",
+          "platelet rich fibrin facial"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "fat_dissolving_injections": {
+      "category": "injectables",
+      "display_name_en": "Fat Dissolving Injections",
+      "synonyms": {
+        "en": [
+          "fat dissolving injections",
+          "deoxycholic acid",
+          "Kybella",
+          "Belkyra",
+          "Aqualyx"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "hyperhidrosis_botox": {
+      "category": "injectables",
+      "display_name_en": "Botox For Sweating",
+      "synonyms": {
+        "en": [
+          "Botox for sweating",
+          "hyperhidrosis injections"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "masseter_botox": {
+      "category": "injectables",
+      "display_name_en": "Masseter Botox",
+      "synonyms": {
+        "en": [
+          "masseter Botox",
+          "jaw slimming Botox"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "lip_flip": {
+      "category": "injectables",
+      "display_name_en": "Lip Flip",
+      "synonyms": {
+        "en": [
+          "lip flip",
+          "Botox lip flip"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "gummy_smile_botox": {
+      "category": "injectables",
+      "display_name_en": "Gummy Smile Botox",
+      "synonyms": {
+        "en": [
+          "gummy smile Botox"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "trap_botox": {
+      "category": "injectables",
+      "display_name_en": "Trapezius Botox",
+      "synonyms": {
+        "en": [
+          "trapezius Botox",
+          "Barbie Botox"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "chemical_peel_superficial": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Superficial Chemical Peel",
+      "synonyms": {
+        "en": [
+          "superficial chemical peel",
+          "light peel",
+          "glycolic peel",
+          "mandelic peel",
+          "salicylic peel"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "chemical_peel_medium": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Medium Chemical Peel",
+      "synonyms": {
+        "en": [
+          "medium chemical peel",
+          "TCA peel"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "chemical_peel_deep": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Deep Chemical Peel",
+      "synonyms": {
+        "en": [
+          "deep chemical peel",
+          "phenol peel"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "laser_resurfacing_ablative": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Ablative Laser Resurfacing",
+      "synonyms": {
+        "en": [
+          "ablative laser resurfacing",
+          "CO2 laser resurfacing",
+          "Er:YAG resurfacing"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "fractional_co2_laser": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Fractional Co2 Laser",
+      "synonyms": {
+        "en": [
+          "fractional CO2 laser",
+          "fractional carbon dioxide laser"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "erbium_laser": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Erbium Laser",
+      "synonyms": {
+        "en": [
+          "erbium laser",
+          "Er:YAG laser"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "non_ablative_fractional_laser": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Non-Ablative Fractional Laser",
+      "synonyms": {
+        "en": [
+          "non-ablative fractional laser",
+          "Fraxel"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "ipl_photofacial": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Ipl",
+      "synonyms": {
+        "en": [
+          "IPL",
+          "intense pulsed light",
+          "photofacial"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "bbl_photofacial": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Bbl",
+      "synonyms": {
+        "en": [
+          "BBL",
+          "broadband light"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "pico_laser": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Picosecond Laser",
+      "synonyms": {
+        "en": [
+          "picosecond laser",
+          "PicoSure",
+          "PicoWay",
+          "pico laser"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "q_switched_laser": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Q-Switched Laser",
+      "synonyms": {
+        "en": [
+          "Q-switched laser"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "vascular_laser": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Vascular Laser",
+      "synonyms": {
+        "en": [
+          "vascular laser",
+          "pulsed dye laser",
+          "PDL",
+          "Vbeam"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "nd_yag_laser": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Nd:Yag Laser",
+      "synonyms": {
+        "en": [
+          "Nd:YAG laser"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "microdermabrasion": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Microdermabrasion",
+      "synonyms": {
+        "en": [
+          "microdermabrasion"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "dermabrasion": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Dermabrasion",
+      "synonyms": {
+        "en": [
+          "dermabrasion"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "microneedling": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Microneedling",
+      "synonyms": {
+        "en": [
+          "microneedling",
+          "collagen induction therapy",
+          "Dermapen"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "rf_microneedling": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Rf Microneedling",
+      "synonyms": {
+        "en": [
+          "RF microneedling",
+          "radiofrequency microneedling",
+          "Morpheus8",
+          "Secret RF",
+          "Potenza"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "hydrafacial": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Hydrafacial",
+      "synonyms": {
+        "en": [
+          "HydraFacial",
+          "hydradermabrasion"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "oxygen_facial": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Oxygen Facial",
+      "synonyms": {
+        "en": [
+          "oxygen facial"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "led_light_therapy": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Led Light Therapy",
+      "synonyms": {
+        "en": [
+          "LED light therapy",
+          "photobiomodulation"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "medical_facial": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Medical Facial",
+      "synonyms": {
+        "en": [
+          "medical facial",
+          "clinical facial"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "acne_treatment_aesthetic": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Aesthetic Acne Treatment",
+      "synonyms": {
+        "en": [
+          "aesthetic acne treatment",
+          "acne procedure"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "acne_scar_subcision": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Subcision",
+      "synonyms": {
+        "en": [
+          "subcision",
+          "acne scar subcision"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "tca_cross": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Tca Cross",
+      "synonyms": {
+        "en": [
+          "TCA CROSS",
+          "chemical reconstruction of skin scars"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "scar_laser": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Laser Scar Treatment",
+      "synonyms": {
+        "en": [
+          "laser scar treatment",
+          "fractional laser scar treatment"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "scar_revision": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Scar Revision",
+      "synonyms": {
+        "en": [
+          "scar revision",
+          "scar correction"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "keloid_treatment": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Keloid Treatment",
+      "synonyms": {
+        "en": [
+          "keloid treatment",
+          "keloid injection",
+          "keloid excision"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "stretch_mark_treatment": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Stretch Mark Treatment",
+      "synonyms": {
+        "en": [
+          "stretch mark treatment",
+          "striae treatment"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "pigmentation_treatment": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Pigmentation Laser",
+      "synonyms": {
+        "en": [
+          "pigmentation laser",
+          "melasma treatment",
+          "age spot treatment"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "tattoo_removal": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Laser Tattoo Removal",
+      "synonyms": {
+        "en": [
+          "laser tattoo removal",
+          "tattoo removal"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "mole_removal_cosmetic": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Cosmetic Mole Removal",
+      "synonyms": {
+        "en": [
+          "cosmetic mole removal",
+          "nevus removal"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "skin_tag_removal": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Skin Tag Removal",
+      "synonyms": {
+        "en": [
+          "skin tag removal"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "seborrheic_keratosis_removal": {
+      "category": "skin_resurfacing_rejuvenation",
+      "display_name_en": "Seborrheic Keratosis Removal",
+      "synonyms": {
+        "en": [
+          "seborrheic keratosis removal"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "hifu_face": {
+      "category": "energy_based_tightening_contouring",
+      "display_name_en": "Hifu Face",
+      "synonyms": {
+        "en": [
+          "HIFU face",
+          "high intensity focused ultrasound",
+          "ultrasound skin tightening",
+          "Ultherapy"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "radiofrequency_skin_tightening": {
+      "category": "energy_based_tightening_contouring",
+      "display_name_en": "Radiofrequency Skin Tightening",
+      "synonyms": {
+        "en": [
+          "radiofrequency skin tightening",
+          "RF tightening",
+          "Thermage"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "rf_body_tightening": {
+      "category": "energy_based_tightening_contouring",
+      "display_name_en": "Radiofrequency Body Tightening",
+      "synonyms": {
+        "en": [
+          "radiofrequency body tightening"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "ultrasound_body_contouring": {
+      "category": "energy_based_tightening_contouring",
+      "display_name_en": "Ultrasound Fat Reduction",
+      "synonyms": {
+        "en": [
+          "ultrasound fat reduction",
+          "ultrasound body contouring"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "cryolipolysis": {
+      "category": "energy_based_tightening_contouring",
+      "display_name_en": "Cryolipolysis",
+      "synonyms": {
+        "en": [
+          "cryolipolysis",
+          "CoolSculpting",
+          "fat freezing"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "laser_lipolysis_non_surgical": {
+      "category": "energy_based_tightening_contouring",
+      "display_name_en": "Non-Surgical Laser Lipolysis",
+      "synonyms": {
+        "en": [
+          "non-surgical laser lipolysis",
+          "laser fat reduction"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "emsculpt": {
+      "category": "energy_based_tightening_contouring",
+      "display_name_en": "Emsculpt",
+      "synonyms": {
+        "en": [
+          "Emsculpt",
+          "HIFEM body contouring",
+          "muscle toning"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "emsella": {
+      "category": "energy_based_tightening_contouring",
+      "display_name_en": "Emsella",
+      "synonyms": {
+        "en": [
+          "Emsella",
+          "pelvic floor HIFEM"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "cellulite_treatment": {
+      "category": "energy_based_tightening_contouring",
+      "display_name_en": "Cellulite Treatment",
+      "synonyms": {
+        "en": [
+          "cellulite treatment",
+          "Cellfina",
+          "Cellulaze",
+          "subcision cellulite treatment"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "rhinoplasty": {
+      "category": "face_surgery",
+      "display_name_en": "Rhinoplasty",
+      "synonyms": {
+        "en": [
+          "rhinoplasty",
+          "nose job",
+          "nose reshaping"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "revision_rhinoplasty": {
+      "category": "face_surgery",
+      "display_name_en": "Revision Rhinoplasty",
+      "synonyms": {
+        "en": [
+          "revision rhinoplasty",
+          "secondary rhinoplasty"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "septorhinoplasty": {
+      "category": "face_surgery",
+      "display_name_en": "Septorhinoplasty",
+      "synonyms": {
+        "en": [
+          "septorhinoplasty"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "facelift": {
+      "category": "face_surgery",
+      "display_name_en": "Facelift",
+      "synonyms": {
+        "en": [
+          "facelift",
+          "rhytidectomy"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "mini_facelift": {
+      "category": "face_surgery",
+      "display_name_en": "Mini Facelift",
+      "synonyms": {
+        "en": [
+          "mini facelift",
+          "short scar facelift"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "deep_plane_facelift": {
+      "category": "face_surgery",
+      "display_name_en": "Deep Plane Facelift",
+      "synonyms": {
+        "en": [
+          "deep plane facelift"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "neck_lift": {
+      "category": "face_surgery",
+      "display_name_en": "Neck Lift",
+      "synonyms": {
+        "en": [
+          "neck lift",
+          "lower rhytidectomy"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "brow_lift": {
+      "category": "face_surgery",
+      "display_name_en": "Brow Lift",
+      "synonyms": {
+        "en": [
+          "brow lift",
+          "forehead lift",
+          "eyebrow lift"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "temporal_lift": {
+      "category": "face_surgery",
+      "display_name_en": "Temporal Lift",
+      "synonyms": {
+        "en": [
+          "temporal lift",
+          "lateral brow lift"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "fox_eye_lift": {
+      "category": "face_surgery",
+      "display_name_en": "Fox Eye Lift",
+      "synonyms": {
+        "en": [
+          "fox eye lift",
+          "cat eye lift",
+          "canthopexy aesthetic"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "upper_blepharoplasty": {
+      "category": "face_surgery",
+      "display_name_en": "Upper Blepharoplasty",
+      "synonyms": {
+        "en": [
+          "upper blepharoplasty",
+          "upper eyelid surgery"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "lower_blepharoplasty": {
+      "category": "face_surgery",
+      "display_name_en": "Lower Blepharoplasty",
+      "synonyms": {
+        "en": [
+          "lower blepharoplasty",
+          "lower eyelid surgery"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "double_eyelid_surgery": {
+      "category": "face_surgery",
+      "display_name_en": "Double Eyelid Surgery",
+      "synonyms": {
+        "en": [
+          "double eyelid surgery",
+          "Asian blepharoplasty"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "canthoplasty": {
+      "category": "face_surgery",
+      "display_name_en": "Canthoplasty",
+      "synonyms": {
+        "en": [
+          "canthoplasty",
+          "lateral canthoplasty"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "canthopexy": {
+      "category": "face_surgery",
+      "display_name_en": "Canthopexy",
+      "synonyms": {
+        "en": [
+          "canthopexy"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "otoplasty": {
+      "category": "face_surgery",
+      "display_name_en": "Otoplasty",
+      "synonyms": {
+        "en": [
+          "otoplasty",
+          "ear pinning",
+          "ear surgery"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "ear_reduction": {
+      "category": "face_surgery",
+      "display_name_en": "Ear Reduction",
+      "synonyms": {
+        "en": [
+          "ear reduction",
+          "macrotia surgery"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "earlobe_repair": {
+      "category": "face_surgery",
+      "display_name_en": "Earlobe Repair",
+      "synonyms": {
+        "en": [
+          "earlobe repair",
+          "split earlobe repair"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "chin_implant": {
+      "category": "face_surgery",
+      "display_name_en": "Chin Implant",
+      "synonyms": {
+        "en": [
+          "chin implant",
+          "chin augmentation implant"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "genioplasty": {
+      "category": "face_surgery",
+      "display_name_en": "Genioplasty",
+      "synonyms": {
+        "en": [
+          "genioplasty",
+          "sliding genioplasty"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "cheek_implants": {
+      "category": "face_surgery",
+      "display_name_en": "Cheek Implants",
+      "synonyms": {
+        "en": [
+          "cheek implants",
+          "malar implants"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "facial_implants": {
+      "category": "face_surgery",
+      "display_name_en": "Facial Implants",
+      "synonyms": {
+        "en": [
+          "facial implants"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "buccal_fat_removal": {
+      "category": "face_surgery",
+      "display_name_en": "Buccal Fat Removal",
+      "synonyms": {
+        "en": [
+          "buccal fat removal",
+          "cheek reduction"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "lip_lift": {
+      "category": "face_surgery",
+      "display_name_en": "Lip Lift",
+      "synonyms": {
+        "en": [
+          "lip lift",
+          "bullhorn lip lift"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "lip_reduction": {
+      "category": "face_surgery",
+      "display_name_en": "Lip Reduction",
+      "synonyms": {
+        "en": [
+          "lip reduction"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "lip_surgery_augmentation": {
+      "category": "face_surgery",
+      "display_name_en": "Surgical Lip Augmentation",
+      "synonyms": {
+        "en": [
+          "surgical lip augmentation",
+          "lip implant"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "dimpleplasty": {
+      "category": "face_surgery",
+      "display_name_en": "Dimpleplasty",
+      "synonyms": {
+        "en": [
+          "dimpleplasty",
+          "dimple surgery"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "facial_fat_grafting": {
+      "category": "face_surgery",
+      "display_name_en": "Facial Fat Grafting",
+      "synonyms": {
+        "en": [
+          "facial fat grafting",
+          "fat transfer to face"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "breast_augmentation_implants": {
+      "category": "breast_surgery",
+      "display_name_en": "Breast Augmentation",
+      "synonyms": {
+        "en": [
+          "breast augmentation",
+          "breast implants",
+          "augmentation mammoplasty"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "breast_augmentation_fat_transfer": {
+      "category": "breast_surgery",
+      "display_name_en": "Fat Transfer Breast Augmentation",
+      "synonyms": {
+        "en": [
+          "fat transfer breast augmentation",
+          "breast fat grafting"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "breast_lift": {
+      "category": "breast_surgery",
+      "display_name_en": "Breast Lift",
+      "synonyms": {
+        "en": [
+          "breast lift",
+          "mastopexy"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "breast_reduction": {
+      "category": "breast_surgery",
+      "display_name_en": "Breast Reduction",
+      "synonyms": {
+        "en": [
+          "breast reduction",
+          "reduction mammoplasty"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "breast_implant_removal": {
+      "category": "breast_surgery",
+      "display_name_en": "Breast Implant Removal",
+      "synonyms": {
+        "en": [
+          "breast implant removal",
+          "explant surgery"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "breast_implant_revision": {
+      "category": "breast_surgery",
+      "display_name_en": "Breast Implant Revision",
+      "synonyms": {
+        "en": [
+          "breast implant revision",
+          "implant exchange"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "capsulectomy": {
+      "category": "breast_surgery",
+      "display_name_en": "Capsulectomy",
+      "synonyms": {
+        "en": [
+          "capsulectomy",
+          "en bloc capsulectomy"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "gynecomastia_surgery": {
+      "category": "breast_surgery",
+      "display_name_en": "Gynecomastia Surgery",
+      "synonyms": {
+        "en": [
+          "gynecomastia surgery",
+          "male breast reduction"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "nipple_reduction": {
+      "category": "breast_surgery",
+      "display_name_en": "Nipple Reduction",
+      "synonyms": {
+        "en": [
+          "nipple reduction"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "areola_reduction": {
+      "category": "breast_surgery",
+      "display_name_en": "Areola Reduction",
+      "synonyms": {
+        "en": [
+          "areola reduction"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "inverted_nipple_correction": {
+      "category": "breast_surgery",
+      "display_name_en": "Inverted Nipple Correction",
+      "synonyms": {
+        "en": [
+          "inverted nipple correction"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "liposuction": {
+      "category": "body_surgery",
+      "display_name_en": "Liposuction",
+      "synonyms": {
+        "en": [
+          "liposuction",
+          "lipo",
+          "suction-assisted lipectomy"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "vaser_liposuction": {
+      "category": "body_surgery",
+      "display_name_en": "Vaser Liposuction",
+      "synonyms": {
+        "en": [
+          "VASER liposuction",
+          "ultrasound-assisted liposuction"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "laser_liposuction": {
+      "category": "body_surgery",
+      "display_name_en": "Laser-Assisted Liposuction",
+      "synonyms": {
+        "en": [
+          "laser-assisted liposuction",
+          "SmartLipo"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "tumescent_liposuction": {
+      "category": "body_surgery",
+      "display_name_en": "Tumescent Liposuction",
+      "synonyms": {
+        "en": [
+          "tumescent liposuction"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "high_definition_liposuction": {
+      "category": "body_surgery",
+      "display_name_en": "Hd Liposuction",
+      "synonyms": {
+        "en": [
+          "HD liposuction",
+          "high definition liposuction",
+          "360 lipo"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "tummy_tuck": {
+      "category": "body_surgery",
+      "display_name_en": "Tummy Tuck",
+      "synonyms": {
+        "en": [
+          "tummy tuck",
+          "abdominoplasty"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "mini_tummy_tuck": {
+      "category": "body_surgery",
+      "display_name_en": "Mini Tummy Tuck",
+      "synonyms": {
+        "en": [
+          "mini tummy tuck",
+          "mini abdominoplasty"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "extended_tummy_tuck": {
+      "category": "body_surgery",
+      "display_name_en": "Extended Tummy Tuck",
+      "synonyms": {
+        "en": [
+          "extended tummy tuck"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "mommy_makeover": {
+      "category": "body_surgery",
+      "display_name_en": "Mommy Makeover",
+      "synonyms": {
+        "en": [
+          "mommy makeover"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "body_lift": {
+      "category": "body_surgery",
+      "display_name_en": "Body Lift",
+      "synonyms": {
+        "en": [
+          "body lift",
+          "belt lipectomy",
+          "lower body lift"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "arm_lift": {
+      "category": "body_surgery",
+      "display_name_en": "Arm Lift",
+      "synonyms": {
+        "en": [
+          "arm lift",
+          "brachioplasty"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "thigh_lift": {
+      "category": "body_surgery",
+      "display_name_en": "Thigh Lift",
+      "synonyms": {
+        "en": [
+          "thigh lift",
+          "thighplasty"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "buttock_lift": {
+      "category": "body_surgery",
+      "display_name_en": "Buttock Lift",
+      "synonyms": {
+        "en": [
+          "buttock lift"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "brazilian_butt_lift": {
+      "category": "body_surgery",
+      "display_name_en": "Brazilian Butt Lift",
+      "synonyms": {
+        "en": [
+          "Brazilian butt lift",
+          "BBL",
+          "gluteal fat grafting"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "buttock_implants": {
+      "category": "body_surgery",
+      "display_name_en": "Buttock Implants",
+      "synonyms": {
+        "en": [
+          "buttock implants",
+          "gluteal implants"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "calf_implants": {
+      "category": "body_surgery",
+      "display_name_en": "Calf Implants",
+      "synonyms": {
+        "en": [
+          "calf implants",
+          "calf augmentation"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "pectoral_implants": {
+      "category": "body_surgery",
+      "display_name_en": "Pectoral Implants",
+      "synonyms": {
+        "en": [
+          "pectoral implants",
+          "male chest implants"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "back_lift": {
+      "category": "body_surgery",
+      "display_name_en": "Back Lift",
+      "synonyms": {
+        "en": [
+          "back lift",
+          "bra line back lift"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "monsplasty": {
+      "category": "body_surgery",
+      "display_name_en": "Monsplasty",
+      "synonyms": {
+        "en": [
+          "monsplasty",
+          "mons pubis lift"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "hair_transplant_fue": {
+      "category": "hair",
+      "display_name_en": "Fue Hair Transplant",
+      "synonyms": {
+        "en": [
+          "FUE hair transplant",
+          "follicular unit extraction"
+        ]
+      },
+      "search_priority": "primary"
+    },
+    "hair_transplant_fut": {
+      "category": "hair",
+      "display_name_en": "Fut Hair Transplant",
+      "synonyms": {
+        "en": [
+          "FUT hair transplant",
+          "strip hair transplant",
+          "follicular unit transplantation"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "hair_transplant_dhi": {
+      "category": "hair",
+      "display_name_en": "Dhi Hair Transplant",
+      "synonyms": {
+        "en": [
+          "DHI hair transplant",
+          "direct hair implantation"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "beard_transplant": {
+      "category": "hair",
+      "display_name_en": "Beard Transplant",
+      "synonyms": {
+        "en": [
+          "beard transplant",
+          "facial hair transplant"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "eyebrow_transplant": {
+      "category": "hair",
+      "display_name_en": "Eyebrow Transplant",
+      "synonyms": {
+        "en": [
+          "eyebrow transplant"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "hairline_lowering": {
+      "category": "hair",
+      "display_name_en": "Hairline Lowering",
+      "synonyms": {
+        "en": [
+          "hairline lowering",
+          "forehead reduction surgery"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "scalp_micropigmentation": {
+      "category": "hair",
+      "display_name_en": "Scalp Micropigmentation",
+      "synonyms": {
+        "en": [
+          "scalp micropigmentation",
+          "SMP"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "prp_hair": {
+      "category": "hair",
+      "display_name_en": "Prp Hair Treatment",
+      "synonyms": {
+        "en": [
+          "PRP hair treatment",
+          "platelet rich plasma hair"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "prf_hair": {
+      "category": "hair",
+      "display_name_en": "Prf Hair Treatment",
+      "synonyms": {
+        "en": [
+          "PRF hair treatment"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "laser_hair_removal": {
+      "category": "hair",
+      "display_name_en": "Laser Hair Removal",
+      "synonyms": {
+        "en": [
+          "laser hair removal",
+          "laser epilation"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "electrolysis_hair_removal": {
+      "category": "hair",
+      "display_name_en": "Electrolysis Hair Removal",
+      "synonyms": {
+        "en": [
+          "electrolysis hair removal"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "sclerotherapy": {
+      "category": "vascular",
+      "display_name_en": "Sclerotherapy",
+      "synonyms": {
+        "en": [
+          "sclerotherapy",
+          "spider vein injections"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "laser_spider_veins": {
+      "category": "vascular",
+      "display_name_en": "Laser Spider Vein Treatment",
+      "synonyms": {
+        "en": [
+          "laser spider vein treatment",
+          "vascular laser veins"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "endovenous_laser": {
+      "category": "vascular",
+      "display_name_en": "Endovenous Laser Treatment",
+      "synonyms": {
+        "en": [
+          "endovenous laser treatment",
+          "EVLT"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "radiofrequency_vein_ablation": {
+      "category": "vascular",
+      "display_name_en": "Radiofrequency Vein Ablation",
+      "synonyms": {
+        "en": [
+          "radiofrequency vein ablation",
+          "RFA veins"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "ambulatory_phlebectomy": {
+      "category": "vascular",
+      "display_name_en": "Ambulatory Phlebectomy",
+      "synonyms": {
+        "en": [
+          "ambulatory phlebectomy",
+          "microphlebectomy"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "labiaplasty": {
+      "category": "genital_aesthetic",
+      "display_name_en": "Labiaplasty",
+      "synonyms": {
+        "en": [
+          "labiaplasty",
+          "labial reduction"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "vaginoplasty": {
+      "category": "genital_aesthetic",
+      "display_name_en": "Vaginoplasty",
+      "synonyms": {
+        "en": [
+          "vaginoplasty",
+          "vaginal tightening surgery"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "clitoral_hood_reduction": {
+      "category": "genital_aesthetic",
+      "display_name_en": "Clitoral Hood Reduction",
+      "synonyms": {
+        "en": [
+          "clitoral hood reduction"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "mons_reduction": {
+      "category": "genital_aesthetic",
+      "display_name_en": "Mons Reduction",
+      "synonyms": {
+        "en": [
+          "mons reduction",
+          "monsplasty"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "penile_enhancement": {
+      "category": "genital_aesthetic",
+      "display_name_en": "Penile Enhancement",
+      "synonyms": {
+        "en": [
+          "penile enhancement",
+          "penis enlargement"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "scrotoplasty": {
+      "category": "genital_aesthetic",
+      "display_name_en": "Scrotoplasty",
+      "synonyms": {
+        "en": [
+          "scrotoplasty",
+          "scrotal lift"
+        ]
+      },
+      "search_priority": "secondary"
+    },
+    "non_surgical_vaginal_rejuvenation": {
+      "category": "genital_aesthetic",
+      "display_name_en": "Non-Surgical Vaginal Rejuvenation",
+      "synonyms": {
+        "en": [
+          "non-surgical vaginal rejuvenation",
+          "RF vaginal rejuvenation",
+          "laser vaginal rejuvenation"
+        ]
+      },
+      "search_priority": "secondary"
+    }
+  }
+}

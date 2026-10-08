@@ -16,6 +16,8 @@
 /// e18: exact prices stay exact (no auto /ml from "1 ml"); cross-city cache purge.
 /// e19: page-level clinicOwnPrice / country cost guides; display-title normalization.
 /// e20: Fresha JSON-LD Offer.itemOffered names; cost-savings URL reject; Fresha/Booksy discovery.
-const EXTRACT_REVISION = 'e20';
+/// e21: synchronize with the supplied Flutter verifier and preserve menu labels.
+/// e22: preserve owned tariffs beside dosage averages and multilingual offers.
+const EXTRACT_REVISION = 'e22';
 
 module.exports = {EXTRACT_REVISION};

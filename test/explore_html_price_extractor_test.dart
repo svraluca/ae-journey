@@ -1158,7 +1158,7 @@ void main() {
       expect(perGraft.currency, 'AED');
     });
 
-    test('AA — peel FAQ does not stitch 199–1499; menu row wins', () {
+    test('AA — market peel FAQ is rejected; owned menu row wins', () {
       const faq =
           'The chemical peel cost Dubai ranges from 399 AED to 1299 AED, '
           'depending on the number of sessions required, the condition of '
@@ -1182,17 +1182,13 @@ void main() {
         rows: faqRows,
         procedure: 'chemical peel',
       );
-      expect(faqPicked, isNotNull);
-      expect(faqPicked!.priceMin, 399);
-      expect(faqPicked.priceMax, 1299);
-      expect(faqPicked.priceMin, isNot(199));
-      expect(faqPicked.priceMax, isNot(1499));
+      expect(faqPicked, isNull, reason: 'A city-market FAQ does not own its prices');
 
       const html = '''
         <p>$faq</p>
         <table>
           <tr>
-            <td>Glycolic chemical peel</td>
+            <td>Our peel treatment — Glycolic chemical peel</td>
             <td>399 AED</td>
           </tr>
         </table>
@@ -1207,10 +1203,12 @@ void main() {
       );
       expect(picked, isNotNull);
       expect(picked!.priceMin, 399);
+      expect(picked.priceMax, 399);
       expect(picked.currency, 'AED');
+      expect(picked.extractionMethod, PriceExtractionMethod.htmlTable);
     });
 
-    test('AD — Tajmeels landing copy keeps the published range', () {
+    test('AD — city marketing is rejected; clinic tariff ranges stay exact', () {
       const rhino = '''
         <p>The nose job cost Dubai ranges from 12999 AED to 19999 AED,
         depending on several factors that affect the overall cost.</p>
@@ -1222,10 +1220,7 @@ void main() {
         ),
         procedure: 'rhinoplasty',
       );
-      expect(rhinoPicked, isNotNull);
-      expect(rhinoPicked!.priceMin, 12999);
-      expect(rhinoPicked.priceMax, 19999);
-      expect(rhinoPicked.currency, 'AED');
+      expect(rhinoPicked, isNull);
 
       const hair = '''
         <p>The Hair transplant price UAE ranges from 4,999 AED to 29,999 AED,
@@ -1238,10 +1233,35 @@ void main() {
         ),
         procedure: 'hair transplant FUE',
       );
-      expect(hairPicked, isNotNull);
-      expect(hairPicked!.priceMin, 4999);
-      expect(hairPicked.priceMax, 29999);
-      expect(hairPicked.currency, 'AED');
+      expect(hairPicked, isNull);
+
+      const tariff = '''
+        <h1>Our prices</h1>
+        <table>
+          <tr><td>Rhinoplasty</td><td>12,999–19,999 AED</td></tr>
+          <tr><td>FUE hair transplant</td><td>6,000–8,500 AED</td></tr>
+        </table>
+      ''';
+      final tariffRows = extractPriceEvidence(
+        html: tariff,
+        sourceUrl: 'https://tajmeels.ae/prices/',
+      );
+      final ownedRhino = selectEvidenceForProcedure(
+        rows: tariffRows,
+        procedure: 'rhinoplasty',
+      );
+      expect(ownedRhino, isNotNull);
+      expect(ownedRhino!.priceMin, 12999);
+      expect(ownedRhino.priceMax, 19999);
+      expect(ownedRhino.currency, 'AED');
+      final ownedHair = selectEvidenceForProcedure(
+        rows: tariffRows,
+        procedure: 'hair transplant FUE',
+      );
+      expect(ownedHair, isNotNull);
+      expect(ownedHair!.priceMin, 6000);
+      expect(ownedHair.priceMax, 8500);
+      expect(ownedHair.currency, 'AED');
     });
 
     test('AE — Skin111 starts from AED 490 beats a city typical range', () {
@@ -2413,11 +2433,28 @@ void main() {
         ),
         procedure: 'rhinoplasty nose job',
       );
-      expect(lphPicked, isNotNull);
-      expect(lphPicked!.priceMin, 6900);
-      expect(lphPicked.priceMin, isNot(3500));
-      expect(lphPicked.priceMin, isNot(4900));
-      expect(lphPicked.rawProcedureText.toLowerCase(), contains('closed'));
+      expect(lphPicked, isNull, reason: 'A reference table explicitly says it is not a clinic menu');
+
+      const ownedMenu = '''
+        <h1>Our prices</h1>
+        <table>
+          <tr><td>Closed Rhinoplasty</td><td>from £6,900</td></tr>
+          <tr><td>Open Rhinoplasty</td><td>from £7,999</td></tr>
+          <tr><td>Tip Rhinoplasty</td><td>from £4,900</td></tr>
+          <tr><td>Secondary / Septo Rhinoplasty</td><td>from £9,900</td></tr>
+        </table>
+      ''';
+      final ownedPicked = selectEvidenceForProcedure(
+        rows: extractPriceEvidence(
+          html: ownedMenu,
+          sourceUrl: 'https://londonprivatehospital.uk/treatments/rhinoplasty/',
+        ),
+        procedure: 'rhinoplasty nose job',
+      );
+      expect(ownedPicked, isNotNull);
+      expect(ownedPicked!.priceMin, 6900);
+      expect(ownedPicked.priceMin, isNot(4900));
+      expect(ownedPicked.rawProcedureText.toLowerCase(), contains('closed'));
 
       const cadogan = '''
         <p>Price guide revised in June 2026</p>
@@ -2945,10 +2982,35 @@ void main() {
       const tamLanding = '''
         <p>Our hair transplant treatment fee starts from £5400 to £7600.</p>
       ''';
+      final tamLandingPicked = selectEvidenceForProcedure(
+        rows: extractPriceEvidence(
+          html: tamLanding,
+          sourceUrl: 'https://drmarktam.co.uk/fue-hair-transplant/',
+        ),
+        procedure: 'hair transplant FUE',
+      );
+      expect(tamLandingPicked, isNotNull);
+      expect(tamLandingPicked!.priceMin, 5400);
+      expect(tamLandingPicked.priceMax, 7600);
+      expect(tamLandingPicked.currency, 'GBP');
+
+      const expiredLanding = '''
+        <p>Our hair transplant treatment fee starts from £5400 to £7600.
+        This price has expired and is no longer available.</p>
+      ''';
+      expect(
+        looksLikeHairStaleLandingQuote(
+          sourceUrl: 'https://drmarktam.co.uk/fue-hair-transplant/',
+          blob: expiredLanding,
+          priceMin: 5400,
+          priceMax: 7600,
+        ),
+        isTrue,
+      );
       expect(
         selectEvidenceForProcedure(
           rows: extractPriceEvidence(
-            html: tamLanding,
+            html: expiredLanding,
             sourceUrl: 'https://drmarktam.co.uk/fue-hair-transplant/',
           ),
           procedure: 'hair transplant FUE',
@@ -3000,7 +3062,7 @@ void main() {
           currency: 'GBP',
           priceExtractRevision: kExplorePriceExtractRevision,
         ),
-        isTrue,
+        isFalse,
       );
       expect(
         exploreCachedPriceNeedsReselect(
@@ -3010,6 +3072,21 @@ void main() {
           procedure: 'hair transplant FUE',
           rawPriceText: 'from 5400 £',
           rawEvidence: '',
+          priceMin: 5400,
+          priceMax: 5400,
+          currency: 'GBP',
+          priceExtractRevision: kExplorePriceExtractRevision,
+        ),
+        isFalse,
+      );
+      expect(
+        exploreCachedPriceNeedsReselect(
+          rawProcedureText: 'FUE hair transplant',
+          brand: 'hair transplant FUE',
+          sourceUrl: 'https://drmarktam.co.uk/fue-hair-transplant/',
+          procedure: 'hair transplant FUE',
+          rawPriceText: 'Expired price: from 5400 £',
+          rawEvidence: 'This price has expired and is no longer available.',
           priceMin: 5400,
           priceMax: 5400,
           currency: 'GBP',
@@ -3039,7 +3116,7 @@ void main() {
           ),
           procedure: 'hair transplant FUE',
         ),
-        isNull,
+        isNotNull,
       );
       expect(
         exploreCachedPriceNeedsReselect(
@@ -3080,7 +3157,7 @@ void main() {
           priceMax: 7600,
           currency: 'GBP',
         ),
-        isFalse,
+        isTrue,
       );
       expect(
         explorePriceIsComparableTypicalStart(

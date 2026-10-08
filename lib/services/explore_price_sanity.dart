@@ -17,7 +17,8 @@ import 'explore_price_binding.dart';
 /// e19: page-level clinicOwnPrice / country cost guides; display-title normalization.
 /// e20: Fresha JSON-LD Offer.itemOffered names; cost-savings URL reject; Fresha/Booksy discovery.
 /// e21: service-bound marketplace prices; consultation/market/seasonal exclusions.
-const kExplorePriceExtractRevision = 'e21';
+/// e22: preserve owned tariffs beside dosage averages and multilingual offers.
+const kExplorePriceExtractRevision = 'e22';
 
 /// Hard gate: a number from clinic HTML is not a procedure price until this
 /// passes. AI must never invent a replacement amount.
@@ -867,6 +868,13 @@ bool looksLikeCalendarYearPrice(double amount, String raw) {
 
 const _kClinicOwnCurrency =
     r'(?:aed|usd|eur|gbp|€|£|\$|درهم|د\.إ)';
+const _kClinicOwnAttachedRange =
+    r'(?:\s*(?:to|-|–|—)\s*'
+    '$_kClinicOwnCurrency?'
+    r'\s*\d[\d.,]*'
+    r'(?:\s*'
+    '$_kClinicOwnCurrency'
+    r')?)?';
 
 /// Menu fact rows (`Cost: 500 AED to 1000 AED`) and "starts from AED 1500".
 final _kClinicLabeledCostRe = RegExp(
@@ -884,6 +892,7 @@ final _kClinicLabeledCostRe = RegExp(
   r'(?:approximately\s+|about\s+|around\s+)?'
   '$_kClinicOwnCurrency'
   r'\s*\d[\d.,]*'
+  '$_kClinicOwnAttachedRange'
   r'(?:\s*(?:per\s+ml|\/\s*ml|per\s+area|per\s+unit))?',
   caseSensitive: false,
 );
@@ -902,11 +911,13 @@ final _kClinicOwnPublishedPriceRe = RegExp(
   r'(?:the\s+)?price for [^.]{0,80}?(?:starts?\s+from|starting(?:\s+from)?)\s+'
   '$_kClinicOwnCurrency?'
   r'\s*\d[\d.,]*'
+  '$_kClinicOwnAttachedRange'
   r'|'
   r'(?:starts?\s+from|starting(?:\s+from)?)\s+'
   r'(?:approximately\s+|about\s+|around\s+)?'
   '$_kClinicOwnCurrency'
   r'\s*\d[\d.,]*'
+  '$_kClinicOwnAttachedRange'
   r'(?:\s*(?:per\s+ml|\/\s*ml|per\s+area|per\s+unit))?'
   r'|'
   // Cadogan: "a boob job costs from £5,900" — not the UK market £5k–£7k band.
@@ -1980,10 +1991,12 @@ PriceSanityResult evaluateExtractedPriceCandidate({
     debugPrint('[GP PRICE] REJECT · $reason');
   }
 
-  final sourceHost = Uri.tryParse(sourceUrl)?.host.toLowerCase() ?? '';
+  final sourceUri = Uri.tryParse(sourceUrl);
+  final sourceHost = sourceUri?.host.toLowerCase() ?? '';
   if (const ['beautyforqueens.com', 'cliniciestetice.ro', 'clinici-estetice.ro']
       .any((host) => sourceHost == host || sourceHost.endsWith('.$host')) ||
-      RegExp(r'/(?:demo|template|example)[-/]', caseSensitive: false).hasMatch(sourceUrl)) {
+      RegExp(r'(?:^|/)(?:demo|template|example)(?:[-/]|$)', caseSensitive: false)
+          .hasMatch(sourceUri?.path ?? '')) {
     logReject('directory_or_demo_price');
     return const PriceSanityResult.reject('directory_or_demo_price');
   }
@@ -2033,7 +2046,12 @@ PriceSanityResult evaluateExtractedPriceCandidate({
     rawProcedureText: procedure,
     rawPriceText: rawPriceText,
     clinicName: clinicName,
-    treatProseAsUnowned: proseLike,
+    // A bound tariff table is structured evidence even when its inherited
+    // heading describes hair loss in a full sentence. Page-level market and
+    // guide contexts still enforce their explicit ownership requirement.
+    treatProseAsUnowned: proseLike &&
+        method.toLowerCase() != 'html_table' &&
+        method.toLowerCase() != 'htmltable',
   )) {
     logReject('not_clinic_owned_price');
     return const PriceSanityResult.reject('not_clinic_owned_price');

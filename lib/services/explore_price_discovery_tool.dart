@@ -203,11 +203,16 @@ class ExplorePriceDiscoveryTool {
   static const compareFreshTarget = kExploreCompareFreshTarget;
   ExplorePriceDiscoveryTool({http.Client? client, String? baseUrl})
     : _client = client ?? http.Client(),
+      _ownsDiscoverClients = client == null,
       _baseUrlOverride = baseUrl;
 
   static final ExplorePriceDiscoveryTool instance = ExplorePriceDiscoveryTool();
 
   final http.Client _client;
+  // Injected clients cover every API and remain owned by their caller. Default
+  // discovery requests use separate clients so cancellation leaves health and
+  // index requests available.
+  final bool _ownsDiscoverClients;
   final String? _baseUrlOverride;
   DateTime? _downUntil;
   Future<bool>? _healthInFlight;
@@ -295,7 +300,7 @@ class ExplorePriceDiscoveryTool {
     _discoverEpoch++;
     final live = _liveDiscoverClient;
     _liveDiscoverClient = null;
-    if (live != null) {
+    if (live != null && _ownsDiscoverClients) {
       try {
         live.close();
       } catch (_) {}
@@ -1067,7 +1072,7 @@ class ExplorePriceDiscoveryTool {
     request.headers['Accept'] = 'application/x-ndjson, application/json';
     request.body = jsonEncode(body);
     final epoch = _discoverEpoch;
-    final live = http.Client();
+    final live = _ownsDiscoverClients ? http.Client() : _client;
     _liveDiscoverClient = live;
     try {
       if (epoch != _discoverEpoch) return _cancelledDiscover();
@@ -1294,6 +1299,8 @@ class ExplorePriceDiscoveryTool {
     } finally {
       if (identical(_liveDiscoverClient, live)) {
         _liveDiscoverClient = null;
+      }
+      if (_ownsDiscoverClients) {
         try {
           live.close();
         } catch (_) {}

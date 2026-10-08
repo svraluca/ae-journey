@@ -60,3 +60,43 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Additional local setup exclusions
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.jks
+*.keystore
+*service-account*.json
+
+# Python environments, bytecode, and local job state
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.sqlite3-*
+*.sqlite
+*.sqlite-*
+.pytest_cache/
+.coverage
+node_modules/
+.cache/
+
+# Flutter and platform build output
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+ios/Pods/
+macos/Pods/
+.gradle/
+local.properties
+
+# Local tools and editor state
+.DS_Store
+.idea/
+*.log

@@ -1,0 +1,578 @@
+[
+  {
+    "key": "turopark-botox",
+    "title": "turopark",
+    "url": "https://www.turoparkaesthetic.com/en/pricing/",
+    "city": "Barcelona",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "turopark-filler",
+    "title": "turopark",
+    "url": "https://www.turoparkaesthetic.com/en/pricing/",
+    "city": "Barcelona",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "turopark-chemical_peel",
+    "title": "turopark",
+    "url": "https://www.turoparkaesthetic.com/en/pricing/",
+    "city": "Barcelona",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "defelipe_bcn-botox",
+    "title": "defelipe_bcn",
+    "url": "https://www.defelipe.com/precios/",
+    "city": "Barcelona",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "defelipe_bcn-filler",
+    "title": "defelipe_bcn",
+    "url": "https://www.defelipe.com/precios/",
+    "city": "Barcelona",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "defelipe_bcn-chemical_peel",
+    "title": "defelipe_bcn",
+    "url": "https://www.defelipe.com/precios/",
+    "city": "Barcelona",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "sermed-botox",
+    "title": "sermed",
+    "url": "https://www.clinicasermedbcn.com/service-page/aumento-de-labios-oferta-actual",
+    "city": "Barcelona",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "sermed-filler",
+    "title": "sermed",
+    "url": "https://www.clinicasermedbcn.com/service-page/aumento-de-labios-oferta-actual",
+    "city": "Barcelona",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "sermed-chemical_peel",
+    "title": "sermed",
+    "url": "https://www.clinicasermedbcn.com/service-page/aumento-de-labios-oferta-actual",
+    "city": "Barcelona",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "renacek-botox",
+    "title": "renacek",
+    "url": "https://renacek.com/toxina-botulinica-barcelona/",
+    "city": "Barcelona",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "renacek-filler",
+    "title": "renacek",
+    "url": "https://renacek.com/toxina-botulinica-barcelona/",
+    "city": "Barcelona",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "renacek-chemical_peel",
+    "title": "renacek",
+    "url": "https://renacek.com/toxina-botulinica-barcelona/",
+    "city": "Barcelona",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "rovira-botox",
+    "title": "rovira",
+    "url": "https://drvladimirrovira.com/acido-hialuronico-barcelona",
+    "city": "Barcelona",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "rovira-filler",
+    "title": "rovira",
+    "url": "https://drvladimirrovira.com/acido-hialuronico-barcelona",
+    "city": "Barcelona",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "rovira-chemical_peel",
+    "title": "rovira",
+    "url": "https://drvladimirrovira.com/acido-hialuronico-barcelona",
+    "city": "Barcelona",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "wellness-botox",
+    "title": "wellness",
+    "url": "https://www.wellnesskliniek.es/es/precios/relleno-facial-precios",
+    "city": "Barcelona",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "wellness-filler",
+    "title": "wellness",
+    "url": "https://www.wellnesskliniek.es/es/precios/relleno-facial-precios",
+    "city": "Barcelona",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "wellness-chemical_peel",
+    "title": "wellness",
+    "url": "https://www.wellnesskliniek.es/es/precios/relleno-facial-precios",
+    "city": "Barcelona",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "holaglow_bcn-botox",
+    "title": "holaglow_bcn",
+    "url": "https://www.holaglow.com/tratamientos/peeling-quimico/barcelona",
+    "city": "Barcelona",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "holaglow_bcn-filler",
+    "title": "holaglow_bcn",
+    "url": "https://www.holaglow.com/tratamientos/peeling-quimico/barcelona",
+    "city": "Barcelona",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "holaglow_bcn-chemical_peel",
+    "title": "holaglow_bcn",
+    "url": "https://www.holaglow.com/tratamientos/peeling-quimico/barcelona",
+    "city": "Barcelona",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "defelipe_mad-botox",
+    "title": "defelipe_mad",
+    "url": "https://madrid.defelipe.com/precios/",
+    "city": "Madrid",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "defelipe_mad-filler",
+    "title": "defelipe_mad",
+    "url": "https://madrid.defelipe.com/precios/",
+    "city": "Madrid",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "defelipe_mad-chemical_peel",
+    "title": "defelipe_mad",
+    "url": "https://madrid.defelipe.com/precios/",
+    "city": "Madrid",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "trasmonte-botox",
+    "title": "trasmonte",
+    "url": "https://dratrasmonte.com/peeling-quimico/",
+    "city": "Madrid",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "trasmonte-filler",
+    "title": "trasmonte",
+    "url": "https://dratrasmonte.com/peeling-quimico/",
+    "city": "Madrid",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "trasmonte-chemical_peel",
+    "title": "trasmonte",
+    "url": "https://dratrasmonte.com/peeling-quimico/",
+    "city": "Madrid",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "ibiza-botox",
+    "title": "ibiza",
+    "url": "https://www.clinicaibiza.com/tratamientos-faciales/peeling-quimico-en-madrid/",
+    "city": "Madrid",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "ibiza-filler",
+    "title": "ibiza",
+    "url": "https://www.clinicaibiza.com/tratamientos-faciales/peeling-quimico-en-madrid/",
+    "city": "Madrid",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "ibiza-chemical_peel",
+    "title": "ibiza",
+    "url": "https://www.clinicaibiza.com/tratamientos-faciales/peeling-quimico-en-madrid/",
+    "city": "Madrid",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "bluemoon-botox",
+    "title": "bluemoon",
+    "url": "https://clinicabluemoon.es/tienda/tratamientos-faciales/",
+    "city": "Madrid",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "bluemoon-filler",
+    "title": "bluemoon",
+    "url": "https://clinicabluemoon.es/tienda/tratamientos-faciales/",
+    "city": "Madrid",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "bluemoon-chemical_peel",
+    "title": "bluemoon",
+    "url": "https://clinicabluemoon.es/tienda/tratamientos-faciales/",
+    "city": "Madrid",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "perova-botox",
+    "title": "perova",
+    "url": "https://www.clinicaperova.com/precios",
+    "city": "Valencia",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "perova-filler",
+    "title": "perova",
+    "url": "https://www.clinicaperova.com/precios",
+    "city": "Valencia",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "perova-chemical_peel",
+    "title": "perova",
+    "url": "https://www.clinicaperova.com/precios",
+    "city": "Valencia",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "divas-botox",
+    "title": "divas",
+    "url": "https://divaestetica.es/pricing",
+    "city": "Valencia",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "divas-filler",
+    "title": "divas",
+    "url": "https://divaestetica.es/pricing",
+    "city": "Valencia",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "divas-chemical_peel",
+    "title": "divas",
+    "url": "https://divaestetica.es/pricing",
+    "city": "Valencia",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "navarro-botox",
+    "title": "navarro",
+    "url": "https://clinicanavarroviana.com/tarifas/",
+    "city": "Valencia",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "navarro-filler",
+    "title": "navarro",
+    "url": "https://clinicanavarroviana.com/tarifas/",
+    "city": "Valencia",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "navarro-chemical_peel",
+    "title": "navarro",
+    "url": "https://clinicanavarroviana.com/tarifas/",
+    "city": "Valencia",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "holaglow_val-botox",
+    "title": "holaglow_val",
+    "url": "https://www.holaglow.com/tratamientos/peeling-quimico/valencia",
+    "city": "Valencia",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "holaglow_val-filler",
+    "title": "holaglow_val",
+    "url": "https://www.holaglow.com/tratamientos/peeling-quimico/valencia",
+    "city": "Valencia",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "holaglow_val-chemical_peel",
+    "title": "holaglow_val",
+    "url": "https://www.holaglow.com/tratamientos/peeling-quimico/valencia",
+    "city": "Valencia",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "clara-botox",
+    "title": "clara",
+    "url": "https://draclaranavarro.com/es/precios",
+    "city": "Valencia",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "clara-filler",
+    "title": "clara",
+    "url": "https://draclaranavarro.com/es/precios",
+    "city": "Valencia",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "clara-chemical_peel",
+    "title": "clara",
+    "url": "https://draclaranavarro.com/es/precios",
+    "city": "Valencia",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "eb-botox",
+    "title": "eb",
+    "url": "https://drelenaberezo.com/precios",
+    "city": "Madrid",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "eb-filler",
+    "title": "eb",
+    "url": "https://drelenaberezo.com/precios",
+    "city": "Madrid",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "eb-chemical_peel",
+    "title": "eb",
+    "url": "https://drelenaberezo.com/precios",
+    "city": "Madrid",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "davinci-botox",
+    "title": "davinci",
+    "url": "https://www.davinciclinique.es/peeling-solo",
+    "city": "Barcelona",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "davinci-filler",
+    "title": "davinci",
+    "url": "https://www.davinciclinique.es/peeling-solo",
+    "city": "Barcelona",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "davinci-chemical_peel",
+    "title": "davinci",
+    "url": "https://www.davinciclinique.es/peeling-solo",
+    "city": "Barcelona",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "bederma-botox",
+    "title": "bederma",
+    "url": "https://www.bederma.es/en/service-page/peelings-quimicos-m%C3%A9dicos-en-barcelona",
+    "city": "Barcelona",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "bederma-filler",
+    "title": "bederma",
+    "url": "https://www.bederma.es/en/service-page/peelings-quimicos-m%C3%A9dicos-en-barcelona",
+    "city": "Barcelona",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "bederma-chemical_peel",
+    "title": "bederma",
+    "url": "https://www.bederma.es/en/service-page/peelings-quimicos-m%C3%A9dicos-en-barcelona",
+    "city": "Barcelona",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "bermejo-botox",
+    "title": "bermejo",
+    "url": "https://www.doctorbermejo.com/tratamientos-faciales-peeling-quimico/",
+    "city": "Barcelona",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "bermejo-filler",
+    "title": "bermejo",
+    "url": "https://www.doctorbermejo.com/tratamientos-faciales-peeling-quimico/",
+    "city": "Barcelona",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "bermejo-chemical_peel",
+    "title": "bermejo",
+    "url": "https://www.doctorbermejo.com/tratamientos-faciales-peeling-quimico/",
+    "city": "Barcelona",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "provenca-botox",
+    "title": "provenca",
+    "url": "https://clinicaprovenca.com/peeling-quimico-barcelona/",
+    "city": "Barcelona",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "provenca-filler",
+    "title": "provenca",
+    "url": "https://clinicaprovenca.com/peeling-quimico-barcelona/",
+    "city": "Barcelona",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "provenca-chemical_peel",
+    "title": "provenca",
+    "url": "https://clinicaprovenca.com/peeling-quimico-barcelona/",
+    "city": "Barcelona",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "alejandria-botox",
+    "title": "alejandria",
+    "url": "https://clinicaalejandria.es/precios/",
+    "city": "Valencia",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "alejandria-filler",
+    "title": "alejandria",
+    "url": "https://clinicaalejandria.es/precios/",
+    "city": "Valencia",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "alejandria-chemical_peel",
+    "title": "alejandria",
+    "url": "https://clinicaalejandria.es/precios/",
+    "city": "Valencia",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "holaglow_mad-botox",
+    "title": "holaglow_mad",
+    "url": "https://www.holaglow.com/tratamientos/peeling-quimico/madrid",
+    "city": "Madrid",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "holaglow_mad-filler",
+    "title": "holaglow_mad",
+    "url": "https://www.holaglow.com/tratamientos/peeling-quimico/madrid",
+    "city": "Madrid",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "holaglow_mad-chemical_peel",
+    "title": "holaglow_mad",
+    "url": "https://www.holaglow.com/tratamientos/peeling-quimico/madrid",
+    "city": "Madrid",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  },
+  {
+    "key": "solumed-botox",
+    "title": "solumed",
+    "url": "https://booksy.com/es-es/193629_solumed-centro-medico_medicina-estetica_58087_valencia",
+    "city": "Valencia",
+    "procedure": "botox",
+    "country_code": "ES"
+  },
+  {
+    "key": "solumed-filler",
+    "title": "solumed",
+    "url": "https://booksy.com/es-es/193629_solumed-centro-medico_medicina-estetica_58087_valencia",
+    "city": "Valencia",
+    "procedure": "filler",
+    "country_code": "ES"
+  },
+  {
+    "key": "solumed-chemical_peel",
+    "title": "solumed",
+    "url": "https://booksy.com/es-es/193629_solumed-centro-medico_medicina-estetica_58087_valencia",
+    "city": "Valencia",
+    "procedure": "chemical_peel",
+    "country_code": "ES"
+  }
+]

@@ -5,11 +5,18 @@
  * Fragment extractors must not bypass a country/market page classification.
  */
 
+function withoutDoseAverages(raw) {
+  return String(raw || '').replace(
+      /\bon average\s*,?\s*\d+(?:\s*[-–—]\s*\d+)?\s+(?:units?|grafts?)\b([^.!?\n]{0,120}\b(?:are|is)\s+(?:used|required|needed)\b[^.!?\n]*(?:[.!?]|$))/gi,
+      (sentence, remainder) => /[€£$]|\b(?:costs?|prices?|fees?|aed|eur|usd|gbp|ron|lei)\b/i.test(sentence) || /\d/.test(remainder) ? sentence : '',
+  );
+}
+
 function classifyExplorePricePageContext({sourceUrl = '', pageText = '', title = ''} = {}) {
   const url = String(sourceUrl || '').trim().toLowerCase();
-  const blob = `${title}\n${pageText}`.replace(/\u00a0/g, ' ').toLowerCase();
+  const blob = withoutDoseAverages(`${title}\n${pageText}`).replace(/\u00a0/g, ' ').toLowerCase();
 
-  if (/\/cost-of-[a-z0-9-]+-in-[a-z0-9-]+|\/prices?-in-[a-z0-9-]+|\/cost-guide|\/price-guide|\/cost-savings|\/cost-saving|cost-of-breast|\/breast-augmentation-cost|\/how-much-does-|\/average-cost|albania-vs-|vs-italy|vs-uk|vs-europe|getclearbeauty\.|trueclinic\.|mymeditravel\./i.test(url)) {
+  if (/\/cost-of-[a-z0-9-]+-in-[a-z0-9-]+|\/prices?-in-[a-z0-9-]+|\/cost-guide|\/price-guide\/[^/?#]|\/cost-savings|\/cost-saving|cost-of-breast|\/breast-augmentation-cost|\/how-much-does-|\/average-cost|albania-vs-|vs-italy|vs-uk|vs-europe|getclearbeauty\.|trueclinic\.|mymeditravel\./i.test(url)) {
     return 'country_cost_guide';
   }
   if (/\bcompared with\b|\bcompare(?:d)?\s+(?:to|with)\b|\bpatients? can save\b|\bin albania (?:offers|starts|range)\b|\bacross (?:clinics|the country|albania|turkey)\b/i.test(blob)) {
@@ -24,7 +31,7 @@ function classifyExplorePricePageContext({sourceUrl = '', pageText = '', title =
   if (/\/blog\/|\/news\/|\/article\/|\/insights\//i.test(url) || /\bblog\b|\bin this article\b/i.test(blob)) {
     return 'blog';
   }
-  if (/\/price-list|\/pricelist|\/precios|\/preturi|\/prezzi|\/tarifs|\/cmimet|\/çmimet|\/fiyat|\/cennik|\/pricing\b/i.test(url)) {
+  if (/\/price-list|\/pricelist|\/prices?(?:\/|$|[?#])|\/price-guide(?:\/|$|[?#])|\/precios|\/preturi|\/prezzi|\/tarifs|\/cmimet|\/çmimet|\/fiyat|\/cennik|\/pricing\b/i.test(url)) {
     return 'official_price_list';
   }
   if (/\bprice list\b|\bour prices?\b|\bcmimet\b|\bçmimet\b/i.test(blob)) {
@@ -33,7 +40,7 @@ function classifyExplorePricePageContext({sourceUrl = '', pageText = '', title =
   if (/\bour package\b|\bpackage (?:includes|starts|price)\b|\bincludes 1 pair of implants\b/i.test(blob)) {
     return 'official_package_price';
   }
-  if (/\bour (?:breast|botox|filler|rhinoplast|peel).{0,40}\bprice\b|\bstarting (?:at|from)\b/i.test(`${title}\n${pageText}`)) {
+  if (/\bour (?:breast|botox|filler|rhinoplast|peel).{0,40}\bprice\b|\bstarting (?:at|from)\b|(?:^|\s)(?:عرضنا|أسعارنا)(?:\s|$)/i.test(`${title}\n${pageText}`)) {
     return 'official_service_price';
   }
   if (/\bin (?:albania|turkey|dubai|london|italy)\b.{0,48}\b(?:offers|starts)|\bwith only\b.{0,48}\b(?:breast|botox|filler|euros?|€)/i.test(blob)) {
@@ -45,7 +52,7 @@ function classifyExplorePricePageContext({sourceUrl = '', pageText = '', title =
 function looksLikeExplicitClinicOwnPriceLanguage(raw) {
   const t = String(raw || '').replace(/\u00a0/g, ' ').trim();
   if (!t) return false;
-  return /\bour (?:breast|botox|filler|rhinoplast|peel|package|price|prices)\b|\bour package starts\b|\bprice list\s*:|\bat\s+[A-Z][\w.\s-]{1,40}\s+(?:clinic|hospital|centre|center)\b|\bstarts? from\b|\bstarting (?:at|from)\b/i.test(t);
+  return /\bour (?:breast|botox|filler|rhinoplast|peel|package|price|prices)\b|\bour package starts\b|\bprice list\s*:|\bat\s+[A-Z][\w.\s-]{1,40}\s+(?:clinic|hospital|centre|center)\b|\bstarts? from\b|\bstarting (?:at|from)\b|(?:^|\s)(?:عرضنا|أسعارنا)(?:\s|$)/i.test(t);
 }
 
 function looksLikeCountryMarketPriceMarketing(raw) {
@@ -97,6 +104,13 @@ function exploreNormalizeProcedureDisplayName({
   rawProcedureText = '',
 } = {}) {
   const canonical = String(procedureCanonical || '').trim().toLowerCase().replace(/\s+/g, '_');
+  const listed = String(rawProcedureText || '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
+  if (listed && listed.length <= 110 &&
+      !/^(?:botox|chemical peel|lip filler|dermal filler|filler|rhinoplasty|breast augmentation|hair transplant)$/i.test(listed) &&
+      !/\b(?:prices?|costs?|average|how|what|starting|from|roughly)\b|[€£$]/i.test(listed) &&
+      !looksLikeCountryMarketPriceMarketing(listed)) {
+    return listed;
+  }
   switch (canonical) {
     case 'chemical_peel':
     case 'peel':

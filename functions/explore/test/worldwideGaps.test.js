@@ -65,12 +65,12 @@ test('docIdWithLocality prefers cityId and dual-reads legacy revision', () => {
   const legacy = docId('Sofia', 'Botox', PREV_REVISION);
   assert.notEqual(withId, byCity);
   assert.notEqual(byCity, legacy);
-  assert.equal(REVISION, 'v13');
-  assert.equal(PREV_REVISION, 'v12');
+  assert.equal(REVISION, 'v14');
+  assert.equal(PREV_REVISION, 'v13');
   assert.ok(withId.includes('place_sofia'));
-  assert.ok(withId.startsWith('v13') || withId.includes('v13'));
-  assert.ok(byCity.includes('v13'));
-  assert.ok(legacy.includes('v12'));
+  assert.ok(withId.startsWith('v14') || withId.includes('v14'));
+  assert.ok(byCity.includes('v14'));
+  assert.ok(legacy.includes('v13'));
 });
 
 test('Paris FR vs Paris TX cityIds never collide', () => {

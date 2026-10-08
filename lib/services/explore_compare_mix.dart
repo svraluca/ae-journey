@@ -1,7 +1,7 @@
 /// Selection rules shared by the Python-first path and the legacy pool planner.
 /// Kept independent of Flutter and Firebase so partial streams are testable.
-const kExploreCompareDisplayLimit = 8;
-const kExploreCompareGoodEnough = 6;
+const kExploreCompareDisplayLimit = 4;
+const kExploreCompareGoodEnough = 4;
 const kExploreCompareSavedTarget = 2;
 const kExploreCompareFreshTarget = 2;
 

@@ -26,7 +26,7 @@ const _kElementorAdjacentPeelHtml = '''
 
 void main() {
   group('adjacent Elementor heading price pairs', () {
-    test('pairs BioRePeel 70€ and PRX 80€ from separate h4 titles', () {
+    test('pairs BioRePeel/PRX fees while excluding the Cosmelan package', () {
       final rows = extractPriceEvidence(
         html: _kElementorAdjacentPeelHtml,
         sourceUrl: 'https://botoxtirana.com/sq/',
@@ -53,7 +53,7 @@ void main() {
               r.priceMin == 600 &&
               r.rawProcedureText.toLowerCase().contains('cosmelan'),
         ),
-        isTrue,
+        isFalse,
       );
     });
   });

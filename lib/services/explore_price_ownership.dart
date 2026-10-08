@@ -89,7 +89,7 @@ bool _looksLikeCostGuideUrl(String sourceUrl) {
   return RegExp(
     r'/cost-of-[a-z0-9-]+-in-[a-z0-9-]+|'
     r'/prices?-in-[a-z0-9-]+|'
-    r'/cost-guide|/price-guide|/fiyat-rehberi|'
+    r'/cost-guide|/price-guide/[^/?#]|/fiyat-rehberi|'
     r'/cost-savings|/cost-saving|'
     r'cost-of-breast|/breast-augmentation-cost|'
     r'/how-much-does-|/average-cost|'
@@ -99,6 +99,25 @@ bool _looksLikeCostGuideUrl(String sourceUrl) {
   ).hasMatch(url);
 }
 
+final _doseAverageSentence = RegExp(
+  r'\bon average\s*,?\s*\d+(?:\s*[-–—]\s*\d+)?\s+(?:units?|grafts?)\b'
+  r'([^.!?\n]{0,120}\b(?:are|is)\s+(?:used|required|needed)\b[^.!?\n]*(?:[.!?]|$))',
+  caseSensitive: false,
+);
+final _monetaryAverage = RegExp(
+  r'[€£$]|\b(?:costs?|prices?|fees?|aed|eur|usd|gbp|ron|lei)\b',
+  caseSensitive: false,
+);
+final _additionalAverageAmount = RegExp(r'\d');
+
+String _withoutDoseAverages(String raw) => raw.replaceAllMapped(
+      _doseAverageSentence,
+      (match) => _monetaryAverage.hasMatch(match.group(0)!) ||
+              _additionalAverageAmount.hasMatch(match.group(1)!)
+          ? match.group(0)!
+          : '',
+    );
+
 /// Classify the *page* (URL + body), not a single DOM fragment.
 ExplorePricePageContext classifyExplorePricePageContext({
   required String sourceUrl,
@@ -106,7 +125,11 @@ ExplorePricePageContext classifyExplorePricePageContext({
   String title = '',
 }) {
   final url = sourceUrl.trim().toLowerCase();
-  final blob = '$title\n$pageText'.replaceAll('\u00a0', ' ').toLowerCase();
+  // Average quantities do not describe average prices. Keep monetary claims
+  // intact, including sentences that mention a dose and a total fee together.
+  final blob = _withoutDoseAverages('$title\n$pageText')
+      .replaceAll('\u00a0', ' ')
+      .toLowerCase();
 
   if (_looksLikeCostGuideUrl(sourceUrl)) {
     return ExplorePricePageContext.countryCostGuide;
@@ -146,7 +169,7 @@ ExplorePricePageContext classifyExplorePricePageContext({
   }
 
   if (RegExp(
-    r'/price-list|/pricelist|/precios|/preturi|/prezzi|/tarifs|'
+    r'/price-list|/pricelist|/prices?(?:/|$|[?#])|/price-guide(?:/|$|[?#])|/precios|/preturi|/prezzi|/tarifs|'
     r'/cmimet|/çmimet|/fiyat|/cennik|/pricing\b',
     caseSensitive: false,
   ).hasMatch(url)) {
@@ -170,7 +193,8 @@ ExplorePricePageContext classifyExplorePricePageContext({
 
   if (RegExp(
     r'\bour (?:breast|botox|filler|rhinoplast|peel).{0,40}\bprice\b|'
-    r'\bstarting (?:at|from)\b',
+    r'\bstarting (?:at|from)\b|'
+    r'(?:^|\s)(?:عرضنا|أسعارنا)(?:\s|$)',
     caseSensitive: false,
   ).hasMatch('$title\n$pageText')) {
     return ExplorePricePageContext.officialServicePrice;
@@ -200,7 +224,8 @@ bool looksLikeExplicitClinicOwnPriceLanguage(
     r'\bprice list\s*:|'
     r'\bat\s+[A-Z][\w.\s-]{1,40}\s+(?:clinic|hospital|centre|center)\b|'
     r'\bstarts? from\b|'
-    r'\bstarting (?:at|from)\b',
+    r'\bstarting (?:at|from)\b|'
+    r'(?:^|\s)(?:عرضنا|أسعارنا)(?:\s|$)',
     caseSensitive: false,
   ).hasMatch(t)) {
     return true;

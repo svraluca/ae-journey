@@ -650,16 +650,9 @@ function looksLikeHairStaleLandingQuote({sourceUrl, blob, priceMin, priceMax}) {
   if (hairGraftSessionQuantity(blob) != null) return false;
   const t = String(blob || '');
   if (/min(?:imum)?\s+fee|2,?400\s*[-–—]\s*3,?000\s*grafts/i.test(t)) return false;
-  if (Number(priceMin) >= 1500) return true;
-  if (/starts?\s+from\s+[£$€]?\s*\d[\d.,]*.{0,80}(?:to|–|—|-)\s*[£$€]?\s*\d/i.test(t)) {
-    return true;
-  }
-  const toHi = /\bto\s+[£$€]?\s*(\d{1,3}(?:[,.]\d{3})+|\d{3,5})/i.exec(t);
-  if (toHi) {
-    const hi = Number(String(toHi[1] || '').replace(/[,.]/g, '')) || 0;
-    if (hi > Number(priceMin) + 500) return true;
-  }
-  return Number(priceMax) > Number(priceMin) + 500;
+  // Amounts, ranges and the absence of a graft table cannot establish age.
+  // Mirror the Flutter verifier's explicit expiry/supersession requirement.
+  return /\b(?:expired|superseded|archived|discontinued|no longer available)\b.{0,70}\b(?:price|offer|tariff|package)\b|\b(?:price|offer|tariff|package)\b.{0,70}\b(?:expired|superseded|discontinued|no longer available)\b/i.test(t);
 }
 
 function looksLikeUnshavenHairVariant(raw) {

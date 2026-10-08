@@ -1,0 +1,107 @@
+[
+  {
+    "name": "ipanema",
+    "url": "https://booksy.com/es-es/110260_ipanema-beauty-studio_salon-de-unas_58087_valencia",
+    "status": 200
+  },
+  {
+    "name": "puig",
+    "url": "https://drpuig.com/medicina-estetica/facial/botox/",
+    "status": 200
+  },
+  {
+    "name": "mymedica",
+    "url": "https://mymedicavalencia.com/aesthetic-medicine/",
+    "status": 200
+  },
+  {
+    "name": "aurora_offer",
+    "url": "https://aurorareig.com/oferta-especial-de-toxina-botulinica-botox-en-valencia-y-denia/",
+    "status": 200
+  },
+  {
+    "name": "aurora_regular",
+    "url": "https://aurorareig.com/neuromodulador/",
+    "status": 200
+  },
+  {
+    "name": "miim",
+    "url": "https://www.miimclinic.com/cual-es-el-precio-de-un-aumento-de-labios/",
+    "status": 200
+  },
+  {
+    "name": "holaglow",
+    "url": "https://www.holaglow.com/tratamientos/aumento-labios/valencia",
+    "status": 200
+  },
+  {
+    "name": "aurora_filler",
+    "url": "https://aurorareig.com/aumento-de-labios/",
+    "status": 200
+  },
+  {
+    "name": "molto",
+    "url": "https://www.drmolto.com/rinoplastia-ultrasonica-precio/",
+    "status": 200
+  },
+  {
+    "name": "simon",
+    "url": "https://dreduardosimon.com/",
+    "status": 200
+  },
+  {
+    "name": "zingone",
+    "url": "https://drzingone.com/precio-rinoplastia/",
+    "error": "Client error '403 Forbidden' for url 'https://drzingone.com/precio-rinoplastia/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  {
+    "name": "medics",
+    "url": "https://www.medicsintegralsalut.com/cuanto-cuesta-rinoplastia-espana/",
+    "status": 200
+  },
+  {
+    "name": "sensabell",
+    "url": "https://sensabell.com/precio-aumento-pecho-2026-valencia/",
+    "status": 200
+  },
+  {
+    "name": "puig_breast_blog",
+    "url": "https://drpuig.com/precio-aumento-de-pecho-valencia-cuanto-cuesta/",
+    "status": 200
+  },
+  {
+    "name": "puig_breast",
+    "url": "https://drpuig.com/cirugia-estetica/mamas/aumento-pecho/",
+    "status": 200
+  },
+  {
+    "name": "hunter",
+    "url": "https://clinichunter.com/breast-enlargement/clinics/spain/valencia/",
+    "status": 200
+  },
+  {
+    "name": "mcapilar",
+    "url": "https://clinicamcapilar.com/injerto-capilar-precio/",
+    "status": 200
+  },
+  {
+    "name": "saludcapilar",
+    "url": "https://clinicasaludcapilar.com/clinica-trasplante-capilar-valencia/",
+    "error": "Server error '502 Bad Gateway' for url 'https://clinicasaludcapilar.com/clinica-trasplante-capilar-valencia/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502"
+  },
+  {
+    "name": "magna",
+    "url": "https://clinicamagnasalud.es/servicios/medicina-capilar/trasplante-capilar-fue/",
+    "status": 200
+  },
+  {
+    "name": "benaes_hair",
+    "url": "https://www.benaes.com/clinica-capilar/injerto-capilar/",
+    "error": "Client error '403 Forbidden' for url 'https://www.benaes.com/clinica-capilar/injerto-capilar/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  {
+    "name": "mymedica_fees",
+    "url": "https://es.mymedicavalencia.com/fees/",
+    "status": 200
+  }
+]

@@ -56,6 +56,25 @@ MockClient _client(
   });
 }
 
+class _TrackingClient extends http.BaseClient {
+  _TrackingClient(this._delegate);
+
+  final http.Client _delegate;
+  bool isClosed = false;
+
+  @override
+  Future<http.StreamedResponse> send(http.BaseRequest request) {
+    if (isClosed) throw StateError('The caller-owned client was closed');
+    return _delegate.send(request);
+  }
+
+  @override
+  void close() {
+    isClosed = true;
+    _delegate.close();
+  }
+}
+
 void main() {
   group('compare hybrid contract', () {
     test('laser hair removal is not rewritten as a transplant', () {
@@ -341,6 +360,77 @@ void main() {
       expect(outcome.rows, isEmpty);
       expect(outcome.failure, contains('Connection refused'));
     });
+
+    test(
+      'cancellation preserves the injected client for the next selection',
+      () async {
+        final started = Completer<void>();
+        final firstResponse = Completer<Object?>();
+        var discoveryRequests = 0;
+        final client = _TrackingClient(
+          _client((request) {
+            expect(request.url.path, '/discover-hybrid');
+            discoveryRequests++;
+            if (discoveryRequests == 1) {
+              started.complete();
+              return firstResponse.future;
+            }
+            return {
+              'display_results': [
+                _card(
+                  name: 'Current Clinic',
+                  origin: 'live_search',
+                  url: 'https://current.al/fillers',
+                  sourceType: 'official_clinic',
+                  evidence: 'official_price_menu',
+                  price: 180,
+                  procedure: 'dermal filler',
+                ),
+              ],
+            };
+          }),
+        );
+        addTearDown(client.close);
+        final tool = ExplorePriceDiscoveryTool(
+          baseUrl: 'http://127.0.0.1:8080',
+          client: client,
+        );
+
+        final previous = tool.discoverHybrid(
+          city: 'Tirane',
+          procedure: 'Botox',
+        );
+        await started.future.timeout(const Duration(seconds: 2));
+        tool.abortInFlightDiscover();
+        expect(client.isClosed, isFalse);
+        firstResponse.complete({
+          'display_results': [
+            _card(
+              name: 'Previous Clinic',
+              origin: 'live_search',
+              url: 'https://previous.al/botox',
+              sourceType: 'official_clinic',
+              evidence: 'official_price_menu',
+              price: 100,
+            ),
+          ],
+        });
+
+        final cancelled = await previous;
+        expect(cancelled.searchCompleted, isFalse);
+        expect(cancelled.failure, 'cancelled');
+        expect(cancelled.rows, isEmpty);
+
+        final current = await tool.discoverHybrid(
+          city: 'Tirane',
+          procedure: 'dermal filler',
+        );
+        expect(current.searchCompleted, isTrue);
+        expect(current.rows.single.clinicName, 'Current Clinic');
+        expect(discoveryRequests, 2);
+        expect(client.isClosed, isFalse);
+      },
+    );
 
     test('plain JSON and NDJSON both yield the same cards', () async {
       final jsonTool = ExplorePriceDiscoveryTool(

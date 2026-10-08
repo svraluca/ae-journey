@@ -1,0 +1,12 @@
+[
+  {
+    "component": "python",
+    "git_apply_check": "passed",
+    "applied_hashes_match": true
+  },
+  {
+    "component": "flutter",
+    "git_apply_check": "passed",
+    "applied_hashes_match": true
+  }
+]

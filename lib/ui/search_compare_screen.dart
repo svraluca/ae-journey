@@ -288,6 +288,8 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
   void _onBackgroundHunt() {
     if (!mounted) return;
     final note = _openAI.backgroundHuntNote.value;
+    // Other city/pill jobs must not rebuild and revalidate the visible list.
+    if (note != null && (note.pill != _pill || note.city != _city)) return;
     setState(() {});
     if (note == null || note.pill != _pill || note.city != _city) return;
     // Automatic jobs are watched by OpenAIService. Manual jobs use the
@@ -390,15 +392,30 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
       knownClinicNames: [for (final c in _comparison?.clinics ?? const <OpenAIClinic>[]) c.name],
     );
     if (!mounted || city != _city || pill != _pill) return;
+    if (job != null && job.rows.isNotEmpty) {
+      final result = _openAI.comparisonWithDiscoveryRows(
+        city: city, procedure: explorePillAiSearchQuery(pill),
+        rows: job.rows, previous: _comparison,
+      );
+      setState(() {
+        _comparison = _withResolvedMapCenter(result);
+        _isMapLoading = false;
+      });
+    }
     _openAI.backgroundHuntNote.value = ExploreBackgroundHunt(
-      city: city, pill: pill, jobId: job?.id ?? '',
+      city: city, pill: pill,
+      jobId: job != null && !job.isFinished ? job.id : '',
       message: job == null
           ? 'Search could not connect. Please try again.'
           : job.message,
     );
-    if (job != null) {
+    if (job != null && !job.isFinished) {
       _backgroundPollStartedAt = DateTime.now();
       _scheduleBackgroundPoll(pill);
+    } else {
+      _backgroundPoll?.cancel();
+      _backgroundPoll = null;
+      _backgroundPollStartedAt = null;
     }
   }
 
@@ -4078,8 +4095,12 @@ class _ProcedureResultCard extends StatelessWidget {
     // One searching card for cold start (null cmp) and empty+still-filling —
     // never stack a bare "Loading" orb with a second "Checking clinic prices…"
     // card (Boob job / Fillers cold pill).
-    final showInitialSearch =
-        isLoading || (sortedClinics.isEmpty && loadingMore);
+    final noteIsSearching = RegExp(
+      r'^(?:searching|checking|preparing|looking|discovery is still running)',
+      caseSensitive: false,
+    ).hasMatch(backgroundNote.trim());
+    final showInitialSearch = isLoading ||
+        (sortedClinics.isEmpty && (loadingMore || noteIsSearching));
     final searchMessage = backgroundNote.isNotEmpty
         ? backgroundNote
         : exploreSearchingVerifiedMessage(
@@ -4563,7 +4584,7 @@ class _ClinicCompareCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 2),
                       Text(
-                        rating.isNotEmpty ? rating : '—',
+                        rating.isNotEmpty ? rating : 'No rating',
                         style: ProcedureSelectionTypography.label(
                           size: 10,
                           weight: FontWeight.w700,

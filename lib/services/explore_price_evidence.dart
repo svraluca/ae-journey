@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'explore_regex_cache.dart';
+
 import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
 
@@ -21,16 +23,16 @@ enum PriceExtractionMethod {
   textProximity;
 
   String get wire => switch (this) {
-        PriceExtractionMethod.jsonLd => 'jsonLd',
-        PriceExtractionMethod.schemaOffer => 'schemaOffer',
-        PriceExtractionMethod.htmlTable => 'html_table',
-        PriceExtractionMethod.productCard => 'product_card',
-        PriceExtractionMethod.listItem => 'list_item',
-        PriceExtractionMethod.domBlock => 'dom_block',
-        PriceExtractionMethod.wooCommerce => 'woocommerce',
-        PriceExtractionMethod.shopify => 'shopify',
-        PriceExtractionMethod.textProximity => 'text_proximity',
-      };
+    PriceExtractionMethod.jsonLd => 'jsonLd',
+    PriceExtractionMethod.schemaOffer => 'schemaOffer',
+    PriceExtractionMethod.htmlTable => 'html_table',
+    PriceExtractionMethod.productCard => 'product_card',
+    PriceExtractionMethod.listItem => 'list_item',
+    PriceExtractionMethod.domBlock => 'dom_block',
+    PriceExtractionMethod.wooCommerce => 'woocommerce',
+    PriceExtractionMethod.shopify => 'shopify',
+    PriceExtractionMethod.textProximity => 'text_proximity',
+  };
 
   static PriceExtractionMethod? fromWire(String? raw) {
     switch ('$raw'.trim()) {
@@ -106,11 +108,11 @@ enum PriceSourceType {
   searchSnippet;
 
   String get wire => switch (this) {
-        PriceSourceType.officialClinic => 'official_clinic',
-        PriceSourceType.marketplace => 'marketplace',
-        PriceSourceType.aggregator => 'aggregator',
-        PriceSourceType.searchSnippet => 'search_snippet',
-      };
+    PriceSourceType.officialClinic => 'official_clinic',
+    PriceSourceType.marketplace => 'marketplace',
+    PriceSourceType.aggregator => 'aggregator',
+    PriceSourceType.searchSnippet => 'search_snippet',
+  };
 
   bool get isTrustedByDefault => this == PriceSourceType.officialClinic;
 
@@ -268,12 +270,12 @@ String buildEvidenceHash({
   return sha256.convert(utf8.encode(raw)).toString().substring(0, 24);
 }
 
-final _kRonEquivalentInParens = RegExp(
+final _kRonEquivalentInParens = cachedRegExp(
   r'\(\s*\d[\d.\s]*\s*(?:lei|ron)\s*\)',
   caseSensitive: false,
 );
 
-final _kRonEquivalentAfterSlash = RegExp(
+final _kRonEquivalentAfterSlash = cachedRegExp(
   r'\s*[\/|,]\s*\d[\d.\s]*\s*(?:lei|ron)\b',
   caseSensitive: false,
 );
@@ -282,12 +284,13 @@ final _kRonEquivalentAfterSlash = RegExp(
 /// The lei amount is FX, not a second price.
 String _stripRonEquivalentBesideEuro(String raw) {
   var t = raw.replaceAll('\u00a0', ' ');
-  final hasEuro = t.contains('€') ||
-      RegExp(r'\beuros?\b|\beur\b', caseSensitive: false).hasMatch(t);
+  final hasEuro =
+      t.contains('€') ||
+      cachedRegExp(r'\beuros?\b|\beur\b', caseSensitive: false).hasMatch(t);
   if (!hasEuro) return t;
   t = t.replaceAll(_kRonEquivalentInParens, ' ');
   t = t.replaceAll(_kRonEquivalentAfterSlash, ' ');
-  return t.replaceAll(RegExp(r'\s+'), ' ').trim();
+  return t.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
 }
 
 const _kCurrencyBesideAmount =
@@ -310,14 +313,16 @@ Set<double> _amountsBesideCurrency(String raw) {
   // Leading currency ("€60", "AED 1200"). The lookbehinds keep a *trailing*
   // symbol from claiming the next number: in "33€ 90 min" the € prices 33,
   // and 90 is the duration.
-  for (final m in RegExp(
-    r'(?<!\d)(?<!\d )' '(?:$_kCurrencyBesideAmount)' r'\s{0,2}(\d[\d.,]*)',
+  for (final m in cachedRegExp(
+    r'(?<!\d)(?<!\d )'
+    '(?:$_kCurrencyBesideAmount)'
+    r'\s{0,2}(\d[\d.,]*)',
     caseSensitive: false,
   ).allMatches(raw)) {
     add(m.group(1));
   }
   // Trailing currency also prices the range partner: "120 - 180 €" is both.
-  for (final m in RegExp(
+  for (final m in cachedRegExp(
     r'(\d[\d.,]*)(?:\s*(?:[-–—/]|to|or|pana\s+la|până\s+la)\s*(\d[\d.,]*))?'
     '\\s*(?:$_kCurrencyBesideAmount)',
     caseSensitive: false,
@@ -332,10 +337,7 @@ Set<double> _amountsBesideCurrency(String raw) {
 /// position in the list, not its price. Requires trailing whitespace so a
 /// decimal separator ("1.500 €") is never mistaken for an ordinal.
 String _stripLeadingListOrdinal(String raw) {
-  return raw.replaceFirst(
-    RegExp(r'^\s*\d{1,2}\s*[.)\]:]\s+(?=\D)'),
-    '',
-  );
+  return raw.replaceFirst(cachedRegExp(r'^\s*\d{1,2}\s*[.)\]:]\s+(?=\D)'), '');
 }
 
 /// Time a treatment takes, never what it costs.
@@ -344,8 +346,9 @@ const _kDurationUnitAlt =
     r'ore|ora|orë|hour|hours|hrs|h|'
     r'zile|ditë|dite|day|days|jave|javë|week|weeks|saat|ساعة|دقيقة';
 
-final _kDurationUnitAfterAmount = RegExp(
-  '^(?:$_kDurationUnitAlt)' r'\b',
+final _kDurationUnitAfterAmount = cachedRegExp(
+  '^(?:$_kDurationUnitAlt)'
+  r'\b',
   caseSensitive: false,
 );
 
@@ -353,11 +356,11 @@ final _kDurationUnitAfterAmount = RegExp(
 /// Spaced phrases like `from 799` / `1 ml` must stay intact.
 String stripClinicBrandNumericTokens(String raw) {
   var t = raw.replaceAllMapped(
-    RegExp(r'\b([A-Za-z][A-Za-z._-]{1,24})(\d{2,5})\b'),
+    cachedRegExp(r'\b([A-Za-z][A-Za-z._-]{1,24})(\d{2,5})\b'),
     (m) => m.group(1) ?? '',
   );
   t = t.replaceAllMapped(
-    RegExp(
+    cachedRegExp(
       r'\b(?:at\s+)([A-Za-z][A-Za-z._-]{1,24})\s+(\d{2,4})\b',
       caseSensitive: false,
     ),
@@ -394,16 +397,21 @@ ParsedPrice? parsePriceText(String raw) {
   }
   // Implant projection ratios / bare decimals with no currency (1,00 · 1,12).
   if (currency.isEmpty &&
-      RegExp(r'^\s*\d{1,2}[,.]\d{2}\s*$').hasMatch(original)) {
+      cachedRegExp(r'^\s*\d{1,2}[,.]\d{2}\s*$').hasMatch(original)) {
     return null;
   }
-  if (RegExp(r'\b\d+\s*months?\b', caseSensitive: false).hasMatch(original) &&
+  if (cachedRegExp(
+        r'\b\d+\s*months?\b',
+        caseSensitive: false,
+      ).hasMatch(original) &&
       currency.isEmpty) {
     return null;
   }
-  if (RegExp(r'\d+\s*[-–—]\s*\d+\s*%').hasMatch(original) ||
-      RegExp(r'\d+\s*%\s*(less|off|daha\s+az)', caseSensitive: false)
-          .hasMatch(original)) {
+  if (cachedRegExp(r'\d+\s*[-–—]\s*\d+\s*%').hasMatch(original) ||
+      cachedRegExp(
+        r'\d+\s*%\s*(less|off|daha\s+az)',
+        caseSensitive: false,
+      ).hasMatch(original)) {
     return null;
   }
 
@@ -413,11 +421,11 @@ ParsedPrice? parsePriceText(String raw) {
   final unitQty = exploreParsePriceUnitQuantity(original);
   // "1 ml" in a procedure name is package quantity, not a /ml rate.
   // Only treat as per-unit when the source literally prices per/slash unit.
-  final explicitPerUnit = RegExp(
+  final explicitPerUnit = cachedRegExp(
     r'(?:per|/)\s*(?:ml|cc|iu|unit|units|syringe|syringes|vial|مل|وحدات)\b',
     caseSensitive: false,
   ).hasMatch(original);
-  final explicitPerArea = RegExp(
+  final explicitPerArea = cachedRegExp(
     r'(?:per|/)\s*(?:area|areas|zone|zones|منطقة)\b',
     caseSensitive: false,
   ).hasMatch(original);
@@ -479,7 +487,7 @@ ParsedPrice? parsePriceText(String raw) {
   }
 
   var type = PriceType.fixed;
-  final fromRe = RegExp(
+  final fromRe = cachedRegExp(
     r'(?:from|starts?\s+from|starts?\s+at|starting(?:\s+(?:at|from))?|desde|de\s+la|'
     r'a\s+partir\s+de|ab|od|'
     r'à\s+partir\s+de|porneste(?:\s+de\s+la)?|pornește(?:\s+de\s+la)?|'
@@ -492,23 +500,23 @@ ParsedPrice? parsePriceText(String raw) {
   );
   final fromMatch = fromRe.firstMatch(working);
   if (fromMatch != null ||
-      RegExp(r'\d\s*\+\s*$').hasMatch(working.trim())) {
+      cachedRegExp(r'\d\s*\+\s*$').hasMatch(working.trim())) {
     type = PriceType.from;
   }
   if (fromMatch != null) {
     // English/prefix: "from 100". Turkish suffix: "100.000 TL'den başlayan"
     // — do not slice away the leading amount.
     final before = working.substring(0, fromMatch.start);
-    if (!RegExp(r'\d').hasMatch(before)) {
+    if (!cachedRegExp(r'\d').hasMatch(before)) {
       working = working.substring(fromMatch.start);
     }
   }
 
-  final saleDel = RegExp(
+  final saleDel = cachedRegExp(
     r'<del[^>]*>([\s\S]*?)</del>',
     caseSensitive: false,
   ).firstMatch(working);
-  final saleIns = RegExp(
+  final saleIns = cachedRegExp(
     r'<ins[^>]*>([\s\S]*?)</ins>',
     caseSensitive: false,
   ).firstMatch(working);
@@ -533,15 +541,12 @@ ParsedPrice? parsePriceText(String raw) {
     }
   }
 
-  working = stripCurrencyTokensForNumberParse(working)
-      .replaceAll(RegExp(r'\s+'), ' ')
-      .trim();
+  working = stripCurrencyTokensForNumberParse(
+    working,
+  ).replaceAll(cachedRegExp(r'\s+'), ' ').trim();
   // Turkish "100 bin TL" → 100000 before digit parse.
   working = working.replaceAllMapped(
-    RegExp(
-      r'(\d[\d.,]*)\s*bin\b',
-      caseSensitive: false,
-    ),
+    cachedRegExp(r'(\d[\d.,]*)\s*bin\b', caseSensitive: false),
     (m) {
       final n = parseLocaleNumber(m.group(1) ?? '');
       if (n == null) return m.group(0) ?? '';
@@ -552,8 +557,10 @@ ParsedPrice? parsePriceText(String raw) {
   // "33 90 min" is a fee plus a duration, not 33.90 — gluing them produced an
   // amount that then looked like a duration and the whole row was dropped.
   working = working.replaceAllMapped(
-    RegExp(
-      r'\b(\d{1,6})\s+(\d{2})\b(?!\s*(?:' '$_kDurationUnitAlt' r')\b)'
+    cachedRegExp(
+      r'\b(\d{1,6})\s+(\d{2})\b(?!\s*(?:'
+      '$_kDurationUnitAlt'
+      r')\b)'
       r'(?=\s*(?:€|eur|euro|euros|£|gbp|\$|usd|ron|lei|'
       r'bgn|лв|lv\.?|try|tl|aed|د\.?إ)?(?:\s|$|[^\d]))',
       caseSensitive: false,
@@ -561,12 +568,12 @@ ParsedPrice? parsePriceText(String raw) {
     (m) => '${m.group(1)}.${m.group(2)}',
   );
   working = working.replaceAllMapped(
-    RegExp(r'\b(\d{1,3}(?:\s\d{3})+)\b'),
+    cachedRegExp(r'\b(\d{1,3}(?:\s\d{3})+)\b'),
     (m) => (m.group(1) ?? '').replaceAll(' ', ''),
   );
 
   // Turkish "100.000 TL ile 150.000 TL arasında"
-  final trRange = RegExp(
+  final trRange = cachedRegExp(
     r'(\d[\d.,\s]*)\s*(?:TL|₺)?\s*ile\s+(\d[\d.,\s]*)\s*(?:TL|₺)?\s*aras[iı]nda',
     caseSensitive: false,
   ).firstMatch(working);
@@ -585,7 +592,7 @@ ParsedPrice? parsePriceText(String raw) {
     }
   }
 
-  final rangeRe = RegExp(
+  final rangeRe = cachedRegExp(
     r'(\d[\d.,\s]*)\s*(?:–|—|-|to|until|hasta|pana\s+la|până\s+la|\ba\b|ile)\s*\+?\s*(\d[\d.,\s]*)',
     caseSensitive: false,
   );
@@ -605,12 +612,12 @@ ParsedPrice? parsePriceText(String raw) {
     }
   }
 
-  final numRe = RegExp(r'(?<![A-Za-z])\d[\d.,]*');
+  final numRe = cachedRegExp(r'(?<![A-Za-z])\d[\d.,]*');
   var nums = <double>[];
   for (final m in numRe.allMatches(working)) {
     final after = working.substring(m.end).trimLeft();
     // Skip "1 ml" / "3 areas" quantity prefixes — not the clinic fee.
-    if (RegExp(
+    if (cachedRegExp(
       r'^(ml|cc|iu|syringe|syringes|area|areas|zone|zones|session|sessions|'
       r'vial|vials|package|packages|graft|grafts|unit|units|unitate|unitati|'
       r'unități|ampoule|ampoules|sedinte|ședințe|sedințe|%|cm|mm|'
@@ -698,22 +705,22 @@ int countPriceLikeAmounts(String raw) {
   );
   working = working
       .replaceAll(
-        RegExp(
+        cachedRegExp(
           r'(?:€|eur|euro|euros|£|gbp|\$|usd|ron|lei|try|tl|pln|zł|aed|'
           r'dirhams?|درهم|د\.إ)',
           caseSensitive: false,
         ),
         ' ',
       )
-      .replaceAll(RegExp(r'\s+'), ' ')
+      .replaceAll(cachedRegExp(r'\s+'), ' ')
       .trim();
   working = working.replaceAllMapped(
-    RegExp(r'\b(\d{1,3}(?:\s\d{3})+)\b'),
+    cachedRegExp(r'\b(\d{1,3}(?:\s\d{3})+)\b'),
     (m) => (m.group(1) ?? '').replaceAll(' ', ''),
   );
   final pricedAmounts = _amountsBesideCurrency(raw);
   var n = 0;
-  for (final m in RegExp(r'(?<![A-Za-z])\d[\d.,]*').allMatches(working)) {
+  for (final m in cachedRegExp(r'(?<![A-Za-z])\d[\d.,]*').allMatches(working)) {
     final amount = parseLocaleNumber(m.group(0) ?? '');
     if (amount == null || amount < 1) continue;
     // How long the treatment takes is not a second quote. Spa-style menus
@@ -751,8 +758,8 @@ double? parseLocaleNumber(String raw) {
   var s = raw.replaceAll('\u00a0', ' ').trim();
   if (s.isEmpty) return null;
   s = s.replaceAll("'", '').replaceAll('’', '');
-  s = s.replaceAll(RegExp(r'[^\d.,\s]'), '');
-  s = s.replaceAll(RegExp(r'\s+'), '');
+  s = s.replaceAll(cachedRegExp(r'[^\d.,\s]'), '');
+  s = s.replaceAll(cachedRegExp(r'\s+'), '');
   if (s.isEmpty) return null;
 
   final hasComma = s.contains(',');
@@ -764,24 +771,27 @@ double? parseLocaleNumber(String raw) {
       s = s.replaceAll(',', '');
     }
   } else if (hasComma) {
-    if (RegExp(r',\d{1,2}$').hasMatch(s) && !RegExp(r',\d{3}$').hasMatch(s)) {
+    if (cachedRegExp(r',\d{1,2}$').hasMatch(s) &&
+        !cachedRegExp(r',\d{3}$').hasMatch(s)) {
       s = s.replaceAll(',', '.');
-    } else if (RegExp(r',\d{3}(?:\d{3})*$').hasMatch(s)) {
+    } else if (cachedRegExp(r',\d{3}(?:\d{3})*$').hasMatch(s)) {
       s = s.replaceAll(',', '');
     } else {
       s = s.replaceAll(',', '.');
     }
   } else if (hasDot) {
-    if (RegExp(r'\.\d{3}(?:\d{3})*$').hasMatch(s) &&
-        !RegExp(r'\.\d{1,2}$').hasMatch(s)) {
+    if (cachedRegExp(r'\.\d{3}(?:\d{3})*$').hasMatch(s) &&
+        !cachedRegExp(r'\.\d{1,2}$').hasMatch(s)) {
       s = s.replaceAll('.', '');
     }
   }
   return double.tryParse(s);
 }
 
-String _stripTags(String raw) =>
-    raw.replaceAll(RegExp(r'<[^>]+>'), ' ').replaceAll(RegExp(r'\s+'), ' ').trim();
+String _stripTags(String raw) => raw
+    .replaceAll(cachedRegExp(r'<[^>]+>'), ' ')
+    .replaceAll(cachedRegExp(r'\s+'), ' ')
+    .trim();
 
 /// Serp / listing titles that are promotions or prices, not clinics.
 bool isInvalidClinicIdentity(String name) =>
@@ -793,7 +803,9 @@ bool isNonLiteralClinicPriceUrl(String sourceUrl) {
   if (raw.isEmpty) return false;
   var path = raw;
   try {
-    path = Uri.parse(raw.contains('://') ? raw : 'https://$raw').path.toLowerCase();
+    path = Uri.parse(
+      raw.contains('://') ? raw : 'https://$raw',
+    ).path.toLowerCase();
   } catch (_) {}
   if (path.contains('/blog/') ||
       path.contains('/article/') ||
@@ -828,7 +840,7 @@ bool isNonLiteralClinicPriceUrl(String sourceUrl) {
   }
   if (looksLikeMarketEstimateDirectoryUrl(raw)) return true;
   // Generic market-guide / average-price URLs — never city allowlists.
-  return RegExp(
+  return cachedRegExp(
     r'cost-london|precio-medio|price-range|average-price|average-cost|'
     r'cat-costa|cat_costa|how-much-does|how-much-do|cuanto-cuesta|cât-costă|'
     r'market[-_]?average|typical[-_]?price|city[-_]?average|'
@@ -844,10 +856,10 @@ String shrinkEvidenceToProcedureAndPrice({
   required String procedure,
   required String priceRaw,
 }) {
-  final text = block.replaceAll(RegExp(r'\s+'), ' ').trim();
+  final text = block.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
   if (text.isEmpty) return text;
-  final proc = procedure.replaceAll(RegExp(r'\s+'), ' ').trim();
-  final price = priceRaw.replaceAll(RegExp(r'\s+'), ' ').trim();
+  final proc = procedure.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
+  final price = priceRaw.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
   if (proc.isEmpty || price.isEmpty) return text;
   final lo = text.toLowerCase();
   final procLo = proc.toLowerCase();
@@ -858,7 +870,7 @@ String shrinkEvidenceToProcedureAndPrice({
   }
   var priceIdx = lo.indexOf(priceLo);
   if (priceIdx < 0) {
-    final amount = RegExp(r'\d[\d.,]*').firstMatch(priceLo)?.group(0);
+    final amount = cachedRegExp(r'\d[\d.,]*').firstMatch(priceLo)?.group(0);
     if (amount != null) priceIdx = lo.indexOf(amount);
   }
   if (pIdx < 0 || priceIdx < 0) return text;
@@ -878,8 +890,9 @@ bool looksLikeClinicArticlePriceUrl(String sourceUrl) {
   if (raw.isEmpty) return false;
   var path = raw;
   try {
-    path =
-        Uri.parse(raw.contains('://') ? raw : 'https://$raw').path.toLowerCase();
+    path = Uri.parse(
+      raw.contains('://') ? raw : 'https://$raw',
+    ).path.toLowerCase();
   } catch (_) {}
   for (final seg in const [
     '/post/',
@@ -896,7 +909,7 @@ bool looksLikeClinicArticlePriceUrl(String sourceUrl) {
   ]) {
     if (path.contains(seg)) return true;
   }
-  return RegExp(
+  return cachedRegExp(
     r'/post/|/posts/|/news/|/insights/|/resources/|/magazine/|/tips/|'
     r'/articles?/|'
     r'complete-breakdown|complete-pricing-guide|complete-price-guide|'
@@ -933,10 +946,7 @@ String exploreEnglishLocaleUrl(String sourceUrl) {
 /// lives on a language prefix (`/sq/`, `/ro/`, `/bg/`, …), prefer that twin.
 ///
 /// Example: botoxtirana.com English shell vs `/sq/` which lists BioRePeel 70€.
-String exploreLocalLocaleHomepageUrl(
-  String sourceUrl, {
-  required String lang,
-}) {
+String exploreLocalLocaleHomepageUrl(String sourceUrl, {required String lang}) {
   final raw = sourceUrl.trim();
   final l = lang.trim().toLowerCase();
   if (raw.isEmpty || l.isEmpty || l == 'en') return raw;
@@ -984,11 +994,12 @@ bool looksLikeCityCostArticleUrl(String sourceUrl) {
   if (raw.isEmpty) return false;
   var path = raw;
   try {
-    path =
-        Uri.parse(raw.contains('://') ? raw : 'https://$raw').path.toLowerCase();
+    path = Uri.parse(
+      raw.contains('://') ? raw : 'https://$raw',
+    ).path.toLowerCase();
   } catch (_) {}
   if (path.contains('/uncategorized/')) return true;
-  return RegExp(
+  return cachedRegExp(
     r'(?:cost|costs|price|prices|pricing)-in-[a-z][a-z-]{2,30}|'
     r'cost-of-[a-z][a-z-]{2,40}|'
     r'(?:cost|price)-\d{4}(?:/|$)|'
@@ -1012,10 +1023,11 @@ bool looksLikeGenericCitySurgeryGuideUrl(String sourceUrl) {
   if (raw.isEmpty) return false;
   var path = raw;
   try {
-    path =
-        Uri.parse(raw.contains('://') ? raw : 'https://$raw').path.toLowerCase();
+    path = Uri.parse(
+      raw.contains('://') ? raw : 'https://$raw',
+    ).path.toLowerCase();
   } catch (_) {}
-  return RegExp(
+  return cachedRegExp(
     r'plastic-surgery-cost|'
     r'plastic-surgery-price|'
     r'surgery-cost-in-|'
@@ -1034,7 +1046,7 @@ bool exploreEvidenceQuotesPriceRange({
   required double priceMax,
 }) {
   if (priceMin > 0 && priceMax > priceMin + 0.5) return true;
-  final re = RegExp(
+  final re = cachedRegExp(
     r'\d[\d.,]*\s*(?:aed|eur|euro|usd|gbp|ron|lei|try|€|£|\$|درهم)?\s*'
     r'(?:to|–|—|-|until|hasta|pana la|până la)\s*'
     r'(?:aed|eur|euro|usd|gbp|ron|lei|try|€|£|\$|درهم)?\s*\d',
@@ -1104,11 +1116,13 @@ const kExplorePricePathWords = <String>[
 ];
 
 RegExp _pricePathRe({List<String> extra = const []}) {
-  final words = <String>{...kExplorePricePathWords, ...extra}
-      .map(RegExp.escape)
-      .join('|');
+  final words = <String>{
+    ...kExplorePricePathWords,
+    ...extra,
+  }.map(RegExp.escape).join('|');
   return RegExp(
-    '(?:^|/)(?:$words)' r'(?:/|$|\.|-)',
+    '(?:^|/)(?:$words)'
+    r'(?:/|$|\.|-)',
     caseSensitive: false,
   );
 }
@@ -1121,8 +1135,9 @@ bool looksLikeOfficialPriceListUrl(String url) {
   try {
     path = Uri.parse(raw.contains('://') ? raw : 'https://$raw').path;
   } catch (_) {}
-  if (RegExp(r'book-online|/booking|/book-now').hasMatch(path)) return false;
-  if (RegExp(r'special-?offers?|/offers?/|/deals?/').hasMatch(path)) {
+  if (cachedRegExp(r'book-online|/booking|/book-now').hasMatch(path))
+    return false;
+  if (cachedRegExp(r'special-?offers?|/offers?/|/deals?/').hasMatch(path)) {
     return false;
   }
   if (looksLikeCityCostArticleUrl(raw)) return false;
@@ -1144,7 +1159,7 @@ bool looksLikeBookingOrCheckoutUrl(String url) {
   try {
     path = Uri.parse(raw.contains('://') ? raw : 'https://$raw').path;
   } catch (_) {}
-  return RegExp(
+  return cachedRegExp(
     r'(?:^|/)(?:book-online|booking|book-now|book-now|reserve|reservation)(?:/|$)',
     caseSensitive: false,
   ).hasMatch(path);
@@ -1153,7 +1168,7 @@ bool looksLikeBookingOrCheckoutUrl(String url) {
 bool looksLikeSpecialOfferUrl(String url) {
   final raw = url.trim().toLowerCase();
   if (raw.isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'special-?offers?|/(?:offers|deals|promotions?|promo)(?:/|$)',
     caseSensitive: false,
   ).hasMatch(raw);
@@ -1162,9 +1177,9 @@ bool looksLikeSpecialOfferUrl(String url) {
 String _exploreBareHost(String domain) {
   var host = domain.trim().toLowerCase();
   if (host.isEmpty) return '';
-  host = host.replaceFirst(RegExp(r'^https?://'), '');
+  host = host.replaceFirst(cachedRegExp(r'^https?://'), '');
   host = host.split('/').first;
-  host = host.replaceFirst(RegExp(r'^www\.'), '');
+  host = host.replaceFirst(cachedRegExp(r'^www\.'), '');
   return host;
 }
 
@@ -1297,7 +1312,7 @@ PriceSourceType classifyPriceSourceType(String sourceUrl) {
 String _hostOf(String url) {
   try {
     final uri = Uri.parse(url.contains('://') ? url : 'https://$url');
-    return uri.host.toLowerCase().replaceFirst(RegExp(r'^www\.'), '');
+    return uri.host.toLowerCase().replaceFirst(cachedRegExp(r'^www\.'), '');
   } catch (_) {
     return '';
   }
@@ -1312,18 +1327,30 @@ bool htmlLooksLikeJsShell(String html) {
       lower.contains('enable js') ||
       lower.contains('noscript') && lower.contains('javascript')) {
     final stripped = raw
-        .replaceAll(RegExp(r'<script[\s\S]*?</script>', caseSensitive: false), '')
-        .replaceAll(RegExp(r'<style[\s\S]*?</style>', caseSensitive: false), '')
-        .replaceAll(RegExp(r'<[^>]+>'), ' ')
-        .replaceAll(RegExp(r'\s+'), ' ')
+        .replaceAll(
+          cachedRegExp(r'<script[\s\S]*?</script>', caseSensitive: false),
+          '',
+        )
+        .replaceAll(
+          cachedRegExp(r'<style[\s\S]*?</style>', caseSensitive: false),
+          '',
+        )
+        .replaceAll(cachedRegExp(r'<[^>]+>'), ' ')
+        .replaceAll(cachedRegExp(r'\s+'), ' ')
         .trim();
     if (stripped.length < 250) return true;
   }
   final stripped = raw
-      .replaceAll(RegExp(r'<script[\s\S]*?</script>', caseSensitive: false), '')
-      .replaceAll(RegExp(r'<style[\s\S]*?</style>', caseSensitive: false), '')
-      .replaceAll(RegExp(r'<[^>]+>'), ' ')
-      .replaceAll(RegExp(r'\s+'), ' ')
+      .replaceAll(
+        cachedRegExp(r'<script[\s\S]*?</script>', caseSensitive: false),
+        '',
+      )
+      .replaceAll(
+        cachedRegExp(r'<style[\s\S]*?</style>', caseSensitive: false),
+        '',
+      )
+      .replaceAll(cachedRegExp(r'<[^>]+>'), ' ')
+      .replaceAll(cachedRegExp(r'\s+'), ' ')
       .trim();
   if (raw.length > 1500 && stripped.length < 180) return true;
   return false;
@@ -1349,19 +1376,24 @@ ExtractedPriceEvidence applyLabelClassification({
       break;
     }
   }
-  final family = '${aiJson['family'] ?? aiJson['procedure_family'] ?? ''}'.trim();
+  final family = '${aiJson['family'] ?? aiJson['procedure_family'] ?? ''}'
+      .trim();
   final canonical =
       '${aiJson['canonical'] ?? aiJson['canonical_procedure'] ?? ''}'.trim();
   final confidence = (aiJson['confidence'] as num?)?.toDouble();
   return evidence.copyWith(
     procedureFamily: family.isNotEmpty ? family : evidence.procedureFamily,
-    procedureCanonical:
-        canonical.isNotEmpty ? canonical : evidence.procedureCanonical,
+    procedureCanonical: canonical.isNotEmpty
+        ? canonical
+        : evidence.procedureCanonical,
     confidence: confidence ?? evidence.confidence,
   );
 }
 
-void logExtractedEvidence(ExtractedPriceEvidence row, {String clinicName = ''}) {
+void logExtractedEvidence(
+  ExtractedPriceEvidence row, {
+  String clinicName = '',
+}) {
   if (clinicName.isNotEmpty) {
     debugPrint('[GP EXTRACT] $clinicName');
   }

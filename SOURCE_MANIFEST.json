@@ -1,0 +1,1482 @@
+[
+  {
+    "path": "functions/explore/brightdata/brightDataClient.js",
+    "sha256": "4b372a736974811a190f90045e928de8aae986d8f50ff772133249f49cef3004"
+  },
+  {
+    "path": "functions/explore/brightdata/brightDataMaps.js",
+    "sha256": "efc3fc8fcd79cf1775d32fd4aeb7e8109146a16a3835626c009f5a48db56d285"
+  },
+  {
+    "path": "functions/explore/brightdata/brightDataSerp.js",
+    "sha256": "d28cb8dfd1ebd747776bcb44705205a23bb55896c9ea56dd0bda8e5bf03223d5"
+  },
+  {
+    "path": "functions/explore/brightdata/brightDataUnlocker.js",
+    "sha256": "9c8c2d959dcd0225bd24eba69d9f373fe17182c39c51681eb4596e8aeb2acd5c"
+  },
+  {
+    "path": "functions/explore/brightdata/cityDiscovery.js",
+    "sha256": "664b7f45ef72fa2b09fd428060ff6488d49603c114271381853e87d25ebd3804"
+  },
+  {
+    "path": "functions/explore/brightdata/cityDiscoveryState.js",
+    "sha256": "44753689eae05ae8b28f9c83bab015954ccd015aaf8c6a6dc38b3feed56f7139"
+  },
+  {
+    "path": "functions/explore/brightdata/discoveryQueries.js",
+    "sha256": "8abfe37f1c26a1dad3647be53a910fbc1cc8f1a2e710b052ef961b25b93c761b"
+  },
+  {
+    "path": "functions/explore/cityIdentity.js",
+    "sha256": "4f5489ee153f2812f51e0ee57fc45bc7d4bddeeac596a14bf00ec0abcb633164"
+  },
+  {
+    "path": "functions/explore/classifyLabel.js",
+    "sha256": "2b907b58ad4dd8e1196bd1fd067539426dd7e0424224d55e823d95e0b288eaae"
+  },
+  {
+    "path": "functions/explore/clinicCandidateStore.js",
+    "sha256": "e3954a88130241fcd78cc155cf1aaebf71080a05c4eb416ae8d0524b2fca44f1"
+  },
+  {
+    "path": "functions/explore/clinicCatalog.js",
+    "sha256": "c8a8d19a24c1a607d75695493099fe03b63b966fc5d6f38284d76fa0c6224fd6"
+  },
+  {
+    "path": "functions/explore/curatedStore.js",
+    "sha256": "15535ffe1eb9880402454b539a91a38dd49dd8bc7d7d26e38b9b962f58a4e4ee"
+  },
+  {
+    "path": "functions/explore/currencyTokens.js",
+    "sha256": "e2e48e22f36fd7016208e46b865f577cb2977f65f21a06f29c262b905ec54bc1"
+  },
+  {
+    "path": "functions/explore/discovery.js",
+    "sha256": "c7d82ca9d8a8eb4ecb99cd6820fe7984de2ab44c102906128802d24ebd8fc574"
+  },
+  {
+    "path": "functions/explore/discoveryState.js",
+    "sha256": "106c07a75b3d756e8dc72a6d613260e236c96ca8e3ac0d5028dbc05c44383c85"
+  },
+  {
+    "path": "functions/explore/enqueueClinicCandidates.js",
+    "sha256": "25516cc20f73c1a2bb14781fe2bf258005053e96b6ee15016521fb60067d7101"
+  },
+  {
+    "path": "functions/explore/evidenceLock.js",
+    "sha256": "39a8c7552e28cd0b061c83197810b05554a34d9e45d6bf00aefde219304a3132"
+  },
+  {
+    "path": "functions/explore/explorePipelineVersion.js",
+    "sha256": "9b1d76370e7c729a8e65c4c21eb758075cc411f3ab42365e5c20a0ac66c35776"
+  },
+  {
+    "path": "functions/explore/extractRevision.js",
+    "sha256": "6e75f4023621b2334986cd70abc2c7f6ec19e648143c8e2cd8daa752272692c7"
+  },
+  {
+    "path": "functions/explore/featureFlags.js",
+    "sha256": "236c066055f0b96f7b120b98280401a4dac0f0142d5faead5b276d3601d4678e"
+  },
+  {
+    "path": "functions/explore/firecrawlClient.js",
+    "sha256": "2d0d2e6d16dbff45ea9e70e37056c84dff28865b4a9c3430f4bf54ec71e6bdd7"
+  },
+  {
+    "path": "functions/explore/firecrawlDiscovery.js",
+    "sha256": "376bbcd979d1ee5b4b88332dffdbb32180d2d155802e647296d3990c8f8d4648"
+  },
+  {
+    "path": "functions/explore/firestoreStore.js",
+    "sha256": "a5d28f77e8e7c676464afae4899669d9f8cfe8199ba79c5b3b0f0183f6723541"
+  },
+  {
+    "path": "functions/explore/getExploreProcedurePrices.js",
+    "sha256": "e172668ee835291282b1c36e551ee350ab4e41ba33932a56630f002a2a4b394d"
+  },
+  {
+    "path": "functions/explore/identity.js",
+    "sha256": "1137296142dff804daf51c62a28feed1da4fd096808b7e4925a7851bb0089f46"
+  },
+  {
+    "path": "functions/explore/infra.js",
+    "sha256": "fbf48f1bb583e8dba0821e4dbed46b073428863f1931a385f76549ab60c02675"
+  },
+  {
+    "path": "functions/explore/marketplaces/constants.js",
+    "sha256": "6d974d9cd470b773ade86bbf04d9f231ce0f1392b437129fa181d912c548b0bb"
+  },
+  {
+    "path": "functions/explore/marketplaces/freshaProvider.js",
+    "sha256": "109f790def4e642f5afcfb32867607f862292fd306b279b6077f1b34b0e1d2ec"
+  },
+  {
+    "path": "functions/explore/marketplaces/freshaUrlFinder.js",
+    "sha256": "1780cd156b681e4d08464a5518c61afc27049e920f59ddd78e8fd1c75d1c6daa"
+  },
+  {
+    "path": "functions/explore/marketplaces/googleClinicDiscovery.js",
+    "sha256": "2f72ba16e252ac5782f13c4e0ab5dedda2886c7f620371fe912e0b228d5bcdd6"
+  },
+  {
+    "path": "functions/explore/marketplaces/identityMatch.js",
+    "sha256": "18c2fca5d1e7f444811eb5bbf36312536855e9016d84c073302dfe92ead86df0"
+  },
+  {
+    "path": "functions/explore/marketplaces/importCity.js",
+    "sha256": "f18a6f86104f352b490ae971813b3cd5fc20e271f516589aa78b8ac9bbd16fb1"
+  },
+  {
+    "path": "functions/explore/marketplaces/importState.js",
+    "sha256": "7298c9c9084e7db001b04827ab3436dd3d7189a4816ee176583330d65f5c8ac3"
+  },
+  {
+    "path": "functions/explore/marketplaces/locationFormat.js",
+    "sha256": "48706daad3c658cf2f01db7e19f311e40220f989cfa913e11041c210cad5eb76"
+  },
+  {
+    "path": "functions/explore/marketplaces/marketplaceProvider.js",
+    "sha256": "1c877b693015228994fbe73de4beb2a7028d4163985f3fc35e9383c12601f084"
+  },
+  {
+    "path": "functions/explore/marketplaces/procedureMap.js",
+    "sha256": "2dcca8f8ce6908d59a831e69d09ebdda1e907dde1fe1c9274e1f148a94bba75c"
+  },
+  {
+    "path": "functions/explore/marketplaces/requestImport.js",
+    "sha256": "1cdb1fa9020349840d60e68cf05e884ad0f7c204a7c65e389d7da87a1b123909"
+  },
+  {
+    "path": "functions/explore/migrations/invalidateLegacyPrices.js",
+    "sha256": "04beab16a1321079d7462c232b1676207e291916ac3a4e8de162f2b9f4d49e0b"
+  },
+  {
+    "path": "functions/explore/migrations/runInvalidateLegacyPrices.js",
+    "sha256": "4600a3835aea1dcce15e9a08749c2bb4b6ad305cbd5c93aa5d5d5c83bc6cbbf8"
+  },
+  {
+    "path": "functions/explore/normalizeProcedureSemantics.js",
+    "sha256": "73dd86c2cd97e6a5943180522c7fa74b240e8ec2879839ae9589c06b8cff5707"
+  },
+  {
+    "path": "functions/explore/pageFetcher.js",
+    "sha256": "d55154693fab3273fc90f36a95d7e8a514a4c6e888d2268e6106c9fe73630c68"
+  },
+  {
+    "path": "functions/explore/parsePrice.js",
+    "sha256": "398f9c90baa690c72e1c2e4ddbd3744c88953bb5cd11564878e32a2847e49d77"
+  },
+  {
+    "path": "functions/explore/priceExtractor.js",
+    "sha256": "fdaa260dacb9f3299ea5a55310e7ce3c3552538b9e380edc00124e0ed6304b48"
+  },
+  {
+    "path": "functions/explore/priceOwnership.js",
+    "sha256": "c5067ee9cf68d3eb4233c9d97cf6a02fa47d3fef2832647986c3664c9de50ca0"
+  },
+  {
+    "path": "functions/explore/priceSanity.js",
+    "sha256": "8260a055e8b37256c429f3ba5f61a2645bcb05d0036b57bbefc8501f1e3b30d1"
+  },
+  {
+    "path": "functions/explore/procedureMatch.js",
+    "sha256": "c441618a7a7506acece52bd288ed42791634907ff2ae79922c4b456c8a47cfde"
+  },
+  {
+    "path": "functions/explore/procedureRelation.js",
+    "sha256": "99768851a03e3d0c2572c41bcfbd4baefb446fba4e18fa8288bc618672e09287"
+  },
+  {
+    "path": "functions/explore/rendererClient.js",
+    "sha256": "9fd6deb1afbe952bd9dbe5aa6c9153e0bc07f1aa4af4c72b9a32ce1b452a6582"
+  },
+  {
+    "path": "functions/explore/reviewQueue.js",
+    "sha256": "5ab1259e13cdf4d10d6c7e1fa1477af1c01d78a51d99d29affa7651b03882f7c"
+  },
+  {
+    "path": "functions/explore/searchLocale.js",
+    "sha256": "132d6212b5663830ab6c4483519ed9a1239bfc0989051556edae4faacc670d68"
+  },
+  {
+    "path": "functions/explore/secrets.js",
+    "sha256": "091e5d424418a8265b93c91aef90a9ff712e458033f174f8acbd3e46bb9b0c98"
+  },
+  {
+    "path": "functions/explore/serpProvider.js",
+    "sha256": "a45dfc13f6c6cb284c341174351698737be034904596d262c5a3a1bc7e6a25e7"
+  },
+  {
+    "path": "functions/explore/siteUrlCache.js",
+    "sha256": "492bb57c47f2ee1ffdda77f1dcf8ad1f293865366e7cb4bfa6432f21a39b2115"
+  },
+  {
+    "path": "functions/explore/test/barcelonaPriceScope.test.js",
+    "sha256": "3f5c5f907f53dc9b6273f0dd09931a10c41e50da5012390bd5dceb147ebfde1d"
+  },
+  {
+    "path": "functions/explore/test/brightData.test.js",
+    "sha256": "900806b94f8cfe5ecc00ac6f4fa137caccdde4d711c8bbfd7f6a6a2cd9aec773"
+  },
+  {
+    "path": "functions/explore/test/cityDiscoveryLease.test.js",
+    "sha256": "49f305c899631df510d4732e8a16e4d6c4d6976baa78c0835bd841243bf87e3f"
+  },
+  {
+    "path": "functions/explore/test/cityDiscoveryResponse.test.js",
+    "sha256": "6b5c0cb87d5f4a2a3b9bda32659d228096d0d88a1d7db5588bdfb0ac789930a5"
+  },
+  {
+    "path": "functions/explore/test/clientDisplayContract.test.js",
+    "sha256": "ad5e3a9b679209756d2ac549ea10754fa1094d0079fabd08597a7e94c092db28"
+  },
+  {
+    "path": "functions/explore/test/clinicCandidateStore.test.js",
+    "sha256": "94cae618254ff5e9b620c6cfc813b5ce4b2ff22baefe0e864c03c6a820f55e1d"
+  },
+  {
+    "path": "functions/explore/test/curatedStore.canada.test.js",
+    "sha256": "bee4e2b9754b2cb064d4c31bd0fb1f762ccbcbb4accf4312677df5109a87a767"
+  },
+  {
+    "path": "functions/explore/test/curatedStore.dallas.test.js",
+    "sha256": "749bbb42c03f51274ddb21b0a204e30757377fd7380f0b9c10263415c96837c4"
+  },
+  {
+    "path": "functions/explore/test/curatedStore.houston.test.js",
+    "sha256": "a09711db1cf4985e13121c184850d672d238500ec8f9dee53b28cb8c103cb053"
+  },
+  {
+    "path": "functions/explore/test/curatedStore.london.test.js",
+    "sha256": "19fb50526c7d16b5ac12f149becc4731b6a66adb71ceac40fe63c2f531b8ab55"
+  },
+  {
+    "path": "functions/explore/test/curatedStore.losangeles.test.js",
+    "sha256": "f2448e5906830716d262e89487fba217a2b3b3d073677c9079de2d3cc354dfe7"
+  },
+  {
+    "path": "functions/explore/test/curatedStore.newyork.test.js",
+    "sha256": "d5798238b916cb957ff38e0a765a25581b2d115514929eea21583bad7cee9c7e"
+  },
+  {
+    "path": "functions/explore/test/curatedStore.remainingCities.test.js",
+    "sha256": "686ba47a5c924afda89842a6d7f0c8eaa807fb7cff732fb87d058161f81c1a04"
+  },
+  {
+    "path": "functions/explore/test/curatedStore.test.js",
+    "sha256": "ba5ed0dd4f5fe19d63d262ed4f56c74335bf8870fb9551336751a26fd3b43319"
+  },
+  {
+    "path": "functions/explore/test/currencyTokens.test.js",
+    "sha256": "1f2700e3d45e0c1271185fcac5be94055202b0be27a818c486a67624e68ca7e7"
+  },
+  {
+    "path": "functions/explore/test/evidenceLock.test.js",
+    "sha256": "47f9b255ff1b8138713eb8c140e0b0df273dbc6ed9b1846c9a2ad8b0468cce1a"
+  },
+  {
+    "path": "functions/explore/test/explorePipelineFixes.test.js",
+    "sha256": "f4169720f76faebcb5ba91fa522bc5f0c1c253d492d11d37269fbe894f6fb896"
+  },
+  {
+    "path": "functions/explore/test/exploreVerifyFixes.test.js",
+    "sha256": "f31585d0a3f028546c304807f158da19468cedde36e2944a964f4d98ef713b2b"
+  },
+  {
+    "path": "functions/explore/test/firecrawlDiscovery.test.js",
+    "sha256": "ceb3163b4ccaeaf216b56bd5c00a5f69e520f77e73971c614b6ba69b269b97e5"
+  },
+  {
+    "path": "functions/explore/test/freshaMarketplace.test.js",
+    "sha256": "5b8cb4106122384709f9391a910fdfb4bea1eeb2278562ae0cdf374a48345770"
+  },
+  {
+    "path": "functions/explore/test/globalDiscovery.test.js",
+    "sha256": "d70b30e7e41f84944b06fde111a0c958e4872550af25bdf8c004cfd7d48d44e7"
+  },
+  {
+    "path": "functions/explore/test/identity.test.js",
+    "sha256": "50d163ce399a9de373d730c806e9b2fa28d7bf7a8286faa79bf8b7833a39c87e"
+  },
+  {
+    "path": "functions/explore/test/menuPriceGates.test.js",
+    "sha256": "471ac8d4b06f075de31f9872f97844e9d00afb42a9dd0f65c490f4ac20630991"
+  },
+  {
+    "path": "functions/explore/test/normalizeSemantics.test.js",
+    "sha256": "b8d3bc3bb6aa35c064ba71031c562a123008323946b7637d96bf1b1debd0d6f8"
+  },
+  {
+    "path": "functions/explore/test/octoberPriceScope.test.js",
+    "sha256": "f13ce84549d2694a23165dcb798ef0cf0c752e1a5f717b95b29bcf7209c3582e"
+  },
+  {
+    "path": "functions/explore/test/ownedTariffContext.test.js",
+    "sha256": "66ca5b5404f655913d4ab4d98d52f2bbdca2c961d25b0f712d31ef22fa0b723e"
+  },
+  {
+    "path": "functions/explore/test/priceExtractor.test.js",
+    "sha256": "df75ab50e02e54bd46e493e27dbe38d1d650e0200af71f98bd98b115b37c45bd"
+  },
+  {
+    "path": "functions/explore/test/searchLocale.test.js",
+    "sha256": "015d6baff3dd0972bd6350f60dc9f4e27a5ed4a2994eac777a33948180be958f"
+  },
+  {
+    "path": "functions/explore/test/serpProvider.test.js",
+    "sha256": "6008d261511abb88169f78120cd4c2022a2d1d516f15bc1b0f2346a4807dc773"
+  },
+  {
+    "path": "functions/explore/test/worldwideGaps.test.js",
+    "sha256": "2afbe698d4fc1b03fc57b5245344d9c8e56d751324bb5a193f299fc922ea96d2"
+  },
+  {
+    "path": "functions/explore/trustRules.js",
+    "sha256": "2cb70fe7f2ba3cce3118cde5ba2f6c67ddf5485950ae5bf0bae8568510dc065f"
+  },
+  {
+    "path": "functions/explore/urlRank.js",
+    "sha256": "8fd01ee16ba00b69470ddbe832d8fa7d14deacaaf8238948308ce83fe0e81301"
+  },
+  {
+    "path": "functions/explore/verifyCandidateBatch.js",
+    "sha256": "8a4272d62ff9ef3ccaf06e90ef06dacb970350af2495aa2ad52f1c2072328180"
+  },
+  {
+    "path": "functions/explore/zyteClient.js",
+    "sha256": "91eb07bfeed00155fa6d669df35fd393e179192ea742d65ebd8ce7a17d19b74e"
+  },
+  {
+    "path": "functions/index.js",
+    "sha256": "bd189bce891607bf2da40a2bc15453f4e67eaf0f9df58b89113508986491c5db"
+  },
+  {
+    "path": "functions/package-lock.json",
+    "sha256": "e295835492bd78bda6ff76bf73142ae4c20edb453a35e22bc4abf5d8e9bb4ab8"
+  },
+  {
+    "path": "functions/package.json",
+    "sha256": "27fda85b9dc98938ec2f410bf46396cac1bf0ad53ee08690700691f7d4cca1a3"
+  },
+  {
+    "path": "functions/scripts/data/atlanta_clinics_sitewide_all_public_prices_v2_expanded_injectables.json",
+    "sha256": "fcd8afe9cfc4c02c5aecacf99d65067fe9ccf29c3cc5e42b85d97fecf4dafc36"
+  },
+  {
+    "path": "functions/scripts/data/austin_clinics_public_pricing_seed_v1.json",
+    "sha256": "31eb0f7190995a2bf616ffcd7f779109631caa06611ad9a73e50380ec7e94933"
+  },
+  {
+    "path": "functions/scripts/data/boston_clinics_public_pricing_seed_v1.json",
+    "sha256": "faeb4defe0cc1dfd4bd803e8d343f94a9630d547a253af21bbd1b7dca6ad29eb"
+  },
+  {
+    "path": "functions/scripts/data/burnaby_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "a6142dae7780174fad6b6abf2fd9edcff3a2515d2795c19eec1f8f8a39f78d02"
+  },
+  {
+    "path": "functions/scripts/data/calgary_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "052051be2fa4c690f1339a1c60837ad20204e4cde022f60bc058a7aa39e506a8"
+  },
+  {
+    "path": "functions/scripts/data/charlotte_clinics_public_pricing_seed_v1.json",
+    "sha256": "50c53da05f6adbf9e5a9898c604033dd20912c25bbfd1ec1be4d04f86ed8192c"
+  },
+  {
+    "path": "functions/scripts/data/chicago_clinics_public_pricing_seed_v1.json",
+    "sha256": "6bc31b2d2bf9f29e459dc7d17ef78cf7f1cd0be5ef53aa655d549090ffbb84e4"
+  },
+  {
+    "path": "functions/scripts/data/chisinau_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "c33000fee7986e743f16f4fe216b18ff76b854ba76e7525637d9976551ba1cd7"
+  },
+  {
+    "path": "functions/scripts/data/dallas_clinics_sitewide_all_public_prices_v1.json",
+    "sha256": "bd48cae34e3648b26e76357354697812dc8a1b653f73e560988b650b5bbc50be"
+  },
+  {
+    "path": "functions/scripts/data/denver_clinics_public_pricing_seed_v1.json",
+    "sha256": "e1c4149dd5305fea6343d892870172236b575db4cf0e0e027192922ec47947eb"
+  },
+  {
+    "path": "functions/scripts/data/edmonton_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "86f875dbf3c42bfeb927d92f7ad66b2a2f791b5c99de4562eebd449bce0901d1"
+  },
+  {
+    "path": "functions/scripts/data/halifax_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "e71548a90c4b1ccaad37d6d65b22050173814a3268b9335d3b0ce0fcdd04578e"
+  },
+  {
+    "path": "functions/scripts/data/hamilton_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "c316d0fa6558aaf82a6a481273ddd3ad4c0cbd4b6ef23fcf99a6a05bc11b4433"
+  },
+  {
+    "path": "functions/scripts/data/houston_clinics_sitewide_all_public_prices_v1.json",
+    "sha256": "9ddcc80f33fbb81c5872ee8a7446c7d0d017d1aefe3d8c9adeb27e72135527e3"
+  },
+  {
+    "path": "functions/scripts/data/kelowna_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "8f37f971eb530278eda020658dfe1fb31537cde499f39711eec5fbd0756f0c52"
+  },
+  {
+    "path": "functions/scripts/data/las_vegas_clinics_public_pricing_seed_v1.json",
+    "sha256": "470342d0dadf83321b7def7c28b41cfc6ff82459a454d0b1ac9842614f2c2874"
+  },
+  {
+    "path": "functions/scripts/data/london_clinics_sitewide_all_public_prices_v1.json",
+    "sha256": "76b16230959223aaee220fc1fa3bc4d822f159507d7449b50a6fb044c3e0b8cf"
+  },
+  {
+    "path": "functions/scripts/data/london_clinics_sitewide_all_public_prices_v2_100plus.json",
+    "sha256": "e8ccfde7a87a2c186b5eba6dcc0a1135f273f37f0c925ed1a3b7b4002ea285de"
+  },
+  {
+    "path": "functions/scripts/data/los_angeles_clinics_sitewide_all_public_prices_v2_expanded.json",
+    "sha256": "2eb7e9d25e383d53e2cb0eddeaa4888b0b693a741b66a890a6e1a17da8dc344f"
+  },
+  {
+    "path": "functions/scripts/data/markham_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "ad7734a364b88b6b6a3b6d4f3ab75ed03304fbf2f7e7c531b0574e626a355d8e"
+  },
+  {
+    "path": "functions/scripts/data/miami_clinics_sitewide_all_public_prices_v4.json",
+    "sha256": "8d5b83f5272d744ff6529f752b5ed155f6d7ec110e6c25d9c84f8b4fbf2f1e1d"
+  },
+  {
+    "path": "functions/scripts/data/mississauga_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "5d9fcf3b234218a023703ac9b106918f9e56b29371cf833bb2e7e811c07c80a5"
+  },
+  {
+    "path": "functions/scripts/data/montreal_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "904b4340a5391df1e35d72cde823a6abf61ea01dd5edc1e85f25fdf3c84a743f"
+  },
+  {
+    "path": "functions/scripts/data/nashville_clinics_public_pricing_seed_v1.json",
+    "sha256": "a4da7496584e2c0229be7f89e568a65df1e1d3911c7baed8e571c2993ac728ee"
+  },
+  {
+    "path": "functions/scripts/data/new_york_clinics_sitewide_all_public_prices_v1.json",
+    "sha256": "189cecd0851259baed50e129943c8fcafa507114ecc746f8d93c30b2dc4e3cb3"
+  },
+  {
+    "path": "functions/scripts/data/oakville_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "ab87b75ef9e67052746a249493c684a44cea1e7ac797b9b87ded09753dd1df57"
+  },
+  {
+    "path": "functions/scripts/data/orlando_clinics_sitewide_all_public_prices_v1.json",
+    "sha256": "8badd306d8d63b980b45f8fb57f9a2eb7320f3f66a59be29a4142d2737130317"
+  },
+  {
+    "path": "functions/scripts/data/ottawa_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "f0e13527c4c1b4da96fc21f8e57d5411150d52ac92bd16f823425c75c4764397"
+  },
+  {
+    "path": "functions/scripts/data/paris_clinics_sitewide_all_public_prices_v1_100plus.json",
+    "sha256": "093201726eee455006795f99f2a0cd191301666c16bfaf9acdca765e64fec22d"
+  },
+  {
+    "path": "functions/scripts/data/phoenix_clinics_public_pricing_seed_v1.json",
+    "sha256": "f2bce32aad63fe95b703833cee5c70d6a76f728da8d8cf033932cc733b7ae528"
+  },
+  {
+    "path": "functions/scripts/data/quebec_city_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "6f83c01ec498415c1c6fbde00286898ef7eb4a9fb08908a35e0f9382c85a87f0"
+  },
+  {
+    "path": "functions/scripts/data/richmond_hill_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "02521c0cb7854788436034d4d36b09b352dc162632557b97c5f55abc389e4151"
+  },
+  {
+    "path": "functions/scripts/data/san_diego_clinics_sitewide_all_public_prices_v1.json",
+    "sha256": "6f5e40b0249e24ae32a4aa44f8ad63b494dee47728850c9fe3745b0d6586b09b"
+  },
+  {
+    "path": "functions/scripts/data/saskatoon_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "5793f15f0b91236da141d8b0fe950739e7257cfe0899b6e1d58ec00052a94e22"
+  },
+  {
+    "path": "functions/scripts/data/surrey_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "a65c7c627565d8c2504ba98915bdc16e08d11e36cec6334d1af6778d45790ca8"
+  },
+  {
+    "path": "functions/scripts/data/tampa_clinics_sitewide_all_public_prices_v1.json",
+    "sha256": "9a3d50503d51bc0b466456ccb8bd1c96bc2ab9fbbcb901f8c0ef8f4ee9f9a22a"
+  },
+  {
+    "path": "functions/scripts/data/toronto_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "1b49cde2c81d322f5bc354d15972040b077ebfee6ee673525ce0c8e64e0740af"
+  },
+  {
+    "path": "functions/scripts/data/vancouver_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "99c3c5e0622c9ae5bb61951c5090bd6ceffb4ab4cff91dac8c790d5c6b8bb16e"
+  },
+  {
+    "path": "functions/scripts/data/vaughan_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "5196a27894e69e5d8dfbaa0f549bdc644db600191cc67c81d3d68c48530a6393"
+  },
+  {
+    "path": "functions/scripts/data/victoria_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "be5a31dd192f392a09806e933d82fd033a7003c15e19f6198108022a96fc26a5"
+  },
+  {
+    "path": "functions/scripts/data/washington_dc_clinics_public_pricing_seed_v1.json",
+    "sha256": "53ca21f97892788d6bfe2c82574b7500afe499f40f39467ff6faf1a2f6d55e90"
+  },
+  {
+    "path": "functions/scripts/data/winnipeg_aesthetic_clinics_public_prices_v1.json",
+    "sha256": "511e3064fb33bc65e75ea641603e2cc42eef8fd8b8a631a23d8d6cfa2a1c9cca"
+  },
+  {
+    "path": "functions/scripts/importMiamiCuratedClinics.js",
+    "sha256": "2db2be6a471d75fd72bd51643f2764a99e8f4334ee02fd0b97d83d6cb5d912ff"
+  },
+  {
+    "path": "lib/Archive.zip",
+    "sha256": "91914c5a2345bf2d4144bae6cdfcbd257b5bc5b6e3653e98c66233c83216d8cf"
+  },
+  {
+    "path": "lib/data/checkpoint.dart",
+    "sha256": "137518394702843f3bc84c3dea90e9a01247c5f6c28b4fe49c0cc90d21e25939"
+  },
+  {
+    "path": "lib/data/community_post.dart",
+    "sha256": "c5769f8f333f31841843de354ef564c3f84b5f2f4081f0c573b0e51a0ea5533e"
+  },
+  {
+    "path": "lib/data/procedure.dart",
+    "sha256": "75c4dc8baa947f598a4089a1757d66d3af85900a4a21ffe23cab2fa50ad62cd8"
+  },
+  {
+    "path": "lib/data/procedure_repository.dart",
+    "sha256": "25701c002c163cedaab91d130169c6c3715fa9f695cbeaa57d3d54331ac06702"
+  },
+  {
+    "path": "lib/data/user_doctor.dart",
+    "sha256": "66180cb66ce7251f2c43e1c15ac344ed33ba0782b1dcdf39d5d7aabf0ca828dc"
+  },
+  {
+    "path": "lib/firebase_options.dart",
+    "sha256": "ebd6413aa20efaee0d54654ac0cca0b772b78cdc2212a9cf9d98979952b6a9b6"
+  },
+  {
+    "path": "lib/main.dart",
+    "sha256": "de7fab585af6e0c43a1360130d124ea92048e03ccf382926f2606e7e3f9b7a82"
+  },
+  {
+    "path": "lib/services/app_navigator.dart",
+    "sha256": "cb300477259145c05c1fb26686f73b2ca1ff428d6ee4d160681814bb69a0e9f4"
+  },
+  {
+    "path": "lib/services/auth_service.dart",
+    "sha256": "9a36d9529cd1d077f2a1235a59c36585ff86a4d9e28c2a27417bc9ef90dfcaa2"
+  },
+  {
+    "path": "lib/services/before_after_analysis_service.dart",
+    "sha256": "420ca28d0fe8d8618fb8b741c759cda4af633f473789afc9b3fc62b914abc014"
+  },
+  {
+    "path": "lib/services/calendar_sync.dart",
+    "sha256": "cdcd51a8f2fd978394cd2874e2b3075e83315ee68afed4399a15352e5c8e6083"
+  },
+  {
+    "path": "lib/services/camera_bootstrap.dart",
+    "sha256": "0be1d23ba0d10522c7642ac6b2b2b2aaa22ca57f3a41459a9a8c8fc701acad62"
+  },
+  {
+    "path": "lib/services/capture_sharpness.dart",
+    "sha256": "0affae7ddc972b63e0647542a11932b67ca9c063f83dec336fe730585db55c3f"
+  },
+  {
+    "path": "lib/services/clinic_catalog_store.dart",
+    "sha256": "faea2ec397c0907dcdc717c9a478d35bde86e9732204291c8bf77e03ef305dc0"
+  },
+  {
+    "path": "lib/services/clinic_page_fetcher.dart",
+    "sha256": "2c33b616db9cb69a226c3e1d3525c6ad27e0515acede8891869ccccba99df54c"
+  },
+  {
+    "path": "lib/services/explore_backend_service.dart",
+    "sha256": "6b0f929bfcba057a9c2529dda3f9b6f67986e4a0a24e302a133eca6cf153270d"
+  },
+  {
+    "path": "lib/services/explore_city_identity.dart",
+    "sha256": "6c40afaa7699cfeb443ae46cec9bccc409f58f4466a3c9d48c9e7c7b967f7d7b"
+  },
+  {
+    "path": "lib/services/explore_clinic_identity.dart",
+    "sha256": "a854f6f8e1d9883baa4fe94ea7393d89fa86d8bf884df91c0b0e5abc4774d71e"
+  },
+  {
+    "path": "lib/services/explore_cold_start_session.dart",
+    "sha256": "4d802a6f327d139b7b60da4b08bfb3c0d3a20bdaa11d1333588282a58c6cafff"
+  },
+  {
+    "path": "lib/services/explore_compare_mix.dart",
+    "sha256": "dfc07925c2f67a9472c326eb674bac0d7fb8c097e817f9e34dd0f2ae1b9c1e61"
+  },
+  {
+    "path": "lib/services/explore_comparison_session.dart",
+    "sha256": "2c0df60e937c07ec46f0904f2c3ca54ad09d5133ba18bb6db3db24108f039e19"
+  },
+  {
+    "path": "lib/services/explore_curated_price_store.dart",
+    "sha256": "f7a6437d45600a6e701c51b0582dc12516d837afb1ebe50086060e6a9ccedbfb"
+  },
+  {
+    "path": "lib/services/explore_currency_tokens.dart",
+    "sha256": "e3e5ff014166480712bb4bf6b2a98325759d94141bdc68a26abe1830ad4552f1"
+  },
+  {
+    "path": "lib/services/explore_discovery_state_store.dart",
+    "sha256": "be7f7bae8968217fa25bd60302919d892167794efa5e5b8b341c928b77c1d060"
+  },
+  {
+    "path": "lib/services/explore_discovery_transport.dart",
+    "sha256": "526768f0ea9fc26fd74f192df7b244b5b05420886baac4f1846f2a7c34fe3831"
+  },
+  {
+    "path": "lib/services/explore_firecrawl_client.dart",
+    "sha256": "cf19a762c85cfeedb9e356389a59e5bebce47bf8f50a775ff0523e1b50aa1b4d"
+  },
+  {
+    "path": "lib/services/explore_google_price_store.dart",
+    "sha256": "85bf590056f48be73b31f96279ab8739136c938cea92ebe73c16ce164dc41073"
+  },
+  {
+    "path": "lib/services/explore_html_price_extractor.dart",
+    "sha256": "7a4d0e8b5a8500d101d25f4580ee3c7e66ff8f1bc0190cbeb95c1eb38c07ba50"
+  },
+  {
+    "path": "lib/services/explore_marketplace_discovery.dart",
+    "sha256": "db205796c5ea7b865c24c201ed7385f9436200ac310d8aba0698953f220dd9b8"
+  },
+  {
+    "path": "lib/services/explore_pipeline_config.dart",
+    "sha256": "70286ab860939a5159f48bf9433c869aff55f646be0dc6ad9b61d93451219be0"
+  },
+  {
+    "path": "lib/services/explore_place_cache_store.dart",
+    "sha256": "9d4a5017a30bb2dc17651fe1aca63ddb17db1a934eadb76aa3b877b2e516b109"
+  },
+  {
+    "path": "lib/services/explore_price_binding.dart",
+    "sha256": "ac60ea31783c1a805daf827e183fbbb5475fdc72465666c08662de287f591e64"
+  },
+  {
+    "path": "lib/services/explore_price_discovery_tool.dart",
+    "sha256": "e6a9ccb2657bc5aeb82d6ad24fc2e926ea0bb558f34b8e04e9c9f02ac2fbec47"
+  },
+  {
+    "path": "lib/services/explore_price_evidence.dart",
+    "sha256": "04fe605e25de9a4315d686d26df0d42e57ea19a70a709388e744fe0fa3212251"
+  },
+  {
+    "path": "lib/services/explore_price_evidence_lock.dart",
+    "sha256": "1454fab1667361f5c9677a2397222481331b6460a9ad17881df397a783361c76"
+  },
+  {
+    "path": "lib/services/explore_price_ownership.dart",
+    "sha256": "de2ff2bec041cfe8e305c503961f6bd802687db6cbe57a019326f2476fbef8fc"
+  },
+  {
+    "path": "lib/services/explore_price_sanity.dart",
+    "sha256": "3e14b01aa1b79a4289b98b1315d1318adc82204f3b8e2a03b89461fb361a12bf"
+  },
+  {
+    "path": "lib/services/explore_price_verification.dart",
+    "sha256": "2bf02ba5766bb9f0888355b4715e5ccb76b3def76dc055806a40aa42bd764536"
+  },
+  {
+    "path": "lib/services/explore_procedure_family.dart",
+    "sha256": "a6ed8c6609c0441a083cdcf4d8241e74382de48728f558abae9093b6e9c5bf10"
+  },
+  {
+    "path": "lib/services/explore_procedure_interests.dart",
+    "sha256": "8f96571b988545818ef47f19f02a8d038897588db5b7d7019a2664a0128248a2"
+  },
+  {
+    "path": "lib/services/explore_procedure_ontology.dart",
+    "sha256": "6dcc0c32b7bcafe796adfe6a1d8906ea84b506c2d69665f686d9e9cb1a851d34"
+  },
+  {
+    "path": "lib/services/explore_procedure_relation.dart",
+    "sha256": "98e8ec5a3921f8864c932c831a82bf992f6f041732305cf2f4e6ecdf00fb2e90"
+  },
+  {
+    "path": "lib/services/explore_procedure_translation.dart",
+    "sha256": "d30bcfe728f2f6b178ca170bcd554745d0c8e3f7233fd5ef30b5da1ac8570873"
+  },
+  {
+    "path": "lib/services/explore_provider_interfaces.dart",
+    "sha256": "baa85c0b15ce8d657cbb63c52b54d5351aae7ff2baac66dc3cfe88d45a7c5ffd"
+  },
+  {
+    "path": "lib/services/explore_regex_cache.dart",
+    "sha256": "4199cb4370e5ddec547dcbc03c9fba67825c1210736a3b9a55515ed8a6d05887"
+  },
+  {
+    "path": "lib/services/explore_renderer_client.dart",
+    "sha256": "a19019e7a3caae862880d298ed8a2c0088b768d772ec207afcb06b39db882644"
+  },
+  {
+    "path": "lib/services/explore_request_coordinator.dart",
+    "sha256": "2184b0cfb4e545dde431293b7f6527c836fc50ec4e95c28a69cc1f0e2754874e"
+  },
+  {
+    "path": "lib/services/explore_search_locale.dart",
+    "sha256": "1ce04ff783fde4f435b471e16f401c6f71a5441eeab0da8adf9854b76b0fbd68"
+  },
+  {
+    "path": "lib/services/explore_seed_catalog.dart",
+    "sha256": "42bbc766459a7a893c963fbf3777af39f98ddd62d6a2e6848df130fa069ae976"
+  },
+  {
+    "path": "lib/services/explore_serp_provider.dart",
+    "sha256": "b54686faf64cd77bde3286940e86a5edcac62100d87c0a19ae1d48f1603adc03"
+  },
+  {
+    "path": "lib/services/explore_site_url_cache_store.dart",
+    "sha256": "5bd5d41340f4798901ad36bda7e441dd06544a594baa3b16c1abee20d58e1c64"
+  },
+  {
+    "path": "lib/services/explore_url_discovery.dart",
+    "sha256": "f421311cecdaf93e32325228dfc727f140cae8b4252529285b285a2f2921ee14"
+  },
+  {
+    "path": "lib/services/explore_zyte_client.dart",
+    "sha256": "608819c9edaa58fe0983047bbfd789c707d8b31800cf42d1e8b4ae55003c723d"
+  },
+  {
+    "path": "lib/services/face_landmark_service.dart",
+    "sha256": "37c6bacbf6c93fbe5d2c6ed2e30908d9fffb68610ae04d93c286fe41b002ba17"
+  },
+  {
+    "path": "lib/services/face_scan_quality.dart",
+    "sha256": "6e20ef0c30d7b7e0dea66c28112bd0e6efb5c0fa7afb11e2fcfb2a2a77b4f703"
+  },
+  {
+    "path": "lib/services/filter_currency.dart",
+    "sha256": "6db7261527b1384fe910dcb01dc0f847fa0d169d603465ade28ae9912fc2e8be"
+  },
+  {
+    "path": "lib/services/glow_analysis_codec.dart",
+    "sha256": "584b8af5a3c42dfcc080f6eda1f5353e6b77e2e7f01da094151c12ce9a730f93"
+  },
+  {
+    "path": "lib/services/glow_scan_cropper.dart",
+    "sha256": "077a5017d873c00da8ef9845533c3ad0b9922567ef29d5b0b06f5287eb075e5d"
+  },
+  {
+    "path": "lib/services/glow_up/clinic_prompt_builder.dart",
+    "sha256": "b7150161c8e2d942ca809db4de216b7a3cf9e6e89f4175c7fc1f4862b6ebbd66"
+  },
+  {
+    "path": "lib/services/glow_up_edit_composite.dart",
+    "sha256": "bd77221fa0128db001f6ce82c2930f9e47a1f65da41c6e6cd1686fa39163ce48"
+  },
+  {
+    "path": "lib/services/glow_up_edit_mask.dart",
+    "sha256": "388af2f452afe1c2ee105681dabe53b13ed923e392819a2cebd71f040dbbe861"
+  },
+  {
+    "path": "lib/services/glow_up_face_analysis_service.dart",
+    "sha256": "52850de9800f65f5f8f5e682ba1846706c3e8a326fdfd55bd843308b12f2da0b"
+  },
+  {
+    "path": "lib/services/glow_up_history_store.dart",
+    "sha256": "ca34d071460d97ee9e426a3a8340a4b7c8300be4c7d9be0a009202cc5d181de0"
+  },
+  {
+    "path": "lib/services/glow_up_in_memory_post_process.dart",
+    "sha256": "6d14bf8a6ccdc0cf6ed1d5aa7777603614cb22a9d69e6a7ba76a08af70b5b93f"
+  },
+  {
+    "path": "lib/services/glow_up_job.dart",
+    "sha256": "ac613b5a6de0b61436aac3743b58113062b56f0747b376742b7a6ab6c597aa48"
+  },
+  {
+    "path": "lib/services/glow_up_job_persistence.dart",
+    "sha256": "884d60a7046eb1a8a5509b548cc55378e3fa39614257e7efac01d15f1ca99be0"
+  },
+  {
+    "path": "lib/services/glow_up_pipeline.dart",
+    "sha256": "03b3d964427d2b36ab92e061392ffdec62366734c38892ae6507fe9162cbd643"
+  },
+  {
+    "path": "lib/services/glow_up_progress_notification.dart",
+    "sha256": "6cc5f5fb5c5d623237c1ee9f8b15b2c9daf12592e8e67e0d31c4f751ef35f0f2"
+  },
+  {
+    "path": "lib/services/google_places_service.dart",
+    "sha256": "d89e9618283404e3c4e9aa78ab19b5766f59be05cda1a31d202cdf4114db300f"
+  },
+  {
+    "path": "lib/services/local_glow_retouch.dart",
+    "sha256": "f3aead4f1e494f2c6c28e790fcb45ab6b26de4d13fb51aaa99f7fc076c433eee"
+  },
+  {
+    "path": "lib/services/meitu_glow_up_edit_service.dart",
+    "sha256": "fa7456c751d938f124d981e64d02c7aea34baad29dcb5cf2b907f41c9790d72d"
+  },
+  {
+    "path": "lib/services/meitu_openapi_client.dart",
+    "sha256": "2b6002078053d7413b999db7aa29186349071a93f49e7f6d54ec879fba3ae74a"
+  },
+  {
+    "path": "lib/services/meitu_openapi_signer.dart",
+    "sha256": "f0121f65e4c22701668374705175b6b4c240f495bdab60bbcfc1c43bafe41fbb"
+  },
+  {
+    "path": "lib/services/mlkit_face_scan_service.dart",
+    "sha256": "4d796fe8bb03191f3ebdab1babdc128ef0db06ffe2fe07bee148d123aebc5dcd"
+  },
+  {
+    "path": "lib/services/notification_navigation.dart",
+    "sha256": "2d35b16d09cb1551dbc499db40e8283ee9055d6a012abf987cfc19d0a1f32dac"
+  },
+  {
+    "path": "lib/services/notification_service.dart",
+    "sha256": "f4307b264ac608027575c2934e6c65a94a7d8d221575a5c70991d8f1264d2955"
+  },
+  {
+    "path": "lib/services/notifications_store.dart",
+    "sha256": "9f831ffb8b352810a072eac24182619faf7e37757e8df157ec1b21b54904912f"
+  },
+  {
+    "path": "lib/services/openai_image_edit_service.dart",
+    "sha256": "8e0daa469e7e2febcde63ba2273e2c158194500b335cfb68a02ce6b6027f42ee"
+  },
+  {
+    "path": "lib/services/openai_service.dart",
+    "sha256": "ef012fca05a7fb14d2c47e4b561876de8638a9e7e8e10dfe9c429ee7637c7a44"
+  },
+  {
+    "path": "lib/services/photo_processor.dart",
+    "sha256": "46667ae3844a1ac63cf12b5dbcd1cca74b21ea64eefc6c1dc2a0c739afc2eca4"
+  },
+  {
+    "path": "lib/services/procedure_ba_align.dart",
+    "sha256": "7253d3f8b4b4335dd69d8ac9c4d27192cec688d62a9a88d3eb5dbcdd87c0ee14"
+  },
+  {
+    "path": "lib/services/progress_share_link_handler.dart",
+    "sha256": "0b69619bf6d0bbad9368c9065e957b6c1b1fd64f6e478c868377360bd99fad9a"
+  },
+  {
+    "path": "lib/services/progress_share_service.dart",
+    "sha256": "3a9155a50088514a4f3c48f830a847e8f6781ca01428cc3f73f06e7a987ebf56"
+  },
+  {
+    "path": "lib/services/replicate_glow_up_edit_service.dart",
+    "sha256": "e2029cdac2adadb6a1236914f8d83fd30b2d317780deacdb5be0b6698ec6b05f"
+  },
+  {
+    "path": "lib/services/replicate_service.dart",
+    "sha256": "f3809081448a296ed20317094e7e41299f159b7d8416d917e266d88812e1acb0"
+  },
+  {
+    "path": "lib/services/sanitize_utf16.dart",
+    "sha256": "d9f226d62c1f24b36d52b67d0499c2af782dbce3fccf35f61b6b888575827829"
+  },
+  {
+    "path": "lib/services/saved_bookmarks_store.dart",
+    "sha256": "b7490f813e1805eee8f0b37902fa7b9b9b0e49619bdc799546060d4af4886f6a"
+  },
+  {
+    "path": "lib/services/saved_clinics_store.dart",
+    "sha256": "f34dba25f499c63986928d35b8fe808b032b7423aab69dcf39638b7392ad9b3e"
+  },
+  {
+    "path": "lib/services/saved_glow_ups_store.dart",
+    "sha256": "2c3f999e24a29f9059bc7b5eb0e3ad977618f6e1740ab05c6a19390f02aad573"
+  },
+  {
+    "path": "lib/services/saved_procedures_store.dart",
+    "sha256": "5ea3eda4f7df963b28f355f65d6c57cf4cdb45f8f205ebfcb9efd50f39a968c9"
+  },
+  {
+    "path": "lib/services/session_prefs.dart",
+    "sha256": "879594545fbc44db559d12eac280c610d694c078b382b272dd73bee18933966c"
+  },
+  {
+    "path": "lib/services/transformation_history_store.dart",
+    "sha256": "d11c5a2b8b32b3a2c92ec6410ccc82a464880ae393c04ef7a0636618b9277525"
+  },
+  {
+    "path": "lib/services/worldwide_curated_clinics.dart",
+    "sha256": "234b9474553a29c7653dfc45704ac76eb6d4216bbfff09a4b354dc59324bb1fb"
+  },
+  {
+    "path": "lib/ui/add_checkpoint_screen.dart",
+    "sha256": "89d1e86bbf03ac17b716b45bd09669f7f09500a28b66387d3f53f886cebf4dc1"
+  },
+  {
+    "path": "lib/ui/add_reminder_screen.dart",
+    "sha256": "8c1c7d7bc8693484e2988f356c7f0a39c4ee3f158228bb2ab32ba0bef63674de"
+  },
+  {
+    "path": "lib/ui/app_shell.dart",
+    "sha256": "d31d0e2cae2bfac062e5fd228522e7dd3ef8547e835b7169c02746c364fb5257"
+  },
+  {
+    "path": "lib/ui/before_after_comparison_screen.dart",
+    "sha256": "034db9c5e3d9183b5fba29cc3549ec5abb276e1a2c1a80ead09f7b281fd2a808"
+  },
+  {
+    "path": "lib/ui/book_contact_sheet.dart",
+    "sha256": "8dd03c0c2dd5c77970aff0602ccbe34d3a854ca562df7ea3174937d2118227c7"
+  },
+  {
+    "path": "lib/ui/clinic_compare_price_display.dart",
+    "sha256": "81a30b46505b62ebc47ac3b772371d333c9c3fc2c5bedd0e2394f297c1e01c69"
+  },
+  {
+    "path": "lib/ui/clinic_detail_screen.dart",
+    "sha256": "dc629effc03791963bacebc735215170b34d72077b19366d68f929ecf1d8eefa"
+  },
+  {
+    "path": "lib/ui/clinic_profile_screen.dart",
+    "sha256": "be8034aab0fec718ea2739df3607545241dcfbb19e9d8b6a6d63ef65586f7a3e"
+  },
+  {
+    "path": "lib/ui/clinics_for_procedure_screen.dart",
+    "sha256": "857c54a4ee50c85c39882cb50030ca4ce8986da874f80a9ad4b8ce65b8b81025"
+  },
+  {
+    "path": "lib/ui/community_glow_up_viewer_screen.dart",
+    "sha256": "a1b2e4aca9d3c5db325953a87b073008b5d7e3fe75933432317702ac09c1ad02"
+  },
+  {
+    "path": "lib/ui/delete_checkpoint_sheet.dart",
+    "sha256": "8a8c70696671ebd18cd7179138d8bf9c636c9edf4479527a74c1278d9beea179"
+  },
+  {
+    "path": "lib/ui/delete_procedure_sheet.dart",
+    "sha256": "4ddac7a02c61b5a21a8a25c5521ef8c31cee898fd0fb2e3171a1dc7f5e56bb79"
+  },
+  {
+    "path": "lib/ui/doctor_detail_screen.dart",
+    "sha256": "0f748dd2032c775dfa90d85dbba39cb8bd0c8fc881785d76d9ad9a3d9e2462b2"
+  },
+  {
+    "path": "lib/ui/expanded_map_screen.dart",
+    "sha256": "42ac0e9ffdaafede9fffed4aa331c74a0bf79f1462874e012401dac24b1325e6"
+  },
+  {
+    "path": "lib/ui/explore_procedure_interests_screen.dart",
+    "sha256": "8e0882dd96afa18f85b6b9b870114ba03bb2345497befe81278380b1e14198dc"
+  },
+  {
+    "path": "lib/ui/filter_compare_screen.dart",
+    "sha256": "0b800ca70c1c6693fd975c29d7583e1abb7e45e90e86da92a5a0b3e95f9a738f"
+  },
+  {
+    "path": "lib/ui/formatters.dart",
+    "sha256": "bc286928c5d97dfd886c2ed1262e63e007199832a34dbc14bcbaad5ef9558944"
+  },
+  {
+    "path": "lib/ui/glow_map_style.dart",
+    "sha256": "6267e06694c8bdc081d985d6ef32a4ec32d8bb04461c4aa065f70df8440f5439"
+  },
+  {
+    "path": "lib/ui/glow_up_before_confirm_screen.dart",
+    "sha256": "24051f5d383df5597ce6d9b07b69e402b6c38431f289400591de25280590100e"
+  },
+  {
+    "path": "lib/ui/glow_up_face_scan_screen.dart",
+    "sha256": "1e948c1a133a9f589b049b09b154873f47813fa0384b01aa56fe72cdd0d1d2d8"
+  },
+  {
+    "path": "lib/ui/glow_up_history_screen.dart",
+    "sha256": "90f2e9b1135ece0346655795bdc8bb6f9e1de8e868f2d49265a4b8d84a048a31"
+  },
+  {
+    "path": "lib/ui/glow_up_loading_screen.dart",
+    "sha256": "2a50555ac2238e95d9dd6fafe2b7fff5a9b61c2762c43191ba75b3a9155e1556"
+  },
+  {
+    "path": "lib/ui/glow_up_photo_handoff.dart",
+    "sha256": "2631bdb0ba89a6a3d0af8668c1cd9d13acd3d0df6bd9004b5715682d4686a01f"
+  },
+  {
+    "path": "lib/ui/glow_up_photo_source_screen.dart",
+    "sha256": "7bd755c84bba5cb4a9a3f85c16f82312d0ad5e6948a7ce3f7d3509c30c96dfb5"
+  },
+  {
+    "path": "lib/ui/glow_up_result_screen.dart",
+    "sha256": "96034054e109660983c543ef6c8d777aba392c475d6474ad50ed7367ddd8bbd0"
+  },
+  {
+    "path": "lib/ui/glow_up_results_community_screen.dart",
+    "sha256": "5946f5ccd8a1cd06650124710d826b0f88ed2e906977b210fdb558190e7851b2"
+  },
+  {
+    "path": "lib/ui/home_screen.dart",
+    "sha256": "bc68c88c75ed9ec2ac286ab259be315137b64a707543a8a473c4f200c33037db"
+  },
+  {
+    "path": "lib/ui/location_change_sheet.dart",
+    "sha256": "ca4c0b3a89f4e9b3f0b95795f973595fb8fa100e07661caa3324df298d5a6c6c"
+  },
+  {
+    "path": "lib/ui/login_screen.dart",
+    "sha256": "0d77fbd5e4ac9a228e35e13ef878c60d139aec6f0163208ae25d16329f293113"
+  },
+  {
+    "path": "lib/ui/manage_subscription_screen.dart",
+    "sha256": "69ba93ccf29d5434461bdc74b54d7753cc9988c1710805f0d52cb12d71732482"
+  },
+  {
+    "path": "lib/ui/map_price_pin_bitmap.dart",
+    "sha256": "9157e7d9b44a2ef6e02da12ee01b6fd9c4431281cb41a8b367ccbfe0b339485d"
+  },
+  {
+    "path": "lib/ui/notifications_screen.dart",
+    "sha256": "bc2874479c82095b6399827139ad2bfd13a49488f0a33e7967587f45fe0fb25a"
+  },
+  {
+    "path": "lib/ui/photo_frame_adjust_screen.dart",
+    "sha256": "9a30c63b302d6962d4b8970a933a269408eeaf65deb685468ed613a75616bc0c"
+  },
+  {
+    "path": "lib/ui/photo_storage.dart",
+    "sha256": "9580eb40093d8fbe8ed21b463d1930aa55cc95490efa76ee32a7c716decabc2d"
+  },
+  {
+    "path": "lib/ui/post_auth_stamp_splash.dart",
+    "sha256": "30249f6d3fae7dc2ca946f52be307a20b2aabf4640fb7686c442e784bd4730e8"
+  },
+  {
+    "path": "lib/ui/procedure_ba_capture_screen.dart",
+    "sha256": "cc1c2dac14f3ab289f082ae33110910b079d3011e078f4c8294602f5cb807e2b"
+  },
+  {
+    "path": "lib/ui/procedure_detail_screen.dart",
+    "sha256": "c8c21d123a64a6b1a478fcfa99508afc17b414bafa97944849a2915f362fb79c"
+  },
+  {
+    "path": "lib/ui/procedure_form_screen.dart",
+    "sha256": "afdb7fd83cd2b6a08290a0e150338783fe705ab1371c9a4c186ff183568b4fd7"
+  },
+  {
+    "path": "lib/ui/procedure_icon_resolver.dart",
+    "sha256": "803b2a511ab23c3f23f42e611842b42472e1ec68129e06bbc1e9f582364f5331"
+  },
+  {
+    "path": "lib/ui/procedure_selection_theme.dart",
+    "sha256": "77c55df4fd9d327020a410817e9dddefc8448b0e010fee26fe7ed3fe7c9ed761"
+  },
+  {
+    "path": "lib/ui/profile_screen.dart",
+    "sha256": "542fba0b71b744bc5ec917a7d813f498116e729f68536fa11a86f2a8cd4ead6b"
+  },
+  {
+    "path": "lib/ui/reminders_screen.dart",
+    "sha256": "6c54ca812a19224600abb3b10ad77f4f27d7650d6cefb9056168cb73cf841da0"
+  },
+  {
+    "path": "lib/ui/restore_subscription_screen.dart",
+    "sha256": "d6a49a731b9fba76daf20beb2c70fdc676429e3c2e10f14865df99e34b7118d7"
+  },
+  {
+    "path": "lib/ui/saved_compare_screen.dart",
+    "sha256": "58d354894ce7adca480c4837744ce3e39550dc7b8af040e99654249cbd019d70"
+  },
+  {
+    "path": "lib/ui/saved_glow_ups_screen.dart",
+    "sha256": "f99e31bb3c7896ffe360abfecd3fcf551bbea7d89fa33a24928374959f1351df"
+  },
+  {
+    "path": "lib/ui/saved_procedures_screen.dart",
+    "sha256": "24b5441afa92ee2ab49312efd95c4559034da043bbea12a8e5d907c73631eb0d"
+  },
+  {
+    "path": "lib/ui/search_compare_screen.dart",
+    "sha256": "753cc5eda337e9649aebf6ebcb899a83f5d7898caad40cbe49308b8e90b800fb"
+  },
+  {
+    "path": "lib/ui/signup_screen.dart",
+    "sha256": "6840daa31521ec06e24e351e4c7389f58cca2e0622d856beab77c79c2558c8d6"
+  },
+  {
+    "path": "lib/ui/soft_auth_swap_route.dart",
+    "sha256": "b6ad45f7ff7efb1501a752777144ad311070ff42bbf3e6de01e8319fcba881fe"
+  },
+  {
+    "path": "lib/ui/splash_screen.dart",
+    "sha256": "cde5e48ed424adb40b45ec60d0f51dae9c3fe961c2f17fedf75533a9d23fdedb"
+  },
+  {
+    "path": "lib/ui/subscription_screen.dart",
+    "sha256": "9f6566e893921145006d012798be70ce41f5940f7fa9563e6528a53e364525aa"
+  },
+  {
+    "path": "lib/ui/subscription_success_screen.dart",
+    "sha256": "68e103666769b61c4c23d366a364ad8fdfea5912754ee50cdf1a5d82ecf9d53f"
+  },
+  {
+    "path": "lib/ui/timeline_filter_sheet.dart",
+    "sha256": "69e274140dc08e977dd6b22c7458f08b496899a86e6c31cdb4e3537f900e5c73"
+  },
+  {
+    "path": "lib/ui/timeline_screen.dart",
+    "sha256": "ea0dcc69fb976035c29606589516f851c4df8a724092f9de16d5bae9210385b2"
+  },
+  {
+    "path": "lib/ui/timeline_theme.dart",
+    "sha256": "715f0ed0fea18af0756b8624248fde945db925828b06e5948e28bfe1461ba5b1"
+  },
+  {
+    "path": "lib/ui/welcome_screen.dart",
+    "sha256": "7925f95ebb6842c79251bb041cfea3d05c62b0545021bfdf39ec17ac42c72bd7"
+  },
+  {
+    "path": "lib/ui/welcome_screen2.dart",
+    "sha256": "7885ba8cc558484745d66aa6f5fd8e20c71b3b86ef7f0cca3f58e893783ccd44"
+  },
+  {
+    "path": "lib/ui/widgets/airdrop_light_field.dart",
+    "sha256": "d80fe109ecdc6a46aeb094b982f6a0883d566335da9264016b9d2a5ae1d38b59"
+  },
+  {
+    "path": "lib/ui/widgets/app_background.dart",
+    "sha256": "0ca87bb6fd51239e9988868d4a52473316257749c96928441ff764fec2ece671"
+  },
+  {
+    "path": "lib/ui/widgets/apple_empty_procedures.dart",
+    "sha256": "fab6edecbb40467fe0f08bc59fb5d9da27959f3c6e9b1ad1255e7efc87f1df30"
+  },
+  {
+    "path": "lib/ui/widgets/black_date_picker_sheet.dart",
+    "sha256": "07ab550ea5fc825895fe8be9f5c32bcab2357c65b119e0188444df9c52f8e6eb"
+  },
+  {
+    "path": "lib/ui/widgets/black_photo_source_sheet.dart",
+    "sha256": "c6029ddb0aefc4e46f0bf86065b6c2f5e6cedea32d7ea3eaa96c90daae3cec20"
+  },
+  {
+    "path": "lib/ui/widgets/black_profile_photo_sheet.dart",
+    "sha256": "52111c8ea3caa73ff739f5c4e6d679babb92107d11f1801547caf50cad624625"
+  },
+  {
+    "path": "lib/ui/widgets/bottom_nav.dart",
+    "sha256": "edc35d3420fd93c48dc6cc42bf88059b9b7545d69391c6e7e9ae9a7074832f1b"
+  },
+  {
+    "path": "lib/ui/widgets/empty_state.dart",
+    "sha256": "1532409a5bbbd225aee089c9831d817d984940b78b2894bb765a3046f149e986"
+  },
+  {
+    "path": "lib/ui/widgets/glass_card.dart",
+    "sha256": "992440b199f8c18cdb9eee0ef45f36dde4eb47468651bfc2822af553a6830876"
+  },
+  {
+    "path": "lib/ui/widgets/glow_up_ready_announcement.dart",
+    "sha256": "19a27f9c8abe23ddefba66c72e5006ec9c75cfd15de1a3127654e6194bd1f0f9"
+  },
+  {
+    "path": "lib/ui/widgets/labeled_text.dart",
+    "sha256": "0cc705363d49e262428504834d80387ae536af0f72e979e02690550f81024b0e"
+  },
+  {
+    "path": "lib/ui/widgets/notification_permission_sheet.dart",
+    "sha256": "6bdf6b8f3642c4cc0651dd870203ff8dbd0c55816d716e311095fc079e975290"
+  },
+  {
+    "path": "lib/ui/widgets/procedure_selection_widgets.dart",
+    "sha256": "43ed055f08cde2a53589c1a81c418ab9cd74a3de297945c3096ca10842a3d4c8"
+  },
+  {
+    "path": "lib/ui/widgets/step1_background.dart",
+    "sha256": "436a9ae4f8b8d342e89eea3c5c33bded53c84c430cf2c56561e3f4f3def77546"
+  },
+  {
+    "path": "lib/ui/widgets/step2_warm_background.dart",
+    "sha256": "a76a7993ba2449d25147e47bc59cc09dc437fb5367bd9fcc893354605495d565"
+  },
+  {
+    "path": "lib/ui/widgets/step2_wave_background.dart",
+    "sha256": "0c1170c8ee240fe412d96a96fbb559682bf8abd3d0e705df07925a1374931139"
+  },
+  {
+    "path": "lib/ui/widgets/step3_background.dart",
+    "sha256": "f2aa90f4ebd2219b8b6ecce0374a6f61fac66e0a7de94de6fcfac77b0bda1f15"
+  },
+  {
+    "path": "lib/ui/widgets/step5_background.dart",
+    "sha256": "cca7e82ada2273a3e2b2bd43e0092526daeee0c176952d1cad9b8059153d9c7a"
+  },
+  {
+    "path": "lib/ui/widgets/thinking_orb.dart",
+    "sha256": "a13d98b8a42185044c2bf99039d1745006cb81326f17fef6019d9a90c6185ee7"
+  },
+  {
+    "path": "python/aesthetic_price_discovery_v11_67.py",
+    "sha256": "3fd7fb6e40c88ad669e2d17eabf18567fef103b66287cbe1fe065379a975bdd8"
+  },
+  {
+    "path": "python/config/countries_v2_final.json",
+    "sha256": "436e23d9db41b939f9dfb98a4fa36ee417ce68db93f9f9513e4ced8bedaac2e4"
+  },
+  {
+    "path": "python/config/procedures_v3_expanded.json",
+    "sha256": "352bb48fe2331a7c5926ca7eac5c05537c9a5c1bcb4ca1edfed60cec730dfdb7"
+  },
+  {
+    "path": "python/explore_index_jobs.py",
+    "sha256": "e30f972a9d1c8a68754e8c4b37773373ba9176c84644062dbb15d6b6f272fb55"
+  },
+  {
+    "path": "python/requirements.lock",
+    "sha256": "a46fc543946aba1c14b35c8e08b4a2c03693d207f4d27030b6d70eff4d920484"
+  },
+  {
+    "path": "python/requirements.txt",
+    "sha256": "77a199aa6388793eba86eacffe2eda7f0093f8073eaaa334a61eb0fea0aeb3d4"
+  },
+  {
+    "path": "python/tests/price_fixtures.py",
+    "sha256": "b0b47c9bbe8993341269365047b3027ffcd7550e761f94533bc5e4a3494206b4"
+  },
+  {
+    "path": "python/tests/test_discovery_coverage.py",
+    "sha256": "e3842f44b1cb2950357c85866700399efe1a8f852cd7f19d6fdc0970b9045973"
+  },
+  {
+    "path": "python/tests/test_index_jobs_regressions.py",
+    "sha256": "febf0cfd2198512e4ecf7c8e801cf656fc8a6783d348d29524aa0e04d71d3c89"
+  },
+  {
+    "path": "python/tests/test_price_engine_regressions.py",
+    "sha256": "d793455f4f8fbc99b8137d32eeff297927c8f8739a7f716b56e36aa6d5c75c6e"
+  },
+  {
+    "path": "python/tests/test_public_price_layouts.py",
+    "sha256": "d3c0005e4b7b6250ea4dd66c8e18a9842c2d837922cd8ed3c42a9f637315adbb"
+  },
+  {
+    "path": "python/tests/test_valencia_price_binding.py",
+    "sha256": "1ad65ff50619ba35f472ea729c8e5f73bc9d5f71e9425f5db00655e4caf19f70"
+  },
+  {
+    "path": "python/tests/test_vertical_regressions.py",
+    "sha256": "c2cc6e412cf58ab0ebe511916d9ea144f81635482cb41e63b4ddfd84798231e1"
+  },
+  {
+    "path": "python/tests/test_vertical_search.py",
+    "sha256": "9b4b627a4f0112c74fa2375b53fea5167a1de549acd6e8c1a43e5d3a7b97156c"
+  },
+  {
+    "path": "python/vertical_search.py",
+    "sha256": "6617894dba6f8050702e0a8bdd19f3b9ad74667f8c9a7248d7a593cafb678599"
+  },
+  {
+    "path": "scripts/setup-cloud.sh",
+    "sha256": "5d74675b540a204eed9ecc4390c4f96d093ac6e68ec6746a80cd38cf65281a7a"
+  },
+  {
+    "path": "scripts/start-local-backend.sh",
+    "sha256": "f6e7457b2e5718cbd0e53731e0fde526220e90edecf12343e33a83dd42a94766"
+  },
+  {
+    "path": "test/explore_any_city_pipeline_test.dart",
+    "sha256": "062ba8711ca6ddcf99a8e26048a2d302427f4a083d0ec86e48e1a32f7a820e80"
+  },
+  {
+    "path": "test/explore_booking_platform_test.dart",
+    "sha256": "2406a6b75c5d78a8783fb8930f048cb31fd0dfa6bb15b7f63fbf50b8080eac85"
+  },
+  {
+    "path": "test/explore_city_and_eight_cards_test.dart",
+    "sha256": "b363696d90d3574d3c4a8a6de7bd78309601cb14f4b1fa4abcd46c2eb9935697"
+  },
+  {
+    "path": "test/explore_clinic_name_vocabulary_test.dart",
+    "sha256": "7552647bed90d9cc17bba06db103acea0e7bc1d87dfe90dbdf93567ff8fdbbcb"
+  },
+  {
+    "path": "test/explore_cold_city_pipeline_test.dart",
+    "sha256": "3decb5404a0027bd2046b3f4822fc54e7d7cf82a066d616f1998dd95fe9fb940"
+  },
+  {
+    "path": "test/explore_compare_hybrid_contract_test.dart",
+    "sha256": "b7d6d5c33763c4ac4558744b76c948e652d8edbc5eec244c6c54d21516c43bc7"
+  },
+  {
+    "path": "test/explore_cross_procedure_exclusion_test.dart",
+    "sha256": "07b46fcf6d4038e7a7fdf870bf72798c3537ce1c8b1d5c60479d78a98f0b58a3"
+  },
+  {
+    "path": "test/explore_curated_price_test.dart",
+    "sha256": "db40d00de660521207445a9924a597cbc6ba839dce59246d149a4363f5ef6fca"
+  },
+  {
+    "path": "test/explore_currency_cached_pipeline_test.dart",
+    "sha256": "5b23f7f10c79fc851884776417468592ae2e25ef9ec90727d19a057dc9f6af59"
+  },
+  {
+    "path": "test/explore_discovery_identity_test.dart",
+    "sha256": "65e6e6a0458c4a5dcbb3811b6b6dde0fabb5568d3b8edb90a47eefe316767ee8"
+  },
+  {
+    "path": "test/explore_duplicate_verify_test.dart",
+    "sha256": "4ae100a34973e2dff327cac5f5ce1ff1945011b8f6b59658557b60f17471bf3a"
+  },
+  {
+    "path": "test/explore_extract_performance_test.dart",
+    "sha256": "fdad394092fb237ecec1274233eb05ceaabec6972115c335f0684dfbd089ccc5"
+  },
+  {
+    "path": "test/explore_fill_session_lifecycle_test.dart",
+    "sha256": "2a052b16a4dcff370362a42d78491604e57cbd5aaf0aa3acd8bdaab5fd557cbd"
+  },
+  {
+    "path": "test/explore_filler_ml_lock_test.dart",
+    "sha256": "347a1009d3e4b787799372821c6e8a0c470a43dd786da1f0933d69fc49503797"
+  },
+  {
+    "path": "test/explore_firecrawl_discovery_test.dart",
+    "sha256": "6570e18e6c230439d9cab6a02140b65304da621885fcc7ecb437786a97b9da7a"
+  },
+  {
+    "path": "test/explore_global_price_discovery_test.dart",
+    "sha256": "b730324039c71c3cb790417534219a3477e039cf0877a8bb05b2a3d84c47f9a3"
+  },
+  {
+    "path": "test/explore_html_price_extractor_test.dart",
+    "sha256": "f75be8a465283faf9fd947e05ad1bd8551c64b6d6d445876d858f8f664e2bd6d"
+  },
+  {
+    "path": "test/explore_market_coverage_test.dart",
+    "sha256": "459a10929d55e37865593375ad07e7c7304338ecbd7f29063be94cd17e0ef5e8"
+  },
+  {
+    "path": "test/explore_marketplace_discovery_test.dart",
+    "sha256": "48a0613e7140dd3ee703cb93f83af033cdb520c4c3aa60c8797ff149a1264362"
+  },
+  {
+    "path": "test/explore_owned_tariff_context_test.dart",
+    "sha256": "d5d5469e2e9011a1a14a8c255feaa6cd2d1e299d19b1c98ee8da2e8ccc4fedae"
+  },
+  {
+    "path": "test/explore_peel_discovery_extract_test.dart",
+    "sha256": "3bfb2fee03f99119b0467966550da314c4c80041610dc1e0ee57b66830996a2a"
+  },
+  {
+    "path": "test/explore_perf_coordinator_test.dart",
+    "sha256": "25d73da5356e8fb795114439a20b2a6e09968a9d0def065011521764cce4c507"
+  },
+  {
+    "path": "test/explore_places_circuit_breaker_test.dart",
+    "sha256": "5bf592f22f61ee4f29a077dd5a20e5be685fd0f50ae1d339217b61d4270d2d0a"
+  },
+  {
+    "path": "test/explore_price_discovery_tool_test.dart",
+    "sha256": "25c084370db6ba6d62c13e7efd56c15bfc739f0d9a5fdce60110e243d8049bdd"
+  },
+  {
+    "path": "test/explore_price_evidence_lock_test.dart",
+    "sha256": "7059045a0161a087106787f44422090bc327993ab2d9fdc5c11aa8608d5bb097"
+  },
+  {
+    "path": "test/explore_price_index_test.dart",
+    "sha256": "41644049f12872085556c197986b26dff3b78340c34af92be348a3b40e75f6c0"
+  },
+  {
+    "path": "test/explore_price_ownership_test.dart",
+    "sha256": "5c1729c51d7efd8aa3fada9403387488c821a0da8f3af1ad9c69e3eb15bc902e"
+  },
+  {
+    "path": "test/explore_price_sanity_test.dart",
+    "sha256": "ae6c1f40dcf351231b8f48c7542fc6e727fb88383671dfa760d8f20c2c179684"
+  },
+  {
+    "path": "test/explore_procedure_relation_test.dart",
+    "sha256": "34abb155d00812c43f5d546079b1e954c1027715b57473faa0729de815514631"
+  },
+  {
+    "path": "test/explore_progressive_fill_drop_test.dart",
+    "sha256": "5f67283a6ddaafc603a17b1c37bb8eb50d4ae4ac18ff585541a581b5e5bfc323"
+  },
+  {
+    "path": "test/explore_queue_and_ratings_test.dart",
+    "sha256": "6b2de4fe773d111d5033277eb0f427faf3bedc3096485a2c4ea06274bd6dc130"
+  },
+  {
+    "path": "test/explore_regex_flags_test.dart",
+    "sha256": "c933a97de801dc62e94695c54dcf6096ba735eeeaeb9335aa7b8370a431ef149"
+  },
+  {
+    "path": "test/explore_reject_path_fix_test.dart",
+    "sha256": "5d4f4a18cd5db51de1374d2494915fd956aacf833a5e4f83d3e24758c7d91048"
+  },
+  {
+    "path": "test/explore_renderer_client_test.dart",
+    "sha256": "42452f4eeb1ce9939f65df3ace62c40e2a97e848df412bc53e49babafd156d78"
+  },
+  {
+    "path": "test/explore_serp_provider_test.dart",
+    "sha256": "ba3110db9c64a86520886f82905291fece69f11e81d72d431b5fad069426d7f6"
+  },
+  {
+    "path": "test/explore_snapshot_and_scope_test.dart",
+    "sha256": "9fa0397b860f1f89895930f256894b059d230e99ad99809f6599761ca053ddb9"
+  },
+  {
+    "path": "test/explore_source_context_regressions_test.dart",
+    "sha256": "585f24b1603cab70a6a1e1c61ad2b7a13de019a1e7f8641f069a1b7f677e7873"
+  },
+  {
+    "path": "test/explore_tirana_peel_price_parse_test.dart",
+    "sha256": "b11e10f597a21ca62f3cbdc35999cf4ce6e3544c518e810306791f8962927e3b"
+  },
+  {
+    "path": "test/explore_turkish_cold_city_test.dart",
+    "sha256": "2a9b53efd380b292b8fdf5162bc62b2f11f49dc2444511162d27386c06ef05d4"
+  },
+  {
+    "path": "test/explore_v76_approx_price_test.dart",
+    "sha256": "8cea2def62bf42cae3e2ac9f8a0cfda08d4afbb728c5dc04d19fb9d7e30ceb7a"
+  },
+  {
+    "path": "test/explore_valencia_prices_test.dart",
+    "sha256": "148dee5b19860c5bcee668c8c038bcc2e2f830014e70fe3ed119fa957f819446"
+  },
+  {
+    "path": "test/explore_verified_card_titles_test.dart",
+    "sha256": "d009eec2aef01cdbd4c3207507d68aef56ce151b3d01a17a7fef4ad44c466d89"
+  },
+  {
+    "path": "test/explore_worldwide_gaps_test.dart",
+    "sha256": "40ff21cbd7ef958da843de2d9435c0a7d130ecd06bb83b0fa22bd99674407d13"
+  },
+  {
+    "path": "test/explore_worldwide_pipeline_test.dart",
+    "sha256": "039793b0e7ae9e34c6e308a95e2529fb9015fb2e3f1c5f5684211cdf3f604c88"
+  },
+  {
+    "path": "test/explore_zyte_client_test.dart",
+    "sha256": "11562524398faad6fd5957a4dff24efd09f209943b915da195bfd81bc415afd7"
+  },
+  {
+    "path": "test/fixture_fresha_klaudias.html",
+    "sha256": "ffae39aebe03fbaec5e1c7075d3dc576cd10505d0310e4e2d6cb08e48e533a20"
+  },
+  {
+    "path": "test/price_binding_regression_test.dart",
+    "sha256": "35bcfbc09a1d61349df1cb0b435a437091644198def5808263fe61dfff480a00"
+  },
+  {
+    "path": "test/sofia_botox_check_test.dart",
+    "sha256": "d368f0ce4e29c5b876fce6a655c80ac7b2c17d57c3ad2b66a7e4b2b9ec65d535"
+  },
+  {
+    "path": "test/widget_test.dart",
+    "sha256": "44c92d495aeb7fd7533e78f71c1cd1f340247858e2e464f8ea93ba05fb4b6ef2"
+  },
+  {
+    "path": "test/worldwide_compare_display_test.dart",
+    "sha256": "953e9310e9f48a8bc177db155957529515375200c4c43d363a7bc9ba8668662e"
+  }
+]

@@ -97,9 +97,10 @@ void main() {
       await Future<void>.delayed(Duration.zero);
       gate.complete();
       await Future.wait(all);
-      expect(peak, lessThanOrEqualTo(
-        ExploreRequestCoordinator.maxVerifyConcurrency,
-      ));
+      expect(
+        peak,
+        lessThanOrEqualTo(ExploreRequestCoordinator.maxVerifyConcurrency),
+      );
     });
   });
 
@@ -148,23 +149,78 @@ void main() {
     test('warming fills the cache so the sync read never parses', () async {
       final cache = ExploreHtmlPriceParseCache.instance;
       cache.rememberHtml('https://warm.al/cmimet', full);
-      expect(cache.evidenceByUrl.containsKey('https://warm.al/cmimet'), isFalse);
+      expect(
+        cache.evidenceByUrl.containsKey('https://warm.al/cmimet'),
+        isFalse,
+      );
 
       await cache.warmEvidence(['https://warm.al/cmimet']);
       expect(cache.evidenceByUrl.containsKey('https://warm.al/cmimet'), isTrue);
       final rows = cache.evidenceFor('https://warm.al/cmimet');
       expect(rows, isNotEmpty);
       // Second read is the same object — no reparse on the frame thread.
-      expect(identical(cache.evidenceFor('https://warm.al/cmimet'), rows), isTrue);
+      expect(
+        identical(cache.evidenceFor('https://warm.al/cmimet'), rows),
+        isTrue,
+      );
     });
 
-    test('warmAllPending covers pages the sync host scan would touch', () async {
+    test(
+      'warming lets the event loop handle input before parsing finishes',
+      () async {
+        final cache = ExploreHtmlPriceParseCache.instance;
+        const sourceUrl = 'https://responsive.al/cmimet';
+        cache.rememberHtml(sourceUrl, full);
+        final heartbeat = Completer<void>();
+        final warming = cache.warmEvidence([sourceUrl]);
+        Timer.run(heartbeat.complete);
+        final first = await Future.any<String>([
+          heartbeat.future.then((_) => 'input'),
+          warming.then((_) => 'parse'),
+        ]);
+        expect(
+          first,
+          'input',
+          reason: 'price parsing must yield to input events',
+        );
+        await warming;
+        expect(cache.evidenceByUrl[sourceUrl], isNotEmpty);
+      },
+    );
+
+    test('a parse in flight cannot overwrite a richer HTML fetch', () async {
       final cache = ExploreHtmlPriceParseCache.instance;
-      cache.rememberHtml('https://a.al/cmimet', full);
-      cache.rememberHtml('https://a.al/sherbimet', full);
-      await cache.warmAllPending();
-      expect(cache.evidenceByUrl.length, 2);
+      const sourceUrl = 'https://richer.al/cmimet';
+      cache.rememberHtml(
+        sourceUrl,
+        '<html><body><ul><li>Peeling kimik 33€</li></ul></body></html>',
+      );
+      final warming = cache.warmEvidence([sourceUrl]);
+
+      cache.rememberHtml(sourceUrl, full);
+      await warming;
+      expect(
+        cache.evidenceByUrl.containsKey(sourceUrl),
+        isFalse,
+        reason: 'the older page parse must not be cached for its replacement',
+      );
+
+      await cache.warmEvidence([sourceUrl]);
+      final rows = cache.evidenceFor(sourceUrl);
+      expect(rows.map((row) => row.priceMin), containsAll(<double>[33, 45]));
+      expect(identical(cache.evidenceFor(sourceUrl), rows), isTrue);
     });
+
+    test(
+      'warmAllPending covers pages the sync host scan would touch',
+      () async {
+        final cache = ExploreHtmlPriceParseCache.instance;
+        cache.rememberHtml('https://a.al/cmimet', full);
+        cache.rememberHtml('https://a.al/sherbimet', full);
+        await cache.warmAllPending();
+        expect(cache.evidenceByUrl.length, 2);
+      },
+    );
 
     test('the numbered Tirana rows now carry the real fee', () {
       final cache = ExploreHtmlPriceParseCache.instance;
