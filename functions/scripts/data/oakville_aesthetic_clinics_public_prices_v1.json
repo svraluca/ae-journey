@@ -1,0 +1,659 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Oakville, Ontario, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 2,
+  "priced_procedure_count": 32,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 1,
+    "Fillers": 2,
+    "Rhinoplasty": 0,
+    "Boob job": 0,
+    "Hair transplant": 0,
+    "Peels": 1
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Secret Faces - Oakville",
+        "location": {
+          "address": null,
+          "city": "Oakville",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.secretfaces.com/product-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 9
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.secretfaces.com/product-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8.5
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Secret Faces - Oakville",
+        "location": {
+          "address": null,
+          "city": "Oakville",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Filler - Full Syringe",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "full syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.secretfaces.com/product-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 550
+          },
+          {
+            "name": "Filler - Half Syringe",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.secretfaces.com/product-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 270
+          }
+        ]
+      },
+      {
+        "clinic": "Vistoso Medical Aesthetics - Oakville",
+        "location": {
+          "address": null,
+          "city": "Oakville",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Face Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.vistoso.ca/pricelist.php",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 499
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.vistoso.ca/pricelist.php",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 345
+          },
+          {
+            "name": "Lips + Nasolabial Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.vistoso.ca/pricelist.php",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 429
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [],
+    "Boob job": [],
+    "Hair transplant": [],
+    "Peels": [
+      {
+        "clinic": "Vistoso Medical Aesthetics - Oakville",
+        "location": {
+          "address": null,
+          "city": "Oakville",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Body Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.vistoso.ca/pricelist.php",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 300
+          },
+          {
+            "name": "Enzyme Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.vistoso.ca/pricelist.php",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 99
+          },
+          {
+            "name": "Jessner Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.vistoso.ca/pricelist.php",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 180
+          },
+          {
+            "name": "Pumpkin Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.vistoso.ca/pricelist.php",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 100
+          },
+          {
+            "name": "Retinol Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.vistoso.ca/pricelist.php",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 99
+          },
+          {
+            "name": "Salicylic Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.vistoso.ca/pricelist.php",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 150
+          },
+          {
+            "name": "TCA Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.vistoso.ca/pricelist.php",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 250
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [
+    {
+      "name": "Oakville Hair Transplant Market Range",
+      "category": "Hair transplant",
+      "currency": "CAD",
+      "price_min": 4000,
+      "price_max": 15000,
+      "source_url": "https://hair-transplant.ca/blog/hair-transplant-cost-in-oakville-2026-guide-prices-results-what-to-expect/",
+      "source_type": "market_evidence"
+    }
+  ],
+  "clinics": [
+    {
+      "name": "Secret Faces - Oakville",
+      "website": "https://www.secretfaces.com/",
+      "location": {
+        "address": null,
+        "city": "Oakville",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.secretfaces.com/product-pricing"
+      ],
+      "procedures": [
+        {
+          "name": "Filler - Full Syringe",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "full syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "Filler - Half Syringe",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 270
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 9
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8.5
+        },
+        {
+          "name": "IPL Face",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        },
+        {
+          "name": "IPL Face + Neck",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 450
+        },
+        {
+          "name": "IPL Face - 2 Pack",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "IPL Rosacea Cheeks",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 250
+        },
+        {
+          "name": "Latisse",
+          "category": "lashes_brows",
+          "currency": "CAD",
+          "unit": "per item",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 200
+        },
+        {
+          "name": "Fractora - Face + Neck",
+          "category": "rf_microneedling",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 850
+        },
+        {
+          "name": "Fractora - Face + Neck 3 Pack",
+          "category": "rf_microneedling",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 2300
+        },
+        {
+          "name": "Fractora - Face / Neck",
+          "category": "rf_microneedling",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 650
+        },
+        {
+          "name": "Fractora - Face / Neck 3 Pack",
+          "category": "rf_microneedling",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1700
+        },
+        {
+          "name": "Fractora Acne Scars",
+          "category": "rf_microneedling",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.secretfaces.com/product-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 400
+        }
+      ]
+    },
+    {
+      "name": "Vistoso Medical Aesthetics - Oakville",
+      "website": "https://www.vistoso.ca/",
+      "location": {
+        "address": null,
+        "city": "Oakville",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.vistoso.ca/pricelist.php"
+      ],
+      "procedures": [
+        {
+          "name": "Body Contouring",
+          "category": "body_contouring",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 399
+        },
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 199
+        },
+        {
+          "name": "Face Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 499
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 345
+        },
+        {
+          "name": "Lips + Nasolabial Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 429
+        },
+        {
+          "name": "Microneedling Hair",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 399
+        },
+        {
+          "name": "PRP Hair",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 599
+        },
+        {
+          "name": "Photofacial",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 250
+        },
+        {
+          "name": "Body Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 300
+        },
+        {
+          "name": "Enzyme Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 99
+        },
+        {
+          "name": "Jessner Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 180
+        },
+        {
+          "name": "Pumpkin Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 100
+        },
+        {
+          "name": "Retinol Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 99
+        },
+        {
+          "name": "Salicylic Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 150
+        },
+        {
+          "name": "TCA Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 250
+        },
+        {
+          "name": "Microdermabrasion",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 120
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 199
+        },
+        {
+          "name": "Microneedling - 3 Pack",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://www.vistoso.ca/pricelist.php",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 900
+        }
+      ]
+    }
+  ]
+}

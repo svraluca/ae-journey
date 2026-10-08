@@ -1,0 +1,13 @@
+{
+  "name": "glowpass-renderer",
+  "private": true,
+  "engines": {
+    "node": "20"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "playwright": "1.49.1"
+  }
+}

@@ -1,0 +1,634 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Kelowna, British Columbia, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 5,
+  "priced_procedure_count": 29,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 1,
+    "Fillers": 1,
+    "Rhinoplasty": 1,
+    "Boob job": 1,
+    "Hair transplant": 0,
+    "Peels": 2
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "RegenMD Kelowna",
+        "location": {
+          "address": null,
+          "city": "Kelowna",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.regenmd.health/book-online",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "RegenMD Kelowna",
+        "location": {
+          "address": null,
+          "city": "Kelowna",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per vial",
+            "price_type": "fixed",
+            "source_url": "https://www.regenmd.health/book-online",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price": 750
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "Okanagan Health Surgical Centre - Public Listing",
+        "location": {
+          "address": null,
+          "city": "Kelowna",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price": 9100
+          }
+        ]
+      }
+    ],
+    "Boob job": [
+      {
+        "clinic": "Okanagan Health Surgical Centre - Public Listing",
+        "location": {
+          "address": null,
+          "city": "Kelowna",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price": 17350
+          },
+          {
+            "name": "Breast Implants",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price": 9100
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [],
+    "Peels": [
+      {
+        "clinic": "Kelowna Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Kelowna",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.kelownamedicalaesthetics.com/purchase-services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 309.75
+          }
+        ]
+      },
+      {
+        "clinic": "Kelowna Esthetics Studio",
+        "location": {
+          "address": null,
+          "city": "Kelowna",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Skin Rejuvenation Facial + Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "40 min",
+            "price_type": "fixed",
+            "source_url": "https://www.kelownaestheticsstudio.ca/prices.html",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 65
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Kelowna Esthetics Studio",
+      "website": "https://www.kelownaestheticsstudio.ca/",
+      "location": {
+        "address": null,
+        "city": "Kelowna",
+        "province": "British Columbia",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.kelownaestheticsstudio.ca/prices.html"
+      ],
+      "procedures": [
+        {
+          "name": "Skin Rejuvenation Facial + Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "40 min",
+          "price_type": "fixed",
+          "source_url": "https://www.kelownaestheticsstudio.ca/prices.html",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 65
+        }
+      ]
+    },
+    {
+      "name": "Kelowna Medical Aesthetics",
+      "website": "https://www.kelownamedicalaesthetics.com/",
+      "location": {
+        "address": null,
+        "city": "Kelowna",
+        "province": "British Columbia",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.kelownamedicalaesthetics.com/purchase-services"
+      ],
+      "procedures": [
+        {
+          "name": "Anti-Aging Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.kelownamedicalaesthetics.com/purchase-services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 288.75
+        },
+        {
+          "name": "Gentlemen Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.kelownamedicalaesthetics.com/purchase-services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 288.75
+        },
+        {
+          "name": "Medical Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.kelownamedicalaesthetics.com/purchase-services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 288.75
+        },
+        {
+          "name": "LED Treatment",
+          "category": "light_therapy",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.kelownamedicalaesthetics.com/purchase-services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 183.75
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.kelownamedicalaesthetics.com/purchase-services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 309.75
+        },
+        {
+          "name": "Dermaplane",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.kelownamedicalaesthetics.com/purchase-services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 195
+        },
+        {
+          "name": "Intellibright",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.kelownamedicalaesthetics.com/purchase-services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 136
+        }
+      ]
+    },
+    {
+      "name": "NEXT Clinic - West Kelowna",
+      "website": "https://nextclinic.ca/",
+      "location": {
+        "address": null,
+        "city": "Kelowna",
+        "province": "British Columbia",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://nextclinic.ca/services/injectables"
+      ],
+      "procedures": [
+        {
+          "name": "Injectables Consultation",
+          "category": "consultation",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://nextclinic.ca/services/injectables",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 50
+        },
+        {
+          "name": "Neurotoxin",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://nextclinic.ca/services/injectables",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 11
+        }
+      ],
+      "note": "West Kelowna is included in the Kelowna market."
+    },
+    {
+      "name": "Okanagan Health Surgical Centre - Public Listing",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Kelowna",
+        "province": "British Columbia",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.clinictor.com/clinic/okanagan-health-surgical-centre"
+      ],
+      "procedures": [
+        {
+          "name": "Abdominoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 9100
+        },
+        {
+          "name": "Body Contouring",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 11850
+        },
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 17350
+        },
+        {
+          "name": "Breast Implants",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 9100
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 11850
+        },
+        {
+          "name": "Breast Reduction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 14600
+        },
+        {
+          "name": "Brow Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 9100
+        },
+        {
+          "name": "Eyelid Surgery",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 11850
+        },
+        {
+          "name": "Facelift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 14600
+        },
+        {
+          "name": "Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 9100
+        },
+        {
+          "name": "Nasal Tip Surgery",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 11850
+        },
+        {
+          "name": "Neck Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 14650
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.clinictor.com/clinic/okanagan-health-surgical-centre",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price": 9100
+        }
+      ],
+      "note": "Third-party public pricing-directory values; lower trust than official clinic-site pricing."
+    },
+    {
+      "name": "RegenMD Kelowna",
+      "website": "https://www.regenmd.health/",
+      "location": {
+        "address": null,
+        "city": "Kelowna",
+        "province": "British Columbia",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "public_booking_price_capture",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.regenmd.health/book-online"
+      ],
+      "procedures": [
+        {
+          "name": "Radiesse",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "per vial",
+          "price_type": "fixed",
+          "source_url": "https://www.regenmd.health/book-online",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 1000
+        },
+        {
+          "name": "Sculptra - 2 Vials",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "2 vials",
+          "price_type": "fixed",
+          "source_url": "https://www.regenmd.health/book-online",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 1800
+        },
+        {
+          "name": "Sexual Health Consultation",
+          "category": "consultation",
+          "currency": "CAD",
+          "unit": "per consultation",
+          "price_type": "fixed",
+          "source_url": "https://www.regenmd.health/book-online",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 250
+        },
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per vial",
+          "price_type": "fixed",
+          "source_url": "https://www.regenmd.health/book-online",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 750
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.regenmd.health/book-online",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "P-Shot",
+          "category": "intimate",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.regenmd.health/book-online",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 450
+        }
+      ]
+    }
+  ]
+}

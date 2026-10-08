@@ -1,0 +1,1169 @@
+{
+  "schema_version": "5.0-public-pricing-seed",
+  "checked_at": "2026-09-13",
+  "market": "Denver metro, Colorado, USA",
+  "currency_default": "USD",
+  "dataset_rule": "Clinic-first mixed-source public-pricing seed. procedures[] contains every numeric-priced service captured from the reviewed public source for that clinic. Flagship categories are indexes only, not a filter.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page; preferred.",
+    "official_context_price": "Clinic's own public educational/planning range; use below direct posted price.",
+    "public_pricing_directory": "Third-party public pricing directory; lower trust than clinic-site pricing.",
+    "patient_reported": "Public patient-reported price; historical/lower trust.",
+    "market_benchmark": "City/metro benchmark only; never present it as a clinic quote."
+  },
+  "limitations": [
+    "This is a best-effort public-web seed, not a guaranteed exhaustive site-wide audit of every clinic.",
+    "Booking-only, login-only, private-quote, phone-only and unindexed prices may be absent.",
+    "Rows without numeric public pricing are omitted rather than estimated.",
+    "Directory-derived rows are explicitly marked and should rank below official clinic-site pricing in Explore.",
+    "Market benchmarks are stored separately and are not counted as clinic coverage."
+  ],
+  "clinic_count": 8,
+  "priced_procedure_count": 35,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 4,
+    "Fillers": 4,
+    "Rhinoplasty": 1,
+    "Boob job": 0,
+    "Hair transplant": 3,
+    "Peels": 4
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "La Fontaine Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 500
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 250,
+            "price_max": 450
+          }
+        ]
+      },
+      {
+        "clinic": "Rejuvenate MedSpa",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 500
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 500
+          }
+        ]
+      },
+      {
+        "clinic": "VITAHL Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      },
+      {
+        "clinic": "VITAHL Medical Aesthetics - LoDo",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 400
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 350
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "La Fontaine Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Rejuvenate MedSpa",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "VITAHL Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "VITAHL Medical Aesthetics - LoDo",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 600
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "Denver Rhinoplasty Provider Aggregate",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty - Published Provider Range",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.navmds.com/doctor/specialty/rhinoplasty/colorado/denver",
+            "source_type": "public_pricing_directory",
+            "price_min": 6450,
+            "price_max": 11700,
+            "note": "Aggregate of published provider pricing, not one clinic quote."
+          }
+        ]
+      }
+    ],
+    "Boob job": [],
+    "Hair transplant": [
+      {
+        "clinic": "Advanced Hair Restoration - Lone Tree",
+        "location": {
+          "address": null,
+          "city": "Lone Tree",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/us/co/",
+            "source_type": "public_pricing_directory",
+            "price_min": 10000
+          }
+        ]
+      },
+      {
+        "clinic": "Colorado Facial Plastic Surgery",
+        "location": {
+          "address": null,
+          "city": "Englewood",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/us/co/",
+            "source_type": "public_pricing_directory",
+            "price_min": 6000
+          }
+        ]
+      },
+      {
+        "clinic": "RESTORE Hair Denver",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/us/co/",
+            "source_type": "public_pricing_directory",
+            "price_min": 8000
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "La Fontaine Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Deep Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 1200
+          },
+          {
+            "name": "Medium Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          },
+          {
+            "name": "Superficial Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      },
+      {
+        "clinic": "Rejuvenate MedSpa",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peels",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          }
+        ]
+      },
+      {
+        "clinic": "VITAHL Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 300
+          }
+        ]
+      },
+      {
+        "clinic": "VITAHL Medical Aesthetics - LoDo",
+        "location": {
+          "address": null,
+          "city": "Denver",
+          "state": "CO",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peels",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      }
+    ]
+  },
+  "market_benchmarks": [
+    {
+      "category": "Botox",
+      "metric": "typical_unit_range",
+      "price_min": 12,
+      "price_max": 17,
+      "unit": "per unit",
+      "source_url": "https://www.allmedspas.com/blog/med-spa-cost-guide/",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Fillers",
+      "metric": "lip_filler_range",
+      "price_min": 600,
+      "price_max": 950,
+      "source_url": "https://www.allmedspas.com/blog/med-spa-cost-guide/",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Boob job",
+      "metric": "metro_average",
+      "price": 9012,
+      "source_url": "https://www.realself.com/surgical/breast-augmentation/cost",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Hair transplant",
+      "metric": "city_range",
+      "price_min": 7800,
+      "price_median": 11500,
+      "price_max": 16000,
+      "source_url": "https://transplantmatch.com/prices/",
+      "source_type": "market_benchmark"
+    }
+  ],
+  "clinics": [
+    {
+      "name": "Advanced Hair Restoration - Lone Tree",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Lone Tree",
+        "state": "CO",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://transplantmatch.com/us/co/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/us/co/",
+          "source_type": "public_pricing_directory",
+          "price_min": 10000
+        }
+      ]
+    },
+    {
+      "name": "Colorado Facial Plastic Surgery",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Englewood",
+        "state": "CO",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://transplantmatch.com/us/co/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/us/co/",
+          "source_type": "public_pricing_directory",
+          "price_min": 6000
+        }
+      ]
+    },
+    {
+      "name": "Denver Rhinoplasty Provider Aggregate",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Denver",
+        "state": "CO",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://www.navmds.com/doctor/specialty/rhinoplasty/colorado/denver"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Rhinoplasty - Published Provider Range",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.navmds.com/doctor/specialty/rhinoplasty/colorado/denver",
+          "source_type": "public_pricing_directory",
+          "price_min": 6450,
+          "price_max": 11700,
+          "note": "Aggregate of published provider pricing, not one clinic quote."
+        }
+      ],
+      "note": "Kept as a directory aggregate and should not be shown as a named clinic quote."
+    },
+    {
+      "name": "La Fontaine Aesthetics",
+      "website": "https://www.denverfusionspa.com/",
+      "location": {
+        "address": null,
+        "city": "Denver",
+        "state": "CO",
+        "country": "USA"
+      },
+      "phone": "+1 303-355-4772",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/co/denver/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 250,
+          "price_max": 450
+        },
+        {
+          "name": "BBL Facial",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 250,
+          "price_max": 400
+        },
+        {
+          "name": "Laser Hair Removal",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 300
+        },
+        {
+          "name": "Deep Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 1200
+        },
+        {
+          "name": "Medium Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Superficial Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 250,
+          "price_max": 400
+        },
+        {
+          "name": "Liposuction",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 3000,
+          "price_max": 8000
+        }
+      ]
+    },
+    {
+      "name": "Rejuvenate MedSpa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Denver",
+        "state": "CO",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/co/denver/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Chemical Peels",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Dermaplane",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 150
+        }
+      ]
+    },
+    {
+      "name": "RESTORE Hair Denver",
+      "website": "https://restorehair.com/locations/restore-denver/",
+      "location": {
+        "address": null,
+        "city": "Denver",
+        "state": "CO",
+        "country": "USA"
+      },
+      "phone": "+1 866-488-9356",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://transplantmatch.com/us/co/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/us/co/",
+          "source_type": "public_pricing_directory",
+          "price_min": 8000
+        }
+      ]
+    },
+    {
+      "name": "VITAHL Medical Aesthetics",
+      "website": "https://vitahl.com/",
+      "location": {
+        "address": null,
+        "city": "Denver",
+        "state": "CO",
+        "country": "USA"
+      },
+      "phone": "+1 303-388-7380",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/co/denver/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "IPL",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        },
+        {
+          "name": "Laser Hair Removal",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 300
+        },
+        {
+          "name": "Secret RF",
+          "category": "rf_microneedling",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 2200
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        }
+      ]
+    },
+    {
+      "name": "VITAHL Medical Aesthetics - LoDo",
+      "website": "https://vitahl.com/",
+      "location": {
+        "address": null,
+        "city": "Denver",
+        "state": "CO",
+        "country": "USA"
+      },
+      "phone": "+1 303-388-7380",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/co/denver/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 600
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 400
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 350
+        },
+        {
+          "name": "IV Hydration",
+          "category": "iv_therapy",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 200
+        },
+        {
+          "name": "Chemical Peels",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/co/denver/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        }
+      ]
+    }
+  ]
+}

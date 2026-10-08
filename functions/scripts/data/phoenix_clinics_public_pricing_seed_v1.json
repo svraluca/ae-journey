@@ -1,0 +1,2967 @@
+{
+  "schema_version": "5.0-public-pricing-seed",
+  "checked_at": "2026-09-13",
+  "market": "Phoenix / Scottsdale metro, Arizona, USA",
+  "currency_default": "USD",
+  "dataset_rule": "Clinic-first mixed-source public-pricing seed. procedures[] contains every numeric-priced service captured from the reviewed public source for that clinic. Flagship categories are indexes only, not a filter.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page; preferred.",
+    "official_context_price": "Clinic's own public educational/planning range; use below direct posted price.",
+    "public_pricing_directory": "Third-party public pricing directory; lower trust than clinic-site pricing.",
+    "patient_reported": "Public patient-reported price; historical/lower trust.",
+    "market_benchmark": "City/metro benchmark only; never present it as a clinic quote."
+  },
+  "limitations": [
+    "This is a best-effort public-web seed, not a guaranteed exhaustive site-wide audit of every clinic.",
+    "Booking-only, login-only, private-quote, phone-only and unindexed prices may be absent.",
+    "Rows without numeric public pricing are omitted rather than estimated.",
+    "Directory-derived rows are explicitly marked and should rank below official clinic-site pricing in Explore.",
+    "Market benchmarks are stored separately and are not counted as clinic coverage."
+  ],
+  "clinic_count": 17,
+  "priced_procedure_count": 105,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 14,
+    "Fillers": 14,
+    "Rhinoplasty": 2,
+    "Boob job": 1,
+    "Hair transplant": 1,
+    "Peels": 9
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "All About Me Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Crow's Feet Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          },
+          {
+            "name": "Forehead Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          },
+          {
+            "name": "Frown Line Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      },
+      {
+        "clinic": "BeautyBorn MedSpa Phoenix",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/beautyborn-medspa-phoenix",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          }
+        ]
+      },
+      {
+        "clinic": "Body Beautiful Day and Med Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/body-beautiful-day-and-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 250,
+            "price_max": 500
+          }
+        ]
+      },
+      {
+        "clinic": "Kalologie Medspa Paradise Valley",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/kalologie-medspa-paradise-valley",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/kalologie-medspa-paradise-valley",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Paradise Valley Dermatology",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/paradise-valley-dermatology",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Phoenix Laser & Rejuvenation Center",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-laser-rejuvenation-center",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-laser-rejuvenation-center",
+            "source_type": "public_pricing_directory",
+            "price_min": 200,
+            "price_max": 400
+          }
+        ]
+      },
+      {
+        "clinic": "Phoenix MedSpa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 500
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 500
+          }
+        ]
+      },
+      {
+        "clinic": "Phoenix Skin Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          }
+        ]
+      },
+      {
+        "clinic": "Results Med Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/results-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/results-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      },
+      {
+        "clinic": "Sculpt AZ Med Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Southwest Skin Specialists - Tatum",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/southwest-skin-specialists-phoenix-tatum-blvd",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Suddenly Slimmer Med Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 250,
+            "price_max": 500
+          }
+        ]
+      },
+      {
+        "clinic": "Tessler Plastic Surgery",
+        "location": {
+          "address": null,
+          "city": "Scottsdale",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://tesslerplasticsurgery.com/pricing/",
+            "source_type": "official_public_price_page",
+            "price": 12
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://tesslerplasticsurgery.com/pricing/",
+            "source_type": "official_public_price_page",
+            "price": 4
+          }
+        ]
+      },
+      {
+        "clinic": "Vibrant Skin Bar",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://lip-fillers.trustanalytica.org/us/az/phoenix/reviews/vibrant-skin-bar",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://lip-fillers.trustanalytica.org/us/az/phoenix/reviews/vibrant-skin-bar",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "All About Me Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 500
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 200,
+            "price_max": 400
+          },
+          {
+            "name": "Marionette Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 250,
+            "price_max": 450
+          }
+        ]
+      },
+      {
+        "clinic": "BeautyBorn MedSpa Phoenix",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/beautyborn-medspa-phoenix",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 900
+          }
+        ]
+      },
+      {
+        "clinic": "Body Beautiful Day and Med Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/body-beautiful-day-and-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/body-beautiful-day-and-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Kalologie Medspa Paradise Valley",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/kalologie-medspa-paradise-valley",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 900
+          }
+        ]
+      },
+      {
+        "clinic": "Paradise Valley Dermatology",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/paradise-valley-dermatology",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Phoenix Laser & Rejuvenation Center",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-laser-rejuvenation-center",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Phoenix MedSpa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 900
+          },
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          },
+          {
+            "name": "Marionette Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 900
+          }
+        ]
+      },
+      {
+        "clinic": "Phoenix Skin Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 900
+          }
+        ]
+      },
+      {
+        "clinic": "Results Med Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/results-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Sculpt AZ Med Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 700
+          }
+        ]
+      },
+      {
+        "clinic": "Southwest Skin Specialists - Tatum",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/southwest-skin-specialists-phoenix-tatum-blvd",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Suddenly Slimmer Med Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Tessler Plastic Surgery",
+        "location": {
+          "address": null,
+          "city": "Scottsdale",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://tesslerplasticsurgery.com/pricing/",
+            "source_type": "official_public_price_page",
+            "price": 750
+          }
+        ]
+      },
+      {
+        "clinic": "Vibrant Skin Bar",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per syringe",
+            "price_type": "range",
+            "source_url": "https://lip-fillers.trustanalytica.org/us/az/phoenix/reviews/vibrant-skin-bar",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 700
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "Sidney Starkman, MD",
+        "location": {
+          "address": null,
+          "city": "Scottsdale",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Primary Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://rhinoplasty.cc/cost",
+            "source_type": "public_pricing_directory",
+            "price_min": 16000,
+            "price_max": 22000
+          }
+        ]
+      },
+      {
+        "clinic": "Tessler Plastic Surgery",
+        "location": {
+          "address": null,
+          "city": "Scottsdale",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://tesslerplasticsurgery.com/pricing/",
+            "source_type": "official_public_price_page",
+            "price": 8000
+          }
+        ]
+      }
+    ],
+    "Boob job": [
+      {
+        "clinic": "Tessler Plastic Surgery",
+        "location": {
+          "address": null,
+          "city": "Scottsdale",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://tesslerplasticsurgery.com/pricing/",
+            "source_type": "official_public_price_page",
+            "price": 6500
+          },
+          {
+            "name": "Breast Augmentation with Implants",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://tesslerplasticsurgery.com/pricing/",
+            "source_type": "official_public_price_page",
+            "price": 9000
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [
+      {
+        "clinic": "Biltmore Hair Restoration",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/prices/hair-transplant/az/",
+            "source_type": "public_pricing_directory",
+            "price_min": 6000
+          },
+          {
+            "name": "Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://transplantmatch.com/prices/hair-transplant/az/",
+            "source_type": "public_pricing_directory",
+            "price": 7
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "All About Me Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Deep Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 200,
+            "price_max": 500
+          },
+          {
+            "name": "Light Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          },
+          {
+            "name": "Medium Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      },
+      {
+        "clinic": "Body Beautiful Day and Med Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peels",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/body-beautiful-day-and-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          }
+        ]
+      },
+      {
+        "clinic": "Camelback Dermatology & Skin Surgery",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peels",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      },
+      {
+        "clinic": "Kalologie Medspa Paradise Valley",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/kalologie-medspa-paradise-valley",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 150
+          }
+        ]
+      },
+      {
+        "clinic": "Paradise Valley Dermatology",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peels",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/paradise-valley-dermatology",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 250
+          }
+        ]
+      },
+      {
+        "clinic": "Phoenix Laser & Rejuvenation Center",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-laser-rejuvenation-center",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          }
+        ]
+      },
+      {
+        "clinic": "Phoenix Skin Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Medium Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          },
+          {
+            "name": "Superficial Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          }
+        ]
+      },
+      {
+        "clinic": "Sculpt AZ Med Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peels",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      },
+      {
+        "clinic": "Suddenly Slimmer Med Spa",
+        "location": {
+          "address": null,
+          "city": "Phoenix",
+          "state": "AZ",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 400
+          }
+        ]
+      }
+    ]
+  },
+  "market_benchmarks": [
+    {
+      "category": "Boob job",
+      "metric": "metro_average",
+      "price": 8614,
+      "source_url": "https://www.realself.com/surgical/breast-augmentation/cost",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Botox",
+      "metric": "metro_average",
+      "price": 498,
+      "source_url": "https://www.realself.com/nonsurgical/botox/cost",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Hair transplant",
+      "metric": "city_range",
+      "price_min": 6400,
+      "price_median": 9800,
+      "price_max": 13200,
+      "source_url": "https://transplantmatch.com/prices/",
+      "source_type": "market_benchmark"
+    }
+  ],
+  "clinics": [
+    {
+      "name": "All About Me Medical Aesthetics",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Cheek Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        },
+        {
+          "name": "Marionette Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 250,
+          "price_max": 450
+        },
+        {
+          "name": "Crow's Feet Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Forehead Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Frown Line Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Laser Hair Removal",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 300
+        },
+        {
+          "name": "Skin Resurfacing",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 600
+        },
+        {
+          "name": "Deep Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 500
+        },
+        {
+          "name": "Light Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Medium Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Acne Scarring",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/all-about-me-medical-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 400
+        }
+      ]
+    },
+    {
+      "name": "BeautyBorn MedSpa Phoenix",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/az/phoenix/reviews/beautyborn-medspa-phoenix"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "CoolSculpting",
+          "category": "body_contouring",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/beautyborn-medspa-phoenix",
+          "source_type": "public_pricing_directory",
+          "price_min": 1500,
+          "price_max": 4000
+        },
+        {
+          "name": "Dermal Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/beautyborn-medspa-phoenix",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 900
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/beautyborn-medspa-phoenix",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "Kybella",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/beautyborn-medspa-phoenix",
+          "source_type": "public_pricing_directory",
+          "price_min": 900,
+          "price_max": 1800
+        },
+        {
+          "name": "RF Treatment",
+          "category": "radiofrequency",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/beautyborn-medspa-phoenix",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 600
+        }
+      ]
+    },
+    {
+      "name": "Biltmore Hair Restoration",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://transplantmatch.com/prices/hair-transplant/az/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/prices/hair-transplant/az/",
+          "source_type": "public_pricing_directory",
+          "price_min": 6000
+        },
+        {
+          "name": "Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://transplantmatch.com/prices/hair-transplant/az/",
+          "source_type": "public_pricing_directory",
+          "price": 7
+        }
+      ],
+      "note": "TransplantMatch public directory pricing."
+    },
+    {
+      "name": "Body Beautiful Day and Med Spa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/az/phoenix/reviews/body-beautiful-day-and-med-spa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Cheek Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/body-beautiful-day-and-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/body-beautiful-day-and-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 600
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/body-beautiful-day-and-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 250,
+          "price_max": 500
+        },
+        {
+          "name": "Chemical Peels",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/body-beautiful-day-and-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        }
+      ]
+    },
+    {
+      "name": "Camelback Dermatology & Skin Surgery",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/az/phoenix/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "BBL",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        },
+        {
+          "name": "Halo",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 1000,
+          "price_max": 2000
+        },
+        {
+          "name": "Chemical Peels",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        }
+      ]
+    },
+    {
+      "name": "Kalologie Medspa Paradise Valley",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/az/phoenix/reviews/kalologie-medspa-paradise-valley"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Facial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/kalologie-medspa-paradise-valley",
+          "source_type": "public_pricing_directory",
+          "price_min": 60,
+          "price_max": 120
+        },
+        {
+          "name": "Dermal Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/kalologie-medspa-paradise-valley",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 900
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/kalologie-medspa-paradise-valley",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/kalologie-medspa-paradise-valley",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "IPL",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/kalologie-medspa-paradise-valley",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/kalologie-medspa-paradise-valley",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 150
+        }
+      ]
+    },
+    {
+      "name": "Paradise Valley Dermatology",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/paradise-valley-dermatology"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Mole Removal",
+          "category": "dermatology",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/paradise-valley-dermatology",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Skin Cancer Screening",
+          "category": "dermatology",
+          "currency": "USD",
+          "unit": "per visit",
+          "price_type": "range",
+          "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/paradise-valley-dermatology",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 150
+        },
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/paradise-valley-dermatology",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/paradise-valley-dermatology",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Chemical Peels",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/paradise-valley-dermatology",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        }
+      ]
+    },
+    {
+      "name": "Phoenix Laser & Rejuvenation Center",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-laser-rejuvenation-center"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-laser-rejuvenation-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-laser-rejuvenation-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-laser-rejuvenation-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        },
+        {
+          "name": "Tattoo Removal",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-laser-rejuvenation-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 500
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-laser-rejuvenation-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-laser-rejuvenation-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        }
+      ]
+    },
+    {
+      "name": "Phoenix MedSpa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Cheek Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 900
+        },
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Marionette Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 900
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        }
+      ]
+    },
+    {
+      "name": "Phoenix Skin Spa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Custom Facial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 150
+        },
+        {
+          "name": "Dermal Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 900
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "Kybella",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 1200,
+          "price_max": 1800
+        },
+        {
+          "name": "Laser Skin Resurfacing",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Medium Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Superficial Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Microneedling + PRP",
+          "category": "regenerative",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/phoenix-skin-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 250,
+          "price_max": 500
+        }
+      ]
+    },
+    {
+      "name": "Results Med Spa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/az/phoenix/reviews/results-med-spa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Sculptra",
+          "category": "biostimulators",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/results-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 800
+        },
+        {
+          "name": "Emsculpt",
+          "category": "body_contouring",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/results-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 750,
+          "price_max": 1500
+        },
+        {
+          "name": "Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/results-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/results-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/results-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        }
+      ]
+    },
+    {
+      "name": "Sculpt AZ Med Spa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/az/phoenix/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Emsculpt NEO",
+          "category": "body_contouring",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 750,
+          "price_max": 1500
+        },
+        {
+          "name": "Emtone",
+          "category": "body_contouring",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 1000
+        },
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Cheek Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 700
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Laser Hair Removal",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 800
+        },
+        {
+          "name": "Skin Resurfacing",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 900
+        },
+        {
+          "name": "Chemical Peels",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Exilis",
+          "category": "radiofrequency",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 800,
+          "price_max": 1200
+        },
+        {
+          "name": "Microdermabrasion",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        }
+      ]
+    },
+    {
+      "name": "Sidney Starkman, MD",
+      "website": "https://www.scottsdalefacialplastics.com/",
+      "location": {
+        "address": null,
+        "city": "Scottsdale",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": "+1 480-680-8677",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://rhinoplasty.cc/cost"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Primary Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://rhinoplasty.cc/cost",
+          "source_type": "public_pricing_directory",
+          "price_min": 16000,
+          "price_max": 22000
+        }
+      ],
+      "note": "Public rhinoplasty pricing directory."
+    },
+    {
+      "name": "Southwest Skin Specialists - Tatum",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/southwest-skin-specialists-phoenix-tatum-blvd"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/southwest-skin-specialists-phoenix-tatum-blvd",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/southwest-skin-specialists-phoenix-tatum-blvd",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Scar Laser",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://dermatologist.trustanalytica.org/us/az/phoenix/reviews/southwest-skin-specialists-phoenix-tatum-blvd",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 600
+        }
+      ]
+    },
+    {
+      "name": "Suddenly Slimmer Med Spa",
+      "website": "https://www.suddenlyslimmer.com/",
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": "+1 602-952-8446",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "CoolSculpting",
+          "category": "body_contouring",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 750,
+          "price_max": 2000
+        },
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 250,
+          "price_max": 500
+        },
+        {
+          "name": "CO2 Laser",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 1000,
+          "price_max": 2000
+        },
+        {
+          "name": "IPL",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 400
+        },
+        {
+          "name": "Dermaplaning",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/az/phoenix/reviews/suddenly-slimmer-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        }
+      ]
+    },
+    {
+      "name": "Tessler Plastic Surgery",
+      "website": "https://tesslerplasticsurgery.com/",
+      "location": {
+        "address": null,
+        "city": "Scottsdale",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://tesslerplasticsurgery.com/pricing/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://tesslerplasticsurgery.com/pricing/",
+          "source_type": "official_public_price_page",
+          "price": 750
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://tesslerplasticsurgery.com/pricing/",
+          "source_type": "official_public_price_page",
+          "price": 12
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://tesslerplasticsurgery.com/pricing/",
+          "source_type": "official_public_price_page",
+          "price": 4
+        },
+        {
+          "name": "Morpheus",
+          "category": "rf_microneedling",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://tesslerplasticsurgery.com/pricing/",
+          "source_type": "official_public_price_page",
+          "price": 1200
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://tesslerplasticsurgery.com/pricing/",
+          "source_type": "official_public_price_page",
+          "price": 300
+        },
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://tesslerplasticsurgery.com/pricing/",
+          "source_type": "official_public_price_page",
+          "price": 6500
+        },
+        {
+          "name": "Breast Augmentation with Implants",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://tesslerplasticsurgery.com/pricing/",
+          "source_type": "official_public_price_page",
+          "price": 9000
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://tesslerplasticsurgery.com/pricing/",
+          "source_type": "official_public_price_page",
+          "price": 10500
+        },
+        {
+          "name": "Breast Reduction",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://tesslerplasticsurgery.com/pricing/",
+          "source_type": "official_public_price_page",
+          "price": 10500
+        },
+        {
+          "name": "Facelift & Necklift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://tesslerplasticsurgery.com/pricing/",
+          "source_type": "official_public_price_page",
+          "price": 25000
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://tesslerplasticsurgery.com/pricing/",
+          "source_type": "official_public_price_page",
+          "price": 8000
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://tesslerplasticsurgery.com/pricing/",
+          "source_type": "official_public_price_page",
+          "price": 12500
+        }
+      ]
+    },
+    {
+      "name": "Vibrant Skin Bar",
+      "website": "https://vibrantskinbar.com/",
+      "location": {
+        "address": null,
+        "city": "Phoenix",
+        "state": "AZ",
+        "country": "USA"
+      },
+      "phone": "+1 480-691-3900",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://lip-fillers.trustanalytica.org/us/az/phoenix/reviews/vibrant-skin-bar"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://lip-fillers.trustanalytica.org/us/az/phoenix/reviews/vibrant-skin-bar",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 200
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per syringe",
+          "price_type": "range",
+          "source_url": "https://lip-fillers.trustanalytica.org/us/az/phoenix/reviews/vibrant-skin-bar",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 700
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://lip-fillers.trustanalytica.org/us/az/phoenix/reviews/vibrant-skin-bar",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://lip-fillers.trustanalytica.org/us/az/phoenix/reviews/vibrant-skin-bar",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "Sofwave",
+          "category": "skin_tightening",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://lip-fillers.trustanalytica.org/us/az/phoenix/reviews/vibrant-skin-bar",
+          "source_type": "public_pricing_directory",
+          "price_min": 750,
+          "price_max": 1200
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,344 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Saskatoon, Saskatchewan, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 2,
+  "priced_procedure_count": 12,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 1,
+    "Fillers": 1,
+    "Rhinoplasty": 1,
+    "Boob job": 1,
+    "Hair transplant": 0,
+    "Peels": 1
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "SKN Med Spa",
+        "location": {
+          "address": null,
+          "city": "Saskatoon",
+          "province": "Saskatchewan",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Neuromodulator",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://sknmedspa.ca/treatments",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "SKN Med Spa",
+        "location": {
+          "address": null,
+          "city": "Saskatoon",
+          "province": "Saskatchewan",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://sknmedspa.ca/treatments",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 595
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "Ian Sunderland, MD - Saskatoon Listing",
+        "location": {
+          "address": null,
+          "city": "Saskatoon",
+          "province": "Saskatchewan",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-saskatoon-sk",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price_min": 8582.5
+          }
+        ]
+      }
+    ],
+    "Boob job": [
+      {
+        "clinic": "Ian Sunderland, MD - Saskatoon Listing",
+        "location": {
+          "address": null,
+          "city": "Saskatoon",
+          "province": "Saskatchewan",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-saskatoon-sk",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price_min": 8257.5
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [],
+    "Peels": [
+      {
+        "clinic": "SKN Med Spa",
+        "location": {
+          "address": null,
+          "city": "Saskatoon",
+          "province": "Saskatchewan",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://sknmedspa.ca/treatments",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 160
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Ian Sunderland, MD - Saskatoon Listing",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Saskatoon",
+        "province": "Saskatchewan",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.threebestrated.ca/plastic-surgeon-in-saskatoon-sk"
+      ],
+      "procedures": [
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-saskatoon-sk",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 8257.5
+        },
+        {
+          "name": "Brow Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-saskatoon-sk",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 7284.5
+        },
+        {
+          "name": "Fat Grafting",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-saskatoon-sk",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 2500
+        },
+        {
+          "name": "Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-saskatoon-sk",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 4000
+        },
+        {
+          "name": "Lower Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-saskatoon-sk",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 9457.5
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-saskatoon-sk",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 8582.5
+        },
+        {
+          "name": "Upper Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-saskatoon-sk",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 3492.5
+        }
+      ],
+      "note": "Third-party public pricing; lower trust than official clinic-site prices."
+    },
+    {
+      "name": "SKN Med Spa",
+      "website": "https://sknmedspa.ca/",
+      "location": {
+        "address": null,
+        "city": "Saskatoon",
+        "province": "Saskatchewan",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://sknmedspa.ca/treatments"
+      ],
+      "procedures": [
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://sknmedspa.ca/treatments",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 595
+        },
+        {
+          "name": "Neuromodulator",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://sknmedspa.ca/treatments",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Laser Facial",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://sknmedspa.ca/treatments",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 275
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://sknmedspa.ca/treatments",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 160
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://sknmedspa.ca/treatments",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 385
+        }
+      ]
+    }
+  ]
+}

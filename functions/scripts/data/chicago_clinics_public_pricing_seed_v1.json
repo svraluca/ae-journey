@@ -1,0 +1,1669 @@
+{
+  "schema_version": "5.0-public-pricing-seed",
+  "checked_at": "2026-09-13",
+  "market": "Chicago metro, Illinois, USA",
+  "currency_default": "USD",
+  "dataset_rule": "Clinic-first mixed-source public-pricing seed. procedures[] contains every numeric-priced service captured from the reviewed public source for that clinic. Flagship categories are indexes only, not a filter.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page; preferred.",
+    "official_context_price": "Clinic's own public educational/planning range; use below direct posted price.",
+    "public_pricing_directory": "Third-party public pricing directory; lower trust than clinic-site pricing.",
+    "patient_reported": "Public patient-reported price; historical/lower trust.",
+    "market_benchmark": "City/metro benchmark only; never present it as a clinic quote."
+  },
+  "limitations": [
+    "This is a best-effort public-web seed, not a guaranteed exhaustive site-wide audit of every clinic.",
+    "Booking-only, login-only, private-quote, phone-only and unindexed prices may be absent.",
+    "Rows without numeric public pricing are omitted rather than estimated.",
+    "Directory-derived rows are explicitly marked and should rank below official clinic-site pricing in Explore.",
+    "Market benchmarks are stored separately and are not counted as clinic coverage."
+  ],
+  "clinic_count": 14,
+  "priced_procedure_count": 39,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 3,
+    "Fillers": 3,
+    "Rhinoplasty": 8,
+    "Boob job": 6,
+    "Hair transplant": 3,
+    "Peels": 3
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Center for Dermatology and Aesthetic Medicine",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/reviews/center-for-dermatology-and-aesthetic-medicine",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          }
+        ]
+      },
+      {
+        "clinic": "Chicagoland Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      },
+      {
+        "clinic": "Northwestern Med Spa River North",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Forehead Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          },
+          {
+            "name": "Masseter Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 20,
+            "price_max": 30
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Center for Dermatology and Aesthetic Medicine",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per syringe",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/reviews/center-for-dermatology-and-aesthetic-medicine",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Chicagoland Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 700
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 350,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Northwestern Med Spa River North",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chin Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 700
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 600
+          },
+          {
+            "name": "Nasal Folds Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 450,
+            "price_max": 650
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "Bloom Plastic Surgery",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 12000
+          }
+        ]
+      },
+      {
+        "clinic": "Chicago Breast & Body Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 8995
+          }
+        ]
+      },
+      {
+        "clinic": "Fulcrum Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 6100
+          }
+        ]
+      },
+      {
+        "clinic": "Hudson Facial Plastic Surgery",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 12000
+          }
+        ]
+      },
+      {
+        "clinic": "Michael Horn Plastic Surgery",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 9000
+          }
+        ]
+      },
+      {
+        "clinic": "Steven Dayan, MD / Glencoe Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 10000
+          }
+        ]
+      },
+      {
+        "clinic": "The Few Institute",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 15000
+          }
+        ]
+      },
+      {
+        "clinic": "TLKM Plastic Surgery - Thomas Mustoe, MD",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 7200
+          }
+        ]
+      }
+    ],
+    "Boob job": [
+      {
+        "clinic": "Bloom Plastic Surgery",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation / Breast Surgery",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/breast-surgery/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 9000,
+            "note": "Directory listing may group augmentation with broader breast-surgery pricing."
+          }
+        ]
+      },
+      {
+        "clinic": "Chicago Breast & Body Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation / Breast Surgery",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/breast-surgery/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 6995,
+            "note": "Directory listing may group augmentation with broader breast-surgery pricing."
+          }
+        ]
+      },
+      {
+        "clinic": "Fulcrum Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation / Breast Surgery",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/breast-surgery/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 5400,
+            "note": "Directory listing may group augmentation with broader breast-surgery pricing."
+          }
+        ]
+      },
+      {
+        "clinic": "Michael Horn Plastic Surgery",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation / Breast Surgery",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/breast-surgery/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 9000,
+            "note": "Directory listing may group augmentation with broader breast-surgery pricing."
+          }
+        ]
+      },
+      {
+        "clinic": "Steven Dayan, MD / Glencoe Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation / Breast Surgery",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/breast-surgery/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 9000,
+            "note": "Directory listing may group augmentation with broader breast-surgery pricing."
+          }
+        ]
+      },
+      {
+        "clinic": "The Few Institute",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation / Breast Surgery",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/best/breast-surgery/chicago",
+            "source_type": "public_pricing_directory",
+            "price_min": 12000,
+            "note": "Directory listing may group augmentation with broader breast-surgery pricing."
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [
+      {
+        "clinic": "Chicago Hair Transplant Clinic",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/clinics/city/chicago/",
+            "source_type": "public_pricing_directory",
+            "price_min": 5000
+          },
+          {
+            "name": "Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://transplantmatch.com/clinics/city/chicago/",
+            "source_type": "public_pricing_directory",
+            "price": 4.4
+          }
+        ]
+      },
+      {
+        "clinic": "Northwestern Hair",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/clinics/city/chicago/",
+            "source_type": "public_pricing_directory",
+            "price_min": 7000
+          },
+          {
+            "name": "Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://transplantmatch.com/clinics/city/chicago/",
+            "source_type": "public_pricing_directory",
+            "price": 7
+          }
+        ]
+      },
+      {
+        "clinic": "Solve Clinics",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/clinics/city/chicago/",
+            "source_type": "public_pricing_directory",
+            "price_min": 5000
+          },
+          {
+            "name": "Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://transplantmatch.com/clinics/city/chicago/",
+            "source_type": "public_pricing_directory",
+            "price": 5
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "Center for Dermatology and Aesthetic Medicine",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/reviews/center-for-dermatology-and-aesthetic-medicine",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 250
+          }
+        ]
+      },
+      {
+        "clinic": "Chicagoland Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Deep Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          },
+          {
+            "name": "Light Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          }
+        ]
+      },
+      {
+        "clinic": "Northwestern Med Spa River North",
+        "location": {
+          "address": null,
+          "city": "Chicago",
+          "state": "IL",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Deep Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 500
+          },
+          {
+            "name": "Light Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 150
+          },
+          {
+            "name": "Medium Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 200
+          }
+        ]
+      }
+    ]
+  },
+  "market_benchmarks": [
+    {
+      "category": "Botox",
+      "metric": "typical_unit_range",
+      "price_min": 12,
+      "price_max": 17,
+      "unit": "per unit",
+      "source_url": "https://www.allmedspas.com/blog/med-spa-cost-guide/",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Fillers",
+      "metric": "lip_filler_range",
+      "price_min": 600,
+      "price_max": 1000,
+      "source_url": "https://www.allmedspas.com/blog/med-spa-cost-guide/",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Boob job",
+      "metric": "metro_average",
+      "price": 8290,
+      "source_url": "https://www.realself.com/surgical/breast-augmentation/cost",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Hair transplant",
+      "metric": "city_range",
+      "price_min": 7500,
+      "price_median": 11200,
+      "price_max": 16500,
+      "source_url": "https://transplantmatch.com/prices/",
+      "source_type": "market_benchmark"
+    }
+  ],
+  "clinics": [
+    {
+      "name": "Bloom Plastic Surgery",
+      "website": "https://www.bloomplasticsurgery.com/",
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": "+1 312-549-8691",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://longevity.haus/best/rhinoplasty/chicago",
+          "https://longevity.haus/best/breast-surgery/chicago"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Breast Augmentation / Breast Surgery",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/breast-surgery/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 9000,
+          "note": "Directory listing may group augmentation with broader breast-surgery pricing."
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 12000
+        }
+      ],
+      "note": "Public Longevity.haus price listing."
+    },
+    {
+      "name": "Center for Dermatology and Aesthetic Medicine",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/il/chicago/reviews/center-for-dermatology-and-aesthetic-medicine"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Diamond Facial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/reviews/center-for-dermatology-and-aesthetic-medicine",
+          "source_type": "public_pricing_directory",
+          "price_min": 80,
+          "price_max": 150
+        },
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/reviews/center-for-dermatology-and-aesthetic-medicine",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Dermal Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per syringe",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/reviews/center-for-dermatology-and-aesthetic-medicine",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/reviews/center-for-dermatology-and-aesthetic-medicine",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "Kybella",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/reviews/center-for-dermatology-and-aesthetic-medicine",
+          "source_type": "public_pricing_directory",
+          "price_min": 1200,
+          "price_max": 1800
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/reviews/center-for-dermatology-and-aesthetic-medicine",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 250
+        }
+      ]
+    },
+    {
+      "name": "Chicago Breast & Body Aesthetics",
+      "website": "https://chicagobreastandbody.com/",
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": "+1 312-846-1529",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://longevity.haus/best/rhinoplasty/chicago",
+          "https://longevity.haus/best/breast-surgery/chicago"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Breast Augmentation / Breast Surgery",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/breast-surgery/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 6995,
+          "note": "Directory listing may group augmentation with broader breast-surgery pricing."
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 8995
+        }
+      ],
+      "note": "Public Longevity.haus price listing."
+    },
+    {
+      "name": "Chicago Hair Transplant Clinic",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://transplantmatch.com/clinics/city/chicago/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/clinics/city/chicago/",
+          "source_type": "public_pricing_directory",
+          "price_min": 5000
+        },
+        {
+          "name": "Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://transplantmatch.com/clinics/city/chicago/",
+          "source_type": "public_pricing_directory",
+          "price": 4.4
+        }
+      ]
+    },
+    {
+      "name": "Chicagoland Aesthetics",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/il/chicago/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Cheek Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 700
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 350,
+          "price_max": 600
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Deep Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Light Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        }
+      ]
+    },
+    {
+      "name": "Fulcrum Aesthetics",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://longevity.haus/best/rhinoplasty/chicago",
+          "https://longevity.haus/best/breast-surgery/chicago"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Breast Augmentation / Breast Surgery",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/breast-surgery/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 5400,
+          "note": "Directory listing may group augmentation with broader breast-surgery pricing."
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 6100
+        }
+      ],
+      "note": "Public Longevity.haus price listing."
+    },
+    {
+      "name": "Hudson Facial Plastic Surgery",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://longevity.haus/best/rhinoplasty/chicago",
+          "https://longevity.haus/best/breast-surgery/chicago"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 12000
+        }
+      ],
+      "note": "Public Longevity.haus price listing."
+    },
+    {
+      "name": "Michael Horn Plastic Surgery",
+      "website": "https://www.lakeshoreplasticsurgery.com/",
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": "+1 312-202-9000",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://longevity.haus/best/rhinoplasty/chicago",
+          "https://longevity.haus/best/breast-surgery/chicago"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Breast Augmentation / Breast Surgery",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/breast-surgery/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 9000,
+          "note": "Directory listing may group augmentation with broader breast-surgery pricing."
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 9000
+        }
+      ],
+      "note": "Public Longevity.haus price listing."
+    },
+    {
+      "name": "Northwestern Hair",
+      "website": "https://northwesternhair.com/",
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": "+1 312-668-8222",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://transplantmatch.com/clinics/city/chicago/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/clinics/city/chicago/",
+          "source_type": "public_pricing_directory",
+          "price_min": 7000
+        },
+        {
+          "name": "Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://transplantmatch.com/clinics/city/chicago/",
+          "source_type": "public_pricing_directory",
+          "price": 7
+        }
+      ]
+    },
+    {
+      "name": "Northwestern Med Spa River North",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/il/chicago/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Chin Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 700
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 600
+        },
+        {
+          "name": "Nasal Folds Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 450,
+          "price_max": 650
+        },
+        {
+          "name": "Forehead Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Masseter Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 20,
+          "price_max": 30
+        },
+        {
+          "name": "Deep Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Light Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 150
+        },
+        {
+          "name": "Medium Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/il/chicago/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 200
+        }
+      ]
+    },
+    {
+      "name": "Solve Clinics",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://transplantmatch.com/clinics/city/chicago/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/clinics/city/chicago/",
+          "source_type": "public_pricing_directory",
+          "price_min": 5000
+        },
+        {
+          "name": "Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://transplantmatch.com/clinics/city/chicago/",
+          "source_type": "public_pricing_directory",
+          "price": 5
+        }
+      ]
+    },
+    {
+      "name": "Steven Dayan, MD / Glencoe Aesthetics",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://longevity.haus/best/rhinoplasty/chicago",
+          "https://longevity.haus/best/breast-surgery/chicago"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Breast Augmentation / Breast Surgery",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/breast-surgery/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 9000,
+          "note": "Directory listing may group augmentation with broader breast-surgery pricing."
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 10000
+        }
+      ],
+      "note": "Public Longevity.haus price listing."
+    },
+    {
+      "name": "The Few Institute",
+      "website": "https://www.fewinstitute.com/",
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": "+1 312-380-0430",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://longevity.haus/best/rhinoplasty/chicago",
+          "https://longevity.haus/best/breast-surgery/chicago"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Breast Augmentation / Breast Surgery",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/breast-surgery/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 12000,
+          "note": "Directory listing may group augmentation with broader breast-surgery pricing."
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 15000
+        }
+      ],
+      "note": "Public Longevity.haus price listing."
+    },
+    {
+      "name": "TLKM Plastic Surgery - Thomas Mustoe, MD",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://longevity.haus/best/rhinoplasty/chicago",
+          "https://longevity.haus/best/breast-surgery/chicago"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/best/rhinoplasty/chicago",
+          "source_type": "public_pricing_directory",
+          "price_min": 7200
+        }
+      ],
+      "note": "Public Longevity.haus price listing."
+    }
+  ]
+}

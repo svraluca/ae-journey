@@ -1,0 +1,1882 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Richmond Hill, Ontario, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 8,
+  "priced_procedure_count": 91,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 8,
+    "Fillers": 8,
+    "Rhinoplasty": 0,
+    "Boob job": 0,
+    "Hair transplant": 0,
+    "Peels": 4
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Donya Medical Spa",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://donyamedicalspa.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8.99
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://donyamedicalspa.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 6.99
+          }
+        ]
+      },
+      {
+        "clinic": "Richmond Hill Cosmetic Clinic",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox - Up to 25 Units",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://rhcosmeticclinic.ca/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 9
+          },
+          {
+            "name": "Botox - Up to 50 Units",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://rhcosmeticclinic.ca/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8
+          },
+          {
+            "name": "Hyperhidrosis Botox - 100 Units",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "100 units",
+            "price_type": "fixed",
+            "source_url": "https://rhcosmeticclinic.ca/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 650
+          }
+        ]
+      },
+      {
+        "clinic": "Dermatouch Richmond Hill",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox - Promotional",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "promo_price",
+            "source_url": "https://dermatouch.ca/our-services/prices/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 7.5
+          },
+          {
+            "name": "Botox - Regular",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://dermatouch.ca/our-services/prices/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8
+          },
+          {
+            "name": "Dysport - Promotional",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "promo_price",
+            "source_url": "https://dermatouch.ca/our-services/prices/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 6.5
+          },
+          {
+            "name": "Dysport - Regular",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://dermatouch.ca/our-services/prices/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 7
+          }
+        ]
+      },
+      {
+        "clinic": "Skin Trek",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://skin-trek.com/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 12
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://skin-trek.com/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "clinic": "Rejubeau Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.rejubeau.com/",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price": 7
+          }
+        ]
+      },
+      {
+        "clinic": "LMC Laser Medical Clinic",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://lasermedicalclinic.com/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://lasermedicalclinic.com/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "clinic": "Bar Beauty Medical Aesthetics - Richmond Hill",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://barbeautymedspa.com/",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "clinic": "Richmond Hill Natural Therapies",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://rhnaturaltherapies.ca/",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price": 9
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://rhnaturaltherapies.ca/",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price": 8.25
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Donya Medical Spa",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Juvederm / Stylage Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "range",
+            "source_url": "https://donyamedicalspa.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 400,
+            "price_max": 500
+          }
+        ]
+      },
+      {
+        "clinic": "Richmond Hill Cosmetic Clinic",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Revanesse Contour / Ultra",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://rhcosmeticclinic.ca/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 550
+          },
+          {
+            "name": "Revanesse Kiss",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://rhcosmeticclinic.ca/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 500
+          },
+          {
+            "name": "Revanesse Shape / Outline",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://rhcosmeticclinic.ca/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 600
+          },
+          {
+            "name": "Under-Eye Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://rhcosmeticclinic.ca/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Dermatouch Richmond Hill",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "range",
+            "source_url": "https://dermatouch.ca/our-services/prices/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 350,
+            "price_max": 550
+          }
+        ]
+      },
+      {
+        "clinic": "Skin Trek",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "HA Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://skin-trek.com/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 800
+          },
+          {
+            "name": "Filler Dissolving",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://skin-trek.com/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Rejubeau Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Face Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per cc",
+            "price_type": "fixed",
+            "source_url": "https://www.rejubeau.com/",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price": 550
+          },
+          {
+            "name": "Hair Filler",
+            "category": "hair",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.rejubeau.com/",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price": 150
+          }
+        ]
+      },
+      {
+        "clinic": "LMC Laser Medical Clinic",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "from",
+            "source_url": "https://lasermedicalclinic.com/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 500
+          }
+        ]
+      },
+      {
+        "clinic": "Bar Beauty Medical Aesthetics - Richmond Hill",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler - Full",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "full syringe",
+            "price_type": "fixed",
+            "source_url": "https://barbeautymedspa.com/",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price": 750
+          },
+          {
+            "name": "Lip Filler - Half",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://barbeautymedspa.com/",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price": 500
+          }
+        ]
+      },
+      {
+        "clinic": "Richmond Hill Natural Therapies",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Restylane Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://rhnaturaltherapies.ca/",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price_min": 255,
+            "price_max": 590
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [],
+    "Boob job": [],
+    "Hair transplant": [],
+    "Peels": [
+      {
+        "clinic": "Donya Medical Spa",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://donyamedicalspa.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 250
+          }
+        ]
+      },
+      {
+        "clinic": "Richmond Hill Cosmetic Clinic",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Acid Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://rhcosmeticclinic.ca/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 100
+          },
+          {
+            "name": "Hollywood Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://rhcosmeticclinic.ca/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 150
+          }
+        ]
+      },
+      {
+        "clinic": "LMC Laser Medical Clinic",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://lasermedicalclinic.com/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 200
+          },
+          {
+            "name": "Chemical Peel - 3 Pack",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "package",
+            "price_type": "fixed",
+            "source_url": "https://lasermedicalclinic.com/price-list/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 500
+          }
+        ]
+      },
+      {
+        "clinic": "Richmond Hill Natural Therapies",
+        "location": {
+          "address": null,
+          "city": "Richmond Hill",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://rhnaturaltherapies.ca/",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price": 69
+          },
+          {
+            "name": "Chemical Peel - 3 Pack",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "package",
+            "price_type": "fixed",
+            "source_url": "https://rhnaturaltherapies.ca/",
+            "source_type": "public_booking_price",
+            "checked_at": "2026-09-13",
+            "price": 189
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Bar Beauty Medical Aesthetics - Richmond Hill",
+      "website": "https://barbeautymedspa.com/",
+      "location": {
+        "address": null,
+        "city": "Richmond Hill",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "public_booking_price_capture",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://barbeautymedspa.com/"
+      ],
+      "procedures": [
+        {
+          "name": "Lip Filler - Full",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "full syringe",
+          "price_type": "fixed",
+          "source_url": "https://barbeautymedspa.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 750
+        },
+        {
+          "name": "Lip Filler - Half",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://barbeautymedspa.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 500
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://barbeautymedspa.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Aerolase - Face + Neck",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://barbeautymedspa.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "Aerolase - Full",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://barbeautymedspa.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 450
+        },
+        {
+          "name": "Aerolase - Half",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://barbeautymedspa.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 300
+        },
+        {
+          "name": "PRP + Microneedling",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://barbeautymedspa.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 700
+        },
+        {
+          "name": "PRP Face",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://barbeautymedspa.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "ProCell",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://barbeautymedspa.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 350
+        },
+        {
+          "name": "SkinPen",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://barbeautymedspa.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 400
+        }
+      ]
+    },
+    {
+      "name": "Dermatouch Richmond Hill",
+      "website": "https://dermatouch.ca/",
+      "location": {
+        "address": null,
+        "city": "Richmond Hill",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://dermatouch.ca/our-services/prices/"
+      ],
+      "procedures": [
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "range",
+          "source_url": "https://dermatouch.ca/our-services/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 350,
+          "price_max": 550
+        },
+        {
+          "name": "Botox - Promotional",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "promo_price",
+          "source_url": "https://dermatouch.ca/our-services/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 7.5
+        },
+        {
+          "name": "Botox - Regular",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://dermatouch.ca/our-services/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8
+        },
+        {
+          "name": "Dysport - Promotional",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "promo_price",
+          "source_url": "https://dermatouch.ca/our-services/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 6.5
+        },
+        {
+          "name": "Dysport - Regular",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://dermatouch.ca/our-services/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 7
+        }
+      ]
+    },
+    {
+      "name": "Donya Medical Spa",
+      "website": "https://donyamedicalspa.com/",
+      "location": {
+        "address": null,
+        "city": "Richmond Hill",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://donyamedicalspa.com/pricing/"
+      ],
+      "procedures": [
+        {
+          "name": "Body Contouring",
+          "category": "body_contouring",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 150
+        },
+        {
+          "name": "Acne Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 200
+        },
+        {
+          "name": "Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 120
+        },
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 250
+        },
+        {
+          "name": "OxyGeneo",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 250
+        },
+        {
+          "name": "Juvederm / Stylage Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "range",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 400,
+          "price_max": 500
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8.99
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 6.99
+        },
+        {
+          "name": "IPL",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 250
+        },
+        {
+          "name": "Red Light Therapy",
+          "category": "light_therapy",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 50
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 250
+        },
+        {
+          "name": "Radiofrequency",
+          "category": "radiofrequency",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 100
+        },
+        {
+          "name": "Microneedling + PRF",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 449
+        },
+        {
+          "name": "Microneedling + PRP",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 349
+        },
+        {
+          "name": "SkinPen",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 320
+        },
+        {
+          "name": "Profhilo",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://donyamedicalspa.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        }
+      ]
+    },
+    {
+      "name": "LMC Laser Medical Clinic",
+      "website": "https://lasermedicalclinic.com/",
+      "location": {
+        "address": null,
+        "city": "Richmond Hill",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://lasermedicalclinic.com/price-list/"
+      ],
+      "procedures": [
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "from",
+          "source_url": "https://lasermedicalclinic.com/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 500
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://lasermedicalclinic.com/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://lasermedicalclinic.com/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://lasermedicalclinic.com/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 200
+        },
+        {
+          "name": "Chemical Peel - 3 Pack",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://lasermedicalclinic.com/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 500
+        },
+        {
+          "name": "Skin-Tox",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://lasermedicalclinic.com/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "Skin-Tox - 3 Pack",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://lasermedicalclinic.com/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1600
+        },
+        {
+          "name": "NCTF",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://lasermedicalclinic.com/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        },
+        {
+          "name": "Restylane Skinbooster",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://lasermedicalclinic.com/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 400
+        }
+      ]
+    },
+    {
+      "name": "Rejubeau Medical Aesthetics",
+      "website": "https://www.rejubeau.com/",
+      "location": {
+        "address": null,
+        "city": "Richmond Hill",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "public_booking_price_capture",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.rejubeau.com/"
+      ],
+      "procedures": [
+        {
+          "name": "Radiesse",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.rejubeau.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 650
+        },
+        {
+          "name": "Sculptra",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "per vial",
+          "price_type": "fixed",
+          "source_url": "https://www.rejubeau.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "Cellulite Treatment",
+          "category": "body_contouring",
+          "currency": "CAD",
+          "unit": "per session",
+          "price_type": "fixed",
+          "source_url": "https://www.rejubeau.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 500
+        },
+        {
+          "name": "VIP Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.rejubeau.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 250
+        },
+        {
+          "name": "Face Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per cc",
+          "price_type": "fixed",
+          "source_url": "https://www.rejubeau.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "Hair Filler",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.rejubeau.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 150
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.rejubeau.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 7
+        },
+        {
+          "name": "P-Shot / O-Shot",
+          "category": "intimate",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.rejubeau.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 1300
+        },
+        {
+          "name": "EndoRF",
+          "category": "radiofrequency",
+          "currency": "CAD",
+          "unit": "per area",
+          "price_type": "fixed",
+          "source_url": "https://www.rejubeau.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "Exosome",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per vial",
+          "price_type": "fixed",
+          "source_url": "https://www.rejubeau.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 500
+        },
+        {
+          "name": "PRP / PRF",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.rejubeau.com/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 450
+        }
+      ]
+    },
+    {
+      "name": "Richmond Hill Cosmetic Clinic",
+      "website": "https://rhcosmeticclinic.ca/",
+      "location": {
+        "address": null,
+        "city": "Richmond Hill",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://rhcosmeticclinic.ca/price-list/"
+      ],
+      "procedures": [
+        {
+          "name": "Sculptra",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "per vial",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 700
+        },
+        {
+          "name": "Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 120
+        },
+        {
+          "name": "Facial + Microdermabrasion",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 180
+        },
+        {
+          "name": "Revanesse Contour / Ultra",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "Revanesse Kiss",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 500
+        },
+        {
+          "name": "Revanesse Shape / Outline",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "Under-Eye Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "Botox - Up to 25 Units",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 9
+        },
+        {
+          "name": "Botox - Up to 50 Units",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8
+        },
+        {
+          "name": "Hyperhidrosis Botox - 100 Units",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "100 units",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 650
+        },
+        {
+          "name": "Nail Laser",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 400
+        },
+        {
+          "name": "Acid Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 100
+        },
+        {
+          "name": "Hollywood Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 150
+        },
+        {
+          "name": "Ear Piercing",
+          "category": "piercing",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 50
+        },
+        {
+          "name": "Acne Package",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1000
+        },
+        {
+          "name": "Crystal Microdermabrasion",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 100
+        },
+        {
+          "name": "Diamond Microdermabrasion",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 90
+        },
+        {
+          "name": "Profhilo H+L",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 400
+        },
+        {
+          "name": "Profhilo Structura",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhcosmeticclinic.ca/price-list/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 500
+        }
+      ]
+    },
+    {
+      "name": "Richmond Hill Natural Therapies",
+      "website": "https://rhnaturaltherapies.ca/",
+      "location": {
+        "address": null,
+        "city": "Richmond Hill",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "public_booking_price_capture",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://rhnaturaltherapies.ca/"
+      ],
+      "procedures": [
+        {
+          "name": "Restylane Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://rhnaturaltherapies.ca/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price_min": 255,
+          "price_max": 590
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://rhnaturaltherapies.ca/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 9
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://rhnaturaltherapies.ca/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 8.25
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhnaturaltherapies.ca/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 69
+        },
+        {
+          "name": "Chemical Peel - 3 Pack",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://rhnaturaltherapies.ca/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 189
+        },
+        {
+          "name": "Fractora",
+          "category": "rf_microneedling",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhnaturaltherapies.ca/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 500
+        },
+        {
+          "name": "Fractora - 3 Pack",
+          "category": "rf_microneedling",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://rhnaturaltherapies.ca/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 1300
+        },
+        {
+          "name": "Microblading",
+          "category": "semi_permanent_makeup",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhnaturaltherapies.ca/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 390
+        },
+        {
+          "name": "Microblading Follow-Up",
+          "category": "semi_permanent_makeup",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://rhnaturaltherapies.ca/",
+          "source_type": "public_booking_price",
+          "checked_at": "2026-09-13",
+          "price": 120
+        }
+      ]
+    },
+    {
+      "name": "Skin Trek",
+      "website": "https://skin-trek.com/",
+      "location": {
+        "address": null,
+        "city": "Richmond Hill",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://skin-trek.com/"
+      ],
+      "procedures": [
+        {
+          "name": "Radiesse",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://skin-trek.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1000
+        },
+        {
+          "name": "Sculptra",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "per vial",
+          "price_type": "fixed",
+          "source_url": "https://skin-trek.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1000
+        },
+        {
+          "name": "HA Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://skin-trek.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "PRP Hair",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://skin-trek.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1000
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://skin-trek.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 12
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://skin-trek.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Filler Dissolving",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://skin-trek.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "Laser Facial",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://skin-trek.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        },
+        {
+          "name": "PRP Face",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://skin-trek.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "Combo Mesotherapy",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://skin-trek.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1000
+        },
+        {
+          "name": "NCTF Mesotherapy",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://skin-trek.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 500
+        },
+        {
+          "name": "Redensity Mesotherapy",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://skin-trek.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 700
+        }
+      ]
+    }
+  ]
+}

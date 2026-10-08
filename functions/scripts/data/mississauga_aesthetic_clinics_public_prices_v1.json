@@ -1,0 +1,684 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Mississauga, Ontario, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 3,
+  "priced_procedure_count": 33,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 1,
+    "Fillers": 1,
+    "Rhinoplasty": 2,
+    "Boob job": 2,
+    "Hair transplant": 0,
+    "Peels": 1
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "TS Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Mississauga",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "TS Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Mississauga",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Fillers",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 550
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "The Plastic Surgery Clinic - Mississauga",
+        "location": {
+          "address": "1421 Hurontario St, Mississauga, ON",
+          "city": "Mississauga",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Revision Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 19900,
+            "price_max": 25000
+          },
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 14900,
+            "price_max": 16900
+          }
+        ]
+      },
+      {
+        "clinic": "Cory Goldberg, MD - Mississauga Listing",
+        "location": {
+          "address": null,
+          "city": "Mississauga",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/ontario/mississauga",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price_min": 4900,
+            "price_max": 8500
+          }
+        ]
+      }
+    ],
+    "Boob job": [
+      {
+        "clinic": "The Plastic Surgery Clinic - Mississauga",
+        "location": {
+          "address": "1421 Hurontario St, Mississauga, ON",
+          "city": "Mississauga",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 15000,
+            "price_max": 17000
+          }
+        ]
+      },
+      {
+        "clinic": "Cory Goldberg, MD - Mississauga Listing",
+        "location": {
+          "address": null,
+          "city": "Mississauga",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Implants",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/ontario/mississauga",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price_min": 5900,
+            "price_max": 7400
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [],
+    "Peels": [
+      {
+        "clinic": "TS Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Mississauga",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Linder Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 249
+          },
+          {
+            "name": "TCA Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 449
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Cory Goldberg, MD - Mississauga Listing",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Mississauga",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/ontario/mississauga"
+      ],
+      "procedures": [
+        {
+          "name": "Breast Implants",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/ontario/mississauga",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 5900,
+          "price_max": 7400
+        },
+        {
+          "name": "Gynecomastia",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/ontario/mississauga",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 5400
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/ontario/mississauga",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 4900,
+          "price_max": 8500
+        }
+      ],
+      "note": "Third-party WhatClinic public pricing; lower trust than an official clinic-site quote."
+    },
+    {
+      "name": "The Plastic Surgery Clinic - Mississauga",
+      "website": "https://www.theplasticsurgeryclinic.ca/",
+      "location": {
+        "address": "1421 Hurontario St, Mississauga, ON",
+        "city": "Mississauga",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "practice",
+      "source_urls": [
+        "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/"
+      ],
+      "procedures": [
+        {
+          "name": "Brazilian Butt Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14900,
+          "price_max": 19900
+        },
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15000,
+          "price_max": 17000
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14000,
+          "price_max": 18000
+        },
+        {
+          "name": "Breast Lift + Implant",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 16000,
+          "price_max": 20000
+        },
+        {
+          "name": "Breast Reduction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14000,
+          "price_max": 18000
+        },
+        {
+          "name": "Facelift / Mini Facelift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 28000,
+          "price_max": 38000
+        },
+        {
+          "name": "Gynecomastia",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 13000,
+          "price_max": 17000
+        },
+        {
+          "name": "Labiaplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9000,
+          "price_max": 14000
+        },
+        {
+          "name": "Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12000,
+          "price_max": 19000
+        },
+        {
+          "name": "Otoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9000,
+          "price_max": 13000
+        },
+        {
+          "name": "Revision Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 19900,
+          "price_max": 25000
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14900,
+          "price_max": 16900
+        },
+        {
+          "name": "Thigh Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12000,
+          "price_max": 19000
+        }
+      ]
+    },
+    {
+      "name": "TS Medical Aesthetics",
+      "website": "https://www.trendsassy.ca/",
+      "location": {
+        "address": null,
+        "city": "Mississauga",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.trendsassy.ca/pricing-and-promotions"
+      ],
+      "procedures": [
+        {
+          "name": "Radiesse",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 799
+        },
+        {
+          "name": "Dermal Fillers",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "PRP Hair",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 449
+        },
+        {
+          "name": "Botox / Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Submental Treatment",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 399
+        },
+        {
+          "name": "Linder Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 249
+        },
+        {
+          "name": "TCA Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 449
+        },
+        {
+          "name": "Microneedling + Exosomes",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 549
+        },
+        {
+          "name": "Microneedling + VAMP",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 599
+        },
+        {
+          "name": "PRF Gel Skin",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 699
+        },
+        {
+          "name": "PRF Gel Under-Eye",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 599
+        },
+        {
+          "name": "PRP Under Eye",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 449
+        },
+        {
+          "name": "PRP Vampire Facial",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 549
+        },
+        {
+          "name": "Morpheus8 Face",
+          "category": "rf_microneedling",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 749
+        },
+        {
+          "name": "Morpheus8 Face + Neck",
+          "category": "rf_microneedling",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 949
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 349
+        },
+        {
+          "name": "Skin Booster",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.trendsassy.ca/pricing-and-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 550
+        }
+      ]
+    }
+  ]
+}

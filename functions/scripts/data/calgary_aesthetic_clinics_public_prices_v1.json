@@ -1,0 +1,1851 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Calgary, Alberta, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 10,
+  "priced_procedure_count": 75,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 7,
+    "Fillers": 8,
+    "Rhinoplasty": 0,
+    "Boob job": 1,
+    "Hair transplant": 1,
+    "Peels": 1
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Forma Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.formaspecialist.ca/services-calgary-medical-aesthetic-clinic",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "clinic": "Beauty Edit Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://beautyedit.ca/services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "clinic": "Franks by Frida",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Dysport - Level 2",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8
+          },
+          {
+            "name": "Botox / Dysport - Level 3",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          },
+          {
+            "name": "Botox / Dysport - Level 4",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 11
+          },
+          {
+            "name": "Botox / Dysport - Level 5",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 12
+          }
+        ]
+      },
+      {
+        "clinic": "The Clinic YYC",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://theclinicyyc.ca/pages/aesthetics",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 12
+          }
+        ]
+      },
+      {
+        "clinic": "Face Equation",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Neuromodulator - Referral",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.faceequation.com/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8.5
+          },
+          {
+            "name": "Neuromodulator - Standard",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.faceequation.com/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 9
+          }
+        ]
+      },
+      {
+        "clinic": "NÜ Clinic",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.nuyyc.ca/aesthetics-prices",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "clinic": "Avenida Medispa",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://avenidamedispa.com/botox-fillers",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Dermatology Centre - Calgary",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Miso Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.dermatologycentre.ca/prices",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 450
+          }
+        ]
+      },
+      {
+        "clinic": "Forma Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.formaspecialist.ca/services-calgary-medical-aesthetic-clinic",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 600
+          },
+          {
+            "name": "Half-Syringe Lip Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.formaspecialist.ca/services-calgary-medical-aesthetic-clinic",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 350
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.formaspecialist.ca/services-calgary-medical-aesthetic-clinic",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Beauty Edit Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Fillers",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "from",
+            "source_url": "https://beautyedit.ca/services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Franks by Frida",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Filler - Level 2 Full",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "full syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 550
+          },
+          {
+            "name": "Filler - Level 2 Half",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 325
+          },
+          {
+            "name": "Filler - Level 3 Full",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "full syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 650
+          },
+          {
+            "name": "Filler - Level 3 Half",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 375
+          },
+          {
+            "name": "Filler - Level 4 Full",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "full syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 750
+          },
+          {
+            "name": "Filler - Level 4 Half",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 475
+          },
+          {
+            "name": "Filler - Level 5 Full",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "full syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 850
+          },
+          {
+            "name": "Filler - Level 5 Half",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 575
+          },
+          {
+            "name": "Non-Surgical Rhinoplasty",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.wearefranks.com/services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 950
+          }
+        ]
+      },
+      {
+        "clinic": "The Clinic YYC",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Filler - Full Syringe",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "full syringe",
+            "price_type": "fixed",
+            "source_url": "https://theclinicyyc.ca/pages/aesthetics",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 800
+          },
+          {
+            "name": "Filler - Half Syringe",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://theclinicyyc.ca/pages/aesthetics",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 525
+          }
+        ]
+      },
+      {
+        "clinic": "Face Equation",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.faceequation.com/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 650
+          },
+          {
+            "name": "Half-Syringe Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.faceequation.com/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 375
+          }
+        ]
+      },
+      {
+        "clinic": "NÜ Clinic",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.nuyyc.ca/aesthetics-prices",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 500
+          }
+        ]
+      },
+      {
+        "clinic": "Avenida Medispa",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://avenidamedispa.com/botox-fillers",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 550
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [],
+    "Boob job": [
+      {
+        "clinic": "Radiance Plastic Surgery",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://radianceplasticsurgery.ca/fees-and-financing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 12400
+          },
+          {
+            "name": "Breast Augmentation + Lift",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://radianceplasticsurgery.ca/fees-and-financing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 19400
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [
+      {
+        "clinic": "HairNation Calgary",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "FUE Hair Transplant - 1200 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1200 grafts",
+            "price_type": "fixed",
+            "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 7500
+          },
+          {
+            "name": "FUE Hair Transplant - 1500 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1500 grafts",
+            "price_type": "fixed",
+            "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8000
+          },
+          {
+            "name": "FUE Hair Transplant - 1800 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1800 grafts",
+            "price_type": "fixed",
+            "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8500
+          },
+          {
+            "name": "FUE Hair Transplant - 2000 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2000 grafts",
+            "price_type": "fixed",
+            "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 9000
+          },
+          {
+            "name": "FUE Hair Transplant - 2200 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2200 grafts",
+            "price_type": "fixed",
+            "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10000
+          },
+          {
+            "name": "FUE Hair Transplant - 2500 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2500 grafts",
+            "price_type": "fixed",
+            "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 11000
+          },
+          {
+            "name": "FUE Hair Transplant - 2700 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2700 grafts",
+            "price_type": "fixed",
+            "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 11500
+          },
+          {
+            "name": "FUE Hair Transplant - 3000+ Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "3000+ grafts",
+            "price_type": "from",
+            "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 12000
+          },
+          {
+            "name": "FUE Hair Transplant - 400 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "400 grafts",
+            "price_type": "fixed",
+            "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 5500
+          },
+          {
+            "name": "FUE Hair Transplant - 800 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "800 grafts",
+            "price_type": "fixed",
+            "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 6500
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "Dermatology Centre - Calgary",
+        "location": {
+          "address": null,
+          "city": "Calgary",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Acne Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.dermatologycentre.ca/prices",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 160
+          },
+          {
+            "name": "AHA Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.dermatologycentre.ca/prices",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 200
+          },
+          {
+            "name": "Anti-Aging Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.dermatologycentre.ca/prices",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 180
+          },
+          {
+            "name": "Discolouration Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.dermatologycentre.ca/prices",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 200
+          },
+          {
+            "name": "Hydrating Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.dermatologycentre.ca/prices",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 160
+          },
+          {
+            "name": "Radiance Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.dermatologycentre.ca/prices",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 180
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Avenida Medispa",
+      "website": "https://avenidamedispa.com/",
+      "location": {
+        "address": null,
+        "city": "Calgary",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://avenidamedispa.com/botox-fillers"
+      ],
+      "procedures": [
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://avenidamedispa.com/botox-fillers",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://avenidamedispa.com/botox-fillers",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8
+        },
+        {
+          "name": "Hyaluronidase",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://avenidamedispa.com/botox-fillers",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 200
+        }
+      ]
+    },
+    {
+      "name": "Beauty Edit Medical Aesthetics",
+      "website": "https://beautyedit.ca/",
+      "location": {
+        "address": null,
+        "city": "Calgary",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://beautyedit.ca/services/"
+      ],
+      "procedures": [
+        {
+          "name": "CoolSculpting",
+          "category": "body_contouring",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://beautyedit.ca/services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 800
+        },
+        {
+          "name": "HydraFacial Deluxe",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://beautyedit.ca/services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 249
+        },
+        {
+          "name": "HydraFacial Platinum",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://beautyedit.ca/services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 299
+        },
+        {
+          "name": "HydraFacial Signature",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://beautyedit.ca/services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 199
+        },
+        {
+          "name": "Dermal Fillers",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "from",
+          "source_url": "https://beautyedit.ca/services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 600
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://beautyedit.ca/services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Exosome Treatment",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://beautyedit.ca/services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 700
+        },
+        {
+          "name": "Exosome Treatment - 3 Sessions",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://beautyedit.ca/services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1500
+        }
+      ]
+    },
+    {
+      "name": "Dermatology Centre - Calgary",
+      "website": "https://www.dermatologycentre.ca/",
+      "location": {
+        "address": null,
+        "city": "Calgary",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.dermatologycentre.ca/prices"
+      ],
+      "procedures": [
+        {
+          "name": "Cosmetic Lesion Removal",
+          "category": "dermatology",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.dermatologycentre.ca/prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 100,
+          "price_max": 500
+        },
+        {
+          "name": "Miso Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.dermatologycentre.ca/prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 450
+        },
+        {
+          "name": "Acne Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.dermatologycentre.ca/prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 160
+        },
+        {
+          "name": "AHA Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.dermatologycentre.ca/prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 200
+        },
+        {
+          "name": "Anti-Aging Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.dermatologycentre.ca/prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 180
+        },
+        {
+          "name": "Discolouration Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.dermatologycentre.ca/prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 200
+        },
+        {
+          "name": "Hydrating Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.dermatologycentre.ca/prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 160
+        },
+        {
+          "name": "Radiance Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.dermatologycentre.ca/prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 180
+        },
+        {
+          "name": "Microneedling Skin Lightening",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.dermatologycentre.ca/prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        },
+        {
+          "name": "HA Skin Booster",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.dermatologycentre.ca/prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        }
+      ]
+    },
+    {
+      "name": "Face Equation",
+      "website": "https://www.faceequation.com/",
+      "location": {
+        "address": null,
+        "city": "Calgary",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.faceequation.com/pricing"
+      ],
+      "procedures": [
+        {
+          "name": "HArmonyCa - 2 Syringes",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "2 syringes",
+          "price_type": "fixed",
+          "source_url": "https://www.faceequation.com/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1800
+        },
+        {
+          "name": "Radiesse",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "1.5 mL",
+          "price_type": "fixed",
+          "source_url": "https://www.faceequation.com/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 850
+        },
+        {
+          "name": "Radiesse - 2 Syringes",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "2 syringes",
+          "price_type": "fixed",
+          "source_url": "https://www.faceequation.com/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1600
+        },
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.faceequation.com/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 650
+        },
+        {
+          "name": "Half-Syringe Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.faceequation.com/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 375
+        },
+        {
+          "name": "Neuromodulator - Referral",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.faceequation.com/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8.5
+        },
+        {
+          "name": "Neuromodulator - Standard",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.faceequation.com/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 9
+        },
+        {
+          "name": "Redensity 1",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "3 mL",
+          "price_type": "fixed",
+          "source_url": "https://www.faceequation.com/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "SkinVive - 2 Syringes",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "2 syringes",
+          "price_type": "fixed",
+          "source_url": "https://www.faceequation.com/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "SkinVive - 3 Syringes",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "3 syringes",
+          "price_type": "fixed",
+          "source_url": "https://www.faceequation.com/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1200
+        }
+      ]
+    },
+    {
+      "name": "Forma Medical Aesthetics",
+      "website": "https://www.formaspecialist.ca/",
+      "location": {
+        "address": null,
+        "city": "Calgary",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.formaspecialist.ca/services-calgary-medical-aesthetic-clinic"
+      ],
+      "procedures": [
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.formaspecialist.ca/services-calgary-medical-aesthetic-clinic",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "Half-Syringe Lip Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.formaspecialist.ca/services-calgary-medical-aesthetic-clinic",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.formaspecialist.ca/services-calgary-medical-aesthetic-clinic",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "Botox / Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.formaspecialist.ca/services-calgary-medical-aesthetic-clinic",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Deoxycholic Acid",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.formaspecialist.ca/services-calgary-medical-aesthetic-clinic",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 500,
+          "price_max": 600
+        },
+        {
+          "name": "Hyaluronidase",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.formaspecialist.ca/services-calgary-medical-aesthetic-clinic",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 100
+        }
+      ]
+    },
+    {
+      "name": "Franks by Frida",
+      "website": "https://www.wearefranks.com/",
+      "location": {
+        "address": null,
+        "city": "Calgary",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.wearefranks.com/services"
+      ],
+      "procedures": [
+        {
+          "name": "Filler - Level 2 Full",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "full syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "Filler - Level 2 Half",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 325
+        },
+        {
+          "name": "Filler - Level 3 Full",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "full syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 650
+        },
+        {
+          "name": "Filler - Level 3 Half",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 375
+        },
+        {
+          "name": "Filler - Level 4 Full",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "full syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 750
+        },
+        {
+          "name": "Filler - Level 4 Half",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 475
+        },
+        {
+          "name": "Filler - Level 5 Full",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "full syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 850
+        },
+        {
+          "name": "Filler - Level 5 Half",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 575
+        },
+        {
+          "name": "Non-Surgical Rhinoplasty",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 950
+        },
+        {
+          "name": "Botox / Dysport - Level 2",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8
+        },
+        {
+          "name": "Botox / Dysport - Level 3",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Botox / Dysport - Level 4",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 11
+        },
+        {
+          "name": "Botox / Dysport - Level 5",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.wearefranks.com/services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 12
+        }
+      ]
+    },
+    {
+      "name": "HairNation Calgary",
+      "website": "https://hairnation.ca/",
+      "location": {
+        "address": null,
+        "city": "Calgary",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://hairnation.ca/hair-transplant-calgary-pricing"
+      ],
+      "procedures": [
+        {
+          "name": "FUE Hair Transplant - 1200 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1200 grafts",
+          "price_type": "fixed",
+          "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 7500
+        },
+        {
+          "name": "FUE Hair Transplant - 1500 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1500 grafts",
+          "price_type": "fixed",
+          "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8000
+        },
+        {
+          "name": "FUE Hair Transplant - 1800 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1800 grafts",
+          "price_type": "fixed",
+          "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8500
+        },
+        {
+          "name": "FUE Hair Transplant - 2000 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2000 grafts",
+          "price_type": "fixed",
+          "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 9000
+        },
+        {
+          "name": "FUE Hair Transplant - 2200 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2200 grafts",
+          "price_type": "fixed",
+          "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10000
+        },
+        {
+          "name": "FUE Hair Transplant - 2500 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2500 grafts",
+          "price_type": "fixed",
+          "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 11000
+        },
+        {
+          "name": "FUE Hair Transplant - 2700 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2700 grafts",
+          "price_type": "fixed",
+          "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 11500
+        },
+        {
+          "name": "FUE Hair Transplant - 3000+ Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "3000+ grafts",
+          "price_type": "from",
+          "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12000
+        },
+        {
+          "name": "FUE Hair Transplant - 400 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "400 grafts",
+          "price_type": "fixed",
+          "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 5500
+        },
+        {
+          "name": "FUE Hair Transplant - 800 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "800 grafts",
+          "price_type": "fixed",
+          "source_url": "https://hairnation.ca/hair-transplant-calgary-pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 6500
+        }
+      ]
+    },
+    {
+      "name": "NÜ Clinic",
+      "website": "https://www.nuyyc.ca/",
+      "location": {
+        "address": null,
+        "city": "Calgary",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.nuyyc.ca/aesthetics-prices"
+      ],
+      "procedures": [
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.nuyyc.ca/aesthetics-prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 500
+        },
+        {
+          "name": "PRP Hair Restoration",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per session",
+          "price_type": "fixed",
+          "source_url": "https://www.nuyyc.ca/aesthetics-prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.nuyyc.ca/aesthetics-prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "PRP Face",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.nuyyc.ca/aesthetics-prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 500
+        },
+        {
+          "name": "PRP Tear Trough",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.nuyyc.ca/aesthetics-prices",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        }
+      ]
+    },
+    {
+      "name": "Radiance Plastic Surgery",
+      "website": "https://radianceplasticsurgery.ca/",
+      "location": {
+        "address": null,
+        "city": "Calgary",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://radianceplasticsurgery.ca/fees-and-financing/"
+      ],
+      "procedures": [
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://radianceplasticsurgery.ca/fees-and-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12400
+        },
+        {
+          "name": "Breast Augmentation + Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://radianceplasticsurgery.ca/fees-and-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 19400
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://radianceplasticsurgery.ca/fees-and-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12400
+        },
+        {
+          "name": "Face / Neck Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://radianceplasticsurgery.ca/fees-and-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 26400
+        },
+        {
+          "name": "Facial Fat Grafting",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://radianceplasticsurgery.ca/fees-and-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9400,
+          "price_max": 15900
+        },
+        {
+          "name": "Otoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://radianceplasticsurgery.ca/fees-and-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 19400,
+          "price_max": 26400
+        },
+        {
+          "name": "Upper Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://radianceplasticsurgery.ca/fees-and-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5400
+        }
+      ]
+    },
+    {
+      "name": "The Clinic YYC",
+      "website": "https://theclinicyyc.ca/",
+      "location": {
+        "address": null,
+        "city": "Calgary",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://theclinicyyc.ca/pages/aesthetics"
+      ],
+      "procedures": [
+        {
+          "name": "Filler - Full Syringe",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "full syringe",
+          "price_type": "fixed",
+          "source_url": "https://theclinicyyc.ca/pages/aesthetics",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "Filler - Half Syringe",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://theclinicyyc.ca/pages/aesthetics",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 525
+        },
+        {
+          "name": "Botox / Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://theclinicyyc.ca/pages/aesthetics",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 12
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,450 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Surrey, British Columbia, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 1,
+  "priced_procedure_count": 18,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 1,
+    "Fillers": 1,
+    "Rhinoplasty": 0,
+    "Boob job": 0,
+    "Hair transplant": 0,
+    "Peels": 1
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Serene Rejuvenation",
+        "location": {
+          "address": null,
+          "city": "Surrey",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 11
+          },
+          {
+            "name": "Xeomin",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Serene Rejuvenation",
+        "location": {
+          "address": null,
+          "city": "Surrey",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Belotero Intense - Full",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "full syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 695
+          },
+          {
+            "name": "Belotero Intense - Half",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 525
+          },
+          {
+            "name": "Belotero Shape / Contour - Full",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "full syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 595
+          },
+          {
+            "name": "Belotero Shape / Contour - Half",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 445
+          },
+          {
+            "name": "Belotero Soft / Balance - Full",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "full syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 655
+          },
+          {
+            "name": "Belotero Soft / Balance - Half",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 495
+          },
+          {
+            "name": "Belotero Volume",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "full syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 745
+          },
+          {
+            "name": "Filler Dissolving",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 295
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [],
+    "Boob job": [],
+    "Hair transplant": [],
+    "Peels": [
+      {
+        "clinic": "Serene Rejuvenation",
+        "location": {
+          "address": null,
+          "city": "Surrey",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "PCA Enzymatic Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 229
+          },
+          {
+            "name": "PCA NoPeel Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 229
+          },
+          {
+            "name": "PCA Perfecting Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.serenesurrey.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 229
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Serene Rejuvenation",
+      "website": "https://www.serenesurrey.ca/",
+      "location": {
+        "address": null,
+        "city": "Surrey",
+        "province": "British Columbia",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.serenesurrey.ca/pricing/"
+      ],
+      "procedures": [
+        {
+          "name": "Cryotherapy",
+          "category": "dermatology",
+          "currency": "CAD",
+          "unit": "per 10 min",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 60
+        },
+        {
+          "name": "Belotero Intense - Full",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "full syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 695
+        },
+        {
+          "name": "Belotero Intense - Half",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 525
+        },
+        {
+          "name": "Belotero Shape / Contour - Full",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "full syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 595
+        },
+        {
+          "name": "Belotero Shape / Contour - Half",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 445
+        },
+        {
+          "name": "Belotero Soft / Balance - Full",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "full syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 655
+        },
+        {
+          "name": "Belotero Soft / Balance - Half",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 495
+        },
+        {
+          "name": "Belotero Volume",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "full syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 745
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 11
+        },
+        {
+          "name": "Filler Dissolving",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 295
+        },
+        {
+          "name": "Xeomin",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "PCA Enzymatic Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 229
+        },
+        {
+          "name": "PCA NoPeel Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 229
+        },
+        {
+          "name": "PCA Perfecting Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 229
+        },
+        {
+          "name": "SkinPen Abdomen",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 400
+        },
+        {
+          "name": "SkinPen Face",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 400
+        },
+        {
+          "name": "SkinPen Face + Neck",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 450
+        },
+        {
+          "name": "SkinPen Face + Neck + Décolleté",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.serenesurrey.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 500
+        }
+      ]
+    }
+  ]
+}

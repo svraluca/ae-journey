@@ -1,0 +1,19 @@
+{
+  "name": "glowpass-functions",
+  "description": "Cloud Functions for GlowPass (FCM push + Explore prices)",
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test explore/test/*.test.js",
+    "migrate:legacy-prices:dry": "node explore/migrations/runInvalidateLegacyPrices.js --dryRun",
+    "migrate:legacy-prices:execute": "node explore/migrations/runInvalidateLegacyPrices.js --execute"
+  },
+  "dependencies": {
+    "cheerio": "1.0.0-rc.12",
+    "firebase-admin": "^12.7.0",
+    "firebase-functions": "^4.9.0"
+  },
+  "private": true
+}

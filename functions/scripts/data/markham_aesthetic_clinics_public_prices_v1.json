@@ -1,0 +1,567 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Markham, Ontario, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 3,
+  "priced_procedure_count": 23,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 0,
+    "Fillers": 0,
+    "Rhinoplasty": 0,
+    "Boob job": 0,
+    "Hair transplant": 1,
+    "Peels": 2
+  },
+  "category_index": {
+    "Botox": [],
+    "Fillers": [],
+    "Rhinoplasty": [],
+    "Boob job": [],
+    "Hair transplant": [
+      {
+        "clinic": "DrHairs Markham",
+        "location": {
+          "address": null,
+          "city": "Markham",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "FUE Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per graft",
+            "price_type": "range",
+            "source_url": "https://www.drhairs.com/hair-transplant/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 3.75,
+            "price_max": 4.5
+          },
+          {
+            "name": "FUE Hair Transplant - 1000-1800 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1000-1800 grafts",
+            "price_type": "range",
+            "source_url": "https://www.drhairs.com/hair-transplant/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 4500,
+            "price_max": 7200
+          },
+          {
+            "name": "FUE Hair Transplant - 2000-3000 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2000-3000 grafts",
+            "price_type": "range",
+            "source_url": "https://www.drhairs.com/hair-transplant/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 7800,
+            "price_max": 11500
+          },
+          {
+            "name": "FUE Hair Transplant - 3500-4500+ Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "3500-4500+ grafts",
+            "price_type": "range",
+            "source_url": "https://www.drhairs.com/hair-transplant/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 12500,
+            "price_max": 16000
+          },
+          {
+            "name": "FUT Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per graft",
+            "price_type": "range",
+            "source_url": "https://www.drhairs.com/fut-hair-transplant/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 3.5,
+            "price_max": 4.25
+          },
+          {
+            "name": "FUT Hair Transplant - 1200-1800 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1200-1800 grafts",
+            "price_type": "range",
+            "source_url": "https://www.drhairs.com/fut-hair-transplant/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 4200,
+            "price_max": 6800
+          },
+          {
+            "name": "FUT Hair Transplant - 2000-3000 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2000-3000 grafts",
+            "price_type": "range",
+            "source_url": "https://www.drhairs.com/fut-hair-transplant/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 7200,
+            "price_max": 10500
+          },
+          {
+            "name": "FUT Hair Transplant - 3500-4500+ Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "3500-4500+ grafts",
+            "price_type": "range",
+            "source_url": "https://www.drhairs.com/fut-hair-transplant/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 11500,
+            "price_max": 15000
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "Beyond Medical Aesthetics - Markham",
+        "location": {
+          "address": null,
+          "city": "Markham",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://beyondclinic.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 300
+          },
+          {
+            "name": "Chemical Peel - 3 Pack",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "package",
+            "price_type": "fixed",
+            "source_url": "https://beyondclinic.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 800
+          },
+          {
+            "name": "COLD Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://beyondclinic.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 350
+          },
+          {
+            "name": "COLD Peel - 3 Pack",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "package",
+            "price_type": "fixed",
+            "source_url": "https://beyondclinic.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 900
+          }
+        ]
+      },
+      {
+        "clinic": "Cosmo Spa Markham",
+        "location": {
+          "address": null,
+          "city": "Markham",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.cosmospamarkham.com/service-page/chemical-peel",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 129
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Beyond Medical Aesthetics - Markham",
+      "website": "https://beyondclinic.ca/",
+      "location": {
+        "address": null,
+        "city": "Markham",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://beyondclinic.ca/pricing/"
+      ],
+      "procedures": [
+        {
+          "name": "Sculptra + Skin Booster - Face",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1500
+        },
+        {
+          "name": "Sculptra + Skin Booster - Face + Neck",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 2400
+        },
+        {
+          "name": "Facials - 4 Pack",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "PRP Hair - 4 Sessions + Homecare",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 2700
+        },
+        {
+          "name": "Ultherapy",
+          "category": "hifu",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 2700
+        },
+        {
+          "name": "Laser Resurfacing",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "Laser Resurfacing - 3 Pack",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1500
+        },
+        {
+          "name": "Sun Spot Treatment",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 200
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 300
+        },
+        {
+          "name": "Chemical Peel - 3 Pack",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "COLD Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        },
+        {
+          "name": "COLD Peel - 3 Pack",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 900
+        },
+        {
+          "name": "Microneedling + PRP / AnteAGE - 3 Pack",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1500
+        },
+        {
+          "name": "Dark Circle Treatment",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://beyondclinic.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 200
+        }
+      ]
+    },
+    {
+      "name": "Cosmo Spa Markham",
+      "website": "https://www.cosmospamarkham.com/",
+      "location": {
+        "address": null,
+        "city": "Markham",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.cosmospamarkham.com/service-page/chemical-peel"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.cosmospamarkham.com/service-page/chemical-peel",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 129
+        }
+      ]
+    },
+    {
+      "name": "DrHairs Markham",
+      "website": "https://www.drhairs.com/",
+      "location": {
+        "address": null,
+        "city": "Markham",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.drhairs.com/hair-transplant/",
+        "https://www.drhairs.com/fut-hair-transplant/"
+      ],
+      "procedures": [
+        {
+          "name": "FUE Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per graft",
+          "price_type": "range",
+          "source_url": "https://www.drhairs.com/hair-transplant/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 3.75,
+          "price_max": 4.5
+        },
+        {
+          "name": "FUE Hair Transplant - 1000-1800 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1000-1800 grafts",
+          "price_type": "range",
+          "source_url": "https://www.drhairs.com/hair-transplant/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4500,
+          "price_max": 7200
+        },
+        {
+          "name": "FUE Hair Transplant - 2000-3000 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2000-3000 grafts",
+          "price_type": "range",
+          "source_url": "https://www.drhairs.com/hair-transplant/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7800,
+          "price_max": 11500
+        },
+        {
+          "name": "FUE Hair Transplant - 3500-4500+ Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "3500-4500+ grafts",
+          "price_type": "range",
+          "source_url": "https://www.drhairs.com/hair-transplant/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12500,
+          "price_max": 16000
+        },
+        {
+          "name": "FUT Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per graft",
+          "price_type": "range",
+          "source_url": "https://www.drhairs.com/fut-hair-transplant/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 3.5,
+          "price_max": 4.25
+        },
+        {
+          "name": "FUT Hair Transplant - 1200-1800 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1200-1800 grafts",
+          "price_type": "range",
+          "source_url": "https://www.drhairs.com/fut-hair-transplant/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4200,
+          "price_max": 6800
+        },
+        {
+          "name": "FUT Hair Transplant - 2000-3000 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2000-3000 grafts",
+          "price_type": "range",
+          "source_url": "https://www.drhairs.com/fut-hair-transplant/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7200,
+          "price_max": 10500
+        },
+        {
+          "name": "FUT Hair Transplant - 3500-4500+ Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "3500-4500+ grafts",
+          "price_type": "range",
+          "source_url": "https://www.drhairs.com/fut-hair-transplant/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11500,
+          "price_max": 15000
+        }
+      ]
+    }
+  ]
+}

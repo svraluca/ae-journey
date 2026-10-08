@@ -1,0 +1,14 @@
+{
+  // Flutter pulls each plugin's own android/ folder out of ~/.pub-cache and
+  // includes it as a subproject of android/. Several of those folders ship a
+  // stale gradle-wrapper.properties — image_cropper pins Gradle 5.4.1, which
+  // predates Java 17 — so the Gradle Build Server fails to configure them and
+  // reports "Could not use Gradle version 5.4.1 and Java version 17".
+  //
+  // The real build never reads those wrappers: `flutter build` runs the root
+  // android/ wrapper (Gradle 8.14) on Android Studio's bundled JDK 21. The
+  // build server only exists to feed Java IntelliSense, which this project has
+  // no Java language extension for, so nothing is lost by switching it off.
+  "java.gradle.buildServer.enabled": "off",
+  "gradle.autoDetect": "off"
+}

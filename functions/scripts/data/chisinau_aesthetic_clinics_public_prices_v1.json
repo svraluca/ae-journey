@@ -1,0 +1,460 @@
+{
+  "schema_version": "1.0-moldova-city",
+  "checked_at": "2026-09-14",
+  "market": "Chișinău, Moldova",
+  "currency_default": "MDL",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced Explore treatment captured from reviewed public clinic pages. No invented or Google-AI overview prices.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only and phone-only prices are omitted.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "EUR and lei/MDL/RON amounts are kept as published on the clinic site.",
+    "Medpark botox landing has no public amount and is omitted."
+  ],
+  "notes": [
+    "Search key city-key=chisinau matches Flutter normalizeExploreCity (Chișinău / Kishinev).",
+    "AMC publishes lei; stored as MDL for Moldova market fit."
+  ],
+  "clinic_count": 7,
+  "priced_procedure_count": 23,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Peels",
+    "Rhinoplasty",
+    "Boob job"
+  ],
+  "category_coverage_counts": {
+    "Botox": 4,
+    "Fillers": 5,
+    "Peels": 4,
+    "Rhinoplasty": 4,
+    "Boob job": 5
+  },
+  "clinics": [
+    {
+      "name": "Clinica SANCOS Chișinău",
+      "website": "https://www.sancos.md/",
+      "location": {
+        "address": "bd. Moscova 16",
+        "city": "Chisinau",
+        "province": null,
+        "country": "Moldova"
+      },
+      "phone": "+37322909909",
+      "rating": {
+        "value": 3.2,
+        "review_count": null,
+        "platform": "google"
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.sancos.md/lista-de-preturi"
+      ],
+      "procedures": [
+        {
+          "name": "Toxina botulinică 1 zonă facial",
+          "category": "injectables",
+          "currency": "EUR",
+          "unit": "per zone",
+          "price_type": "from",
+          "source_url": "https://www.sancos.md/lista-de-preturi",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 70
+        },
+        {
+          "name": "Augmentarea buzelor cu preparat Stylage",
+          "category": "fillers",
+          "currency": "EUR",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.sancos.md/lista-de-preturi",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 150,
+          "price_max": 180
+        },
+        {
+          "name": "Filler dermal Stylage M",
+          "category": "fillers",
+          "currency": "EUR",
+          "unit": "per 1 ml",
+          "price_type": "from",
+          "source_url": "https://www.sancos.md/lista-de-preturi",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 160
+        },
+        {
+          "name": "Peeling chimic AHA 12%",
+          "category": "peels",
+          "currency": "MDL",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.sancos.md/lista-de-preturi",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 750
+        },
+        {
+          "name": "Rinoplastie",
+          "category": "surgery",
+          "currency": "EUR",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.sancos.md/lista-de-preturi",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 2000,
+          "price_max": 5000
+        },
+        {
+          "name": "Mărirea sânilor (breast augmentation)",
+          "category": "surgery",
+          "currency": "EUR",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.sancos.md/lista-de-preturi",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 4500,
+          "price_max": 5000
+        }
+      ]
+    },
+    {
+      "name": "American Medical Center",
+      "website": "https://www.amc.md/",
+      "location": {
+        "address": "54 Independentei",
+        "city": "Chisinau",
+        "province": null,
+        "country": "Moldova"
+      },
+      "phone": "+37322223311",
+      "rating": {
+        "value": 3.7,
+        "review_count": null,
+        "platform": "google"
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.amc.md/en/prices/"
+      ],
+      "procedures": [
+        {
+          "name": "Correcting facial wrinkles (1 unit botulinum toxin)",
+          "category": "injectables",
+          "currency": "MDL",
+          "unit": "per unit",
+          "price_type": "from",
+          "source_url": "https://www.amc.md/en/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 150
+        },
+        {
+          "name": "Lip volumisation (Stylage M)",
+          "category": "fillers",
+          "currency": "MDL",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.amc.md/en/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 4000
+        },
+        {
+          "name": "Lip volumisation (Stylage S)",
+          "category": "fillers",
+          "currency": "MDL",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.amc.md/en/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 3500
+        },
+        {
+          "name": "Peeling PRX-T33 (1 ml)",
+          "category": "peels",
+          "currency": "MDL",
+          "unit": "per 1 ml",
+          "price_type": "from",
+          "source_url": "https://www.amc.md/en/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 950
+        }
+      ]
+    },
+    {
+      "name": "Aesthetic Surgery Clinic",
+      "website": "https://www.chirurgie-estetica.md/",
+      "location": {
+        "address": "37 Lomonosov str.",
+        "city": "Chisinau",
+        "province": null,
+        "country": "Moldova"
+      },
+      "phone": "+37322288726",
+      "rating": {
+        "value": 4.7,
+        "review_count": null,
+        "platform": "google"
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.chirurgie-estetica.md/en/prices/"
+      ],
+      "procedures": [
+        {
+          "name": "Botulinum toxin (neuronox) – 1 unit",
+          "category": "injectables",
+          "currency": "EUR",
+          "unit": "per unit",
+          "price_type": "from",
+          "source_url": "https://www.chirurgie-estetica.md/en/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 9
+        },
+        {
+          "name": "Stylage M – 1,0 ml",
+          "category": "fillers",
+          "currency": "EUR",
+          "unit": "per 1 ml",
+          "price_type": "from",
+          "source_url": "https://www.chirurgie-estetica.md/en/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 140
+        },
+        {
+          "name": "Stylage L – 1,0 ml",
+          "category": "fillers",
+          "currency": "EUR",
+          "unit": "per 1 ml",
+          "price_type": "from",
+          "source_url": "https://www.chirurgie-estetica.md/en/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 170
+        },
+        {
+          "name": "Medium TCA peeling – 1 procedure",
+          "category": "peels",
+          "currency": "EUR",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.chirurgie-estetica.md/en/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 90
+        },
+        {
+          "name": "JET PEEL Face",
+          "category": "peels",
+          "currency": "MDL",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.chirurgie-estetica.md/en/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 770
+        },
+        {
+          "name": "Multi-zone Rhinoplasty",
+          "category": "surgery",
+          "currency": "EUR",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.chirurgie-estetica.md/en/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 3700
+        },
+        {
+          "name": "Breast augmentation with anatomical implants Mentor USA (subglandular)",
+          "category": "surgery",
+          "currency": "EUR",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.chirurgie-estetica.md/en/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 4500
+        }
+      ]
+    },
+    {
+      "name": "Invitro",
+      "website": "https://www.invitro.md/",
+      "location": {
+        "address": null,
+        "city": "Chisinau",
+        "province": null,
+        "country": "Moldova"
+      },
+      "phone": "+37378903999",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.invitro.md/ro/services/terapia-injectabila-cu-neuroproteina-botulotoxina-xeomin-1-zona"
+      ],
+      "procedures": [
+        {
+          "name": "Terapia injectabilă cu neuroproteina (botulotoxina) (1 zona)",
+          "category": "injectables",
+          "currency": "MDL",
+          "unit": "per zone",
+          "price_type": "from",
+          "source_url": "https://www.invitro.md/ro/services/terapia-injectabila-cu-neuroproteina-botulotoxina-xeomin-1-zona",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 1500
+        }
+      ]
+    },
+    {
+      "name": "Alter-MED",
+      "website": "https://altermed.md/",
+      "location": {
+        "address": "81/3 Alba-Iulia",
+        "city": "Chisinau",
+        "province": null,
+        "country": "Moldova"
+      },
+      "phone": "+37322589822",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://altermed.md/en/services/rhinoplasty",
+        "https://altermed.md/en/services/41-augmentarea-mamar"
+      ],
+      "procedures": [
+        {
+          "name": "Primary Rhinoplasty",
+          "category": "surgery",
+          "currency": "EUR",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://altermed.md/en/services/rhinoplasty",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 4000
+        },
+        {
+          "name": "Breast augmentation",
+          "category": "surgery",
+          "currency": "EUR",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://altermed.md/en/services/41-augmentarea-mamar",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 4500,
+          "price_max": 5000
+        }
+      ]
+    },
+    {
+      "name": "Magnum Estetic",
+      "website": "https://magnumestetic.md/",
+      "location": {
+        "address": "str. Gheorghe Asachi 71/A",
+        "city": "Chisinau",
+        "province": null,
+        "country": "Moldova"
+      },
+      "phone": "+37378800102",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://magnumestetic.md/preturi/",
+        "https://magnumestetic.md/rino-septo-plastie/",
+        "https://magnumestetic.md/augmentare-mamara/"
+      ],
+      "procedures": [
+        {
+          "name": "Rinoplastie",
+          "category": "surgery",
+          "currency": "EUR",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://magnumestetic.md/rino-septo-plastie/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 3000
+        },
+        {
+          "name": "Augmentare mamară cu implanturi premium",
+          "category": "surgery",
+          "currency": "EUR",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://magnumestetic.md/augmentare-mamara/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 4500
+        }
+      ]
+    },
+    {
+      "name": "Dr. Anatolie Taran",
+      "website": "https://anatolietaran.com/",
+      "location": {
+        "address": null,
+        "city": "Chisinau",
+        "province": null,
+        "country": "Moldova"
+      },
+      "phone": "+37379432776",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://anatolietaran.com/preturi/"
+      ],
+      "procedures": [
+        {
+          "name": "Augmentare mamară cu implanturi anatomice",
+          "category": "surgery",
+          "currency": "MDL",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://anatolietaran.com/preturi/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-14",
+          "price_min": 70000
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "functions": {
+    "source": "functions"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "hosting": {
+    "site": "ae-glowup",
+    "public": "share-web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "README.md",
+      "server.py"
+    ],
+    "rewrites": [
+      {
+        "source": "/preview",
+        "destination": "/home.html"
+      },
+      {
+        "source": "/share",
+        "destination": "/share.html"
+      },
+      {
+        "source": "/share/**",
+        "destination": "/share.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ]
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "aestheticpass-818c6",
+          "appId": "1:688009382588:android:f974b7bf69048d2eaf1eb9",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "aestheticpass-818c6",
+          "appId": "1:688009382588:ios:ef539e72aa29a28caf1eb9",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "aestheticpass-818c6",
+          "appId": "1:688009382588:ios:d41175cabcdd0db4af1eb9",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "aestheticpass-818c6",
+          "configurations": {
+            "android": "1:688009382588:android:f974b7bf69048d2eaf1eb9",
+            "ios": "1:688009382588:ios:ef539e72aa29a28caf1eb9",
+            "macos": "1:688009382588:ios:d41175cabcdd0db4af1eb9",
+            "web": "1:688009382588:web:aba4134426075a70af1eb9",
+            "windows": "1:688009382588:web:b9b2696fcded7d3caf1eb9"
+          }
+        }
+      }
+    }
+  }
+}

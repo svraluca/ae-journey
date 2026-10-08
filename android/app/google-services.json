@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "688009382588",
+    "project_id": "aestheticpass-818c6",
+    "storage_bucket": "aestheticpass-818c6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688009382588:android:f974b7bf69048d2eaf1eb9",
+        "android_client_info": {
+          "package_name": "com.glowpass.glowpass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "688009382588-h72deub7uqbh3pb6bvo8pitv429uh3sk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTErwRNl39dZ7DHev7TvoxSq4RQ8Jjs1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "688009382588-h72deub7uqbh3pb6bvo8pitv429uh3sk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "688009382588-3l9cm1vje1dlglmf11ej5h92m4gprb2i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.svapps.aestheticpass"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

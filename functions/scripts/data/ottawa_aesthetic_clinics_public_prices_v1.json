@@ -1,0 +1,1635 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Ottawa, Ontario, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 7,
+  "priced_procedure_count": 76,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 5,
+    "Fillers": 2,
+    "Rhinoplasty": 3,
+    "Boob job": 1,
+    "Hair transplant": 0,
+    "Peels": 2
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "The Ottawa Clinic",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Neuromodulator - MD 25+ Units",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 13
+          },
+          {
+            "name": "Neuromodulator - MD Under 25 Units",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 15
+          },
+          {
+            "name": "Neuromodulator - RN",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 11
+          }
+        ]
+      },
+      {
+        "clinic": "Ottawa Medical Spa",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://ottawamedicalspa.ca/botox/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 11
+          }
+        ]
+      },
+      {
+        "clinic": "Ottawa MediSpa - Trainyards",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://ottawamedispa.ca/trainyards/medical/botox/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 12
+          },
+          {
+            "name": "Botox - 100 Units",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "100 units",
+            "price_type": "fixed",
+            "source_url": "https://ottawamedispa.ca/trainyards/medical/botox/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 1000
+          },
+          {
+            "name": "Botox - 150 Units",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "150 units",
+            "price_type": "fixed",
+            "source_url": "https://ottawamedispa.ca/trainyards/medical/botox/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 1425
+          },
+          {
+            "name": "Botox - 200 Units",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "200 units",
+            "price_type": "fixed",
+            "source_url": "https://ottawamedispa.ca/trainyards/medical/botox/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 1800
+          },
+          {
+            "name": "Botox - 65 Units",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "65 units",
+            "price_type": "fixed",
+            "source_url": "https://ottawamedispa.ca/trainyards/medical/botox/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 780
+          }
+        ]
+      },
+      {
+        "clinic": "Silhouette Med Spa",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Baby Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 150
+          },
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "clinic": "Westend Laser Clinic",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://westendlaser.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 9
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "The Ottawa Clinic",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler - MD",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 800
+          },
+          {
+            "name": "Dermal Filler - RN",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 750
+          },
+          {
+            "name": "Liquid Rhinoplasty",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 1500
+          }
+        ]
+      },
+      {
+        "clinic": "Silhouette Med Spa",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 450
+          },
+          {
+            "name": "Chin Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 450
+          },
+          {
+            "name": "Facial Balancing - 3 mL",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "3 mL",
+            "price_type": "fixed",
+            "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 1200
+          },
+          {
+            "name": "Facial Balancing - 5 mL",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "5 mL",
+            "price_type": "fixed",
+            "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 2000
+          },
+          {
+            "name": "Jawline Filler - 2 mL",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "2 mL",
+            "price_type": "fixed",
+            "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 850
+          },
+          {
+            "name": "Lip Filler - Full",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "full syringe",
+            "price_type": "fixed",
+            "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 450
+          },
+          {
+            "name": "Lip Filler - Half",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 300
+          },
+          {
+            "name": "Marionette Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 450
+          },
+          {
+            "name": "Nasolabial Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 450
+          },
+          {
+            "name": "Filler Dissolving",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 100
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "Ottawa Derm Centre",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 9500,
+            "price_max": 11000
+          }
+        ]
+      },
+      {
+        "clinic": "The Ottawa Clinic",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Surgical Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 11000
+          }
+        ]
+      },
+      {
+        "clinic": "Dr. Bonaparte - Ottawa Rhinoplasty",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Revision Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.ottawarhinoplasty.ca/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 10500
+          },
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.ottawarhinoplasty.ca/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 9000
+          }
+        ]
+      }
+    ],
+    "Boob job": [
+      {
+        "clinic": "Ottawa Derm Centre",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 11000,
+            "price_max": 12000
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [],
+    "Peels": [
+      {
+        "clinic": "Ottawa Medical Spa",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "BHA Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://ottawamedicalspa.ca/chemical-peels/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 120
+          },
+          {
+            "name": "Glow Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://ottawamedicalspa.ca/chemical-peels/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 150
+          },
+          {
+            "name": "Renew Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://ottawamedicalspa.ca/chemical-peels/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 100
+          }
+        ]
+      },
+      {
+        "clinic": "Westend Laser Clinic",
+        "location": {
+          "address": null,
+          "city": "Ottawa",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://westendlaser.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 140
+          },
+          {
+            "name": "Glow Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://westendlaser.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 140
+          },
+          {
+            "name": "Perfect Derma Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://westendlaser.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 285
+          },
+          {
+            "name": "Perfect Derma Peel + Booster",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://westendlaser.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 300
+          },
+          {
+            "name": "ProDerm Peel + NCTF / EXOIE",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://westendlaser.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 550
+          },
+          {
+            "name": "ProDerm Peel + NCTF / EXOIE - 3 Pack",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "package",
+            "price_type": "fixed",
+            "source_url": "https://westendlaser.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 1500
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Dr. Bonaparte - Ottawa Rhinoplasty",
+      "website": "https://www.ottawarhinoplasty.ca/",
+      "location": {
+        "address": null,
+        "city": "Ottawa",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.ottawarhinoplasty.ca/pricing"
+      ],
+      "procedures": [
+        {
+          "name": "Revision Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.ottawarhinoplasty.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10500
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.ottawarhinoplasty.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9000
+        }
+      ]
+    },
+    {
+      "name": "Ottawa Derm Centre",
+      "website": "https://ottawadermcentre.com/",
+      "location": {
+        "address": null,
+        "city": "Ottawa",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/"
+      ],
+      "procedures": [
+        {
+          "name": "Arm Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12000,
+          "price_max": 15000
+        },
+        {
+          "name": "Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4500,
+          "price_max": 7000
+        },
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11000,
+          "price_max": 12000
+        },
+        {
+          "name": "Buccal Fat Removal",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5000,
+          "price_max": 6500
+        },
+        {
+          "name": "Earlobe Repair - Each",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per lobe",
+          "price_type": "from",
+          "source_url": "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 800
+        },
+        {
+          "name": "Facelift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 19000,
+          "price_max": 23000
+        },
+        {
+          "name": "Labiaplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6000,
+          "price_max": 7000
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9500,
+          "price_max": 11000
+        },
+        {
+          "name": "Scar Revision",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 900
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://ottawadermcentre.com/pricing-menu/specialized-laser-and-plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14000,
+          "price_max": 16000
+        }
+      ]
+    },
+    {
+      "name": "Ottawa Medical Spa",
+      "website": "https://ottawamedicalspa.ca/",
+      "location": {
+        "address": null,
+        "city": "Ottawa",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://ottawamedicalspa.ca/botox/",
+        "https://ottawamedicalspa.ca/chemical-peels/"
+      ],
+      "procedures": [
+        {
+          "name": "Consultation",
+          "category": "consultation",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ottawamedicalspa.ca/botox/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 50
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://ottawamedicalspa.ca/botox/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 11
+        },
+        {
+          "name": "BHA Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ottawamedicalspa.ca/chemical-peels/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 120
+        },
+        {
+          "name": "Glow Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ottawamedicalspa.ca/chemical-peels/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 150
+        },
+        {
+          "name": "Renew Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ottawamedicalspa.ca/chemical-peels/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 100
+        }
+      ]
+    },
+    {
+      "name": "Ottawa MediSpa - Trainyards",
+      "website": "https://ottawamedispa.ca/",
+      "location": {
+        "address": null,
+        "city": "Ottawa",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://ottawamedispa.ca/trainyards/medical/botox/"
+      ],
+      "procedures": [
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://ottawamedispa.ca/trainyards/medical/botox/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 12
+        },
+        {
+          "name": "Botox - 100 Units",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "100 units",
+          "price_type": "fixed",
+          "source_url": "https://ottawamedispa.ca/trainyards/medical/botox/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1000
+        },
+        {
+          "name": "Botox - 150 Units",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "150 units",
+          "price_type": "fixed",
+          "source_url": "https://ottawamedispa.ca/trainyards/medical/botox/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1425
+        },
+        {
+          "name": "Botox - 200 Units",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "200 units",
+          "price_type": "fixed",
+          "source_url": "https://ottawamedispa.ca/trainyards/medical/botox/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1800
+        },
+        {
+          "name": "Botox - 65 Units",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "65 units",
+          "price_type": "fixed",
+          "source_url": "https://ottawamedispa.ca/trainyards/medical/botox/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 780
+        },
+        {
+          "name": "Nefertiti Lift",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://ottawamedispa.ca/trainyards/medical/botox/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 360
+        }
+      ]
+    },
+    {
+      "name": "Silhouette Med Spa",
+      "website": "https://silhouettemedispa.ca/",
+      "location": {
+        "address": null,
+        "city": "Ottawa",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://silhouettemedispa.ca/services/injection-services/"
+      ],
+      "procedures": [
+        {
+          "name": "Cheek Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 450
+        },
+        {
+          "name": "Chin Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 450
+        },
+        {
+          "name": "Facial Balancing - 3 mL",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "3 mL",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1200
+        },
+        {
+          "name": "Facial Balancing - 5 mL",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "5 mL",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 2000
+        },
+        {
+          "name": "Jawline Filler - 2 mL",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "2 mL",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 850
+        },
+        {
+          "name": "Lip Filler - Full",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "full syringe",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 450
+        },
+        {
+          "name": "Lip Filler - Half",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 300
+        },
+        {
+          "name": "Marionette Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 450
+        },
+        {
+          "name": "Nasolabial Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 450
+        },
+        {
+          "name": "PRP Hair",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 400
+        },
+        {
+          "name": "Baby Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 150
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Filler Dissolving",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 100
+        },
+        {
+          "name": "PRP Face",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 400
+        },
+        {
+          "name": "PRP Under-Eye",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 400
+        },
+        {
+          "name": "B12 Injection",
+          "category": "wellness",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://silhouettemedispa.ca/services/injection-services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 60
+        }
+      ]
+    },
+    {
+      "name": "The Ottawa Clinic",
+      "website": "https://www.theottawaclinic.com/",
+      "location": {
+        "address": null,
+        "city": "Ottawa",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.theottawaclinic.com/resources/fee-information/"
+      ],
+      "procedures": [
+        {
+          "name": "Dermal Filler - MD",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "Dermal Filler - RN",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 750
+        },
+        {
+          "name": "Liquid Rhinoplasty",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 1500
+        },
+        {
+          "name": "Neuromodulator - MD 25+ Units",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 13
+        },
+        {
+          "name": "Neuromodulator - MD Under 25 Units",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 15
+        },
+        {
+          "name": "Neuromodulator - RN",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 11
+        },
+        {
+          "name": "Brazilian Butt Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15000
+        },
+        {
+          "name": "Brow Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11500
+        },
+        {
+          "name": "Chin Surgery",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 8800
+        },
+        {
+          "name": "Earlobe Repair",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 750
+        },
+        {
+          "name": "Face + Neck Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 21500
+        },
+        {
+          "name": "Labiaplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6500
+        },
+        {
+          "name": "Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6500
+        },
+        {
+          "name": "Neck Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15000
+        },
+        {
+          "name": "Otoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10000
+        },
+        {
+          "name": "Surgical Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11000
+        },
+        {
+          "name": "Upper / Lower Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.theottawaclinic.com/resources/fee-information/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15000
+        }
+      ]
+    },
+    {
+      "name": "Westend Laser Clinic",
+      "website": "https://westendlaser.com/",
+      "location": {
+        "address": null,
+        "city": "Ottawa",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://westendlaser.com/pricing/"
+      ],
+      "procedures": [
+        {
+          "name": "BSHAPE",
+          "category": "body_contouring",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        },
+        {
+          "name": "OxyGeneo",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 205
+        },
+        {
+          "name": "OxyGeneo Gold",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 230
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 9
+        },
+        {
+          "name": "FRAX",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 500
+        },
+        {
+          "name": "IPL",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        },
+        {
+          "name": "Light & Bright",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "Sublative",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 390
+        },
+        {
+          "name": "Lash Lift",
+          "category": "lashes_brows",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 110
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 140
+        },
+        {
+          "name": "Glow Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 140
+        },
+        {
+          "name": "Perfect Derma Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 285
+        },
+        {
+          "name": "Perfect Derma Peel + Booster",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 300
+        },
+        {
+          "name": "ProDerm Peel + NCTF / EXOIE",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "ProDerm Peel + NCTF / EXOIE - 3 Pack",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1500
+        },
+        {
+          "name": "Exosome Add-On",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "add-on",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 150
+        },
+        {
+          "name": "Dermaplane",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 155
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 385
+        },
+        {
+          "name": "Microneedling - 3 Pack",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1000
+        },
+        {
+          "name": "Skin Tight + Glow",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://westendlaser.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 250
+        }
+      ]
+    }
+  ]
+}

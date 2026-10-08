@@ -1,0 +1,441 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Quebec City, Quebec, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 4,
+  "priced_procedure_count": 16,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 0,
+    "Fillers": 0,
+    "Rhinoplasty": 0,
+    "Boob job": 0,
+    "Hair transplant": 1,
+    "Peels": 3
+  },
+  "category_index": {
+    "Botox": [],
+    "Fillers": [],
+    "Rhinoplasty": [],
+    "Boob job": [],
+    "Hair transplant": [
+      {
+        "clinic": "Groupe Medical PAI - Quebec City",
+        "location": {
+          "address": "7415 Wilfrid-Hamel, Quebec City, QC",
+          "city": "Quebec City",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.greffecheveuxpai.com/greffe-de-cheveux-consultation/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 9800
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "Avant Garde Esthétique",
+        "location": {
+          "address": null,
+          "city": "Quebec City",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Full Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.salonavantgarde.com/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 145
+          },
+          {
+            "name": "OxyPeeling",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.salonavantgarde.com/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 125
+          }
+        ]
+      },
+      {
+        "clinic": "Cinq Sens - Quebec City",
+        "location": {
+          "address": "2880 Quatre-Bourgeois, Quebec City, QC",
+          "city": "Quebec City",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "ProDerm Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://cinqsens.ca/en/pages/peeling-proderm",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 150
+          },
+          {
+            "name": "ProDerm Chemical Peel - 5 Pack",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "package",
+            "price_type": "fixed",
+            "source_url": "https://cinqsens.ca/en/pages/peeling-proderm",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Clinique Médico-Esthétique de Québec",
+        "location": {
+          "address": null,
+          "city": "Quebec City",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://cliniquemedicoesthetiquequebec.com/pages/peeling-chimique",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 200
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [
+    {
+      "name": "Quebec City Botox Typical Market Range",
+      "category": "Botox",
+      "currency": "CAD",
+      "price_min": 250,
+      "price_max": 800,
+      "unit": "per area / treatment",
+      "source_url": "https://skinday.com/",
+      "source_type": "market_evidence"
+    }
+  ],
+  "clinics": [
+    {
+      "name": "Avant Garde Esthétique",
+      "website": "https://www.salonavantgarde.com/",
+      "location": {
+        "address": null,
+        "city": "Quebec City",
+        "province": "Quebec",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.salonavantgarde.com/"
+      ],
+      "procedures": [
+        {
+          "name": "Adolescent Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.salonavantgarde.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 95
+        },
+        {
+          "name": "Back Treatment",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.salonavantgarde.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 115
+        },
+        {
+          "name": "Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.salonavantgarde.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 115
+        },
+        {
+          "name": "Glow Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.salonavantgarde.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 90
+        },
+        {
+          "name": "Ultimate Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.salonavantgarde.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 130
+        },
+        {
+          "name": "Youth Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.salonavantgarde.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 130
+        },
+        {
+          "name": "Photorejuvenation - Full",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.salonavantgarde.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 225
+        },
+        {
+          "name": "Photorejuvenation - Hands",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.salonavantgarde.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 100
+        },
+        {
+          "name": "Photorejuvenation - Local",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.salonavantgarde.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 80
+        },
+        {
+          "name": "Full Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.salonavantgarde.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 145
+        },
+        {
+          "name": "OxyPeeling",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.salonavantgarde.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 125
+        }
+      ]
+    },
+    {
+      "name": "Cinq Sens - Quebec City",
+      "website": "https://cinqsens.ca/",
+      "location": {
+        "address": "2880 Quatre-Bourgeois, Quebec City, QC",
+        "city": "Quebec City",
+        "province": "Quebec",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://cinqsens.ca/en/pages/peeling-proderm"
+      ],
+      "procedures": [
+        {
+          "name": "ProDerm Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cinqsens.ca/en/pages/peeling-proderm",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 150
+        },
+        {
+          "name": "ProDerm Chemical Peel - 5 Pack",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://cinqsens.ca/en/pages/peeling-proderm",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        }
+      ]
+    },
+    {
+      "name": "Clinique Médico-Esthétique de Québec",
+      "website": "https://cliniquemedicoesthetiquequebec.com/",
+      "location": {
+        "address": null,
+        "city": "Quebec City",
+        "province": "Quebec",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://cliniquemedicoesthetiquequebec.com/pages/peeling-chimique"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://cliniquemedicoesthetiquequebec.com/pages/peeling-chimique",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 200
+        }
+      ]
+    },
+    {
+      "name": "Groupe Medical PAI - Quebec City",
+      "website": "https://www.greffecheveuxpai.com/",
+      "location": {
+        "address": "7415 Wilfrid-Hamel, Quebec City, QC",
+        "city": "Quebec City",
+        "province": "Quebec",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.greffecheveuxpai.com/greffe-de-cheveux-consultation/"
+      ],
+      "procedures": [
+        {
+          "name": "Hair Consultation",
+          "category": "consultation",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.greffecheveuxpai.com/greffe-de-cheveux-consultation/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 50
+        },
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.greffecheveuxpai.com/greffe-de-cheveux-consultation/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9800
+        }
+      ]
+    }
+  ]
+}

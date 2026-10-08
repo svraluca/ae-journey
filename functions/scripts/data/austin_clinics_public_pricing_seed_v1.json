@@ -1,0 +1,1908 @@
+{
+  "schema_version": "5.0-public-pricing-seed",
+  "checked_at": "2026-09-13",
+  "market": "Austin metro, Texas, USA",
+  "currency_default": "USD",
+  "dataset_rule": "Clinic-first mixed-source public-pricing seed. procedures[] contains every numeric-priced service captured from the reviewed public source for that clinic. Flagship categories are indexes only, not a filter.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page; preferred.",
+    "official_context_price": "Clinic's own public educational/planning range; use below direct posted price.",
+    "public_pricing_directory": "Third-party public pricing directory; lower trust than clinic-site pricing.",
+    "patient_reported": "Public patient-reported price; historical/lower trust.",
+    "market_benchmark": "City/metro benchmark only; never present it as a clinic quote."
+  },
+  "limitations": [
+    "This is a best-effort public-web seed, not a guaranteed exhaustive site-wide audit of every clinic.",
+    "Booking-only, login-only, private-quote, phone-only and unindexed prices may be absent.",
+    "Rows without numeric public pricing are omitted rather than estimated.",
+    "Directory-derived rows are explicitly marked and should rank below official clinic-site pricing in Explore.",
+    "Market benchmarks are stored separately and are not counted as clinic coverage."
+  ],
+  "clinic_count": 10,
+  "priced_procedure_count": 65,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 8,
+    "Fillers": 8,
+    "Rhinoplasty": 1,
+    "Boob job": 1,
+    "Hair transplant": 1,
+    "Peels": 4
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Austin Med Spa",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Austin Plastic Surgeon - MedSpa",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Dysport / Daxxify / Xeomin",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://longevity.haus/best/botox-fillers/austin",
+            "source_type": "public_pricing_directory",
+            "price_min": 12,
+            "price_max": 13
+          }
+        ]
+      },
+      {
+        "clinic": "Beaux MedSpa",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          },
+          {
+            "name": "Jaw Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 250
+          }
+        ]
+      },
+      {
+        "clinic": "Ginger Allure MedSpa - Round Rock",
+        "location": {
+          "address": null,
+          "city": "Round Rock",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 500
+          }
+        ]
+      },
+      {
+        "clinic": "Glo Med Spa Austin",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      },
+      {
+        "clinic": "Med Physique Center For Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Crow's Feet Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          },
+          {
+            "name": "Forehead Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          },
+          {
+            "name": "Frown Lines Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      },
+      {
+        "clinic": "Rejuvenate Austin",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      },
+      {
+        "clinic": "Vibrant Med Spa - Round Rock",
+        "location": {
+          "address": null,
+          "city": "Round Rock",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Austin Med Spa",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Bellafill Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 800,
+            "price_max": 1200
+          },
+          {
+            "name": "Juvederm Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Austin Plastic Surgeon - MedSpa",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Juvederm Ultra",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/best/botox-fillers/austin",
+            "source_type": "public_pricing_directory",
+            "price": 725
+          },
+          {
+            "name": "Restylane",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per syringe",
+            "price_type": "range",
+            "source_url": "https://longevity.haus/best/botox-fillers/austin",
+            "source_type": "public_pricing_directory",
+            "price_min": 675,
+            "price_max": 725
+          },
+          {
+            "name": "Voluma / Volux",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/best/botox-fillers/austin",
+            "source_type": "public_pricing_directory",
+            "price": 950
+          }
+        ]
+      },
+      {
+        "clinic": "Beaux MedSpa",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Ginger Allure MedSpa - Round Rock",
+        "location": {
+          "address": null,
+          "city": "Round Rock",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 900
+          }
+        ]
+      },
+      {
+        "clinic": "Glo Med Spa Austin",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Med Physique Center For Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek / Temple Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          },
+          {
+            "name": "Lip Augmentation",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          },
+          {
+            "name": "Tear Trough Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Rejuvenate Austin",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Facial Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 500
+          }
+        ]
+      },
+      {
+        "clinic": "Vibrant Med Spa - Round Rock",
+        "location": {
+          "address": null,
+          "city": "Round Rock",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 700
+          },
+          {
+            "name": "Other Dermal Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "Austin Plastic Surgeon",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Focused Revision Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+            "source_type": "official_public_price_page",
+            "price_min": 14500,
+            "price_max": 16500
+          },
+          {
+            "name": "Primary Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+            "source_type": "official_public_price_page",
+            "price_min": 19000,
+            "price_max": 22000
+          },
+          {
+            "name": "Revision Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+            "source_type": "official_public_price_page",
+            "price_min": 26000,
+            "price_max": 29000
+          },
+          {
+            "name": "Revision Rhinoplasty Tip Only",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+            "source_type": "official_public_price_page",
+            "price_min": 11000,
+            "price_max": 13000
+          }
+        ]
+      }
+    ],
+    "Boob job": [
+      {
+        "clinic": "Austin Plastic Surgeon",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation - Axillary",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+            "source_type": "official_public_price_page",
+            "price_min": 10000,
+            "price_max": 13500
+          },
+          {
+            "name": "Breast Augmentation - Inframammary Fold",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+            "source_type": "official_public_price_page",
+            "price_min": 9500,
+            "price_max": 12000
+          },
+          {
+            "name": "Breast Augmentation - Periareolar",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+            "source_type": "official_public_price_page",
+            "price_min": 9500,
+            "price_max": 12000
+          },
+          {
+            "name": "Breast Augmentation Fat Transfer",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+            "source_type": "official_public_price_page",
+            "price_min": 12500,
+            "price_max": 14000
+          },
+          {
+            "name": "Breast Lift + Augmentation",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+            "source_type": "official_public_price_page",
+            "price_min": 15500,
+            "price_max": 18000
+          },
+          {
+            "name": "Preserve Breast Augmentation",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+            "source_type": "official_public_price_page",
+            "price_min": 17000,
+            "price_max": 19000
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [
+      {
+        "clinic": "McGrath Medical - Austin",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/us/tx/",
+            "source_type": "public_pricing_directory",
+            "price_min": 5000
+          },
+          {
+            "name": "Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://transplantmatch.com/us/tx/",
+            "source_type": "public_pricing_directory",
+            "price": 5.5
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "Austin Med Spa",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 250
+          }
+        ]
+      },
+      {
+        "clinic": "Beaux MedSpa",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peels",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 200
+          },
+          {
+            "name": "V-Peels",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 250
+          }
+        ]
+      },
+      {
+        "clinic": "Ginger Allure MedSpa - Round Rock",
+        "location": {
+          "address": null,
+          "city": "Round Rock",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          }
+        ]
+      },
+      {
+        "clinic": "Glo Med Spa Austin",
+        "location": {
+          "address": null,
+          "city": "Austin",
+          "state": "TX",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Deep Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          },
+          {
+            "name": "Light Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 75,
+            "price_max": 150
+          },
+          {
+            "name": "Medium Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      }
+    ]
+  },
+  "market_benchmarks": [
+    {
+      "category": "Botox",
+      "metric": "typical_unit_range",
+      "price_min": 10,
+      "price_max": 14,
+      "unit": "per unit",
+      "source_url": "https://www.allmedspas.com/blog/med-spa-cost-guide/",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Fillers",
+      "metric": "lip_filler_range",
+      "price_min": 500,
+      "price_max": 800,
+      "source_url": "https://www.allmedspas.com/blog/med-spa-cost-guide/",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Boob job",
+      "metric": "metro_average",
+      "price": 8084,
+      "source_url": "https://www.realself.com/surgical/breast-augmentation/cost",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Hair transplant",
+      "metric": "city_range",
+      "price_min": 6800,
+      "price_median": 10200,
+      "price_max": 14000,
+      "source_url": "https://transplantmatch.com/prices/",
+      "source_type": "market_benchmark"
+    }
+  ],
+  "clinics": [
+    {
+      "name": "Austin Med Spa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Austin",
+        "state": "TX",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/tx/austin/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 200
+        },
+        {
+          "name": "Bellafill Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 800,
+          "price_max": 1200
+        },
+        {
+          "name": "Juvederm Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Photofacial",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 250
+        },
+        {
+          "name": "Microdermabrasion",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 150
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        }
+      ]
+    },
+    {
+      "name": "Austin Plastic Surgeon",
+      "website": "https://www.austinplasticsurgeon.com/",
+      "location": {
+        "address": null,
+        "city": "Austin",
+        "state": "TX",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Arm Lift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 12000,
+          "price_max": 13000
+        },
+        {
+          "name": "Brazilian Butt Lift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 20000,
+          "price_max": 22500
+        },
+        {
+          "name": "Breast Augmentation - Axillary",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 10000,
+          "price_max": 13500
+        },
+        {
+          "name": "Breast Augmentation - Inframammary Fold",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 9500,
+          "price_max": 12000
+        },
+        {
+          "name": "Breast Augmentation - Periareolar",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 9500,
+          "price_max": 12000
+        },
+        {
+          "name": "Breast Augmentation Fat Transfer",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 12500,
+          "price_max": 14000
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 12000,
+          "price_max": 14000
+        },
+        {
+          "name": "Breast Lift + Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 15500,
+          "price_max": 18000
+        },
+        {
+          "name": "Breast Reduction",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 13500,
+          "price_max": 15500
+        },
+        {
+          "name": "Focused Revision Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 14500,
+          "price_max": 16500
+        },
+        {
+          "name": "Preserve Breast Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 17000,
+          "price_max": 19000
+        },
+        {
+          "name": "Primary Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 19000,
+          "price_max": 22000
+        },
+        {
+          "name": "Revision Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 26000,
+          "price_max": 29000
+        },
+        {
+          "name": "Revision Rhinoplasty Tip Only",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 11000,
+          "price_max": 13000
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.austinplasticsurgeon.com/about/pricing/plastic-surgery/",
+          "source_type": "official_public_price_page",
+          "price_min": 12500,
+          "price_max": 13500
+        }
+      ]
+    },
+    {
+      "name": "Austin Plastic Surgeon - MedSpa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Austin",
+        "state": "TX",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://longevity.haus/best/botox-fillers/austin"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Sculptra",
+          "category": "biostimulators",
+          "currency": "USD",
+          "unit": "per vial",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/best/botox-fillers/austin",
+          "source_type": "public_pricing_directory",
+          "price": 800
+        },
+        {
+          "name": "Juvederm Ultra",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/best/botox-fillers/austin",
+          "source_type": "public_pricing_directory",
+          "price": 725
+        },
+        {
+          "name": "Restylane",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per syringe",
+          "price_type": "range",
+          "source_url": "https://longevity.haus/best/botox-fillers/austin",
+          "source_type": "public_pricing_directory",
+          "price_min": 675,
+          "price_max": 725
+        },
+        {
+          "name": "Voluma / Volux",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/best/botox-fillers/austin",
+          "source_type": "public_pricing_directory",
+          "price": 950
+        },
+        {
+          "name": "Botox / Dysport / Daxxify / Xeomin",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://longevity.haus/best/botox-fillers/austin",
+          "source_type": "public_pricing_directory",
+          "price_min": 12,
+          "price_max": 13
+        },
+        {
+          "name": "Kybella",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per vial",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/best/botox-fillers/austin",
+          "source_type": "public_pricing_directory",
+          "price": 600
+        }
+      ]
+    },
+    {
+      "name": "Beaux MedSpa",
+      "website": "https://beauxmedspa.com/",
+      "location": {
+        "address": null,
+        "city": "Austin",
+        "state": "TX",
+        "country": "USA"
+      },
+      "phone": "+1 512-428-5438",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/tx/austin/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 600
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "Jaw Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "BBL Laser",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Chemical Peels",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 200
+        },
+        {
+          "name": "V-Peels",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 300
+        }
+      ]
+    },
+    {
+      "name": "Ginger Allure MedSpa - Round Rock",
+      "website": "https://gingerallure.com/",
+      "location": {
+        "address": null,
+        "city": "Round Rock",
+        "state": "TX",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/tx/austin/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Dermal Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 900
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        }
+      ]
+    },
+    {
+      "name": "Glo Med Spa Austin",
+      "website": "https://www.glomedspaaustin.com/",
+      "location": {
+        "address": null,
+        "city": "Austin",
+        "state": "TX",
+        "country": "USA"
+      },
+      "phone": "+1 512-336-7546",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/tx/austin/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Botox / Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Laser Hair Removal",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 300
+        },
+        {
+          "name": "Deep Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Light Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 75,
+          "price_max": 150
+        },
+        {
+          "name": "Medium Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        }
+      ]
+    },
+    {
+      "name": "McGrath Medical - Austin",
+      "website": "https://mcgrathmedical.com/",
+      "location": {
+        "address": null,
+        "city": "Austin",
+        "state": "TX",
+        "country": "USA"
+      },
+      "phone": "+1 512-474-4247",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://transplantmatch.com/us/tx/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/us/tx/",
+          "source_type": "public_pricing_directory",
+          "price_min": 5000
+        },
+        {
+          "name": "Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://transplantmatch.com/us/tx/",
+          "source_type": "public_pricing_directory",
+          "price": 5.5
+        }
+      ]
+    },
+    {
+      "name": "Med Physique Center For Aesthetics",
+      "website": "https://www.medphysique.com/",
+      "location": {
+        "address": null,
+        "city": "Austin",
+        "state": "TX",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/tx/austin/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Cheek / Temple Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Lip Augmentation",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Tear Trough Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Crow's Feet Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Double Chin / Fat Reduction",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 1200
+        },
+        {
+          "name": "Forehead Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Frown Lines Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        }
+      ]
+    },
+    {
+      "name": "Rejuvenate Austin",
+      "website": "https://www.rejuvenateaustin.com/",
+      "location": {
+        "address": null,
+        "city": "Austin",
+        "state": "TX",
+        "country": "USA"
+      },
+      "phone": "+1 512-923-1071",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/tx/austin/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Facial Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 350
+        }
+      ]
+    },
+    {
+      "name": "Vibrant Med Spa - Round Rock",
+      "website": "https://www.vibrantmedspa.com/",
+      "location": {
+        "address": null,
+        "city": "Round Rock",
+        "state": "TX",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/tx/austin/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 700
+        },
+        {
+          "name": "Other Dermal Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "IPL Treatment",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Morpheus8 Microneedling",
+          "category": "rf_microneedling",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tx/austin/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        }
+      ]
+    }
+  ]
+}

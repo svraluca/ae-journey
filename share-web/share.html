@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ÆSTHETIC JOURNEY — Shared progress</title>
+  <meta name="description" content="Someone shared their glow-up progress. Open ÆSTHETIC JOURNEY to see the full before & after." />
+  <meta name="theme-color" content="#111214" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="/assets/logo.png" />
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+
+  <div class="loading" id="loading" hidden>
+    <div id="orbRoot" class="orb-root" aria-hidden="true"></div>
+    <p class="loading-label">Loading share…</p>
+  </div>
+
+  <header class="top">
+    <img class="brand-mark" src="/assets/logo.png" alt="ÆSTHETIC JOURNEY" />
+    <span class="brand-name">ÆSTHETIC JOURNEY</span>
+  </header>
+
+  <main class="shell" id="shell">
+    <section class="card" id="card">
+      <p class="eyebrow" id="eyebrow">Shared glow-up</p>
+      <h1 id="title">Loading…</h1>
+      <p class="meta" id="meta"></p>
+
+      <div class="ba" id="ba">
+        <div class="ba-half ba-before">
+          <span class="ba-label">Before</span>
+          <div class="ba-media ba-media-clear" id="beforeMedia"></div>
+        </div>
+        <div class="ba-divider" aria-hidden="true"></div>
+        <div class="ba-half ba-after">
+          <span class="ba-label">After</span>
+          <div class="ba-media ba-media-blur" id="afterMedia"></div>
+          <div class="lock">
+            <div class="lock-pill">
+              <svg class="gate-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A9 9 0 0 1 12 5c5 0 9 4.5 9 7-1 1.6-2.7 3.4-4.7 4.6M6.1 6.1C4.5 7.3 3.2 8.9 2.5 12c.8 1.8 2.8 4.4 5.6 5.9A9 9 0 0 0 12 19c.7 0 1.4-.1 2-.2"/>
+              </svg>
+              <span>After unlocked in app</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-bar" role="tablist" aria-label="Share sections">
+        <button type="button" class="tab tab-active" role="tab" aria-selected="true" data-tab="milestones" id="tabMilestones">
+          Milestones
+        </button>
+        <button type="button" class="tab" role="tab" aria-selected="false" data-tab="about" id="tabAbout">
+          About procedure
+        </button>
+      </div>
+
+      <section class="locked-block" id="panelMilestones" role="tabpanel" aria-labelledby="tabMilestones">
+        <div class="locked-inner gated-content" id="checkpoints">
+          <article class="milestone">
+            <div class="milestone-icon" aria-hidden="true"></div>
+            <div class="milestone-copy">
+              <p class="milestone-day">Day 0</p>
+              <div class="skel skel-title"></div>
+              <div class="skel skel-line"></div>
+            </div>
+            <div class="milestone-thumb locked-thumb" aria-hidden="true"></div>
+          </article>
+          <article class="milestone">
+            <div class="milestone-icon" aria-hidden="true"></div>
+            <div class="milestone-copy">
+              <p class="milestone-day">Day 7</p>
+              <div class="skel skel-title"></div>
+              <div class="skel skel-line short"></div>
+            </div>
+            <div class="milestone-thumb locked-thumb" aria-hidden="true"></div>
+          </article>
+          <article class="milestone">
+            <div class="milestone-icon" aria-hidden="true"></div>
+            <div class="milestone-copy">
+              <p class="milestone-day">1 Month</p>
+              <div class="skel skel-title"></div>
+              <div class="skel skel-line"></div>
+            </div>
+            <div class="milestone-thumb locked-thumb" aria-hidden="true"></div>
+          </article>
+        </div>
+        <div class="gate">
+          <div class="lock-pill">
+            <svg class="gate-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A9 9 0 0 1 12 5c5 0 9 4.5 9 7-1 1.6-2.7 3.4-4.7 4.6M6.1 6.1C4.5 7.3 3.2 8.9 2.5 12c.8 1.8 2.8 4.4 5.6 5.9A9 9 0 0 0 12 19c.7 0 1.4-.1 2-.2"/>
+            </svg>
+            <span>Milestones unlocked in app</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="locked-block is-hidden" id="panelAbout" role="tabpanel" aria-labelledby="tabAbout" hidden>
+        <div class="locked-inner gated-content about-panel" id="about">
+          <h2 class="about-heading">About procedure</h2>
+          <div class="about-row"><span>Clinic</span><div class="skel skel-value"></div></div>
+          <div class="about-row"><span>Doctor</span><div class="skel skel-value"></div></div>
+          <div class="about-row"><span>Product</span><div class="skel skel-value wide"></div></div>
+          <div class="about-row"><span>Area</span><div class="skel skel-value"></div></div>
+          <div class="about-row"><span>Volume</span><div class="skel skel-value short"></div></div>
+        </div>
+        <div class="gate">
+          <div class="lock-pill">
+            <svg class="gate-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A9 9 0 0 1 12 5c5 0 9 4.5 9 7-1 1.6-2.7 3.4-4.7 4.6M6.1 6.1C4.5 7.3 3.2 8.9 2.5 12c.8 1.8 2.8 4.4 5.6 5.9A9 9 0 0 0 12 19c.7 0 1.4-.1 2-.2"/>
+            </svg>
+            <span>About unlocked in app</span>
+          </div>
+        </div>
+      </section>
+
+      <p class="teaser" id="teaser">
+        Preview only — download ÆSTHETIC JOURNEY to open the full progress journey, milestones, and community results.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-primary" id="openApp" href="#">Open in ÆSTHETIC JOURNEY</a>
+        <div class="store-row">
+          <a class="btn btn-ghost" id="appStore" href="https://apps.apple.com/search?term=ÆSTHETIC JOURNEY" target="_blank" rel="noopener">App Store</a>
+          <a class="btn btn-ghost" id="playStore" href="https://play.google.com/store/search?q=ÆSTHETIC JOURNEY&c=apps" target="_blank" rel="noopener">Google Play</a>
+        </div>
+      </div>
+    </section>
+
+    <p class="footnote">Already have the app? The open button jumps straight to this share.</p>
+  </main>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@18.3.1",
+      "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime",
+      "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+      "thinking-orbs": "https://esm.sh/thinking-orbs@0.2.0?deps=react@18.3.1"
+    }
+  }
+  </script>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

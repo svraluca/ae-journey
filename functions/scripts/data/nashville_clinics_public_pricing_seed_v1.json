@@ -1,0 +1,1202 @@
+{
+  "schema_version": "5.0-public-pricing-seed",
+  "checked_at": "2026-09-13",
+  "market": "Nashville / Brentwood metro, Tennessee, USA",
+  "currency_default": "USD",
+  "dataset_rule": "Clinic-first mixed-source public-pricing seed. procedures[] contains every numeric-priced service captured from the reviewed public source for that clinic. Flagship categories are indexes only, not a filter.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page; preferred.",
+    "official_context_price": "Clinic's own public educational/planning range; use below direct posted price.",
+    "public_pricing_directory": "Third-party public pricing directory; lower trust than clinic-site pricing.",
+    "patient_reported": "Public patient-reported price; historical/lower trust.",
+    "market_benchmark": "City/metro benchmark only; never present it as a clinic quote."
+  },
+  "limitations": [
+    "This is a best-effort public-web seed, not a guaranteed exhaustive site-wide audit of every clinic.",
+    "Booking-only, login-only, private-quote, phone-only and unindexed prices may be absent.",
+    "Rows without numeric public pricing are omitted rather than estimated.",
+    "Directory-derived rows are explicitly marked and should rank below official clinic-site pricing in Explore.",
+    "Market benchmarks are stored separately and are not counted as clinic coverage."
+  ],
+  "clinic_count": 7,
+  "priced_procedure_count": 46,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 4,
+    "Fillers": 4,
+    "Rhinoplasty": 0,
+    "Boob job": 0,
+    "Hair transplant": 2,
+    "Peels": 3
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Belcourt Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Nashville",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          }
+        ]
+      },
+      {
+        "clinic": "ElaMar Nashville",
+        "location": {
+          "address": null,
+          "city": "Nashville",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      },
+      {
+        "clinic": "Nashville Med Spa",
+        "location": {
+          "address": null,
+          "city": "Nashville",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Tox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/nashville-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 3.99,
+            "price_max": 13
+          }
+        ]
+      },
+      {
+        "clinic": "The Natural Look MedSpa",
+        "location": {
+          "address": null,
+          "city": "Nashville",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Brow Lift Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          },
+          {
+            "name": "Crow's Feet Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          },
+          {
+            "name": "Forehead Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Belcourt Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Nashville",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "ElaMar Nashville",
+        "location": {
+          "address": null,
+          "city": "Nashville",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Nashville Med Spa",
+        "location": {
+          "address": null,
+          "city": "Nashville",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/nashville-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 195,
+            "price_max": 599
+          }
+        ]
+      },
+      {
+        "clinic": "The Natural Look MedSpa",
+        "location": {
+          "address": null,
+          "city": "Nashville",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 600
+          },
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 600
+          },
+          {
+            "name": "Under-Eye Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 600
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [],
+    "Boob job": [],
+    "Hair transplant": [
+      {
+        "clinic": "Nashville Hair Doctor",
+        "location": {
+          "address": null,
+          "city": "Brentwood",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/prices/hair-transplant/tn/",
+            "source_type": "public_pricing_directory",
+            "price_min": 5500
+          },
+          {
+            "name": "Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://transplantmatch.com/prices/hair-transplant/tn/",
+            "source_type": "public_pricing_directory",
+            "price": 4.5
+          }
+        ]
+      },
+      {
+        "clinic": "We Grow Hair Nashville",
+        "location": {
+          "address": null,
+          "city": "Brentwood",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/prices/hair-transplant/tn/",
+            "source_type": "public_pricing_directory",
+            "price_min": 5000
+          },
+          {
+            "name": "Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://transplantmatch.com/prices/hair-transplant/tn/",
+            "source_type": "public_pricing_directory",
+            "price": 6
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "ElaMar Nashville",
+        "location": {
+          "address": null,
+          "city": "Nashville",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          }
+        ]
+      },
+      {
+        "clinic": "Hi, Finch",
+        "location": {
+          "address": null,
+          "city": "Nashville",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peels",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 75,
+            "price_max": 150
+          }
+        ]
+      },
+      {
+        "clinic": "The Natural Look MedSpa",
+        "location": {
+          "address": null,
+          "city": "Nashville",
+          "state": "TN",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Exfoliation",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 200
+          },
+          {
+            "name": "IP Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 200
+          },
+          {
+            "name": "VI Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 200
+          }
+        ]
+      }
+    ]
+  },
+  "market_benchmarks": [
+    {
+      "category": "Rhinoplasty",
+      "metric": "primary_range",
+      "price_min": 11000,
+      "price_max": 16500,
+      "source_url": "https://getclearbeauty.com/rhinoplasty/nashville-tn",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Boob job",
+      "metric": "metro_average",
+      "price": 6939,
+      "source_url": "https://www.realself.com/surgical/breast-augmentation/cost",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Boob job",
+      "metric": "published_provider_range",
+      "price_min": 6300,
+      "price_median": 7200,
+      "price_max": 7800,
+      "source_url": "https://www.navmds.com/doctor/specialty/breast-augmentation/tennessee/nashville",
+      "source_type": "market_benchmark"
+    }
+  ],
+  "clinics": [
+    {
+      "name": "Belcourt Aesthetics",
+      "website": "https://belcourtaesthetics.com/",
+      "location": {
+        "address": null,
+        "city": "Nashville",
+        "state": "TN",
+        "country": "USA"
+      },
+      "phone": "+1 615-622-4544",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/tn/nashville/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "BBL Photofacial",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "PRP Injections",
+          "category": "regenerative",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Facial Threading",
+          "category": "threads",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Neck Thread Lift",
+          "category": "threads",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "PDO Thread Lift",
+          "category": "threads",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 600
+        }
+      ]
+    },
+    {
+      "name": "ElaMar Nashville",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Nashville",
+        "state": "TN",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/tn/nashville/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "CoolSculpting",
+          "category": "body_contouring",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 2000,
+          "price_max": 4000
+        },
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 600
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Kybella",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 1200
+        },
+        {
+          "name": "BBL",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 500
+        },
+        {
+          "name": "Laser Hair Removal",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 300
+        },
+        {
+          "name": "Skin Resurfacing",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 400
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Microdermabrasion",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 90,
+          "price_max": 200
+        }
+      ]
+    },
+    {
+      "name": "Hi, Finch",
+      "website": "https://hifinch.com/",
+      "location": {
+        "address": null,
+        "city": "Nashville",
+        "state": "TN",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/tn/nashville/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Facials",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 50,
+          "price_max": 100
+        },
+        {
+          "name": "Crow's Feet Treatment",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Gummy Smile Correction",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Lip Flip",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "BBL Laser",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        },
+        {
+          "name": "Chemical Peels",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 75,
+          "price_max": 150
+        },
+        {
+          "name": "Radiofrequency",
+          "category": "radiofrequency",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        }
+      ]
+    },
+    {
+      "name": "Nashville Hair Doctor",
+      "website": "https://nashvillehairdoctor.com/",
+      "location": {
+        "address": null,
+        "city": "Brentwood",
+        "state": "TN",
+        "country": "USA"
+      },
+      "phone": "+1 615-676-8232",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://transplantmatch.com/prices/hair-transplant/tn/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/prices/hair-transplant/tn/",
+          "source_type": "public_pricing_directory",
+          "price_min": 5500
+        },
+        {
+          "name": "Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://transplantmatch.com/prices/hair-transplant/tn/",
+          "source_type": "public_pricing_directory",
+          "price": 4.5
+        }
+      ]
+    },
+    {
+      "name": "Nashville Med Spa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Nashville",
+        "state": "TN",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/tn/nashville/reviews/nashville-med-spa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/nashville-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 195,
+          "price_max": 599
+        },
+        {
+          "name": "PRP Hair Loss",
+          "category": "hair",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/nashville-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 700,
+          "price_max": 900
+        },
+        {
+          "name": "Tox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/nashville-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 3.99,
+          "price_max": 13
+        },
+        {
+          "name": "PRP Face",
+          "category": "regenerative",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/nashville-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 700
+        }
+      ]
+    },
+    {
+      "name": "The Natural Look MedSpa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Nashville",
+        "state": "TN",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Cheek Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 600
+        },
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 600
+        },
+        {
+          "name": "Under-Eye Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 600
+        },
+        {
+          "name": "Brow Lift Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Crow's Feet Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Forehead Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "BBL",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 250,
+          "price_max": 350
+        },
+        {
+          "name": "Laser Hair Removal",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 300
+        },
+        {
+          "name": "Tattoo Removal",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 500
+        },
+        {
+          "name": "Chemical Exfoliation",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 200
+        },
+        {
+          "name": "IP Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 200
+        },
+        {
+          "name": "VI Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/tn/nashville/reviews/the-natural-look-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 200
+        }
+      ]
+    },
+    {
+      "name": "We Grow Hair Nashville",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Brentwood",
+        "state": "TN",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://transplantmatch.com/prices/hair-transplant/tn/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/prices/hair-transplant/tn/",
+          "source_type": "public_pricing_directory",
+          "price_min": 5000
+        },
+        {
+          "name": "Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://transplantmatch.com/prices/hair-transplant/tn/",
+          "source_type": "public_pricing_directory",
+          "price": 6
+        }
+      ]
+    }
+  ]
+}

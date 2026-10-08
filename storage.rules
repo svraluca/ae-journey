@@ -1,0 +1,13 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Each authenticated user owns the bucket subtree under their uid.
+    // Mirrors the Firestore rule that scopes /users/{uid}/** reads & writes
+    // to the matching auth uid.
+    match /users/{userId}/{allPaths=**} {
+      allow read, write: if request.auth != null
+                            && request.auth.uid == userId;
+    }
+  }
+}

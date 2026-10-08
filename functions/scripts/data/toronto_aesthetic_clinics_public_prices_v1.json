@@ -1,0 +1,2787 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Toronto, Ontario, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 10,
+  "priced_procedure_count": 158,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 3,
+    "Fillers": 3,
+    "Rhinoplasty": 3,
+    "Boob job": 6,
+    "Hair transplant": 4,
+    "Peels": 2
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Toronto Cosmetic Surgery Institute",
+        "location": {
+          "address": "100 Front St W, Toronto, ON",
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 12
+          }
+        ]
+      },
+      {
+        "clinic": "Toronto Cosmetic Surgery Clinic",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 12
+          }
+        ]
+      },
+      {
+        "clinic": "The Clinica - Toronto",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "from",
+            "source_url": "https://theclinica.ca/promotions-2/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 10
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Toronto Cosmetic Surgery Institute",
+        "location": {
+          "address": "100 Front St W, Toronto, ON",
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 750
+          },
+          {
+            "name": "Lip Enhancement Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 700
+          },
+          {
+            "name": "Under-Eye Redensity II",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 750
+          }
+        ]
+      },
+      {
+        "clinic": "Toronto Cosmetic Surgery Clinic",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Bellafill",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 1200
+          }
+        ]
+      },
+      {
+        "clinic": "The Clinica - Toronto",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "from",
+            "source_url": "https://theclinica.ca/promotions-2/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 699
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "Toronto Cosmetic Surgery Clinic",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 12000
+          }
+        ]
+      },
+      {
+        "clinic": "Toronto Cosmetic Clinic",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.tcclinic.com/surgical/fees/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 10899
+          }
+        ]
+      },
+      {
+        "clinic": "The Plastic Surgery Clinic - Toronto",
+        "location": {
+          "address": "67 Scollard St, Toronto, ON",
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Revision Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 19900,
+            "price_max": 25000
+          },
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 14900,
+            "price_max": 16900
+          }
+        ]
+      }
+    ],
+    "Boob job": [
+      {
+        "clinic": "Toronto Cosmetic Surgery Institute",
+        "location": {
+          "address": "100 Front St W, Toronto, ON",
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation + Lift - Saline",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 15100
+          },
+          {
+            "name": "Breast Augmentation + Lift - Silicone",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 17100
+          },
+          {
+            "name": "Breast Augmentation - Saline",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 10500
+          },
+          {
+            "name": "Breast Augmentation - Silicone / Gummy",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 12800
+          },
+          {
+            "name": "Fat Transfer Breast Augmentation - Standalone",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 11300
+          },
+          {
+            "name": "Fat Transfer Breast Augmentation - With Liposuction",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 4800
+          },
+          {
+            "name": "Revision Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 13100,
+            "price_max": 16100
+          }
+        ]
+      },
+      {
+        "clinic": "Toronto Cosmetic Surgery Clinic",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation - Gel",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 10000
+          },
+          {
+            "name": "Breast Augmentation - Saline",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 8500
+          }
+        ]
+      },
+      {
+        "clinic": "Toronto Cosmetic Clinic",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.tcclinic.com/surgical/fees/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 9999
+          }
+        ]
+      },
+      {
+        "clinic": "The Plastic Surgery Clinic - Toronto",
+        "location": {
+          "address": "67 Scollard St, Toronto, ON",
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 15000,
+            "price_max": 17000
+          }
+        ]
+      },
+      {
+        "clinic": "Toronto Plastic Surgery Center - Dr. Pirani",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://drpirani.com/fees-financing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 14500
+          },
+          {
+            "name": "Breast Augmentation + Lift",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://drpirani.com/fees-financing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 19500
+          }
+        ]
+      },
+      {
+        "clinic": "Power Plastic Surgery",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation - Silicone",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 11200
+          },
+          {
+            "name": "Revision Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 13620
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [
+      {
+        "clinic": "Toronto Cosmetic Surgery Institute",
+        "location": {
+          "address": "100 Front St W, Toronto, ON",
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Beard Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 6999
+          },
+          {
+            "name": "Eyebrow Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 4999
+          },
+          {
+            "name": "Hair Transplant - 1000-1500 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1000-1500 grafts",
+            "price_type": "from",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 6999
+          },
+          {
+            "name": "Hair Transplant - 1500-2000 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1500-2000 grafts",
+            "price_type": "from",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 9999
+          },
+          {
+            "name": "Hair Transplant - 2000-3000 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2000-3000 grafts",
+            "price_type": "from",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 10999
+          },
+          {
+            "name": "Hair Transplant - 3000-4000 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "3000-4000 grafts",
+            "price_type": "from",
+            "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 12999
+          }
+        ]
+      },
+      {
+        "clinic": "Toronto Cosmetic Surgery Clinic",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "NeoGraft Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 5000
+          }
+        ]
+      },
+      {
+        "clinic": "Hair Toronto",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Large FUE Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.hairtoronto.com/patient-resources/hair-transplant-cost/",
+            "source_type": "official_context_price",
+            "checked_at": "2026-09-13",
+            "price_min": 17500
+          },
+          {
+            "name": "Small Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.hairtoronto.com/patient-resources/hair-transplant-cost/",
+            "source_type": "official_context_price",
+            "checked_at": "2026-09-13",
+            "price": 3500
+          }
+        ]
+      },
+      {
+        "clinic": "Hair Transplant Toronto Clinic",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Beard Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per procedure",
+            "price_type": "from",
+            "source_url": "https://www.hairtransplanttorontoclinic.com/cost/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 6000
+          },
+          {
+            "name": "Eyebrow Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per procedure",
+            "price_type": "from",
+            "source_url": "https://www.hairtransplanttorontoclinic.com/cost/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 4000
+          },
+          {
+            "name": "Hair Transplant - 1000-1200 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1000-1200 grafts",
+            "price_type": "from",
+            "source_url": "https://www.hairtransplanttorontoclinic.com/cost/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 5000
+          },
+          {
+            "name": "Hair Transplant - 1200-1500 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1200-1500 grafts",
+            "price_type": "from",
+            "source_url": "https://www.hairtransplanttorontoclinic.com/cost/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 6000
+          },
+          {
+            "name": "Hair Transplant - 1500-1800 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1500-1800 grafts",
+            "price_type": "from",
+            "source_url": "https://www.hairtransplanttorontoclinic.com/cost/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 7500
+          },
+          {
+            "name": "Hair Transplant - 1800-2000 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1800-2000 grafts",
+            "price_type": "from",
+            "source_url": "https://www.hairtransplanttorontoclinic.com/cost/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 9000
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "Rejuvenus Clinic",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel - Level 1",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.rejuvenusclinic.ca/pricing-promotions",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 200
+          },
+          {
+            "name": "Jessner Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.rejuvenusclinic.ca/pricing-promotions",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 250
+          },
+          {
+            "name": "Perfect Derma Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.rejuvenusclinic.ca/pricing-promotions",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 300
+          }
+        ]
+      },
+      {
+        "clinic": "The Clinica - Toronto",
+        "location": {
+          "address": null,
+          "city": "Toronto",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "BodyPeel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://theclinica.ca/promotions-2/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 299
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Hair Toronto",
+      "website": "https://www.hairtoronto.com/",
+      "location": {
+        "address": null,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.hairtoronto.com/patient-resources/hair-transplant-cost/"
+      ],
+      "procedures": [
+        {
+          "name": "Large FUE Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.hairtoronto.com/patient-resources/hair-transplant-cost/",
+          "source_type": "official_context_price",
+          "checked_at": "2026-09-13",
+          "price_min": 17500
+        },
+        {
+          "name": "Small Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.hairtoronto.com/patient-resources/hair-transplant-cost/",
+          "source_type": "official_context_price",
+          "checked_at": "2026-09-13",
+          "price": 3500
+        }
+      ]
+    },
+    {
+      "name": "Hair Transplant Toronto Clinic",
+      "website": "https://www.hairtransplanttorontoclinic.com/",
+      "location": {
+        "address": null,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.hairtransplanttorontoclinic.com/cost/"
+      ],
+      "procedures": [
+        {
+          "name": "Beard Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.hairtransplanttorontoclinic.com/cost/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6000
+        },
+        {
+          "name": "Eyebrow Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.hairtransplanttorontoclinic.com/cost/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4000
+        },
+        {
+          "name": "Hair Transplant - 1000-1200 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1000-1200 grafts",
+          "price_type": "from",
+          "source_url": "https://www.hairtransplanttorontoclinic.com/cost/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5000
+        },
+        {
+          "name": "Hair Transplant - 1200-1500 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1200-1500 grafts",
+          "price_type": "from",
+          "source_url": "https://www.hairtransplanttorontoclinic.com/cost/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6000
+        },
+        {
+          "name": "Hair Transplant - 1500-1800 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1500-1800 grafts",
+          "price_type": "from",
+          "source_url": "https://www.hairtransplanttorontoclinic.com/cost/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7500
+        },
+        {
+          "name": "Hair Transplant - 1800-2000 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1800-2000 grafts",
+          "price_type": "from",
+          "source_url": "https://www.hairtransplanttorontoclinic.com/cost/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9000
+        }
+      ]
+    },
+    {
+      "name": "Power Plastic Surgery",
+      "website": "https://www.powerplasticsurgery.com/",
+      "location": {
+        "address": null,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.powerplasticsurgery.com/pricing-details/"
+      ],
+      "procedures": [
+        {
+          "name": "Bilateral Implant Exchange",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 13620
+        },
+        {
+          "name": "Breast Augmentation - Silicone",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 11200
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10430
+        },
+        {
+          "name": "Breast Lift + Implants",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14500
+        },
+        {
+          "name": "Breast Reduction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10120
+        },
+        {
+          "name": "Explant + Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 17420
+        },
+        {
+          "name": "Inverted Nipple Correction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 3960
+        },
+        {
+          "name": "Liposuction - One Site",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7900
+        },
+        {
+          "name": "Revision Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 13620
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14150
+        },
+        {
+          "name": "Tummy Tuck + Flank Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.powerplasticsurgery.com/pricing-details/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 16320
+        }
+      ]
+    },
+    {
+      "name": "Rejuvenus Clinic",
+      "website": "https://www.rejuvenusclinic.ca/",
+      "location": {
+        "address": null,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.rejuvenusclinic.ca/pricing-promotions"
+      ],
+      "procedures": [
+        {
+          "name": "Bela MD Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.rejuvenusclinic.ca/pricing-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 250
+        },
+        {
+          "name": "Deep Clean Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.rejuvenusclinic.ca/pricing-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 175
+        },
+        {
+          "name": "Express Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.rejuvenusclinic.ca/pricing-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 99
+        },
+        {
+          "name": "OxyGeneo Pro Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.rejuvenusclinic.ca/pricing-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 270
+        },
+        {
+          "name": "OxyGeneo Pro Max",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.rejuvenusclinic.ca/pricing-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 290
+        },
+        {
+          "name": "Signature Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.rejuvenusclinic.ca/pricing-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 220
+        },
+        {
+          "name": "Chemical Peel - Level 1",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.rejuvenusclinic.ca/pricing-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 200
+        },
+        {
+          "name": "Jessner Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.rejuvenusclinic.ca/pricing-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 250
+        },
+        {
+          "name": "Perfect Derma Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.rejuvenusclinic.ca/pricing-promotions",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 300
+        }
+      ]
+    },
+    {
+      "name": "The Clinica - Toronto",
+      "website": "https://theclinica.ca/",
+      "location": {
+        "address": null,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://theclinica.ca/promotions-2/"
+      ],
+      "procedures": [
+        {
+          "name": "BodyGlow",
+          "category": "body_contouring",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://theclinica.ca/promotions-2/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 299
+        },
+        {
+          "name": "BodyRevive",
+          "category": "body_contouring",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://theclinica.ca/promotions-2/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 799
+        },
+        {
+          "name": "BodyTight",
+          "category": "body_contouring",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://theclinica.ca/promotions-2/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 299
+        },
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "from",
+          "source_url": "https://theclinica.ca/promotions-2/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 699
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "from",
+          "source_url": "https://theclinica.ca/promotions-2/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10
+        },
+        {
+          "name": "Laser Hair Removal",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://theclinica.ca/promotions-2/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 69
+        },
+        {
+          "name": "PicoSure",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://theclinica.ca/promotions-2/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 899
+        },
+        {
+          "name": "BodyPeel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://theclinica.ca/promotions-2/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 299
+        },
+        {
+          "name": "Golden PRP",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://theclinica.ca/promotions-2/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 899
+        },
+        {
+          "name": "Beauty Booster",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://theclinica.ca/promotions-2/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 799
+        },
+        {
+          "name": "Miracle Cocktail",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://theclinica.ca/promotions-2/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 499
+        },
+        {
+          "name": "SkinRevive",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://theclinica.ca/promotions-2/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 699
+        }
+      ]
+    },
+    {
+      "name": "The Plastic Surgery Clinic - Toronto",
+      "website": "https://www.theplasticsurgeryclinic.ca/",
+      "location": {
+        "address": "67 Scollard St, Toronto, ON",
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "practice",
+      "source_urls": [
+        "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/"
+      ],
+      "procedures": [
+        {
+          "name": "Brazilian Butt Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14900,
+          "price_max": 19900
+        },
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15000,
+          "price_max": 17000
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14000,
+          "price_max": 18000
+        },
+        {
+          "name": "Breast Lift + Implant",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 16000,
+          "price_max": 20000
+        },
+        {
+          "name": "Breast Reduction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14000,
+          "price_max": 18000
+        },
+        {
+          "name": "Facelift / Mini Facelift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 28000,
+          "price_max": 38000
+        },
+        {
+          "name": "Gynecomastia",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 13000,
+          "price_max": 17000
+        },
+        {
+          "name": "Labiaplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9000,
+          "price_max": 14000
+        },
+        {
+          "name": "Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12000,
+          "price_max": 19000
+        },
+        {
+          "name": "Otoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9000,
+          "price_max": 13000
+        },
+        {
+          "name": "Revision Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 19900,
+          "price_max": 25000
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14900,
+          "price_max": 16900
+        },
+        {
+          "name": "Thigh Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.theplasticsurgeryclinic.ca/our-clinic/pricing-plastic-surgery/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12000,
+          "price_max": 19000
+        }
+      ]
+    },
+    {
+      "name": "Toronto Cosmetic Clinic",
+      "website": "https://www.tcclinic.com/",
+      "location": {
+        "address": null,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.tcclinic.com/surgical/fees/"
+      ],
+      "procedures": [
+        {
+          "name": "Arm Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.tcclinic.com/surgical/fees/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9999
+        },
+        {
+          "name": "Brazilian Butt Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.tcclinic.com/surgical/fees/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12499
+        },
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.tcclinic.com/surgical/fees/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9999
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.tcclinic.com/surgical/fees/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11999
+        },
+        {
+          "name": "Eyelid Surgery",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.tcclinic.com/surgical/fees/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 3999
+        },
+        {
+          "name": "Facelift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.tcclinic.com/surgical/fees/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15999
+        },
+        {
+          "name": "Labiaplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.tcclinic.com/surgical/fees/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4199
+        },
+        {
+          "name": "Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.tcclinic.com/surgical/fees/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6999
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.tcclinic.com/surgical/fees/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10899
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.tcclinic.com/surgical/fees/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11999
+        },
+        {
+          "name": "Vaginoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.tcclinic.com/surgical/fees/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5699
+        },
+        {
+          "name": "VASER Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.tcclinic.com/surgical/fees/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7499
+        }
+      ]
+    },
+    {
+      "name": "Toronto Cosmetic Surgery Clinic",
+      "website": "https://torontocosmeticsurgeryclinic.com/",
+      "location": {
+        "address": null,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://torontocosmeticsurgeryclinic.com/our-pricing/"
+      ],
+      "procedures": [
+        {
+          "name": "Bellafill",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 1200
+        },
+        {
+          "name": "NeoGraft Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5000
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 12
+        },
+        {
+          "name": "Arm Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12000
+        },
+        {
+          "name": "Breast Augmentation - Gel",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10000
+        },
+        {
+          "name": "Breast Augmentation - Saline",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 8500
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12000
+        },
+        {
+          "name": "Buccal Fat Removal",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5000
+        },
+        {
+          "name": "Butt Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14500
+        },
+        {
+          "name": "Cheek Implants",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6250
+        },
+        {
+          "name": "Chin Implants",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5000
+        },
+        {
+          "name": "Chin Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 2500
+        },
+        {
+          "name": "Chin Surgery",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7000
+        },
+        {
+          "name": "Earlobe Repair - Each",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 600
+        },
+        {
+          "name": "Facelift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15000
+        },
+        {
+          "name": "Gynecomastia",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 8000
+        },
+        {
+          "name": "Hymenoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 2600
+        },
+        {
+          "name": "Labiaplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4200
+        },
+        {
+          "name": "Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6999
+        },
+        {
+          "name": "Mini Facelift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10000
+        },
+        {
+          "name": "Neck Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10000
+        },
+        {
+          "name": "Otoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4500
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12000
+        },
+        {
+          "name": "Scar Revision",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 750
+        },
+        {
+          "name": "Single Eyelid Surgery",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5000
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12000
+        },
+        {
+          "name": "Upper + Lower Eyelid Surgery",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9000
+        },
+        {
+          "name": "Vaginoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontocosmeticsurgeryclinic.com/our-pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5700
+        }
+      ]
+    },
+    {
+      "name": "Toronto Cosmetic Surgery Institute",
+      "website": "https://torontosurgery.com/",
+      "location": {
+        "address": "100 Front St W, Toronto, ON",
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://torontosurgery.com/fees-financing-cosmetic-surgery"
+      ],
+      "procedures": [
+        {
+          "name": "Abdominal Etching",
+          "category": "body_contouring",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4500
+        },
+        {
+          "name": "J-Plasma Add-On",
+          "category": "body_contouring",
+          "currency": "CAD",
+          "unit": "add-on",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 2500
+        },
+        {
+          "name": "VASER Add-On",
+          "category": "body_contouring",
+          "currency": "CAD",
+          "unit": "add-on",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 2500
+        },
+        {
+          "name": "Cosmetic Consultation",
+          "category": "consultation",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 200
+        },
+        {
+          "name": "Cheek Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 750
+        },
+        {
+          "name": "Lip Enhancement Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 700
+        },
+        {
+          "name": "Under-Eye Redensity II",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 750
+        },
+        {
+          "name": "Beard Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6999
+        },
+        {
+          "name": "Eyebrow Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4999
+        },
+        {
+          "name": "Hair Transplant - 1000-1500 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1000-1500 grafts",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6999
+        },
+        {
+          "name": "Hair Transplant - 1500-2000 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1500-2000 grafts",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9999
+        },
+        {
+          "name": "Hair Transplant - 2000-3000 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2000-3000 grafts",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10999
+        },
+        {
+          "name": "Hair Transplant - 3000-4000 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "3000-4000 grafts",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12999
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 12
+        },
+        {
+          "name": "Microneedling + Redensity I",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "Body Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 21300
+        },
+        {
+          "name": "Brazilian Butt Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14500
+        },
+        {
+          "name": "Brazilian Butt Lift + Lipo 360",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 26100
+        },
+        {
+          "name": "Breast Augmentation + Lift - Saline",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15100
+        },
+        {
+          "name": "Breast Augmentation + Lift - Silicone",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 17100
+        },
+        {
+          "name": "Breast Augmentation - Saline",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10500
+        },
+        {
+          "name": "Breast Augmentation - Silicone / Gummy",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12800
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10600,
+          "price_max": 12100
+        },
+        {
+          "name": "Breast Reduction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12100
+        },
+        {
+          "name": "Brow Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 8300,
+          "price_max": 11300
+        },
+        {
+          "name": "Buffalo Hump Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4800
+        },
+        {
+          "name": "Buttock Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15300
+        },
+        {
+          "name": "Chin Implant",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11500
+        },
+        {
+          "name": "Clitoral Hood Reduction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4300
+        },
+        {
+          "name": "Extended Tummy Tuck",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 16300,
+          "price_max": 19000
+        },
+        {
+          "name": "Facelift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 22000,
+          "price_max": 60500
+        },
+        {
+          "name": "Facial Fat Transfer",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4300,
+          "price_max": 7300
+        },
+        {
+          "name": "Fat Transfer Breast Augmentation - Standalone",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11300
+        },
+        {
+          "name": "Fat Transfer Breast Augmentation - With Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4800
+        },
+        {
+          "name": "Full Arm Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12300
+        },
+        {
+          "name": "Full Thigh Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12300,
+          "price_max": 13500
+        },
+        {
+          "name": "Full Tummy Tuck",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15300,
+          "price_max": 19000
+        },
+        {
+          "name": "Gynecomastia - Full",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 8500
+        },
+        {
+          "name": "Gynecomastia - Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6300
+        },
+        {
+          "name": "Hymenoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 4300
+        },
+        {
+          "name": "Labiaplasty - Inner",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5500
+        },
+        {
+          "name": "Labiaplasty - Outer",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6300
+        },
+        {
+          "name": "Lip Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4300
+        },
+        {
+          "name": "Lipo 360",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 19500
+        },
+        {
+          "name": "Liposuction - First Area",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7900
+        },
+        {
+          "name": "Lower Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6700
+        },
+        {
+          "name": "Mini Arm Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9800
+        },
+        {
+          "name": "Mini Thigh Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9800
+        },
+        {
+          "name": "Mini Tummy Tuck",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 13300
+        },
+        {
+          "name": "Neck Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9800,
+          "price_max": 16500
+        },
+        {
+          "name": "Neck Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6100
+        },
+        {
+          "name": "Revision Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 13100,
+          "price_max": 16100
+        },
+        {
+          "name": "Top Surgery",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12100
+        },
+        {
+          "name": "Upper Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://torontosurgery.com/fees-financing-cosmetic-surgery",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5700
+        }
+      ]
+    },
+    {
+      "name": "Toronto Plastic Surgery Center - Dr. Pirani",
+      "website": "https://drpirani.com/",
+      "location": {
+        "address": null,
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://drpirani.com/fees-financing/"
+      ],
+      "procedures": [
+        {
+          "name": "Arm Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drpirani.com/fees-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10000
+        },
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drpirani.com/fees-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14500
+        },
+        {
+          "name": "Breast Augmentation + Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drpirani.com/fees-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 19500
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drpirani.com/fees-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10500
+        },
+        {
+          "name": "Brow Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drpirani.com/fees-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10000
+        },
+        {
+          "name": "Face + Neck + Brow Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drpirani.com/fees-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 45000
+        },
+        {
+          "name": "Face + Neck Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drpirani.com/fees-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 35000
+        },
+        {
+          "name": "Facial Fat Grafting",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drpirani.com/fees-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10500
+        },
+        {
+          "name": "Lower Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drpirani.com/fees-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9500
+        },
+        {
+          "name": "Neck Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drpirani.com/fees-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14500
+        },
+        {
+          "name": "Upper Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drpirani.com/fees-financing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7500
+        }
+      ]
+    }
+  ]
+}

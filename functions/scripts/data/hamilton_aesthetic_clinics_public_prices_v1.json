@@ -1,0 +1,476 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Hamilton, Ontario, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 4,
+  "priced_procedure_count": 20,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 1,
+    "Fillers": 0,
+    "Rhinoplasty": 0,
+    "Boob job": 1,
+    "Hair transplant": 0,
+    "Peels": 2
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Hamilton Botox Clinic",
+        "location": {
+          "address": null,
+          "city": "Hamilton",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://hamiltonbotox.com/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 7
+          }
+        ]
+      }
+    ],
+    "Fillers": [],
+    "Rhinoplasty": [],
+    "Boob job": [
+      {
+        "clinic": "Ronen Avram, MD - Hamilton Listing",
+        "location": {
+          "address": null,
+          "city": "Hamilton",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Asymmetric Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price_min": 10900
+          },
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price_min": 10100
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [],
+    "Peels": [
+      {
+        "clinic": "The Rose Rooms",
+        "location": {
+          "address": null,
+          "city": "Hamilton",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel Facial",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.theroserooms.com/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 120
+          }
+        ]
+      },
+      {
+        "clinic": "Skin by Kipp",
+        "location": {
+          "address": null,
+          "city": "Hamilton",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://skinbykipp.ca/facials/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 80
+          },
+          {
+            "name": "Chemical Peel - 4 Pack",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "package",
+            "price_type": "fixed",
+            "source_url": "https://skinbykipp.ca/facials/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 240
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Hamilton Botox Clinic",
+      "website": "https://hamiltonbotox.com/",
+      "location": {
+        "address": null,
+        "city": "Hamilton",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://hamiltonbotox.com/"
+      ],
+      "procedures": [
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://hamiltonbotox.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 7
+        }
+      ]
+    },
+    {
+      "name": "Ronen Avram, MD - Hamilton Listing",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Hamilton",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on"
+      ],
+      "procedures": [
+        {
+          "name": "Asymmetric Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 10900
+        },
+        {
+          "name": "Brazilian Butt Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 17000
+        },
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 10100
+        },
+        {
+          "name": "Breast Implant Removal",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 10500
+        },
+        {
+          "name": "Breast Implant Removal + Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 14000
+        },
+        {
+          "name": "Breast Implant Removal + Replacement",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 12800
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 10500
+        },
+        {
+          "name": "Breast Revision",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 11500
+        },
+        {
+          "name": "Fleur-de-Lis Tummy Tuck",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 15000
+        },
+        {
+          "name": "Lipo 360",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 12300
+        },
+        {
+          "name": "Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 8850
+        },
+        {
+          "name": "Mommy Makeover",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 19700
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 11500
+        },
+        {
+          "name": "Tummy Tuck + 360 Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 21000
+        },
+        {
+          "name": "Tummy Tuck + Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.threebestrated.ca/plastic-surgeon-in-hamilton-on",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 15500
+        }
+      ],
+      "note": "ThreeBestRated public pricing; lower trust than official clinic-site pricing."
+    },
+    {
+      "name": "Skin by Kipp",
+      "website": "https://skinbykipp.ca/",
+      "location": {
+        "address": null,
+        "city": "Hamilton",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://skinbykipp.ca/facials/"
+      ],
+      "procedures": [
+        {
+          "name": "Glass Skin Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://skinbykipp.ca/facials/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 150
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://skinbykipp.ca/facials/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 80
+        },
+        {
+          "name": "Chemical Peel - 4 Pack",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://skinbykipp.ca/facials/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 240
+        }
+      ]
+    },
+    {
+      "name": "The Rose Rooms",
+      "website": "https://www.theroserooms.com/",
+      "location": {
+        "address": null,
+        "city": "Hamilton",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "partial_public_page_capture",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.theroserooms.com/"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel Facial",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.theroserooms.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 120
+        }
+      ]
+    }
+  ]
+}

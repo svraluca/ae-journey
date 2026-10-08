@@ -1,0 +1,1852 @@
+{
+  "schema_version": "5.0-public-pricing-seed",
+  "checked_at": "2026-09-13",
+  "market": "Boston metro, Massachusetts, USA",
+  "currency_default": "USD",
+  "dataset_rule": "Clinic-first mixed-source public-pricing seed. procedures[] contains every numeric-priced service captured from the reviewed public source for that clinic. Flagship categories are indexes only, not a filter.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page; preferred.",
+    "official_context_price": "Clinic's own public educational/planning range; use below direct posted price.",
+    "public_pricing_directory": "Third-party public pricing directory; lower trust than clinic-site pricing.",
+    "patient_reported": "Public patient-reported price; historical/lower trust.",
+    "market_benchmark": "City/metro benchmark only; never present it as a clinic quote."
+  },
+  "limitations": [
+    "This is a best-effort public-web seed, not a guaranteed exhaustive site-wide audit of every clinic.",
+    "Booking-only, login-only, private-quote, phone-only and unindexed prices may be absent.",
+    "Rows without numeric public pricing are omitted rather than estimated.",
+    "Directory-derived rows are explicitly marked and should rank below official clinic-site pricing in Explore.",
+    "Market benchmarks are stored separately and are not counted as clinic coverage."
+  ],
+  "clinic_count": 9,
+  "priced_procedure_count": 60,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 7,
+    "Fillers": 7,
+    "Rhinoplasty": 0,
+    "Boob job": 0,
+    "Hair transplant": 1,
+    "Peels": 7
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Botox Boston",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox Treatment",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/botox-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Laser MD Medspa",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Crow's Feet Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          },
+          {
+            "name": "Forehead Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 200,
+            "price_max": 400
+          },
+          {
+            "name": "Frown Lines Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      },
+      {
+        "clinic": "Medical Aesthetics on Tremont",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox Injection",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          },
+          {
+            "name": "Lip Flip Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          },
+          {
+            "name": "TMJ Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      },
+      {
+        "clinic": "Skin Deep Med Spa",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-deep-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      },
+      {
+        "clinic": "Skin Rx Boston",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox Injections",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 500
+          }
+        ]
+      },
+      {
+        "clinic": "SkinHealth Centers Med Spa Boston",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Brow Lift Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 500
+          },
+          {
+            "name": "Crow's Feet Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 500
+          },
+          {
+            "name": "Forehead Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 500
+          }
+        ]
+      },
+      {
+        "clinic": "Vega Vitality MedSpa & Wellness - Back Bay",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Botox Boston",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/botox-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 1000
+          },
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/botox-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Fillers Boston",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 700,
+            "price_max": 900
+          },
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          },
+          {
+            "name": "Nose Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 650,
+            "price_max": 850
+          }
+        ]
+      },
+      {
+        "clinic": "Laser MD Medspa",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 900
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          },
+          {
+            "name": "Under-Eye Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Skin Deep Med Spa",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Belotero",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-deep-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 600
+          },
+          {
+            "name": "Restylane",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-deep-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Skin Rx Boston",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 900
+          },
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "SkinHealth Centers Med Spa Boston",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          },
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          },
+          {
+            "name": "Under-Eye Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Vega Vitality MedSpa & Wellness - Back Bay",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [],
+    "Boob job": [],
+    "Hair transplant": [
+      {
+        "clinic": "New England Center for Hair Restoration / NE Hair",
+        "location": {
+          "address": null,
+          "city": "Westwood",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/clinics/new-england-center-for-hair-restoration-boston/",
+            "source_type": "public_pricing_directory",
+            "price_min": 4000,
+            "note": "Historical directory estimate; confirm current fee."
+          },
+          {
+            "name": "Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://transplantmatch.com/clinics/new-england-center-for-hair-restoration-boston/",
+            "source_type": "public_pricing_directory",
+            "price": 5,
+            "note": "Historical directory estimate."
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "Botox Boston",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Deep Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/botox-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 1000
+          },
+          {
+            "name": "Light Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/botox-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          },
+          {
+            "name": "Medium Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/botox-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 200,
+            "price_max": 400
+          }
+        ]
+      },
+      {
+        "clinic": "Fillers Boston",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Deep Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 500
+          },
+          {
+            "name": "Light Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 150
+          },
+          {
+            "name": "Medium Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      },
+      {
+        "clinic": "Laser MD Medspa",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Deep Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 600
+          },
+          {
+            "name": "Light Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          },
+          {
+            "name": "Medium Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 200,
+            "price_max": 400
+          }
+        ]
+      },
+      {
+        "clinic": "Skin Deep Med Spa",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "VI Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-deep-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 250
+          }
+        ]
+      },
+      {
+        "clinic": "Skin Rx Boston",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Deep Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          },
+          {
+            "name": "Light Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 250
+          }
+        ]
+      },
+      {
+        "clinic": "SkinHealth Centers Med Spa Boston",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Glycolic Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          },
+          {
+            "name": "Salicylic Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          },
+          {
+            "name": "TCA Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 250
+          }
+        ]
+      },
+      {
+        "clinic": "Vega Vitality MedSpa & Wellness - Back Bay",
+        "location": {
+          "address": null,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "VI Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 200
+          }
+        ]
+      }
+    ]
+  },
+  "market_benchmarks": [
+    {
+      "category": "Rhinoplasty",
+      "metric": "boston_provider_range",
+      "price_min": 6000,
+      "price_typical": 8450,
+      "price_max": 14000,
+      "source_url": "https://www.navmds.com/resources/rhinoplasty-cost/massachusetts",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Boob job",
+      "metric": "metro_average",
+      "price": 8746,
+      "source_url": "https://www.realself.com/surgical/breast-augmentation/cost",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Botox",
+      "metric": "metro_average",
+      "price": 659,
+      "source_url": "https://www.realself.com/nonsurgical/botox/cost",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Hair transplant",
+      "metric": "city_range",
+      "price_min": 8500,
+      "price_median": 12800,
+      "price_max": 18500,
+      "source_url": "https://transplantmatch.com/prices/",
+      "source_type": "market_benchmark"
+    }
+  ],
+  "clinics": [
+    {
+      "name": "Botox Boston",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Boston",
+        "state": "MA",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/ma/boston/reviews/botox-boston"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Dermal Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/botox-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 1000
+        },
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/botox-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 800
+        },
+        {
+          "name": "Botox Treatment",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/botox-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Deep Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/botox-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 1000
+        },
+        {
+          "name": "Light Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/botox-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Medium Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/botox-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        }
+      ]
+    },
+    {
+      "name": "Fillers Boston",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Boston",
+        "state": "MA",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/ma/boston/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Cheek Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 700,
+          "price_max": 900
+        },
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Nose Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 650,
+          "price_max": 850
+        },
+        {
+          "name": "Crow's Feet Injection",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Forehead Injection",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 300
+        },
+        {
+          "name": "Frown Lines Injection",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 300
+        },
+        {
+          "name": "Deep Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Light Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 150
+        },
+        {
+          "name": "Medium Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        }
+      ]
+    },
+    {
+      "name": "Laser MD Medspa",
+      "website": "https://lasermdmedspa.com/",
+      "location": {
+        "address": null,
+        "city": "Boston",
+        "state": "MA",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Cheek Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 900
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Under-Eye Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 600
+        },
+        {
+          "name": "Crow's Feet Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Forehead Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        },
+        {
+          "name": "Frown Lines Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Deep Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 600
+        },
+        {
+          "name": "Light Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Medium Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/laser-md-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        }
+      ]
+    },
+    {
+      "name": "Medical Aesthetics on Tremont",
+      "website": "https://medicalaestheticsontremont.com/",
+      "location": {
+        "address": null,
+        "city": "Boston",
+        "state": "MA",
+        "country": "USA"
+      },
+      "phone": "+1 857-239-8067",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/ma/boston/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Botox Injection",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Lip Flip Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "TMJ Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Dermaplaning",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 75,
+          "price_max": 150
+        }
+      ]
+    },
+    {
+      "name": "New England Center for Hair Restoration / NE Hair",
+      "website": "https://nehair.com/",
+      "location": {
+        "address": null,
+        "city": "Westwood",
+        "state": "MA",
+        "country": "USA"
+      },
+      "phone": "+1 888-781-1045",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://transplantmatch.com/clinics/new-england-center-for-hair-restoration-boston/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/clinics/new-england-center-for-hair-restoration-boston/",
+          "source_type": "public_pricing_directory",
+          "price_min": 4000,
+          "note": "Historical directory estimate; confirm current fee."
+        },
+        {
+          "name": "Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://transplantmatch.com/clinics/new-england-center-for-hair-restoration-boston/",
+          "source_type": "public_pricing_directory",
+          "price": 5,
+          "note": "Historical directory estimate."
+        }
+      ]
+    },
+    {
+      "name": "Skin Deep Med Spa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Boston",
+        "state": "MA",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/ma/boston/reviews/skin-deep-med-spa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-deep-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 200
+        },
+        {
+          "name": "Belotero",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-deep-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 600
+        },
+        {
+          "name": "Restylane",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-deep-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 600
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-deep-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "VI Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-deep-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-deep-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 400
+        }
+      ]
+    },
+    {
+      "name": "Skin Rx Boston",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Boston",
+        "state": "MA",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 175,
+          "price_max": 300
+        },
+        {
+          "name": "Cheek Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 900
+        },
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 800
+        },
+        {
+          "name": "Botox Injections",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Deep Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Light Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skin-rx-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        }
+      ]
+    },
+    {
+      "name": "SkinHealth Centers Med Spa Boston",
+      "website": "https://www.skinhealthcenters.com/",
+      "location": {
+        "address": null,
+        "city": "Boston",
+        "state": "MA",
+        "country": "USA"
+      },
+      "phone": "+1 617-582-2645",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Cheek Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Under-Eye Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Brow Lift Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 500
+        },
+        {
+          "name": "Crow's Feet Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 500
+        },
+        {
+          "name": "Forehead Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 500
+        },
+        {
+          "name": "Glycolic Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Salicylic Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "TCA Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/reviews/skinhealth-centers-med-spa-boston",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        }
+      ]
+    },
+    {
+      "name": "Vega Vitality MedSpa & Wellness - Back Bay",
+      "website": "https://vegavitality.com/",
+      "location": {
+        "address": null,
+        "city": "Boston",
+        "state": "MA",
+        "country": "USA"
+      },
+      "phone": "+1 617-658-3421",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/ma/boston/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "CO2 Laser Resurfacing",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 800,
+          "price_max": 1500
+        },
+        {
+          "name": "Moxi Laser",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 750
+        },
+        {
+          "name": "VI Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 200
+        },
+        {
+          "name": "Genius Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/ma/boston/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 750
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1263 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Edmonton, Alberta, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 7,
+  "priced_procedure_count": 51,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 4,
+    "Fillers": 4,
+    "Rhinoplasty": 0,
+    "Boob job": 0,
+    "Hair transplant": 2,
+    "Peels": 3
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "LJ MedGlow",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://ljmedglow.ca/price-guide/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "clinic": "Revive Cosmetic Clinic",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.revivecosmeticclinic.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "clinic": "London & Glow",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://londonandglow.ca/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 13
+          }
+        ]
+      },
+      {
+        "clinic": "Illustria Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://illustriamedical.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "LJ MedGlow",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://ljmedglow.ca/price-guide/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 650
+          },
+          {
+            "name": "Half-Syringe Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "half syringe",
+            "price_type": "fixed",
+            "source_url": "https://ljmedglow.ca/price-guide/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 400
+          },
+          {
+            "name": "Filler Dissolving",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://ljmedglow.ca/price-guide/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 300
+          }
+        ]
+      },
+      {
+        "clinic": "Revive Cosmetic Clinic",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.revivecosmeticclinic.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 850
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.revivecosmeticclinic.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 650
+          },
+          {
+            "name": "Marionette Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.revivecosmeticclinic.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 1000
+          }
+        ]
+      },
+      {
+        "clinic": "London & Glow",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Fillers",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "from",
+            "source_url": "https://londonandglow.ca/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 650
+          }
+        ]
+      },
+      {
+        "clinic": "Illustria Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip / Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://illustriamedical.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 550
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [],
+    "Boob job": [],
+    "Hair transplant": [
+      {
+        "clinic": "Canadian Hair Transplant Centre",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant - 1200 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1200 grafts",
+            "price_type": "fixed",
+            "source_url": "https://canadianhairtransplant.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 7004
+          },
+          {
+            "name": "Hair Transplant - 1500 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1500 grafts",
+            "price_type": "fixed",
+            "source_url": "https://canadianhairtransplant.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 7505
+          },
+          {
+            "name": "Hair Transplant - 1800 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1800 grafts",
+            "price_type": "fixed",
+            "source_url": "https://canadianhairtransplant.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8150
+          },
+          {
+            "name": "Hair Transplant - 2000 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2000 grafts",
+            "price_type": "fixed",
+            "source_url": "https://canadianhairtransplant.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8500
+          },
+          {
+            "name": "Hair Transplant - 400 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "400 grafts",
+            "price_type": "fixed",
+            "source_url": "https://canadianhairtransplant.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 5668
+          },
+          {
+            "name": "Hair Transplant - 800 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "800 grafts",
+            "price_type": "fixed",
+            "source_url": "https://canadianhairtransplant.com/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 6336
+          }
+        ]
+      },
+      {
+        "clinic": "Edmonton Hair Restoration Clinic",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Beard Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per procedure",
+            "price_type": "range",
+            "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 6500,
+            "price_max": 8000
+          },
+          {
+            "name": "Eyebrow Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per procedure",
+            "price_type": "range",
+            "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 5500,
+            "price_max": 7000
+          },
+          {
+            "name": "Hair Transplant - 1000-1500 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1000-1500 grafts",
+            "price_type": "range",
+            "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 7000,
+            "price_max": 9500
+          },
+          {
+            "name": "Hair Transplant - 1500-2000 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1500-2000 grafts",
+            "price_type": "range",
+            "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 9500,
+            "price_max": 11500
+          },
+          {
+            "name": "Hair Transplant - 2000-2500 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2000-2500 grafts",
+            "price_type": "range",
+            "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 11500,
+            "price_max": 13500
+          },
+          {
+            "name": "Hair Transplant - 2500-3000 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2500-3000 grafts",
+            "price_type": "range",
+            "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 13500,
+            "price_max": 16000
+          },
+          {
+            "name": "Hair Transplant - 3000+ Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "3000+ grafts",
+            "price_type": "from",
+            "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 16000
+          },
+          {
+            "name": "Scar Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per procedure",
+            "price_type": "range",
+            "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 4500,
+            "price_max": 6500
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "London & Glow",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Skin Peels",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://londonandglow.ca/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 280
+          }
+        ]
+      },
+      {
+        "clinic": "Illustria Medical Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://illustriamedical.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 225
+          }
+        ]
+      },
+      {
+        "clinic": "Nurse Injector Shayse",
+        "location": {
+          "address": null,
+          "city": "Edmonton",
+          "province": "Alberta",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://nurseinjectorshayse.ca/services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 125
+          },
+          {
+            "name": "Jessner Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://nurseinjectorshayse.ca/services/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 150
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Canadian Hair Transplant Centre",
+      "website": "https://canadianhairtransplant.com/",
+      "location": {
+        "address": null,
+        "city": "Edmonton",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://canadianhairtransplant.com/pricing/"
+      ],
+      "procedures": [
+        {
+          "name": "Hair Transplant - 1200 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1200 grafts",
+          "price_type": "fixed",
+          "source_url": "https://canadianhairtransplant.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 7004
+        },
+        {
+          "name": "Hair Transplant - 1500 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1500 grafts",
+          "price_type": "fixed",
+          "source_url": "https://canadianhairtransplant.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 7505
+        },
+        {
+          "name": "Hair Transplant - 1800 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1800 grafts",
+          "price_type": "fixed",
+          "source_url": "https://canadianhairtransplant.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8150
+        },
+        {
+          "name": "Hair Transplant - 2000 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2000 grafts",
+          "price_type": "fixed",
+          "source_url": "https://canadianhairtransplant.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8500
+        },
+        {
+          "name": "Hair Transplant - 400 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "400 grafts",
+          "price_type": "fixed",
+          "source_url": "https://canadianhairtransplant.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 5668
+        },
+        {
+          "name": "Hair Transplant - 800 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "800 grafts",
+          "price_type": "fixed",
+          "source_url": "https://canadianhairtransplant.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 6336
+        }
+      ]
+    },
+    {
+      "name": "Edmonton Hair Restoration Clinic",
+      "website": "https://www.edmontonmenshealth.com/",
+      "location": {
+        "address": null,
+        "city": "Edmonton",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.edmontonmenshealth.com/pages/hair-transplant-cost"
+      ],
+      "procedures": [
+        {
+          "name": "Beard Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "range",
+          "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6500,
+          "price_max": 8000
+        },
+        {
+          "name": "Eyebrow Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "range",
+          "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5500,
+          "price_max": 7000
+        },
+        {
+          "name": "Hair Transplant - 1000-1500 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1000-1500 grafts",
+          "price_type": "range",
+          "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7000,
+          "price_max": 9500
+        },
+        {
+          "name": "Hair Transplant - 1500-2000 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1500-2000 grafts",
+          "price_type": "range",
+          "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9500,
+          "price_max": 11500
+        },
+        {
+          "name": "Hair Transplant - 2000-2500 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2000-2500 grafts",
+          "price_type": "range",
+          "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11500,
+          "price_max": 13500
+        },
+        {
+          "name": "Hair Transplant - 2500-3000 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2500-3000 grafts",
+          "price_type": "range",
+          "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 13500,
+          "price_max": 16000
+        },
+        {
+          "name": "Hair Transplant - 3000+ Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "3000+ grafts",
+          "price_type": "from",
+          "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 16000
+        },
+        {
+          "name": "Scar Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "range",
+          "source_url": "https://www.edmontonmenshealth.com/pages/hair-transplant-cost",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4500,
+          "price_max": 6500
+        }
+      ]
+    },
+    {
+      "name": "Illustria Medical Aesthetics",
+      "website": "https://illustriamedical.ca/",
+      "location": {
+        "address": null,
+        "city": "Edmonton",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://illustriamedical.ca/pricing/"
+      ],
+      "procedures": [
+        {
+          "name": "Radiesse",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://illustriamedical.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 900
+        },
+        {
+          "name": "Consultation",
+          "category": "consultation",
+          "currency": "CAD",
+          "unit": "per consultation",
+          "price_type": "fixed",
+          "source_url": "https://illustriamedical.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 100
+        },
+        {
+          "name": "Follow-Up",
+          "category": "consultation",
+          "currency": "CAD",
+          "unit": "per visit",
+          "price_type": "fixed",
+          "source_url": "https://illustriamedical.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 75
+        },
+        {
+          "name": "Lip / Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://illustriamedical.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "Botox / Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://illustriamedical.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://illustriamedical.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 225
+        }
+      ]
+    },
+    {
+      "name": "LJ MedGlow",
+      "website": "https://ljmedglow.ca/",
+      "location": {
+        "address": null,
+        "city": "Edmonton",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://ljmedglow.ca/price-guide/"
+      ],
+      "procedures": [
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 650
+        },
+        {
+          "name": "Half-Syringe Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "half syringe",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 400
+        },
+        {
+          "name": "PRP Hair",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 650
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Filler Dissolving",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 300
+        },
+        {
+          "name": "IV Glutathione - Basic",
+          "category": "iv_therapy",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 110
+        },
+        {
+          "name": "IV Glutathione - High",
+          "category": "iv_therapy",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 170
+        },
+        {
+          "name": "IV Glutathione - Medium",
+          "category": "iv_therapy",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 140
+        },
+        {
+          "name": "IV Myers",
+          "category": "iv_therapy",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 180
+        },
+        {
+          "name": "IV NAD",
+          "category": "iv_therapy",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        },
+        {
+          "name": "IV VHC",
+          "category": "iv_therapy",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 200
+        },
+        {
+          "name": "PRP Under-Eye",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 549
+        },
+        {
+          "name": "Vampire Facial - Microneedling + PRP",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://ljmedglow.ca/price-guide/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 750
+        }
+      ]
+    },
+    {
+      "name": "London & Glow",
+      "website": "https://londonandglow.ca/",
+      "location": {
+        "address": null,
+        "city": "Edmonton",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://londonandglow.ca/pricing"
+      ],
+      "procedures": [
+        {
+          "name": "Hormone Skin Consultation",
+          "category": "consultation",
+          "currency": "CAD",
+          "unit": "per consultation",
+          "price_type": "fixed",
+          "source_url": "https://londonandglow.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 400
+        },
+        {
+          "name": "ZO Skin Consultation",
+          "category": "consultation",
+          "currency": "CAD",
+          "unit": "per consultation",
+          "price_type": "fixed",
+          "source_url": "https://londonandglow.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 200
+        },
+        {
+          "name": "Dermal Fillers",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "from",
+          "source_url": "https://londonandglow.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 650
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://londonandglow.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 13
+        },
+        {
+          "name": "Skin Peels",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://londonandglow.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 280
+        },
+        {
+          "name": "Polynucleotides",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://londonandglow.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "PRP",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://londonandglow.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 650
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://londonandglow.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 380
+        },
+        {
+          "name": "Skin Rejuvenation",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://londonandglow.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 280
+        },
+        {
+          "name": "Skin Boosters",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://londonandglow.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 650
+        }
+      ]
+    },
+    {
+      "name": "Nurse Injector Shayse",
+      "website": "https://nurseinjectorshayse.ca/",
+      "location": {
+        "address": null,
+        "city": "Edmonton",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://nurseinjectorshayse.ca/services/"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://nurseinjectorshayse.ca/services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 125
+        },
+        {
+          "name": "Jessner Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://nurseinjectorshayse.ca/services/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 150
+        }
+      ]
+    },
+    {
+      "name": "Revive Cosmetic Clinic",
+      "website": "https://www.revivecosmeticclinic.com/",
+      "location": {
+        "address": null,
+        "city": "Edmonton",
+        "province": "Alberta",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.revivecosmeticclinic.com/pricing/"
+      ],
+      "procedures": [
+        {
+          "name": "Cheek Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.revivecosmeticclinic.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 850
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.revivecosmeticclinic.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 650
+        },
+        {
+          "name": "Marionette Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.revivecosmeticclinic.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1000
+        },
+        {
+          "name": "HIFU Face",
+          "category": "hifu",
+          "currency": "CAD",
+          "unit": "per session",
+          "price_type": "fixed",
+          "source_url": "https://www.revivecosmeticclinic.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 390
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.revivecosmeticclinic.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "Votiva",
+          "category": "intimate",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.revivecosmeticclinic.com/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 590
+        }
+      ]
+    }
+  ]
+}

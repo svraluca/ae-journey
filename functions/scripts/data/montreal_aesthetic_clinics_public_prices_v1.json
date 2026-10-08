@@ -1,0 +1,1740 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Montreal, Quebec, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 6,
+  "priced_procedure_count": 94,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 3,
+    "Fillers": 2,
+    "Rhinoplasty": 2,
+    "Boob job": 4,
+    "Hair transplant": 1,
+    "Peels": 1
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Chirurgie Plastique Montréal - Dr. Chen Lee",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dysport / AbobotulinumtoxinA",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per 3 units",
+            "price_type": "from",
+            "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 14
+          }
+        ]
+      },
+      {
+        "clinic": "Dr. Stephanie Thibaudeau",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://www.drthibaudeau.com/fr/prices/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 14
+          }
+        ]
+      },
+      {
+        "clinic": "Cura Med Aesthetics - Westmount",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "from",
+            "source_url": "https://curamed.ca/aesthetics/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 12
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Chirurgie Plastique Montréal - Dr. Chen Lee",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per 1 mL",
+            "price_type": "from",
+            "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 700
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 700
+          },
+          {
+            "name": "Liquid Rhinoplasty",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 700
+          }
+        ]
+      },
+      {
+        "clinic": "Dr. Stephanie Thibaudeau",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://www.drthibaudeau.com/fr/prices/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 800
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "Chirurgie Plastique Montréal - Dr. Chen Lee",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per procedure",
+            "price_type": "from",
+            "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 10000
+          }
+        ]
+      },
+      {
+        "clinic": "Phi Surgery",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Septorhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.phisurgery.ca/fr/tarification/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 12000
+          }
+        ]
+      }
+    ],
+    "Boob job": [
+      {
+        "clinic": "Chirurgie Plastique Montréal - Dr. Chen Lee",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per procedure",
+            "price_type": "from",
+            "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 10800
+          }
+        ]
+      },
+      {
+        "clinic": "Phi Surgery",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.phisurgery.ca/fr/tarification/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 11000
+          },
+          {
+            "name": "Breast Augmentation + Lift",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.phisurgery.ca/fr/tarification/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 14500
+          },
+          {
+            "name": "Fat Transfer Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.phisurgery.ca/fr/tarification/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 21000
+          },
+          {
+            "name": "Revision Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.phisurgery.ca/fr/tarification/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 12500
+          }
+        ]
+      },
+      {
+        "clinic": "Clinique Evolution - Dr. Ferland Caron",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation - Saline",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://cliniqueevolution.ca/tarifs",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10150
+          },
+          {
+            "name": "Breast Augmentation - Silicone",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://cliniqueevolution.ca/tarifs",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10150
+          },
+          {
+            "name": "Fat Graft Breast Augmentation - First Session",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://cliniqueevolution.ca/tarifs",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 15900
+          },
+          {
+            "name": "Fat Graft Breast Augmentation - Second Session",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://cliniqueevolution.ca/tarifs",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8500
+          }
+        ]
+      },
+      {
+        "clinic": "Dr. Stephanie Thibaudeau",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.drthibaudeau.com/fr/prices/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 7945,
+            "price_max": 15655
+          },
+          {
+            "name": "Breast Augmentation + Lift",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.drthibaudeau.com/fr/prices/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 15365,
+            "price_max": 29930
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [
+      {
+        "clinic": "DHD Hair Transplant",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Eyebrow Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "per procedure",
+            "price_type": "from",
+            "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 8000
+          },
+          {
+            "name": "Hair Transplant - 1000-1500 FU",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1000-1500 FU",
+            "price_type": "from",
+            "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 10000
+          },
+          {
+            "name": "Hair Transplant - 1500-2000 FU",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1500-2000 FU",
+            "price_type": "from",
+            "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 13000
+          },
+          {
+            "name": "Hair Transplant - 2000-2500 FU",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2000-2500 FU",
+            "price_type": "from",
+            "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 15000
+          },
+          {
+            "name": "Hair Transplant - 3000+ FU",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "3000+ FU",
+            "price_type": "from",
+            "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 20000
+          },
+          {
+            "name": "Hair Transplant - 4000+ FU",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "4000+ FU",
+            "price_type": "from",
+            "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 25000
+          },
+          {
+            "name": "Hair Transplant - 5000+ FU",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "5000+ FU",
+            "price_type": "from",
+            "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 30000
+          },
+          {
+            "name": "Hair Transplant - 6000+ FU",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "6000+ FU",
+            "price_type": "from",
+            "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 35000
+          },
+          {
+            "name": "Hair Transplant - 7000+ FU",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "7000+ FU",
+            "price_type": "from",
+            "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 40000
+          },
+          {
+            "name": "Hair Transplant - 8000+ FU",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "8000+ FU",
+            "price_type": "from",
+            "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 45000
+          },
+          {
+            "name": "Hair Transplant - Under 1000 FU",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "under 1000 FU",
+            "price_type": "from",
+            "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 8000
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "Cura Med Aesthetics - Westmount",
+        "location": {
+          "address": null,
+          "city": "Montreal",
+          "province": "Quebec",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://curamed.ca/aesthetics/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 150
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Chirurgie Plastique Montréal - Dr. Chen Lee",
+      "website": "https://chirurgieplastiquemontreal.net/",
+      "location": {
+        "address": null,
+        "city": "Montreal",
+        "province": "Quebec",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://chirurgieplastiquemontreal.net/prix/"
+      ],
+      "procedures": [
+        {
+          "name": "Consultation",
+          "category": "consultation",
+          "currency": "CAD",
+          "unit": "per consultation",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 165.25
+        },
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per 1 mL",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 700
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 700
+        },
+        {
+          "name": "Liquid Rhinoplasty",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 700
+        },
+        {
+          "name": "Belkyra",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per vial",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 750
+        },
+        {
+          "name": "Dysport / AbobotulinumtoxinA",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per 3 units",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14
+        },
+        {
+          "name": "Hyaluronidase",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 375
+        },
+        {
+          "name": "Jaw Slimming Neurotoxin",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 650
+        },
+        {
+          "name": "Asian Double Eyelid Surgery",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5000
+        },
+        {
+          "name": "Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4500
+        },
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10800
+        },
+        {
+          "name": "Breast Implant Exchange",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11800
+        },
+        {
+          "name": "Breast Implant Removal",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7500
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10800
+        },
+        {
+          "name": "Breast Reduction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10500
+        },
+        {
+          "name": "Brow Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4500
+        },
+        {
+          "name": "Facelift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 18500
+        },
+        {
+          "name": "Gynecomastia",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9000
+        },
+        {
+          "name": "Inverted Nipple Correction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 2500
+        },
+        {
+          "name": "Nasal Implant Removal",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4000
+        },
+        {
+          "name": "Otoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5300
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://chirurgieplastiquemontreal.net/prix/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10000
+        }
+      ]
+    },
+    {
+      "name": "Clinique Evolution - Dr. Ferland Caron",
+      "website": "https://cliniqueevolution.ca/",
+      "location": {
+        "address": null,
+        "city": "Montreal",
+        "province": "Quebec",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://cliniqueevolution.ca/tarifs"
+      ],
+      "procedures": [
+        {
+          "name": "Scrotox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cliniqueevolution.ca/tarifs",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "Breast Augmentation - Saline",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cliniqueevolution.ca/tarifs",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10150
+        },
+        {
+          "name": "Breast Augmentation - Silicone",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cliniqueevolution.ca/tarifs",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10150
+        },
+        {
+          "name": "Breast Implant Exchange - Saline",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cliniqueevolution.ca/tarifs",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 9850
+        },
+        {
+          "name": "Breast Implant Exchange - Silicone",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cliniqueevolution.ca/tarifs",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 9950
+        },
+        {
+          "name": "Breast Implant Removal - No Capsule",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cliniqueevolution.ca/tarifs",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 4950
+        },
+        {
+          "name": "Breast Reduction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cliniqueevolution.ca/tarifs",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 11450
+        },
+        {
+          "name": "Earlobe Repair - Bilateral",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cliniqueevolution.ca/tarifs",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1390
+        },
+        {
+          "name": "Earlobe Repair - Unilateral",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cliniqueevolution.ca/tarifs",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1150
+        },
+        {
+          "name": "Fat Graft Breast Augmentation - First Session",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cliniqueevolution.ca/tarifs",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 15900
+        },
+        {
+          "name": "Fat Graft Breast Augmentation - Second Session",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cliniqueevolution.ca/tarifs",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8500
+        },
+        {
+          "name": "Upper Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://cliniqueevolution.ca/tarifs",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 4500
+        }
+      ]
+    },
+    {
+      "name": "Cura Med Aesthetics - Westmount",
+      "website": "https://curamed.ca/",
+      "location": {
+        "address": null,
+        "city": "Montreal",
+        "province": "Quebec",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://curamed.ca/aesthetics/"
+      ],
+      "procedures": [
+        {
+          "name": "Consultation",
+          "category": "consultation",
+          "currency": "CAD",
+          "unit": "per consultation",
+          "price_type": "from",
+          "source_url": "https://curamed.ca/aesthetics/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 250
+        },
+        {
+          "name": "Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://curamed.ca/aesthetics/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 100
+        },
+        {
+          "name": "Botox / Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "from",
+          "source_url": "https://curamed.ca/aesthetics/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://curamed.ca/aesthetics/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 150
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://curamed.ca/aesthetics/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 340
+        }
+      ]
+    },
+    {
+      "name": "DHD Hair Transplant",
+      "website": "https://greffecheveuxdhd.ca/",
+      "location": {
+        "address": null,
+        "city": "Montreal",
+        "province": "Quebec",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://greffecheveuxdhd.ca/tarifs/"
+      ],
+      "procedures": [
+        {
+          "name": "Follow-Up",
+          "category": "consultation",
+          "currency": "CAD",
+          "unit": "per visit",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 199
+        },
+        {
+          "name": "Exosome Hair Treatment",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 750
+        },
+        {
+          "name": "Hair / PRP Consultation",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per consultation",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 350
+        },
+        {
+          "name": "PRP Micropuncture - 1 Tube",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per session",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 650
+        },
+        {
+          "name": "PRP Micropuncture - 2 Tubes",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per session",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 850
+        },
+        {
+          "name": "PRPplus",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per session",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 1000
+        },
+        {
+          "name": "Eyebrow Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 8000
+        },
+        {
+          "name": "Hair Transplant - 1000-1500 FU",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1000-1500 FU",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10000
+        },
+        {
+          "name": "Hair Transplant - 1500-2000 FU",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1500-2000 FU",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 13000
+        },
+        {
+          "name": "Hair Transplant - 2000-2500 FU",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2000-2500 FU",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15000
+        },
+        {
+          "name": "Hair Transplant - 3000+ FU",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "3000+ FU",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 20000
+        },
+        {
+          "name": "Hair Transplant - 4000+ FU",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "4000+ FU",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 25000
+        },
+        {
+          "name": "Hair Transplant - 5000+ FU",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "5000+ FU",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 30000
+        },
+        {
+          "name": "Hair Transplant - 6000+ FU",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "6000+ FU",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 35000
+        },
+        {
+          "name": "Hair Transplant - 7000+ FU",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "7000+ FU",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 40000
+        },
+        {
+          "name": "Hair Transplant - 8000+ FU",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "8000+ FU",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 45000
+        },
+        {
+          "name": "Hair Transplant - Under 1000 FU",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "under 1000 FU",
+          "price_type": "from",
+          "source_url": "https://greffecheveuxdhd.ca/tarifs/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 8000
+        }
+      ]
+    },
+    {
+      "name": "Dr. Stephanie Thibaudeau",
+      "website": "https://www.drthibaudeau.com/",
+      "location": {
+        "address": null,
+        "city": "Montreal",
+        "province": "Quebec",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.drthibaudeau.com/fr/prices/"
+      ],
+      "procedures": [
+        {
+          "name": "Sculptra / Radiesse",
+          "category": "biostimulators",
+          "currency": "CAD",
+          "unit": "per vial",
+          "price_type": "fixed",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 950
+        },
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "Botox / Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 14
+        },
+        {
+          "name": "Arm Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 16725,
+          "price_max": 24435
+        },
+        {
+          "name": "Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4800,
+          "price_max": 16300
+        },
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7945,
+          "price_max": 15655
+        },
+        {
+          "name": "Breast Augmentation + Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15365,
+          "price_max": 29930
+        },
+        {
+          "name": "Breast Implant Exchange",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9800,
+          "price_max": 17510
+        },
+        {
+          "name": "Breast Implant Removal",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 3810,
+          "price_max": 14085
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11230,
+          "price_max": 17840
+        },
+        {
+          "name": "Gynecomastia",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7520,
+          "price_max": 18230
+        },
+        {
+          "name": "Labiaplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4800,
+          "price_max": 11510
+        },
+        {
+          "name": "Lipo 360",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 13135,
+          "price_max": 23845
+        },
+        {
+          "name": "Nipple Surgery",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 1800,
+          "price_max": 7400
+        },
+        {
+          "name": "Otoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 6000,
+          "price_max": 12275
+        },
+        {
+          "name": "Skin Excision",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 800,
+          "price_max": 4800
+        },
+        {
+          "name": "Thigh Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 16725,
+          "price_max": 24435
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drthibaudeau.com/fr/prices/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11230,
+          "price_max": 17840
+        }
+      ]
+    },
+    {
+      "name": "Phi Surgery",
+      "website": "https://www.phisurgery.ca/",
+      "location": {
+        "address": null,
+        "city": "Montreal",
+        "province": "Quebec",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.phisurgery.ca/fr/tarification/"
+      ],
+      "procedures": [
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11000
+        },
+        {
+          "name": "Breast Augmentation + Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14500
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11000
+        },
+        {
+          "name": "Buccal Fat Removal",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4000
+        },
+        {
+          "name": "Fat Transfer Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 21000
+        },
+        {
+          "name": "Fleur-de-Lis Tummy Tuck",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 17000
+        },
+        {
+          "name": "Gynecomastia",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9000
+        },
+        {
+          "name": "Lateral Brow Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5000
+        },
+        {
+          "name": "Lower Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5500
+        },
+        {
+          "name": "Neck Lift - Local Sedation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9000
+        },
+        {
+          "name": "Posterior Body Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14000
+        },
+        {
+          "name": "Revision Breast Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12500
+        },
+        {
+          "name": "Septorhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 12000
+        },
+        {
+          "name": "Submental Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5000
+        },
+        {
+          "name": "Surgical Lip Augmentation",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4000
+        },
+        {
+          "name": "Tuberous Breast Correction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 11000
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 14000
+        },
+        {
+          "name": "Tummy Tuck + Lipo 360",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 20000
+        },
+        {
+          "name": "Upper + Lower Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9000
+        },
+        {
+          "name": "Upper Blepharoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.phisurgery.ca/fr/tarification/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4500
+        }
+      ]
+    }
+  ]
+}

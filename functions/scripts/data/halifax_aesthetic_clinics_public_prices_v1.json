@@ -1,0 +1,595 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Halifax, Nova Scotia, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 3,
+  "priced_procedure_count": 23,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 2,
+    "Fillers": 2,
+    "Rhinoplasty": 1,
+    "Boob job": 1,
+    "Hair transplant": 0,
+    "Peels": 1
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "True Clinic Halifax",
+        "location": {
+          "address": null,
+          "city": "Halifax",
+          "province": "Nova Scotia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://trueclinic.ca/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "clinic": "Monarchy Medispa Halifax",
+        "location": {
+          "address": null,
+          "city": "Halifax",
+          "province": "Nova Scotia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "True Clinic Halifax",
+        "location": {
+          "address": null,
+          "city": "Halifax",
+          "province": "Nova Scotia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://trueclinic.ca/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 600
+          },
+          {
+            "name": "Lip Filler - Full",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://trueclinic.ca/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 600
+          },
+          {
+            "name": "Lip Filler - Mini",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://trueclinic.ca/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 350
+          },
+          {
+            "name": "Non-Surgical Nose Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://trueclinic.ca/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Monarchy Medispa Halifax",
+        "location": {
+          "address": null,
+          "city": "Halifax",
+          "province": "Nova Scotia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Facial Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price_min": 500,
+            "price_max": 800
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price_min": 400,
+            "price_max": 600
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "The Landings Surgical Centre - Halifax Listing",
+        "location": {
+          "address": null,
+          "city": "Halifax",
+          "province": "Nova Scotia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/nova-scotia/halifax",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price_min": 4500,
+            "price_max": 7500
+          }
+        ]
+      }
+    ],
+    "Boob job": [
+      {
+        "clinic": "The Landings Surgical Centre - Halifax Listing",
+        "location": {
+          "address": null,
+          "city": "Halifax",
+          "province": "Nova Scotia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Implants",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/nova-scotia/halifax",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price_min": 6700,
+            "price_max": 8900
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [],
+    "Peels": [
+      {
+        "clinic": "Monarchy Medispa Halifax",
+        "location": {
+          "address": null,
+          "city": "Halifax",
+          "province": "Nova Scotia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+            "source_type": "public_pricing_directory",
+            "checked_at": "2026-09-13",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Monarchy Medispa Halifax",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Halifax",
+        "province": "Nova Scotia",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://trustanalytica.org/ca/ns/halifax/best-medspa"
+      ],
+      "procedures": [
+        {
+          "name": "Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 100,
+          "price_max": 150
+        },
+        {
+          "name": "Facial Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 400,
+          "price_max": 600
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Laser Hair Removal",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 100,
+          "price_max": 300
+        },
+        {
+          "name": "Laser Resurfacing",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 300,
+          "price_max": 500
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Morpheus8",
+          "category": "rf_microneedling",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 750,
+          "price_max": 1200
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/ca/ns/halifax/best-medspa",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 250,
+          "price_max": 450
+        }
+      ],
+      "note": "TrustAnalytica public directory ranges; lower trust than official clinic-site pricing."
+    },
+    {
+      "name": "The Landings Surgical Centre - Halifax Listing",
+      "website": "https://www.landingsurgery.ca/",
+      "location": {
+        "address": null,
+        "city": "Halifax",
+        "province": "Nova Scotia",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/nova-scotia/halifax"
+      ],
+      "procedures": [
+        {
+          "name": "Breast Implants",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/nova-scotia/halifax",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 6700,
+          "price_max": 8900
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/nova-scotia/halifax",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 8000
+        },
+        {
+          "name": "Brow Lift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/nova-scotia/halifax",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 4500
+        },
+        {
+          "name": "Facelift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/nova-scotia/halifax",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 11000,
+          "price_max": 15200
+        },
+        {
+          "name": "Gynecomastia",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/nova-scotia/halifax",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 3100
+        },
+        {
+          "name": "Labiaplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/nova-scotia/halifax",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 2200
+        },
+        {
+          "name": "Otoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/nova-scotia/halifax",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 2800
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/nova-scotia/halifax",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 4500,
+          "price_max": 7500
+        },
+        {
+          "name": "Upper / Lower Eyelid Surgery",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/canada/nova-scotia/halifax",
+          "source_type": "public_pricing_directory",
+          "checked_at": "2026-09-13",
+          "price_min": 2600
+        }
+      ],
+      "note": "WhatClinic public price listing; lower trust than official clinic-site pricing."
+    },
+    {
+      "name": "True Clinic Halifax",
+      "website": "https://trueclinic.ca/",
+      "location": {
+        "address": null,
+        "city": "Halifax",
+        "province": "Nova Scotia",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://trueclinic.ca/"
+      ],
+      "procedures": [
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://trueclinic.ca/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "Lip Filler - Full",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://trueclinic.ca/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 600
+        },
+        {
+          "name": "Lip Filler - Mini",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://trueclinic.ca/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 350
+        },
+        {
+          "name": "Non-Surgical Nose Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://trueclinic.ca/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 800
+        },
+        {
+          "name": "Botox / Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://trueclinic.ca/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Shared AI clinic-list cache (OpenAIComparisonResult). Authenticated only.
+    match /ai_cache/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Shared Explore prices from Google (cross-user). Authenticated only.
+    match /explore_google_prices/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /explore_discovery_state/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Worldwide city/procedure discovery lease + status (Functions admin only).
+    match /explore_city_discovery/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Worldwide coverage keyed by cityId + procedure (Functions admin only).
+    match /explore_city_procedure_coverage/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Ambiguous price review queue (Functions admin only).
+    match /explore_price_review_queue/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Legacy name-keyed docs awaiting geo migration (Functions admin only).
+    match /explore_legacy_city_migration/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Curated public-site clinic prices, imported by the admin SDK only.
+    // Read-only for clients: these rows are trusted by the app without DOM
+    // evidence, so a signed-in client must not be able to write one.
+    match /explore_curated_prices/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    match /explore_curated_clinics/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Shared Google Places rating lookup (city|clinic, cross-user).
+    match /place_cache/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Shared procedure-name translations (canonical|lang). Authenticated only.
+    match /explore_procedure_translations/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Shared clinic website URL cache (discovery only — never prices).
+    match /clinic_site_urls/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Shared clinic procedures/prices catalog (cross-user). Authenticated only.
+    match /clinic_catalog/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Live passport results shown in Glow Up results community.
+    match /community_posts/{postId} {
+      allow read: if request.auth != null;
+      allow create, update: if request.auth != null
+          && request.resource.data.ownerUid == request.auth.uid;
+      allow delete: if request.auth != null
+          && resource.data.ownerUid == request.auth.uid;
+    }
+
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /notifications/{docId} {
+      allow read: if request.auth != null &&
+          resource.data.recipientId == request.auth.uid;
+      allow create: if request.auth != null &&
+          request.resource.data.recipientId == request.auth.uid;
+      allow update, delete: if request.auth != null &&
+          resource.data.recipientId == request.auth.uid;
+    }
+
+    // Shared procedure progress links (WhatsApp / system share).
+    // Public read so the web teaser page can load without sign-in.
+    match /shared_progress/{shareId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null &&
+          resource.data.ownerUid == request.auth.uid;
+    }
+
+    // Optional: tighten to only procedure subcollections:
+    // match /users/{userId}/procedure_done/{docId} { ... }
+    // match /users/{userId}/procedure_reminder/{docId} { ... }
+  }
+}

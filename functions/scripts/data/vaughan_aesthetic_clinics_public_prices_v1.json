@@ -1,0 +1,452 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Vaughan, Ontario, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 3,
+  "priced_procedure_count": 21,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 1,
+    "Fillers": 1,
+    "Rhinoplasty": 1,
+    "Boob job": 0,
+    "Hair transplant": 0,
+    "Peels": 0
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Beauty Aesthetics Vaughan",
+        "location": {
+          "address": null,
+          "city": "Vaughan",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "from",
+            "source_url": "https://beautyaesthetics.ca/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 7
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Solomon Facial Plastic - Vaughan / Thornhill Area",
+        "location": {
+          "address": null,
+          "city": "Vaughan",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Non-Surgical Rhinoplasty",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 1200
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "Solomon Facial Plastic - Vaughan / Thornhill Area",
+        "location": {
+          "address": null,
+          "city": "Vaughan",
+          "province": "Ontario",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Asian / Ethnic Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 15800
+          },
+          {
+            "name": "Revision Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 17000
+          },
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 13000
+          },
+          {
+            "name": "Rhinoplasty with Rib Graft",
+            "category": "surgery",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 17800
+          }
+        ]
+      }
+    ],
+    "Boob job": [],
+    "Hair transplant": [],
+    "Peels": []
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Beauty Aesthetics Vaughan",
+      "website": "https://beautyaesthetics.ca/",
+      "location": {
+        "address": null,
+        "city": "Vaughan",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://beautyaesthetics.ca/"
+      ],
+      "procedures": [
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "from",
+          "source_url": "https://beautyaesthetics.ca/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 7
+        }
+      ]
+    },
+    {
+      "name": "Canada MedLaser - Vaughan",
+      "website": "https://shop.canadamedlaser.ca/vaughan/",
+      "location": {
+        "address": "200 Whitmore Rd Unit 18, Vaughan, ON",
+        "city": "Vaughan",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://shop.canadamedlaser.ca/vaughan/"
+      ],
+      "procedures": [
+        {
+          "name": "Body Treatments",
+          "category": "body_contouring",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://shop.canadamedlaser.ca/vaughan/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 175
+        },
+        {
+          "name": "Facials",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://shop.canadamedlaser.ca/vaughan/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 117
+        },
+        {
+          "name": "Hair Restoration",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://shop.canadamedlaser.ca/vaughan/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 450
+        },
+        {
+          "name": "Cosmetic Injections",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://shop.canadamedlaser.ca/vaughan/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 330
+        },
+        {
+          "name": "Vaginal Rejuvenation",
+          "category": "intimate",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://shop.canadamedlaser.ca/vaughan/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 650
+        },
+        {
+          "name": "Laser Hair Removal",
+          "category": "laser",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://shop.canadamedlaser.ca/vaughan/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 29
+        },
+        {
+          "name": "Med Spa Specials",
+          "category": "package",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://shop.canadamedlaser.ca/vaughan/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 89
+        },
+        {
+          "name": "Morpheus8",
+          "category": "rf_microneedling",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://shop.canadamedlaser.ca/vaughan/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 400
+        },
+        {
+          "name": "Skin Treatments",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://shop.canadamedlaser.ca/vaughan/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 60
+        }
+      ]
+    },
+    {
+      "name": "Solomon Facial Plastic - Vaughan / Thornhill Area",
+      "website": "https://www.solomonfacialplastic.com/",
+      "location": {
+        "address": null,
+        "city": "Vaughan",
+        "province": "Ontario",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "practice",
+      "source_urls": [
+        "https://www.solomonfacialplastic.com/about-us/price-list/"
+      ],
+      "procedures": [
+        {
+          "name": "Non-Surgical Rhinoplasty",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 1200
+        },
+        {
+          "name": "Alar Base Reduction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4500
+        },
+        {
+          "name": "Asian / Ethnic Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15800
+        },
+        {
+          "name": "Chin + Neck Liposuction",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 8500
+        },
+        {
+          "name": "Chin Implant",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 5000
+        },
+        {
+          "name": "Jaw Implant",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 15300
+        },
+        {
+          "name": "Revision Facelift",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 33000
+        },
+        {
+          "name": "Revision Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 17000
+        },
+        {
+          "name": "Rhinophyma Surgery",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 4000
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 13000
+        },
+        {
+          "name": "Rhinoplasty with Rib Graft",
+          "category": "surgery",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.solomonfacialplastic.com/about-us/price-list/",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 17800
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,570 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Winnipeg, Manitoba, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 4,
+  "priced_procedure_count": 20,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 3,
+    "Fillers": 3,
+    "Rhinoplasty": 0,
+    "Boob job": 0,
+    "Hair transplant": 1,
+    "Peels": 0
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Flawless Derma",
+        "location": {
+          "address": null,
+          "city": "Winnipeg",
+          "province": "Manitoba",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "from",
+            "source_url": "https://flawlessderma.ca/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 10
+          }
+        ]
+      },
+      {
+        "clinic": "Prime Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Winnipeg",
+          "province": "Manitoba",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Dysport",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://primeaesthetics.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "clinic": "Dr. Minuk Cosmetic SkinClinic",
+        "location": {
+          "address": null,
+          "city": "Winnipeg",
+          "province": "Manitoba",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Dysport / Nuceiva",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://www.drminuk.ca/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 9,
+            "price_max": 12
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Flawless Derma",
+        "location": {
+          "address": null,
+          "city": "Winnipeg",
+          "province": "Manitoba",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "range",
+            "source_url": "https://flawlessderma.ca/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 450,
+            "price_max": 700
+          }
+        ]
+      },
+      {
+        "clinic": "Prime Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Winnipeg",
+          "province": "Manitoba",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Restylane",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://primeaesthetics.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 425
+          },
+          {
+            "name": "Restylane Kysse",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://primeaesthetics.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 500
+          },
+          {
+            "name": "Restylane Lyft",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "fixed",
+            "source_url": "https://primeaesthetics.ca/pricing/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 475
+          }
+        ]
+      },
+      {
+        "clinic": "Dr. Minuk Cosmetic SkinClinic",
+        "location": {
+          "address": null,
+          "city": "Winnipeg",
+          "province": "Manitoba",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "per syringe",
+            "price_type": "range",
+            "source_url": "https://www.drminuk.ca/pricing",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price_min": 650,
+            "price_max": 900
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [],
+    "Boob job": [],
+    "Hair transplant": [
+      {
+        "clinic": "Visage Cosmetic Clinic - Hair Transplant",
+        "location": {
+          "address": null,
+          "city": "Winnipeg",
+          "province": "Manitoba",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "FUE Hair Transplant - Advanced 2000 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2000 grafts",
+            "price_type": "fixed",
+            "source_url": "https://services.visagecosmeticclinic.com/services/hair-transplants/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8000
+          },
+          {
+            "name": "FUE Hair Transplant - Premium 2500+ Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "2500+ grafts",
+            "price_type": "fixed",
+            "source_url": "https://services.visagecosmeticclinic.com/services/hair-transplants/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 9500
+          },
+          {
+            "name": "FUE Hair Transplant - Standard 1500 Grafts",
+            "category": "hair_transplant",
+            "currency": "CAD",
+            "unit": "1500 grafts",
+            "price_type": "fixed",
+            "source_url": "https://services.visagecosmeticclinic.com/services/hair-transplants/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 6000
+          }
+        ]
+      }
+    ],
+    "Peels": []
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Dr. Minuk Cosmetic SkinClinic",
+      "website": "https://www.drminuk.ca/",
+      "location": {
+        "address": null,
+        "city": "Winnipeg",
+        "province": "Manitoba",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.drminuk.ca/pricing"
+      ],
+      "procedures": [
+        {
+          "name": "CO2 Mole Removal",
+          "category": "dermatology",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.drminuk.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 300
+        },
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "range",
+          "source_url": "https://www.drminuk.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 650,
+          "price_max": 900
+        },
+        {
+          "name": "Botox / Dysport / Nuceiva",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://www.drminuk.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 9,
+          "price_max": 12
+        },
+        {
+          "name": "SkinVive",
+          "category": "skin_boosters",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drminuk.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 600,
+          "price_max": 2500
+        },
+        {
+          "name": "Sclerotherapy",
+          "category": "vascular",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.drminuk.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 175
+        }
+      ]
+    },
+    {
+      "name": "Flawless Derma",
+      "website": "https://flawlessderma.ca/",
+      "location": {
+        "address": null,
+        "city": "Winnipeg",
+        "province": "Manitoba",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://flawlessderma.ca/pricing"
+      ],
+      "procedures": [
+        {
+          "name": "Dermal Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "range",
+          "source_url": "https://flawlessderma.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 450,
+          "price_max": 700
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "from",
+          "source_url": "https://flawlessderma.ca/pricing",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price_min": 10
+        }
+      ]
+    },
+    {
+      "name": "Prime Aesthetics",
+      "website": "https://primeaesthetics.ca/",
+      "location": {
+        "address": null,
+        "city": "Winnipeg",
+        "province": "Manitoba",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://primeaesthetics.ca/pricing/"
+      ],
+      "procedures": [
+        {
+          "name": "Restylane",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://primeaesthetics.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 425
+        },
+        {
+          "name": "Restylane Kysse",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://primeaesthetics.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 500
+        },
+        {
+          "name": "Restylane Lyft",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "per syringe",
+          "price_type": "fixed",
+          "source_url": "https://primeaesthetics.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 475
+        },
+        {
+          "name": "PRP Hair",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "per session",
+          "price_type": "fixed",
+          "source_url": "https://primeaesthetics.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "PRP Hair - 3 Pack",
+          "category": "hair",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://primeaesthetics.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1500
+        },
+        {
+          "name": "Botox / Dysport",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://primeaesthetics.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 10
+        },
+        {
+          "name": "PRP Under Eyes",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://primeaesthetics.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "PRP Under Eyes - 3 Pack",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://primeaesthetics.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1500
+        },
+        {
+          "name": "Vampire Facial",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://primeaesthetics.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 550
+        },
+        {
+          "name": "Vampire Facial - 3 Pack",
+          "category": "regenerative",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://primeaesthetics.ca/pricing/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 1500
+        }
+      ]
+    },
+    {
+      "name": "Visage Cosmetic Clinic - Hair Transplant",
+      "website": "https://www.visagecosmeticclinic.com/",
+      "location": {
+        "address": null,
+        "city": "Winnipeg",
+        "province": "Manitoba",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://services.visagecosmeticclinic.com/services/hair-transplants/"
+      ],
+      "procedures": [
+        {
+          "name": "FUE Hair Transplant - Advanced 2000 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2000 grafts",
+          "price_type": "fixed",
+          "source_url": "https://services.visagecosmeticclinic.com/services/hair-transplants/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8000
+        },
+        {
+          "name": "FUE Hair Transplant - Premium 2500+ Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "2500+ grafts",
+          "price_type": "fixed",
+          "source_url": "https://services.visagecosmeticclinic.com/services/hair-transplants/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 9500
+        },
+        {
+          "name": "FUE Hair Transplant - Standard 1500 Grafts",
+          "category": "hair_transplant",
+          "currency": "CAD",
+          "unit": "1500 grafts",
+          "price_type": "fixed",
+          "source_url": "https://services.visagecosmeticclinic.com/services/hair-transplants/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 6000
+        }
+      ]
+    }
+  ]
+}

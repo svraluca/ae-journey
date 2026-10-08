@@ -1,0 +1,441 @@
+{
+  "schema_version": "1.0-canada-city",
+  "checked_at": "2026-09-13",
+  "market": "Victoria, British Columbia, Canada",
+  "currency_default": "CAD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] contains every numeric-priced treatment/service captured from the reviewed public pages for each included clinic. It is not limited to the six Explore categories.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page.",
+    "official_context_price": "Clinic's own public planning/typical range rather than a personalized quote.",
+    "official_practice_price_page": "Practice-wide price page applied to a documented branch.",
+    "public_pricing_directory": "Third-party public pricing directory; rank below direct clinic-site pricing.",
+    "market_evidence": "City/market range only; never count as a clinic price."
+  },
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, phone-only and unindexed prices may be absent.",
+    "Rows without a numeric public price are omitted rather than estimated.",
+    "Starting, range, package, member, per-unit, per-syringe, per-vial and per-graft semantics are preserved where the source exposed them.",
+    "A city can have fewer than 10 clinics in a category when enough credible numeric public pricing was not found; no fake clinics are added to hit a quota."
+  ],
+  "notes": [],
+  "clinic_count": 3,
+  "priced_procedure_count": 15,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 2,
+    "Fillers": 1,
+    "Rhinoplasty": 0,
+    "Boob job": 0,
+    "Hair transplant": 0,
+    "Peels": 2
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Victoria Botox Clinic",
+        "location": {
+          "address": null,
+          "city": "Victoria",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://victoriabotoxclinic.com/",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 8.5
+          }
+        ]
+      },
+      {
+        "clinic": "Oak Skin - Victoria",
+        "location": {
+          "address": null,
+          "city": "Victoria",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Neuromodulator",
+            "category": "injectables",
+            "currency": "CAD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price": 9.5
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Oak Skin - Victoria",
+        "location": {
+          "address": null,
+          "city": "Victoria",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Filler - 0.5 Syringe",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "0.5 syringe",
+            "price_type": "fixed",
+            "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price": 375
+          },
+          {
+            "name": "Dermal Filler - 1 Syringe",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "1 syringe",
+            "price_type": "fixed",
+            "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price": 750
+          },
+          {
+            "name": "Full Lip Filler",
+            "category": "fillers",
+            "currency": "CAD",
+            "unit": "1 syringe",
+            "price_type": "fixed",
+            "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price": 625
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [],
+    "Boob job": [],
+    "Hair transplant": [],
+    "Peels": [
+      {
+        "clinic": "Cook Street Village Spa",
+        "location": {
+          "address": null,
+          "city": "Victoria",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.cookstreetvillagespa.com/facial-services",
+            "source_type": "official_public_price_page",
+            "checked_at": "2026-09-13",
+            "price": 90
+          }
+        ]
+      },
+      {
+        "clinic": "Oak Skin - Victoria",
+        "location": {
+          "address": null,
+          "city": "Victoria",
+          "province": "British Columbia",
+          "country": "Canada"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel - 3 Pack",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "package",
+            "price_type": "fixed",
+            "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price": 515
+          },
+          {
+            "name": "Chemical Peel - 5 Pack",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "package",
+            "price_type": "fixed",
+            "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price": 810
+          },
+          {
+            "name": "Chemical Peel - Face",
+            "category": "peels",
+            "currency": "CAD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+            "source_type": "official_practice_price_page",
+            "checked_at": "2026-09-13",
+            "price": 180
+          }
+        ]
+      }
+    ]
+  },
+  "market_evidence": [],
+  "clinics": [
+    {
+      "name": "Cook Street Village Spa",
+      "website": "https://www.cookstreetvillagespa.com/",
+      "location": {
+        "address": null,
+        "city": "Victoria",
+        "province": "British Columbia",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://www.cookstreetvillagespa.com/facial-services"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.cookstreetvillagespa.com/facial-services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 90
+        },
+        {
+          "name": "Dermaplaning",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.cookstreetvillagespa.com/facial-services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 140
+        },
+        {
+          "name": "Microdermabrasion",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.cookstreetvillagespa.com/facial-services",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 95
+        }
+      ]
+    },
+    {
+      "name": "Oak Skin - Victoria",
+      "website": "https://oakskincare.com/",
+      "location": {
+        "address": null,
+        "city": "Victoria",
+        "province": "British Columbia",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "practice",
+      "source_urls": [
+        "https://oakskincare.com/oak-skin-price-list-menu"
+      ],
+      "procedures": [
+        {
+          "name": "Oak Skin Facial",
+          "category": "facials",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price": 175
+        },
+        {
+          "name": "Dermal Filler - 0.5 Syringe",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "0.5 syringe",
+          "price_type": "fixed",
+          "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price": 375
+        },
+        {
+          "name": "Dermal Filler - 1 Syringe",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "1 syringe",
+          "price_type": "fixed",
+          "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price": 750
+        },
+        {
+          "name": "Full Lip Filler",
+          "category": "fillers",
+          "currency": "CAD",
+          "unit": "1 syringe",
+          "price_type": "fixed",
+          "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price": 625
+        },
+        {
+          "name": "Hyaluronidase",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price": 150
+        },
+        {
+          "name": "Lip Flip",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price": 80
+        },
+        {
+          "name": "Neuromodulator",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price": 9.5
+        },
+        {
+          "name": "Chemical Peel - 3 Pack",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price": 515
+        },
+        {
+          "name": "Chemical Peel - 5 Pack",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "package",
+          "price_type": "fixed",
+          "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price": 810
+        },
+        {
+          "name": "Chemical Peel - Face",
+          "category": "peels",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price": 180
+        },
+        {
+          "name": "Dermaplaning",
+          "category": "skin",
+          "currency": "CAD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://oakskincare.com/oak-skin-price-list-menu",
+          "source_type": "official_practice_price_page",
+          "checked_at": "2026-09-13",
+          "price": 90
+        }
+      ]
+    },
+    {
+      "name": "Victoria Botox Clinic",
+      "website": "https://victoriabotoxclinic.com/",
+      "location": {
+        "address": null,
+        "city": "Victoria",
+        "province": "British Columbia",
+        "country": "Canada"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "audit_status": "reviewed_public_price_page",
+      "price_scope": "clinic",
+      "source_urls": [
+        "https://victoriabotoxclinic.com/"
+      ],
+      "procedures": [
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "CAD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://victoriabotoxclinic.com/",
+          "source_type": "official_public_price_page",
+          "checked_at": "2026-09-13",
+          "price": 8.5
+        }
+      ]
+    }
+  ]
+}

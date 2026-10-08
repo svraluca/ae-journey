@@ -1,0 +1,3369 @@
+{
+  "schema_version": "4.0-dallas",
+  "checked_at": "2026-09-13",
+  "market": "Dallas-Fort Worth metro / North Texas, USA",
+  "currency_default": "USD",
+  "dataset_rule": "Clinic-first public-price audit. procedures[] keeps every numeric-priced treatment captured from the reviewed public pages, not only flagship categories.",
+  "limitations": [
+    "Best-effort public-web snapshot; booking-only, private-quote, login-only, unindexed or phone-only prices may be absent.",
+    "Public-directory, network, patient-reported and expired-special rows are explicitly marked with source_type or notes and should rank below current official clinic-site prices.",
+    "Dallas-Fort Worth coverage includes nearby Plano, Frisco, Allen, Arlington and Highland Park."
+  ],
+  "clinic_count": 43,
+  "priced_procedure_count": 121,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 3,
+    "Fillers": 2,
+    "Rhinoplasty": 13,
+    "Boob job": 12,
+    "Hair transplant": 11,
+    "Peels": 13
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Mara's Med Spa Dallas",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox Membership Price",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/botox-fillers/us/dallas",
+            "source_type": "public_pricing_directory",
+            "price": 10
+          }
+        ]
+      },
+      {
+        "clinic": "Omni Sculpt MD Dallas",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox / Neurotoxin",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/botox-fillers/us/dallas",
+            "source_type": "public_pricing_directory",
+            "price": 11
+          }
+        ]
+      },
+      {
+        "clinic": "Paul Pin, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "from",
+            "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+            "source_type": "official_public_price_page",
+            "price_min": 13
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Omni Sculpt MD Dallas",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Twilight Facelift Package - 2 Syringes Filler + PRP",
+            "category": "package",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/botox-fillers/us/dallas",
+            "source_type": "public_pricing_directory",
+            "price": 2200
+          }
+        ]
+      },
+      {
+        "clinic": "Paul Pin, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Juvederm Voluma XC",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per syringe",
+            "price_type": "from",
+            "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+            "source_type": "official_public_price_page",
+            "price_min": 850
+          },
+          {
+            "name": "Other Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per syringe",
+            "price_type": "from",
+            "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+            "source_type": "official_public_price_page",
+            "price_min": 750
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "Ali Abtahi, MD - Amor Propio Aesthetic Surgery",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://rhinoplasty.apaesthetics.com/",
+            "source_type": "official_public_price_page",
+            "price_min": 10000,
+            "price_max": 30000
+          }
+        ]
+      },
+      {
+        "clinic": "Bardia Amirlak, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.navmds.com/doctor/dr-bardia-amirlak-md",
+            "source_type": "public_pricing_directory",
+            "price": 8000
+          }
+        ]
+      },
+      {
+        "clinic": "Bret Johnson, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://dallasplasticsurgeon.com/rhinoplasty/",
+            "source_type": "official_public_price_page",
+            "price_min": 10000,
+            "price_max": 15000
+          }
+        ]
+      },
+      {
+        "clinic": "C. Spencer Cochran, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.realself.com/review/dallas-tx-rhinoplasty-dr-cochran-changed-life",
+            "source_type": "patient_reported",
+            "price": 10000
+          }
+        ]
+      },
+      {
+        "clinic": "Dallas Rhinoplasty Directory Listing",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.navmds.com/resources/rhinoplasty-cost/texas",
+            "source_type": "public_pricing_directory",
+            "price": 8000
+          }
+        ]
+      },
+      {
+        "clinic": "Jennyfer F. Cocco, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Open Rhinoplasty - Tip Only",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://drcocco.com/plastic-surgery-prices/",
+            "source_type": "official_public_price_page",
+            "price_min": 8000,
+            "price_max": 10000
+          }
+        ]
+      },
+      {
+        "clinic": "Paul Pin, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per procedure",
+            "price_type": "from",
+            "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+            "source_type": "official_public_price_page",
+            "price_min": 8600
+          }
+        ]
+      },
+      {
+        "clinic": "Plastic & Cosmetic Surgery Center of Texas",
+        "location": {
+          "city": "Plano",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.drwilcox.com/rhinoplasty-plano/",
+            "source_type": "official_public_price_page",
+            "price_min": 6400,
+            "price_max": 9000
+          }
+        ]
+      },
+      {
+        "clinic": "Ronald Friedman, MD",
+        "location": {
+          "city": "Plano",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.drwilcox.com/rhinoplasty-plano/",
+            "source_type": "official_public_price_page",
+            "price_min": 6400,
+            "price_max": 9000
+          }
+        ]
+      },
+      {
+        "clinic": "Toledo Plastic Surgery",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+            "source_type": "official_public_price_page",
+            "price_min": 12000,
+            "price_max": 15000
+          },
+          {
+            "name": "Revision Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+            "source_type": "official_public_price_page",
+            "price_min": 15000,
+            "price_max": 20000
+          }
+        ]
+      },
+      {
+        "clinic": "Rod Rohrich, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per procedure",
+            "price_type": "from",
+            "price_min": 12500,
+            "source_url": "https://longevity.haus/provider/dr-rod-rohrich-plastic-surgery-dallas/rhinoplasty",
+            "source_type": "public_pricing_directory"
+          }
+        ]
+      },
+      {
+        "clinic": "Sam Jejurikar, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per procedure",
+            "price_type": "from",
+            "price_min": 9000,
+            "source_url": "https://longevity.haus/provider/dr-sam-jejurikar-plastic-surgery-dallas/rhinoplasty",
+            "source_type": "public_pricing_directory"
+          }
+        ]
+      },
+      {
+        "clinic": "Randy Sanovich, DDS, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per procedure",
+            "price_type": "fixed",
+            "price": 7300,
+            "source_url": "https://www.navmds.com/doctor/dr-randy-sanovich-dds",
+            "source_type": "public_pricing_directory"
+          }
+        ]
+      }
+    ],
+    "Boob job": [
+      {
+        "clinic": "David Liland, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.realself.com/review/dallas-texas-breast-augmentation",
+            "source_type": "patient_reported",
+            "price": 6000
+          }
+        ]
+      },
+      {
+        "clinic": "Evan Beale, MD Plastic Surgery",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://longevity.haus/provider/dr-evan-beale-plastic-surgery-dallas/breast-surgery",
+            "source_type": "public_pricing_directory",
+            "price_min": 6000
+          }
+        ]
+      },
+      {
+        "clinic": "Farris Plastic Surgery",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.navmds.com/doctor/dr-zachary-farris-md-facs",
+            "source_type": "public_pricing_directory",
+            "price": 7000
+          }
+        ]
+      },
+      {
+        "clinic": "Jennyfer F. Cocco, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation - Silicone Implants",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://drcocco.com/plastic-surgery-prices/",
+            "source_type": "official_public_price_page",
+            "price_min": 7300,
+            "price_max": 8800
+          },
+          {
+            "name": "Breast Augmentation Mastopexy",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://drcocco.com/plastic-surgery-prices/",
+            "source_type": "official_public_price_page",
+            "price_min": 12900
+          }
+        ]
+      },
+      {
+        "clinic": "Paul Pin, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per procedure",
+            "price_type": "from",
+            "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+            "source_type": "official_public_price_page",
+            "price_min": 7000
+          },
+          {
+            "name": "Breast Augmentation with Lift",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per procedure",
+            "price_type": "from",
+            "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+            "source_type": "official_public_price_page",
+            "price_min": 12000
+          }
+        ]
+      },
+      {
+        "clinic": "Plastic & Cosmetic Surgery Center of Texas",
+        "location": {
+          "city": "Plano",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://www.drwilcox.com/breast-augmentation-plano/",
+            "source_type": "official_public_price_page",
+            "price_min": 6000,
+            "price_max": 7200
+          }
+        ]
+      },
+      {
+        "clinic": "Ronald Friedman, MD",
+        "location": {
+          "city": "Plano",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation - Saline",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.plasticsurgerydallas.com/procedures-photos/",
+            "source_type": "official_public_price_page",
+            "price": 5950
+          },
+          {
+            "name": "Breast Augmentation - Silicone Gel",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.plasticsurgerydallas.com/procedures-photos/",
+            "source_type": "official_public_price_page",
+            "price": 6950
+          },
+          {
+            "name": "Breast Augmentation + Lift - Saline",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.plasticsurgerydallas.com/procedures-photos/",
+            "source_type": "official_public_price_page",
+            "price_min": 10600
+          },
+          {
+            "name": "Breast Augmentation + Lift - Silicone",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.plasticsurgerydallas.com/procedures-photos/",
+            "source_type": "official_public_price_page",
+            "price_min": 11700
+          }
+        ]
+      },
+      {
+        "clinic": "Toledo Plastic Surgery",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation - Saline",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+            "source_type": "official_public_price_page",
+            "price_min": 6000,
+            "price_max": 7000
+          },
+          {
+            "name": "Breast Augmentation - Silicone",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+            "source_type": "official_public_price_page",
+            "price_min": 7000,
+            "price_max": 8400
+          },
+          {
+            "name": "Breast Augmentation + Lift",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+            "source_type": "official_public_price_page",
+            "price_min": 15000,
+            "price_max": 18000
+          }
+        ]
+      },
+      {
+        "clinic": "William P. Adams, Jr., MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.navmds.com/doctor/dr-william-p-adams-jr-md",
+            "source_type": "public_pricing_directory",
+            "price": 6500
+          },
+          {
+            "name": "Breast Implants",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.navmds.com/doctor/dr-william-p-adams-jr-md",
+            "source_type": "public_pricing_directory",
+            "price": 7000
+          }
+        ]
+      },
+      {
+        "clinic": "David M. Godat, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per procedure",
+            "price_type": "fixed",
+            "price": 4150,
+            "source_url": "https://www.navmds.com/doctor/dr-david-m-godat-md",
+            "source_type": "public_pricing_directory"
+          },
+          {
+            "name": "Sientra Breast Implants",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per procedure",
+            "price_type": "fixed",
+            "price": 3950,
+            "source_url": "https://www.navmds.com/doctor/dr-david-m-godat-md",
+            "source_type": "public_pricing_directory"
+          },
+          {
+            "name": "Breast Implants",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per procedure",
+            "price_type": "fixed",
+            "price": 10000,
+            "source_url": "https://www.navmds.com/doctor/dr-david-m-godat-md",
+            "source_type": "public_pricing_directory"
+          }
+        ]
+      },
+      {
+        "clinic": "Vasdev Rai, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per procedure",
+            "price_type": "fixed",
+            "price": 6760,
+            "source_url": "https://www.navmds.com/doctor/specialty/body-lift/texas/dallas",
+            "source_type": "public_pricing_directory"
+          }
+        ]
+      },
+      {
+        "clinic": "Fadi Constantine, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Implants",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per procedure",
+            "price_type": "fixed",
+            "price": 4000,
+            "source_url": "https://www.navmds.com/doctor/specialty/body-lift/texas/dallas",
+            "source_type": "public_pricing_directory"
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [
+      {
+        "clinic": "Advanced Hair Restoration",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/us/tx/dallas/",
+            "source_type": "public_pricing_directory",
+            "price_min": 12000
+          },
+          {
+            "name": "Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://transplantmatch.com/us/tx/dallas/",
+            "source_type": "public_pricing_directory",
+            "price": 6
+          },
+          {
+            "name": "FUE Hair Transplant - DFW Range",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://hairclinicdallas.com/procedure/smartgraft-hair-restoration/",
+            "source_type": "official_public_price_page",
+            "price_min": 6000,
+            "price_max": 15000
+          }
+        ]
+      },
+      {
+        "clinic": "Armani Medical",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/us/tx/dallas/",
+            "source_type": "public_pricing_directory",
+            "price_min": 6650
+          },
+          {
+            "name": "Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://transplantmatch.com/us/tx/dallas/",
+            "source_type": "public_pricing_directory",
+            "price": 3.3
+          }
+        ]
+      },
+      {
+        "clinic": "Bosley Hair Restoration & Transplant - Dallas",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/us/tx/dallas/",
+            "source_type": "public_pricing_directory",
+            "price_min": 4400
+          },
+          {
+            "name": "Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://transplantmatch.com/us/tx/dallas/",
+            "source_type": "public_pricing_directory",
+            "price": 6
+          }
+        ]
+      },
+      {
+        "clinic": "Dr. Plano Hair",
+        "location": {
+          "city": "Plano",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "FUE Hair Transplant - Public Special",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "special",
+            "source_url": "https://www.drplanohair.com/hair-restoration-specials/",
+            "source_type": "official_public_price_page",
+            "price": 4
+          }
+        ]
+      },
+      {
+        "clinic": "Farris Plastic Surgery",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "NeoGraft / FUE Hair Restoration",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://farrismd.com/how-much-does-hair-restoration-cost/",
+            "source_type": "official_public_price_page",
+            "price": 5
+          }
+        ]
+      },
+      {
+        "clinic": "MAXIM Hair Restoration - Dallas",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "FUT Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://voyagedallas.com/interview/meet-mac-fadra-maxim-hair-restoration-north-dallas/",
+            "source_type": "official_public_price_page",
+            "price": 2.95
+          },
+          {
+            "name": "FUE Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://voyagedallas.com/interview/meet-mac-fadra-maxim-hair-restoration-north-dallas/",
+            "source_type": "official_public_price_page",
+            "price": 3.95
+          }
+        ]
+      },
+      {
+        "clinic": "Moleno Hair Restoration",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "FUT Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per procedure",
+            "price_type": "fixed",
+            "source_url": "https://www.myhair.ai/clinics/moleno-hair-restoration-ChIJnRVl-3CfToYRNJBMgZJGOtg",
+            "source_type": "public_pricing_directory",
+            "price": 5050
+          },
+          {
+            "name": "FUT Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://www.myhair.ai/clinics/moleno-hair-restoration-ChIJnRVl-3CfToYRNJBMgZJGOtg",
+            "source_type": "public_pricing_directory",
+            "price": 2.6
+          }
+        ]
+      },
+      {
+        "clinic": "RESTORE Hair - Allen",
+        "location": {
+          "city": "Allen",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "FUE Hair Transplant - Patient-Reported Example",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "800 grafts",
+            "price_type": "fixed",
+            "source_url": "https://www.reddit.com/r/HairTransplants/comments/1bw47z9",
+            "source_type": "patient_reported",
+            "price": 6000
+          }
+        ]
+      },
+      {
+        "clinic": "RESTORE Hair - Arlington",
+        "location": {
+          "city": "Arlington",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "FUE Hair Transplant - Patient-Reported Example",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "800 grafts",
+            "price_type": "fixed",
+            "source_url": "https://www.reddit.com/r/HairTransplants/comments/1bw47z9",
+            "source_type": "patient_reported",
+            "price": 6000
+          }
+        ]
+      },
+      {
+        "clinic": "RESTORE Hair - Dallas Highland Park",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "FUE Hair Transplant - Patient-Reported Example",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "800 grafts",
+            "price_type": "fixed",
+            "source_url": "https://www.reddit.com/r/HairTransplants/comments/1bw47z9",
+            "source_type": "patient_reported",
+            "price": 6000
+          }
+        ]
+      },
+      {
+        "clinic": "RESTORE Hair - Plano",
+        "location": {
+          "city": "Plano",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "FUE Hair Transplant - Patient-Reported Example",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "800 grafts",
+            "price_type": "fixed",
+            "source_url": "https://www.reddit.com/r/HairTransplants/comments/1bw47z9",
+            "source_type": "patient_reported",
+            "price": 6000
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "Beauti Science Med Spa Dallas",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+            "source_type": "public_pricing_directory",
+            "price": 150
+          }
+        ]
+      },
+      {
+        "clinic": "Dallas Aesthetic Center",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+            "source_type": "public_pricing_directory",
+            "price": 300
+          }
+        ]
+      },
+      {
+        "clinic": "dermani MEDSPA - Preston Hollow",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Signature Chemical Peel - Pay Per Visit",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://dermanimedspa.com/preston-hollow-dallas-tx/chemical-peels/",
+            "source_type": "official_public_price_page",
+            "price": 150
+          },
+          {
+            "name": "Signature Chemical Peel - Membership",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per month/session",
+            "price_type": "member",
+            "source_url": "https://dermanimedspa.com/preston-hollow-dallas-tx/chemical-peels/",
+            "source_type": "official_public_price_page",
+            "price": 75
+          },
+          {
+            "name": "Premium Chemical Peel - Pay Per Visit",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://dermanimedspa.com/preston-hollow-dallas-tx/chemical-peels/",
+            "source_type": "official_public_price_page",
+            "price_min": 225
+          },
+          {
+            "name": "Premium Chemical Peel - Membership",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://dermanimedspa.com/preston-hollow-dallas-tx/chemical-peels/",
+            "source_type": "official_public_price_page",
+            "price_min": 175
+          }
+        ]
+      },
+      {
+        "clinic": "Frisco Med Spa",
+        "location": {
+          "city": "Frisco",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+            "source_type": "public_pricing_directory",
+            "price": 225
+          }
+        ]
+      },
+      {
+        "clinic": "Highland Park Aesthetics",
+        "location": {
+          "city": "Highland Park",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+            "source_type": "public_pricing_directory",
+            "price": 250
+          }
+        ]
+      },
+      {
+        "clinic": "Legacy Dermatology - Plano",
+        "location": {
+          "city": "Plano",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+            "source_type": "public_pricing_directory",
+            "price": 200
+          }
+        ]
+      },
+      {
+        "clinic": "Mara's Med Spa Dallas",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.nobsmedspareviews.com/treatment/chemical-peels-in-dallas",
+            "source_type": "public_pricing_directory",
+            "price": 150
+          }
+        ]
+      },
+      {
+        "clinic": "MD Laser Med Spa - Plano",
+        "location": {
+          "city": "Plano",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Red Carpet Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://mdlasermed.com/pages/chemical-peel-plano",
+            "source_type": "official_public_price_page",
+            "price": 149
+          },
+          {
+            "name": "Acne Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://mdlasermed.com/pages/chemical-peel-plano",
+            "source_type": "official_public_price_page",
+            "price": 169
+          },
+          {
+            "name": "Brightening Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://mdlasermed.com/pages/chemical-peel-plano",
+            "source_type": "official_public_price_page",
+            "price": 179
+          }
+        ]
+      },
+      {
+        "clinic": "MOYSKIN Studio",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel (Includes Post Care)",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://moyskinstudio.glossgenius.com/",
+            "source_type": "official_public_price_page",
+            "price": 249
+          }
+        ]
+      },
+      {
+        "clinic": "Paul Pin, MD",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+            "source_type": "official_public_price_page",
+            "price_min": 175
+          }
+        ]
+      },
+      {
+        "clinic": "Preston Center MedSpa",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+            "source_type": "public_pricing_directory",
+            "price": 275
+          }
+        ]
+      },
+      {
+        "clinic": "Pure Spa and Salon",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "VI Peel - Full Face",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.purespaandsalon.com/chemical-peels/",
+            "source_type": "official_public_price_page",
+            "price": 350
+          },
+          {
+            "name": "VI Peel - Face + Neck + Chest",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.purespaandsalon.com/chemical-peels/",
+            "source_type": "official_public_price_page",
+            "price": 500
+          },
+          {
+            "name": "TCA Chemical Peel - Full Face",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.purespaandsalon.com/chemical-peels/",
+            "source_type": "official_public_price_page",
+            "price": 300
+          },
+          {
+            "name": "TCA Chemical Peel - Face + Neck + Chest",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://www.purespaandsalon.com/chemical-peels/",
+            "source_type": "official_public_price_page",
+            "price": 450
+          }
+        ]
+      },
+      {
+        "clinic": "SkinSpaMed Dallas",
+        "location": {
+          "city": "Dallas",
+          "state": "TX",
+          "country": "USA"
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+            "source_type": "public_pricing_directory",
+            "price": 139
+          }
+        ]
+      }
+    ]
+  },
+  "clinics": [
+    {
+      "name": "Advanced Hair Restoration",
+      "website": "https://hairclinicdallas.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://transplantmatch.com/us/tx/dallas/",
+        "https://hairclinicdallas.com/procedure/smartgraft-hair-restoration/"
+      ],
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/us/tx/dallas/",
+          "source_type": "public_pricing_directory",
+          "price_min": 12000
+        },
+        {
+          "name": "Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://transplantmatch.com/us/tx/dallas/",
+          "source_type": "public_pricing_directory",
+          "price": 6
+        },
+        {
+          "name": "FUE Hair Transplant - DFW Range",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://hairclinicdallas.com/procedure/smartgraft-hair-restoration/",
+          "source_type": "official_public_price_page",
+          "price_min": 6000,
+          "price_max": 15000
+        }
+      ]
+    },
+    {
+      "name": "Ali Abtahi, MD - Amor Propio Aesthetic Surgery",
+      "website": "https://www.apaesthetics.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://rhinoplasty.apaesthetics.com/"
+      ],
+      "procedures": [
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://rhinoplasty.apaesthetics.com/",
+          "source_type": "official_public_price_page",
+          "price_min": 10000,
+          "price_max": 30000
+        }
+      ]
+    },
+    {
+      "name": "Armani Medical",
+      "website": "https://www.armanihair.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://transplantmatch.com/us/tx/dallas/"
+      ],
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/us/tx/dallas/",
+          "source_type": "public_pricing_directory",
+          "price_min": 6650
+        },
+        {
+          "name": "Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://transplantmatch.com/us/tx/dallas/",
+          "source_type": "public_pricing_directory",
+          "price": 3.3
+        }
+      ]
+    },
+    {
+      "name": "Bardia Amirlak, MD",
+      "website": "https://amirlakplasticsurgery.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "1801 Inwood Road, 5th Floor",
+        "zip": "75235"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.navmds.com/doctor/dr-bardia-amirlak-md"
+      ],
+      "procedures": [
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.navmds.com/doctor/dr-bardia-amirlak-md",
+          "source_type": "public_pricing_directory",
+          "price": 8000
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.navmds.com/doctor/dr-bardia-amirlak-md",
+          "source_type": "public_pricing_directory",
+          "price": 8500
+        }
+      ],
+      "note": "Public directory/crowdsourced price.",
+      "phone": "+1 214-645-2353"
+    },
+    {
+      "name": "Beauti Science Med Spa Dallas",
+      "website": "https://beautisciencemedspa.com/",
+      "location": {
+        "city": "Plano",
+        "state": "TX",
+        "country": "USA",
+        "address": "3308 Preston Road, Suite 300",
+        "zip": "75093"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://longevity.haus/chemical-peels/us/dallas"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+          "source_type": "public_pricing_directory",
+          "price": 150
+        }
+      ],
+      "note": "Public pricing-directory peel listing; lower trust than official clinic page.",
+      "phone": "+1 214-280-4316"
+    },
+    {
+      "name": "Bosley Hair Restoration & Transplant - Dallas",
+      "website": "https://www.bosley.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://transplantmatch.com/us/tx/dallas/"
+      ],
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/us/tx/dallas/",
+          "source_type": "public_pricing_directory",
+          "price_min": 4400
+        },
+        {
+          "name": "Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://transplantmatch.com/us/tx/dallas/",
+          "source_type": "public_pricing_directory",
+          "price": 6
+        }
+      ]
+    },
+    {
+      "name": "Bret Johnson, MD",
+      "website": "https://dallasplasticsurgeon.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://dallasplasticsurgeon.com/rhinoplasty/"
+      ],
+      "procedures": [
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://dallasplasticsurgeon.com/rhinoplasty/",
+          "source_type": "official_public_price_page",
+          "price_min": 10000,
+          "price_max": 15000
+        }
+      ]
+    },
+    {
+      "name": "C. Spencer Cochran, MD",
+      "website": "https://www.rhinoplasty-usa.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "8144 Walnut Hill Lane, Suite 170",
+        "zip": "75231"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.realself.com/review/dallas-tx-rhinoplasty-dr-cochran-changed-life"
+      ],
+      "procedures": [
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.realself.com/review/dallas-tx-rhinoplasty-dr-cochran-changed-life",
+          "source_type": "patient_reported",
+          "price": 10000
+        }
+      ],
+      "note": "Historical patient-reported price; lower trust.",
+      "phone": "+1 214-369-8123"
+    },
+    {
+      "name": "Dallas Aesthetic Center",
+      "website": null,
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://longevity.haus/chemical-peels/us/dallas"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+          "source_type": "public_pricing_directory",
+          "price": 300
+        }
+      ],
+      "note": "Public pricing-directory peel listing; lower trust than official clinic page."
+    },
+    {
+      "name": "Dallas Rhinoplasty Directory Listing",
+      "website": null,
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.navmds.com/resources/rhinoplasty-cost/texas"
+      ],
+      "procedures": [
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.navmds.com/resources/rhinoplasty-cost/texas",
+          "source_type": "public_pricing_directory",
+          "price": 8000
+        }
+      ],
+      "note": "Market/directory reference; lower trust."
+    },
+    {
+      "name": "David Liland, MD",
+      "website": "https://www.drliland.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "3500 Oak Lawn Ave, Suite 160",
+        "zip": "75219"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.realself.com/review/dallas-texas-breast-augmentation"
+      ],
+      "procedures": [
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.realself.com/review/dallas-texas-breast-augmentation",
+          "source_type": "patient_reported",
+          "price": 6000
+        }
+      ],
+      "note": "Historical patient-reported price; lower trust.",
+      "phone": "+1 214-692-6500"
+    },
+    {
+      "name": "David M. Godat, MD",
+      "website": "https://www.drgodat.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "11970 N Central Expressway, Suite 500",
+        "zip": "75243"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.navmds.com/doctor/dr-david-m-godat-md"
+      ],
+      "note": "Crowdsourced public procedure pricing; marked public_pricing_directory.",
+      "procedures": [
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "fixed",
+          "price": 4150,
+          "source_url": "https://www.navmds.com/doctor/dr-david-m-godat-md",
+          "source_type": "public_pricing_directory"
+        },
+        {
+          "name": "Sientra Breast Implants",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "fixed",
+          "price": 3950,
+          "source_url": "https://www.navmds.com/doctor/dr-david-m-godat-md",
+          "source_type": "public_pricing_directory"
+        },
+        {
+          "name": "Breast Implants",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "fixed",
+          "price": 10000,
+          "source_url": "https://www.navmds.com/doctor/dr-david-m-godat-md",
+          "source_type": "public_pricing_directory"
+        },
+        {
+          "name": "Breast Reduction",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "fixed",
+          "price": 14800,
+          "source_url": "https://www.navmds.com/doctor/dr-david-m-godat-md",
+          "source_type": "public_pricing_directory"
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "fixed",
+          "price": 9450,
+          "source_url": "https://www.navmds.com/doctor/dr-david-m-godat-md",
+          "source_type": "public_pricing_directory"
+        }
+      ],
+      "phone": "+1 469-248-0899"
+    },
+    {
+      "name": "dermani MEDSPA - Preston Hollow",
+      "website": "https://dermanimedspa.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://dermanimedspa.com/preston-hollow-dallas-tx/chemical-peels/"
+      ],
+      "procedures": [
+        {
+          "name": "Signature Chemical Peel - Pay Per Visit",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://dermanimedspa.com/preston-hollow-dallas-tx/chemical-peels/",
+          "source_type": "official_public_price_page",
+          "price": 150
+        },
+        {
+          "name": "Signature Chemical Peel - Membership",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per month/session",
+          "price_type": "member",
+          "source_url": "https://dermanimedspa.com/preston-hollow-dallas-tx/chemical-peels/",
+          "source_type": "official_public_price_page",
+          "price": 75
+        },
+        {
+          "name": "Premium Chemical Peel - Pay Per Visit",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://dermanimedspa.com/preston-hollow-dallas-tx/chemical-peels/",
+          "source_type": "official_public_price_page",
+          "price_min": 225
+        },
+        {
+          "name": "Premium Chemical Peel - Membership",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://dermanimedspa.com/preston-hollow-dallas-tx/chemical-peels/",
+          "source_type": "official_public_price_page",
+          "price_min": 175
+        }
+      ]
+    },
+    {
+      "name": "Dr. Plano Hair",
+      "website": "https://www.drplanohair.com/",
+      "location": {
+        "city": "Plano",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.drplanohair.com/hair-restoration-specials/"
+      ],
+      "procedures": [
+        {
+          "name": "FUE Hair Transplant - Public Special",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "special",
+          "source_url": "https://www.drplanohair.com/hair-restoration-specials/",
+          "source_type": "official_public_price_page",
+          "price": 4
+        }
+      ],
+      "note": "Historical public special; revalidate before default display."
+    },
+    {
+      "name": "Evan Beale, MD Plastic Surgery",
+      "website": "https://www.drevanbeale.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "8201 Preston Rd, Suite 700",
+        "zip": "75225"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://longevity.haus/provider/dr-evan-beale-plastic-surgery-dallas/breast-surgery"
+      ],
+      "procedures": [
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://longevity.haus/provider/dr-evan-beale-plastic-surgery-dallas/breast-surgery",
+          "source_type": "public_pricing_directory",
+          "price_min": 6000
+        }
+      ],
+      "note": "Public pricing-directory price.",
+      "phone": "+1 214-739-5600"
+    },
+    {
+      "name": "Fadi Constantine, MD",
+      "website": "https://constantineplasticsurgery.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "8220 Walnut Hill Lane, Suite 206",
+        "zip": "75231"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.navmds.com/doctor/specialty/body-lift/texas/dallas"
+      ],
+      "note": "Crowdsourced public procedure pricing; marked public_pricing_directory.",
+      "procedures": [
+        {
+          "name": "Breast Implants",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "fixed",
+          "price": 4000,
+          "source_url": "https://www.navmds.com/doctor/specialty/body-lift/texas/dallas",
+          "source_type": "public_pricing_directory"
+        }
+      ],
+      "phone": "+1 214-739-5760"
+    },
+    {
+      "name": "Farris Plastic Surgery",
+      "website": "https://farrismd.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.navmds.com/doctor/dr-zachary-farris-md-facs",
+        "https://farrismd.com/how-much-does-hair-restoration-cost/"
+      ],
+      "procedures": [
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.navmds.com/doctor/dr-zachary-farris-md-facs",
+          "source_type": "public_pricing_directory",
+          "price": 7000
+        },
+        {
+          "name": "Breast Lift with Implants",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.navmds.com/doctor/dr-zachary-farris-md-facs",
+          "source_type": "public_pricing_directory",
+          "price": 9900
+        },
+        {
+          "name": "Mommy Makeover",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.navmds.com/doctor/dr-zachary-farris-md-facs",
+          "source_type": "public_pricing_directory",
+          "price": 12800
+        },
+        {
+          "name": "NeoGraft / FUE Hair Restoration",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://farrismd.com/how-much-does-hair-restoration-cost/",
+          "source_type": "official_public_price_page",
+          "price": 5
+        }
+      ]
+    },
+    {
+      "name": "Frisco Med Spa",
+      "website": null,
+      "location": {
+        "city": "Frisco",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://longevity.haus/chemical-peels/us/dallas"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+          "source_type": "public_pricing_directory",
+          "price": 225
+        }
+      ],
+      "note": "Public pricing-directory peel listing; lower trust than official clinic page."
+    },
+    {
+      "name": "Highland Park Aesthetics",
+      "website": "https://www.highlandpark.clinic/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "5213 W Lovers Lane",
+        "zip": "75209"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://longevity.haus/chemical-peels/us/dallas"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+          "source_type": "public_pricing_directory",
+          "price": 250
+        }
+      ],
+      "note": "Public pricing-directory peel listing; lower trust than official clinic page.",
+      "phone": "+1 214-774-9644"
+    },
+    {
+      "name": "Jennyfer F. Cocco, MD",
+      "website": "https://drcocco.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://drcocco.com/plastic-surgery-prices/"
+      ],
+      "procedures": [
+        {
+          "name": "Open Rhinoplasty - Tip Only",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://drcocco.com/plastic-surgery-prices/",
+          "source_type": "official_public_price_page",
+          "price_min": 8000,
+          "price_max": 10000
+        },
+        {
+          "name": "Breast Augmentation - Silicone Implants",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://drcocco.com/plastic-surgery-prices/",
+          "source_type": "official_public_price_page",
+          "price_min": 7300,
+          "price_max": 8800
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://drcocco.com/plastic-surgery-prices/",
+          "source_type": "official_public_price_page",
+          "price_min": 7300,
+          "price_max": 11200
+        },
+        {
+          "name": "Breast Augmentation Mastopexy",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drcocco.com/plastic-surgery-prices/",
+          "source_type": "official_public_price_page",
+          "price_min": 12900
+        },
+        {
+          "name": "Breast Reduction / Gynecomastia",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://drcocco.com/plastic-surgery-prices/",
+          "source_type": "official_public_price_page",
+          "price_min": 7300,
+          "price_max": 11200
+        },
+        {
+          "name": "Breast Implant Removal",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://drcocco.com/plastic-surgery-prices/",
+          "source_type": "official_public_price_page",
+          "price_min": 6300,
+          "price_max": 8200
+        },
+        {
+          "name": "Brazilian Butt Lift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drcocco.com/plastic-surgery-prices/",
+          "source_type": "official_public_price_page",
+          "price_min": 10000
+        },
+        {
+          "name": "Mommy Makeover",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://drcocco.com/plastic-surgery-prices/",
+          "source_type": "official_public_price_page",
+          "price_min": 15000
+        },
+        {
+          "name": "Extended Abdominoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://drcocco.com/plastic-surgery-prices/",
+          "source_type": "official_public_price_page",
+          "price_min": 16800,
+          "price_max": 18800
+        }
+      ]
+    },
+    {
+      "name": "Legacy Dermatology - Plano",
+      "website": null,
+      "location": {
+        "city": "Plano",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://longevity.haus/chemical-peels/us/dallas"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+          "source_type": "public_pricing_directory",
+          "price": 200
+        }
+      ],
+      "note": "Public pricing-directory peel listing; lower trust than official clinic page."
+    },
+    {
+      "name": "Mara's Med Spa Dallas",
+      "website": "https://www.marasmedspa.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "2222 McKinney Ave, Suite 120",
+        "zip": "75201"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://longevity.haus/botox-fillers/us/dallas"
+      ],
+      "procedures": [
+        {
+          "name": "Botox Membership Price",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/botox-fillers/us/dallas",
+          "source_type": "public_pricing_directory",
+          "price": 10
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.nobsmedspareviews.com/treatment/chemical-peels-in-dallas",
+          "source_type": "public_pricing_directory",
+          "price": 150
+        }
+      ],
+      "note": "Public pricing-directory values.",
+      "phone": "+1 469-730-3333"
+    },
+    {
+      "name": "MAXIM Hair Restoration - Dallas",
+      "website": "https://www.maximhairrestoration.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://voyagedallas.com/interview/meet-mac-fadra-maxim-hair-restoration-north-dallas/"
+      ],
+      "procedures": [
+        {
+          "name": "FUT Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://voyagedallas.com/interview/meet-mac-fadra-maxim-hair-restoration-north-dallas/",
+          "source_type": "official_public_price_page",
+          "price": 2.95
+        },
+        {
+          "name": "FUE Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://voyagedallas.com/interview/meet-mac-fadra-maxim-hair-restoration-north-dallas/",
+          "source_type": "official_public_price_page",
+          "price": 3.95
+        }
+      ]
+    },
+    {
+      "name": "MD Laser Med Spa - Plano",
+      "website": "https://mdlasermed.com/",
+      "location": {
+        "city": "Plano",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://mdlasermed.com/pages/chemical-peel-plano"
+      ],
+      "procedures": [
+        {
+          "name": "Red Carpet Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://mdlasermed.com/pages/chemical-peel-plano",
+          "source_type": "official_public_price_page",
+          "price": 149
+        },
+        {
+          "name": "Acne Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://mdlasermed.com/pages/chemical-peel-plano",
+          "source_type": "official_public_price_page",
+          "price": 169
+        },
+        {
+          "name": "Brightening Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://mdlasermed.com/pages/chemical-peel-plano",
+          "source_type": "official_public_price_page",
+          "price": 179
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://mdlasermed.com/pages/chemical-peel-plano",
+          "source_type": "official_public_price_page",
+          "price": 249
+        },
+        {
+          "name": "Dermaplane & Glow",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://mdlasermed.com/pages/chemical-peel-plano",
+          "source_type": "official_public_price_page",
+          "price": 99
+        }
+      ]
+    },
+    {
+      "name": "Moleno Hair Restoration",
+      "website": "https://www.molenohair.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "3303 Lee Pkwy, Suite 103",
+        "zip": "75219"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.myhair.ai/clinics/moleno-hair-restoration-ChIJnRVl-3CfToYRNJBMgZJGOtg"
+      ],
+      "procedures": [
+        {
+          "name": "FUT Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "fixed",
+          "source_url": "https://www.myhair.ai/clinics/moleno-hair-restoration-ChIJnRVl-3CfToYRNJBMgZJGOtg",
+          "source_type": "public_pricing_directory",
+          "price": 5050
+        },
+        {
+          "name": "FUT Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://www.myhair.ai/clinics/moleno-hair-restoration-ChIJnRVl-3CfToYRNJBMgZJGOtg",
+          "source_type": "public_pricing_directory",
+          "price": 2.6
+        }
+      ],
+      "note": "Public directory pricing.",
+      "phone": "+1 469-414-9914"
+    },
+    {
+      "name": "MOYSKIN Studio",
+      "website": "https://moyskinstudio.glossgenius.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://moyskinstudio.glossgenius.com/"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel (Includes Post Care)",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://moyskinstudio.glossgenius.com/",
+          "source_type": "official_public_price_page",
+          "price": 249
+        },
+        {
+          "name": "Back Treatment",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://moyskinstudio.glossgenius.com/",
+          "source_type": "official_public_price_page",
+          "price": 135
+        },
+        {
+          "name": "Virtual Consultation",
+          "category": "consultation",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://moyskinstudio.glossgenius.com/",
+          "source_type": "official_public_price_page",
+          "price": 50
+        }
+      ]
+    },
+    {
+      "name": "Omni Sculpt MD Dallas",
+      "website": "https://omnisculptmd.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "10440 N Central Expressway, Suite 124",
+        "zip": "75231"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://longevity.haus/botox-fillers/us/dallas"
+      ],
+      "procedures": [
+        {
+          "name": "Botox / Neurotoxin",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/botox-fillers/us/dallas",
+          "source_type": "public_pricing_directory",
+          "price": 11
+        },
+        {
+          "name": "Twilight Facelift Package - 2 Syringes Filler + PRP",
+          "category": "package",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/botox-fillers/us/dallas",
+          "source_type": "public_pricing_directory",
+          "price": 2200
+        }
+      ],
+      "note": "Public pricing-directory values.",
+      "phone": "+1 469-278-7662"
+    },
+    {
+      "name": "Paul Pin, MD",
+      "website": "https://www.paulpinmd.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.paulpinmd.com/patient-resources/costs"
+      ],
+      "procedures": [
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 8600
+        },
+        {
+          "name": "Facelift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 16000
+        },
+        {
+          "name": "Browlift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 5000
+        },
+        {
+          "name": "Otoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 8600
+        },
+        {
+          "name": "Chin Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 6000
+        },
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 7000
+        },
+        {
+          "name": "Breast Augmentation with Lift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 12000
+        },
+        {
+          "name": "Breast Reduction",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 12000
+        },
+        {
+          "name": "Breast Implant Removal",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 8500
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 13
+        },
+        {
+          "name": "Juvederm Voluma XC",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per syringe",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 850
+        },
+        {
+          "name": "Other Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per syringe",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 750
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 350
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 175
+        },
+        {
+          "name": "Neck Lift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 9000,
+          "price_max": 10000
+        },
+        {
+          "name": "Breast Implant Revision",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.paulpinmd.com/patient-resources/costs",
+          "source_type": "official_public_price_page",
+          "price_min": 11000,
+          "price_max": 13000
+        }
+      ]
+    },
+    {
+      "name": "Plastic & Cosmetic Surgery Center of Texas",
+      "website": "https://www.drwilcox.com/",
+      "location": {
+        "city": "Plano",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.drwilcox.com/breast-augmentation-plano/",
+        "https://www.drwilcox.com/rhinoplasty-plano/"
+      ],
+      "procedures": [
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drwilcox.com/breast-augmentation-plano/",
+          "source_type": "official_public_price_page",
+          "price_min": 6000,
+          "price_max": 7200
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drwilcox.com/rhinoplasty-plano/",
+          "source_type": "official_public_price_page",
+          "price_min": 6400,
+          "price_max": 9000
+        }
+      ]
+    },
+    {
+      "name": "Preston Center MedSpa",
+      "website": null,
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://longevity.haus/chemical-peels/us/dallas"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+          "source_type": "public_pricing_directory",
+          "price": 275
+        }
+      ],
+      "note": "Public pricing-directory peel listing; lower trust than official clinic page."
+    },
+    {
+      "name": "Pure Spa and Salon",
+      "website": "https://www.purespaandsalon.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.purespaandsalon.com/chemical-peels/"
+      ],
+      "procedures": [
+        {
+          "name": "VI Peel - Full Face",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.purespaandsalon.com/chemical-peels/",
+          "source_type": "official_public_price_page",
+          "price": 350
+        },
+        {
+          "name": "VI Peel - Face + Neck + Chest",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.purespaandsalon.com/chemical-peels/",
+          "source_type": "official_public_price_page",
+          "price": 500
+        },
+        {
+          "name": "TCA Chemical Peel - Full Face",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.purespaandsalon.com/chemical-peels/",
+          "source_type": "official_public_price_page",
+          "price": 300
+        },
+        {
+          "name": "TCA Chemical Peel - Face + Neck + Chest",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.purespaandsalon.com/chemical-peels/",
+          "source_type": "official_public_price_page",
+          "price": 450
+        }
+      ]
+    },
+    {
+      "name": "Randy Sanovich, DDS, MD",
+      "website": "https://www.dallassurgicalarts.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "12740 Hillcrest Road, Suite 100",
+        "zip": "75230"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.navmds.com/doctor/dr-randy-sanovich-dds"
+      ],
+      "note": "Crowdsourced public procedure pricing; marked public_pricing_directory.",
+      "procedures": [
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "fixed",
+          "price": 7300,
+          "source_url": "https://www.navmds.com/doctor/dr-randy-sanovich-dds",
+          "source_type": "public_pricing_directory"
+        },
+        {
+          "name": "Genioplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "fixed",
+          "price": 5800,
+          "source_url": "https://www.navmds.com/doctor/dr-randy-sanovich-dds",
+          "source_type": "public_pricing_directory"
+        }
+      ],
+      "phone": "+1 972-914-3660"
+    },
+    {
+      "name": "RESTORE Hair - Allen",
+      "website": "https://restorehair.com/",
+      "location": {
+        "city": "Allen",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://restorehair.com/locations/",
+        "https://www.reddit.com/r/HairTransplants/comments/1bw47z9"
+      ],
+      "procedures": [
+        {
+          "name": "FUE Hair Transplant - Patient-Reported Example",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "800 grafts",
+          "price_type": "fixed",
+          "source_url": "https://www.reddit.com/r/HairTransplants/comments/1bw47z9",
+          "source_type": "patient_reported",
+          "price": 6000
+        }
+      ],
+      "note": "Dallas-area RESTORE patient-reported quote; branch-specific official pricing not public."
+    },
+    {
+      "name": "RESTORE Hair - Arlington",
+      "website": "https://restorehair.com/",
+      "location": {
+        "city": "Arlington",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://restorehair.com/locations/",
+        "https://www.reddit.com/r/HairTransplants/comments/1bw47z9"
+      ],
+      "procedures": [
+        {
+          "name": "FUE Hair Transplant - Patient-Reported Example",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "800 grafts",
+          "price_type": "fixed",
+          "source_url": "https://www.reddit.com/r/HairTransplants/comments/1bw47z9",
+          "source_type": "patient_reported",
+          "price": 6000
+        }
+      ],
+      "note": "Dallas-area RESTORE patient-reported quote; branch-specific official pricing not public."
+    },
+    {
+      "name": "RESTORE Hair - Dallas Highland Park",
+      "website": "https://restorehair.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://restorehair.com/locations/",
+        "https://www.reddit.com/r/HairTransplants/comments/1bw47z9"
+      ],
+      "procedures": [
+        {
+          "name": "FUE Hair Transplant - Patient-Reported Example",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "800 grafts",
+          "price_type": "fixed",
+          "source_url": "https://www.reddit.com/r/HairTransplants/comments/1bw47z9",
+          "source_type": "patient_reported",
+          "price": 6000
+        }
+      ],
+      "note": "Dallas-area RESTORE patient-reported quote; branch-specific official pricing not public."
+    },
+    {
+      "name": "RESTORE Hair - Plano",
+      "website": "https://restorehair.com/",
+      "location": {
+        "city": "Plano",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://restorehair.com/locations/",
+        "https://www.reddit.com/r/HairTransplants/comments/1bw47z9"
+      ],
+      "procedures": [
+        {
+          "name": "FUE Hair Transplant - Patient-Reported Example",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "800 grafts",
+          "price_type": "fixed",
+          "source_url": "https://www.reddit.com/r/HairTransplants/comments/1bw47z9",
+          "source_type": "patient_reported",
+          "price": 6000
+        }
+      ],
+      "note": "Dallas-area RESTORE patient-reported quote; branch-specific official pricing not public."
+    },
+    {
+      "name": "Rod Rohrich, MD",
+      "website": "https://drrohrich.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "9101 N Central Expressway, Suite 600",
+        "zip": "75231"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://longevity.haus/provider/dr-rod-rohrich-plastic-surgery-dallas"
+      ],
+      "note": "Public pricing-directory values; marked public_pricing_directory.",
+      "procedures": [
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "price_min": 12500,
+          "source_url": "https://longevity.haus/provider/dr-rod-rohrich-plastic-surgery-dallas/rhinoplasty",
+          "source_type": "public_pricing_directory"
+        },
+        {
+          "name": "Facelift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "fixed",
+          "price": 21000,
+          "source_url": "https://longevity.haus/provider/dr-rod-rohrich-plastic-surgery-dallas",
+          "source_type": "public_pricing_directory"
+        }
+      ],
+      "phone": "+1 214-821-9114"
+    },
+    {
+      "name": "Ronald Friedman, MD",
+      "website": "https://www.plasticsurgerydallas.com/",
+      "location": {
+        "city": "Plano",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.plasticsurgerydallas.com/procedures-photos/"
+      ],
+      "procedures": [
+        {
+          "name": "Breast Augmentation - Saline",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.plasticsurgerydallas.com/procedures-photos/",
+          "source_type": "official_public_price_page",
+          "price": 5950
+        },
+        {
+          "name": "Breast Augmentation - Silicone Gel",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.plasticsurgerydallas.com/procedures-photos/",
+          "source_type": "official_public_price_page",
+          "price": 6950
+        },
+        {
+          "name": "Breast Implant Revision",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.plasticsurgerydallas.com/procedures-photos/",
+          "source_type": "official_public_price_page",
+          "price_min": 8250
+        },
+        {
+          "name": "Breast Augmentation + Lift - Saline",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.plasticsurgerydallas.com/procedures-photos/",
+          "source_type": "official_public_price_page",
+          "price_min": 10600
+        },
+        {
+          "name": "Breast Augmentation + Lift - Silicone",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://www.plasticsurgerydallas.com/procedures-photos/",
+          "source_type": "official_public_price_page",
+          "price_min": 11700
+        },
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://www.drwilcox.com/rhinoplasty-plano/",
+          "source_type": "official_public_price_page",
+          "price_min": 6400,
+          "price_max": 9000
+        }
+      ]
+    },
+    {
+      "name": "Sam Jejurikar, MD",
+      "website": "https://dallasplasticsurgery.pro/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "9101 N Central Expressway, Suite 600",
+        "zip": "75231"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://longevity.haus/provider/dr-sam-jejurikar-plastic-surgery-dallas"
+      ],
+      "note": "Public pricing-directory values; marked public_pricing_directory.",
+      "procedures": [
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "from",
+          "price_min": 9000,
+          "source_url": "https://longevity.haus/provider/dr-sam-jejurikar-plastic-surgery-dallas/rhinoplasty",
+          "source_type": "public_pricing_directory"
+        },
+        {
+          "name": "Liposuction",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "fixed",
+          "price": 6000,
+          "source_url": "https://longevity.haus/provider/dr-sam-jejurikar-plastic-surgery-dallas",
+          "source_type": "public_pricing_directory"
+        }
+      ],
+      "phone": "+1 214-827-2814"
+    },
+    {
+      "name": "SkinSpaMed Dallas",
+      "website": "https://www.skinspamed.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "5330 Alpha Rd, Suite 100",
+        "zip": "75240"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://longevity.haus/chemical-peels/us/dallas"
+      ],
+      "procedures": [
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/chemical-peels/us/dallas",
+          "source_type": "public_pricing_directory",
+          "price": 139
+        }
+      ],
+      "note": "Public pricing-directory peel listing; lower trust than official clinic page.",
+      "phone": "+1 972-392-3895"
+    },
+    {
+      "name": "Toledo Plastic Surgery",
+      "website": "https://toledoplasticsurgery.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://toledoplasticsurgery.com/pricing-financing"
+      ],
+      "procedures": [
+        {
+          "name": "Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 12000,
+          "price_max": 15000
+        },
+        {
+          "name": "Revision Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 15000,
+          "price_max": 20000
+        },
+        {
+          "name": "Facelift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 15000,
+          "price_max": 20000
+        },
+        {
+          "name": "Face + Neck Lift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 30000,
+          "price_max": 40000
+        },
+        {
+          "name": "Chin Implant",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 6500,
+          "price_max": 7000
+        },
+        {
+          "name": "Otoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 7000,
+          "price_max": 8000
+        },
+        {
+          "name": "Arm Lift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 7000,
+          "price_max": 10500
+        },
+        {
+          "name": "Labiaplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 4000,
+          "price_max": 5000
+        },
+        {
+          "name": "Liposuction",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 10000,
+          "price_max": 20000
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 12000,
+          "price_max": 14000
+        },
+        {
+          "name": "Breast Augmentation - Saline",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 6000,
+          "price_max": 7000
+        },
+        {
+          "name": "Breast Augmentation - Silicone",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 7000,
+          "price_max": 8400
+        },
+        {
+          "name": "Breast Implant Remove + Replace",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 9000,
+          "price_max": 10500
+        },
+        {
+          "name": "Breast Lift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 10500,
+          "price_max": 12500
+        },
+        {
+          "name": "Breast Augmentation + Lift",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 15000,
+          "price_max": 18000
+        },
+        {
+          "name": "Breast Reduction",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://toledoplasticsurgery.com/pricing-financing",
+          "source_type": "official_public_price_page",
+          "price_min": 10000,
+          "price_max": 13000
+        }
+      ]
+    },
+    {
+      "name": "Vasdev Rai, MD",
+      "website": "https://www.drrai.net/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "7777 Forest Ln, Suite C612",
+        "zip": "75230"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.navmds.com/doctor/specialty/body-lift/texas/dallas"
+      ],
+      "note": "Crowdsourced public procedure pricing; marked public_pricing_directory.",
+      "procedures": [
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per procedure",
+          "price_type": "fixed",
+          "price": 6760,
+          "source_url": "https://www.navmds.com/doctor/specialty/body-lift/texas/dallas",
+          "source_type": "public_pricing_directory"
+        }
+      ],
+      "phone": "+1 972-566-6500"
+    },
+    {
+      "name": "William P. Adams, Jr., MD",
+      "website": "https://www.dr-adams.com/",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "country": "USA",
+        "address": "6901 Snider Plaza, Suite 120",
+        "zip": "75205"
+      },
+      "checked_at": "2026-09-13",
+      "source_urls": [
+        "https://www.navmds.com/doctor/dr-william-p-adams-jr-md"
+      ],
+      "procedures": [
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.navmds.com/doctor/dr-william-p-adams-jr-md",
+          "source_type": "public_pricing_directory",
+          "price": 6500
+        },
+        {
+          "name": "Breast Implants",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.navmds.com/doctor/dr-william-p-adams-jr-md",
+          "source_type": "public_pricing_directory",
+          "price": 7000
+        },
+        {
+          "name": "Breast Lift with Implants",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.navmds.com/doctor/dr-william-p-adams-jr-md",
+          "source_type": "public_pricing_directory",
+          "price": 14000
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://www.navmds.com/doctor/dr-william-p-adams-jr-md",
+          "source_type": "public_pricing_directory",
+          "price": 20000
+        }
+      ],
+      "note": "Crowdsourced public procedure pricing.",
+      "phone": "+1 214-965-9885"
+    }
+  ]
+}

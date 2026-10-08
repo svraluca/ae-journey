@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ÆSTHETIC JOURNEY — From inspiration to transformation</title>
+  <meta name="description" content="Track every procedure, milestone, and glow-up in one place. Your aesthetic journey, beautifully organized." />
+  <meta name="theme-color" content="#F2F2F2" />
+  <meta property="og:title" content="ÆSTHETIC JOURNEY" />
+  <meta property="og:description" content="From inspiration to transformation — one place for your aesthetic journey." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="/assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/home.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Before/after + Qoves-style bottom (no black sheet) -->
+    <section class="hero" aria-label="Before and after comparison">
+      <div class="ba-stage" id="baStage">
+        <div class="ba-layer ba-after" style="background-image:url('/assets/afterw.jpg')"></div>
+        <div class="ba-layer ba-before" id="baBefore" style="background-image:url('/assets/beforew.jpg')"></div>
+        <div class="ba-gradient" aria-hidden="true"></div>
+
+        <div class="ba-label ba-label-before">BEFORE</div>
+        <div class="ba-label ba-label-after">AFTER</div>
+
+        <div class="ba-line" id="baLine" aria-hidden="true"></div>
+        <button
+          type="button"
+          class="ba-handle"
+          id="baHandle"
+          aria-label="Drag to compare before and after"
+          aria-valuemin="8"
+          aria-valuemax="92"
+          aria-valuenow="50"
+          role="slider"
+        >
+          <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+            <path fill="currentColor" d="M6.99 11H17v2H6.99v3L3 12l3.99-4v3zm10.02 0v-3L21 12l-4 4v-3H7v-2h9.99z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="ba-cta">
+        <p class="ba-proof">ÆSTHETIC JOURNEY</p>
+        <h1 class="ba-title">Your aesthetic journey,<br />beautifully kept</h1>
+        <p class="ba-sub">Track your procedures over the years — milestones, photos, and progress in one place. Compare clinics, prices, and results.</p>
+        <div class="ba-actions">
+          <a class="btn btn-light" href="#product">Download app</a>
+          <a class="btn btn-ghost-light" href="#how">How it works</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- welcome_screen2 dual orbit — under before/after -->
+    <section class="orbit-section" id="why" aria-label="Procedure orbit">
+      <span class="brand-pill brand-pill-ink">ÆSTHETIC JOURNEY</span>
+      <div class="orbit-viewport">
+        <div class="orbit-stage" id="orbitStage">
+          <div class="orbit-glow" aria-hidden="true"></div>
+          <div class="orbit-aura" id="orbitAura" aria-hidden="true"></div>
+          <div class="orbit-nodes" id="orbitNodes"></div>
+          <div class="orbit-center">
+            <p>Discover.<br />Decide.<br />Glow.</p>
+          </div>
+        </div>
+      </div>
+      <div class="orbit-footer">
+        <p class="manifesto-sub">From inspiration to transformation</p>
+        <a class="btn btn-download" href="#product">
+          <svg class="btn-download-ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 4v10m0 0l-4-4m4 4l4-4M5 18h14"/>
+          </svg>
+          <span class="btn-download-divider" aria-hidden="true"></span>
+          <span>Download app</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Phone product showcase — matches promo layout -->
+    <section class="showcase" id="product" aria-label="App preview">
+      <div class="showcase-head">
+        <h2 class="reveal delay-1">Your aesthetic journey,<br />all in one place.</h2>
+        <p class="showcase-lede reveal delay-2">
+          Track your procedures, compare clinics worldwide and plan your perfect results.
+        </p>
+      </div>
+
+      <div class="showcase-layout">
+        <div class="showcase-phones reveal">
+          <img
+            src="/assets/reklamphone.png"
+            alt="ÆSTHETIC JOURNEY app — add custom procedures and find clinics worldwide"
+            width="1200"
+            height="800"
+            decoding="async"
+            loading="lazy"
+          />
+          <div class="showcase-stores">
+            <a
+              class="store-btn"
+              href="https://apps.apple.com/search?term=%C3%86STHETIC%20JOURNEY"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg class="store-btn-icon" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+                <path fill="currentColor" d="M16.7 12.7c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.7-1.3-.1-2.5.8-3.1.8-.7 0-1.7-.7-2.8-.7-1.4 0-2.8.9-3.5 2.2-1.5 2.6-.4 6.4 1.1 8.5.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.8-.7s1.7.7 2.8.7c1.2 0 1.9-1 2.6-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.7zM14.6 6.4c.6-.7 1-1.7.9-2.7-1 .1-2.1.6-2.7 1.4-.6.6-1.1 1.7-.9 2.6 1.1.1 2.1-.5 2.7-1.3z"/>
+              </svg>
+              <span class="store-btn-copy">
+                <small>Download on</small>
+                <strong>App Store</strong>
+              </span>
+              <svg class="store-btn-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
+            </a>
+            <a
+              class="store-btn"
+              href="https://play.google.com/store/search?q=%C3%86STHETIC%20JOURNEY&c=apps"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg class="store-btn-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <path fill="currentColor" d="M3.6 2.3c-.3.2-.6.6-.6 1.1v17.2c0 .5.3.9.6 1.1l9.5-9.7L3.6 2.3zm11.2 5.6L6.3 2.7l8.9 5.1 2.8-1.6-3.2-1.8zm3.5 2L15.7 11l2.6 1.5c.9-.5.9-1.3 0-1.8zM6.3 21.3l8.5-4.9-2.8-1.6-8.5 8.7c.3.3.7.2 1.2-.1l1.6-1.1zm8.5-5.9 2.8-1.6-2.8-1.6-2.6 1.5 2.6 1.7z"/>
+              </svg>
+              <span class="store-btn-copy">
+                <small>Download on</small>
+                <strong>Google Play</strong>
+              </span>
+              <svg class="store-btn-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <aside class="showcase-side showcase-side-left" aria-label="Procedure features">
+          <article class="showcase-callout reveal">
+            <div>
+              <h3>Choose treatment zones</h3>
+              <p>Select exactly the areas you want to treat.</p>
+            </div>
+            <span class="showcase-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.55">
+                <circle cx="12" cy="9" r="3"/><path d="M6.8 18.5c1.1-2.2 2.9-3.3 5.2-3.3s4.1 1.1 5.2 3.3" stroke-linecap="round"/>
+                <circle cx="8.2" cy="7.2" r="1" fill="currentColor" stroke="none"/><circle cx="15.8" cy="7.2" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
+            <svg class="showcase-dotline" viewBox="0 0 96 36" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M2 22 C 28 22, 42 8, 94 12"/>
+            </svg>
+          </article>
+          <article class="showcase-callout reveal delay-1">
+            <div>
+              <h3>Easy selection</h3>
+              <p>Tap to select or deselect zones based on your goals.</p>
+            </div>
+            <span class="showcase-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="8"/><path d="M8.5 12.2l2.2 2.2 4.6-4.6"/>
+              </svg>
+            </span>
+            <svg class="showcase-dotline" viewBox="0 0 96 36" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M2 18 C 30 18, 48 18, 94 18"/>
+            </svg>
+          </article>
+          <article class="showcase-callout reveal delay-2">
+            <div>
+              <h3>Track every detail</h3>
+              <p>Save your procedures, products, brands, and costs — all in one place.</p>
+            </div>
+            <span class="showcase-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/>
+              </svg>
+            </span>
+            <svg class="showcase-dotline" viewBox="0 0 96 36" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M2 14 C 28 14, 42 28, 94 24"/>
+            </svg>
+          </article>
+        </aside>
+
+        <aside class="showcase-side showcase-side-right" aria-label="Explore features">
+          <article class="showcase-callout reveal">
+            <svg class="showcase-dotline" viewBox="0 0 96 36" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M2 12 C 54 8, 68 22, 94 22"/>
+            </svg>
+            <span class="showcase-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9.5V7.2A2.2 2.2 0 0 1 8.2 5h7.6A2.2 2.2 0 0 1 18 7.2v2.3"/><rect x="5" y="9.5" width="14" height="10" rx="2"/><path d="M12 13v3"/>
+              </svg>
+            </span>
+            <div>
+              <h3>See &amp; share glow-ups</h3>
+              <p>Explore other people’s journeys — or share your own when you’re ready.</p>
+            </div>
+          </article>
+          <article class="showcase-callout reveal delay-1">
+            <svg class="showcase-dotline" viewBox="0 0 96 36" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M2 18 C 48 18, 66 18, 94 18"/>
+            </svg>
+            <span class="showcase-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round">
+                <path d="M5 18V8"/><path d="M10 18V5"/><path d="M15 18v-7"/><path d="M20 18V10"/>
+              </svg>
+            </span>
+            <div>
+              <h3>Visual &amp; clear overview</h3>
+              <p>See all top clinics worldwide and compare prices at a glance.</p>
+            </div>
+          </article>
+          <article class="showcase-callout reveal delay-2">
+            <svg class="showcase-dotline" viewBox="0 0 96 36" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M2 24 C 54 28, 68 14, 94 14"/>
+            </svg>
+            <span class="showcase-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 4.5l1.2 3.6H17l-3 2.3 1.1 3.6L12 11.8 8.9 14l1.1-3.6-3-2.3h3.8L12 4.5z"/>
+              </svg>
+            </span>
+            <div>
+              <h3>AI-guided recommendations</h3>
+              <p>Use our AI tools to see which procedures can improve your appearance.</p>
+            </div>
+          </article>
+        </aside>
+      </div>
+
+      <div class="showcase-trust reveal">
+        <article class="showcase-trust-item">
+          <span class="showcase-trust-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.2 2.4 3.4 5 3.4 8S14.2 17.6 12 20c-2.2-2.4-3.4-5-3.4-8S9.8 6.4 12 4z"/>
+            </svg>
+          </span>
+          <div>
+            <h3>Worldwide clinics</h3>
+            <p>Find the best clinics anywhere in the world.</p>
+          </div>
+        </article>
+        <article class="showcase-trust-item">
+          <span class="showcase-trust-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3.8l6.5 2.4v4.8c0 4.1-2.8 7.1-6.5 8.6-3.7-1.5-6.5-4.5-6.5-8.6V6.2L12 3.8z"/><path d="M9.4 12l1.8 1.8 3.5-3.6"/>
+            </svg>
+          </span>
+          <div>
+            <h3>Trusted &amp; safe</h3>
+            <p>Verified clinics and transparent prices.</p>
+          </div>
+        </article>
+        <article class="showcase-trust-item">
+          <span class="showcase-trust-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5.5" y="11" width="13" height="8.5" rx="2"/><path d="M8.5 11V8.4a3.5 3.5 0 0 1 7 0V11"/>
+            </svg>
+          </span>
+          <div>
+            <h3>Your journey</h3>
+            <p>100% private and secure.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="section-head">
+        <p class="eyebrow reveal">How it works</p>
+        <h2 class="reveal delay-1">Five steps to your journey</h2>
+      </div>
+      <ol class="steps">
+        <li class="step glass reveal">
+          <span class="step-num">01</span>
+          <h3>Start your journey</h3>
+          <p>Create your space and capture what inspires your next glow-up.</p>
+        </li>
+        <li class="step glass reveal delay-1">
+          <span class="step-num">02</span>
+          <h3>Find clinics &amp; procedures</h3>
+          <p>Use our AI tools in the app to find the best clinics and procedures — and make your glow-up meaningful.</p>
+        </li>
+        <li class="step glass reveal delay-2">
+          <span class="step-num">03</span>
+          <h3>Log every procedure</h3>
+          <p>Areas, clinics, dates, and notes — clear and ready when you need them.</p>
+        </li>
+        <li class="step glass reveal delay-3">
+          <span class="step-num">04</span>
+          <h3>Track the timeline</h3>
+          <p>Photos and milestones turn recovery into a story you can see.</p>
+        </li>
+        <li class="step glass reveal delay-3">
+          <span class="step-num">05</span>
+          <h3>See &amp; share</h3>
+          <p>Compare before &amp; after, then share via a link or make a post live.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section soft">
+      <div class="section-head">
+        <p class="eyebrow reveal">Why ÆSTHETIC JOURNEY</p>
+        <h2 class="reveal delay-1">Built for the way you glow up</h2>
+      </div>
+      <div class="pillars-light">
+        <article class="glass pillar-card reveal">
+          <h3>Organized</h3>
+          <p>Every procedure lives in one aesthetic journey.</p>
+        </article>
+        <article class="glass pillar-card reveal delay-1">
+          <h3>Visual</h3>
+          <p>Before &amp; after, day by day — not lost in Camera Roll.</p>
+        </article>
+        <article class="glass pillar-card reveal delay-2">
+          <h3>Yours</h3>
+          <p>Private by default. You choose what to share via dedicated links — or make a post live.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="section-head">
+        <p class="eyebrow reveal">FAQ</p>
+        <h2 class="reveal delay-1">Questions, answered</h2>
+      </div>
+      <div class="faq-list glass">
+        <details class="faq-item reveal" open>
+          <summary>Is this a clinic?</summary>
+          <p>No — it’s your personal aesthetic journey. Care stays between you and your providers.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Who sees my photos?</summary>
+          <p>Private by default. You choose what to share via dedicated links — or make a post live when you’re ready. Nothing is public unless you decide.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>What happens to my data when I delete it?</summary>
+          <p>Deleted means deleted forever. Your photos, notes, and timeline entries are permanently removed from our servers.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Is it only for the face?</summary>
+          <p>No — face and body. Log any procedure, invasive or non-invasive, wherever it belongs on your journey.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Surgical and non-surgical?</summary>
+          <p>Yes. Injectables, skin treatments, body procedures, surgery — invasive and non-invasive — whatever belongs on your timeline.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>How do I start?</summary>
+          <p>Get the app, create your account, and tap Get Started.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section cta-final" id="contact">
+      <div class="cta-panel reveal">
+        <span class="brand-pill brand-pill-ink">ÆSTHETIC JOURNEY</span>
+        <h2 class="manifesto-title compact">Discover.<br />Decide.<br />Glow.</h2>
+        <p class="manifesto-sub">Every change. One place.</p>
+        <a class="btn btn-download" href="#product">
+          <svg class="btn-download-ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 4v10m0 0l-4-4m4 4l4-4M5 18h14"/>
+          </svg>
+          <span class="btn-download-divider" aria-hidden="true"></span>
+          <span>Download app</span>
+        </a>
+        <p class="sheet-signin light">
+          After you download, create an account to start using the app.
+        </p>
+        <div class="store-row">
+          <a class="store" href="#">App Store</a>
+          <a class="store" href="#">Google Play</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="brand-pill brand-pill-ink">ÆSTHETIC JOURNEY</span>
+    <p>Every change. One place.</p>
+    <div class="footer-links">
+      <a href="#why">Why</a>
+      <a href="#product">App</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <a href="#product">Download app</a>
+    </div>
+    <p class="copy">© <span id="year"></span> ÆSTHETIC JOURNEY</p>
+  </footer>
+
+  <script src="/home.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "notifications",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "pushSent", "order": "ASCENDING" },
+        { "fieldPath": "deliverAt", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "notifications",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "recipientId", "order": "ASCENDING" },
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "explore_curated_prices",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "city_key", "order": "ASCENDING" },
+        { "fieldPath": "procedure_family", "order": "ASCENDING" },
+        { "fieldPath": "rating", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "explore_curated_prices",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "city_key", "order": "ASCENDING" },
+        { "fieldPath": "procedure_family", "order": "ASCENDING" },
+        { "fieldPath": "price_min", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "explore_curated_prices",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "city_key", "order": "ASCENDING" },
+        { "fieldPath": "procedure_family", "order": "ASCENDING" },
+        { "fieldPath": "checked_at", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "explore_city_procedure_coverage",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "cityId", "order": "ASCENDING" },
+        { "fieldPath": "procedureCanonicalId", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "explore_city_discovery",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "cityId", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "leaseExpiresAt", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "explore_price_review_queue",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "updatedAt", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

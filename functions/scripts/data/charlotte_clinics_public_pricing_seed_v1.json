@@ -1,0 +1,2285 @@
+{
+  "schema_version": "5.0-public-pricing-seed",
+  "checked_at": "2026-09-13",
+  "market": "Charlotte metro, North Carolina, USA",
+  "currency_default": "USD",
+  "dataset_rule": "Clinic-first mixed-source public-pricing seed. procedures[] contains every numeric-priced service captured from the reviewed public source for that clinic. Flagship categories are indexes only, not a filter.",
+  "trust_policy": {
+    "official_public_price_page": "Direct clinic/practice public pricing page; preferred.",
+    "official_context_price": "Clinic's own public educational/planning range; use below direct posted price.",
+    "public_pricing_directory": "Third-party public pricing directory; lower trust than clinic-site pricing.",
+    "patient_reported": "Public patient-reported price; historical/lower trust.",
+    "market_benchmark": "City/metro benchmark only; never present it as a clinic quote."
+  },
+  "limitations": [
+    "This is a best-effort public-web seed, not a guaranteed exhaustive site-wide audit of every clinic.",
+    "Booking-only, login-only, private-quote, phone-only and unindexed prices may be absent.",
+    "Rows without numeric public pricing are omitted rather than estimated.",
+    "Directory-derived rows are explicitly marked and should rank below official clinic-site pricing in Explore.",
+    "Market benchmarks are stored separately and are not counted as clinic coverage."
+  ],
+  "clinic_count": 13,
+  "priced_procedure_count": 74,
+  "target_categories": [
+    "Botox",
+    "Fillers",
+    "Rhinoplasty",
+    "Boob job",
+    "Hair transplant",
+    "Peels"
+  ],
+  "category_coverage_counts": {
+    "Botox": 10,
+    "Fillers": 12,
+    "Rhinoplasty": 1,
+    "Boob job": 1,
+    "Hair transplant": 1,
+    "Peels": 9
+  },
+  "category_index": {
+    "Botox": [
+      {
+        "clinic": "Essential Aesthetics and Laser",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/essential-aesthetics-and-laser",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          }
+        ]
+      },
+      {
+        "clinic": "Evolve Medical Associates",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          }
+        ]
+      },
+      {
+        "clinic": "Femme Medspa",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Forehead Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/femme-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 250,
+            "price_max": 350
+          }
+        ]
+      },
+      {
+        "clinic": "Infinity MedSpa and Wellness",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/infinity-medspa-and-wellness",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/infinity-medspa-and-wellness",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      },
+      {
+        "clinic": "M2 Medical Spa and Wellness",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          },
+          {
+            "name": "Dysport",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          }
+        ]
+      },
+      {
+        "clinic": "Providence Plastic Surgery & Skin Center",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 15
+          }
+        ]
+      },
+      {
+        "clinic": "Satin Med Spa",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/satin-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 10,
+            "price_max": 20
+          }
+        ]
+      },
+      {
+        "clinic": "SOesthetic Med Spa",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/soesthetic-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Urban Medspa & Weight Loss Center Charlotte",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/urban-medspa-weight-loss-center-charlotte",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "Valencia Voci Medical Aesthetics & Wellness",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Botox",
+            "category": "injectables",
+            "currency": "USD",
+            "unit": "per unit",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+            "source_type": "public_pricing_directory",
+            "price_min": 12,
+            "price_max": 15
+          }
+        ]
+      }
+    ],
+    "Fillers": [
+      {
+        "clinic": "Carolina Facial Plastics",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Non-Surgical Rhinoplasty",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "fixed",
+            "source_url": "https://longevity.haus/rhinoplasty/us/charlotte",
+            "source_type": "public_pricing_directory",
+            "price": 1200
+          }
+        ]
+      },
+      {
+        "clinic": "Essential Aesthetics and Laser",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/essential-aesthetics-and-laser",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Evolve Medical Associates",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Enhancement",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 700
+          },
+          {
+            "name": "Under-Eye Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Femme Medspa",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler Injection",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/femme-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Infinity MedSpa and Wellness",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/infinity-medspa-and-wellness",
+            "source_type": "public_pricing_directory",
+            "price_min": 1000,
+            "price_max": 1200
+          }
+        ]
+      },
+      {
+        "clinic": "M2 Medical Spa and Wellness",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "Providence Plastic Surgery & Skin Center",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dermal Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          },
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 700
+          }
+        ]
+      },
+      {
+        "clinic": "Satin Med Spa",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Facial Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/satin-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 800
+          },
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/satin-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 300,
+            "price_max": 600
+          }
+        ]
+      },
+      {
+        "clinic": "SOesthetic Med Spa",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/soesthetic-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          }
+        ]
+      },
+      {
+        "clinic": "The Center for Women's Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Cheek Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 1000
+          },
+          {
+            "name": "Lip Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 700
+          },
+          {
+            "name": "Under-Eye Filler",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 900
+          }
+        ]
+      },
+      {
+        "clinic": "Urban Medspa & Weight Loss Center Charlotte",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Dissolvable Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/urban-medspa-weight-loss-center-charlotte",
+            "source_type": "public_pricing_directory",
+            "price_min": 500,
+            "price_max": 800
+          },
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/urban-medspa-weight-loss-center-charlotte",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 700
+          }
+        ]
+      },
+      {
+        "clinic": "Valencia Voci Medical Aesthetics & Wellness",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Facial Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+            "source_type": "public_pricing_directory",
+            "price_min": 600,
+            "price_max": 800
+          },
+          {
+            "name": "Lip Fillers",
+            "category": "fillers",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+            "source_type": "public_pricing_directory",
+            "price_min": 550,
+            "price_max": 700
+          }
+        ]
+      }
+    ],
+    "Rhinoplasty": [
+      {
+        "clinic": "Carolina Facial Plastics",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Surgical Rhinoplasty",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://longevity.haus/rhinoplasty/us/charlotte",
+            "source_type": "public_pricing_directory",
+            "price_min": 9000,
+            "price_max": 18000
+          }
+        ]
+      }
+    ],
+    "Boob job": [
+      {
+        "clinic": "Providence Plastic Surgery & Skin Center",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Breast Augmentation",
+            "category": "surgery",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+            "source_type": "public_pricing_directory",
+            "price_min": 6000,
+            "price_max": 10000
+          }
+        ]
+      }
+    ],
+    "Hair transplant": [
+      {
+        "clinic": "Cooley Hair Center",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Hair Transplant",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "from",
+            "source_url": "https://transplantmatch.com/prices/hair-transplant/nc/",
+            "source_type": "public_pricing_directory",
+            "price_min": 8000
+          },
+          {
+            "name": "Hair Transplant - Per Graft",
+            "category": "hair_transplant",
+            "currency": "USD",
+            "unit": "per graft",
+            "price_type": "fixed",
+            "source_url": "https://transplantmatch.com/prices/hair-transplant/nc/",
+            "source_type": "public_pricing_directory",
+            "price": 8
+          }
+        ]
+      }
+    ],
+    "Peels": [
+      {
+        "clinic": "Essential Aesthetics and Laser",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/essential-aesthetics-and-laser",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      },
+      {
+        "clinic": "Evolve Medical Associates",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "VI Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 250
+          }
+        ]
+      },
+      {
+        "clinic": "M2 Medical Spa and Wellness",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peels",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      },
+      {
+        "clinic": "Providence Plastic Surgery & Skin Center",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          }
+        ]
+      },
+      {
+        "clinic": "Satin Med Spa",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peels",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/satin-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 75,
+            "price_max": 250
+          }
+        ]
+      },
+      {
+        "clinic": "SOesthetic Med Spa",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "VI Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/soesthetic-med-spa",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 300
+          }
+        ]
+      },
+      {
+        "clinic": "The Center for Women's Aesthetics",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Deep Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 400,
+            "price_max": 800
+          },
+          {
+            "name": "Light Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          },
+          {
+            "name": "Medium Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics",
+            "source_type": "public_pricing_directory",
+            "price_min": 200,
+            "price_max": 400
+          }
+        ]
+      },
+      {
+        "clinic": "Urban Medspa & Weight Loss Center Charlotte",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Chemical Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/urban-medspa-weight-loss-center-charlotte",
+            "source_type": "public_pricing_directory",
+            "price_min": 100,
+            "price_max": 200
+          }
+        ]
+      },
+      {
+        "clinic": "Valencia Voci Medical Aesthetics & Wellness",
+        "location": {
+          "address": null,
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "USA"
+        },
+        "rating": {
+          "value": null,
+          "review_count": null,
+          "platform": null
+        },
+        "qualifying_procedures": [
+          {
+            "name": "Precision Plus Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+            "source_type": "public_pricing_directory",
+            "price_min": 200,
+            "price_max": 250
+          },
+          {
+            "name": "TCA Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+            "source_type": "public_pricing_directory",
+            "price_min": 250,
+            "price_max": 300
+          },
+          {
+            "name": "VI Peel",
+            "category": "peels",
+            "currency": "USD",
+            "unit": "per treatment",
+            "price_type": "range",
+            "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+            "source_type": "public_pricing_directory",
+            "price_min": 150,
+            "price_max": 200
+          }
+        ]
+      }
+    ]
+  },
+  "market_benchmarks": [
+    {
+      "category": "Boob job",
+      "metric": "metro_average",
+      "price": 6615,
+      "source_url": "https://www.realself.com/surgical/breast-augmentation/cost",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Botox",
+      "metric": "metro_average",
+      "price": 453,
+      "source_url": "https://www.realself.com/nonsurgical/botox/cost",
+      "source_type": "market_benchmark"
+    },
+    {
+      "category": "Hair transplant",
+      "metric": "city_range",
+      "price_min": 6100,
+      "price_median": 9200,
+      "price_max": 14500,
+      "source_url": "https://transplantmatch.com/prices/",
+      "source_type": "market_benchmark"
+    }
+  ],
+  "clinics": [
+    {
+      "name": "Carolina Facial Plastics",
+      "website": "https://carolinafacialplasticsurgery.com/",
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://longevity.haus/rhinoplasty/us/charlotte"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Non-Surgical Rhinoplasty",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "fixed",
+          "source_url": "https://longevity.haus/rhinoplasty/us/charlotte",
+          "source_type": "public_pricing_directory",
+          "price": 1200
+        },
+        {
+          "name": "Surgical Rhinoplasty",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://longevity.haus/rhinoplasty/us/charlotte",
+          "source_type": "public_pricing_directory",
+          "price_min": 9000,
+          "price_max": 18000
+        }
+      ]
+    },
+    {
+      "name": "Cooley Hair Center",
+      "website": "https://haircenter.com/",
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": "+1 704-542-1601",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://transplantmatch.com/prices/hair-transplant/nc/"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Hair Transplant",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "from",
+          "source_url": "https://transplantmatch.com/prices/hair-transplant/nc/",
+          "source_type": "public_pricing_directory",
+          "price_min": 8000
+        },
+        {
+          "name": "Hair Transplant - Per Graft",
+          "category": "hair_transplant",
+          "currency": "USD",
+          "unit": "per graft",
+          "price_type": "fixed",
+          "source_url": "https://transplantmatch.com/prices/hair-transplant/nc/",
+          "source_type": "public_pricing_directory",
+          "price": 8
+        }
+      ]
+    },
+    {
+      "name": "Essential Aesthetics and Laser",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/nc/charlotte/reviews/essential-aesthetics-and-laser"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/essential-aesthetics-and-laser",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/essential-aesthetics-and-laser",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/essential-aesthetics-and-laser",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        }
+      ]
+    },
+    {
+      "name": "Evolve Medical Associates",
+      "website": "https://www.evolvemetoday.com/",
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": "+1 704-386-6695",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/nc/charlotte/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "CoolSculpting",
+          "category": "body_contouring",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 750,
+          "price_max": 1500
+        },
+        {
+          "name": "Lip Enhancement",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 700
+        },
+        {
+          "name": "Under-Eye Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "BBL",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Halo Skin Rejuvenation",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        },
+        {
+          "name": "VI Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        }
+      ]
+    },
+    {
+      "name": "Femme Medspa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/nc/charlotte/reviews/femme-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Lip Filler Injection",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/femme-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Forehead Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/femme-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 250,
+          "price_max": 350
+        },
+        {
+          "name": "Frown Lines",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/femme-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 250,
+          "price_max": 350
+        },
+        {
+          "name": "Gummy Smile",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/femme-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Lip Dissolve",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/femme-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 600
+        },
+        {
+          "name": "Lip Flip",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/femme-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        }
+      ]
+    },
+    {
+      "name": "Infinity MedSpa and Wellness",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/nc/charlotte/reviews/infinity-medspa-and-wellness"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "CoolSculpting",
+          "category": "body_contouring",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/infinity-medspa-and-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 750,
+          "price_max": 1500
+        },
+        {
+          "name": "Custom Facial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/infinity-medspa-and-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 60,
+          "price_max": 100
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/infinity-medspa-and-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 1000,
+          "price_max": 1200
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/infinity-medspa-and-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/infinity-medspa-and-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Microdermabrasion",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/infinity-medspa-and-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 75,
+          "price_max": 150
+        }
+      ]
+    },
+    {
+      "name": "M2 Medical Spa and Wellness",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/nc/charlotte/best-medspa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Facials",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "Dysport",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "Fraxel",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 750,
+          "price_max": 1500
+        },
+        {
+          "name": "Laser Hair Removal",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 250
+        },
+        {
+          "name": "Chemical Peels",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/best-medspa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        }
+      ]
+    },
+    {
+      "name": "Providence Plastic Surgery & Skin Center",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 250
+        },
+        {
+          "name": "Dermal Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 700
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 15
+        },
+        {
+          "name": "CO2 Laser",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 1000,
+          "price_max": 2500
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 300
+        },
+        {
+          "name": "Breast Augmentation",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 6000,
+          "price_max": 10000
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/providence-plastic-surgery-skin-center",
+          "source_type": "public_pricing_directory",
+          "price_min": 8000,
+          "price_max": 12000
+        }
+      ]
+    },
+    {
+      "name": "Satin Med Spa",
+      "website": "https://www.satinmedspa.com/",
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": "+1 704-365-3588",
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/nc/charlotte/reviews/satin-med-spa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Facial Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/satin-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 800
+        },
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/satin-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/satin-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 10,
+          "price_max": 20
+        },
+        {
+          "name": "Chemical Peels",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/satin-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 75,
+          "price_max": 250
+        },
+        {
+          "name": "Fat Transfer",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/satin-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 2500,
+          "price_max": 5500
+        },
+        {
+          "name": "Liposuction",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/satin-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 3000,
+          "price_max": 7000
+        },
+        {
+          "name": "Tummy Tuck",
+          "category": "surgery",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/satin-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 5000,
+          "price_max": 10000
+        }
+      ]
+    },
+    {
+      "name": "SOesthetic Med Spa",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/nc/charlotte/reviews/soesthetic-med-spa"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/soesthetic-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/soesthetic-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "VI Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/soesthetic-med-spa",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        }
+      ]
+    },
+    {
+      "name": "The Center for Women's Aesthetics",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Cheek Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 1000
+        },
+        {
+          "name": "Lip Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 700
+        },
+        {
+          "name": "Under-Eye Filler",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 900
+        },
+        {
+          "name": "Deep Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 800
+        },
+        {
+          "name": "Light Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Medium Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/the-center-for-women-s-aesthetics",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 400
+        }
+      ]
+    },
+    {
+      "name": "Urban Medspa & Weight Loss Center Charlotte",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/nc/charlotte/reviews/urban-medspa-weight-loss-center-charlotte"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "Facial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/urban-medspa-weight-loss-center-charlotte",
+          "source_type": "public_pricing_directory",
+          "price_min": 50,
+          "price_max": 100
+        },
+        {
+          "name": "Dissolvable Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/urban-medspa-weight-loss-center-charlotte",
+          "source_type": "public_pricing_directory",
+          "price_min": 500,
+          "price_max": 800
+        },
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/urban-medspa-weight-loss-center-charlotte",
+          "source_type": "public_pricing_directory",
+          "price_min": 400,
+          "price_max": 700
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/urban-medspa-weight-loss-center-charlotte",
+          "source_type": "public_pricing_directory",
+          "price_min": 300,
+          "price_max": 600
+        },
+        {
+          "name": "Laser Hair Removal",
+          "category": "laser",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/urban-medspa-weight-loss-center-charlotte",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 300
+        },
+        {
+          "name": "Chemical Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/urban-medspa-weight-loss-center-charlotte",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 200
+        },
+        {
+          "name": "Microdermabrasion",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/urban-medspa-weight-loss-center-charlotte",
+          "source_type": "public_pricing_directory",
+          "price_min": 100,
+          "price_max": 150
+        }
+      ]
+    },
+    {
+      "name": "Valencia Voci Medical Aesthetics & Wellness",
+      "website": null,
+      "location": {
+        "address": null,
+        "city": "Charlotte",
+        "state": "NC",
+        "country": "USA"
+      },
+      "phone": null,
+      "rating": {
+        "value": null,
+        "review_count": null,
+        "platform": null
+      },
+      "site_price_audit": {
+        "checked_at": "2026-09-13",
+        "source_urls": [
+          "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness"
+        ],
+        "rule": "Include every numeric-priced service captured from the reviewed public source(s). This is a current public-pricing seed, not a claim that hidden booking-only or quote-only prices do not exist."
+      },
+      "procedures": [
+        {
+          "name": "CoolSculpting",
+          "category": "body_contouring",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 700,
+          "price_max": 1500
+        },
+        {
+          "name": "Signature HydraFacial",
+          "category": "facials",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 200
+        },
+        {
+          "name": "Facial Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 600,
+          "price_max": 800
+        },
+        {
+          "name": "Lip Fillers",
+          "category": "fillers",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 550,
+          "price_max": 700
+        },
+        {
+          "name": "Botox",
+          "category": "injectables",
+          "currency": "USD",
+          "unit": "per unit",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 12,
+          "price_max": 15
+        },
+        {
+          "name": "Precision Plus Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 200,
+          "price_max": 250
+        },
+        {
+          "name": "TCA Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 250,
+          "price_max": 300
+        },
+        {
+          "name": "VI Peel",
+          "category": "peels",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 150,
+          "price_max": 200
+        },
+        {
+          "name": "SkinPen Microneedling",
+          "category": "skin",
+          "currency": "USD",
+          "unit": "per treatment",
+          "price_type": "range",
+          "source_url": "https://trustanalytica.org/us/nc/charlotte/reviews/valencia-voci-medical-aesthetics-wellness",
+          "source_type": "public_pricing_directory",
+          "price_min": 250,
+          "price_max": 300
+        }
+      ]
+    }
+  ]
+}
