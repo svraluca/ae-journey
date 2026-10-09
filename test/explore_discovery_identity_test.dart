@@ -2161,7 +2161,7 @@ void main() {
         isTrue,
       );
 
-      // The card is English, so an Arabic row shows its family name.
+      // Keep a usable source-language tariff name on the card.
       final arabic =
           _clinic(
             name: 'Biolite Dubai',
@@ -2179,7 +2179,7 @@ void main() {
           );
       expect(
         exploreCardProcedureLabel(arabic, selectedPill: 'Fillers'),
-        'Lip filler',
+        'فيلر الشفاه 1 مل',
       );
     });
 

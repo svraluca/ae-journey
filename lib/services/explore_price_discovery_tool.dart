@@ -554,13 +554,13 @@ class ExplorePriceDiscoveryTool {
         return false;
       }
     }
-    if (requested.contains('lip') && requested.contains('filler')) {
+    if (requested.contains('lip') && !requested.contains('cheek') && requested.contains('filler')) {
       final cheekOnly =
           (blob.contains('cheek') || blob.contains('jaw')) &&
           !blob.contains('lip');
       if (cheekOnly) return false;
     }
-    if (requested.contains('cheek') && requested.contains('filler')) {
+    if (requested.contains('cheek') && !requested.contains('lip') && requested.contains('filler')) {
       final lipOnly = blob.contains('lip') && !blob.contains('cheek');
       if (lipOnly) return false;
     }

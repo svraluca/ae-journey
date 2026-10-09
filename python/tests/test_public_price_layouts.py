@@ -187,7 +187,7 @@ class FetchEvidence(unittest.IsolatedAsyncioTestCase):
                                      base_url="http://test") as client:
             response = await client.get("/health")
         data = response.json()
-        self.assertEqual(data["version"], "0.11.86")
+        self.assertEqual(data["version"], "0.11.87")
         self.assertEqual(data["worker_version"], data["version"])
         self.assertTrue(data["progressive_jobs"])
 

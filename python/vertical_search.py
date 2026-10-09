@@ -223,10 +223,16 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
     remaining = max(0, serper_request_budget - max(0, initial_serper_requests)) if serper_request_budget > 0 else 4
     total_serper_cap = min(4, remaining)
     deep = engine.env_bool('ENABLE_DEEP_DISCOVERY', True)
-    stages = ['known_domains', 'primary']
+    stages = ['known_domains']
+    # Search the market's language first. A slow English round must not hold
+    # local tariff pages behind its fetch/navigation budget. Paid search caps
+    # and verification gates remain the same; English is the fallback round.
+    local_queries = CATALOG.queries(selected, city, country, engine.local_terms_for, stage='local')
+    local_first = engine.env_bool('ENABLE_MULTILINGUAL_SEARCH', True) and bool(local_queries)
+    stages.append('local' if local_first else 'primary')
+    if deep and local_first:
+        stages.append('primary')
     if deep:
-        if engine.env_bool('ENABLE_MULTILINGUAL_SEARCH', True):
-            stages.append('local')
         if engine.env_bool('ENABLE_EXA_RESCUE', False):
             stages.append('exa')
         stages.append('places')

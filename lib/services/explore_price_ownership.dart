@@ -137,6 +137,17 @@ bool looksLikeExplicitNonClinicPriceDisclaimer(String raw) {
   ).hasMatch(text);
 }
 
+/// General Turkish estimates cannot inherit ownership from a clinic host.
+bool looksLikeLocalizedMarketPriceEstimate(String raw) {
+  final text = foldExploreCityText(raw);
+  return cachedRegExp(
+    r'\b(?:fiyat\w*|ucret\w*|maliyet\w*)\b(?:[^.!?\n|]|\.(?=\d)){0,100}'
+    r'\b(?:genellikle|ortalama|degis\w*|arasinda)\b|'
+    r'\b(?:genellikle|ortalama|genel olarak)\b(?:[^.!?\n|]|\.(?=\d)){0,100}'
+    r'\b(?:fiyat\w*|ucret\w*|maliyet\w*|tl|try)\b',
+  ).hasMatch(text);
+}
+
 /// Classify the *page* (URL + body), not a single DOM fragment.
 ExplorePricePageContext classifyExplorePricePageContext({
   required String sourceUrl,
@@ -180,7 +191,7 @@ ExplorePricePageContext classifyExplorePricePageContext({
     r'\baverage price\b|\bon average\b|\btypically (?:cost|range|start)\b|'
     r'\bstarts? at roughly\b|\baround \d',
     caseSensitive: false,
-  ).hasMatch(blob)) {
+  ).hasMatch(blob) || looksLikeLocalizedMarketPriceEstimate(blob)) {
     return ExplorePricePageContext.marketAverage;
   }
 
@@ -241,6 +252,11 @@ bool looksLikeExplicitClinicOwnPriceLanguage(
 }) {
   final t = raw.replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return false;
+  if (cachedRegExp(r'\b(?:klinigimiz\w*|hastanemiz\w*|merkezimiz\w*)\b'
+      r'.{0,100}\b(?:fiyat\w*|ucret\w*|botoks|dolgu\w*)\b')
+      .hasMatch(foldExploreCityText(t))) {
+    return true;
+  }
   if (cachedRegExp(
     r'\bour (?:breast|botox|filler|rhinoplast|peel|package|price|prices)\b|'
     r'\bour package starts\b|'
@@ -294,6 +310,7 @@ bool exploreEvidenceIsClinicOwnedPrice({
   bool treatProseAsUnowned = false,
 }) {
   final blob = '$rawProcedureText\n$rawEvidence\n$rawPriceText';
+  if (looksLikeLocalizedMarketPriceEstimate(rawEvidence)) return false;
   if (pageContext == ExplorePricePageContext.nonClinicPrices ||
       looksLikeExplicitNonClinicPriceDisclaimer(blob)) {
     return false;

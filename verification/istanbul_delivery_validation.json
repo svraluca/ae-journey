@@ -1,0 +1,223 @@
+{
+  "validated_at_utc": "2026-10-09T15:21:19.090758+00:00",
+  "base_commit": "770767c238e6b970b4d8c1048a26367ca6dbce5f",
+  "backend_version": "0.11.87",
+  "extract_revision": "e24",
+  "python": {
+    "passed": 119,
+    "failed": 0,
+    "new_tests": 6,
+    "command": "PYTHON_DOTENV_DISABLED=1 ENABLE_FIRESTORE=false ENABLE_BACKGROUND_REFRESH=false python -m unittest discover -s python/tests -v"
+  },
+  "functions": {
+    "passed": 316,
+    "failed": 0,
+    "new_tests": 2,
+    "command": "node --test functions/explore/test/*.test.js"
+  },
+  "flutter": {
+    "broad_completed": true,
+    "broad_all_passed": false,
+    "suites": 56,
+    "visible_test_counts": {
+      "success": 736,
+      "failure": 13,
+      "error": 1
+    },
+    "baseline_failure_count": 14,
+    "failures": [
+      {
+        "suite": "explore_currency_cached_pipeline_test.dart",
+        "test": "extract revision is e18"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "pool mix plan 2+ pool paints 2 Firestore seeds and still hunts 2 Google"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "procedure display title 14. Serp page titles are not clinic names"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "Places name looks medical keeps named plastic clinics Google may type as gym/lodging"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "Places name looks medical 25g. Abu Dhabi keeps verified quotes and skips Dubai-only URLs"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "SERP fetch uses any listed price, not a snippet amount London hair cards show package FROM, not /graft on graft counts"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "canonical city + early discovery rejects Budapest Botox does not keep a Tiranë clinic"
+      },
+      {
+        "suite": "explore_global_price_discovery_test.dart",
+        "test": "units on parsePriceText stores ml quantity and per-unit type"
+      },
+      {
+        "suite": "explore_places_circuit_breaker_test.dart",
+        "test": "Places 429 trips circuit breaker and skips further calls"
+      },
+      {
+        "suite": "explore_price_sanity_test.dart",
+        "test": "price sanity gate gold packages, Quick Facts, and SEO titles are not clinic prices"
+      },
+      {
+        "suite": "explore_price_sanity_test.dart",
+        "test": "price sanity gate hair market £/graft copy and stale landing quotes are rejected"
+      },
+      {
+        "suite": "explore_price_sanity_test.dart",
+        "test": "price sanity gate rhinoplasty market guide is rejected; hospital guide stays scoped"
+      },
+      {
+        "suite": "explore_progressive_fill_drop_test.dart",
+        "test": "price-list path witness Global Action 1 ml stays eligible after accept-time variant"
+      },
+      {
+        "suite": "explore_worldwide_pipeline_test.dart",
+        "test": "UI states + exact price labelling cold city searching copy"
+      }
+    ],
+    "new_failures": [],
+    "focused_completed": true,
+    "focused_test_counts": {
+      "success": 9
+    },
+    "focused_command": "flutter test --no-pub test/explore_istanbul_delivery_test.dart",
+    "broad_suite_paths": [
+      "test/explore_any_city_pipeline_test.dart",
+      "test/explore_booking_platform_test.dart",
+      "test/explore_city_and_eight_cards_test.dart",
+      "test/explore_clinic_name_vocabulary_test.dart",
+      "test/explore_cold_city_pipeline_test.dart",
+      "test/explore_compare_hybrid_contract_test.dart",
+      "test/explore_cross_procedure_exclusion_test.dart",
+      "test/explore_curated_price_test.dart",
+      "test/explore_currency_cached_pipeline_test.dart",
+      "test/explore_discovery_identity_test.dart",
+      "test/explore_duplicate_verify_test.dart",
+      "test/explore_extract_performance_test.dart",
+      "test/explore_fill_session_lifecycle_test.dart",
+      "test/explore_filler_ml_lock_test.dart",
+      "test/explore_firecrawl_discovery_test.dart",
+      "test/explore_fresh_tariff_and_rating_test.dart",
+      "test/explore_global_price_discovery_test.dart",
+      "test/explore_html_price_extractor_test.dart",
+      "test/explore_injectable_cached_eligibility_test.dart",
+      "test/explore_market_coverage_test.dart",
+      "test/explore_marketplace_discovery_test.dart",
+      "test/explore_owned_tariff_context_test.dart",
+      "test/explore_peel_discovery_extract_test.dart",
+      "test/explore_perf_coordinator_test.dart",
+      "test/explore_places_circuit_breaker_test.dart",
+      "test/explore_price_discovery_tool_test.dart",
+      "test/explore_price_evidence_lock_test.dart",
+      "test/explore_price_index_test.dart",
+      "test/explore_price_ownership_test.dart",
+      "test/explore_price_sanity_test.dart",
+      "test/explore_procedure_relation_test.dart",
+      "test/explore_progressive_fill_drop_test.dart",
+      "test/explore_queue_and_ratings_test.dart",
+      "test/explore_quote_restrictions_test.dart",
+      "test/explore_regex_flags_test.dart",
+      "test/explore_reject_path_fix_test.dart",
+      "test/explore_renderer_client_test.dart",
+      "test/explore_responsive_rotation_test.dart",
+      "test/explore_rhinoplasty_variant_eligibility_test.dart",
+      "test/explore_saved_price_loading_test.dart",
+      "test/explore_serp_provider_test.dart",
+      "test/explore_snapshot_and_scope_test.dart",
+      "test/explore_source_context_regressions_test.dart",
+      "test/explore_tab_restore_and_qualifier_test.dart",
+      "test/explore_tirana_peel_price_parse_test.dart",
+      "test/explore_turkish_cold_city_test.dart",
+      "test/explore_v76_approx_price_test.dart",
+      "test/explore_valencia_prices_test.dart",
+      "test/explore_verified_card_titles_test.dart",
+      "test/explore_worldwide_gaps_test.dart",
+      "test/explore_worldwide_pipeline_test.dart",
+      "test/explore_zyte_client_test.dart",
+      "test/price_binding_regression_test.dart",
+      "test/worldwide_compare_display_test.dart",
+      "test/explore_injectable_scope_test.dart",
+      "test/explore_istanbul_delivery_test.dart"
+    ]
+  },
+  "analysis": {
+    "errors": 0,
+    "warnings": 82,
+    "infos": 175
+  },
+  "api_smoke": {
+    "health": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "version": "0.11.87",
+        "price_index": true,
+        "discovery_jobs": true,
+        "worker_version": "0.11.87",
+        "progressive_jobs": true
+      }
+    },
+    "istanbul_botox_index": {
+      "status": 200,
+      "body": {
+        "city": "İstanbul",
+        "procedure": "botox",
+        "display_results": [],
+        "source_collection": "aesthetic_price_results",
+        "source": "local_verified",
+        "verified_count": 0,
+        "invalidated_source_urls": []
+      }
+    },
+    "istanbul_fillers_index": {
+      "status": 200,
+      "body": {
+        "city": "İstanbul",
+        "procedure": "filler",
+        "display_results": [],
+        "source_collection": "aesthetic_price_results",
+        "source": "local_verified",
+        "verified_count": 0,
+        "invalidated_source_urls": []
+      }
+    }
+  },
+  "cache_timing_unit_benchmark": {
+    "cold_validation_ms": 1459,
+    "cached_100_repaints_ms": 15,
+    "source": "explore_responsive_rotation_test",
+    "live_device_frame_timing": false
+  },
+  "fixes": [
+    "Country-configured local-language queries run before the English fallback without raising the search-request budget.",
+    "A verified local source can quote a foreign currency without being rejected as a foreign-city listing.",
+    "Phone contact spans no longer invalidate a separately quoted treatment fee.",
+    "Published treatment names keep their source language; price-heading and duplicated article suffixes are trimmed for display only.",
+    "Broad Fillers searches accept both lip and cheek treatment rows.",
+    "Official articles retain their evidence type instead of inheriting tariff-table trust.",
+    "General Turkish market estimates are rejected across Python, Flutter and Functions.",
+    "Discovery prices must be quoted literally with currency in retained source evidence, including cached rows."
+  ],
+  "live_price_audit": "istanbul_source_audit.json",
+  "limitations": [
+    "Live Turkish websites returned proxy-policy 403; screenshot fees remain unverified.",
+    "Four cards are a display maximum, not a quota to satisfy with weak or invented evidence.",
+    "Production Firestore was not connected, production was not deployed, and physical-iPhone frame timings were not measured.",
+    "Cloud network additions were saved as a draft and require publishing before they apply."
+  ],
+  "log_sha256": {
+    "ae-istanbul-python5.log": "1f5c3260bda2888b652b7cb507aa468400b78a6b8cacc70f51a3dd8c89453ef4",
+    "ae-istanbul-functions2.log": "12bf4ad546983530b90b0b7af2e781316be85f475cfc7a2d338a0f603d158a18",
+    "ae-istanbul-flutter-final.jsonl": "bed644084b557e94f946a51c814a49c7326215b84e0a9160bdb3866909cb167f",
+    "ae-istanbul-focused-final.jsonl": "cf7f8fbfdf4ea63ba80bdafc1f1d447340f5ce1aee0e92f99acabc479926a52f",
+    "ae-istanbul-analysis-final.log": "49b64e6f9c53e931854e8cb3adcd391ffcaaba34cb3d62fd3d0ad8073e595a24"
+  }
+}

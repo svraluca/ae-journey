@@ -527,8 +527,8 @@ List<OpenAIClinic> _clinicsForCompareDisplayUncached(
 String _tariffTitleFromEvidence(OpenAIClinic clinic) {
   final text = clinic.priceEvidenceText.replaceAll('\u00a0', ' ');
   final money = RegExp(
-    r'(?:\b(?:RON|lei|AED|EUR|USD|GBP)\s*|[$€£]\s*)\d[\d., ]*|'
-    r'(?<![\w.,])\d[\d., ]*\s*(?:(?:RON|lei|AED|EUR|USD|GBP)\b|[$€£])',
+    r'(?:\b(?:RON|lei|AED|EUR|USD|GBP|TRY|TL)\s*|[$€£₺]\s*)\d[\d., ]*|'
+    r'(?<![\w.,])\d[\d., ]*\s*(?:(?:RON|lei|AED|EUR|USD|GBP|TRY|TL)\b|[$€£₺])',
     caseSensitive: false,
   ).allMatches(text).toList();
   // An old cache row with one explicit price still has a usable tariff name.
@@ -561,8 +561,9 @@ String exploreCardProcedureLabel(
 }) {
   final pill = selectedPill?.trim() ?? '';
   final topicHead = topic?.split('·').first.trim() ?? '';
-  // Persisted display name wins — never surface article sentences.
-  final persisted = exploreProcedureTitleWithoutPromotion(clinic.procedureDisplayName);
+  // Source-language tariff names beat generated English family names.
+  final persisted = exploreWebsiteProcedureTitle(
+      exploreProcedureTitleWithoutPromotion(clinic.procedureDisplayName));
   final isFiller = pill == 'Fillers' || clinic.procedureCanonical == 'filler';
   final isPeel = pill == 'Peels' || clinic.procedureCanonical == 'chemical_peel';
   final genericFillerTitle = isFiller && RegExp(
@@ -574,32 +575,11 @@ String exploreCardProcedureLabel(
   final genericBotoxTitle = clinic.procedureCanonical == 'botox' &&
       RegExp(r'^(?:botox|anti[- ]wrinkle(?:\s+injection)?)$', caseSensitive: false).hasMatch(persisted);
   final genericTariffTitle = genericFillerTitle || genericPeelTitle || genericBotoxTitle;
-  if (isFiller && RegExp(r'full[ -]face', caseSensitive: false)
-      .hasMatch(clinic.procedureDetail)) {
-    return 'Dermal filler · Full face rejuvenation';
-  }
   final isBreastAugmentation =
       pill == 'Boob job' ||
       clinic.procedureCanonical == 'breast_augmentation' ||
       persisted.toLowerCase().contains('breast augmentation') ||
       topicHead.toLowerCase().contains('breast augmentation');
-  if (isBreastAugmentation) {
-    return exploreBreastProcedureDisplayName(
-      rawProcedureText: clinic.rawProcedureText.isNotEmpty
-          ? clinic.rawProcedureText
-          : persisted,
-      procedureDetail: clinic.procedureDetail,
-      evidence: clinic.priceEvidenceText,
-      priceMin: clinic.priceMin,
-      currency: clinic.currency,
-    );
-  }
-  if (!genericTariffTitle && persisted.isNotEmpty &&
-      !looksLikeCountryMarketPriceMarketing(persisted) &&
-      !looksLikeRawScrapedProcedureTitle(persisted) &&
-      !looksLikePricingProseProcedureTitle(persisted)) {
-    return isFiller ? stripGenericFillerMethodSubtitle(persisted) : persisted;
-  }
   final brand = exploreWebsiteProcedureTitle(clinic.brand);
   final rawText = exploreWebsiteProcedureTitle(exploreProcedureTitleWithoutPromotion(clinic.rawProcedureText));
   final evidenceTitle = genericTariffTitle ? _tariffTitleFromEvidence(clinic) : '';
@@ -617,19 +597,21 @@ String exploreCardProcedureLabel(
       brand == 'Rhinoplasty' ||
       (isBroadExploreCategoryName(brand) && brand == 'Rhinoplasty');
 
-  // Rhinoplasty tab, or All-tab row tagged as rhinoplasty.
-  if (isRhinoplastyTab || brandIsRhino) {
-    return _rhinoplastyCardLabel(clinic);
-  }
-
   bool matchesPill(String label) {
-    if (query.isEmpty) return true;
+    if (query.isEmpty) {
+      final stored = exploreFamilyFromStoredId(clinic.procedureCanonical);
+      return stored == ExploreTreatmentFamily.other || exploreTreatmentFamily(label) == stored;
+    }
     if (isFiller && RegExp(
       r'buze|pome[tț]i|cearc[aă]ne|menton|mandibul|nazo.?genien|'
       r'lip\s+filler|cheek\s+filler|tear\s+trough',
       caseSensitive: false,
-    ).hasMatch(label)) return true;
+    ).hasMatch(label)) {
+      return true;
+    }
     final fam = exploreTreatmentFamily(label);
+    final wanted = exploreTreatmentFamily(query);
+    if (fam != ExploreTreatmentFamily.other && wanted != ExploreTreatmentFamily.other && fam != wanted) return false;
     if (fam == ExploreTreatmentFamily.other) {
       // "Crows Feet" after stripping "What Is Botox Injection? · …"
       if (exploreTreatmentFamily(query) == ExploreTreatmentFamily.botox &&
@@ -650,6 +632,9 @@ String exploreCardProcedureLabel(
 
   bool usableWebsiteName(String label) {
     if (label.isEmpty) return false;
+    // Keep the established English method subtitle layout. Source-language
+    // breast names pass through unchanged below.
+    if (isBreastAugmentation && RegExp(r'\bbreast\b', caseSensitive: false).hasMatch(label)) return false;
     if (looksLikeGenericLaserCardTitle(label)) return false;
     if (looksLikeInternalProcedureId(label)) return false;
     if (isExploreTopicPlaceholder(label)) return false;
@@ -667,15 +652,26 @@ String exploreCardProcedureLabel(
     if (looksLikeBarePriceLabel(label)) return false;
     if (looksLikeMarketAveragePriceBlurb(label)) return false;
     if (looksLikeCountryMarketPriceMarketing(label)) return false;
-    if (looksLikeNonLatinProcedureLabel(label)) return false;
     if (_brandLooksLikeSpecialtyVariant(label)) return false;
     if (!matchesPill(label)) return false;
     return true;
   }
 
   // Prefer the scraped menu row (clinic-detail treatment.name), then brand.
-  for (final candidate in [rawText, evidenceTitle, brand]) {
+  for (final candidate in [rawText, evidenceTitle, persisted, brand]) {
     if (usableWebsiteName(candidate)) return candidate;
+  }
+  if (isBreastAugmentation) {
+    return exploreBreastProcedureDisplayName(
+      rawProcedureText: clinic.rawProcedureText.isNotEmpty ? clinic.rawProcedureText : persisted,
+      procedureDetail: clinic.procedureDetail, evidence: clinic.priceEvidenceText,
+      priceMin: clinic.priceMin, currency: clinic.currency,
+    );
+  }
+  if (isRhinoplastyTab || brandIsRhino) return _rhinoplastyCardLabel(clinic);
+  if (isFiller && RegExp(r'full[ -]face', caseSensitive: false)
+      .hasMatch(clinic.procedureDetail)) {
+    return 'Dermal filler · Full face rejuvenation';
   }
   // Backend detail (Crow's feet / Three areas / Partial) beats a bare "Botox".
   if (clinic.procedureCanonical == 'botox') {
@@ -709,15 +705,13 @@ String exploreCardProcedureLabel(
   }
   if (genericTariffTitle && persisted.isNotEmpty) return persisted;
 
-  // FAQ/SEO headings and Arabic menu rows still name a family — show
-  // "Lip filler", not the question or the untranslated row.
+  // Unusable FAQ/article titles may still identify the fallback family.
   for (final candidate in [rawText, brand]) {
     if (candidate.isEmpty) continue;
     final needsFallback =
         looksLikeRawScrapedProcedureTitle(candidate) ||
         looksLikeMarketAveragePriceBlurb(candidate) ||
         looksLikeCountryMarketPriceMarketing(candidate) ||
-        looksLikeNonLatinProcedureLabel(candidate) ||
         looksLikeUnilateralBreastStartingRow(candidate) ||
         looksLikeCatalogSectionHeading(candidate) ||
         looksLikeGenericInjectableCategoryHeading(candidate) ||
@@ -777,6 +771,22 @@ String exploreWebsiteProcedureTitle(String raw) {
   if (t.isEmpty) return '';
   t = stripSurroundingPageCopyFromProcedureTitle(t);
   if (t.isEmpty) return '';
+  // SEO heading tails are page copy, not part of a treatment name. Retain
+  // the source spelling, including Turkish diacritics, rather than translate.
+  final pricingTail = RegExp(
+    r'\b(?:fiyat[\wıİşŞğĞüÜöÖçÇ]*|[üu]cret[\wıİşŞğĞüÜöÖçÇ]*|'
+    r'prices?|pricing|costs?|precios?|prix|tarifs?|prezzi|preise|'
+    r'pre[tț]uri|cennik|prijzen)\b', caseSensitive: false,
+  ).firstMatch(t);
+  if (pricingTail != null && pricingTail.start > 0) {
+    final prefix = t.substring(0, pricingTail.start).trim()
+        .replaceFirst(RegExp(r'[\s:|·–—-]+$'), '');
+    if (!RegExp(r'^(?:our|we|how|what)\b', caseSensitive: false).hasMatch(prefix) &&
+        exploreTreatmentFamily(prefix) != ExploreTreatmentFamily.other &&
+        !looksLikeRawScrapedProcedureTitle(prefix)) {
+      t = prefix;
+    }
+  }
   t = _titleCaseAllCapsProcedureLabel(t);
   if (t.isEmpty) return '';
   if (looksLikeCommerceChromeLabel(t)) return '';
@@ -911,19 +921,6 @@ bool _brandLooksLikeSpecialtyVariant(String brand) {
     r'masseter|brux|hiperhidros|hyperhidros|platism|gingival|gummy|'
     r'lip[\s-]?lift|queiloplast',
   ).hasMatch(t);
-}
-
-/// Arabic/Cyrillic/Greek/CJK menu rows are real, but the card is English:
-/// show the family name instead of the untranslated row.
-bool looksLikeNonLatinProcedureLabel(String label) {
-  final t = label.trim();
-  if (t.isEmpty) return false;
-  if (!RegExp(
-    r'[\u0370-\u04ff\u0600-\u06ff\u3040-\u9fff\uac00-\ud7af]',
-  ).hasMatch(t)) {
-    return false;
-  }
-  return !RegExp(r'[A-Za-zÀ-ÿ]{3}').hasMatch(t);
 }
 
 /// Standard wrinkle zones listed under Botox — not masseter / gummy extras.

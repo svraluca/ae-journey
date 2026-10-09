@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.86 — injectable treatment evidence
+Aesthetic Procedure Price Discovery v0.11.87 — local-market delivery and price ownership
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -2401,6 +2401,8 @@ INJECTABLE_FILLER_POSITIVE = [
     "per syringe", "syringe",
     "acid hialuronic", "acid hyaluronic", "fillere",
     "injectare acid hialuronic", "injectare acid hyaluronic",
+    # Use the same explicit service aliases that drive local discovery.
+    *(fold(term) for terms in PROCEDURE_LOCAL_TERMS.get('filler', {}).values() for term in terms),
 ]
 
 FILLER_TREATMENT_CONTEXT = [
@@ -7874,6 +7876,8 @@ def page_disclaims_clinic_prices(raw: str) -> bool:
 def generic_multi_clinic_price_context(raw: str) -> bool:
     """A national or multi-clinic estimate is not this clinic's own quote."""
     local = fold(raw or "")
+    if localized_market_price_context(raw):
+        return True
     if (re.search(r"\b(?:el|los)\s+(?:precio|coste|costo)s?\s+(?:de|del)\b[^.!?\n|]{0,90}"
                   r"\ben\s+[a-z ]{2,40}\b(?:varian?|oscila[n]?|suele[n]?\s+oscilar)\b", local)
             and not re.search(r"\b(?:nuestra|nuestro|nuestras|nuestros)\b", local)):
@@ -7892,6 +7896,16 @@ def generic_multi_clinic_price_context(raw: str) -> bool:
         r"clinicas? low cost|precio orientativo (?:en|de)|precios orientativos|rangos orientativos)\b",
         local,
     ))
+
+
+def localized_market_price_context(raw: str) -> bool:
+    """A Turkish market estimate is not a provider fee, even on its website."""
+    text = fold(raw or '').replace('ı', 'i')
+    return bool(re.search(
+        r'\b(?:fiyat\w*|ucret\w*|maliyet\w*)\b(?:[^.!?\n|]|\.(?=\d)){0,100}'
+        r'\b(?:genellikle|ortalama|degis\w*|arasinda)\b|'
+        r'\b(?:genellikle|ortalama|genel olarak)\b(?:[^.!?\n|]|\.(?=\d)){0,100}'
+        r'\b(?:fiyat\w*|ucret\w*|maliyet\w*|tl|try)\b', text))
 
 
 def nonprimary_rhinoplasty_variant(raw: str) -> bool:
@@ -11690,6 +11704,12 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
         return scope_failure
     if generic_multi_clinic_price_context(row.raw_evidence):
         return "market_context"
+    if not any(code == row.currency and (
+            abs(amount - row.price_min) < .011
+            or (attached := find_attached_range(row.raw_evidence, code, match))
+               and abs(attached[0] - row.price_min) < .011)
+            for match, amount, code in iter_exact_price_matches(row.raw_evidence)):
+        return "missing_literal_price_evidence"
     if consultation_fee_evidence(row):
         return "consultation_fee"
     if seasonal_offer_needs_confirmation(row.raw_evidence):
@@ -12923,6 +12943,25 @@ def filler_price_row_name(evidence: str, raw_price_text: str = "") -> str:
     return tariff_price_row_name(evidence, "filler", raw_price_text)
 
 
+def clean_published_procedure_title(text: str) -> str:
+    """Remove a price-heading suffix without translating the source name.
+
+    This is display-only: ownership/market-price checks keep the untouched
+    source evidence. Cleaning an article title cannot verify its amount.
+    """
+    title = re.sub(r'\s+', ' ', text or '').strip(' |:;-–')
+    tail = re.search(
+        r'\b(?:fiyat\w*|[üu]cret\w*|prices?|pricing|costs?|precios?|prix|'
+        r'tarifs?|prezzi|preise|pre[tț]uri|cennik|prijzen)\b', title, re.I)
+    if tail and tail.start() > 0:
+        prefix = title[:tail.start()].strip(' |:;-–')
+        if not re.match(r'^(?:our|we|how|what)\b', prefix, re.I) and any(has_procedure(prefix, family) for family in
+               ('botox', 'filler', 'chemical_peel', 'rhinoplasty',
+                'breast_augmentation', 'hair_transplant')):
+            title = prefix
+    return title
+
+
 def tariff_price_row_name(evidence: str, procedure: str, raw_price_text: str = "") -> str:
     """Keep the bounded tariff name before its amount, including brand/dose."""
     text = evidence or ""
@@ -12945,6 +12984,7 @@ def tariff_price_row_name(evidence: str, procedure: str, raw_price_text: str = "
     name = re.sub(r'\bsave\s+(?:AED|EUR|USD|GBP|[$€£])?\s*\d[\d.,]*\s*(?:AED|EUR|USD|GBP)?\b', '', name, flags=re.I)
     name = re.sub(r'\s+', ' ', name).strip(' |·:')
     name = re.sub(r"\s*(?:starts?\s+from|starting\s+(?:from|at)|from|de\s+la)\s*$", "", name, flags=re.I).strip()
+    name = clean_published_procedure_title(name)
     canonical = canonicalize_procedure(procedure)
     requested = (injectable_filler_match(name) if canonical == "filler"
                  else has_procedure(name, canonical))
@@ -12962,6 +13002,22 @@ def tariff_price_row_name(evidence: str, procedure: str, raw_price_text: str = "
 def published_procedure_display_name(
     canonical: str, raw_procedure_text: str, evidence: str, raw_price_text: str = "",
 ) -> str:
+    raw_procedure_text = clean_published_procedure_title(raw_procedure_text)
+    listed = tariff_price_row_name(evidence, canonical, raw_price_text)
+    for title in (listed, raw_procedure_text):
+        if (canonical == 'filler' and title == listed
+                and re.match(r'^(?:lip|cheek|chin|jawline|nasolabial|tear trough) filler\b', title, re.I)
+                and (fold(raw_procedure_text) == 'dermal filler' or re.match(r'^(?:how|what)\b', raw_procedure_text, re.I))):
+            continue
+        if (title and len(title) <= 110 and has_procedure(title, canonical)
+                and fold(title) != fold(display_name(canonical))
+                and not pricing_prose_title(title)
+                and not re.search(r'\b(?:how|what|average|generally|genellikle|ranges?|between)\b', fold(title))
+                and not list(iter_exact_price_matches(title))):
+            # English breast method subtitles keep the established formatting.
+            if canonical == 'breast_augmentation' and re.search(r'breast|augmentation', title, re.I):
+                continue
+            return title
     if canonical == "breast_augmentation":
         return breast_augmentation_display_name(evidence, raw_price_text)
     if canonical == 'botox':
@@ -17843,7 +17899,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.86",
+    version="0.11.87",
     lifespan=app_lifespan,
 )
 

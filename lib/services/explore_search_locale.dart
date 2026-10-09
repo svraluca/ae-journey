@@ -1768,6 +1768,7 @@ bool exploreListingFitsSearchCity({
   String procedureText = '',
   String area = '',
   String url = '',
+  bool verifiedSourceCity = false,
 }) {
   final c = city.trim();
   if (c.isEmpty || c.toLowerCase() == 'worldwide') return true;
@@ -1799,7 +1800,13 @@ bool exploreListingFitsSearchCity({
     );
   }
   if (cur.isNotEmpty && !exploreCurrencyFitsSearchCity(cur, c)) {
-    return false;
+    // Currency is a hint, not geography: local clinics also quote foreign
+    // currencies. Require actual source-location evidence or the discovery
+    // verifier's city match, never just the UI's generated area label.
+    final sourceLocation = '$procedureText $priceLabel $url';
+    final mentionsCity = _blobMentionsCityKey(sourceLocation, exploreCanonicalCityKey(c)) ||
+        _exploreLatinCityTokenIn(foldExploreCityText(sourceLocation), foldExploreCityText(c));
+    if (!verifiedSourceCity && !mentionsCity) return false;
   }
   final loc = exploreCityPriceSearchTerms(c);
   final t = procedureText.toLowerCase();

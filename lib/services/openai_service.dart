@@ -18166,6 +18166,14 @@ bool _clinicFitsSearchCityUncached(OpenAIClinic c, String city) {
         '${c.rawPriceText}',
     area: c.area,
     url: c.priceSourceUrl,
+    // Discovery rows reach this type only after city_match/clinic_own_price
+    // and price validation. Its tariff excerpt may omit the footer address
+    // that the backend used. Preserve that proof through cache handoff while
+    // still applying the explicit foreign-city/host checks above.
+    verifiedSourceCity: c.sourceType == 'discovery_tool' &&
+        c.priceExtractRevision == kExplorePriceExtractRevision &&
+        exploreCanonicalCityKey(c.area.split('·').first.trim()) ==
+            exploreCanonicalCityKey(city) && explorePriceIsVerified(c),
   );
 }
 
@@ -20097,7 +20105,7 @@ ExploreTreatmentFamily exploreTreatmentFamily(String raw) {
   bool hasLocal(String family) {
     for (final token in exploreLocalProcedureTokens(family)) {
       if (token.length < 5) continue;
-      if (has(token)) return true;
+      if (has(foldExploreCityText(token))) return true;
     }
     return false;
   }
@@ -21356,7 +21364,11 @@ OpenAIClinic? _clinicFromDiscoveryToolRow(
       ? 'whatclinic_page'
       : marketplace
       ? 'marketplace_menu'
-      : 'html_table';
+      : row.evidenceType == 'official_article'
+      ? 'official_article'
+      : row.evidenceType == 'official_price_menu' || row.evidenceType == 'html_table'
+      ? 'html_table'
+      : 'dom_block';
   final max = row.priceMax ?? row.priceMin;
   final qualifier = row.qualifier.toLowerCase();
   final perUnit = row.procedureCanonical == 'botox' &&
@@ -21492,6 +21504,10 @@ bool _explorePriceIsVerifiedUncached(OpenAIClinic c) {
   if (c.rawPriceText.trim().isEmpty) return false;
   if (c.priceSourceUrl.trim().isEmpty) return false;
   if (c.extractionMethod.trim().isEmpty) return false;
+  if (c.sourceType == 'discovery_tool' && !exploreEvidenceQuotesPrice(
+      evidence: c.priceEvidenceText, amount: c.priceMin, currency: c.currency)) {
+    return false;
+  }
   if (!isValidExtractedPriceCandidate(
     rawPriceText: c.rawPriceText,
     priceMin: c.priceMin,

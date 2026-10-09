@@ -374,9 +374,9 @@ String stripClinicBrandNumericTokens(String raw) {
 
 /// Canonical numeric parser. Never ask an LLM to fix formatting.
 ParsedPrice? parsePriceText(String raw) {
-  final original = stripClinicBrandNumericTokens(
+  final original = stripExplorePhoneContacts(stripClinicBrandNumericTokens(
     _stripRonEquivalentBesideEuro(raw),
-  ).trim();
+  )).trim();
   if (original.isEmpty) return null;
 
   final currency = detectExploreCurrencyToken(original);

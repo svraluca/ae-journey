@@ -7,6 +7,7 @@ import 'explore_price_sanity.dart';
 import 'explore_procedure_relation.dart';
 import 'explore_clinic_identity.dart';
 import 'explore_url_discovery.dart';
+import 'explore_search_locale.dart';
 
 /// Deterministic procedure-family match for extracted HTML labels.
 ///
@@ -83,6 +84,7 @@ final _kFillerPositive = [
   'الفيلر',
   'هيالورونيك',
   'حمض الهيالورونيك',
+  ...exploreLocalProcedureTokens('filler'),
 ];
 
 final _kBotoxPositive = [
@@ -116,6 +118,7 @@ final _kBotoxPositive = [
   'بوتوكس',
   'البوتولينوم',
   'توكسين البوتولينوم',
+  ...exploreLocalProcedureTokens('botox'),
 ];
 
 final _kLaserPositive = [
@@ -350,14 +353,7 @@ final _kHairTxPositive = [
 ];
 
 String _fold(String raw) {
-  const from = 'áàäâãåéèëêíìïîóòöôõúùüûñçşșță';
-  const to = 'aaaaaaeeeeiiiiooooouuuuncssta';
-  final b = StringBuffer();
-  for (final ch in raw.toLowerCase().split('')) {
-    final i = from.indexOf(ch);
-    b.write(i >= 0 ? to[i] : ch);
-  }
-  return b.toString();
+  return foldExploreCityText(raw);
 }
 
 bool _hasAny(String folded, List<String> needles) {

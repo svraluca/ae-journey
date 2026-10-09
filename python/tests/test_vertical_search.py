@@ -93,21 +93,21 @@ class ProgressivePolicy(unittest.IsolatedAsyncioTestCase):
         discover.assert_not_awaited();self.exa.assert_not_awaited();self.places.assert_not_awaited()
         self.assertTrue(result[2])
 
-    async def test_primary_six_stops_before_local_exa_places(self):
+    async def test_local_six_stops_before_english_exa_places(self):
         with patch.object(e,'discover',new=AsyncMock(side_effect=lambda req:self.response(req,6))) as discover:
             _,rows,_=await self.run_search()
         self.assertEqual(len(rows),6)
         self.learned.assert_awaited_once()
         self.assertEqual(len(self.learned.await_args.args[2]), 6)
         self.assertTrue(all('botox' in hit.directory_capabilities for hit in self.learned.await_args.args[2]))
-        self.assertEqual([call.args[0].progressive_stage for call in discover.await_args_list],['primary'])
+        self.assertEqual([call.args[0].progressive_stage for call in discover.await_args_list],['local'])
         self.exa.assert_not_awaited();self.places.assert_not_awaited()
 
-    async def test_insufficient_switches_from_primary_to_local_to_exa(self):
+    async def test_insufficient_switches_from_local_to_english_to_exa(self):
         with patch.object(e,'discover',new=AsyncMock(side_effect=lambda req:self.response(req))) as discover:
             await self.run_search()
         stages=[call.args[0] for call in discover.await_args_list]
-        self.assertEqual([r.progressive_stage for r in stages],['primary','local'])
+        self.assertEqual([r.progressive_stage for r in stages],['local','primary'])
         self.assertEqual(sum(r.serper_request_cap for r in stages),4)
         self.exa.assert_awaited_once()
         self.assertNotIn(self.exa.await_args.args[0],stages[0].query_override)

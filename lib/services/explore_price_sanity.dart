@@ -45,6 +45,7 @@ bool isWeakPriceExtractionMethod(String method) {
     case 'listitem':
     case 'text_proximity':
     case 'textproximity':
+    case 'official_article':
       return true;
     default:
       return false;
@@ -123,6 +124,18 @@ final _pricingLanguage = cachedRegExp(
 );
 
 String digitsOnly(String raw) => raw.replaceAll(cachedRegExp(r'\D'), '');
+
+/// Remove contact numbers before interpreting a tariff's amount. A footer
+/// WhatsApp number must not invalidate a separately bound currency quote.
+/// Number-only inputs become empty and remain invalid prices.
+String stripExplorePhoneContacts(String raw) {
+  return raw.replaceAll(cachedRegExp(
+    r'\b(?:tel(?:e(?:fono|phone))?|tel[eé]fono|phone|whatsapp|mobile|m[oó]vil)'
+    r'\s*[:：]?\s*\+?\d(?:[\s()./\-]*\d){5,14}(?!\d)|'
+    r'\+\d(?:[\s()./\-]*\d){7,14}(?!\d)',
+    caseSensitive: false,
+  ), ' ').trim();
+}
 
 bool looksLikePhoneNumber(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim();
@@ -1762,6 +1775,7 @@ bool looksLikeGoogleAreaEstimateBlurb(String raw) {
 }
 
 bool looksLikeMarketAveragePriceBlurb(String raw) {
+  if (looksLikeLocalizedMarketPriceEstimate(raw)) return true;
   final t = raw.toLowerCase();
   if (t.trim().isEmpty) return false;
   if (looksLikeGoogleAreaEstimateBlurb(raw)) return true;
@@ -2170,6 +2184,8 @@ PriceSanityResult evaluateExtractedPriceCandidate({
 
   final pageContext = pageContextWire.trim().isNotEmpty
       ? explorePricePageContextFromWire(pageContextWire)
+      : method == 'official_article'
+      ? ExplorePricePageContext.informationalArticle
       : classifyExplorePricePageContext(
           sourceUrl: sourceUrl,
           pageText: pageText.isNotEmpty ? pageText : rawEvidence,
@@ -2216,7 +2232,10 @@ PriceSanityResult evaluateExtractedPriceCandidate({
     return const PriceSanityResult.reject('tld_currency_mismatch');
   }
 
-  if (looksLikePhoneNumber(rawPriceText) || looksLikePhoneNumber(blob)) {
+  final priceWithoutContacts = stripExplorePhoneContacts(rawPriceText);
+  if ((rawPriceText.trim().isNotEmpty && priceWithoutContacts.isEmpty) ||
+      looksLikePhoneNumber(priceWithoutContacts) ||
+      looksLikePhoneNumber(stripExplorePhoneContacts(blob))) {
     logReject('phone_number');
     return const PriceSanityResult.reject('phone_number');
   }

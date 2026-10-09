@@ -1,0 +1,90 @@
+{
+  "checked_at_utc": "2026-10-09T15:21:19.090758+00:00",
+  "location": "İstanbul, TR",
+  "status": "unverified_live_access_blocked",
+  "method": "Attempted HTTPS requests to the official domains through the configured environment proxy.",
+  "network_result": [
+    {
+      "host": "nisantasihastanesi.com.tr",
+      "error": "ProxyError",
+      "detail": "403 Forbidden"
+    },
+    {
+      "host": "dokuclinic.com",
+      "error": "ProxyError",
+      "detail": "403 Forbidden"
+    },
+    {
+      "host": "istanbulcerrahi.com",
+      "error": "ProxyError",
+      "detail": "403 Forbidden"
+    },
+    {
+      "host": "guncelozturk.com",
+      "error": "ProxyError",
+      "detail": "403 Forbidden"
+    },
+    {
+      "host": "drakinsahin.com",
+      "error": "ProxyError",
+      "detail": "403 Forbidden"
+    },
+    {
+      "host": "esteworld.com.tr",
+      "error": "ProxyError",
+      "detail": "403 Forbidden"
+    }
+  ],
+  "cards": [
+    {
+      "clinic": "NisantasiHastanesi",
+      "host": "nisantasihastanesi.com.tr",
+      "displayed_procedure": "Dermal Filler",
+      "displayed_amount": 10000,
+      "currency": "TRY",
+      "verification_status": "unverified",
+      "exact_source_url": null,
+      "source_quote": null,
+      "procedure_verified": false,
+      "price_verified": false
+    },
+    {
+      "clinic": "Doku Clinic",
+      "host": "dokuclinic.com",
+      "displayed_procedure": "Dermal Filler",
+      "displayed_amount": 45000,
+      "currency": "TRY",
+      "verification_status": "unverified",
+      "exact_source_url": null,
+      "source_quote": null,
+      "procedure_verified": false,
+      "price_verified": false
+    },
+    {
+      "clinic": "Istanbulcerrahi",
+      "host": "istanbulcerrahi.com",
+      "displayed_procedure": "Dermal Filler",
+      "displayed_amount": 4000,
+      "currency": "TRY",
+      "verification_status": "unverified",
+      "exact_source_url": null,
+      "source_quote": null,
+      "procedure_verified": false,
+      "price_verified": false
+    },
+    {
+      "clinic": "Guncelozturk",
+      "host": "guncelozturk.com",
+      "displayed_procedure": "Lip filler",
+      "displayed_amount": 3000,
+      "currency": "TRY",
+      "verification_status": "unverified",
+      "exact_source_url": null,
+      "source_quote": null,
+      "procedure_verified": false,
+      "price_verified": false
+    }
+  ],
+  "conclusion": "No screenshot amount or procedure has been confirmed from a live source. A proxy-policy denial does not prove that a procedure or fee is absent from the website. Do not substitute guessed amounts.",
+  "next_check": "Trace each card to its exact retained source URL and untouched evidence. Confirm the same provider, city, procedure, scope, amount, currency and active offer conditions. Reject general estimates and unrelated numbers; do not fill four slots with unverified prices."
+}

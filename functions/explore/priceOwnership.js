@@ -32,6 +32,11 @@ function looksLikeConditionalCompanionOffer(raw) {
   return /\bpack\s+(?:amigas|amigos|parejas)\b|\bven\s+con\s+(?:una?\s+)?amig[ao]\b|\b(?:bring|with)\s+(?:a|your)\s+friend\b.{0,90}\b(?:price|offer|discount|special)\b|\b(?:friends?|couples?)\s+(?:pack|offer|discount)\b/.test(t);
 }
 
+function looksLikeLocalizedMarketPriceEstimate(raw) {
+  const t = ownershipFold(raw).replace(/ı/g, 'i');
+  return /\b(?:fiyat\w*|ucret\w*|maliyet\w*)\b(?:[^.!?\n|]|\.(?=\d)){0,100}\b(?:genellikle|ortalama|degis\w*|arasinda)\b|\b(?:genellikle|ortalama|genel olarak)\b(?:[^.!?\n|]|\.(?=\d)){0,100}\b(?:fiyat\w*|ucret\w*|maliyet\w*|tl|try)\b/.test(t);
+}
+
 function classifyExplorePricePageContext({sourceUrl = '', pageText = '', title = ''} = {}) {
   const url = String(sourceUrl || '').trim().toLowerCase();
   const blob = withoutDoseAverages(`${title}\n${pageText}`).replace(/\u00a0/g, ' ').toLowerCase();
@@ -48,7 +53,7 @@ function classifyExplorePricePageContext({sourceUrl = '', pageText = '', title =
     }
     return 'comparison_article';
   }
-  if (/\baverage price\b|\bon average\b|\btypically (?:cost|range|start)\b|\bstarts? at roughly\b|\baround \d/i.test(blob)) {
+  if (looksLikeLocalizedMarketPriceEstimate(blob) || /\baverage price\b|\bon average\b|\btypically (?:cost|range|start)\b|\bstarts? at roughly\b|\baround \d/i.test(blob)) {
     return 'market_average';
   }
   if (/\/blog\/|\/news\/|\/article\/|\/insights\//i.test(url) || /\bblog\b|\bin this article\b/i.test(blob)) {
@@ -75,6 +80,7 @@ function classifyExplorePricePageContext({sourceUrl = '', pageText = '', title =
 function looksLikeExplicitClinicOwnPriceLanguage(raw) {
   const t = String(raw || '').replace(/\u00a0/g, ' ').trim();
   if (!t) return false;
+  if (/\b(?:klinigimiz\w*|hastanemiz\w*|merkezimiz\w*)\b.{0,100}\b(?:fiyat\w*|ucret\w*|botoks|dolgu\w*)\b/.test(ownershipFold(t).replace(/ı/g, 'i'))) return true;
   return /\bour (?:breast|botox|filler|rhinoplast|peel|package|price|prices)\b|\bour package starts\b|\bprice list\s*:|\bat\s+[A-Z][\w.\s-]{1,40}\s+(?:clinic|hospital|centre|center)\b|\bstarts? from\b|\bstarting (?:at|from)\b|(?:^|\s)(?:عرضنا|أسعارنا)(?:\s|$)/i.test(t);
 }
 
@@ -110,6 +116,7 @@ function exploreEvidenceIsClinicOwnedPrice({
   rawPriceText = '',
 } = {}) {
   const blob = `${rawProcedureText}\n${rawEvidence}\n${rawPriceText}`;
+  if (looksLikeLocalizedMarketPriceEstimate(rawEvidence)) return false;
   if (pageContext === 'explicit_non_owned_prices' ||
       pageContext === 'non_clinic_booking_platform' ||
       looksLikeExplicitNonOwnedPriceDisclaimer(blob) ||

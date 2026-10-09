@@ -76,6 +76,35 @@ double? _bindingAmount(String value) {
   return double.tryParse(text);
 }
 
+/// A generated rawPriceText is not evidence. The retained source excerpt must
+/// contain this amount beside its currency (including either end of a range).
+bool exploreEvidenceQuotesPrice({required String evidence, required double amount,
+  required String currency}) {
+  final code = _bindingCurrency(currency);
+  if (evidence.trim().isEmpty || code.isEmpty || amount <= 0) return false;
+  final aliases = switch (code) {
+    'EUR' => r'EUR\b|euros?\b|€', 'USD' => r'USD\b|\$', 'GBP' => r'GBP\b|£',
+    'TRY' => r'TRY\b|TL\b|₺', 'RON' => r'RON\b|lei\b',
+    'AED' => r'AED\b|dirhams?\b|درهم|د\.?إ',
+    'HUF' => r'HUF\b|Ft\b', 'BGN' => r'BGN\b|лв',
+    _ => '${RegExp.escape(code)}\\b',
+  };
+  final cur = '(?:$aliases)';
+  final quotes = cachedRegExp(
+    '(?<![\\w.,])(?:$cur\\s*($_publishedNumber)'
+    '(?:\\s*[-–—]\\s*(?:$cur\\s*)?($_publishedNumber))?|'
+    '($_publishedNumber)(?:\\s*[-–—]\\s*($_publishedNumber))?\\s*$cur)',
+    caseSensitive: false,
+  );
+  for (final match in quotes.allMatches(evidence)) {
+    for (var i = 1; i <= 4; i++) {
+      final n = _bindingAmount(match.group(i) ?? '');
+      if (n != null && (n - amount).abs() < .011) return true;
+    }
+  }
+  return false;
+}
+
 class _BoundPrice {
   const _BoundPrice(this.match, this.amount, this.currency);
   final RegExpMatch match;
