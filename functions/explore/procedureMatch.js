@@ -1,6 +1,6 @@
 'use strict';
 
-const {isValidExtractedPriceCandidate, looksLikeShopifyThemeDummyPrice,
+const {isValidExtractedPriceCandidate, botoxAmountOwnedBySkinTreatment, looksLikeShopifyThemeDummyPrice,
   looksLikeUsdQuotedOnUkHost, looksLikeRoundedMarketPriceSpread,
   looksLikeDepigmentationPeelPackage, looksLikeMultiSessionSeriesQuote, looksLikePartialRhinoplastyStarting,
   looksLikePrimaryRhinoplastyStarting, looksLikePatientAnecdotePrice,
@@ -46,6 +46,10 @@ const {looksLikeFinancingOrPaymentHeading,
 const {lockPriceEvidence, logPriceSource, logPriceAccept} = require('./evidenceLock');
 const {looksLikeInheritableAreaOnlyLabel,
   pageHasRequestedFamilyWitness} = require('./procedureRelation');
+const {looksLikeSurgicalChinTreatment,
+  looksLikeCombinedToxinSkinTreatment, looksLikeCreditLimitQuote,
+  looksLikeSpanishMarketPriceQuote, looksLikeLipHydrationWhenAugmentationRequested,
+  looksLikeNonToxinSkinTreatment} = require('./procedureScope');
 
 const FILLER_POSITIVE = [
   'filler', 'dermal filler', 'hyaluronic acid', 'acido hialuronico',
@@ -247,12 +251,16 @@ function competingFamilyRejectReason(rawLabel, requested) {
   const t = fold(rawLabel);
   const want = String(requested || '').trim().toLowerCase();
   if (looksLikeFinancingOrPaymentHeading(rawLabel)) return 'wrong_family_financing';
+  if (want === 'botox' && looksLikeNonToxinSkinTreatment(rawLabel)) return 'wrong_family_skin_mesotherapy';
 
   const lipLift = t.includes('lip lift') || t.includes('lip-lift') ||
       t.includes('liplift') || t.includes('lifting labial') ||
       t.includes('bullhorn') || t.includes('queiloplast') ||
       t.includes('cirugia labial');
   if (want === 'filler' && lipLift) return 'wrong_family_lip_lift';
+  if (want === 'filler' && looksLikeSurgicalChinTreatment(t)) {
+    return 'wrong_family_surgical_chin';
+  }
 
   // DR.CYJ Hair Filler / scalp HA / hair mesotherapy — not facial dermal filler.
   if (want === 'filler' &&
@@ -843,7 +851,7 @@ function selectEvidenceForProcedure(rows, procedure) {
 
 function exploreCachedPriceNeedsReselect({
   rawProcedureText, brand, sourceUrl, procedure,
-  rawPriceText = '', priceMin = 0, priceMax = 0, currency = '',
+  rawPriceText = '', rawEvidence = '', priceMin = 0, priceMax = 0, currency = '',
 }) {
   if (isNonLiteralClinicPriceUrl(sourceUrl)) return true;
   if (exploreUrlConflictsWithProcedure(sourceUrl, procedure)) return true;
@@ -856,6 +864,15 @@ function exploreCachedPriceNeedsReselect({
   }
   if (catalogAggregateRange({rawPriceText, priceMin, priceMax})) return true;
   const want = requestedFamily(procedure);
+  const scope = `${rawProcedureText || brand || ''}\n${rawPriceText}\n${rawEvidence}`;
+  if (looksLikeCreditLimitQuote({rawPriceText, rawEvidence: scope, priceMin})) return true;
+  if (looksLikeSpanishMarketPriceQuote(scope)) return true;
+  if (looksLikeLipHydrationWhenAugmentationRequested({procedure,
+    label: rawProcedureText || brand, evidence: scope})) return true;
+  if (want === 'botox' && botoxAmountOwnedBySkinTreatment({rawEvidence, priceMin, currency})) return true;
+  if (want === 'filler' && (looksLikeSurgicalChinTreatment(scope) ||
+      looksLikeSurgicalChinTreatment(sourceUrl))) return true;
+  if (want === 'botox' && looksLikeCombinedToxinSkinTreatment(scope)) return true;
   if (want !== 'other' &&
       (competingFamilyRejectReason(rawProcedureText || brand, want) ||
           competingFamilyRejectReason(sourceUrl, want))) {

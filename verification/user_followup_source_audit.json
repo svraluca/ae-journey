@@ -1,0 +1,1037 @@
+{
+  "checked_at_utc": "2026-10-08T15:41:51.423970+00:00",
+  "screenshot_city": "Madrid",
+  "observed_prices_are_screenshot_evidence_only": false,
+  "note": "Public official and exact marketplace pages were fetched with TLS verification on 2026-10-08. Amounts are published evidence, not personal quotes. Original stored card snippets and exact screenshot URLs were not supplied, so published amount/scope checks do not prove original extraction provenance. Preserve subtype, vial/session/area, promotional conditions, and before/current columns when comparing cards.",
+  "cards": [
+    {
+      "category": "botox",
+      "clinic": "Clínica MBA",
+      "observed_price": "350 EUR",
+      "observed_title": "Botox",
+      "verified_current_price": {
+        "treatment": "Toxina Botulínica",
+        "currency": "EUR",
+        "price_min": 350,
+        "price_max": null,
+        "unit": "session",
+        "scope": "Number of areas is not specified beside this fee",
+        "qualifier": "published"
+      },
+      "homepage_access": {
+        "requested_url": "https://clinicamba.com/",
+        "checked_at_utc": "2026-10-08T15:33:38.586577+00:00",
+        "http_status": 200,
+        "proxy_connect_status": null,
+        "curl_exit_code": 0,
+        "final_url": "https://clinicamba.com/",
+        "tls_verification_disabled": false,
+        "live_price_verified": false,
+        "body_sha256": "d1392532a11091efe334e339ee470de1e2fca9b83739fd8c289b2585eb3453a5",
+        "published_excerpts": [],
+        "page_title": "Clínica MBA – Tu salud en manos de expertos.",
+        "body_bytes": 254353
+      },
+      "source_access": {
+        "requested_url": "https://clinicamba.com/toxina-botulinica/",
+        "checked_at_utc": "2026-10-08T15:35:42.943801+00:00",
+        "http_status": 200,
+        "curl_exit_code": 0,
+        "final_url": "https://clinicamba.com/toxina-botulinica/",
+        "tls_verification_disabled": false,
+        "body_sha256": "7e9b2b382fefab25fd6aa9e71eab03d3e1bfed2d72c5ed2157750ed301dd4cba",
+        "body_path": "/tmp/ae-journey-followup-pages/d53451d01af8ad6d.html",
+        "body_bytes": 287324,
+        "page_title": "Toxina Botulínica – Clínica MBA",
+        "published_excerpts": [
+          "Precio Toxina botulínica 350 € Por sesión REJUVENECE TU PIEL Y ELIMINA LAS ARRUGAS RESERVAR Reserva tu cita para Toxina Botulínica Preguntas frecuentes sobre Toxina Botulínica ¿Dón"
+        ],
+        "live_price_verified": true
+      },
+      "observed_price_verdict": "amount_supported_per_session",
+      "published_current_prices": [
+        {
+          "treatment": "Toxina Botulínica",
+          "currency": "EUR",
+          "price_min": 350,
+          "price_max": null,
+          "unit": "session",
+          "scope": "Number of areas is not specified beside this fee",
+          "qualifier": "published"
+        }
+      ],
+      "verification_notes": "The current official treatment page publishes 350 EUR per session. It does not establish a comparable three-area basis.",
+      "exact_screenshot_source_url_supplied": false,
+      "saved_original_card_evidence_supplied": false
+    },
+    {
+      "category": "botox",
+      "clinic": "Sandra Hermida",
+      "observed_price": "510 EUR",
+      "observed_title": "NeuroSkin (Skinbooster + Neuromoduladores)",
+      "verified_current_price": null,
+      "homepage_access": {
+        "requested_url": "https://doctorasandrahermida.com/",
+        "checked_at_utc": "2026-10-08T15:33:34.185319+00:00",
+        "http_status": 200,
+        "proxy_connect_status": null,
+        "curl_exit_code": 0,
+        "final_url": "https://doctorasandrahermida.com/",
+        "tls_verification_disabled": false,
+        "live_price_verified": false,
+        "body_sha256": "9a1446e6d1259d044b68f317d0376dd185c147d5008aeecf6ba6e83bb4b17c2a",
+        "published_excerpts": [],
+        "page_title": "Clínica medicina estética Madrid | Dra. Sandra Hermida",
+        "body_bytes": 242443
+      },
+      "source_access": {
+        "requested_url": "https://doctorasandrahermida.com/precios/",
+        "checked_at_utc": "2026-10-08T15:35:41.492382+00:00",
+        "http_status": 200,
+        "curl_exit_code": 0,
+        "final_url": "https://doctorasandrahermida.com/precios/",
+        "tls_verification_disabled": false,
+        "body_sha256": "3f25767fcea3dda92ec543eb91d593fe6533d4919e0b9d861c73257068d251a4",
+        "body_path": "/tmp/ae-journey-followup-pages/b2def7e7071852c5.html",
+        "body_bytes": 122568,
+        "page_title": "Precios de Medicina Estética en Madrid | Dra. Sandra Hermida",
+        "published_excerpts": [
+          "Neuromoduladores Tercio superior completo 350€ Una zona (según valoración) 250€ Bruxismo 350€ Sonrisa gingival 230€ NeuroSkin (Skinbooster + Neuromoduladores) 510€ Calidad de Piel Mesoterapia NCTF 1 sesión 210€ 3 sesiones 600€ Bio Eyes NCTF"
+        ],
+        "live_price_verified": false
+      },
+      "observed_price_verdict": "published_combination_not_plain_botox",
+      "published_current_prices": [
+        {
+          "treatment": "Neuromoduladores",
+          "currency": "EUR",
+          "price_min": 350,
+          "price_max": null,
+          "unit": "procedure",
+          "scope": "Tercio superior completo",
+          "qualifier": "published"
+        },
+        {
+          "treatment": "Neuromoduladores",
+          "currency": "EUR",
+          "price_min": 250,
+          "price_max": null,
+          "unit": "procedure",
+          "scope": "Una zona",
+          "qualifier": "subject_to_assessment"
+        },
+        {
+          "treatment": "NeuroSkin (Skinbooster + Neuromoduladores)",
+          "currency": "EUR",
+          "price_min": 510,
+          "price_max": null,
+          "unit": "combined_treatment",
+          "scope": "Skinbooster plus neuromodulators",
+          "qualifier": "bundle"
+        }
+      ],
+      "verification_notes": "510 EUR is explicitly a mixed-treatment NeuroSkin fee. The pure neuromodulator fees are separately listed; replacing its amount without retaining basis would conflate treatments.",
+      "exact_screenshot_source_url_supplied": false,
+      "saved_original_card_evidence_supplied": false
+    },
+    {
+      "category": "botox",
+      "clinic": "Clínica Ibiza",
+      "observed_price": "190 EUR",
+      "observed_title": "Botox",
+      "verified_current_price": {
+        "treatment": "Bótox",
+        "currency": "EUR",
+        "price_min": 190,
+        "price_max": null,
+        "unit": "procedure",
+        "scope": "One area: forehead, glabella, or crow's feet",
+        "qualifier": "from"
+      },
+      "homepage_access": {
+        "requested_url": "https://www.clinicaibiza.com/",
+        "checked_at_utc": "2026-10-08T15:33:38.959960+00:00",
+        "http_status": 200,
+        "proxy_connect_status": null,
+        "curl_exit_code": 0,
+        "final_url": "https://www.clinicaibiza.com/",
+        "tls_verification_disabled": false,
+        "live_price_verified": false,
+        "body_sha256": "764f4dbf72e03ec0ee055b91cc7ad75b871aa3c9b2122122237600f6f299ea3a",
+        "published_excerpts": [],
+        "page_title": "Clínica de Medicina Estética en Madrid - Clínica Ibiza",
+        "body_bytes": 209096
+      },
+      "source_access": {
+        "requested_url": "https://www.clinicaibiza.com/tratamiento-antiarrugas/",
+        "checked_at_utc": "2026-10-08T15:35:43.610160+00:00",
+        "http_status": 200,
+        "curl_exit_code": 0,
+        "final_url": "https://www.clinicaibiza.com/precio-del-botox/",
+        "tls_verification_disabled": false,
+        "body_sha256": "0ec36975567e5c29b6c03f3f3cd520778edb48a11b7c0911a3b6bcbf4cf43d7f",
+        "body_path": "/tmp/ae-journey-followup-pages/eed5b4083a4e85e3.html",
+        "body_bytes": 263191,
+        "page_title": "Botox precio y duración Neuromoduladores - Clínica Ibiza",
+        "published_excerpts": [
+          "Desde 190€ / 1 Zona Ver precios y promociones 1ª Consulta Gratuita WhatsApp Preguntas y Respuestas de otros usuarios Ind",
+          "El precio por 1 zona (frente, entrecejo o patas de gallo) es 190€ ; por 2 zonas sube a 290€ . Los precios por zonas incluyen retoque si el paciente lo necesita en la revisión. Precio del bótox 3 zonas ¿Cuánto cuesta hacerse un tratamiento antiarrugas? El precio del bótox dependerá de las zonas donde se apliqu",
+          "Bótox 1 zona 190€ Bótox 2 zonas 290€ Bótox 3 zonas (vial completo) 350€ Bótox sonrisa gingival 350€ Bótox hiperhidrosis (consultar) Consultar Retoque extra 80€ Revisión y retoque inicial Incluida en plan Los precios indicados pueden variar; consulta con la clínica para confirmar el precio actualizad"
+        ],
+        "live_price_verified": true
+      },
+      "observed_price_verdict": "amount_supported_but_one_area_scope_required",
+      "published_current_prices": [
+        {
+          "treatment": "Bótox",
+          "currency": "EUR",
+          "price_min": 190,
+          "price_max": null,
+          "unit": "procedure",
+          "scope": "One area: forehead, glabella, or crow's feet",
+          "qualifier": "from"
+        },
+        {
+          "treatment": "Bótox",
+          "currency": "EUR",
+          "price_min": 350,
+          "price_max": null,
+          "unit": "vial",
+          "scope": "Three upper-third areas: forehead, glabella, and crow's feet",
+          "qualifier": "published"
+        }
+      ],
+      "verification_notes": "The current page distinguishes one, two, and three areas, and includes assessment, review, and an initial touch-up. 190 EUR cannot be presented as the complete three-area treatment.",
+      "exact_screenshot_source_url_supplied": false,
+      "saved_original_card_evidence_supplied": false
+    },
+    {
+      "category": "botox",
+      "clinic": "Dra. Elena Berezo",
+      "observed_price": "299 EUR",
+      "observed_title": "Botox",
+      "verified_current_price": {
+        "treatment": "Tratamiento antiarrugas",
+        "currency": "EUR",
+        "price_min": 299,
+        "price_max": null,
+        "unit": "procedure",
+        "scope": "Forehead, glabella, and crow's feet",
+        "qualifier": "from_promotional",
+        "conditions": "Page offers buy now and undergo treatment within three months; conditions apply."
+      },
+      "homepage_access": {
+        "requested_url": "https://drelenaberezo.com/",
+        "checked_at_utc": "2026-10-08T15:33:37.249310+00:00",
+        "http_status": 200,
+        "proxy_connect_status": null,
+        "curl_exit_code": 0,
+        "final_url": "https://drelenaberezo.com/",
+        "tls_verification_disabled": false,
+        "live_price_verified": false,
+        "body_sha256": "60839264c3a6c13cc5643a49a88725bcfc619669eca19b74fab7cfd6c93ea366",
+        "published_excerpts": [],
+        "page_title": "Clínica de Medicina Estética Madrid ▷ DRA ELENA BEREZO",
+        "body_bytes": 433401
+      },
+      "source_access": {
+        "requested_url": "https://drelenaberezo.com/botox",
+        "checked_at_utc": "2026-10-08T15:35:47.370950+00:00",
+        "http_status": 200,
+        "curl_exit_code": 0,
+        "final_url": "https://drelenaberezo.com/botox",
+        "tls_verification_disabled": false,
+        "body_sha256": "c5f7cfd28b0149aa507c7359f0a6a7201844c1fc44615e4e6fdab645d213b249",
+        "body_path": "/tmp/ae-journey-followup-pages/733bf06d42982058.html",
+        "body_bytes": 314243,
+        "page_title": "Botox Madrid| Botox Precio | Botox Frente I Botox antes y después",
+        "published_excerpts": [
+          "TRATAMIENTO ANTIARRUGAS 299€ COMPRAR AHORA Reserva ahora y realiza tu tratamiento hasta en 3 meses Ver Condiciones SOLICITA CITA GRATIS TRATAMIENTO ANTIARRUGAS ANTES Y DESPUÉS ¿CUAL ES EL PRECIO? TRATAMIENTO ANTIARRUGAS ",
+          "PRECIO ATENUAR ARRUGAS EXPRESIÓN Desde 299€ DURACIÓN SESIÓN De 15 a 30 minutos ANESTESIA EN EL TRATAMIENTO Crema Anestesía Local P",
+          "el precio sin promoción puede variar desde 350€ a 400€ según el periodo del año. El precio es importante para "
+        ],
+        "live_price_verified": true
+      },
+      "observed_price_verdict": "amount_supported_as_starting_promotion",
+      "published_current_prices": [
+        {
+          "treatment": "Tratamiento antiarrugas",
+          "currency": "EUR",
+          "price_min": 299,
+          "price_max": null,
+          "unit": "procedure",
+          "scope": "Forehead, glabella, and crow's feet",
+          "qualifier": "from_promotional",
+          "conditions": "Page offers buy now and undergo treatment within three months; conditions apply."
+        },
+        {
+          "treatment": "Tratamiento antiarrugas",
+          "currency": "EUR",
+          "price_min": 350,
+          "price_max": 400,
+          "unit": "procedure",
+          "scope": "Non-promotional stated range",
+          "qualifier": "range"
+        }
+      ],
+      "verification_notes": "The live page publishes 299 EUR but also labels it from/promotional, with a baseline range of 350–400 EUR. Keep the promotion and starting qualifier.",
+      "exact_screenshot_source_url_supplied": false,
+      "saved_original_card_evidence_supplied": false
+    },
+    {
+      "category": "filler",
+      "clinic": "Venusmed",
+      "observed_price": "250 EUR",
+      "observed_title": "Lip filler",
+      "verified_current_price": null,
+      "homepage_access": {
+        "requested_url": "https://venusmed.clinic/",
+        "checked_at_utc": "2026-10-08T15:33:38.518826+00:00",
+        "http_status": 200,
+        "proxy_connect_status": null,
+        "curl_exit_code": 0,
+        "final_url": "https://venusmed.clinic/",
+        "tls_verification_disabled": false,
+        "live_price_verified": false,
+        "body_sha256": "36ed27b4e1f44d667d664d1a020789d72f3e920d2f8212a903be88cf973542df",
+        "published_excerpts": [
+          "Te Regalamos 30€ Para Tu 1° Tratamiento Médico - Estético"
+        ],
+        "page_title": "Clínica de estética en Madrid y Barcelona - VenusMed",
+        "body_bytes": 278420
+      },
+      "source_access": {
+        "requested_url": "https://venusmed.clinic/services/aumento-de-labios/",
+        "checked_at_utc": "2026-10-08T15:35:49.472457+00:00",
+        "http_status": 200,
+        "curl_exit_code": 0,
+        "final_url": "https://venusmed.clinic/services/aumento-de-labios/",
+        "tls_verification_disabled": false,
+        "body_sha256": "e7b65fbda9d1a129aa600b25c4626496d482d69501be2b19bd38cf0252b32fe0",
+        "body_path": "/tmp/ae-journey-followup-pages/06465733e8fd3997.html",
+        "body_bytes": 151871,
+        "page_title": "Aumento de labios en Madrid y Barcelona - VenusMed",
+        "published_excerpts": [
+          "Aumento de labios (precio depende del producto) de 349€ a 380€ Hidratación de labios (precio depende del producto) de 250€ a 330€ Recomendaciones para el tratamiento de aumento de labios Antes del tratamiento Informa al médico sobre cualquier condición médica preexistente, alergi"
+        ],
+        "live_price_verified": false
+      },
+      "observed_price_verdict": "250_not_general_lip_augmentation_tariff",
+      "published_current_prices": [
+        {
+          "treatment": "Aumento de labios",
+          "currency": "EUR",
+          "price_min": 349,
+          "price_max": 380,
+          "unit": "procedure",
+          "scope": "Product-dependent lip augmentation",
+          "qualifier": "range"
+        },
+        {
+          "treatment": "Hidratación de labios",
+          "currency": "EUR",
+          "price_min": 250,
+          "price_max": 330,
+          "unit": "procedure",
+          "scope": "Product-dependent lip hydration",
+          "qualifier": "range"
+        },
+        {
+          "treatment": "Pack Amigas: Aumento de labios o tratamiento antiarrugas",
+          "currency": "EUR",
+          "price_min": 250,
+          "price_max": null,
+          "unit": "per_person",
+          "scope": "A friend must attend; two alternative treatments",
+          "qualifier": "conditional_promotion",
+          "conditions": "Ven con una amiga; price for each person."
+        }
+      ],
+      "verification_notes": "250 EUR appears as a conditional friends promotion and as the low end of lip hydration, while the checked augmentation page publishes 349–380 EUR. The exact stored card quote is not available, so its original path is unproven.",
+      "exact_screenshot_source_url_supplied": false,
+      "saved_original_card_evidence_supplied": false,
+      "additional_checked_sources": [
+        {
+          "requested_url": "https://venusmed.clinic/price/",
+          "checked_at_utc": "2026-10-08T15:35:46.525757+00:00",
+          "http_status": 200,
+          "curl_exit_code": 0,
+          "final_url": "https://venusmed.clinic/price/",
+          "tls_verification_disabled": false,
+          "body_sha256": "3d0a87b37d700b2248fb124e65b721b9f4bde8d2378fb3b5663dbcc8d7eb4600",
+          "body_path": "/tmp/ae-journey-followup-pages/12a9366ce506cf24.html",
+          "body_bytes": 98869,
+          "page_title": "Precios de tratamientos estéticos en Madrid y Barcelona - VenusMed",
+          "published_excerpts": [
+            "Pack Amigas (Aumento de labios o tratamiento antiarrugas) Ven con una amiga y disfruten de un precio especial. 250€ 350€ *Precio para cada persona Eliminación de Papada Define tu óvalo facial y estiliza tu perfil. 1550€ 1950€ Encuentra tu tratamiento"
+          ],
+          "live_price_verified": false
+        }
+      ]
+    },
+    {
+      "category": "filler",
+      "clinic": "IME",
+      "observed_price": "400 EUR",
+      "observed_title": "Dermal Filler",
+      "verified_current_price": null,
+      "homepage_access": {
+        "requested_url": "https://institutomedicinaestetica.com/",
+        "checked_at_utc": "2026-10-08T15:33:39.758413+00:00",
+        "http_status": 200,
+        "proxy_connect_status": null,
+        "curl_exit_code": 0,
+        "final_url": "https://institutomedicinaestetica.com/",
+        "tls_verification_disabled": false,
+        "live_price_verified": false,
+        "body_sha256": "73e1ec5a99ae15404642ccb5ce137219bf8944c0106e2edcd41f13da64121adf",
+        "published_excerpts": [
+          "Promoción anterior  350€",
+          "Ahora 299€",
+          "Antes 400€",
+          "Ahora desde 330€",
+          "Ahora desde 349€",
+          "PVP normal 450€",
+          "Ahora 399€",
+          "El precio del aumento de labios es de 400€ pero a lo largo del año existen promociones donde el precio baja a 330€"
+        ],
+        "page_title": "Clínica Medicina Estética IME ✔️ Instituto de Medicina Estética",
+        "body_bytes": 356798
+      },
+      "source_access": {
+        "requested_url": "https://institutomedicinaestetica.com/precios",
+        "checked_at_utc": "2026-10-08T15:35:51.910001+00:00",
+        "http_status": 200,
+        "curl_exit_code": 0,
+        "final_url": "https://institutomedicinaestetica.com/precios",
+        "tls_verification_disabled": false,
+        "body_sha256": "de230906e46739021178e74adbd1d8a7636ebea5b83650eb98f7bfacc29caa57",
+        "body_path": "/tmp/ae-journey-followup-pages/9e4dae8706b61369.html",
+        "body_bytes": 259333,
+        "page_title": "Precios en Medicina Estética: Los Mejores Precios",
+        "published_excerpts": [
+          "PRECIOS ÁCIDO HIALURÓNICO PRECIOS ANTES 1VIAL (AHORA) 2VIALES (AHORA) Precio Relleno de arrugas (Terc.Sup.) 400 € 349 € 649 € Precio Código de Barras 400 € 349 € 649 € Precio Aumento de Labios 400 € 330 € Precio Rinomodelación 450 € 399 € 749 € Precio Ojeras 400 € 349 € 649 € Precio Surco nasogeniano 400 € 349 € 649 € Precio Líneas Marionetas 400 € 349 € 649 € Precio Aumento de mentón 450€ 399 € 749 € Precio Marcación mandibular 450 € 399 € 749 € Precio Aumento de Pómulos 400 € 349 € 649 € Precio Rejuv de manos 800 € – € 649 € Precio Skinbooster 350€ 250 € 500 € PRECIOS MESOTERAPIA FACIAL PRECIO TRATAMIENTO PVP AHORA Precio Mesoterapia facial"
+        ],
+        "live_price_verified": false,
+        "published_table_rows": [
+          {
+            "headers": [
+              "PRECIOS",
+              "ANTES",
+              "1VIAL (AHORA)",
+              "2VIALES (AHORA)"
+            ],
+            "rows": [
+              [
+                "Precio Relleno de arrugas (Terc.Sup.)",
+                "400 €",
+                "349 €",
+                "649 €"
+              ],
+              [
+                "Precio Código de Barras",
+                "400 €",
+                "349 €",
+                "649 €"
+              ],
+              [
+                "Precio Aumento de Labios",
+                "400 €",
+                "330 €",
+                ""
+              ],
+              [
+                "Precio  Rinomodelación",
+                "450 €",
+                "399 €",
+                "749 €"
+              ],
+              [
+                "Precio  Ojeras",
+                "400 €",
+                "349 €",
+                "649 €"
+              ],
+              [
+                "Precio Surco nasogeniano",
+                "400 €",
+                "349 €",
+                "649 €"
+              ],
+              [
+                "Precio Líneas Marionetas",
+                "400 €",
+                "349 €",
+                "649 €"
+              ],
+              [
+                "Precio Aumento de mentón",
+                "450€",
+                "399 €",
+                "749 €"
+              ],
+              [
+                "Precio Marcación mandibular",
+                "450 €",
+                "399 €",
+                "749 €"
+              ],
+              [
+                "Precio Aumento de Pómulos",
+                "400 €",
+                "349 €",
+                "649 €"
+              ],
+              [
+                "Precio Rejuv de manos",
+                "800 €",
+                "– €",
+                "649 €"
+              ],
+              [
+                "Precio Skinbooster",
+                "350€",
+                "250 €",
+                "500 €"
+              ]
+            ]
+          }
+        ]
+      },
+      "observed_price_verdict": "400_is_before_price_not_current_generic_fee",
+      "published_current_prices": [
+        {
+          "treatment": "Precio Aumento de Labios",
+          "currency": "EUR",
+          "price_min": 330,
+          "price_max": null,
+          "unit": "vial",
+          "scope": "One vial; AHORA column",
+          "qualifier": "current_promotion"
+        },
+        {
+          "treatment": "Relleno de arrugas / código de barras / ojeras / surco / marionetas / pómulos",
+          "currency": "EUR",
+          "price_min": 349,
+          "price_max": null,
+          "unit": "vial",
+          "scope": "One vial; AHORA column",
+          "qualifier": "current_promotion"
+        },
+        {
+          "treatment": "Aumento de mentón / marcación mandibular",
+          "currency": "EUR",
+          "price_min": 399,
+          "price_max": null,
+          "unit": "vial",
+          "scope": "One vial; AHORA column",
+          "qualifier": "current_promotion"
+        }
+      ],
+      "verification_notes": "The official table labels 400 EUR ANTES. Current one-vial amounts depend on anatomical area; lip augmentation is 330 EUR, several other areas 349 EUR. A generic 400 EUR card loses both current-column and area binding.",
+      "exact_screenshot_source_url_supplied": false,
+      "saved_original_card_evidence_supplied": false
+    },
+    {
+      "category": "filler",
+      "clinic": "Dr. Jorge García",
+      "observed_price": "2500 EUR",
+      "observed_title": "Chin filler",
+      "verified_current_price": null,
+      "homepage_access": {
+        "requested_url": "https://clinicadrjorgegarcia.es/",
+        "checked_at_utc": "2026-10-08T15:33:39.839064+00:00",
+        "http_status": 200,
+        "proxy_connect_status": null,
+        "curl_exit_code": 0,
+        "final_url": "https://clinicadrjorgegarcia.es/",
+        "tls_verification_disabled": false,
+        "live_price_verified": false,
+        "body_sha256": "5acb600517aaa954d43381b60b9851e173b7e3b3874bdbbc0608c115e7bf96c6",
+        "published_excerpts": [
+          "Puedes financiar tu tratamiento hasta en 48 cuotas y con importes de hasta 4.000 €. Lo gestionamos contigo en la propia clínica.",
+          "Hasta 2.500€",
+          "hasta 2.000€",
+          "hasta 4.000€"
+        ],
+        "page_title": "Clínica de Medicina Estética en Madrid | Dr. Jorge García",
+        "body_bytes": 262219
+      },
+      "source_access": {
+        "requested_url": "https://clinicadrjorgegarcia.es/relleno-de-menton-con-acido-hialuronico-en-madrid/",
+        "checked_at_utc": "2026-10-08T15:35:48.497235+00:00",
+        "http_status": 200,
+        "curl_exit_code": 0,
+        "final_url": "https://clinicadrjorgegarcia.es/relleno-de-menton-con-acido-hialuronico-en-madrid/",
+        "tls_verification_disabled": false,
+        "body_sha256": "24bd49b6209028e1f7211ad8f477ac2a19303ce1b3040ff9c52c8af54fa03057",
+        "body_path": "/tmp/ae-journey-followup-pages/b6ed32c6cea83deb.html",
+        "body_bytes": 225129,
+        "page_title": "Relleno de Mentón en Madrid | Dr. Jorge García",
+        "published_excerpts": [
+          "Precio del relleno de mentón El precio del relleno de mentón puede variar según la cantidad de producto utilizada y las necesidades estéticas de cada paciente. En Clínica Dr. Jorge García ofrecemos una valoración personalizada y ajustada para garantizar los mejores resultados y la máxima seguridad. Preguntas frecuentes sobre rel",
+          "¿Cuánto cuesta el relleno de mentón? El precio depende del número de viales necesarios. Se ofrece presupuesto personalizado tras la valoración médica. Inicio Tratamientos corporales Todos los tratamientos corpo"
+        ],
+        "live_price_verified": false
+      },
+      "observed_price_verdict": "2500_not_verified_treatment_price",
+      "published_current_prices": [],
+      "verification_notes": "The checked injectable chin page publishes no numerical fee and requests an individual quote based on vial count. On the current homepage, Hasta 2.500 EUR belongs to financing providers/caps, not a chin tariff. This identifies a plausible false-price source but does not prove the unavailable original card quote.",
+      "exact_screenshot_source_url_supplied": false,
+      "saved_original_card_evidence_supplied": false,
+      "additional_checked_sources": [
+        {
+          "requested_url": "https://clinicadrjorgegarcia.es/",
+          "checked_at_utc": "2026-10-08T15:33:39.839064+00:00",
+          "http_status": 200,
+          "proxy_connect_status": null,
+          "curl_exit_code": 0,
+          "final_url": "https://clinicadrjorgegarcia.es/",
+          "tls_verification_disabled": false,
+          "live_price_verified": false,
+          "body_sha256": "5acb600517aaa954d43381b60b9851e173b7e3b3874bdbbc0608c115e7bf96c6",
+          "published_excerpts": [
+            "Que el dinero no sea un freno Puedes financiar tu tratamiento hasta en 48 cuotas y con importes de hasta 4.000 €. Lo gestionamos contigo en la propia clínica. 1. Valoración médica sin coste El Dr. Jorge García estudia tu caso. 2. Plan de tratamiento Solo si está indicado para ti. 3. Elige cómo pagarlo. Te explicamos las opciones y resolvemos tus dudas. Hasta 2.500€ hasta 2.000€ hasta 4.000€ Pregúntanos por la financiación Preguntas frecuentes sobre medicina estética ¿Qué diferencia una clínica de medicina estética de un centro de estética? Antes de elegi"
+          ],
+          "page_title": "Clínica de Medicina Estética en Madrid | Dr. Jorge García",
+          "body_bytes": 262219,
+          "body_path": "/tmp/ae-journey-followup-pages/e06a1884e50c4ccc.html",
+          "price_context": "financing_limit"
+        }
+      ],
+      "potential_false_price_candidate": {
+        "amount_eur": 2500,
+        "semantic_type": "financing_limit",
+        "literal_text": "Hasta 2.500€",
+        "original_card_provenance_proven": false
+      }
+    },
+    {
+      "category": "filler",
+      "clinic": "Cleopatra Nails",
+      "observed_price": "150 EUR",
+      "observed_title": "Aumento de labios",
+      "verified_current_price": {
+        "treatment": "Aumento de labios",
+        "currency": "EUR",
+        "price_min": 150,
+        "price_max": null,
+        "unit": "vial",
+        "scope": "One vial; marketplace OFERTAS service; mechanism not stated in this promotional row",
+        "qualifier": "promotional"
+      },
+      "homepage_access": {
+        "requested_url": "https://www.fresha.com/",
+        "checked_at_utc": "2026-10-08T15:33:38.998457+00:00",
+        "http_status": 200,
+        "proxy_connect_status": null,
+        "curl_exit_code": 0,
+        "final_url": "https://www.fresha.com/",
+        "tls_verification_disabled": false,
+        "live_price_verified": false,
+        "body_sha256": "5a961fe68b5af569763ac842c4110880a6b52bcc60316f35735e572aee20add1",
+        "published_excerpts": [],
+        "page_title": "Fresha - Instantly book salons and spas nearby",
+        "body_bytes": 1052098
+      },
+      "source_access": {
+        "requested_url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr",
+        "checked_at_utc": "2026-10-08T15:38:56.032915+00:00",
+        "http_status": 200,
+        "curl_exit_code": 0,
+        "final_url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr",
+        "tls_verification_disabled": false,
+        "body_sha256": "9f9a7b34e0d2718a7249349abb29c8277e9bbbea370b8d519cd117edcdadc406",
+        "body_path": "/tmp/ae-journey-cleopatra-nails.html",
+        "body_bytes": 731217,
+        "page_title": "Cleopatra Nails - Calle arroyo, 21  - Madrid | Fresha",
+        "live_price_verified": true,
+        "published_structured_offers": [
+          {
+            "@type": "Offer",
+            "@id": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr#offer-s:23728068",
+            "url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr/booking?offerItemId=s:23728068",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "category": "OFERTAS",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Aumento de labios",
+              "description": "INCLUYE 1 VIAL",
+              "category": "OFERTAS",
+              "provider": {
+                "@id": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr#business"
+              },
+              "additionalProperty": {
+                "@type": "PropertyValue",
+                "name": "Duration",
+                "value": "PT1H"
+              }
+            },
+            "price": 150
+          },
+          {
+            "@type": "Offer",
+            "@id": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr#offer-s:21741805",
+            "url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr/booking?offerItemId=s:21741805",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "category": "HYALURON PEN",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Aumento de labios",
+              "description": "INCLUYE 1 VIAL",
+              "category": "HYALURON PEN",
+              "provider": {
+                "@id": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr#business"
+              },
+              "additionalProperty": {
+                "@type": "PropertyValue",
+                "name": "Duration",
+                "value": "PT1H"
+              }
+            },
+            "price": 199
+          }
+        ]
+      },
+      "observed_price_verdict": "published_marketplace_offer_with_basis_limit",
+      "published_current_prices": [
+        {
+          "treatment": "Aumento de labios",
+          "currency": "EUR",
+          "price_min": 150,
+          "price_max": null,
+          "unit": "vial",
+          "scope": "One vial; marketplace OFERTAS service; mechanism not stated in this promotional row",
+          "qualifier": "promotional"
+        },
+        {
+          "treatment": "Aumento de labios",
+          "currency": "EUR",
+          "price_min": 199,
+          "price_max": null,
+          "unit": "vial",
+          "scope": "One vial; HYALURON PEN category",
+          "qualifier": "published"
+        }
+      ],
+      "verification_notes": "The exact venue was located through Fresha's public Madrid nail-salon directory. 150 EUR is a real one-vial offer. A same-title service in HYALURON PEN is 199 EUR; the title alone does not certify an injectable medical filler technique. The original screenshot offer ID is not available.",
+      "exact_screenshot_source_url_supplied": false,
+      "saved_original_card_evidence_supplied": false,
+      "venue_discovery_url": "https://www.fresha.com/lp/en/bt/nail-salons/in/es-madrid-community-of-madrid"
+    },
+    {
+      "category": "chemical_peel",
+      "clinic": "Dra. Elena Berezo",
+      "observed_price": "120 EUR",
+      "observed_title": "Chemical Peel",
+      "verified_current_price": null,
+      "homepage_access": {
+        "requested_url": "https://drelenaberezo.com/",
+        "checked_at_utc": "2026-10-08T15:33:37.249310+00:00",
+        "http_status": 200,
+        "proxy_connect_status": null,
+        "curl_exit_code": 0,
+        "final_url": "https://drelenaberezo.com/",
+        "tls_verification_disabled": false,
+        "live_price_verified": false,
+        "body_sha256": "60839264c3a6c13cc5643a49a88725bcfc619669eca19b74fab7cfd6c93ea366",
+        "published_excerpts": [],
+        "page_title": "Clínica de Medicina Estética Madrid ▷ DRA ELENA BEREZO",
+        "body_bytes": 433401
+      },
+      "source_access": {
+        "requested_url": "https://drelenaberezo.com/rejuvenecimiento-facial-sin-cirugia/peeling-quimico-facial-peeling-quimico-facial-madrid-peeling-quimico-medicina-estetica-peeling-quimico",
+        "checked_at_utc": "2026-10-08T15:35:47.281917+00:00",
+        "http_status": 200,
+        "curl_exit_code": 0,
+        "final_url": "https://drelenaberezo.com/rejuvenecimiento-facial-sin-cirugia/peeling-quimico-facial-peeling-quimico-facial-madrid-peeling-quimico-medicina-estetica-peeling-quimico",
+        "tls_verification_disabled": false,
+        "body_sha256": "03d2051d22871e0a1b71500d4a67cc2766ccfefa1bc3d708632310f8e9dcb1d4",
+        "body_path": "/tmp/ae-journey-followup-pages/1315f3c594db6926.html",
+        "body_bytes": 310238,
+        "page_title": "Peeling Químico Facial Madrid | Precio | Antes y Después",
+        "published_excerpts": [
+          "PEELING QUIMICO FACIAL PRECIO En la CLÍNICA DE MEDICINA ESTÉTICA MADRID de la doctora Elena Berezo te ofrecemos diferentes promociones de PEELING QUIMICO FACIAL a lo largo del año con descuentos muy sorprendentes. No podemos decir un precio determinado porque cada paciente es diferente y necesita un estudio previo de la piel. Además dependiendo de cada tipo de piel el paciente necesitará una cantidad de sesiones diferentes y por tanto a mas sesiones de PEELING QUIMICO FACIAL menos precio en cada una de ellas. Si de verdad estás interesado o interesada en conocer la MEJOR CLÍNICA DE MEDICINA ESTÉTICA DE MADRID no lo dudes y ven a conocernos He leído y acepto la política de privacidad TESTIMONIOS SOBRE PEELING QUÍMICO FACIAL Piel li"
+        ],
+        "live_price_verified": false
+      },
+      "observed_price_verdict": "120_unsupported_by_checked_current_page",
+      "published_current_prices": [],
+      "verification_notes": "The checked current treatment page says it cannot give a determined price because the treatment and required sessions vary. No literal 120 EUR tariff is present. This does not establish where the original screenshot amount came from.",
+      "exact_screenshot_source_url_supplied": false,
+      "saved_original_card_evidence_supplied": false
+    },
+    {
+      "category": "chemical_peel",
+      "clinic": "Sandra Hermida",
+      "observed_price": "150 EUR",
+      "observed_title": "Peeling Químico PhenTCA (1 sesión)",
+      "verified_current_price": {
+        "treatment": "Peeling Químico PhenTCA",
+        "currency": "EUR",
+        "price_min": 150,
+        "price_max": null,
+        "unit": "session",
+        "scope": "One PhenTCA chemical peel session",
+        "qualifier": "published"
+      },
+      "homepage_access": {
+        "requested_url": "https://doctorasandrahermida.com/",
+        "checked_at_utc": "2026-10-08T15:33:34.185319+00:00",
+        "http_status": 200,
+        "proxy_connect_status": null,
+        "curl_exit_code": 0,
+        "final_url": "https://doctorasandrahermida.com/",
+        "tls_verification_disabled": false,
+        "live_price_verified": false,
+        "body_sha256": "9a1446e6d1259d044b68f317d0376dd185c147d5008aeecf6ba6e83bb4b17c2a",
+        "published_excerpts": [],
+        "page_title": "Clínica medicina estética Madrid | Dra. Sandra Hermida",
+        "body_bytes": 242443
+      },
+      "source_access": {
+        "requested_url": "https://doctorasandrahermida.com/precios/",
+        "checked_at_utc": "2026-10-08T15:35:41.492382+00:00",
+        "http_status": 200,
+        "curl_exit_code": 0,
+        "final_url": "https://doctorasandrahermida.com/precios/",
+        "tls_verification_disabled": false,
+        "body_sha256": "3f25767fcea3dda92ec543eb91d593fe6533d4919e0b9d861c73257068d251a4",
+        "body_path": "/tmp/ae-journey-followup-pages/b2def7e7071852c5.html",
+        "body_bytes": 122568,
+        "page_title": "Precios de Medicina Estética en Madrid | Dra. Sandra Hermida",
+        "published_excerpts": [
+          "Peeling Químico Nanomelan (1 sesión) 150€ Peeling Químico PhenTCA (1 sesión) 150€ \"Recupera tu piel\" facial (Skinbooster, NCTF, Bio Eyes) 540€ \"Recupera tu piel\" facial y cuello (Skinbooster, NCTF, Bi"
+        ],
+        "live_price_verified": true
+      },
+      "observed_price_verdict": "amount_supported_for_named_single_session",
+      "published_current_prices": [
+        {
+          "treatment": "Peeling Químico PhenTCA",
+          "currency": "EUR",
+          "price_min": 150,
+          "price_max": null,
+          "unit": "session",
+          "scope": "One PhenTCA chemical peel session",
+          "qualifier": "published"
+        }
+      ],
+      "verification_notes": "150 EUR matches the named one-session PhenTCA row. A different row also lists Nanomelan at 150 EUR; preserve the selected subtype.",
+      "exact_screenshot_source_url_supplied": false,
+      "saved_original_card_evidence_supplied": false
+    },
+    {
+      "category": "chemical_peel",
+      "clinic": "IME",
+      "observed_price": "120 EUR",
+      "observed_title": "Chemical Peel",
+      "verified_current_price": {
+        "treatment": "Peeling químico",
+        "currency": "EUR",
+        "price_min": 120,
+        "price_max": null,
+        "unit": "session",
+        "scope": "One standard session; PVP column",
+        "qualifier": "published"
+      },
+      "homepage_access": {
+        "requested_url": "https://institutomedicinaestetica.com/",
+        "checked_at_utc": "2026-10-08T15:33:39.758413+00:00",
+        "http_status": 200,
+        "proxy_connect_status": null,
+        "curl_exit_code": 0,
+        "final_url": "https://institutomedicinaestetica.com/",
+        "tls_verification_disabled": false,
+        "live_price_verified": false,
+        "body_sha256": "73e1ec5a99ae15404642ccb5ce137219bf8944c0106e2edcd41f13da64121adf",
+        "published_excerpts": [
+          "Promoción anterior  350€",
+          "Ahora 299€",
+          "Antes 400€",
+          "Ahora desde 330€",
+          "Ahora desde 349€",
+          "PVP normal 450€",
+          "Ahora 399€",
+          "El precio del aumento de labios es de 400€ pero a lo largo del año existen promociones donde el precio baja a 330€"
+        ],
+        "page_title": "Clínica Medicina Estética IME ✔️ Instituto de Medicina Estética",
+        "body_bytes": 356798
+      },
+      "source_access": {
+        "requested_url": "https://institutomedicinaestetica.com/precios",
+        "checked_at_utc": "2026-10-08T15:35:51.910001+00:00",
+        "http_status": 200,
+        "curl_exit_code": 0,
+        "final_url": "https://institutomedicinaestetica.com/precios",
+        "tls_verification_disabled": false,
+        "body_sha256": "de230906e46739021178e74adbd1d8a7636ebea5b83650eb98f7bfacc29caa57",
+        "body_path": "/tmp/ae-journey-followup-pages/9e4dae8706b61369.html",
+        "body_bytes": 259333,
+        "page_title": "Precios en Medicina Estética: Los Mejores Precios",
+        "published_excerpts": [
+          "PRECIOS PEELING QUÍMICO DERMAPEN PRECIOS DESPIGMENTANTE OJERAS PRECIOS POLINUCLEÓTIDOS PRECIOS ENZIMAS RECOMBINANTES INYECTADAS PRECIOS ENZIMAS RECOMBINANTES DERMAPEN PRECIOS TRATAMIENTO CORPORAL COSTES PRP FACIAL/CAPILAR PRECIOS HILOS TENSORES PRECIOS INDUCTOR COLÁGENO COSTES ÁCIDO HIALURÓNICO GLÚTEOS PRECIOS ELLANSÉ "
+        ],
+        "live_price_verified": true,
+        "published_table_rows": [
+          {
+            "headers": [
+              "PRECIOS",
+              "PVP",
+              "Fenol",
+              "Corporal/Blanq"
+            ],
+            "rows": [
+              [
+                "Precio Peeling químico (1sesión)",
+                "120€",
+                "180€",
+                "–"
+              ],
+              [
+                "Precio Peeling químico (2sesiones)",
+                "220€",
+                "330€",
+                "–"
+              ],
+              [
+                "Precio Peeling químico (3sesiones)",
+                "300€",
+                "450€",
+                "–"
+              ],
+              [
+                "Precio Peeling químico (4sesiones)",
+                "360€",
+                "520€",
+                "640€"
+              ]
+            ]
+          }
+        ]
+      },
+      "observed_price_verdict": "amount_supported_for_standard_single_session",
+      "published_current_prices": [
+        {
+          "treatment": "Peeling químico",
+          "currency": "EUR",
+          "price_min": 120,
+          "price_max": null,
+          "unit": "session",
+          "scope": "One standard session; PVP column",
+          "qualifier": "published"
+        },
+        {
+          "treatment": "Peeling químico Fenol",
+          "currency": "EUR",
+          "price_min": 180,
+          "price_max": null,
+          "unit": "session",
+          "scope": "One phenol session; Fenol column",
+          "qualifier": "published"
+        }
+      ],
+      "verification_notes": "The literal PVP fee is 120 EUR for one standard session, not the separate 180 EUR phenol column or a multi-session bundle.",
+      "exact_screenshot_source_url_supplied": false,
+      "saved_original_card_evidence_supplied": false
+    },
+    {
+      "category": "chemical_peel",
+      "clinic": "De Felipe Madrid",
+      "observed_price": "50 EUR",
+      "observed_title": "Peeling de ácido salicílico",
+      "source_access": {
+        "requested_url": "https://madrid.defelipe.com/precios/",
+        "checked_at_utc": "2026-10-08T15:33:42.017524+00:00",
+        "http_status": 200,
+        "proxy_connect_status": null,
+        "curl_exit_code": 0,
+        "final_url": "https://madrid.defelipe.com/precios/",
+        "tls_verification_disabled": false,
+        "live_price_verified": true,
+        "body_sha256": "d9d47e16d18a8cac1aee84d855a24df4d73f7ce4460eaa4bb98b98df57de4de7",
+        "published_excerpts": [
+          "Peeling químico Peelings superficiales 1 sesión Peeling de ácido salicílico 10-25% 50€ 1 sesión Glow Peel (ácido glicólico 20%) 50€ PEELINGS DE PROFUNDIDAD MEDIA 1 sesión Melanstop Tranex 150€ 1 sesión Ácido glicólico 40% 150€ 1 sesión Mesopeel periocular 150€ PEELINGS PROFUNDOS 1 sesión Fenol + TCA 250€ 1 sesión Melanstop Touch 250€ Programa peeling De Feli"
+        ],
+        "page_title": "Lista de Precios Madrid - Clínica Dermatológica De Felipe",
+        "body_bytes": 820219,
+        "body_path": "/tmp/ae-journey-followup-pages/82ba1b7e0b94123a.html"
+      },
+      "verified_current_price": {
+        "treatment": "Peeling de ácido salicílico 10-25%",
+        "currency": "EUR",
+        "price_min": 50,
+        "price_max": null,
+        "unit": "session",
+        "scope": "One superficial salicylic acid peel session",
+        "qualifier": "published"
+      },
+      "observed_price_verdict": "amount_supported_for_named_single_session",
+      "published_current_prices": [
+        {
+          "treatment": "Peeling de ácido salicílico 10-25%",
+          "currency": "EUR",
+          "price_min": 50,
+          "price_max": null,
+          "unit": "session",
+          "scope": "One superficial salicylic acid peel session",
+          "qualifier": "published"
+        }
+      ],
+      "verification_notes": "The current Madrid branch tariff explicitly lists one session of salicylic acid 10–25% at 50 EUR. It is not a phenol/deep-peel price.",
+      "exact_screenshot_source_url_supplied": false,
+      "saved_original_card_evidence_supplied": false
+    }
+  ],
+  "dra_olmo": {
+    "source_url": "https://clinicadraolmo.com/botox-en-valencia/",
+    "fetch_result": "HTTP 200 via TLS-verified curl, saved during this follow-up",
+    "body_sha256": "43a5663d528fd912a5689c8e46240d95bf0f51f345d8f738d71942bca98710d7",
+    "exact_published_excerpt": "Depende del número de viales a infiltrar al paciente pero suele rondar los 300€.",
+    "published_amount_eur": 300,
+    "qualification": "approximate; depends on number of vials",
+    "old_card_amount_provenance_identified": false,
+    "page_is_synthetic_fixture": false,
+    "checked_at_utc": "2026-10-08T15:12:09.917439+00:00",
+    "body_path": "/tmp/ae-journey-olmo-botox.html",
+    "verified_as_fixed_fee": false,
+    "verified_current_price": {
+      "amount_eur": 300,
+      "qualifier": "approximate",
+      "basis": "depends on number of vials; no fixed vial count or area scope stated"
+    }
+  },
+  "observed_price_origin": "User-supplied Madrid screenshots; source audit independently checks published prices and basis.",
+  "method": {
+    "paid_discovery_used": false,
+    "credentials_printed_or_saved": false,
+    "network_settings_changed_by_this_audit": false,
+    "live_pages_are_synthetic_fixtures": false,
+    "fetched_html_location": "/tmp/ae-journey-followup-pages and /tmp/ae-journey-cleopatra-nails.html",
+    "local_job_db_read_only_counts": {
+      "jobs": 0,
+      "client_focus": 0,
+      "source_checks": 0
+    }
+  },
+  "summary": {
+    "unsupported_or_wrong_scope_cards": [
+      "Sandra Hermida Botox 510 EUR: combined Skinbooster+neuromodulators",
+      "Venusmed lip filler 250 EUR: friends conditional offer or hydration, not general augmentation tariff",
+      "IME generic filler 400 EUR: before column and missing anatomical area",
+      "Dr. Jorge García chin filler 2500 EUR: no fee on chin page; same amount is a financing cap on homepage",
+      "Dra. Elena Berezo peel 120 EUR: no matching fee on checked current page"
+    ],
+    "qualified_published_amounts": [
+      "Clínica MBA Botox 350 EUR per session",
+      "Clínica Ibiza Botox 190 EUR for one area",
+      "Dra. Elena Berezo Botox from/promotional 299 EUR",
+      "Cleopatra Nails lip augmentation promotional 150 EUR for one vial; mechanism context limited",
+      "Sandra Hermida PhenTCA peel 150 EUR for one session",
+      "IME standard peel 120 EUR for one session",
+      "De Felipe Madrid salicylic10–25% peel50EUR for one session"
+    ]
+  }
+}

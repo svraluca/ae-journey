@@ -766,6 +766,9 @@ Return JSON only.
 
   /// Last successful [buildComparison] result per memo key (instant UI paint).
   final Map<String, OpenAIComparisonResult> _comparisonMemoryCache = {};
+  final Map<String, ({OpenAIComparisonResult source, String revision,
+      DateTime validatedAt, OpenAIComparisonResult verified})> _verifiedTabSnapshots = {};
+  final Map<String, DateTime> _verifiedTabRefreshAt = {};
   final Map<String, int> _comparisonDisplayEpoch = {};
   final Map<String, DateTime> _placesIdentityMissesRetried = {};
 
@@ -1825,6 +1828,68 @@ Return JSON only.
     final cacheKey =
         'comparison|$kExploreComparisonCacheRevision|$queryOrSelection|$localitySeg|$mode';
     final countryCode = _countryCodeForCity(city);
+    // A tab return is a read of the displayed snapshot. Collection already has
+    // its own durable job; do not rehydrate every Firestore store or await it
+    // merely because the comparison memo's ten-minute clock has expired.
+    if (!forceRefresh && searchNewGoogle && !backgroundRefresh) {
+      final memo = _verifiedTabSnapshots[cacheKey];
+      final unchanged = memo != null &&
+          memo.revision == kExplorePriceExtractRevision &&
+          identical(memo.source, _comparisonMemoryCache[cacheKey]);
+      final retained = unchanged ? memo.verified : getCachedComparison(cacheKey);
+      if (retained != null &&
+          retained.city.trim().toLowerCase() == city.trim().toLowerCase()) {
+        final usable = unchanged ? retained.clinics : _pricedExploreClinics(
+          retained.clinics, procedure: queryOrSelection,
+        ).where((c) => exploreClinicFitsSearchCity(c, city)).toList();
+        if (usable.length >= kExploreCompareMaxClinics) {
+          if (claimLiveSearch) {
+            _claimLiveCompareTopUp(cacheKey, label: '$categoryPill · $city');
+          }
+          final restored = retained.copyWith(
+            clinics: List<OpenAIClinic>.unmodifiable(
+              usable.take(kExploreCompareMaxClinics),
+            ),
+          );
+          final now = DateTime.now();
+          final validatedAt = unchanged ? memo.validatedAt : now;
+          _comparisonMemoryCache[cacheKey] = restored;
+          _verifiedTabSnapshots[cacheKey] = (
+            source: restored, revision: kExplorePriceExtractRevision,
+            validatedAt: validatedAt, verified: restored,
+          );
+          _comparisonGoogleMixComplete.add(cacheKey);
+          onProgress?.call(restored);
+          reportCompareDisplayCount(cacheKey, restored.clinics.length);
+          final builtAt = _comparisonCacheBuiltAt[cacheKey] ?? validatedAt;
+          final sourceNeedsRefresh = restored.clinics.any((c) {
+            final checked = c.lastCheckedAt ?? c.priceVerifiedAt;
+            final ttl = exploreCuratedPriceIsTrusted(c)
+                ? kExploreCuratedStaleAfter : kExploreVerifiedPriceTtl;
+            return checked == null || now.difference(checked) > ttl;
+          });
+          final priorRefresh = _verifiedTabRefreshAt[cacheKey];
+          if ((sourceNeedsRefresh || now.difference(builtAt) > _kComparisonCacheTtl ||
+              now.difference(validatedAt) > _kComparisonCacheTtl) &&
+              (priorRefresh == null || now.difference(priorRefresh) > _kComparisonCacheTtl)) {
+            _verifiedTabRefreshAt[cacheKey] = now;
+            Timer.run(() {
+              unawaited(buildComparison(
+                queryOrSelection: queryOrSelection, city: city, mode: mode,
+                categoryPill: categoryPill, backgroundRefresh: true,
+                claimLiveSearch: false, joinInFlight: false,
+                onProgress: onProgress,
+              ).catchError((Object error) {
+                debugPrint('[GP] Snapshot refresh failed · $error');
+                return restored;
+              }));
+            });
+          }
+          logCompareTiming('memory-verified');
+          return restored;
+        }
+      }
+    }
     if (forceRefresh) {
       _comparisonDisplayEpoch[cacheKey] = (_comparisonDisplayEpoch[cacheKey] ?? 0) + 1;
       _comparisonMemoryCache.remove(cacheKey);
@@ -4823,6 +4888,9 @@ Return JSON only.
     required String procedure,
     required String pill,
   }) async {
+    // This operation only supplies ratings. Without a Places key there is
+    // nothing to recover; probing clinic websites cannot produce a rating.
+    if (!_places.isConfigured) return base;
     final unrated = [
       for (final c in base.clinics)
         if (c.rating <= 0) c,
@@ -4892,10 +4960,15 @@ Return JSON only.
     required List<OpenAIClinic> clinics,
     required String city,
   }) {
+    if (!_places.isConfigured) return false;
     for (final c in clinics) {
       if (c.rating > 0) continue;
       final k = '${city.trim().toLowerCase()}|${c.name.trim().toLowerCase()}';
       if (_ratingBackfillClinicKeys.contains(k)) continue;
+      final miss = ExplorePlaceCacheStore.instance.peekMemory(
+        city: city, clinicName: c.name,
+      );
+      if (miss != null && !miss.matched) continue;
       return true;
     }
     return false;
@@ -10680,7 +10753,10 @@ Return JSON only.
     // Parse pending pages off the frame thread first; the sync readers below
     // (which also scan every cached page on this clinic's host) then hit the
     // cache instead of parsing a 175k-char menu on the UI isolate.
-    await ExploreHtmlPriceParseCache.instance.warmAllPending();
+    final urls = _deterministicEvidenceUrls(
+      clinic: clinic, preferredUrl: preferredUrl, extraUrls: extraUrls,
+    );
+    await ExploreHtmlPriceParseCache.instance.warmEvidence(urls);
     final sync = _clinicFromDeterministicEvidenceSync(
       clinic: clinic,
       procedure: procedure,
@@ -10691,10 +10767,6 @@ Return JSON only.
     );
     if (sync != null) return sync;
     // Retry with AI relation only when the best row was relation-ambiguous.
-    final urls = <String>{
-      if (preferredUrl.trim().isNotEmpty) preferredUrl.trim(),
-      ...extraUrls.where((u) => u.trim().isNotEmpty),
-    };
     final rows = <ExtractedPriceEvidence>[
       for (final url in urls)
         ...ExploreHtmlPriceParseCache.instance.evidenceFor(url),
@@ -10742,23 +10814,9 @@ Return JSON only.
     String city = '',
     bool allowAmbiguousForAi = false,
   }) {
-    final urls = <String>{
-      if (preferredUrl.trim().isNotEmpty) preferredUrl.trim(),
-      ...extraUrls.where((u) => u.trim().isNotEmpty),
-    };
-    final host = _extractDomain(clinic.area);
-    if (host.isNotEmpty) {
-      final hostKey = _stripWww(_normalizeProbeHost(host));
-      urls.addAll(
-        ExploreHtmlPriceParseCache.instance.htmlByUrl.keys.where((u) {
-          final uh = _stripWww(_normalizeProbeHost(u));
-          return uh.isNotEmpty &&
-              hostKey.isNotEmpty &&
-              (_hostsSameDomainOrSubdomain(uh, hostKey) ||
-                  _hostsSameDomainOrSubdomain(hostKey, uh));
-        }),
-      );
-    }
+    final urls = _deterministicEvidenceUrls(
+      clinic: clinic, preferredUrl: preferredUrl, extraUrls: extraUrls,
+    );
     if (urls.isEmpty) return null;
     final rows = <ExtractedPriceEvidence>[
       for (final url in urls)
@@ -10804,6 +10862,15 @@ Return JSON only.
       relation: lock.relation!,
     );
   }
+
+  List<String> _deterministicEvidenceUrls({
+    required OpenAIClinic clinic,
+    required String preferredUrl,
+    required Iterable<String> extraUrls,
+  }) => ExploreHtmlPriceParseCache.instance.urlsForHost(
+    host: _extractDomain(clinic.area),
+    sourceUrls: [preferredUrl, ...extraUrls],
+  );
 
   OpenAIClinic? _finalizeLockedEvidence({
     required OpenAIClinic clinic,
@@ -18822,6 +18889,7 @@ bool isJustifiedProcedurePrice(OpenAIClinic c, {String? procedure}) {
         currency: c.currency,
         extractionMethod: c.extractionMethod,
         rawEvidence: c.priceEvidenceText,
+        rawProcedureText: c.rawProcedureText,
         procedure: proc,
         sourceUrl: c.priceSourceUrl,
         priceMax: c.priceMax,
@@ -21059,7 +21127,9 @@ OpenAIClinic? _clinicFromDiscoveryToolRow(
   final qualifier = row.qualifier.toLowerCase();
   final perUnit = row.procedureCanonical == 'botox' &&
       looksLikeBotoxPerUnitQuote('${row.rawProcedureText} ${row.rawEvidence}');
-  final priceType = qualifier == 'from'
+  final priceType = qualifier == 'approximate'
+      ? 'approximate'
+      : qualifier == 'from'
       ? 'from'
       : (max > row.priceMin + 0.5 ? 'range' : perUnit ? 'per_unit' : 'exact');
   final volume = exploreInjectableVolumeMl(row.rawProcedureText);
@@ -21167,6 +21237,7 @@ bool explorePriceIsVerified(OpenAIClinic c) {
     currency: c.currency,
     extractionMethod: c.extractionMethod,
     rawEvidence: c.priceEvidenceText,
+    rawProcedureText: c.rawProcedureText,
     procedure: c.brand,
     sourceUrl: c.priceSourceUrl,
     priceMax: c.priceMax,
@@ -21965,6 +22036,9 @@ class OpenAIClinic {
           extractionMethod: extractionMethod,
           rawEvidence: sanitizeUtf16(
             (json['price_evidence_text'] as String?)?.trim() ?? '',
+          ),
+          rawProcedureText: sanitizeUtf16(
+            (json['raw_procedure_text'] as String?)?.trim() ?? '',
           ),
           procedure: _readClinicProcedureName(json),
           sourceUrl: sourceUrl,

@@ -93,6 +93,20 @@ void main() {
       priceMin:19999,currency:'AED'),contains('With implants · 150 – 300 cc'));
   });
 
+  test('breast label omits unknown method but retains published implant detail', () {
+    final generic = fixtures.clinic(canonical: 'breast_augmentation',
+      procedure: 'Breast augmentation', rawTitle: 'Breast augmentation',
+      amount: 6400, currency: 'EUR', city: 'Madrid');
+    expect(exploreCardProcedureLabel(generic, selectedPill: 'Boob job'),
+      'Breast augmentation');
+    expect(exploreBreastProcedureDetail(rawProcedureText: 'Breast augmentation'),
+      'Method not specified');
+    final implants = generic.copyWith(rawProcedureText: 'Breast augmentation with implants',
+      priceEvidenceText: 'Breast augmentation with implants | 6400 EUR');
+    expect(exploreCardProcedureLabel(implants, selectedPill: 'Boob job'),
+      'Breast augmentation · With implants');
+  });
+
   test('display priority uses client accepted count and retries a rejected acknowledgement', () async {
     SharedPreferences.setMockInitialValues({});
     final reports=<Map>[];

@@ -3,8 +3,11 @@
 const {looksLikeCityMarketPricingGuideUrl,
   looksLikeTreatmentFinanceUrl,
   looksLikePriceMenuHeadingOnly,
-  looksLikeEnergyOrDeviceTreatment} = require('./priceSanity');
+  looksLikeEnergyOrDeviceTreatment,
+  looksLikePartialRhinoplastyStarting} = require('./priceSanity');
 const {looksLikeMarketEstimateDirectoryUrl} = require('./identity');
+const {looksLikeSurgicalChinTreatment, looksLikeSpanishMarketPriceQuote,
+  looksLikeLipHydrationWhenAugmentationRequested, looksLikeNonToxinSkinTreatment} = require('./procedureScope');
 
 /**
  * Semantic procedureRelation gate (mirrors Dart explore_procedure_relation.dart).
@@ -112,7 +115,8 @@ function detectSignals(raw) {
         /\b\d+(?:[.,]\d+)?\s*ml\b/i.test(t));
   const skin = hasAny(t, [
     'profhilo', 'sculptra', 'skin booster', 'skinbooster', 'rejuran', 'jalupro',
-    'nucleofill', 'stylage hydro', 'hydromax', 'biorevital',
+    'nucleofill', 'stylage hydro', 'hydromax', 'biorevital', 'nctf', 'filorga',
+    'mesoterapia', 'mesotherapy',
   ]);
   const prp = hasAny(t, ['prp', 'platelet rich', 'vampire facial']);
   const hydrafacial = hasAny(t, ['hydrafacial', 'hydra facial']);
@@ -249,6 +253,25 @@ function classifyProcedureRelation({
   const folded = fold(blob);
   const urlFolded = fold(urlPathText(sourceUrl));
 
+  if (looksLikeSpanishMarketPriceQuote(blob)) {
+    return {relation: RELATIONS.market, reason: 'spanish_market_price_quote',
+      eligible: false, logToken: 'market_information'};
+  }
+  if (looksLikeLipHydrationWhenAugmentationRequested({procedure: requestedProcedure, label, evidence})) {
+    return {relation: RELATIONS.different, reason: 'lip_hydration_not_augmentation',
+      eligible: false, logToken: 'different_procedure'};
+  }
+  if (want === 'botox' && looksLikeNonToxinSkinTreatment(label)) {
+    return {relation: RELATIONS.different, reason: 'skin_mesotherapy_not_toxin',
+      eligible: false, logToken: 'different_procedure'};
+  }
+
+  if (want === 'filler' && (looksLikeSurgicalChinTreatment(blob) ||
+      looksLikeSurgicalChinTreatment(urlFolded))) {
+    return {relation: RELATIONS.different, reason: 'surgical_chin_not_filler',
+      eligible: false, logToken: 'different_procedure'};
+  }
+
   if (looksLikeFinancingHeading(label)) {
     return {relation: RELATIONS.ambiguous, reason: 'financing_heading', eligible: false, logToken: 'ambiguous'};
   }
@@ -317,8 +340,7 @@ function classifyProcedureRelation({
     return {relation: RELATIONS.addOn, reason: 'botox_addon_or_targeted', eligible: false, logToken: 'add_on'};
   }
   if (want === 'rhinoplasty' &&
-      /\btip\s+rhino|\brhinoplasty\s+tip|\bnose\s+tip|\btip-only|\balarplasty|\balar\s+base|revision\s+rhino|\bsecondary\s+rhino/i.test(String(label || '')) &&
-      !/\bprimary\b|\bopen rhino|\bclosed rhino/i.test(String(label || ''))) {
+      looksLikePartialRhinoplastyStarting(label)) {
     return {relation: RELATIONS.different, reason: 'rhino_tip_or_partial', eligible: false, logToken: 'different_procedure'};
   }
 

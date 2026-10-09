@@ -185,7 +185,9 @@ function clinicJson({place, evidence, city}) {
     priceMin: evidence.priceMin,
     priceMax: evidence.priceMax,
     price_gbp: Math.round(evidence.priceMin),
-    price_label: formatLabel(evidence.priceMin, evidence.currency),
+    price_label: priceType === 'approximate'
+      ? formatLabel(evidence.priceMin, evidence.currency).replace(/^from /, 'approximately ')
+      : formatLabel(evidence.priceMin, evidence.currency),
     currency: evidence.currency || '',
     currency_confirmed: Boolean(String(evidence.currency || '').trim()),
     brand: evidence.rawProcedureText,

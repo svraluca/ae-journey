@@ -1,12 +1,15 @@
 """Read-only index and four-card API regressions with real local job state."""
+import asyncio
+import sqlite3
 import tempfile
+import threading
 from pathlib import Path
 import unittest
 from unittest.mock import AsyncMock, patch
 
 from pydantic import ValidationError
 from price_fixtures import e, quote
-from explore_index_jobs import IndexJobs, MarketRequest
+from explore_index_jobs import IndexJobs, JobStore, MarketRequest
 
 
 class IndexPriceTrust(unittest.IsolatedAsyncioTestCase):
@@ -50,3 +53,63 @@ class FourCardRequests(unittest.TestCase):
                 for invalid in [0, 5, 8]:
                     with self.assertRaises(ValidationError):
                         model(city='Valencia', procedure='botox', display_limit=invalid)
+
+
+class SQLiteResponsiveness(unittest.IsolatedAsyncioTestCase):
+    async def assert_loop_survives_sqlite_lock(self, operation, path):
+        # A real competing SQLite transaction keeps the operation waiting.
+        # The lock holder releases immediately after an event-loop heartbeat;
+        # its timeout bounds this test when the old code blocks that heartbeat.
+        lock = sqlite3.connect(path, check_same_thread=False)
+        self.addCleanup(lock.close)
+        lock.execute('BEGIN EXCLUSIVE')
+        heartbeat = threading.Event()
+        observations = []
+
+        def release_lock():
+            observations.append(heartbeat.wait(timeout=0.5))
+            lock.rollback()
+
+        holder = threading.Thread(target=release_lock)
+        holder.start()
+        timer = asyncio.get_running_loop().call_later(0.02, heartbeat.set)
+        try:
+            result = await operation()
+        finally:
+            timer.cancel()
+            heartbeat.set()
+            await asyncio.to_thread(holder.join)
+        self.assertEqual(observations, [True], 'SQLite blocked other API requests')
+        return result
+
+    async def test_index_quarantine_lookup_does_not_block_the_api_loop(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        service = IndexJobs(e, str(Path(directory.name) / 'jobs.sqlite3'))
+        service._store = JobStore(service.path)
+        req = MarketRequest(city='Madrid', procedure='botox', country_code='ES')
+        row = quote(city='Madrid')
+        with patch.object(e, 'firestore_load_results', new=AsyncMock(return_value=[row])), \
+                patch.object(e, 'firestore_enabled', return_value=True):
+            indexed = await self.assert_loop_survives_sqlite_lock(
+                lambda: service.index(req), service.path)
+        self.assertEqual(indexed['verified_count'], 1)
+
+    async def test_first_queue_initialization_does_not_block_the_api_loop(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        path = str(Path(directory.name) / 'jobs.sqlite3')
+        JobStore(path)
+        service = IndexJobs(e, path)
+        req = MarketRequest(city='Madrid', procedure='botox', country_code='ES')
+        self.addAsyncCleanup(service.stop)
+        async def hold_worker():
+            # Queue acceptance is under test; discovery must stay offline.
+            await asyncio.Event().wait()
+
+        with patch.object(service, 'run', side_effect=hold_worker):
+            queued = await self.assert_loop_survives_sqlite_lock(
+                lambda: service.enqueue(req), path)
+        self.assertTrue(queued['enqueued'])
+        self.assertEqual(queued['status'], 'queued')
+        await service.stop()

@@ -16,9 +16,15 @@ import 'package:http/http.dart' as http;
 /// Set `GOOGLE_PLACES_API_KEY` (or pass it explicitly) in `.env`.
 /// Without a key the service is a no-op: methods return `null`.
 class GooglePlacesService {
-  GooglePlacesService({http.Client? client, String? apiKey})
+  GooglePlacesService({http.Client? client, String? apiKey,
+    DateTime Function()? now})
     : _client = client ?? http.Client(),
+      _now = now ?? DateTime.now,
       _apiKey = apiKey ?? _readKey();
+
+  final DateTime Function() _now;
+  static final Map<String, DateTime> _unratedCacheUntil = {};
+  static const _unratedCacheTtl = Duration(minutes: 2);
 
   static const _host = 'places.googleapis.com';
 
@@ -350,8 +356,15 @@ class GooglePlacesService {
     required String city,
     bool includeReviews = false,
   }) {
+    if (!isConfigured) return Future.value(null);
     if (_quotaCircuitOpen) return Future.value(null);
-    final key = 'places|$clinicName|$city|${includeReviews ? 'full' : 'lite'}';
+    final key = 'places|${clinicName.trim().toLowerCase()}|'
+        '${city.trim().toLowerCase()}|${includeReviews ? 'full' : 'lite'}';
+    final expires = _unratedCacheUntil[key];
+    if (expires != null && !_now().isBefore(expires)) {
+      _unratedCacheUntil.remove(key);
+      _cache.remove(key);
+    }
     final hit = _cache[key];
     if (hit != null) return hit;
     if (!tryAcquirePlacesHttpPermit()) return Future.value(null);
@@ -365,9 +378,17 @@ class GooglePlacesService {
           city: city,
           includeReviews: includeReviews,
         );
-        if (value == null || value.rating <= 0) _cache.remove(key);
+        if (value == null || value.rating <= 0) {
+          // Genuine misses / businesses without ratings are not transient
+          // HTTP failures. Repeated tab builds should not immediately retry
+          // the same paid lookup; allow recovery after a short cooldown.
+          _unratedCacheUntil[key] = _now().add(_unratedCacheTtl);
+        } else {
+          _unratedCacheUntil.remove(key);
+        }
         return value;
       } catch (_) {
+        _unratedCacheUntil.remove(key);
         _cache.remove(key);
         rethrow;
       } finally {

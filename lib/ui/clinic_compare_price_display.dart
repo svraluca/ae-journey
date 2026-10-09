@@ -1149,6 +1149,21 @@ String clinicCompareProcedurePriceDisplay(OpenAIClinic c, {String? procedure}) {
   if (!explorePriceIsVerified(c)) return '';
 
   if (c.priceMin > 0) {
+    if (c.priceType.trim().toLowerCase() == 'approximate' &&
+        isJustifiedProcedurePrice(c, procedure: procedure)) {
+      final amount = c.priceMax > c.priceMin + 0.5
+          ? _formatPublishedCardRange(c.priceMin, c.priceMax, c.currency)
+          : _formatExactComparePrice(c.priceMin, c.currency);
+      return _withHospitalFeesOnlySuffix(
+        _withHairGraftAllowanceSuffix(
+          _ensurePriceUnitSuffix('approx. $amount', c),
+          c,
+          procedure,
+        ),
+        c,
+        procedure,
+      );
+    }
     if (looksLikeBotoxPerUnitPrice(c, procedure: procedure)) {
       return formatBotoxPerUnitPriceLabel(c.priceMin, c.currency);
     }

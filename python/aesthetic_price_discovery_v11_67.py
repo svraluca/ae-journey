@@ -146,7 +146,7 @@ class ExtractedEvidence(BaseModel):
     price_max: float | None = None
     currency: str
     unit: str = "procedure"
-    qualifier: Literal["exact", "from", "range", "promo", "unknown"] = "unknown"
+    qualifier: Literal["exact", "from", "range", "approximate", "promo", "unknown"] = "unknown"
     original_price_min: float | None = None
     original_price_max: float | None = None
     raw_evidence: str
@@ -1793,6 +1793,8 @@ MARKETPLACES = {
 }
 DIRECTORIES = {
     "clinicpoint.com", "doctoralia.es", "multiestetica.com", "gorgeousgetaways.com",
+    # Explicitly disclaims being a medical practice; sells reservation vouchers.
+    "bonomedico.es",
     "beautyforqueens.com", "cliniciestetice.ro", "clinici-estetice.ro",
     "qunomedical.com", "estheticon.com", "realself.com",
     "beautynailhairsalons.com",
@@ -1916,7 +1918,10 @@ def directory_like_page_context(
 ) -> bool:
     """Detect directory/listing pages on previously unknown domains."""
     path = fold(urlparse(url or "").path)
-    body = fold(text or "")[:30000]
+    body = fold(text or "")
+    if "no es un consultorio medico" in body and re.search(
+            r"(?:reserv\w*.*no se esta contratando la operacion|pago.*(?:direct\w*|cirujano))", body):
+        return True
     if ("independent editorial resource" in body
             and "not affiliated with any clinic" in body):
         return True
@@ -2460,6 +2465,8 @@ def is_retail_product_page(url: str, text: str, procedure: str) -> bool:
 def injectable_filler_match(text: str) -> bool:
     t = fold(text)
     if any(term in t for term in INJECTABLE_FILLER_POSITIVE):
+        return True
+    if re.search(r"\brellenos?\b.{0,30}\b(?:menton|barbilla|pomulos|mejillas|mandibula|ojeras)\b", t):
         return True
     # Romanian menus abbreviate acid hialuronic as AH. Do not match that
     # inside a longer word.
@@ -4630,22 +4637,25 @@ def procedure_negated(text: str, procedure: str) -> bool:
 
 
 FILLER_AREA_TERMS = (
-    ("lip", ("lip filler", "lip fillers", "lips", "lip augmentation", "filler buze", "labbra")),
-    ("cheek", ("cheek filler", "cheeks filler", "malar filler", "cheek")),
-    ("jaw", ("jawline filler", "jaw filler", "jawline")),
-    ("chin", ("chin filler", "chin")),
-    ("tear", ("tear trough", "under eye filler", "under-eye filler")),
-    ("nose", ("rhinofiller", "nose filler", "nasal filler")),
+    ("lip", ("lip", "lips", "lip augmentation", "buze", "buzesh", "labbra", "labios", "labial", "levres")),
+    ("cheek", ("cheek", "cheeks", "malar", "pometi", "pomulos", "mejillas")),
+    ("jaw", ("jawline", "jaw", "mandibula", "mandibular")),
+    ("chin", ("chin", "menton", "mento", "barbilla", "mental filler")),
+    ("tear", ("tear trough", "under eye", "under-eye", "ojeras", "cearcane")),
+    ("nose", ("rhinofiller", "nose filler", "nasal filler", "rinomodelacion")),
     ("nasolabial", ("nasolabial",)),
 )
+_FILLER_AREA_PATTERNS = tuple((key, re.compile(
+    r"(?<!\w)(?:" + "|".join(re.escape(fold(term)) for term in terms) + r")(?!\w)",
+)) for key, terms in FILLER_AREA_TERMS)
 
 
 def requested_filler_areas(procedure: str) -> set[str]:
     """Areas named by the request. A generic filler request names none."""
     folded = fold(procedure)
     found = set()
-    for key, terms in FILLER_AREA_TERMS:
-        if any(fold(term) in folded for term in terms):
+    for key, pattern in _FILLER_AREA_PATTERNS:
+        if pattern.search(folded):
             found.add(key)
     return found
 
@@ -5082,8 +5092,9 @@ def botox_amount_owned_by_filler(text: str, amount: float, currency: str) -> boo
             continue
         start = prices[index - 1][0].end() if index else 0
         prefix = fold(text[start:match.start()])
-        toxin = list(re.finditer(r"\b(?:botox|botulin\w*|neuromodulat\w*)\b", prefix))
-        filler = list(re.finditer(r"\b(?:hyaluronic\s+acid|acid[ou]\s+hialuronic[ou]?|fillers?)\b", prefix))
+        toxin = list(re.finditer(r"\b(?:botox|botulin\w*|neuromodula[td]\w*)\b", prefix))
+        filler = list(re.finditer(r"\b(?:hyaluronic\s+acid|acid[ou]\s+hialuronic[ou]?|fillers?|"
+                                  r"skin[ -]?boosters?|mesotherap\w*|mesoterapia|nctf|hifu)\b", prefix))
         if toxin and (not filler or toxin[-1].start() > filler[-1].start()):
             return False
         if filler:
@@ -5124,6 +5135,19 @@ def unit_of(text: str) -> str:
 
 def qualifier(text: str, lo: float, hi: float | None) -> str:
     t = fold(text)
+
+    # Approximation must describe this monetary amount. A nearby approximate
+    # duration or dosage must not qualify an otherwise exact tariff.
+    for match, amount, _ in iter_exact_price_matches(text):
+        if abs(amount - lo) > .011:
+            continue
+        prefix = fold(text[max(0, match.start() - 110):match.start()])
+        if re.search(
+            r"\b(?:approximately|approx\.?|roughly|around|about|circa|"
+            r"aproximad[oa]|aproximadamente|aproximativ|alrededor\s+de|"
+            r"(?:suele\s+)?rondar?|en\s+torno\s+a)\b[^\d]{0,100}$", prefix,
+        ):
+            return "approximate"
 
     # If extraction found two attached numeric endpoints, this is a real range
     # even when the surrounding phrase says "range from X to Y".
@@ -5309,7 +5333,7 @@ def find_attached_range(text: str, currency: str, price_match) -> tuple[float, f
         rf"\bentre\s+(?P<a>{AMOUNT_TOKEN})\s*(?:{curr_pat})?\s*(?:y|u|a)\s*(?P<b>{AMOUNT_TOKEN})\s*(?P<c>{curr_pat})",
         rf"(?P<c1>{curr_pat})\s*(?P<a>{AMOUNT_TOKEN})\s*(?:-|–|—|to)\s*(?:(?P<c2>{curr_pat})\s*)?(?P<b>{AMOUNT_TOKEN})",
         rf"(?<![\w.,])(?P<a>{AMOUNT_TOKEN})\s*(?:-|–|—|to)\s*(?P<b>{AMOUNT_TOKEN})\s*(?P<c>{curr_pat})",
-        rf"(?<![\w.,])(?P<a>{AMOUNT_TOKEN})\s*(?P<c1>{curr_pat})\s*(?:-|–|—|to)\s*(?P<b>{AMOUNT_TOKEN})\s*(?P<c2>{curr_pat})",
+        rf"(?<![\w.,])(?P<a>{AMOUNT_TOKEN})\s*(?P<c1>{curr_pat})\s*(?:-|–|—|to|a)\s*(?P<b>{AMOUNT_TOKEN})\s*(?P<c2>{curr_pat})",
         rf"(?:varia\s+tra|between|tra)\s+(?P<c1>{curr_pat})\s*(?P<a>{AMOUNT_TOKEN})\s*(?:e|and)\s*(?P<c2>{curr_pat})\s*(?P<b>{AMOUNT_TOKEN})",
     ]
 
@@ -5384,6 +5408,10 @@ def price_amount_is_financing(text: str, match) -> bool:
     """A monthly installment is not the price of the procedure."""
     after = fold((text or "")[match.end():match.end() + 70])
     before = fold((text or "")[max(0, match.start() - 70):match.start()])
+    local = fold(priced_line_text(text, match=match))
+    if (re.search(r"\b(?:financi\w*|credit\w*|prestamo|cuotas?|installments?|monthly\s+payment)\b", local)
+            and re.search(r"\b(?:hasta|up\s+to|maximum|maximo)\s*(?:eur|usd|gbp|aed|€|£|\$)?\s*$", before)):
+        return True
     return bool(re.match(
         r"\s*(?:/\s*(?:month|mo)\b|per\s+month\b|a\s+month\b|"
         r"(?:al|in)\s+mese\b|\blunare\b)", after,
@@ -5450,10 +5478,18 @@ def add_evidence(
             continue
         if price_amount_is_add_on(text, m):
             continue
+        if (canonicalize_procedure(procedure) == "botox"
+                and botox_amount_owned_by_filler(text, amount, currency)):
+            continue
 
         line = priced_line_text(text, match=m)
         if not contains_requested_procedure(line, procedure):
             continue
+        if canonicalize_procedure(procedure) == "filler":
+            first_price = next(iter_exact_price_matches(line), None)
+            label = line[:first_price[0].start()] if first_price else line
+            if filler_area_conflict(procedure, label) or surgical_chin_quote(line, url):
+                continue
         # Breast rows stay extracted so implant and implant+lift remain
         # separate. Trust, not extraction, drops the combo from Compare.
         if (
@@ -6368,6 +6404,9 @@ def extract_scoped_tariff_table_rows(soup, out, seen, url, procedure):
                for cell in header):
             continue  # multi-level brand matrices need their own column model
         headings = [cell.get_text(" ", strip=True) for cell in header]
+        injectable_scope = (canonicalize_procedure(procedure) == "filler"
+                            and bool(re.search(r"\b(?:precio|precios|tarifas?)\b.*\bacido\s+hialuronico\b", fold(scope)))
+                            and any(re.search(r"\b\d*\s*viales?\b", fold(label)) for label in headings))
         price_columns = [i for i, label in enumerate(headings)
                          if i > 0 and re.search(r"\b(?:price|prices|cost|tariff|fee|discount|precio|precios|pvp|antes|ahora)\b", label, re.I)
                          and not re.search(r"\b(?:dose|quantity|average|typical|market|national|other|units?\s+(?:typical|required))\b", label, re.I)]
@@ -6395,7 +6434,14 @@ def extract_scoped_tariff_table_rows(soup, out, seen, url, procedure):
             price = cells[column].get_text(" ", strip=True)
             if not label or not price:
                 continue
-            scoped = contains_requested_procedure(scope, procedure)
+            if (injectable_scope and not contains_requested_procedure(label, procedure)
+                    and not requested_filler_areas(label)
+                    and not re.search(r"\b(?:relleno\s+de\s+arrugas|codigo\s+de\s+barras|"
+                                      r"surco\s+nasogen\w*|lineas\s+marionetas)\b", fold(label))):
+                # Hyaluronic-acid menus also sell skinboosters/body treatments;
+                # only an explicit facial filler row inherits this table scope.
+                continue
+            scoped = contains_requested_procedure(scope, procedure) or injectable_scope
             if not scoped and not contains_requested_procedure(label, procedure):
                 continue
             if not currency_of(price):
@@ -6481,8 +6527,9 @@ def extract_owned_comparison_columns(soup, out, seen, url, procedure):
 
 def extract_semantic_tariff_cards(soup, out, seen, url, procedure):
     """Explicit pricing widgets contain one treatment and one payable price."""
-    for card in soup.select('.mkdf-pi-content-holder, .pricing-card, .price-card, [data-price-card]'):
-        label_node = card.find(['h2','h3','h4','h5','h6']) or card.select_one('[class*="pi-title"]')
+    for card in soup.select('.mkdf-pi-content-holder, .pricing-card, .price-card, [data-price-card], .e-con-inner'):
+        label_node = (card.find(['h2','h3','h4','h5','h6']) or card.select_one('[class*="pi-title"]')
+                      or card.find('p'))
         if not label_node:
             continue
         label = label_node.get_text(' ', strip=True)
@@ -6490,7 +6537,10 @@ def extract_semantic_tariff_cards(soup, out, seen, url, procedure):
         if not contains_requested_procedure(label, procedure) or len(text) > 600:
             continue
         prices = list(iter_exact_price_matches(text))
-        if len(prices) != 1 or any(contains_requested_procedure(label, other)
+        attached = find_attached_range(text, prices[0][2], prices[0][0]) if prices else None
+        one_tariff = len(prices) == 1 or (len(prices) == 2 and attached is not None
+                     and prices[0][2] == prices[1][2] and set(attached) == {prices[0][1], prices[1][1]})
+        if not one_tariff or any(contains_requested_procedure(label, other)
                                   for other in PROCEDURES if other != canonicalize_procedure(procedure)):
             continue
         # Preserve any fee, monthly-payment or package qualifications so the
@@ -7632,7 +7682,7 @@ def cached_market_or_third_party_row_needs_revalidation(
         currency=row.currency,
         unit=row.unit,
         qualifier=row.qualifier
-        if row.qualifier in {"exact", "from", "range", "promo", "unknown"}
+        if row.qualifier in {"exact", "from", "range", "approximate", "promo", "unknown"}
         else "unknown",
         original_price_min=row.original_price_min,
         original_price_max=row.original_price_max,
@@ -7704,6 +7754,16 @@ def normalize_cached_explicit_price_floor(
     else:
         changed_currency = False
     changed_currency = changed_currency or row.model_dump() != previous_payload
+    if row.raw_evidence and qualifier(row.raw_evidence, row.price_min, row.price_max) == "approximate":
+        upper = row.price_max
+        for match, amount, currency in iter_exact_price_matches(row.raw_evidence):
+            if currency == row.currency and abs(amount - row.price_min) <= .011:
+                attached = find_attached_range(row.raw_evidence, currency, match)
+                if attached and abs(attached[0] - row.price_min) <= .011:
+                    upper = attached[1]
+                break
+        updated = row.model_copy(update={"qualifier": "approximate", "price_max": upper})
+        return updated, changed_currency or updated.model_dump() != row.model_dump()
     if row.price_max is not None or not row.raw_evidence:
         return row, changed_currency
     for old_m, _new_m, old_price, new_price, currency in (
@@ -7759,10 +7819,25 @@ def consultation_fee_evidence(evidence: ExtractedEvidence) -> bool:
     ))
 
 
+def page_disclaims_clinic_prices(raw: str) -> bool:
+    """An explicit estimate disclaimer overrides menu/table ownership cues."""
+    text = fold(raw or "")
+    return bool(re.search(
+        r"no\s+representan\s+los\s+precios\s+(?:aplicados|cobrados)|"
+        r"(?:prices?|fees?)\s+(?:do\s+not|don't)\s+represent\b.{0,70}"
+        r"(?:our\s+(?:clinic|consultation|fees?|prices?)|clinic\s+(?:fees?|prices?))|"
+        r"(?:not\s+our\s+(?:menu|prices?|tariff)|no\s+son\s+nuestros\s+precios)", text,
+    ))
+
+
 def generic_multi_clinic_price_context(raw: str) -> bool:
     """A national or multi-clinic estimate is not this clinic's own quote."""
     local = fold(raw or "")
-    return bool(re.search(
+    if (re.search(r"\b(?:el|los)\s+(?:precio|coste|costo)s?\s+(?:de|del)\b[^.!?\n|]{0,90}"
+                  r"\ben\s+[a-z ]{2,40}\b(?:varian?|oscila[n]?|suele[n]?\s+oscilar)\b", local)
+            and not re.search(r"\b(?:nuestra|nuestro|nuestras|nuestros)\b", local)):
+        return True
+    return page_disclaims_clinic_prices(raw) or bool(re.search(
         r"\b(?:depending on (?:your needs and )?the clinic|"
         r"(?:clinics?|providers?) like|(?:many|other|different) clinics? charge|"
         r"(?:si aggira|si colloca) generalmente|prezzo medio|prezzi medi|"
@@ -7771,6 +7846,8 @@ def generic_multi_clinic_price_context(raw: str) -> bool:
         r"\brreth\s+\d+\s+klinika\b|"
         r"average (?:price|cost)|typical (?:price|cost)|"
         r"promedio|(?:precio|coste|costo)s?\s+medi[oa]s?|"
+        r"depend(?:e|iendo)\s+(?:del\s+cirujano\s+y\s+)?(?:de\s+)?(?:la\s+clinica|del\s+centro)|"
+        r"(?:en|entre)\s+(?:otras|distintas|diferentes|varias)\s+clinicas|"
         r"clinicas? low cost|precio orientativo (?:en|de)|precios orientativos|rangos orientativos)\b",
         local,
     ))
@@ -7789,16 +7866,17 @@ def nonprimary_rhinoplasty_variant(raw: str) -> bool:
         r"rinoplastica\s+(?:di\s+)?(?:secondaria|revisione)|"
         r"rinoplastik[a-z]*\s+(?:sekondare|sekundare)|"
         r"rhino[- ]?septoplasty|tip rhinoplasty|nose tip rhinoplasty|"
-        r"alar base reduction|ultrasonic rhinoplasty|"
+        r"alar base reduction|post[- ]?traumat\w*\s+rhinoplasty|"
+        r"rinoplastia\s+post[- ]?traumat\w*|post[- ]?traumatic\w*|"
         r"rinoplastica funzionale|functional rhinoplasty|"
         r"rinoplastik[a-z]*\s+e\s+kombinuar\s+me\s+septoplastik[a-z]*|"
         r"septo[- ]?nasenkorrektur|s?sekundare nasenkorrektur|"
         r"rinoseptoplastie|septorinoplastie|"
-        r"rinoplastie\s+(?:secundara|de\s+revizie|functionala|ultrasonica)|"
+        r"rinoplastie\s+(?:secundara|de\s+revizie|functionala)|"
         r"rinoplastie\s*(?:si|cu|\+|&)\s*(?:dev(?:i)?atie\s+de\s+sept|septoplastie)|"
         r"rinocorectie|micsorare\s+nari|"
         r"rino(?:septo|setto)plastia|septo(?:rrino|rino)plastia|"
-        r"rinoplastia\s+(?:secundaria|de\s+revision|funcional|ultrasonica|racial|etnica)|"
+        r"rinoplastia\s+(?:secundaria|de\s+revision|funcional|racial|etnica)|"
         r"reduccion\s+alar|punta\s+nasal|"
         r"rhino(?:septo|sept)plastie|septo[- ]?rhinoplastie|"
         r"rhinoplastie\s+(?:secondaire|de\s+revision|fonctionnelle|ultrasonique)|"
@@ -7969,7 +8047,8 @@ def breast_augmentation_detail(raw: str, raw_price_text: str = "") -> str:
 
 
 def breast_augmentation_display_name(raw: str, raw_price_text: str = "") -> str:
-    return f"Breast augmentation · {breast_augmentation_detail(raw, raw_price_text)}"
+    detail = breast_augmentation_detail(raw, raw_price_text)
+    return "Breast augmentation" if detail == "Method not specified" else f"Breast augmentation · {detail}"
 
 
 def normalize_breast_price_result(row: ClinicPriceResult) -> ClinicPriceResult:
@@ -8091,7 +8170,14 @@ def procedure_line_is_bundle(text: str, procedure: str) -> bool:
     if not folded:
         return False
     if canonical in {"botox", "filler"} and re.search(
-            r"\b(?:en pareja|couples? offer|couples? price|per couple)\b", folded):
+            r"\b(?:en pareja|couples? offer|couples? price|per couple|"
+            r"pack\s+amigas?|ven\s+con\s+una\s+amiga|with\s+a\s+friend|friends?\s+(?:offer|pack))\b", folded):
+        return True
+    if canonical in {"botox", "filler"} and (
+        re.search(r"\b(?:botox|botulin\w*|neuromodulad\w*|neuromodulat\w*)\b", folded)
+        and re.search(r"\b(?:skin[ -]?boosters?|fillers?|rellenos?|hyaluronic\s+acid|acido\s+hialuronico)\b", folded)
+        and re.search(r"\+|&|\b(?:plus|with|and|con|y|cu)\b", folded)
+    ):
         return True
     if canonical == "botox" and re.search(
             r"\blabios\s*\+\s*botox\b|\bbotox\s*\+\s*(?:labios|fillers?)\b", folded):
@@ -8133,6 +8219,26 @@ def procedure_line_is_bundle(text: str, procedure: str) -> bool:
     return False
 
 
+def surgical_chin_quote(text: str, source_url: str = "") -> bool:
+    """Chin surgery cannot inherit an adjacent injectable-filler heading."""
+    label = fold(text or "")
+    path = fold(urlparse(source_url or "").path).replace("-", " ").replace("_", " ")
+    # An explicitly non-surgical/injectable mentoplasty is a legitimate filler.
+    nonsurgical = bool(re.search(r"\b(?:non[ -]?surgical|sin\s+cirugia|no\s+quirurgic\w*)\b", label))
+    cleaned = re.sub(r"\b(?:non[ -]?surgical|sin\s+cirugia|no\s+quirurgic\w*)\b", "", label)
+    chin = r"(?:chin|menton|mento|barbilla|mental)"
+    implant = r"(?:implants?|implantes?|protesis|prosthes\w*)"
+    surgery = r"(?:surg(?:ery|ical)|cirugia|quirurgic\w*|reduccion|reduction)"
+    if re.search(rf"\b{chin}\b.{{0,45}}\b(?:{implant}|{surgery})\b|"
+                 rf"\b(?:{implant}|{surgery})\b.{{0,45}}\b{chin}\b", cleaned):
+        return not nonsurgical
+    if not re.search(r"\b(?:mentoplast\w*|genioplast\w*)\b", f"{label} {path}"):
+        return False
+    injectable = bool(re.search(
+        r"\b(?:hyaluronic\s+acid|acido\s+hialuronico|acid\s+hialuronic|inject\w*|inyec\w*)\b", label))
+    return not (nonsurgical or injectable)
+
+
 def validate_evidence(
     evidence: ExtractedEvidence,
     full_page_text: str,
@@ -8151,6 +8257,8 @@ def validate_evidence(
         full_page_text,
         evidence,
     )
+    if page_disclaims_clinic_prices(full_page_text):
+        return False, False, 0.10, "page_disclaims_clinic_prices", evidence_type
     if source == "marketplace" and not marketplace_price_evidence_is_strong(
             evidence, evidence.raw_procedure_text):
         return False, False, 0.10, "weak_marketplace_price_binding", evidence_type
@@ -8235,6 +8343,12 @@ def validate_evidence(
         evidence.raw_evidence
     ):
         return False, False, 0.15, "generic_multi_clinic_price", evidence_type
+    canonical = canonicalize_procedure(evidence.raw_procedure_text)
+    line = priced_line_text(evidence.raw_evidence, evidence.price_min, evidence.currency)
+    if canonical == "filler" and surgical_chin_quote(line, evidence.source_url):
+        return False, False, 0.10, "surgical_chin_not_filler", evidence_type
+    if procedure_line_is_bundle(line, canonical):
+        return False, False, 0.10, "package_not_procedure", evidence_type
 
     if (
         canonicalize_procedure(evidence.raw_procedure_text) == "rhinoplasty"
@@ -10652,6 +10766,12 @@ async def firestore_load_results(
             ):
                 row = normalize_whatclinic_cached_result(row)
 
+            if (canonicalize_procedure(procedure) == "filler"
+                    and filler_area_conflict(procedure,
+                        row.raw_procedure_text + " " + tariff_price_row_name(
+                            row.raw_evidence, "filler"))):
+                continue
+
             if (
                 row.source_type == "official_clinic"
                 and row.clinic_own_price
@@ -11542,6 +11662,8 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
             row.raw_procedure_text + " " + priced_line_text(row.raw_evidence, row.price_min, row.currency)):
         return "nonfacial_tariff_scope"
     line = priced_line_text(row.raw_evidence, row.price_min, row.currency)
+    if row.procedure_canonical == "filler" and surgical_chin_quote(line, row.source_url):
+        return "surgical_chin_not_filler"
     if procedure_line_is_bundle(line, row.procedure_canonical):
         return "package_not_procedure"
     if (
@@ -11662,6 +11784,10 @@ def trusted_price_result(row: ClinicPriceResult) -> bool:
     if procedure_line_is_bundle(
         priced_line_text(row.raw_evidence, row.price_min, row.currency),
         row.procedure_canonical,
+    ):
+        return False
+    if row.procedure_canonical == "filler" and surgical_chin_quote(
+        priced_line_text(row.raw_evidence, row.price_min, row.currency), row.source_url,
     ):
         return False
     if (
@@ -17659,7 +17785,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.83",
+    version="0.11.84",
     lifespan=app_lifespan,
 )
 

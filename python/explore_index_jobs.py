@@ -17,6 +17,7 @@ import json
 import os
 from pathlib import Path
 import sqlite3
+import threading
 import time
 import uuid
 
@@ -24,7 +25,7 @@ import httpx
 from fastapi import HTTPException
 from pydantic import BaseModel, Field
 
-JOB_ENGINE_VERSION = "0.11.83"
+JOB_ENGINE_VERSION = "0.11.84"
 
 # HTML extraction/Firestore calls can occupy asyncio's default executor.
 # Queue acceptance, focus changes and polling must not wait behind crawlers.
@@ -355,6 +356,7 @@ class IndexJobs:
             "EXPLORE_JOB_DB", str(Path(__file__).with_name("explore_jobs.sqlite3")),
         )
         self._store = None
+        self._store_lock = threading.Lock()
         self.task = None
         self.wake = asyncio.Event()
         self.active = {}
@@ -362,8 +364,20 @@ class IndexJobs:
     @property
     def store(self):
         if self._store is None:
-            self._store = JobStore(self.path)
+            with self._store_lock:
+                if self._store is None:
+                    self._store = JobStore(self.path)
         return self._store
+
+    async def store_call(self, method, *args, **kwargs):
+        # Resolve the lazy store in the executor too: opening/migrating a
+        # busy SQLite database can wait just like a query can.
+        return await job_control_call(lambda: getattr(self.store, method)(*args, **kwargs))
+
+    async def validated_rows(self, rows, req, **kwargs):
+        # Validation also reads (and sometimes updates) source quarantine.
+        return await job_control_call(self.safe_rows, rows, req.city, req.procedure,
+                                      country_code=req.country_code, **kwargs)
 
     def key(self, req):
         # Preserve country identity when a same-named city exists elsewhere.
@@ -415,23 +429,21 @@ class IndexJobs:
         if not self.e.firestore_enabled():
             # Useful for local development without ADC. Production always
             # reads the configured Firestore result collection.
-            stored = await job_control_call(self.store.latest_results, self.key(req))
-        rows = self.safe_rows(stored, req.city, req.procedure,
-                              include_quarantined=include_quarantined,
-                              country_code=req.country_code)[:req.limit]
+            stored = await self.store_call("latest_results", self.key(req))
+        rows = (await self.validated_rows(stored, req,
+                                         include_quarantined=include_quarantined))[:req.limit]
+        rejected_sources = await self.store_call("rejected_sources", self.key(req))
         return {
             "city": req.city, "procedure": self.e.canonicalize_procedure(req.procedure),
             "display_results": [r.model_dump(mode="json") for r in rows],
             "source_collection": self.e._results_collection_name(),
             "source": "firestore" if self.e.firestore_enabled() else "local_verified",
             "verified_count": len(rows),
-            "invalidated_source_urls": list(self.store.rejected_sources(self.key(req))),
+            "invalidated_source_urls": list(rejected_sources),
         }
 
     async def enqueue(self, req):
-        job = await job_control_call(
-            self.store.enqueue, self.key(req), req.model_dump(),
-        )
+        job = await self.store_call("enqueue", self.key(req), req.model_dump())
         self.wake.set()
         # Also starts under ASGI test transports / older lifespan wrappers.
         if self.task is None or self.task.done():
@@ -441,7 +453,7 @@ class IndexJobs:
     async def run_one(self, job=None):
         timeout = min(600, max(30, int(os.getenv("EXPLORE_JOB_TIMEOUT_SECONDS", "600"))))
         if job is None:
-            job = await job_control_call(self.store.claim, timeout + 60)
+            job = await self.store_call("claim", timeout + 60)
         if not job:
             return False
         req = MarketRequest.model_validate(job["request"])
@@ -449,17 +461,15 @@ class IndexJobs:
             # Retain the existing parser, city checks, ownership and trust
             # gates. A focus change can pause this task without discarding
             # validated partial results or any price already in Firestore.
-            await job_control_call(self.store.update_progress, job, None,
+            await self.store_call("update_progress", job, None,
                                     {"phase": "starting", "engine_version": JOB_ENGINE_VERSION,
                                      "scheduling": req.mode, "collection_target": req.collection_target,
                                      "display_limit": req.display_limit})
             print(f"[GP JOB] {job['job_id']} running {req.city} {req.procedure}", flush=True)
             response = await asyncio.wait_for(self.discover_with_progress(job, req), timeout=timeout)
-            rows = self.safe_rows(
-                response.candidate_results or response.display_results,
-                req.city, req.procedure, country_code=req.country_code,
-                recover_quarantined=True,
-            )
+            rows = await self.validated_rows(
+                response.candidate_results or response.display_results, req,
+                recover_quarantined=True)
             # Include already indexed clinics as well as this job's finds.
             try:
                 indexed = await asyncio.wait_for(
@@ -467,11 +477,9 @@ class IndexJobs:
                 )
             except asyncio.TimeoutError:
                 indexed = {"display_results": []}
-            current = await job_control_call(self.store.get, job["job_id"])
-            retained = self.safe_rows((current or {}).get("display_results", []), req.city, req.procedure,
-                                      country_code=req.country_code)
-            combined = self.safe_rows([*rows, *indexed["display_results"]], req.city, req.procedure,
-                                      country_code=req.country_code)
+            current = await self.store_call("get", job["job_id"])
+            retained = await self.validated_rows((current or {}).get("display_results", []), req)
+            combined = await self.validated_rows([*rows, *indexed["display_results"]], req)
             extras = [row for row in retained if not any(self.e.same_clinic_identity(row, old) for old in combined)]
             if extras:
                 # A paused pass may verify a price before final persistence.
@@ -481,8 +489,7 @@ class IndexJobs:
                     ), timeout=5)
                 except Exception:
                     pass  # The durable ticket still retains validated rows.
-            rows = self.safe_rows([*combined, *retained], req.city, req.procedure,
-                                  country_code=req.country_code)
+            rows = await self.validated_rows([*combined, *retained], req)
             payload = self.row_payload(rows)
             details = {
                 "fresh_count": response.novel_live_available,
@@ -509,19 +516,17 @@ class IndexJobs:
                         rejected_urls.append(item)
             details["rejections"] = rejections
             details["rejected_urls"] = rejected_urls
-            await job_control_call(
-                self.store.finish, job, payload, response.persisted_count, "", details,
-            )
+            await self.store_call("finish", job, payload, response.persisted_count, "", details)
             print(f"[GP JOB] {job['job_id']} completed verified={len(payload)} "
                   f"fresh={response.novel_live_available} reason={response.growth_exhausted_reason or '-'}",
                   flush=True)
         except asyncio.CancelledError:
-            await job_control_call(self.store.release, job)
+            await self.store_call("release", job)
             raise
         except Exception as exc:
-            current = await job_control_call(self.store.get, job["job_id"])
-            await job_control_call(
-                self.store.finish, job, (current or {}).get("display_results", []), 0,
+            current = await self.store_call("get", job["job_id"])
+            await self.store_call(
+                "finish", job, (current or {}).get("display_results", []), 0,
                 type(exc).__name__ + ": " + str(exc)[:300],
             )
             print(f"[GP JOB] {job['job_id']} failed {type(exc).__name__}", flush=True)
@@ -562,9 +567,8 @@ class IndexJobs:
                     excluded_source_urls=req.excluded_source_urls,
                 )
                 response = await self.e._discover_hybrid_impl(request)
-                usable = self.safe_rows(response.candidate_results or response.display_results,
-                                        req.city, req.procedure, country_code=req.country_code,
-                                        recover_quarantined=True)
+                usable = await self.validated_rows(response.candidate_results or response.display_results,
+                                                   req, recover_quarantined=True)
                 # A completed fast pass has persisted its cards. The same
                 # durable job may now collect its larger pool at low priority.
                 # Do not retry an exhausted thin market in another full pass.
@@ -572,7 +576,7 @@ class IndexJobs:
                         and 6 <= len(usable) < req.collection_target
                         and self.e.firestore_enabled()):
                     if not req.require_client_display_confirmation:
-                        await job_control_call(self.store.continue_in_background, job)
+                        await self.store_call("continue_in_background", job)
                         self.wake.set()
                     response = await self.e._discover_hybrid_impl(
                         request.model_copy(update={"background_collection": True}))
@@ -588,26 +592,25 @@ class IndexJobs:
                 if event is None:
                     break
                 if event.get("event") == "partial":
-                    current = await job_control_call(self.store.get, job["job_id"])
-                    fresh = self.safe_rows(event.get("display_results", []), req.city, req.procedure,
-                                           country_code=req.country_code, recover_quarantined=True)
-                    rows = self.safe_rows([*fresh, *(current or {}).get("display_results", [])],
-                                          req.city, req.procedure, country_code=req.country_code)
+                    current = await self.store_call("get", job["job_id"])
+                    fresh = await self.validated_rows(event.get("display_results", []), req,
+                                                      recover_quarantined=True)
+                    rows = await self.validated_rows([*fresh, *(current or {}).get("display_results", [])], req)
                     elapsed = round((time.monotonic() - started) * 1000)
                     if rows and first_result_ms is None:
                         first_result_ms = elapsed
                     if len(rows) >= 6 and good_enough_ms is None:
                         good_enough_ms = elapsed
-                    await job_control_call(
-                        self.store.update_progress, job, self.row_payload(rows),
+                    await self.store_call(
+                        "update_progress", job, self.row_payload(rows),
                         {"phase": "verified_results", "ttfr_ms": first_result_ms,
                          "time_to_6_verified_ms": good_enough_ms},
                     )
                     if len(rows) >= min(6, req.display_limit) and not req.require_client_display_confirmation:
-                        await job_control_call(self.store.continue_in_background, job)
+                        await self.store_call("continue_in_background", job)
                         self.wake.set()
                 elif event.get("event") == "progress":
-                    await job_control_call(self.store.update_progress, job, None, event.get("progress", {}))
+                    await self.store_call("update_progress", job, None, event.get("progress", {}))
             return await task
         finally:
             if not task.done():
@@ -620,9 +623,9 @@ class IndexJobs:
                 await asyncio.gather(entry["task"], return_exceptions=True)
                 del self.active[job_id]
             else:
-                entry["state"] = await job_control_call(self.store.get, job_id)
+                entry["state"] = await self.store_call("get", job_id)
 
-        waiting = await job_control_call(self.store.waiting, "foreground")
+        waiting = await self.store_call("waiting", "foreground")
         if waiting and len(self.active) >= 2:
             # The reserved foreground slot must follow the selected market.
             # Pause an obsolete focus from this client, retaining its partials.
@@ -641,7 +644,7 @@ class IndexJobs:
                            for entry in self.active.values())
             if occupied:
                 continue
-            job = await job_control_call(self.store.claim, timeout + 60, lane)
+            job = await self.store_call("claim", timeout + 60, lane)
             if job:
                 task = asyncio.create_task(self.run_one(job))
                 self.active[job["job_id"]] = {"task": task, "state": job, "lane": lane}
@@ -664,7 +667,7 @@ class IndexJobs:
             self.active.clear()
 
     async def start(self):
-        await job_control_call(self.store.prune)
+        await self.store_call("prune")
         if self.task is None or self.task.done():
             self.task = asyncio.create_task(self.run())
 
@@ -698,8 +701,7 @@ class IndexJobs:
 
     async def refresh_known(self, req):
         indexed = await self.index(req, include_quarantined=True)
-        rows = self.safe_rows(indexed["display_results"], req.city, req.procedure,
-                              include_quarantined=True, country_code=req.country_code)
+        rows = await self.validated_rows(indexed["display_results"], req, include_quarantined=True)
         changed = []
         sem = asyncio.Semaphore(3)
 
@@ -716,7 +718,7 @@ class IndexJobs:
                 invalid = "foreign_tariff_heading" if self.e.tariff_location_conflict(context, req.city) else (
                     "directory_price" if self.e.classify_page_source(stored.source_url, text) == "directory" else "")
                 if invalid:
-                    await job_control_call(self.store.source_check, self.key(req), stored.source_url, invalid)
+                    await self.store_call("source_check", self.key(req), stored.source_url, invalid)
                     return
                 if not await asyncio.to_thread(self.e.strong_local_page_evidence,
                     html, text, req.city, stored.source_url,
@@ -743,9 +745,8 @@ class IndexJobs:
                         "last_verified_at": datetime.now(timezone.utc).isoformat(),
                         "cache_age_days": 0,
                     })
-                    if self.safe_rows([row], req.city, req.procedure, include_quarantined=True,
-                                      country_code=req.country_code):
-                        await job_control_call(self.store.source_check, self.key(req), stored.source_url)
+                    if await self.validated_rows([row], req, include_quarantined=True):
+                        await self.store_call("source_check", self.key(req), stored.source_url)
                         changed.append(row)
                         break
             except (httpx.HTTPError, ValueError):
@@ -757,10 +758,10 @@ class IndexJobs:
                 req.city, req.procedure, req.country_code, changed,
                 discovered_by="known_evidence_refresh",
             )
-        return {**indexed, "invalidated_source_urls": list(self.store.rejected_sources(self.key(req))), "display_results": [
-            r.model_dump(mode="json") for r in self.safe_rows(
-                [*changed, *rows], req.city, req.procedure, country_code=req.country_code,
-            )
+        verified = await self.validated_rows([*changed, *rows], req)
+        rejected_sources = await self.store_call("rejected_sources", self.key(req))
+        return {**indexed, "invalidated_source_urls": list(rejected_sources), "display_results": [
+            r.model_dump(mode="json") for r in verified
         ]}
 
     async def clinic_search(self, req):
@@ -850,14 +851,14 @@ def install(engine):
 
     @engine.app.get("/discover-jobs/{job_id}")
     async def job_status(job_id: str):
-        job = await job_control_call(service.store.get, job_id)
+        job = await service.store_call("get", job_id)
         if job is None:
             raise HTTPException(404, "Unknown discovery job")
         return job
 
     @engine.app.post("/discover-jobs/{job_id}/display")
     async def acknowledge_display(job_id: str, req: DisplayFeedbackRequest):
-        result = await job_control_call(service.store.acknowledge_display, job_id, req)
+        result = await service.store_call("acknowledge_display", job_id, req)
         service.wake.set()
         return result
 

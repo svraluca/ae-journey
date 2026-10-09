@@ -230,6 +230,11 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
       title: doc.querySelector('h1')?.text ?? '',
     ),
   );
+  // Remove disallowed DOM amounts before every extraction strategy. Otherwise
+  // a correct table row can be followed by a generic card/proximity pass that
+  // revives its old price or loses the conditions of a child price span.
+  _stripSupersededTableAmounts(doc);
+  _stripConditionalOfferCards(doc);
   final out = <ExtractedPriceEvidence>[];
   final seen = <String>{};
   final headingContext = _PriceHeadingContext();
@@ -668,6 +673,42 @@ List<String> _tableColumnHeaders(Element tr) {
   ];
 }
 
+void _stripSupersededTableAmounts(Document doc) {
+  for (final table in doc.querySelectorAll('table')) {
+    final rows = table.querySelectorAll('tr');
+    if (rows.isEmpty) continue;
+    final headerRow = table.querySelector('thead tr') ?? rows.first;
+    final headers = headerRow.querySelectorAll('th, td');
+    final oldColumns = <int>[
+      for (var i = 0; i < headers.length; i++)
+        if (looksLikeSupersededPriceColumnHeader(_visibleText(headers[i]))) i,
+    ];
+    if (oldColumns.isEmpty) continue;
+    for (final row in rows) {
+      if (identical(row, headerRow)) continue;
+      final cells = row.querySelectorAll('th, td');
+      for (final column in oldColumns) {
+        if (column >= cells.length) continue;
+        cells[column].text = '';
+        cells[column].attributes.clear();
+      }
+    }
+  }
+}
+
+void _stripConditionalOfferCards(Document doc) {
+  final conditions = cachedRegExp(
+    r'\b(?:pack\s+amigas?|friends?\s+pack|bring\s+(?:a\s+)?friend|'
+    r'ven\s+con\s+una\s+amiga|couples?\s+offer|couples?\s+price|per\s+couple)\b',
+    caseSensitive: false,
+  );
+  for (final card in doc.querySelectorAll(
+    'article, .promo-card, .pricing-card, .offer-card, .service-card',
+  ).toList()) {
+    if (conditions.hasMatch(_visibleText(card))) card.remove();
+  }
+}
+
 List<ExtractedPriceEvidence> _extractTables(
   Document doc,
   String sourceUrl,
@@ -680,6 +721,7 @@ List<ExtractedPriceEvidence> _extractTables(
     final headers = _tableColumnHeaders(tr);
     String procedure = '';
     final priceCells = <String>[];
+    final priceHeaders = <String, String>{};
     for (var i = 0; i < cells.length; i++) {
       final t = _visibleText(cells[i]);
       if (t.isEmpty) continue;
@@ -689,14 +731,16 @@ List<ExtractedPriceEvidence> _extractTables(
       }
       final header = i < headers.length ? headers[i] : '';
       if (looksLikeCompetitorPriceColumnHeader(header) ||
-          looksLikeThirdPartyProviderPriceLabel(header)) {
+          looksLikeThirdPartyProviderPriceLabel(header) ||
+          looksLikeSupersededPriceColumnHeader(header)) {
         continue;
       }
       if (_kPriceLike.hasMatch(t) || _kBarePrice.hasMatch(t)) {
         // Gulf menus often put "Cost (AED)" only in the column header.
-        priceCells.add(
-          !hasCurrencySignal(t) && hasCurrencySignal(header) ? '$t $header' : t,
-        );
+        final value = !hasCurrencySignal(t) && hasCurrencySignal(header)
+            ? '$t $header' : t;
+        priceCells.add(value);
+        priceHeaders[value] = header;
       } else if (_looksLikeProcedureLabel(t)) {
         if (procedure.isEmpty) {
           procedure = t;
@@ -716,6 +760,15 @@ List<ExtractedPriceEvidence> _extractTables(
       continue;
     }
     procedure = _withSectionContext(tr, procedure, headingContext);
+    final basis = priceHeaders[priceRaw] ?? '';
+    if (cachedRegExp(
+      r'\b\d+\s*(?:viales?|vials?|ml|sessions?|sesiones?|units?|unidades|zones?|zonas?|areas?)\b',
+      caseSensitive: false,
+    ).hasMatch(basis)) {
+      procedure = '$procedure · ${basis.replaceAll(cachedRegExp(
+        r'\s*\(\s*(?:ahora|now|current)\s*\)', caseSensitive: false,
+      ), '').trim()}';
+    }
     final hint = _nearestCurrencyHint(tr);
     final parsed = parsePriceText(
       hint.isNotEmpty && !hasCurrencySignal(priceRaw)
@@ -2093,6 +2146,37 @@ class ExploreHtmlPriceParseCache {
   final Map<String, List<ExtractedPriceEvidence>> evidenceByUrl = {};
   final Map<String, Future<List<ExtractedPriceEvidence>>> _warmInFlight = {};
   final List<String> _lru = [];
+
+  /// All remembered evidence a clinic can read, with explicit discovery URLs
+  /// first. Other clinics' pages must not delay this clinic's verification.
+  List<String> urlsForHost({
+    required String host,
+    Iterable<String> sourceUrls = const [],
+  }) {
+    String normalizedHost(String raw) {
+      final value = raw.trim().toLowerCase();
+      if (value.isEmpty) return '';
+      return (Uri.tryParse(value.contains('://') ? value : 'https://$value')
+              ?.host ?? '')
+          .replaceFirst(RegExp(r'^www\.'), '');
+    }
+    final wanted = normalizedHost(host);
+    final urls = <String>{
+      for (final raw in sourceUrls)
+        if (raw.trim().isNotEmpty) raw.trim(),
+    };
+    if (wanted.isNotEmpty) {
+      for (final url in htmlByUrl.keys) {
+        final candidate = normalizedHost(url);
+        if (candidate == wanted ||
+            candidate.endsWith('.$wanted') ||
+            wanted.endsWith('.$candidate') && candidate.isNotEmpty) {
+          urls.add(url);
+        }
+      }
+    }
+    return urls.toList(growable: false);
+  }
 
   void _touch(String url) {
     _lru.remove(url);

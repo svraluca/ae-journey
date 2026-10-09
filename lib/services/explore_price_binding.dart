@@ -6,7 +6,7 @@ const _publishedCurrency =
     r'(?:EUR\b|euros?\b|€|GBP\b|£|USD\b|\$|AED\b|HUF\b|Ft\b|RON\b|lei\b|BGN\b|TRY\b|TL\b|ALL\b|Lek\b)';
 final _publishedPrice = RegExp(
   '(?<![\\d.,])(?:($_publishedCurrency)\\s*($_publishedNumber)|'
-  '($_publishedNumber)\\s*($_publishedCurrency))(?![\\d.,])',
+  '($_publishedNumber)\\s*($_publishedCurrency))(?!\\d|[.,]\\d)',
   caseSensitive: false,
 );
 final _repeatedStartingPrice = RegExp(
@@ -129,6 +129,9 @@ String? exploreNonTreatmentPriceReason({
     return 'seasonal_offer_unconfirmed';
   }
   final prices = _bindingPrices(evidence);
+  if (_publishedPriceIsSuperseded(evidence, priceMin, currency, prices)) {
+    return 'superseded_price';
+  }
   String? rejected;
   for (var i = 0; i < prices.length; i++) {
     final p = prices[i];
@@ -137,7 +140,24 @@ String? exploreNonTreatmentPriceReason({
     final prefix = _bindingFold(evidence.substring(start, p.match.start));
     final end = i+1 < prices.length ? prices[i+1].match.start : evidence.length;
     final tail = _bindingFold(evidence.substring(p.match.end, end));
-    if (RegExp(r'\b(?:promedio|(?:precio|coste|costo)s?\s+medi[oa]s?|clinicas? low cost|precio orientativo (?:en|de)|precios orientativos|rangos orientativos)\b').hasMatch(prefix)) {
+    final near = _bindingFold(evidence.substring(
+      (p.match.start - 240).clamp(0, evidence.length),
+      (p.match.end + 240).clamp(0, evidence.length),
+    ));
+    final creditContext = RegExp(
+      r'\b(?:financi\w*|credit\w*|prestamo\w*|loans?|cuotas?|installments?)\b',
+    ).hasMatch(near);
+    final creditCap = RegExp(
+      r'\b(?:hasta|up\s+to|maximum|maximo|limite(?:\s+de)?\s+credito|credit\s+limit|loan\s+limit)\s*[:=-]?\s*$',
+    ).hasMatch(prefix);
+    if (creditContext && creditCap) {
+      rejected = 'credit_limit';
+    } else if (RegExp(
+      r'\b(?:pack\s+amigas?|friends?\s+pack|bring\s+(?:a\s+)?friend|ven\s+con\s+una\s+amiga|'
+      r'en\s+pareja|couples?\s+offer|couples?\s+price|per\s+couple)\b',
+    ).hasMatch(prefix)) {
+      rejected = 'conditional_offer';
+    } else if (RegExp(r'\b(?:promedio|(?:precio|coste|costo)s?\s+medi[oa]s?|clinicas? low cost|precio orientativo (?:en|de)|precios orientativos|rangos orientativos)\b').hasMatch(prefix)) {
       rejected = 'market_average';
     } else if (RegExp(r'\brinoplastia\s+parcial\b').hasMatch(prefix)) {
       rejected = 'partial_rhinoplasty';
@@ -153,6 +173,27 @@ String? exploreNonTreatmentPriceReason({
     }
   }
   return rejected;
+}
+
+/// Preserve uncertainty only when it qualifies the published currency amount.
+bool explorePublishedPriceIsApproximate({
+  required String evidence,
+  double priceMin = 0,
+}) {
+  final qualifier = RegExp(
+    r'\b(?:approximately|approx\.?|roughly|around|about|aproximadamente|'
+    r'aproximad[oa]s?|suele\s+rondar|ronda|en\s+torno\s+a)'
+    r'\s+(?:(?:los?|unos?|entre)\s+)?$',
+  );
+  for (final price in _bindingPrices(evidence)) {
+    if (priceMin > 0 && (price.amount - priceMin).abs() > 0.011) continue;
+    final before = _bindingFold(evidence.substring(
+      (price.match.start - 80).clamp(0, evidence.length),
+      price.match.start,
+    ));
+    if (qualifier.hasMatch(before)) return true;
+  }
+  return false;
 }
 
 String exploreProcedureTitleWithoutPromotion(String raw) => raw
@@ -202,7 +243,17 @@ bool explorePublishedPriceIsSuperseded({
   required double priceMin,
   required String currency,
 }) {
-  final prices = _bindingPrices(evidence);
+  return _publishedPriceIsSuperseded(
+    evidence, priceMin, currency, _bindingPrices(evidence),
+  );
+}
+
+bool _publishedPriceIsSuperseded(
+  String evidence,
+  double priceMin,
+  String currency,
+  List<_BoundPrice> prices,
+) {
   final code = _bindingCurrency(currency);
   for (var i = 0; i + 1 < prices.length; i++) {
     final old = prices[i];
@@ -215,6 +266,18 @@ bool explorePublishedPriceIsSuperseded({
     }
     final between = evidence.substring(old.match.end, current.match.start);
     if (_repeatedStartingPrice.hasMatch(between)) return true;
+    final before = _bindingFold(evidence.substring(
+      i == 0 ? 0 : prices[i - 1].match.end,
+      old.match.start,
+    ));
+    if (RegExp(r'\b(?:antes|was|old\s+price|previous\s+price|precio\s+anterior)\s*[:=-]?\s*$')
+            .hasMatch(before) ||
+        RegExp(r'^\s*(?:ahora|now|current\s+price|precio\s+actual)\s*[:=-]?\s*$',
+                caseSensitive: false)
+            .hasMatch(between) ||
+        RegExp(r'\bantes\b.{0,50}\bahora\b').hasMatch(before)) {
+      return true;
+    }
   }
   return false;
 }
@@ -342,7 +405,11 @@ String exploreBreastProcedureDisplayName({
   );
   final size = RegExp(r'\b\d+\s*[-–—]\s*\d+\s*cc\b', caseSensitive: false)
       .firstMatch(rawProcedureText)?.group(0);
-  return 'Breast augmentation · $detail${size == null ? "" : " · $size"}';
+  return [
+    'Breast augmentation',
+    if (detail != 'Method not specified') detail,
+    if (size != null) size,
+  ].join(' · ');
 }
 
 bool exploreBreastPriceIsOtherSurgery({

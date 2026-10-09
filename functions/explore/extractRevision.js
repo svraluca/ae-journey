@@ -18,6 +18,7 @@
 /// e20: Fresha JSON-LD Offer.itemOffered names; cost-savings URL reject; Fresha/Booksy discovery.
 /// e21: synchronize with the supplied Flutter verifier and preserve menu labels.
 /// e22: preserve owned tariffs beside dosage averages and multilingual offers.
-const EXTRACT_REVISION = 'e22';
+/// e23: bind current tariffs to their scope; exclude finance, combinations and market disclaimers.
+const EXTRACT_REVISION = 'e23';
 
 module.exports = {EXTRACT_REVISION};

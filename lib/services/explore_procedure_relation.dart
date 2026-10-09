@@ -895,6 +895,29 @@ ProcedureRelationResult classifyProcedureRelation({
       reason: 'mixed_service_package',
     );
   }
+  if ((want == 'filler' || want == 'botox') &&
+      looksLikeSurgicalChinProcedure(
+        label: label,
+        evidence: evidence,
+        sourceUrl: sourceUrl,
+      )) {
+    return const ProcedureRelationResult(
+      relation: ProcedureRelation.differentProcedure,
+      reason: 'surgical_chin_not_filler',
+    );
+  }
+  if (want == 'rhinoplasty' &&
+      looksLikeNonGenericRhinoplastyVariant(
+        procedure: requestedProcedure,
+        label: label,
+        evidence: evidence,
+        sourceUrl: sourceUrl,
+      )) {
+    return const ProcedureRelationResult(
+      relation: ProcedureRelation.differentProcedure,
+      reason: 'rhinoplasty_variant_not_requested',
+    );
+  }
 
   final signals = detectProcedureTreatmentSignals(blob);
   final urlSignals = detectProcedureTreatmentSignals(urlFolded);
@@ -1015,7 +1038,11 @@ ProcedureRelationResult classifyProcedureRelation({
 
   if (want == 'rhinoplasty' &&
       looksLikePartialRhinoplastyStarting(label) &&
-      !looksLikePrimaryRhinoplastyStarting(label)) {
+      !looksLikePrimaryRhinoplastyStarting(label) &&
+      !looksLikeRequestedRhinoplastySubtype(
+        procedure: requestedProcedure,
+        candidate: label,
+      )) {
     return const ProcedureRelationResult(
       relation: ProcedureRelation.differentProcedure,
       reason: 'rhino_tip_or_partial',

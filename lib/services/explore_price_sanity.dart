@@ -18,7 +18,8 @@ import 'explore_price_binding.dart';
 /// e20: Fresha JSON-LD Offer.itemOffered names; cost-savings URL reject; Fresha/Booksy discovery.
 /// e21: service-bound marketplace prices; consultation/market/seasonal exclusions.
 /// e22: preserve owned tariffs beside dosage averages and multilingual offers.
-const kExplorePriceExtractRevision = 'e22';
+/// e23: bind current tariffs to their scope; exclude finance, combinations and market disclaimers.
+const kExplorePriceExtractRevision = 'e23';
 
 /// Hard gate: a number from clinic HTML is not a procedure price until this
 /// passes. AI must never invent a replacement amount.
@@ -944,6 +945,15 @@ final _kClinicOwnPublishedPriceRe = RegExp(
   '$_kClinicOwnCurrency?'
   r'\s*\d[\d,]*'
   r'|'
+  r'our\s+(?:clinic|hospital|practice)\s+charges?\s+'
+  r'(?:(?:approximately|roughly|around|about)\s+)?'
+  '$_kClinicOwnCurrency?'
+  r'\s*\d[\d.,]*'
+  '$_kClinicOwnAttachedRange'
+  r'(?:\s*'
+  '$_kClinicOwnCurrency'
+  r')?'
+  r'|'
   // Tajmeels-style treatment landing page, not "typically range from".
   r'(?:cost|price)s?\s+(?:in\s+)?'
   r'(?:dubai|uae|abudhabi|abu dhabi|sharjah)\s+ranges from\s+'
@@ -1075,6 +1085,12 @@ bool looksLikeFinancingOrPaymentHeading(String raw) {
     caseSensitive: false,
   ).hasMatch(t);
 }
+
+/// Previous/list-price columns do not own the current payable treatment fee.
+bool looksLikeSupersededPriceColumnHeader(String raw) => RegExp(
+      r'^(?:antes|was|old\s+price|previous\s+price|precio\s+anterior)'
+      r'(?:\s*\([^()]*\))?\s*$',
+    ).hasMatch(foldExploreCityText(raw).trim());
 
 /// One-breast / unilateral rows are not the standard BA FROM price.
 bool looksLikeUnilateralBreastStartingRow(String raw) {
@@ -1475,7 +1491,105 @@ bool looksLikeMixedServiceBundle(String raw) {
   ).hasMatch(t)) {
     return true;
   }
+  // A combined skin-booster + neurotoxin service is not the price of either
+  // treatment alone. Require a connector so separate tariff rows survive.
+  const booster = r'(?:skin[\s-]*boosters?|profhilo|jalupro|rejuran)';
+  const toxin =
+      r'(?:neuromodul\w*|neurotoxin\w*|botox|b[oó]tox|botulin\w*|'
+      r'toxina\s+botulin\w*|anti[\s-]?wrinkle)';
+  const connector = r'\s*(?:\+|&|and|y|con|with|plus)\s*';
+  return RegExp(
+    '\\b$booster$connector$toxin\\b|\\b$toxin$connector$booster\\b',
+    caseSensitive: false,
+  ).hasMatch(t);
+}
+
+/// Surgical chin augmentation must not inherit the injectable filler family.
+/// Only row-local injectable evidence can disambiguate a mentoplasty URL;
+/// unrelated HA copy elsewhere on a surgical page cannot establish a price.
+bool looksLikeSurgicalChinProcedure({
+  String label = '',
+  String evidence = '',
+  String sourceUrl = '',
+}) {
+  final rowLabel = foldExploreCityText(label);
+  final rowEvidence = foldExploreCityText(evidence);
+  final local = '$rowLabel\n$rowEvidence';
+  final uri = Uri.tryParse(sourceUrl);
+  final path = foldExploreCityText(uri?.path ?? '')
+      .replaceAll(RegExp(r'[/_.-]+'), ' ');
+  final surgery = RegExp(
+    r'\b(?:mentoplast\w*|genioplast\w*)\b|'
+    r'\bchin\s+(?:implants?|reduction|surgery|osteotomy)\b|'
+    r'\b(?:implants?|reduction|osteotomy)\s+(?:of\s+(?:the\s+)?)?chin\b|'
+    r'\b(?:implante\w*|protesis|reduccion|cirugia|osteotomia)\s+'
+    r'(?:de\s+|del\s+)?menton\b|'
+    r'\bmenton\s+(?:con\s+)?(?:implante\w*|protesis)\b',
+  );
+  final nonSurgical = RegExp(
+    r'\bnon[\s-]?surgical\b|\bnonsurgical\b|'
+    r'\bsin\s+cirugia\b|\bno\s+quirurgic\w*\b|'
+    r'\bfara\s+operatie\b',
+  );
+  final injectable = RegExp(
+    r'\bhyaluron\w*\b|\b(?:acido|acid)\s+hialuron\w*\b|'
+    r'\b(?:juvederm|restylane|teosyal|belotero|revolax|radiesse)\b|'
+    r'\binject\w*\b|\binfiltrac\w*\b|\bsyringes?\b|\bjeringas?\b',
+  ).hasMatch(local);
+  // Explicit surgery labels remain surgical even if the evidence also quotes
+  // an injectable treatment from a neighbouring menu row.
+  if (surgery.hasMatch(rowLabel) &&
+      !(nonSurgical.hasMatch(rowLabel) && injectable)) {
+    return true;
+  }
+  if (surgery.hasMatch(rowEvidence) &&
+      !(injectable && nonSurgical.hasMatch(local))) {
+    return true;
+  }
+  if (surgery.hasMatch(path) && !injectable) return true;
   return false;
+}
+
+/// Revision, trauma reconstruction and functional surgery have distinct fees.
+/// Ultrasound is a primary-surgery technique, so it remains eligible for a
+/// general rhinoplasty request. Specific requests may use their matching row.
+bool looksLikeNonGenericRhinoplastyVariant({
+  required String procedure,
+  String label = '',
+  String evidence = '',
+  String sourceUrl = '',
+}) {
+  final requested = foldExploreCityText(procedure);
+  if (!RegExp(r'rhinoplast|rinoplast|nose\s+job').hasMatch(requested)) {
+    return false;
+  }
+  final candidate = foldExploreCityText('$label\n$evidence');
+  final path = foldExploreCityText(Uri.tryParse(sourceUrl)?.path ?? '')
+      .replaceAll(RegExp(r'[/_.-]+'), ' ');
+  for (final subtype in _distinctRhinoplastySubtypes) {
+    if ((subtype.hasMatch(candidate) || subtype.hasMatch(path)) &&
+        !subtype.hasMatch(requested)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+final _distinctRhinoplastySubtypes = [
+  RegExp(r'\b(?:secondary|secondaria|secundaria|secondaire|revision\w*)\b'),
+  RegExp(r'\bpost[\s-]*traum\w*\b|\btraumati\w*\b'),
+  RegExp(r'\bfunctional\b|\bfuncional\b|\bfunzional\w*\b|'
+      r'\bseptor?hinoplast\w*\b|\bseptoplast\w*\b'),
+];
+
+bool looksLikeRequestedRhinoplastySubtype({
+  required String procedure,
+  required String candidate,
+}) {
+  final requested = foldExploreCityText(procedure);
+  final row = foldExploreCityText(candidate);
+  final present = _distinctRhinoplastySubtypes.where((p) => p.hasMatch(row));
+  return present.isNotEmpty && present.every((p) => p.hasMatch(requested));
 }
 
 /// "series of 3" / "3 for $600" is not a single-treatment starting price.
@@ -1584,10 +1698,14 @@ bool explorePricedLineIsIncomparablePackage({
     return true;
   }
   if (rhino &&
-      RegExp(
-        r'all[- ]inclusive|tutto incluso|\bflight\b|\bhotel\b|revision|septoplast|'
-        r'ethnic\s+rhino|rinoplastia\s+(?:racial|[eé]tnica|secundaria)',
-      ).hasMatch(line)) {
+      (looksLikeNonGenericRhinoplastyVariant(
+        procedure: procedure,
+        evidence: line,
+      ) ||
+          RegExp(
+            r'all[- ]inclusive|tutto incluso|\bflight\b|\bhotel\b|'
+            r'ethnic\s+rhino|rinoplastia\s+(?:racial|[eé]tnica)',
+          ).hasMatch(line))) {
     return true;
   }
   if (breast &&
@@ -1937,6 +2055,7 @@ PriceSanityResult evaluateExtractedPriceCandidate({
   required String currency,
   required String extractionMethod,
   String rawEvidence = '',
+  String rawProcedureText = '',
   String procedure = '',
   String sourceUrl = '',
   double priceMax = 0,
@@ -2004,12 +2123,21 @@ PriceSanityResult evaluateExtractedPriceCandidate({
     return const PriceSanityResult.reject('missing_price_semantics');
   }
   final nonTreatment = exploreNonTreatmentPriceReason(
-    evidence: rawEvidence.isNotEmpty ? rawEvidence : rawPriceText,
+    evidence: '$rawProcedureText\n${rawEvidence.isNotEmpty ? rawEvidence : rawPriceText}',
     priceMin: workingMin, currency: currency,
   );
   if (nonTreatment != null) {
     logReject(nonTreatment);
     return PriceSanityResult.reject(nonTreatment);
+  }
+  if (looksLikeNonGenericRhinoplastyVariant(
+    procedure: procedure,
+    label: rawProcedureText,
+    evidence: exploreLineOwningAmount(blob, workingMin),
+    sourceUrl: sourceUrl,
+  )) {
+    logReject('rhinoplasty_variant_not_requested');
+    return const PriceSanityResult.reject('rhinoplasty_variant_not_requested');
   }
   if (looksLikeNonInjectableBotox('$procedure $blob $clinicName $sourceUrl')) {
     logReject('noninjectable_botox');
@@ -2177,10 +2305,24 @@ PriceSanityResult evaluateExtractedPriceCandidate({
     logReject('seo_price_headline');
     return const PriceSanityResult.reject('seo_price_headline');
   }
-  if (looksLikeMixedServiceBundle(blob) ||
+  if (looksLikeMixedServiceBundle(rawProcedureText) ||
+      looksLikeMixedServiceBundle(procedure) ||
+      looksLikeMixedServiceBundle(blob) ||
       looksLikeMixedServiceBundle(rawPriceText)) {
     logReject('mixed_service_bundle');
     return const PriceSanityResult.reject('mixed_service_bundle');
+  }
+  final injectableRequest = RegExp(
+    r'filler|hyaluron|hialuron|relleno|botox|botulin|neuromodul|neurotoxin',
+    caseSensitive: false,
+  ).hasMatch(procedure);
+  if (injectableRequest && looksLikeSurgicalChinProcedure(
+    label: rawProcedureText.isNotEmpty ? rawProcedureText : procedure,
+    evidence: blob,
+    sourceUrl: sourceUrl,
+  )) {
+    logReject('surgical_chin_not_filler');
+    return const PriceSanityResult.reject('surgical_chin_not_filler');
   }
 
   if (looksLikeCityMarketPricingGuideUrl(sourceUrl)) {
@@ -2313,7 +2455,11 @@ PriceSanityResult evaluateExtractedPriceCandidate({
     return const PriceSanityResult.reject('patient_anecdote');
   }
   if (looksLikePartialRhinoplastyStarting(rawPriceText) &&
-      !looksLikePrimaryRhinoplastyStarting(rawPriceText)) {
+      !looksLikePrimaryRhinoplastyStarting(rawPriceText) &&
+      !looksLikeRequestedRhinoplastySubtype(
+        procedure: procedure,
+        candidate: rawPriceText,
+      )) {
     logReject('rhino_tip_or_partial');
     return const PriceSanityResult.reject('rhino_tip_or_partial');
   }
@@ -2406,6 +2552,7 @@ bool isValidExtractedPriceCandidate({
   required String currency,
   required String extractionMethod,
   String rawEvidence = '',
+  String rawProcedureText = '',
   String procedure = '',
   String sourceUrl = '',
   double priceMax = 0,
@@ -2418,6 +2565,7 @@ bool isValidExtractedPriceCandidate({
     currency: currency,
     extractionMethod: extractionMethod,
     rawEvidence: rawEvidence,
+    rawProcedureText: rawProcedureText,
     procedure: procedure,
     sourceUrl: sourceUrl,
     priceMax: priceMax,
@@ -2495,19 +2643,21 @@ Map<String, Object?> stripInvalidCachedPriceJson(
   final stampOk =
       '${working['price_extract_revision'] ?? ''}'.trim() ==
           kExplorePriceExtractRevision;
-  final ok = stampOk &&
-      isValidExtractedPriceCandidate(
+  final verdict = stampOk
+      ? evaluateExtractedPriceCandidate(
         rawPriceText: rawPrice,
         priceMin: (working['price_min'] as num?)?.toDouble() ?? min,
         currency: '${working['currency'] ?? currency}'.trim(),
         extractionMethod: method,
         rawEvidence: evidence,
+        rawProcedureText: rawProc,
         procedure: proc,
         sourceUrl: sourceUrl,
         priceMax: (working['price_max'] as num?)?.toDouble() ?? 0,
         logRejects: logRejects,
-      );
-  if (ok) return working;
+      )
+      : const PriceSanityResult.reject('stale_extract_revision');
+  if (verdict.accepted) return working;
   final next = Map<String, Object?>.from(working);
   next['price_min'] = 0;
   next['price_max'] = 0;
@@ -2518,18 +2668,7 @@ Map<String, Object?> stripInvalidCachedPriceJson(
   next['price_verification_status'] = 'legacy_unverified';
   next['needs_revalidation'] = true;
   next['price_extract_revision'] = '';
-  next['price_rejection_reason'] = stampOk
-      ? evaluateExtractedPriceCandidate(
-          rawPriceText: rawPrice,
-          priceMin: min,
-          currency: currency,
-          extractionMethod: method,
-          rawEvidence: evidence,
-          procedure: proc,
-          sourceUrl: sourceUrl,
-          priceMax: (row['price_max'] as num?)?.toDouble() ?? 0,
-        ).reason
-      : 'stale_extract_revision';
+  next['price_rejection_reason'] = verdict.reason;
   return next;
 }
 
@@ -2569,7 +2708,10 @@ Map<String, Object?>? migrateE17CachedPriceRow(
   final rawPrice = '${row['raw_price_text'] ?? row['price_label'] ?? ''}'.trim();
   final blob =
       '$rawPrice ${row['price_evidence_text'] ?? ''} ${row['raw_procedure_text'] ?? ''}';
-  final inferred = inferLockedEvidencePriceSemantics(blob);
+  final inferred = inferLockedEvidencePriceSemantics(
+    blob,
+    priceMin: (row['price_min'] as num?)?.toDouble() ?? 0,
+  );
   final next = Map<String, Object?>.from(row);
   next['price_type'] = inferred.priceType;
   next['priceType'] = inferred.priceType;
@@ -2600,7 +2742,10 @@ Map<String, Object?>? migrateE17CachedPriceRow(
 
 /// e18 semantics from locked text: exact unless "from"/range; /ml only when
 /// the source literally prices per unit.
-({String priceType, String unit}) inferLockedEvidencePriceSemantics(String blob) {
+({String priceType, String unit}) inferLockedEvidencePriceSemantics(
+  String blob, {
+  double priceMin = 0,
+}) {
   final t = blob.toLowerCase();
   final explicitPerUnit = RegExp(
     r'(?:per|/)\s*(?:ml|cc|iu|unit|units|syringe|syringes|vial)\b',
@@ -2615,6 +2760,12 @@ Map<String, Object?>? migrateE17CachedPriceRow(
     caseSensitive: false,
   ).hasMatch(t);
   final hasRange = RegExp(r'\d[\d.,]*\s*[–\-—]\s*\d').hasMatch(t);
+  if (explorePublishedPriceIsApproximate(evidence: blob, priceMin: priceMin)) {
+    return (
+      priceType: 'approximate',
+      unit: explicitPerUnit ? _unitFromBlob(t) : (explicitPerArea ? 'area' : ''),
+    );
+  }
   if (explicitPerUnit) return (priceType: 'perUnit', unit: _unitFromBlob(t));
   if (explicitPerArea) return (priceType: 'perArea', unit: 'area');
   if (hasFrom) return (priceType: 'from', unit: '');

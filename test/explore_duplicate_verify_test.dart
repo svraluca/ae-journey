@@ -222,6 +222,25 @@ void main() {
       },
     );
 
+    test('clinic warming targets all its pages without warming unrelated providers', () async {
+      final cache = ExploreHtmlPriceParseCache.instance;
+      for (var i = 0; i < 15; i++) {
+        cache.rememberHtml('https://unrelated-$i.al/cmimet', full);
+      }
+      const preferred = 'https://www.a.al/prices';
+      const sibling = 'https://a.al/services';
+      const subdomain = 'https://booking.a.al/prices';
+      const misleading = 'https://not-a.al/prices';
+      for (final url in [preferred, sibling, subdomain, misleading]) {
+        cache.rememberHtml(url, full);
+      }
+      final urls = cache.urlsForHost(host: 'www.a.al', sourceUrls: [preferred]);
+      expect(urls, [preferred, sibling, subdomain]);
+      await cache.warmEvidence(urls);
+      expect(cache.evidenceByUrl.keys, unorderedEquals(urls));
+      expect(cache.evidenceByUrl.values.every((rows) => rows.isNotEmpty), true);
+    });
+
     test('the numbered Tirana rows now carry the real fee', () {
       final cache = ExploreHtmlPriceParseCache.instance;
       cache.rememberHtml(url, full);

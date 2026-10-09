@@ -129,6 +129,7 @@ function inferUnitsFromLabel(rawLabel) {
 function standardizePriceType(raw, unitType) {
   const t = String(raw || '').trim();
   const lower = t.toLowerCase();
+  if (lower === 'approximate') return 'approximate';
   if (lower === 'from') return 'from';
   if (lower === 'range') return 'range';
   if (lower === 'sale') return 'sale';

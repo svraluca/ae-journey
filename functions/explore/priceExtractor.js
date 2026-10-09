@@ -1,6 +1,9 @@
 'use strict';
 
 const cheerio = require('cheerio');
+const {isApproximatePriceQuote} = require('./procedureScope');
+const {classifyExplorePricePageContext,
+  looksLikeConditionalCompanionOffer} = require('./priceOwnership');
 const {
   parsePriceText,
   buildEvidenceHash,
@@ -110,6 +113,8 @@ function listedRawPriceText(raw, parsed) {
 }
 
 function makeEvidence(partial) {
+  if (looksLikeConditionalCompanionOffer(
+      `${partial.rawProcedureText || ''} ${partial.rawEvidence || ''}`)) return null;
   const hash = buildEvidenceHash(
       partial.sourceUrl, partial.rawProcedureText, partial.rawPriceText);
   const evidence = shrinkEvidenceToProcedureAndPrice({
@@ -129,7 +134,9 @@ function makeEvidence(partial) {
     priceMin: partial.priceMin,
     priceMax: partial.priceMax,
     currency: partial.currency || '',
-    priceType: partial.priceType || 'unknown',
+    priceType: (isApproximatePriceQuote(evidence, partial.priceMin) ||
+        isApproximatePriceQuote(evidence, partial.priceMax))
+      ? 'approximate' : (partial.priceType || 'unknown'),
     sourceUrl: partial.sourceUrl,
     extractionMethod: partial.extractionMethod,
     rawEvidence: String(evidence || '').slice(0, 240),
@@ -320,6 +327,26 @@ function tableColumnHeaders($, tr) {
   return out;
 }
 
+function isFormerPriceHeader(raw) {
+  return /^(?:antes|anterior|precio\s+(?:anterior|original)|(?:previous|original|old)(?:\s+price)?|was)$/i
+      .test(String(raw || '').replace(/\s+/g, ' ').trim());
+}
+
+function removeFormerPriceColumns($) {
+  $('table').each((_, table) => {
+    const firstRow = $(table).find('thead tr').first().length
+      ? $(table).find('thead tr').first() : $(table).find('tr').first();
+    const headers = firstRow.find('th, td').map((__, cell) => visibleText($, $(cell))).get();
+    const oldColumns = headers.flatMap((header, i) => isFormerPriceHeader(header) ? [i] : []);
+    if (!oldColumns.length) return;
+    $(table).find('tr').each((__, tr) => {
+      if (tr === firstRow.get(0)) return;
+      const cells = $(tr).children('th, td');
+      for (const i of oldColumns) cells.eq(i).empty();
+    });
+  });
+}
+
 function extractTables($, sourceUrl) {
   const out = [];
   $('tr').each((_, tr) => {
@@ -328,6 +355,7 @@ function extractTables($, sourceUrl) {
     const headers = tableColumnHeaders($, tr);
     let procedure = '';
     const priceCells = [];
+    const priceHeaders = new Map();
     cells.each((i, cell) => {
       const t = visibleText($, $(cell));
       if (!t) return;
@@ -336,12 +364,13 @@ function extractTables($, sourceUrl) {
         return;
       }
       const header = headers[i] || '';
-      if (looksLikeCompetitorPriceColumnHeader(header) ||
+      if (isFormerPriceHeader(header) || looksLikeCompetitorPriceColumnHeader(header) ||
           looksLikeThirdPartyProviderPriceLabel(header)) {
         return;
       }
       if (PRICE_LIKE.test(t) || BARE_PRICE.test(t)) {
         priceCells.push(t);
+        priceHeaders.set(t, header);
       } else if (!procedure && looksLikeProcedureLabel(t)) {
         procedure = t;
       }
@@ -351,6 +380,11 @@ function extractTables($, sourceUrl) {
     if (looksLikeThirdPartyProviderPriceLabel(procedure) ||
         looksLikeCompetitorPriceColumnHeader(procedure)) {
       return;
+    }
+    const priceHeader = priceHeaders.get(priceRaw) || '';
+    const dose = priceHeader.match(/\b\d+(?:[.,]\d+)?\s*(?:viales?|vials?|ml|sesiones?|sessions?)\b/i);
+    if (dose && !procedure.toLowerCase().includes(dose[0].toLowerCase())) {
+      procedure = `${procedure} · ${dose[0]}`;
     }
     procedure = withSectionContext($, $(tr), procedure);
     const parsed = parsePriceText(priceRaw);
@@ -366,7 +400,7 @@ function extractTables($, sourceUrl) {
       quantity: parsed.quantity,
       sourceUrl,
       extractionMethod: 'html_table',
-      rawEvidence: visibleText($, $(tr)),
+      rawEvidence: `${procedure} | ${priceHeader} | ${priceRaw}`,
       confidence: 0.97,
     }));
   });
@@ -707,6 +741,17 @@ function extractPriceEvidence({html, sourceUrl}) {
   if (!String(html || '').trim()) return [];
   const $ = cheerio.load(html);
   $('nav, header, footer, [role="navigation"], .mega-menu, .mega-menu-wrap, #mega-menu-wrap').remove();
+  const contextDoc = $.root().clone();
+  contextDoc.find('script, style').remove();
+  const pageContext = classifyExplorePricePageContext({sourceUrl,
+    pageText: contextDoc.text(), title: $('title').text()});
+  if (pageContext === 'explicit_non_owned_prices' ||
+      pageContext === 'non_clinic_booking_platform') return [];
+  removeFormerPriceColumns($);
+  $('article, .promo-card, .promotion').each((_, node) => {
+    const text = visibleText($, $(node));
+    if (text.length <= 1500 && looksLikeConditionalCompanionOffer(text)) $(node).remove();
+  });
   const out = [];
   const seen = new Set();
   const add = (row) => {

@@ -12,9 +12,32 @@ function withoutDoseAverages(raw) {
   );
 }
 
+function ownershipFold(raw) {
+  return String(raw || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').toLowerCase();
+}
+
+function looksLikeExplicitNonOwnedPriceDisclaimer(raw) {
+  const t = ownershipFold(raw);
+  return /\bno\s+representan\s+los\s+precios\s+aplicados\s+en\s+(?:la\s+)?(?:consulta|clinica)\b|\bno\s+(?:son|representan)\s+(?:nuestros\s+precios|las\s+tarifas\s+de\s+nuestra\s+clinica)\b|\b(?:do\s+not|don't)\s+represent\s+(?:the\s+)?(?:prices|fees)\s+(?:charged|applied)\s+(?:at|in)\s+(?:our|the)\s+(?:clinic|practice)\b/.test(t);
+}
+
+function looksLikeNonClinicBookingPlatform(raw) {
+  const t = ownershipFold(raw);
+  return /\bno\s+es\s+un\s+(?:consultorio\s+medico|centro\s+medico|centro\s+sanitario)\b|\b(?:is\s+not|isn't)\s+a\s+(?:medical\s+clinic|medical\s+practice)\b/.test(t);
+}
+
+function looksLikeConditionalCompanionOffer(raw) {
+  const t = ownershipFold(raw);
+  return /\bpack\s+(?:amigas|amigos|parejas)\b|\bven\s+con\s+(?:una?\s+)?amig[ao]\b|\b(?:bring|with)\s+(?:a|your)\s+friend\b.{0,90}\b(?:price|offer|discount|special)\b|\b(?:friends?|couples?)\s+(?:pack|offer|discount)\b/.test(t);
+}
+
 function classifyExplorePricePageContext({sourceUrl = '', pageText = '', title = ''} = {}) {
   const url = String(sourceUrl || '').trim().toLowerCase();
   const blob = withoutDoseAverages(`${title}\n${pageText}`).replace(/\u00a0/g, ' ').toLowerCase();
+
+  if (looksLikeExplicitNonOwnedPriceDisclaimer(blob)) return 'explicit_non_owned_prices';
+  if (looksLikeNonClinicBookingPlatform(blob)) return 'non_clinic_booking_platform';
 
   if (/\/cost-of-[a-z0-9-]+-in-[a-z0-9-]+|\/prices?-in-[a-z0-9-]+|\/cost-guide|\/price-guide\/[^/?#]|\/cost-savings|\/cost-saving|cost-of-breast|\/breast-augmentation-cost|\/how-much-does-|\/average-cost|albania-vs-|vs-italy|vs-uk|vs-europe|getclearbeauty\.|trueclinic\.|mymeditravel\./i.test(url)) {
     return 'country_cost_guide';
@@ -87,6 +110,11 @@ function exploreEvidenceIsClinicOwnedPrice({
   rawPriceText = '',
 } = {}) {
   const blob = `${rawProcedureText}\n${rawEvidence}\n${rawPriceText}`;
+  if (pageContext === 'explicit_non_owned_prices' ||
+      pageContext === 'non_clinic_booking_platform' ||
+      looksLikeExplicitNonOwnedPriceDisclaimer(blob) ||
+      looksLikeNonClinicBookingPlatform(blob) ||
+      looksLikeConditionalCompanionOffer(blob)) return false;
   if (looksLikeCountryMarketPriceMarketing(blob) &&
       !looksLikeExplicitClinicOwnPriceLanguage(blob)) {
     return false;
@@ -158,6 +186,9 @@ function exploreNormalizeProcedureDetail(rawProcedureText) {
 }
 
 module.exports = {
+  looksLikeExplicitNonOwnedPriceDisclaimer,
+  looksLikeNonClinicBookingPlatform,
+  looksLikeConditionalCompanionOffer,
   classifyExplorePricePageContext,
   looksLikeExplicitClinicOwnPriceLanguage,
   looksLikeCountryMarketPriceMarketing,

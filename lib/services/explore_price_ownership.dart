@@ -16,6 +16,7 @@ enum ExplorePricePageContext {
   foreignPriceComparison,
   blog,
   unknown,
+  nonClinicPrices,
 }
 
 String explorePricePageContextWire(ExplorePricePageContext c) {
@@ -40,6 +41,8 @@ String explorePricePageContextWire(ExplorePricePageContext c) {
       return 'blog';
     case ExplorePricePageContext.unknown:
       return 'unknown';
+    case ExplorePricePageContext.nonClinicPrices:
+      return 'non_clinic_prices';
   }
 }
 
@@ -63,6 +66,8 @@ ExplorePricePageContext explorePricePageContextFromWire(String raw) {
       return ExplorePricePageContext.foreignPriceComparison;
     case 'blog':
       return ExplorePricePageContext.blog;
+    case 'non_clinic_prices':
+      return ExplorePricePageContext.nonClinicPrices;
     default:
       return ExplorePricePageContext.unknown;
   }
@@ -76,6 +81,7 @@ bool explorePageContextIsAutomaticallyOwned(ExplorePricePageContext c) {
 
 bool explorePageContextBlocksFragmentBypass(ExplorePricePageContext c) {
   return c == ExplorePricePageContext.countryCostGuide ||
+      c == ExplorePricePageContext.nonClinicPrices ||
       c == ExplorePricePageContext.marketAverage ||
       c == ExplorePricePageContext.comparisonArticle ||
       c == ExplorePricePageContext.foreignPriceComparison ||
@@ -118,6 +124,18 @@ String _withoutDoseAverages(String raw) => raw.replaceAllMapped(
           : '',
     );
 
+/// An explicit disclaimer outweighs tariff-shaped fragments on the page.
+bool looksLikeExplicitNonClinicPriceDisclaimer(String raw) {
+  final text = foldExploreCityText(raw).replaceAll(RegExp(r'\s+'), ' ');
+  return RegExp(
+    r'\bno\s+representan\s+(?:los\s+)?precios\s+(?:aplicados|cobrados)\b|'
+    r'\b(?:do\s+not|don.t)\s+represent\s+(?:the\s+)?(?:prices|fees)\s+'
+    r'(?:charged|applied)\b|'
+    r'\b(?:these|listed)\s+(?:prices|fees)\s+are\s+not\s+'
+    r'(?:our|the\s+clinic.s)\s+(?:prices|fees)\b',
+  ).hasMatch(text);
+}
+
 /// Classify the *page* (URL + body), not a single DOM fragment.
 ExplorePricePageContext classifyExplorePricePageContext({
   required String sourceUrl,
@@ -130,6 +148,10 @@ ExplorePricePageContext classifyExplorePricePageContext({
   final blob = _withoutDoseAverages('$title\n$pageText')
       .replaceAll('\u00a0', ' ')
       .toLowerCase();
+
+  if (looksLikeExplicitNonClinicPriceDisclaimer(blob)) {
+    return ExplorePricePageContext.nonClinicPrices;
+  }
 
   if (_looksLikeCostGuideUrl(sourceUrl)) {
     return ExplorePricePageContext.countryCostGuide;
@@ -221,6 +243,7 @@ bool looksLikeExplicitClinicOwnPriceLanguage(
   if (RegExp(
     r'\bour (?:breast|botox|filler|rhinoplast|peel|package|price|prices)\b|'
     r'\bour package starts\b|'
+    r'\bour\s+(?:clinic|hospital|practice)\s+charges?\b|'
     r'\bprice list\s*:|'
     r'\bat\s+[A-Z][\w.\s-]{1,40}\s+(?:clinic|hospital|centre|center)\b|'
     r'\bstarts? from\b|'
@@ -270,6 +293,10 @@ bool exploreEvidenceIsClinicOwnedPrice({
   bool treatProseAsUnowned = false,
 }) {
   final blob = '$rawProcedureText\n$rawEvidence\n$rawPriceText';
+  if (pageContext == ExplorePricePageContext.nonClinicPrices ||
+      looksLikeExplicitNonClinicPriceDisclaimer(blob)) {
+    return false;
+  }
   if (looksLikeCountryMarketPriceMarketing(blob)) {
     if (!looksLikeExplicitClinicOwnPriceLanguage(blob, clinicName: clinicName)) {
       return false;

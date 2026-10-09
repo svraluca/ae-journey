@@ -1,0 +1,572 @@
+{
+  "generated_at_utc": "2026-10-08T15:41:28.185049+00:00",
+  "scope": "User Madrid screenshots: four rhinoplasty and four breast augmentation cards.",
+  "source_of_claimed_amounts": "User screenshots, separately compared against directly fetched public procedure pages.",
+  "live_source_audit_status": "completed",
+  "access_note": "Earlier proxy403 retries were superseded by successful default-proxy HTTPS fetches. TLS verification remained enabled. Seven homepages and eleven targeted procedure/price pages were captured with status200.",
+  "stored_card_evidence_provenance_available": false,
+  "limits": "A live published offer is not confirmation of the amount a clinic will quote for an individual patient. The user logs did not contain saved evidence/source URLs for individual surgery cards, so exact provenance of old amounts remains unproven.",
+  "cards": [
+    {
+      "provider_label_in_screenshot": "Dr Marcoromeo",
+      "host": "drmarcoromeo.com",
+      "procedure": "rhinoplasty",
+      "requested_city": "Madrid",
+      "screenshot_amount": {
+        "min": 10000,
+        "max": 20000,
+        "currency": "EUR",
+        "qualifier": "range"
+      },
+      "source_url_from_stored_card_evidence": null,
+      "audited_source_url": "https://drmarcoromeo.com/precios-cirugia-plastica-madrid-guia-dr-romeo/",
+      "live_source_fetch": {
+        "requested_url": "https://drmarcoromeo.com/precios-cirugia-plastica-madrid-guia-dr-romeo/",
+        "accessed_at_utc": "2026-10-08T15:35:17.242184+00:00",
+        "status": 200,
+        "final_url": "https://drmarcoromeo.com/precios-cirugia-plastica-madrid-guia-dr-romeo/",
+        "sha256": "9e4195e5ad39f20daae4662e917cc0f773848a75c12518e71cc90711d076abae",
+        "bytes": 213789,
+        "saved_path": "/tmp/madrid_surgery_audit/9674b1aa821a2699.html"
+      },
+      "exact_published_excerpts": [
+        "Los precios son indicativos de la media en España en el 2026. No representan los precios aplicados en la consulta del Dr. Romeo.",
+        "Rinoplastia Post-Traumática 10.000 – 20.000 €",
+        "Rinoplastia Ultrasónica 7.500 – 9.000 €"
+      ],
+      "outcome": "reject_market_estimate_and_wrong_post_traumatic_variant",
+      "published_scoped_offer_on_fetched_page": null,
+      "verified_clinic_ownership_of_screenshot_amount": false,
+      "address_evidence": {
+        "source_url": "https://drmarcoromeo.com/",
+        "body_sha256": "406c0cc4d3f880891348e3ae8eb680e04b97a22821d70ce2fcaed3c27a732da5",
+        "exact_public_excerpt": "Calle Conde de Aranda – 15 28001 Madrid"
+      },
+      "notes": [
+        "The guide explicitly says its national-average prices do not represent Dr. Romeo clinic fees. The displayed amount also matches a post-traumatic rather than primary-rhinoplasty row.",
+        "A separate primary-rhinoplasty page states 7,500–9,000 EUR and links back to this guide. Do not invent a replacement tariff from the rejected market table. Stored card provenance was not present in the uploaded log."
+      ]
+    },
+    {
+      "provider_label_in_screenshot": "Sculpture Clinic",
+      "host": "sculptureclinic.es",
+      "procedure": "rhinoplasty",
+      "requested_city": "Madrid",
+      "screenshot_amount": {
+        "min": 7000,
+        "max": null,
+        "currency": "EUR",
+        "qualifier": "from"
+      },
+      "source_url_from_stored_card_evidence": null,
+      "audited_source_url": "https://sculptureclinic.es/rinoplastia/",
+      "live_source_fetch": {
+        "requested_url": "https://sculptureclinic.es/rinoplastia/",
+        "accessed_at_utc": "2026-10-08T15:35:17.243643+00:00",
+        "status": 200,
+        "final_url": "https://sculptureclinic.es/rinoplastia/",
+        "sha256": "18fa1f9d8ad5e34af921d4abf63fdeb5d233e3df94238324450e5005c20e99aa",
+        "bytes": 568928,
+        "saved_path": "/tmp/madrid_surgery_audit/ee3e4159ed777c0c.html"
+      },
+      "exact_published_excerpts": [
+        "El precio de la rinoplastia parte desde 7000 € . El monto puede variar depende de varios factores. Por ejemplo, una cirugía primaria es más económica que una de revisión. También influyen la complejidad del caso y el propósito de la operación."
+      ],
+      "outcome": "matches_published_clinic_starting_price",
+      "published_scoped_offer_on_fetched_page": {
+        "min": 7000,
+        "max": null,
+        "currency": "EUR",
+        "qualifier": "from",
+        "procedure": "Rhinoplasty"
+      },
+      "verified_clinic_ownership_of_screenshot_amount": true,
+      "address_evidence": {
+        "source_url": "https://sculptureclinic.es/",
+        "body_sha256": "3591b32d6d1681b94b1fe794a25dbba0ef16f535da31391fbab423e0106aaad9",
+        "exact_public_excerpt": "Calle de Espronceda 43 - Madrid"
+      },
+      "notes": [
+        "Keep the starting-price qualifier; this is not a fixed final quote. The page says complexity and revision surgery can increase the fee."
+      ]
+    },
+    {
+      "provider_label_in_screenshot": "Icifacial",
+      "host": "icifacial.com",
+      "procedure": "rhinoplasty",
+      "requested_city": "Madrid",
+      "screenshot_amount": {
+        "min": 10000,
+        "max": null,
+        "currency": "EUR",
+        "qualifier": "from"
+      },
+      "source_url_from_stored_card_evidence": null,
+      "audited_source_url": "https://icifacial.com/rinoplastia/precios-rinoplastia/",
+      "live_source_fetch": {
+        "requested_url": "https://icifacial.com/rinoplastia/precios-rinoplastia/",
+        "accessed_at_utc": "2026-10-08T15:35:17.243975+00:00",
+        "status": 200,
+        "final_url": "https://icifacial.com/rinoplastia/precios-rinoplastia/",
+        "sha256": "3c63d759432106d01f004496981d54b93aa19ea301e9a02a77b8d2c4b37b0def",
+        "bytes": 349648,
+        "saved_path": "/tmp/madrid_surgery_audit/45a2a35767fe2779.html"
+      },
+      "exact_published_excerpts": [
+        "Precios de rinoplastia 2025 con técnica ultrasónica en Madrid con Icifacial",
+        "Desde 8000€",
+        "La clave para una cirugía exitosa de rinoplastia está en la correcta elección de tu cirujano. Los centros de cirugía plástica ofrecen servicios con una amplia gama de precios de la rinoplastia. Es importante saber por qué tal rango. Los precios de rinoplastia en Madrid varían entre 6500 y 10000 euros, y dependen de muchos factores: por ejemplo, si la rinoplastia es primaria o secundaria. Lee la siguiente información para que entiendas el porqué de los precios de la operación de rinoplastia.",
+        "En general, el costo de la rinoplastia debe moverse alrededor de 700-10000 euros para un procedimiento primario, y no más de 9000 para una rinoplastia de revisión.",
+        "De acuerdo a la Sociedad Española de Cirugía Maxilofacial, el precio de la rinoplastia en España oscila entre los 5000 y 10000 euros, dependiendo de la reputación de su cirujano."
+      ],
+      "outcome": "screenshot_amount_does_not_match_published_owned_starting_offer",
+      "published_scoped_offer_on_fetched_page": {
+        "min": 8000,
+        "max": null,
+        "currency": "EUR",
+        "qualifier": "from",
+        "procedure": "Rhinoplasty with ultrasonic technique",
+        "advertised_heading_year": 2025
+      },
+      "verified_clinic_ownership_of_screenshot_amount": false,
+      "address_evidence": {
+        "source_url": "https://icifacial.com/",
+        "body_sha256": "c73682216b0a3344bd965f7226de0c5237b288448643f23e5cf52cf1343c723b",
+        "exact_public_excerpt": "Calle Rodríguez de San Pedro 42 – 28015 (Madrid)"
+      },
+      "notes": [
+        "The provider-specific primary section publishes from 8,000 EUR; a separate revision section also publishes from 8,000 EUR. The screenshot from 10,000 EUR is unsupported by these provider-owned sections.",
+        "The same page includes generic Madrid/national market estimates up to 10,000 EUR, including a literal 700–10000 typo. Those estimates must not become a clinic starting tariff.",
+        "The primary-price heading says 2025 and has no explicit expiry on the fetched page; effective current booking price was not independently confirmed.",
+        "Stored card evidence was not available, so the exact origin of the old 10,000 EUR amount is not proven."
+      ]
+    },
+    {
+      "provider_label_in_screenshot": "Diegocasas",
+      "host": "diegocasas.es",
+      "procedure": "rhinoplasty",
+      "requested_city": "Madrid",
+      "screenshot_amount": {
+        "min": 7000,
+        "max": 10000,
+        "currency": "EUR",
+        "qualifier": "range"
+      },
+      "source_url_from_stored_card_evidence": null,
+      "audited_source_url": "https://www.diegocasas.es/rinoplastia-en-madrid/precio/",
+      "live_source_fetch": {
+        "requested_url": "https://www.diegocasas.es/rinoplastia-en-madrid/precio/",
+        "accessed_at_utc": "2026-10-08T15:36:52.134618+00:00",
+        "status": 200,
+        "final_url": "https://www.diegocasas.es/rinoplastia-en-madrid/precio/",
+        "sha256": "f53061f82533f77e6c4fd111413ceb200a8e5dcd0d8a946c362762abe5e19517",
+        "bytes": 200069,
+        "saved_path": "/tmp/madrid_surgery_audit/47316bf843dbe992.html"
+      },
+      "exact_published_excerpts": [
+        "El costo de una rinoplastia con el Dr. Diego Casas en Madrid es de 7.000 € – 10.000 €",
+        "Una rinoplastia en Madrid , el precio de una rinoplastia puede ser 7.000 € – 10.000 € . El presupuesto se determina de forma personalizada tras la valoración médica, en función del tipo de intervención y de la complejidad de cada caso . Es fundamental que programes una consulta con tu cirujano para recibir un presupuesto detallado y personalizado.",
+        "Precio Promedio de una Rinoplastia en Madrid"
+      ],
+      "outcome": "matches_explicit_provider_range",
+      "published_scoped_offer_on_fetched_page": {
+        "min": 7000,
+        "max": 10000,
+        "currency": "EUR",
+        "qualifier": "range",
+        "procedure": "Rhinoplasty with Dr. Diego Casas"
+      },
+      "verified_clinic_ownership_of_screenshot_amount": true,
+      "address_evidence": {
+        "source_url": "https://www.diegocasas.es/",
+        "body_sha256": "7970e3d816b4762c0132e7eeb9fb8f900659609fa674c4caddf7833f2c7f21cd",
+        "exact_public_excerpt": "Clínica Harmos → Calle Velázquez, 12, Salamanca, 28001 Madrid"
+      },
+      "notes": [
+        "An explicit provider FAQ publishes the observed 7,000–10,000 EUR range. Keep both bounds and the named provider.",
+        "The same page contains a general average-price section. It must not make generic ranges owned or remove the explicit provider paragraph within that FAQ."
+      ]
+    },
+    {
+      "provider_label_in_screenshot": "Gustavosordo",
+      "host": "gustavosordo.com",
+      "procedure": "breast_augmentation",
+      "requested_city": "Madrid",
+      "screenshot_amount": {
+        "min": 6400,
+        "max": null,
+        "currency": "EUR",
+        "qualifier": "from"
+      },
+      "source_url_from_stored_card_evidence": null,
+      "audited_source_url": "https://gustavosordo.com/cirugia-mamaria/aumento-pecho-madrid/",
+      "live_source_fetch": {
+        "requested_url": "https://gustavosordo.com/cirugia-mamaria/aumento-pecho-madrid/",
+        "accessed_at_utc": "2026-10-08T15:35:18.160967+00:00",
+        "status": 200,
+        "final_url": "https://gustavosordo.com/cirugia-mamaria/aumento-pecho-madrid/",
+        "sha256": "05f03b117fdeb39d64ffb5063b5c5f32f8e3243887a71fded1f4c111a72d3d1f",
+        "bytes": 204302,
+        "saved_path": "/tmp/madrid_surgery_audit/6f0cfb07afbf802d.html"
+      },
+      "exact_published_excerpts": [
+        "Precio: el aumento de pecho va de 6.400 € a 7.800 € según la técnica: 6.400 € con el protocolo 24h Recovery Láser , 6.752 € con implante de poliuretano y 7.600 € la técnica PRESERVÉ (7.800 € con hospital de día). Tienes el desglose completo un poco más abajo .",
+        "De 6.400 € (24h Recovery Láser) a 7.800 € (PRESERVÉ con hospital de día). Con implante de poliuretano son 6.752 €. El precio incluye quirófano, anestesia, implantes y revisiones."
+      ],
+      "outcome": "matches_published_starting_amount_with_missing_procedure_detail",
+      "published_scoped_offer_on_fetched_page": {
+        "min": 6400,
+        "max": null,
+        "currency": "EUR",
+        "qualifier": "from",
+        "procedure": "Breast augmentation 24h Recovery Láser with implants"
+      },
+      "verified_clinic_ownership_of_screenshot_amount": true,
+      "address_evidence": {
+        "source_url": "https://gustavosordo.com/",
+        "body_sha256": "5d85146c7868d9ab627ef225628bdae26cd20df8983e74896a34b5bea66d27e6",
+        "exact_public_excerpt": "Calle Alberto Aguilera, 48 · 1.º izq. · 28015 Madrid"
+      },
+      "notes": [
+        "The page title advertises from 6,400 EUR. The content identifies the 6,400 EUR technique as 24h Recovery Láser and describes implants; Method not specified is unnecessary and inaccurate.",
+        "Other techniques are separately priced at 6,752, 7,600 and 7,800 EUR. Do not mix their technique names and prices."
+      ]
+    },
+    {
+      "provider_label_in_screenshot": "Dr Marcoromeo",
+      "host": "drmarcoromeo.com",
+      "procedure": "breast_augmentation",
+      "requested_city": "Madrid",
+      "screenshot_amount": {
+        "min": 6000,
+        "max": 8000,
+        "currency": "EUR",
+        "qualifier": "range"
+      },
+      "source_url_from_stored_card_evidence": null,
+      "audited_source_url": "https://drmarcoromeo.com/precios-cirugia-plastica-madrid-guia-dr-romeo/",
+      "live_source_fetch": {
+        "requested_url": "https://drmarcoromeo.com/precios-cirugia-plastica-madrid-guia-dr-romeo/",
+        "accessed_at_utc": "2026-10-08T15:35:17.242184+00:00",
+        "status": 200,
+        "final_url": "https://drmarcoromeo.com/precios-cirugia-plastica-madrid-guia-dr-romeo/",
+        "sha256": "9e4195e5ad39f20daae4662e917cc0f773848a75c12518e71cc90711d076abae",
+        "bytes": 213789,
+        "saved_path": "/tmp/madrid_surgery_audit/9674b1aa821a2699.html"
+      },
+      "exact_published_excerpts": [
+        "Los precios son indicativos de la media en España en el 2026. No representan los precios aplicados en la consulta del Dr. Romeo.",
+        "Cirugía Mamaria Aumento Mamario (Con implantes) 6.000 – 8.000 €"
+      ],
+      "outcome": "reject_explicit_nonowned_national_average",
+      "published_scoped_offer_on_fetched_page": null,
+      "verified_clinic_ownership_of_screenshot_amount": false,
+      "address_evidence": {
+        "source_url": "https://drmarcoromeo.com/",
+        "body_sha256": "406c0cc4d3f880891348e3ae8eb680e04b97a22821d70ce2fcaed3c27a732da5",
+        "exact_public_excerpt": "Calle Conde de Aranda – 15 28001 Madrid"
+      },
+      "notes": [
+        "The amount exists in the guide but the page explicitly says it is a national-average estimate, not the clinic fee. A matching number alone is insufficient verification."
+      ]
+    },
+    {
+      "provider_label_in_screenshot": "Doctor Aso",
+      "host": "doctoraso.es",
+      "procedure": "breast_augmentation",
+      "requested_city": "Madrid",
+      "screenshot_amount": {
+        "min": 6400,
+        "max": null,
+        "currency": "EUR",
+        "qualifier": "from"
+      },
+      "source_url_from_stored_card_evidence": null,
+      "audited_source_url": "https://www.doctoraso.es/aumento-de-pecho-madrid/",
+      "live_source_fetch": {
+        "requested_url": "https://www.doctoraso.es/aumento-de-pecho-madrid/",
+        "accessed_at_utc": "2026-10-08T15:35:19.436518+00:00",
+        "status": 200,
+        "final_url": "https://www.doctoraso.es/aumento-de-pecho-madrid/",
+        "sha256": "068a9d512f0efb8bdd74e05d5290061bbee20379cd78e3018d19827595f2215d",
+        "bytes": 553651,
+        "saved_path": "/tmp/madrid_surgery_audit/1f8ee5326a8b3081.html"
+      },
+      "exact_published_excerpts": [
+        "Mayor versatilidad Aumento de pecho convencional Desde 6.400 € Es la opción más versátil cuando se busca un mayor rango de volúmenes, diferentes vías de abordaje\r\n          o distintas posiciones del implante según la anatomía de la paciente. Permite más opciones de volumen y perfil. Puede realizarse por surco, areola o axila según el caso. Puede colocarse en plano subpectoral, dual o prepectoral."
+      ],
+      "outcome": "matches_published_conventional_augmentation_starting_price",
+      "published_scoped_offer_on_fetched_page": {
+        "min": 6400,
+        "max": null,
+        "currency": "EUR",
+        "qualifier": "from",
+        "procedure": "Conventional breast augmentation with implants"
+      },
+      "verified_clinic_ownership_of_screenshot_amount": true,
+      "address_evidence": {
+        "source_url": "https://www.doctoraso.es/",
+        "body_sha256": "85ddc2cf379119299be04dc699167721d4380eb0d2b1928841e39ac6375cf153",
+        "exact_public_excerpt": "Calle de Jorge Juan, 69, local derecho, 28009 Madrid"
+      },
+      "notes": [
+        "The 6,400 EUR card explicitly identifies conventional augmentation and implant positions. Keep the from qualifier.",
+        "Preservé from 7,900 EUR and MIA from 8,995 EUR are separate option cards, not this procedure price. Hide an unspecified-method placeholder."
+      ]
+    },
+    {
+      "provider_label_in_screenshot": "Bonomédico",
+      "host": "bonomedico.es",
+      "procedure": "breast_augmentation",
+      "requested_city": "Madrid",
+      "screenshot_amount": {
+        "min": 3490,
+        "max": null,
+        "currency": "EUR",
+        "qualifier": "exact"
+      },
+      "source_url_from_stored_card_evidence": null,
+      "audited_source_url": "https://www.bonomedico.es/madrid/cirugia-plastica/mamoplastia/aumento-pecho-madrid",
+      "live_source_fetch": {
+        "requested_url": "https://www.bonomedico.es/madrid/cirugia-plastica/mamoplastia/aumento-pecho-madrid",
+        "accessed_at_utc": "2026-10-08T15:35:19.638508+00:00",
+        "status": 200,
+        "final_url": "https://www.bonomedico.es/madrid/cirugia-plastica/mamoplastia/aumento-pecho-madrid",
+        "sha256": "f2f2adff39156fc806e703eef0b1e7cf9dbef7c5a2dea9658f9797ae5cbb0e0a",
+        "bytes": 123033,
+        "saved_path": "/tmp/madrid_surgery_audit/68d539b12ebec38f.html"
+      },
+      "exact_published_excerpts": [
+        "Aumento de pecho con prótesis redondas: 3.490 €",
+        "BonoMédico no es un consultorio médico.",
+        "La reserva de este Bono Médico incluye la primera consulta y en ningún caso conlleva la obligación de someterte a la operación. Al reservarlo NO se está contratando la operación. Una vez adquirido el Bono Médico lo recibirás en tu correo electrónico. Nosotros te llamaremos para concertar el día de la cita.",
+        "El aumento de pecho en Madrid es la cirugía estética más demandada en la actualidad por las mujeres que desean mejorar su aspecto. Con BonoMédico tienes un aumento de pecho en Madrid por 3.490 € , de la mano del Dr. Carlos Corrales Benítez, uno de los cirujanos plásticos con mayor experiencia en este tipo de intervenciones."
+      ],
+      "outcome": "reject_wrong_platform_as_clinic_identity",
+      "published_scoped_offer_on_fetched_page": {
+        "min": 3490,
+        "max": null,
+        "currency": "EUR",
+        "qualifier": "exact_offer",
+        "procedure": "Breast augmentation with round implants",
+        "named_provider": "Dr. Carlos Corrales Benítez",
+        "platform": "Bonomédico"
+      },
+      "verified_clinic_ownership_of_screenshot_amount": false,
+      "address_evidence": {
+        "source_url": "https://www.bonomedico.es/",
+        "body_sha256": "3ce5a2e7f09ff15fb143d8c627440386dc18a5579c12b0a6cf707a718ea450e5",
+        "exact_public_excerpt": "Clínica La Luz Calle General Rodrigo, 8 - 28003 Madrid; Hospital Moncloa Avda. de Valladolid, 83 - 28008 Madrid (named treatment sites, not Bonomédico clinic address)"
+      },
+      "notes": [
+        "The offer price exists, but Bonomédico is not the clinic or surgeon. The page names Dr. Carlos Corrales Benítez, consultation at Clínica La Luz and surgery at Hospital Moncloa.",
+        "The page conditions describe surgery from 3,490 EUR and direct payment to the surgeon/clinic; the round-implant offer itself is 3,490 EUR and anatomical implants 3,690 EUR.",
+        "Either reject this platform card under the current clinic-only identity rules or use a verified marketplace profile with the actual provider and exact service scope. Do not fabricate a rating or clinic identity."
+      ]
+    }
+  ],
+  "actual_rule_failures": [
+    "An explicit page-wide disclaimer that figures are national averages and not clinic fees must override menu-looking URLs and scoped tariff tables.",
+    "Post-traumatic and revision/secondary rhinoplasty tariffs must not replace a generic primary-rhinoplasty card.",
+    "Primary ultrasonic rhinoplasty is an operative technique, not inherently revision or secondary surgery; preserve its published technique label and scope.",
+    "Mixed informational and owned-price pages need scoped section validation. Generic estimates must not become owned starting prices, while explicit provider sections should remain eligible.",
+    "A named medical booking broker must not be assigned an official clinic identity."
+  ],
+  "offline_rule_probes": [
+    {
+      "fixture": "fictional_general_provider_estimate",
+      "real_site_snapshot": false,
+      "url": "https://clinic-ficticia.example/rinoplastia-madrid-precio/",
+      "text": "El precio de una rinoplastia suele oscilar entre 10.000 € y 20.000 € dependiendo del cirujano y la clínica.",
+      "observed": "All three Python candidates accepted as owned official_price_menu.",
+      "implication": "Spanish generic-provider price scope can bypass ownership via a price slug. General estimate needs to be excluded independent of a menu-looking URL."
+    },
+    {
+      "fixture": "fictional_owned_starting_tariff",
+      "real_site_snapshot": false,
+      "url": "https://clinic-ficticia.example/rinoplastia-madrid-precio/",
+      "text": "En Clínica Ficticia el precio de nuestra rinoplastia empieza desde 7.000 €.",
+      "observed": "All three candidates accepted owned with from qualifier and no upper amount.",
+      "implication": "Keep positive explicit clinic-owned starting fee valid."
+    },
+    {
+      "fixture": "fictional_owned_approximate_range",
+      "real_site_snapshot": false,
+      "url": "https://clinic-ficticia.example/rinoplastia-madrid-precio/",
+      "text": "El precio aproximado de una rinoplastia en nuestra clínica es de 10.000 € a 20.000 €.",
+      "observed": "All three candidates truncate to10000 with max=null qualifier=exact.",
+      "implication": "Range joining and approximate qualification need review without making unsupported exact-price claims."
+    }
+  ],
+  "fetched_sources": [
+    {
+      "host": "drmarcoromeo.com",
+      "requested_url": "https://drmarcoromeo.com/",
+      "accessed_at_utc": "2026-10-08T15:34:37.518324+00:00",
+      "status": 200,
+      "final_url": "https://drmarcoromeo.com/",
+      "sha256": "406c0cc4d3f880891348e3ae8eb680e04b97a22821d70ce2fcaed3c27a732da5",
+      "bytes": 298713,
+      "saved_path": "/tmp/madrid_surgery_audit/drmarcoromeo.com.html"
+    },
+    {
+      "host": "sculptureclinic.es",
+      "requested_url": "https://sculptureclinic.es/",
+      "accessed_at_utc": "2026-10-08T15:34:37.518984+00:00",
+      "status": 200,
+      "final_url": "https://sculptureclinic.es/",
+      "sha256": "3591b32d6d1681b94b1fe794a25dbba0ef16f535da31391fbab423e0106aaad9",
+      "bytes": 433313,
+      "saved_path": "/tmp/madrid_surgery_audit/sculptureclinic.es.html"
+    },
+    {
+      "host": "icifacial.com",
+      "requested_url": "https://icifacial.com/",
+      "accessed_at_utc": "2026-10-08T15:34:37.519449+00:00",
+      "status": 200,
+      "final_url": "https://icifacial.com/",
+      "sha256": "c73682216b0a3344bd965f7226de0c5237b288448643f23e5cf52cf1343c723b",
+      "bytes": 784077,
+      "saved_path": "/tmp/madrid_surgery_audit/icifacial.com.html"
+    },
+    {
+      "host": "diegocasas.es",
+      "requested_url": "https://diegocasas.es/",
+      "accessed_at_utc": "2026-10-08T15:34:37.519831+00:00",
+      "status": 200,
+      "final_url": "https://www.diegocasas.es/",
+      "sha256": "7970e3d816b4762c0132e7eeb9fb8f900659609fa674c4caddf7833f2c7f21cd",
+      "bytes": 227065,
+      "saved_path": "/tmp/madrid_surgery_audit/diegocasas.es.html"
+    },
+    {
+      "host": "gustavosordo.com",
+      "requested_url": "https://gustavosordo.com/",
+      "accessed_at_utc": "2026-10-08T15:34:37.520500+00:00",
+      "status": 200,
+      "final_url": "https://gustavosordo.com/",
+      "sha256": "5d85146c7868d9ab627ef225628bdae26cd20df8983e74896a34b5bea66d27e6",
+      "bytes": 198034,
+      "saved_path": "/tmp/madrid_surgery_audit/gustavosordo.com.html"
+    },
+    {
+      "host": "doctoraso.es",
+      "requested_url": "https://doctoraso.es/",
+      "accessed_at_utc": "2026-10-08T15:34:37.521523+00:00",
+      "status": 200,
+      "final_url": "https://www.doctoraso.es/",
+      "sha256": "85ddc2cf379119299be04dc699167721d4380eb0d2b1928841e39ac6375cf153",
+      "bytes": 440746,
+      "saved_path": "/tmp/madrid_surgery_audit/doctoraso.es.html"
+    },
+    {
+      "host": "bonomedico.es",
+      "requested_url": "https://bonomedico.es/",
+      "accessed_at_utc": "2026-10-08T15:34:37.532287+00:00",
+      "status": 200,
+      "final_url": "https://www.bonomedico.es/",
+      "sha256": "3ce5a2e7f09ff15fb143d8c627440386dc18a5579c12b0a6cf707a718ea450e5",
+      "bytes": 58781,
+      "saved_path": "/tmp/madrid_surgery_audit/bonomedico.es.html"
+    },
+    {
+      "requested_url": "https://drmarcoromeo.com/precios-cirugia-plastica-madrid-guia-dr-romeo/",
+      "accessed_at_utc": "2026-10-08T15:35:17.242184+00:00",
+      "status": 200,
+      "final_url": "https://drmarcoromeo.com/precios-cirugia-plastica-madrid-guia-dr-romeo/",
+      "sha256": "9e4195e5ad39f20daae4662e917cc0f773848a75c12518e71cc90711d076abae",
+      "bytes": 213789,
+      "saved_path": "/tmp/madrid_surgery_audit/9674b1aa821a2699.html"
+    },
+    {
+      "requested_url": "https://drmarcoromeo.com/rinoplastia-cirugia-nariz/",
+      "accessed_at_utc": "2026-10-08T15:35:17.242803+00:00",
+      "status": 200,
+      "final_url": "https://drmarcoromeo.com/rinoplastia-cirugia-nariz/",
+      "sha256": "4a2541b9aa5d7fa9e49b5083d65d76a360f907d906f6674c86bce929a3c5f1e4",
+      "bytes": 218990,
+      "saved_path": "/tmp/madrid_surgery_audit/aba49313331e16b4.html"
+    },
+    {
+      "requested_url": "https://drmarcoromeo.com/mamoplastia-de-aumento/",
+      "accessed_at_utc": "2026-10-08T15:35:17.243259+00:00",
+      "status": 200,
+      "final_url": "https://drmarcoromeo.com/mamoplastia-de-aumento/",
+      "sha256": "85a189039e88ea46f7d5a7748b359cd3d4a58fcbdcaf29b3e057cdea7764d789",
+      "bytes": 192320,
+      "saved_path": "/tmp/madrid_surgery_audit/14e20ca8ff46a0a3.html"
+    },
+    {
+      "requested_url": "https://sculptureclinic.es/rinoplastia/",
+      "accessed_at_utc": "2026-10-08T15:35:17.243643+00:00",
+      "status": 200,
+      "final_url": "https://sculptureclinic.es/rinoplastia/",
+      "sha256": "18fa1f9d8ad5e34af921d4abf63fdeb5d233e3df94238324450e5005c20e99aa",
+      "bytes": 568928,
+      "saved_path": "/tmp/madrid_surgery_audit/ee3e4159ed777c0c.html"
+    },
+    {
+      "requested_url": "https://icifacial.com/rinoplastia/precios-rinoplastia/",
+      "accessed_at_utc": "2026-10-08T15:35:17.243975+00:00",
+      "status": 200,
+      "final_url": "https://icifacial.com/rinoplastia/precios-rinoplastia/",
+      "sha256": "3c63d759432106d01f004496981d54b93aa19ea301e9a02a77b8d2c4b37b0def",
+      "bytes": 349648,
+      "saved_path": "/tmp/madrid_surgery_audit/45a2a35767fe2779.html"
+    },
+    {
+      "requested_url": "https://www.diegocasas.es/rinoplastia-en-madrid/",
+      "accessed_at_utc": "2026-10-08T15:35:17.244383+00:00",
+      "status": 200,
+      "final_url": "https://www.diegocasas.es/rinoplastia-en-madrid/",
+      "sha256": "c6ecf503fc444dac2da27b3b8a9e2d3ca83de467e4c72817f945c2c8907f948c",
+      "bytes": 214994,
+      "saved_path": "/tmp/madrid_surgery_audit/e5b4949676551baf.html"
+    },
+    {
+      "requested_url": "https://www.diegocasas.es/rinoplastia-ultrasonica/",
+      "accessed_at_utc": "2026-10-08T15:35:17.840364+00:00",
+      "status": 200,
+      "final_url": "https://www.diegocasas.es/rinoplastia-ultrasonica/",
+      "sha256": "83347bd7118b456810ca783b841ea9308980fdfd9b5a15568626c19a2d806baa",
+      "bytes": 200167,
+      "saved_path": "/tmp/madrid_surgery_audit/fb2986e500b9e4e7.html"
+    },
+    {
+      "requested_url": "https://gustavosordo.com/cirugia-mamaria/aumento-pecho-madrid/",
+      "accessed_at_utc": "2026-10-08T15:35:18.160967+00:00",
+      "status": 200,
+      "final_url": "https://gustavosordo.com/cirugia-mamaria/aumento-pecho-madrid/",
+      "sha256": "05f03b117fdeb39d64ffb5063b5c5f32f8e3243887a71fded1f4c111a72d3d1f",
+      "bytes": 204302,
+      "saved_path": "/tmp/madrid_surgery_audit/6f0cfb07afbf802d.html"
+    },
+    {
+      "requested_url": "https://www.doctoraso.es/aumento-de-pecho-madrid/",
+      "accessed_at_utc": "2026-10-08T15:35:19.436518+00:00",
+      "status": 200,
+      "final_url": "https://www.doctoraso.es/aumento-de-pecho-madrid/",
+      "sha256": "068a9d512f0efb8bdd74e05d5290061bbee20379cd78e3018d19827595f2215d",
+      "bytes": 553651,
+      "saved_path": "/tmp/madrid_surgery_audit/1f8ee5326a8b3081.html"
+    },
+    {
+      "requested_url": "https://www.bonomedico.es/madrid/cirugia-plastica/mamoplastia/aumento-pecho-madrid",
+      "accessed_at_utc": "2026-10-08T15:35:19.638508+00:00",
+      "status": 200,
+      "final_url": "https://www.bonomedico.es/madrid/cirugia-plastica/mamoplastia/aumento-pecho-madrid",
+      "sha256": "f2f2adff39156fc806e703eef0b1e7cf9dbef7c5a2dea9658f9797ae5cbb0e0a",
+      "bytes": 123033,
+      "saved_path": "/tmp/madrid_surgery_audit/68d539b12ebec38f.html"
+    },
+    {
+      "requested_url": "https://www.diegocasas.es/rinoplastia-en-madrid/precio/",
+      "accessed_at_utc": "2026-10-08T15:36:52.134618+00:00",
+      "status": 200,
+      "final_url": "https://www.diegocasas.es/rinoplastia-en-madrid/precio/",
+      "sha256": "f53061f82533f77e6c4fd111413ceb200a8e5dcd0d8a946c362762abe5e19517",
+      "bytes": 200069,
+      "saved_path": "/tmp/madrid_surgery_audit/47316bf843dbe992.html"
+    }
+  ]
+}

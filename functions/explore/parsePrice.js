@@ -1,6 +1,7 @@
 'use strict';
 
 const crypto = require('crypto');
+const {isApproximatePriceQuote} = require('./procedureScope');
 const {looksLikePhoneNumber, looksLikeAddressNumber,
   looksLikeGraftOrFollicleQuantity, looksLikePerGraftQuotedPrice,
   stripGraftQuantityPhrases, stripDosageQuantityPhrases,
@@ -107,6 +108,8 @@ function parsePriceText(raw) {
       }
       // else: keep fixed/from + quantity metadata (no auto /ml).
     }
+    if (type !== 'sale' && (isApproximatePriceQuote(original, p.priceMin) ||
+        isApproximatePriceQuote(original, p.priceMax))) type = 'approximate';
     return {
       priceMin: p.priceMin,
       priceMax: p.priceMax,

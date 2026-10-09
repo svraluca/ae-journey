@@ -56,6 +56,7 @@ String mapPricePinShortLabel(
         currency: c.currency,
         extractionMethod: c.extractionMethod,
         rawEvidence: c.priceEvidenceText,
+        rawProcedureText: c.rawProcedureText,
         procedure: c.brand,
         sourceUrl: c.priceSourceUrl,
       )) {
@@ -126,6 +127,18 @@ String? convertClinicPriceLabel(OpenAIClinic c, FilterCurrency? to) {
     fromCode: fromCode,
     to: to,
   );
+  if (c.priceType.trim().toLowerCase() == 'approximate') {
+    final lower = FilterFx.formatAmount(converted, to, fromPrefix: false);
+    if (c.priceMax > c.priceMin + 0.5) {
+      final upper = FilterFx.formatAmount(
+        FilterFx.convert(amount: c.priceMax, fromCode: fromCode, to: to),
+        to,
+        fromPrefix: false,
+      );
+      return 'approx. $lower–$upper';
+    }
+    return 'approx. $lower';
+  }
   final hasFrom = label.toLowerCase().startsWith('from ') || c.priceMin > 0;
   return FilterFx.formatAmount(converted, to, fromPrefix: hasFrom);
 }

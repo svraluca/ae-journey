@@ -1,5 +1,9 @@
 'use strict';
 
+const {looksLikeSurgicalChinTreatment,
+  looksLikeCombinedToxinSkinTreatment, looksLikeCreditLimitQuote,
+  looksLikeSpanishMarketPriceQuote, looksLikeLipHydrationWhenAugmentationRequested} = require('./procedureScope');
+
 function isWeakPriceExtractionMethod(method) {
   switch (String(method || '').trim().toLowerCase()) {
     case 'dom_block':
@@ -384,7 +388,7 @@ function looksLikeStarredHospitalGuidePrice({blob, priceMin, procedure}) {
 function looksLikePartialRhinoplastyStarting(raw) {
   const folded = String(raw || '').replace(/\u00a0/g, ' ').toLowerCase();
   if (!folded.trim()) return false;
-  return /\btip\s+rhino|\brhinoplasty\s+tip|\bnose\s+tip|\btip-only|\balarplasty|\balar\s+base|revision\s+rhino|\bsecondary\s+rhino|\bethnic\s+rhino|\brinoplastia\s+(?:racial|[eé]tnica|secundaria)|\bpartial\s+rhino|\brinoplastie\s+par[tț]ial|\bcartilaginous area of the nasal tip|\bseptum region\b|\bwing region\b/i.test(folded);
+  return /\btip\s+rhino|\brhinoplasty\s+tip|\bnose\s+tip|\btip-only|\balarplasty|\balar\s+base|revision\s+rhino|\bsecondary\s+rhino|\bethnic\s+rhino|\brinoplastia\s+(?:racial|[eé]tnica|secundaria|parcial|(?:de\s+(?:la\s+)?)?punta|post[\s-]?traum[aá]tic\w*)|\bpost[\s-]?traumatic\s+rhino|\brhino\w*\s+post[\s-]?traumatic|\bpartial\s+rhino|\brinoplastie\s+par[tț]ial|\bcartilaginous area of the nasal tip|\bseptum region\b|\bwing region\b/i.test(folded);
 }
 
 function looksLikePrimaryRhinoplastyStarting(raw) {
@@ -746,7 +750,7 @@ function hairPerGraftPlausibleMax(currency) {
   }
 }
 
-function botoxAmountOwnedByFiller({rawEvidence, priceMin, currency}) {
+function botoxAmountOwnedByCompetingProcedure({rawEvidence, priceMin, currency}, competing) {
   const text = String(rawEvidence || '');
   const money = /(?:EUR\b|AED\b|USD\b|€|\$)\s*(\d+(?:[.,]\d+)?)|(\d+(?:[.,]\d+)?)\s*(EUR\b|AED\b|USD\b|€|\$)/gi;
   const prices = [...text.matchAll(money)];
@@ -759,12 +763,22 @@ function botoxAmountOwnedByFiller({rawEvidence, priceMin, currency}) {
     if (code(unit) !== code(currency) || Math.abs(amount - Number(priceMin)) > .011) continue;
     const start = i ? prices[i-1].index + prices[i-1][0].length : 0;
     const prefix = text.slice(start, match.index).toLowerCase();
-    const toxin = [...prefix.matchAll(/\b(?:botox|botulin\w*|neuromodulat\w*)\b/g)];
-    const filler = [...prefix.matchAll(/\b(?:hyaluronic\s+acid|acid[ou]\s+hialuronic[ou]?|fillers?)\b/g)];
+    const toxin = [...prefix.matchAll(/\b(?:botox|botulin\w*|neuromodul\w*)\b/g)];
+    const filler = [...prefix.matchAll(competing)];
     if (toxin.length && (!filler.length || toxin.at(-1).index > filler.at(-1).index)) return false;
     if (filler.length) conflicts++;
   }
   return conflicts > 0;
+}
+
+function botoxAmountOwnedByFiller(quote) {
+  return botoxAmountOwnedByCompetingProcedure(quote,
+      /\b(?:hyaluronic\s+acid|acid[ou]\s+hialuronic[ou]?|fillers?)\b/g);
+}
+
+function botoxAmountOwnedBySkinTreatment(quote) {
+  return botoxAmountOwnedByCompetingProcedure(quote,
+      /\b(?:mesoterap\w*|mesotherap\w*|nctf|filorga|skin\s*booster\w*)\b/g);
 }
 
 function evaluateExtractedPriceCandidate({
@@ -791,6 +805,32 @@ function evaluateExtractedPriceCandidate({
 
   if (amount <= 0) {
     return {accepted: false, reason: 'missing_price_semantics'};
+  }
+  if (looksLikeCreditLimitQuote({rawPriceText, rawEvidence, priceMin: amount})) {
+    return {accepted: false, reason: 'financing_credit_limit'};
+  }
+  if (looksLikeSpanishMarketPriceQuote(blob)) {
+    return {accepted: false, reason: 'spanish_market_price_quote'};
+  }
+  if (looksLikeLipHydrationWhenAugmentationRequested({procedure, evidence: blob})) {
+    return {accepted: false, reason: 'lip_hydration_not_augmentation'};
+  }
+  if (/botox|botulin|toxin|neuromodul/i.test(procedure) &&
+      botoxAmountOwnedBySkinTreatment({rawEvidence, priceMin: amount, currency})) {
+    return {accepted: false, reason: 'neighbouring_skin_treatment_amount'};
+  }
+  if (/filler|hialuron|hyaluron|relleno/i.test(procedure) &&
+      (looksLikeSurgicalChinTreatment(`${procedure}\n${blob}`) ||
+          looksLikeSurgicalChinTreatment(sourceUrl))) {
+    return {accepted: false, reason: 'surgical_chin_not_filler'};
+  }
+  if (/botox|botulin|toxin|neuromodul/i.test(procedure) &&
+      looksLikeCombinedToxinSkinTreatment(`${procedure}\n${blob}`)) {
+    return {accepted: false, reason: 'combined_toxin_skinbooster'};
+  }
+  if (/rhino|rinoplast/i.test(procedure) &&
+      looksLikePartialRhinoplastyStarting(`${procedure}\n${blob}`)) {
+    return {accepted: false, reason: 'rhino_tip_or_partial'};
   }
   if (/peel/i.test(procedure) &&
       /\bcorporal\w*|\bcuerpo\b|\bbody\b|\bscrub\b|\bsales\b|\bsalt\b|\bsugar\b|autobronceador|enzim[aá]tic|enzymatic|microdermabrasion|peel\s*off/i.test(`${procedure} ${blob}`)) {
@@ -1065,6 +1105,7 @@ function stripInvalidCachedPrice(row, procedure, {logRejects = true} = {}) {
 
 module.exports = {
   botoxAmountOwnedByFiller,
+  botoxAmountOwnedBySkinTreatment,
   evaluateExtractedPriceCandidate,
   isValidExtractedPriceCandidate,
   isWeakPriceExtractionMethod,

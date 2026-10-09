@@ -10,7 +10,9 @@ This checkout preserves the complete Flutter app already uploaded to GitHub and 
 - Menu parsing runs off the mobile app's frame thread. Heading lookup indexes siblings once; repeated literal regexes and unchanged display rows reuse cached work.
 - Page context travels with each price fragment. Market estimates, foreign comparisons, consultation fees, and incomparable packages cannot masquerade as local treatment tariffs.
 - Owned price menus remain usable beside average dosage descriptions. Monetary averages remain excluded. Explicit offer expiry replaces guesses based on the amount alone.
-- Functions and Flutter share extraction revision **e22**, which invalidates older price evidence. A regression test compares the actual files.
+- Functions and Flutter share extraction revision **e23**, which invalidates older price evidence. A regression test compares the actual files.
+- General extraction rules exclude financing caps, conditional companion offers, old price columns, and explicitly disclaimed market estimates. They preserve current treatment names, areas, doses, and approximate pricing; clinic prices are not hardcoded.
+- Returning to a verified tab reuses its four cards immediately, with bounded background refresh. Repeated missing-rating lookups and duplicate collection submissions are coalesced. SQLite waits run outside the API event loop.
 - City matching uses complete words, and explicit foreign branch tariff headings override local SEO titles and shared footers.
 - Index reads preserve rejected-source quarantine and country scope. Fresh verification can restore a rejected source.
 - Discovery counts eligible unique saved providers and respects already-spent search budgets. Malformed Exa responses fail safely.
@@ -30,13 +32,13 @@ The backend helper starts the local service with Firestore and scheduled refresh
 
 ## Validation
 
-**80 Python tests**, **243 Functions tests**, and **214 tests in 16 selected Flutter suites** passed with no failures or skips. Final commands are recorded in [current validation](verification/current_validation.json). The complete setup script and backend restart instructions were exercised in this workspace. The service passed health, price-index, and four-card request-limit checks. Flutter analysis reports no errors; existing warnings and style notices remain.
+**99 Python tests**, **258 Functions tests**, and **182 tests in 12 selected Flutter suites** passed with no failures or skips. Final commands are recorded in [current validation](verification/current_validation.json). The local API and worker both report **0.11.84** and passed health, price-index, and four-card request-limit checks. Flutter analysis reports no errors; warnings and style notices remain. Earlier setup and performance checks are preserved in [prior validation](verification/prior_validation_7e70ecc.json).
 
 Tests cover the display limit, treatment names, exact fee ranges, active search messages, cancellation, cache ownership, event-loop responsiveness, city scope, tariff ownership, provider budgets, and rejected-source persistence.
 
 ## Limits of this run
 
-Current live clinic-price verification remains blocked: the network proxy rejects the Dr. Puig clinic source with HTTP 403. Access for the three clinic domains in the supplied logs, Clínica Dra. Olmo, their `www` hosts, and Flutter storage is saved in the environment draft. Review/save the settings and publish the environment to activate that configuration; draft saving alone does not apply it. No current clinic prices or ratings are certified by these offline tests.
+The twenty Madrid screenshot cards were checked against live public source pages. The [Madrid price audit](docs/MADRID_PRICE_AUDIT.md) distinguishes matching amounts from wrong treatments, old prices, promotions, financing and market estimates. The Dra. Olmo FAQ publishes approximately €300 depending on vials. Source URLs, excerpts and fetched-page hashes are recorded in the audit JSON files. The old cards' exact stored extraction evidence was not present in the supplied log, and live Google ratings were not rechecked.
 
 Device scrolling and mobile release builds were not run. No Firebase, app-store, or backend deployment was performed. Deploy the client, Python API and Functions changes together; the corrected API rejects older eight-card requests.
 

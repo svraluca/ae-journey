@@ -938,6 +938,8 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     required OpenAIComparisonResult shown,
   }) {
     if (_isWorldwide) return;
+    // Cache warming must not launch rating searches for all hidden pills.
+    if (pill != _pill && _pill != 'All') return;
     if (!_openAI.hasRetryableUnratedClinics(
       clinics: shown.clinics,
       city: _city,

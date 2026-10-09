@@ -72,6 +72,7 @@ enum PriceType {
   fixed,
   from,
   range,
+  approximate,
   sale,
   perArea,
   perUnit,
@@ -87,6 +88,8 @@ enum PriceType {
         return PriceType.from;
       case 'range':
         return PriceType.range;
+      case 'approximate':
+        return PriceType.approximate;
       case 'sale':
         return PriceType.sale;
       case 'perarea':
@@ -431,6 +434,17 @@ ParsedPrice? parsePriceText(String raw) {
   ).hasMatch(original);
   ParsedPrice finish(ParsedPrice p) {
     var type = p.priceType;
+    // Uncertainty belongs to the source amount, not unrelated page copy such
+    // as an approximate treatment duration. Preserve numeric interval bounds.
+    final roughAmount =
+        cachedRegExp(
+          r'\b(?:approximately|approx\.?|roughly|around|about|aproximadamente|aproximad[oa]s?|suele\s+rondar|ronda|en\s+torno\s+a)\s+(?:(?:los?|unos?|entre)\s+)?(?:[€£$]|EUR\s*|GBP\s*|USD\s*)?(\d[\d.,]*)',
+          caseSensitive: false,
+        ).allMatches(original).any((m) {
+          final amount = parseLocaleNumber(m.group(1) ?? '');
+          return amount != null && (amount - p.priceMin).abs() < 0.01;
+        });
+    if (roughAmount && type != PriceType.sale) type = PriceType.approximate;
     var unit = unitQty.unit;
     var qty = graftSessionQty ?? unitQty.quantity;
     if (type == PriceType.fixed || type == PriceType.from) {

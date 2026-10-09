@@ -222,13 +222,15 @@ function resolveCuratedPrice(procedure, currencyDefault) {
   const packageSessions = num(p.package_sessions);
 
   let priceType;
-  if (PER_UNIT_TOKENS.has(unit)) {
+  if (sourceType === 'approximate') {
+    priceType = 'approximate';
+  } else if (PER_UNIT_TOKENS.has(unit)) {
     priceType = 'per_unit';
   } else if (PER_AREA_TOKENS.has(unit)) {
     priceType = 'per_area';
   } else if (max > priceMin) {
     priceType = 'range';
-  } else if (sourceType === 'from' || sourceType === 'approximate') {
+  } else if (sourceType === 'from') {
     priceType = 'from';
   } else if (promotional) {
     priceType = 'sale';

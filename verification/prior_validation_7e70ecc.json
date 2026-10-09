@@ -1,0 +1,73 @@
+{
+  "validated_at_utc": "2026-10-08T12:08:25.258988+00:00",
+  "python": {
+    "tests": 80,
+    "passed": 80,
+    "failed": 0,
+    "skipped": 0,
+    "runtime": "Python 3.12.14",
+    "command": "PYTHONDONTWRITEBYTECODE=1 /workspace/tooling/ae-journey-venv/bin/python -m unittest discover -s tests -v",
+    "working_directory": "python"
+  },
+  "functions": {
+    "tests": 243,
+    "passed": 243,
+    "failed": 0,
+    "skipped": 0,
+    "runtime": "Node 20.20.2",
+    "command": "PATH=/workspace/tooling/node-v20.20.2-linux-x64/bin:$PATH npm test",
+    "working_directory": "functions"
+  },
+  "flutter": {
+    "tests": 214,
+    "passed": 214,
+    "failed": 0,
+    "skipped": 0,
+    "runtime": "Flutter 3.41.4 / Dart 3.11.1",
+    "command": "flutter test --no-pub --concurrency=1 test/explore_valencia_prices_test.dart test/explore_verified_card_titles_test.dart test/explore_price_ownership_test.dart test/explore_compare_hybrid_contract_test.dart test/explore_city_and_eight_cards_test.dart test/explore_price_index_test.dart test/explore_queue_and_ratings_test.dart test/explore_perf_coordinator_test.dart test/explore_extract_performance_test.dart test/explore_regex_flags_test.dart test/explore_duplicate_verify_test.dart test/explore_source_context_regressions_test.dart test/explore_owned_tariff_context_test.dart test/explore_tirana_peel_price_parse_test.dart test/explore_peel_discovery_extract_test.dart test/explore_html_price_extractor_test.dart",
+    "selected_suites": 16,
+    "full_project_test_suite_run": false,
+    "analysis_command": "flutter analyze --no-pub --no-fatal-infos --no-fatal-warnings",
+    "analysis_errors": 0,
+    "analysis_warnings": 83,
+    "analysis_notices": 130,
+    "dart_source_files": 218,
+    "device_scrolling_test_run": false,
+    "mobile_release_build_run": false
+  },
+  "performance": {
+    "full_price_menu_fixture_rows": 2000,
+    "full_price_menu_test_passed": true,
+    "test_budget_ms": 30000,
+    "observed_test_elapsed_seconds_approx": 12,
+    "before_fix_observed_elapsed_ms": 63826,
+    "background_parse_event_loop_regression_passed": true,
+    "stale_parse_cannot_overwrite_new_html": true
+  },
+  "setup": {
+    "complete_script_executed": true,
+    "python_dependencies_locked": true,
+    "functions_npm_ci_passed": true,
+    "flutter_pub_get_enforce_lockfile_passed": true,
+    "app_dependency_lockfiles_unchanged": true,
+    "flutter_framework_commit": "ff37bef603469fb030f2b72995ab929ccfc227f0",
+    "node_archive_official_sha256_verified": true,
+    "backend_start_helper_executed": true,
+    "dotenv_cannot_override_local_helper_flags": true
+  },
+  "api_smoke": {
+    "health": true,
+    "price_index": true,
+    "eight_card_requests_rejected": true,
+    "live_provider_calls": false
+  },
+  "live_clinic_price_verification": {
+    "performed": false,
+    "blocker": "HTTP 403 from current network proxy for required public clinic domains",
+    "reported_draolmo_source": "https://clinicadraolmo.com/botox-en-valencia/",
+    "old_amount_provenance_identified": false,
+    "representative_no_fee_page_regressions_passed": true,
+    "network_domain_additions_saved_in_draft": true
+  },
+  "deployments_performed": false
+}

@@ -251,7 +251,7 @@ test('a package keeps its session count and is flagged', () => {
 });
 
 test('every row carries the current extract revision and curated source', () => {
-  assert.equal(EXTRACT_REVISION, 'e22');
+  assert.equal(EXTRACT_REVISION, 'e23');
   for (const {doc} of normalized.rows) {
     assert.equal(doc.price_extract_revision, EXTRACT_REVISION);
     assert.equal(doc.source, CURATED_SOURCE);

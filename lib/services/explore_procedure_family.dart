@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'explore_price_evidence.dart';
+import 'explore_price_binding.dart';
 import 'explore_price_sanity.dart';
 import 'explore_procedure_relation.dart';
 import 'explore_clinic_identity.dart';
@@ -1251,6 +1252,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
       currency: row.currency,
       extractionMethod: row.extractionMethod.wire,
       rawEvidence: row.rawEvidence,
+      rawProcedureText: row.rawProcedureText,
       procedure: procedure,
       sourceUrl: row.sourceUrl,
     )) {
@@ -1404,10 +1406,14 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
         rejectLog('[GP PRICE] REJECT · nonsurgical_rhino');
         continue;
       }
-      if (looksLikePartialRhinoplastyStarting(foldedLabel) ||
+      if (!looksLikeRequestedRhinoplastySubtype(
+            procedure: procedure,
+            candidate: foldedLabel,
+          ) &&
+          (looksLikePartialRhinoplastyStarting(foldedLabel) ||
           (looksLikePartialRhinoplastyStarting(rhinoBlob) &&
               !looksLikePrimaryRhinoplastyStarting(foldedLabel) &&
-              row.priceMin < 6000)) {
+              row.priceMin < 6000))) {
         rejectLog('[GP PRICE] REJECT · rhino_tip_or_partial');
         continue;
       }
@@ -2012,9 +2018,33 @@ bool exploreCachedPriceNeedsReselect({
   final raw = rawProcedureText.trim().isNotEmpty
       ? rawProcedureText.trim()
       : brand.trim();
+  if (exploreNonTreatmentPriceReason(
+        evidence: '$raw\n${rawEvidence.isNotEmpty ? rawEvidence : rawPriceText}',
+        priceMin: priceMin,
+        currency: currency,
+      ) !=
+      null) {
+    return true;
+  }
+  if (looksLikeNonGenericRhinoplastyVariant(
+    procedure: procedure,
+    label: raw,
+    evidence: exploreLineOwningAmount(quoteBlob, priceMin),
+    sourceUrl: sourceUrl,
+  )) {
+    return true;
+  }
   if (looksLikeSearchQuickFactsBlob(blob) ||
       looksLikeSeoQuotedPriceHeadline(blob) ||
       looksLikeMixedServiceBundle(blob)) {
+    return true;
+  }
+  if ((want == 'filler' || want == 'botox') &&
+      looksLikeSurgicalChinProcedure(
+        label: raw,
+        evidence: '$rawPriceText\n$rawEvidence',
+        sourceUrl: sourceUrl,
+      )) {
     return true;
   }
   if (looksLikeEmergencyOrHelpNumber(rawPriceText, priceMin: priceMin) ||
@@ -2137,10 +2167,14 @@ bool exploreCachedPriceNeedsReselect({
         priceMin < 2500) {
       return true;
     }
-    if (looksLikePartialRhinoplastyStarting(raw) ||
+    if (!looksLikeRequestedRhinoplastySubtype(
+          procedure: procedure,
+          candidate: raw,
+        ) &&
+        (looksLikePartialRhinoplastyStarting(raw) ||
         (looksLikePartialRhinoplastyStarting('$rawPriceText\n$rawEvidence') &&
             priceMin > 0 &&
-            priceMin < 6000)) {
+            priceMin < 6000))) {
       return true;
     }
     if (looksLikePatientAnecdotePrice('$raw\n$rawPriceText\n$rawEvidence')) {
@@ -2237,6 +2271,31 @@ bool explorePriceIsComparableTypicalStart({
   final want = _requestedFamily(procedure);
   final label = rawProcedureText.trim().isNotEmpty ? rawProcedureText : brand;
   final quote = '$rawPriceText\n$rawEvidence';
+  if (exploreNonTreatmentPriceReason(
+        evidence: '$label\n${rawEvidence.isNotEmpty ? rawEvidence : rawPriceText}',
+        priceMin: priceMin,
+        currency: currency,
+      ) !=
+      null) {
+    return false;
+  }
+  if (looksLikeNonGenericRhinoplastyVariant(
+    procedure: procedure,
+    label: label,
+    evidence: exploreLineOwningAmount(quote, priceMin),
+    sourceUrl: sourceUrl,
+  )) {
+    return false;
+  }
+  if (looksLikeMixedServiceBundle('$label\n$quote') ||
+      ((want == 'filler' || want == 'botox') &&
+          looksLikeSurgicalChinProcedure(
+            label: label,
+            evidence: quote,
+            sourceUrl: sourceUrl,
+          ))) {
+    return false;
+  }
   if ((want == 'botox' || want == 'filler') &&
       (looksLikeEnergyOrDeviceTreatment(label) ||
           looksLikeEnergyOrDeviceTreatment(sourceUrl) ||
@@ -2320,8 +2379,12 @@ bool explorePriceIsComparableTypicalStart({
     return false;
   }
   if (want == 'rhinoplasty') {
-    if (looksLikePartialRhinoplastyStarting(label) ||
-        looksLikePartialRhinoplastyStarting(quote)) {
+    if (!looksLikeRequestedRhinoplastySubtype(
+          procedure: procedure,
+          candidate: label,
+        ) &&
+        (looksLikePartialRhinoplastyStarting(label) ||
+        looksLikePartialRhinoplastyStarting(quote))) {
       return false;
     }
     if (looksLikeHospitalFeesOnlyQuote('$label\n$quote') ||

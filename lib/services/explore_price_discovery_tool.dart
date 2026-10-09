@@ -218,6 +218,8 @@ class ExplorePriceDiscoveryTool {
   Future<bool>? _healthInFlight;
   DateTime? _lastHealthyAt;
   final Map<String, String> _jobLogStates = {};
+  final Map<String, ({DateTime started, Future<bool> request})>
+      _cityCollectionRequests = {};
   static Future<({String id, int generation})>? _clientSession;
 
   static Future<({String id, int generation})> _loadClientSession() async {
@@ -741,12 +743,36 @@ class ExplorePriceDiscoveryTool {
   Future<bool> enqueueBackgroundDiscovery({
     required String city, required String procedure, String countryCode = '',
     String pill = '', String reason = 'thin_market',
-  }) async {
-    final job = await enqueueDiscoveryJob(
-      city: city, procedure: procedure, countryCode: countryCode,
-      pill: pill, reason: reason,
-    );
-    return job != null && job.status != 'failed';
+  }) {
+    Future<bool> submit() async {
+      final job = await enqueueDiscoveryJob(
+        city: city, procedure: procedure, countryCode: countryCode,
+        pill: pill, reason: reason,
+      );
+      return job != null && job.status != 'failed';
+    }
+    if (reason != 'city_collection') return submit();
+    final key = '${city.trim().toLowerCase()}|${countryCode.trim().toUpperCase()}|'
+        '${procedureForTool(procedure, pill: pill)}';
+    final now = DateTime.now();
+    _cityCollectionRequests.removeWhere((_, entry) =>
+        now.difference(entry.started) >= const Duration(minutes: 10));
+    final previous = _cityCollectionRequests[key];
+    if (previous != null) return previous.request;
+    late final Future<bool> request;
+    request = submit().then((accepted) {
+      if (!accepted && identical(_cityCollectionRequests[key]?.request, request)) {
+        _cityCollectionRequests.remove(key);
+      }
+      return accepted;
+    }, onError: (Object error, StackTrace stack) {
+      if (identical(_cityCollectionRequests[key]?.request, request)) {
+        _cityCollectionRequests.remove(key);
+      }
+      Error.throwWithStackTrace(error, stack);
+    });
+    _cityCollectionRequests[key] = (started: now, request: request);
+    return request;
   }
 
   Future<ExploreDiscoveryJob?> readDiscoveryJob(String jobId) async {

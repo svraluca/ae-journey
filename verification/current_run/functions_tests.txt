@@ -6,172 +6,172 @@ TAP version 13
 # Subtest: Barcelona anti-frizz hair service never fills an injectable Botox slot
 ok 1 - Barcelona anti-frizz hair service never fills an injectable Botox slot
   ---
-  duration_ms: 2.1249
+  duration_ms: 19.544881
   ...
 # Subtest: a following Botox label cannot adopt the preceding hyaluronic acid amount
 ok 2 - a following Botox label cannot adopt the preceding hyaluronic acid amount
   ---
-  duration_ms: 0.783306
+  duration_ms: 2.90478
   ...
 # Subtest: related shop products never supply breast augmentation fees
 ok 3 - related shop products never supply breast augmentation fees
   ---
-  duration_ms: 0.274652
+  duration_ms: 0.622675
   ...
 # Subtest: five-digit AED surgery ranges are not postal codes
 ok 4 - five-digit AED surgery ranges are not postal codes
   ---
-  duration_ms: 25.6596
+  duration_ms: 17.436436
   ...
 # Subtest: bright data discovery queries
     # Subtest: builds focused Botox queries not generic aesthetic clinic
     ok 1 - builds focused Botox queries not generic aesthetic clinic
       ---
-      duration_ms: 1.440122
+      duration_ms: 1.370297
       ...
     # Subtest: builds rhinoplasty surgeon queries
     ok 2 - builds rhinoplasty surgeon queries
       ---
-      duration_ms: 0.295894
+      duration_ms: 0.252419
       ...
     1..2
 ok 5 - bright data discovery queries
   ---
-  duration_ms: 2.618251
+  duration_ms: 2.489347
   type: 'suite'
   ...
 # Subtest: bright data serp helpers
     # Subtest: builds google search url with brd_json
     ok 1 - builds google search url with brd_json
       ---
-      duration_ms: 0.641423
+      duration_ms: 0.667752
       ...
     # Subtest: parses organic results without reading prices
     ok 2 - parses organic results without reading prices
       ---
-      duration_ms: 0.320391
+      duration_ms: 0.279059
       ...
     1..2
 ok 6 - bright data serp helpers
   ---
-  duration_ms: 1.13204
+  duration_ms: 1.086281
   type: 'suite'
   ...
 # Subtest: bright data maps normalize
     # Subtest: maps dataset rows to clinic candidates
     ok 1 - maps dataset rows to clinic candidates
       ---
-      duration_ms: 0.211598
+      duration_ms: 0.231617
       ...
     1..1
 ok 7 - bright data maps normalize
   ---
-  duration_ms: 0.297997
+  duration_ms: 0.321532
   type: 'suite'
   ...
 # Subtest: worldwide currencies
     # Subtest: detects expanded currencies
     ok 1 - detects expanded currencies
       ---
-      duration_ms: 1.426781
+      duration_ms: 1.407743
       ...
     # Subtest: uses currency-aware bands
     ok 2 - uses currency-aware bands
       ---
-      duration_ms: 0.380832
+      duration_ms: 0.400291
       ...
     1..2
 ok 8 - worldwide currencies
   ---
-  duration_ms: 2.019662
+  duration_ms: 2.001795
   type: 'suite'
   ...
 # Subtest: feature flags defaults
     # Subtest: disables fresha and zyte by default
     ok 1 - disables fresha and zyte by default
       ---
-      duration_ms: 0.198218
+      duration_ms: 0.156485
       ...
     1..1
 ok 9 - feature flags defaults
   ---
-  duration_ms: 0.298047
+  duration_ms: 0.249264
   type: 'suite'
   ...
 # Subtest: missing coverage is unknown not complete
 ok 10 - missing coverage is unknown not complete
   ---
-  duration_ms: 2.599493
+  duration_ms: 1.010607
   ...
 # Subtest: unknown candidateCount expands discovery
 ok 11 - unknown candidateCount expands discovery
   ---
-  duration_ms: 1.505751
+  duration_ms: 0.176946
   ...
 # Subtest: cityProcedureKey prefers cityId to avoid Paris FR/TX collision
 ok 12 - cityProcedureKey prefers cityId to avoid Paris FR/TX collision
   ---
-  duration_ms: 0.392179
+  duration_ms: 0.260802
   ...
 # Subtest: lease TTL is finite so crashed jobs do not lock forever
 ok 13 - lease TTL is finite so crashed jobs do not lock forever
   ---
-  duration_ms: 0.153851
+  duration_ms: 0.135273
   ...
 # Subtest: localized discovery queries include price word and country context
 ok 14 - localized discovery queries include price word and country context
   ---
-  duration_ms: 3.47746
+  duration_ms: 1.276316
   ...
 # Subtest: expired lease can be reacquired (pure clock logic)
 ok 15 - expired lease can be reacquired (pure clock logic)
   ---
-  duration_ms: 0.210596
+  duration_ms: 0.179139
   ...
 # Subtest: concurrent searches reuse one active lease jobId
 ok 16 - concurrent searches reuse one active lease jobId
   ---
-  duration_ms: 0.138728
+  duration_ms: 0.134612
   ...
 # Subtest: coverageLevel thin vs healthy boundaries
 ok 17 - coverageLevel thin vs healthy boundaries
   ---
-  duration_ms: 0.219961
+  duration_ms: 0.142994
   ...
 # Subtest: provider failure status is failed not empty
 ok 18 - provider failure status is failed not empty
   ---
-  duration_ms: 0.153931
+  duration_ms: 0.138048
   ...
 # Subtest: discoveryResponse never returns successful null identity fields
 ok 19 - discoveryResponse never returns successful null identity fields
   ---
-  duration_ms: 1.417998
+  duration_ms: 1.482966
   ...
 # Subtest: city_unresolved response is ok=false with zeroed counts
 ok 20 - city_unresolved response is ok=false with zeroed counts
   ---
-  duration_ms: 0.169925
+  duration_ms: 0.278027
   ...
 # Subtest: enqueue rejects guide domains and SEO headlines
 ok 21 - enqueue rejects guide domains and SEO headlines
   ---
-  duration_ms: 4.584372
+  duration_ms: 1.285549
   ...
 # Subtest: backend price stamp matches the actual Flutter verifier
 ok 22 - backend price stamp matches the actual Flutter verifier
   ---
-  duration_ms: 1.557878
+  duration_ms: 1.535365
   ...
 # Subtest: published treatment label is preserved instead of the category name
 ok 23 - published treatment label is preserved instead of the category name
   ---
-  duration_ms: 1.331409
+  duration_ms: 1.008293
   ...
 # Subtest: official tariff guide stays owned while averages and foreign guides remain excluded
 ok 24 - official tariff guide stays owned while averages and foreign guides remain excluded
   ---
-  duration_ms: 1.759881
+  duration_ms: 1.966141
   ...
 # [RELATION REJECT] "Endolift JawLine (Under Chin)" → different_procedure:energy_device
 # [GP PRICE] REJECT · missing_price_semantics
@@ -180,97 +180,97 @@ ok 24 - official tariff guide stays owned while averages and foreign guides rema
 # Subtest: same clinic Botox then Fillers retains both families
 ok 25 - same clinic Botox then Fillers retains both families
   ---
-  duration_ms: 1.985741
+  duration_ms: 1.473482
   ...
 # Subtest: same placeId from Bright Data and Places is one candidate id
 ok 26 - same placeId from Bright Data and Places is one candidate id
   ---
-  duration_ms: 0.187933
+  duration_ms: 0.184437
   ...
 # Subtest: legacy candidate docs still load safely
 ok 27 - legacy candidate docs still load safely
   ---
-  duration_ms: 0.586801
+  duration_ms: 0.658288
   ...
 # Subtest: coverage: thin triggers discovery; verified visible gates healthy
 ok 28 - coverage: thin triggers discovery; verified visible gates healthy
   ---
-  duration_ms: 0.216685
+  duration_ms: 0.222314
   ...
 # Subtest: candidate healthy/broad with 0 verified does not imply pool healthy
 ok 29 - candidate healthy/broad with 0 verified does not imply pool healthy
   ---
-  duration_ms: 0.114933
+  duration_ms: 0.11298
   ...
 # Subtest: stored Bright Data candidates rank before new Places
 ok 30 - stored Bright Data candidates rank before new Places
   ---
-  duration_ms: 0.362454
+  duration_ms: 0.437727
   ...
 # Subtest: verified pool accumulates A B C + D
 ok 31 - verified pool accumulates A B C + D
   ---
-  duration_ms: 33.451727
+  duration_ms: 53.199473
   ...
 # Subtest: unknown city still gets English family queries
 ok 32 - unknown city still gets English family queries
   ---
-  duration_ms: 0.829165
+  duration_ms: 1.348504
   ...
 # Subtest: bare anatomy and injectables stay ambiguous for Botox
 ok 33 - bare anatomy and injectables stay ambiguous for Botox
   ---
-  duration_ms: 2.499492
+  duration_ms: 2.060283
   ...
 # Subtest: Endolift JawLine is never Botox
 ok 34 - Endolift JawLine is never Botox
   ---
-  duration_ms: 2.255145
+  duration_ms: 2.05838
   ...
 # Subtest: parent Botox Pricing inherits; Injectables does not
 ok 35 - parent Botox Pricing inherits; Injectables does not
   ---
-  duration_ms: 0.682204
+  duration_ms: 1.144489
   ...
 # Subtest: rediscovery upsert payload never resets workflow status
 ok 36 - rediscovery upsert payload never resets workflow status
   ---
-  duration_ms: 0.257146
+  duration_ms: 0.282935
   ...
 # Subtest: empty rediscovery website does not wipe a stored site
 ok 37 - empty rediscovery website does not wipe a stored site
   ---
-  duration_ms: 0.151127
+  duration_ms: 0.157066
   ...
 # Subtest: family maps keep Botox then Fillers independently
 ok 38 - family maps keep Botox then Fillers independently
   ---
-  duration_ms: 0.212089
+  duration_ms: 0.25295
   ...
 # Subtest: global verified status does not count as Botox verified
 ok 39 - global verified status does not count as Botox verified
   ---
-  duration_ms: 0.214883
+  duration_ms: 0.21999
   ...
 # Subtest: no_public_price gets a multi-day recheck TTL, not permanent
 ok 40 - no_public_price gets a multi-day recheck TTL, not permanent
   ---
-  duration_ms: 0.350766
+  duration_ms: 0.476655
   ...
 # Subtest: Botox $12/unit keeps perUnit type via parse
 ok 41 - Botox $12/unit keeps perUnit type via parse
   ---
-  duration_ms: 3.451522
+  duration_ms: 3.929659
   ...
 # Subtest: price safety rejects reviews, financing, and market averages
 ok 42 - price safety rejects reviews, financing, and market averages
   ---
-  duration_ms: 3.043359
+  duration_ms: 3.6837
   ...
 # Subtest: poolHealthy uses post-validation visible count not raw cache
 ok 43 - poolHealthy uses post-validation visible count not raw cache
   ---
-  duration_ms: 0.187712
+  duration_ms: 0.179189
   ...
 # [MATCH] "Large FUE Hair Transplant" → hair_transplant/hair_transplant
 # [MATCH] "Small Hair Transplant" → hair_transplant/hair_transplant
@@ -724,72 +724,72 @@ ok 43 - poolHealthy uses post-validation visible count not raw cache
 # Subtest: Canada locations import as CA when country or CAD is set
 ok 44 - Canada locations import as CA when country or CAD is set
   ---
-  duration_ms: 1.088564
+  duration_ms: 1.290618
   ...
 # Subtest: toronto clinics with public contact import as CAD
 ok 45 - toronto clinics with public contact import as CAD
   ---
-  duration_ms: 142.740931
+  duration_ms: 84.945215
   ...
 # Subtest: vancouver clinics with public contact import as CAD
 ok 46 - vancouver clinics with public contact import as CAD
   ---
-  duration_ms: 25.565493
+  duration_ms: 17.220932
   ...
 # Subtest: calgary clinics with public contact import as CAD
 ok 47 - calgary clinics with public contact import as CAD
   ---
-  duration_ms: 6.765206
+  duration_ms: 16.32707
   ...
 # Subtest: edmonton clinics with public contact import as CAD
 ok 48 - edmonton clinics with public contact import as CAD
   ---
-  duration_ms: 9.221072
+  duration_ms: 5.940498
   ...
 # Subtest: halifax clinics with public contact import as CAD
 ok 49 - halifax clinics with public contact import as CAD
   ---
-  duration_ms: 1.75845
+  duration_ms: 5.496862
   ...
 # Subtest: hamilton clinics with public contact import as CAD
 ok 50 - hamilton clinics with public contact import as CAD
   ---
-  duration_ms: 0.89926
+  duration_ms: 0.784417
   ...
 # Subtest: kelowna clinics with public contact import as CAD
 ok 51 - kelowna clinics with public contact import as CAD
   ---
-  duration_ms: 10.381835
+  duration_ms: 2.520814
   ...
 # Subtest: montreal clinics with public contact import as CAD
 ok 52 - montreal clinics with public contact import as CAD
   ---
-  duration_ms: 21.943611
+  duration_ms: 11.685648
   ...
 # Subtest: ottawa clinics with public contact import as CAD
 ok 53 - ottawa clinics with public contact import as CAD
   ---
-  duration_ms: 23.899246
+  duration_ms: 10.233283
   ...
 # Subtest: quebec city clinics with public contact import as CAD
 ok 54 - quebec city clinics with public contact import as CAD
   ---
-  duration_ms: 24.232953
+  duration_ms: 2.477219
   ...
 # Subtest: saskatoon clinics with public contact import as CAD
 ok 55 - saskatoon clinics with public contact import as CAD
   ---
-  duration_ms: 0.830797
+  duration_ms: 0.566701
   ...
 # Subtest: victoria clinics with public contact import as CAD
 ok 56 - victoria clinics with public contact import as CAD
   ---
-  duration_ms: 1.492741
+  duration_ms: 1.424218
   ...
 # Subtest: winnipeg clinics with public contact import as CAD
 ok 57 - winnipeg clinics with public contact import as CAD
   ---
-  duration_ms: 2.021535
+  duration_ms: 3.512573
   ...
 # [MATCH] "Hair Transplant" → hair_transplant/hair_transplant
 # [MATCH] "Hair Transplant - Per Graft" → hair_transplant/hair_transplant
@@ -868,12 +868,12 @@ ok 57 - winnipeg clinics with public contact import as CAD
 # Subtest: every Dallas clinic with public contact imports with USD
 ok 58 - every Dallas clinic with public contact imports with USD
   ---
-  duration_ms: 8.111838
+  duration_ms: 1.69882
   ...
 # Subtest: Dallas flagship families are populated from public clinic prices
 ok 59 - Dallas flagship families are populated from public clinic prices
   ---
-  duration_ms: 0.2531
+  duration_ms: 0.222414
   ...
 # [MATCH] "Revision Breast Augmentation / Implant Removal" → breast_augmentation/breast_augmentation
 # [MATCH] "Rhinoplasty" → rhinoplasty/rhinoplasty
@@ -1176,12 +1176,12 @@ ok 59 - Dallas flagship families are populated from public clinic prices
 # Subtest: every Houston clinic imports with USD and a priced procedure
 ok 60 - every Houston clinic imports with USD and a priced procedure
   ---
-  duration_ms: 1.591499
+  duration_ms: 1.476367
   ...
 # Subtest: Houston flagship families are populated from public clinic prices
 ok 61 - Houston flagship families are populated from public clinic prices
   ---
-  duration_ms: 0.232449
+  duration_ms: 0.375123
   ...
 # [MATCH] "Non-Surgical Rhinoplasty" → rhinoplasty/rhinoplasty
 # [MATCH] "Radiesse 0.8" → filler/filler
@@ -1653,17 +1653,17 @@ ok 61 - Houston flagship families are populated from public clinic prices
 # Subtest: United Kingdom locations import as GB, not US
 ok 62 - United Kingdom locations import as GB, not US
   ---
-  duration_ms: 5.483702
+  duration_ms: 0.965069
   ...
 # Subtest: every London clinic imports with GBP and a priced procedure
 ok 63 - every London clinic imports with GBP and a priced procedure
   ---
-  duration_ms: 0.889054
+  duration_ms: 0.642394
   ...
 # Subtest: London flagship families are populated from public clinic prices
 ok 64 - London flagship families are populated from public clinic prices
   ---
-  duration_ms: 0.406009
+  duration_ms: 0.371808
   ...
 # [MATCH] "Breast Augmentation" → breast_augmentation/breast_augmentation
 # [MATCH] "Botox" → botox/botox
@@ -2164,17 +2164,17 @@ ok 64 - London flagship families are populated from public clinic prices
 # Subtest: USA locations import as US
 ok 65 - USA locations import as US
   ---
-  duration_ms: 1.417849
+  duration_ms: 1.090878
   ...
 # Subtest: every Los Angeles clinic imports with USD and a priced procedure
 ok 66 - every Los Angeles clinic imports with USD and a priced procedure
   ---
-  duration_ms: 1.078208
+  duration_ms: 0.71243
   ...
 # Subtest: Los Angeles flagship families are populated from public clinic prices
 ok 67 - Los Angeles flagship families are populated from public clinic prices
   ---
-  duration_ms: 0.829705
+  duration_ms: 0.294002
   ...
 # [MATCH] "VI Peel" → peel/chemical_peel
 # [MATCH] "VI Peel Advanced" → peel/chemical_peel
@@ -2418,17 +2418,17 @@ ok 67 - Los Angeles flagship families are populated from public clinic prices
 # Subtest: USA locations import as US
 ok 68 - USA locations import as US
   ---
-  duration_ms: 1.500352
+  duration_ms: 0.989105
   ...
 # Subtest: every New York clinic imports with USD and a priced procedure
 ok 69 - every New York clinic imports with USD and a priced procedure
   ---
-  duration_ms: 1.024177
+  duration_ms: 0.830517
   ...
 # Subtest: New York flagship families are populated from public clinic prices
 ok 70 - New York flagship families are populated from public clinic prices
   ---
-  duration_ms: 0.416655
+  duration_ms: 0.443456
   ...
 # [MATCH] REJECT "Full Face Consultation" → wrong_family_consultation
 # [MATCH] REJECT "Skin Care Regimen Consultation" → wrong_family_consultation
@@ -3614,67 +3614,67 @@ ok 70 - New York flagship families are populated from public clinic prices
 # Subtest: atlanta clinics with public contact import as USD
 ok 71 - atlanta clinics with public contact import as USD
   ---
-  duration_ms: 144.412351
+  duration_ms: 146.262429
   ...
 # Subtest: austin clinics with public contact import as USD
 ok 72 - austin clinics with public contact import as USD
   ---
-  duration_ms: 5.911654
+  duration_ms: 7.707076
   ...
 # Subtest: boston clinics with public contact import as USD
 ok 73 - boston clinics with public contact import as USD
   ---
-  duration_ms: 2.476458
+  duration_ms: 4.88296
   ...
 # Subtest: charlotte clinics with public contact import as USD
 ok 74 - charlotte clinics with public contact import as USD
   ---
-  duration_ms: 2.678331
+  duration_ms: 4.440466
   ...
 # Subtest: chicago clinics with public contact import as USD
 ok 75 - chicago clinics with public contact import as USD
   ---
-  duration_ms: 1.927513
+  duration_ms: 2.715476
   ...
 # Subtest: denver clinics with public contact import as USD
 ok 76 - denver clinics with public contact import as USD
   ---
-  duration_ms: 3.129037
+  duration_ms: 8.419669
   ...
 # Subtest: las vegas clinics with public contact import as USD
 ok 77 - las vegas clinics with public contact import as USD
   ---
-  duration_ms: 1.195344
+  duration_ms: 1.159881
   ...
 # Subtest: nashville clinics with public contact import as USD
 ok 78 - nashville clinics with public contact import as USD
   ---
-  duration_ms: 17.863226
+  duration_ms: 2.440193
   ...
 # Subtest: orlando clinics with public contact import as USD
 ok 79 - orlando clinics with public contact import as USD
   ---
-  duration_ms: 68.197933
+  duration_ms: 42.054042
   ...
 # Subtest: phoenix clinics with public contact import as USD
 ok 80 - phoenix clinics with public contact import as USD
   ---
-  duration_ms: 5.94157
+  duration_ms: 3.995037
   ...
 # Subtest: washington dc clinics with public contact import as USD
 ok 81 - washington dc clinics with public contact import as USD
   ---
-  duration_ms: 2.670338
+  duration_ms: 2.343087
   ...
 # Subtest: tampa clinics with public contact import as USD
 ok 82 - tampa clinics with public contact import as USD
   ---
-  duration_ms: 192.282863
+  duration_ms: 72.219376
   ...
 # Subtest: san diego clinics with public contact import as USD
 ok 83 - san diego clinics with public contact import as USD
   ---
-  duration_ms: 202.631968
+  duration_ms: 87.680351
   ...
 # [MATCH] "Dermal / Lip Filler - Full Syringe" → filler/lip_filler
 # [MATCH] "Dermal / Lip Filler - Half Syringe" → filler/lip_filler
@@ -4439,132 +4439,132 @@ ok 83 - san diego clinics with public contact import as USD
 # Subtest: every imported clinic has a name, a contact and a priced procedure
 ok 84 - every imported clinic has a name, a contact and a priced procedure
   ---
-  duration_ms: 1.410898
+  duration_ms: 1.113982
   ...
 # Subtest: a procedure with no numeric price is never imported
 ok 85 - a procedure with no numeric price is never imported
   ---
-  duration_ms: 1.969887
+  duration_ms: 2.26482
   ...
 # Subtest: currency comes from the row and never defaults silently to nothing
 ok 86 - currency comes from the row and never defaults silently to nothing
   ---
-  duration_ms: 0.300992
+  duration_ms: 0.225449
   ...
 # Subtest: a published range stays a range
 ok 87 - a published range stays a range
   ---
-  duration_ms: 0.413892
+  duration_ms: 0.334672
   ...
 # Subtest: per-unit Botox stays per-unit and keeps the unit price
 ok 88 - per-unit Botox stays per-unit and keeps the unit price
   ---
-  duration_ms: 0.163335
+  duration_ms: 0.172038
   ...
 # Subtest: per-graft hair transplant stays per-graft
 ok 89 - per-graft hair transplant stays per-graft
   ---
-  duration_ms: 0.174162
+  duration_ms: 0.122924
   ...
 # Subtest: member and regular prices stay separate, regular is the display price
 ok 90 - member and regular prices stay separate, regular is the display price
   ---
-  duration_ms: 0.837667
+  duration_ms: 0.743817
   ...
 # Subtest: a clinic with 161 procedures imports all of them, untruncated
 ok 91 - a clinic with 161 procedures imports all of them, untruncated
   ---
-  duration_ms: 0.160321
+  duration_ms: 0.151368
   ...
 # Subtest: one clinic can belong to many families at once
 ok 92 - one clinic can belong to many families at once
   ---
-  duration_ms: 0.253661
+  duration_ms: 0.220361
   ...
 # Subtest: re-running the import reuses the same document ids
 ok 93 - re-running the import reuses the same document ids
   ---
-  duration_ms: 137.772924
+  duration_ms: 102.486734
   ...
 # Subtest: the published procedure name survives; family is only for querying
 ok 94 - the published procedure name survives; family is only for querying
   ---
-  duration_ms: 0.344407
+  duration_ms: 0.332239
   ...
 # Subtest: unrelated services keep their own family instead of a flagship pill
 ok 95 - unrelated services keep their own family instead of a flagship pill
   ---
-  duration_ms: 1.939522
+  duration_ms: 0.355553
   ...
 # Subtest: dataset categories are aliased onto the Explore family vocabulary
 ok 96 - dataset categories are aliased onto the Explore family vocabulary
   ---
-  duration_ms: 0.519109
+  duration_ms: 4.697922
   ...
 # Subtest: unit labels parse into a token and a quantity
 ok 97 - unit labels parse into a token and a quantity
   ---
-  duration_ms: 0.225308
+  duration_ms: 0.231287
   ...
 # Subtest: a promotional price keeps its unit and is flagged, not relabelled
 ok 98 - a promotional price keeps its unit and is flagged, not relabelled
   ---
-  duration_ms: 0.120621
+  duration_ms: 0.120822
   ...
 # Subtest: a package keeps its session count and is flagged
 ok 99 - a package keeps its session count and is flagged
   ---
-  duration_ms: 0.198468
+  duration_ms: 0.191888
   ...
 # Subtest: every row carries the current extract revision and curated source
 ok 100 - every row carries the current extract revision and curated source
   ---
-  duration_ms: 0.863737
+  duration_ms: 0.44026
   ...
 # Subtest: the whole metro answers a Miami search
 ok 101 - the whole metro answers a Miami search
   ---
-  duration_ms: 0.278889
+  duration_ms: 0.309415
   ...
 # Subtest: a conflicting price on two pages resolves to the more specific page
 ok 102 - a conflicting price on two pages resolves to the more specific page
   ---
-  duration_ms: 0.697928
+  duration_ms: 0.177065
   ...
 # Subtest: duplicate rows on two pages collapse without losing a clinic
 ok 103 - duplicate rows on two pages collapse without losing a clinic
   ---
-  duration_ms: 0.145489
+  duration_ms: 0.143316
   ...
 # Subtest: row ids change with unit and price type but not with price
 ok 104 - row ids change with unit and price type but not with price
   ---
-  duration_ms: 0.228914
+  duration_ms: 0.18642
   ...
 # Subtest: a clinic document records identity without embedding its prices
 ok 105 - a clinic document records identity without embedding its prices
   ---
-  duration_ms: 0.196225
+  duration_ms: 0.197467
   ...
 # Subtest: $13 per unit depending → 13 USD perUnit, never PEN
 ok 106 - $13 per unit depending → 13 USD perUnit, never PEN
   ---
-  duration_ms: 20.698433
+  duration_ms: 21.848139
   ...
 # Subtest: English prose is not a currency token
 ok 107 - English prose is not a currency token
   ---
-  duration_ms: 8.675904
+  duration_ms: 1.678059
   ...
 # Subtest: bounded ISO codes and local symbols still parse
 ok 108 - bounded ISO codes and local symbols still parse
   ---
-  duration_ms: 5.934759
+  duration_ms: 4.63625
   ...
 # Subtest: symbol near the amount beats later prose
 ok 109 - symbol near the amount beats later prose
   ---
-  duration_ms: 1.096666
+  duration_ms: 0.770346
   ...
 # [PRICE LITERAL FOUND] 990 AED · "Starting AED 990"
 # [PROCEDURE RELATION] exact · same_treatment · "Lip Filler"
@@ -4580,7 +4580,7 @@ ok 109 - symbol near the amount beats later prose
 # Subtest: /workspace/ae-journey/functions/explore/test/evidenceLock.test.js
 ok 16 - /workspace/ae-journey/functions/explore/test/evidenceLock.test.js
   ---
-  duration_ms: 267.687129
+  duration_ms: 124.717466
   ...
 # [EXTRACT] method=dom_block
 # [EXTRACT] procedure="Wrinkle relaxers are priced per unit — Dysport and Xeomin"
@@ -4594,70 +4594,70 @@ ok 16 - /workspace/ae-journey/functions/explore/test/evidenceLock.test.js
 # [PRICE ACCEPT] clinic="" procedure="Botox anti-wrinkle injection" relation=variant raw="Wrinkle relaxers are priced per unit — Dysport and Xeomin start at $13 per unit, with the exact total depending on the areas treated and the dose your plan calls for." parsed=13 USD method=dom_block url=https://www.miamiskinspa.com/botox
 # [RELATION REJECT] "Endolift JawLine (Under Chin)" → different_procedure:energy_device
 # [RELATION REJECT] "Endolift JawLine (Under Chin)" → different_procedure:energy_device
-# Subtest: extraction revision is e22
-ok 111 - extraction revision is e22
+# Subtest: extraction revision is e23
+ok 111 - extraction revision is e23
   ---
-  duration_ms: 1.463877
+  duration_ms: 1.02576
   ...
 # Subtest: Miami Skin Spa wrinkle-relaxer paragraph is 13 USD perUnit variant
 ok 112 - Miami Skin Spa wrinkle-relaxer paragraph is 13 USD perUnit variant
   ---
-  duration_ms: 89.041809
+  duration_ms: 80.69797
   ...
 # Subtest: stale e11 numeric row is identity stub, not a trusted cached price
 ok 113 - stale e11 numeric row is identity stub, not a trusted cached price
   ---
-  duration_ms: 2.811691
+  duration_ms: 2.050458
   ...
 # Subtest: current-revision re-verify of the same clinic is trusted numeric
 ok 114 - current-revision re-verify of the same clinic is trusted numeric
   ---
-  duration_ms: 3.24411
+  duration_ms: 6.617644
   ...
 # Subtest: empty stored relation is recomputed; Endolift JawLine stays out
 ok 115 - empty stored relation is recomputed; Endolift JawLine stays out
   ---
-  duration_ms: 30.625715
+  duration_ms: 10.066011
   ...
 # Subtest: missing currency is never trusted as EUR
 ok 116 - missing currency is never trusted as EUR
   ---
-  duration_ms: 0.441673
+  duration_ms: 0.275473
   ...
 # Subtest: unexpected verifier exception is temporary, not a permanent blacklist
 ok 117 - unexpected verifier exception is temporary, not a permanent blacklist
   ---
-  duration_ms: 0.337717
+  duration_ms: 0.243766
   ...
 # Subtest: client-triggered verifier is shallow and short
 ok 118 - client-triggered verifier is shallow and short
   ---
-  duration_ms: 0.261262
+  duration_ms: 0.155844
   ...
 # Subtest: no_public_price still waits for its recheck TTL
 ok 119 - no_public_price still waits for its recheck TTL
   ---
-  duration_ms: 0.635935
+  duration_ms: 0.459529
   ...
 # Subtest: accepted place IDs stay discoverable so stale rows can re-verify
 ok 120 - accepted place IDs stay discoverable so stale rows can re-verify
   ---
-  duration_ms: 0.362754
+  duration_ms: 0.275604
   ...
 # Subtest: empty discovery state skips nothing
 ok 121 - empty discovery state skips nothing
   ---
-  duration_ms: 0.200091
+  duration_ms: 0.134652
   ...
 # Subtest: cached procedure URLs are staged before SERP
 ok 122 - cached procedure URLs are staged before SERP
   ---
-  duration_ms: 4.13657
+  duration_ms: 2.428706
   ...
 # Subtest: interactive deadline is 8 seconds
 ok 123 - interactive deadline is 8 seconds
   ---
-  duration_ms: 0.159759
+  duration_ms: 0.162854
   ...
 # ok urlRank
 # [EXTRACT] method=html_table
@@ -4685,7 +4685,7 @@ ok 123 - interactive deadline is 8 seconds
 # Subtest: /workspace/ae-journey/functions/explore/test/firecrawlDiscovery.test.js
 ok 19 - /workspace/ae-journey/functions/explore/test/firecrawlDiscovery.test.js
   ---
-  duration_ms: 494.528086
+  duration_ms: 199.757096
   ...
 # [MATCH] "Lip Filler 1ml" → filler/lip_filler
 # [FRESHA PROCEDURE] raw → canonical · "Lip Filler 1ml" → filler/lip_filler → dermal filler lips cheeks
@@ -4704,188 +4704,471 @@ ok 19 - /workspace/ae-journey/functions/explore/test/firecrawlDiscovery.test.js
     # Subtest: maps cities dynamically
     ok 1 - maps cities dynamically
       ---
-      duration_ms: 0.979109
+      duration_ms: 0.924418
       ...
     1..1
 ok 125 - fresha locationFormat
   ---
-  duration_ms: 1.822866
+  duration_ms: 1.75181
   type: 'suite'
   ...
 # Subtest: fresha price parse
     # Subtest: never invents prices
     ok 1 - never invents prices
       ---
-      duration_ms: 0.549154
+      duration_ms: 0.518008
       ...
     # Subtest: uses Malikgen priceValue without inventing
     ok 2 - uses Malikgen priceValue without inventing
       ---
-      duration_ms: 0.295704
+      duration_ms: 0.312489
       ...
     # Subtest: skips missing priceValue
     ok 3 - skips missing priceValue
       ---
-      duration_ms: 0.129254
+      duration_ms: 0.131447
       ...
     1..3
 ok 126 - fresha price parse
   ---
-  duration_ms: 1.122034
+  duration_ms: 1.114663
   type: 'suite'
   ...
 # Subtest: service-first gate
     # Subtest: accepts medical aesthetic catalogues
     ok 1 - accepts medical aesthetic catalogues
       ---
-      duration_ms: 0.346
+      duration_ms: 0.994523
       ...
     # Subtest: rejects haircut/nails/massage only
     ok 2 - rejects haircut/nails/massage only
       ---
-      duration_ms: 0.183806
+      duration_ms: 0.213641
       ...
     1..2
 ok 127 - service-first gate
   ---
-  duration_ms: 0.706531
+  duration_ms: 1.374714
   type: 'suite'
   ...
 # Subtest: fresha procedure classify
     # Subtest: maps common aesthetic services
     ok 1 - maps common aesthetic services
       ---
-      duration_ms: 7.435773
+      duration_ms: 6.377684
       ...
     # Subtest: rejects bundles
     ok 2 - rejects bundles
       ---
-      duration_ms: 1.265079
+      duration_ms: 1.111809
       ...
     # Subtest: does not force unknown into wrong family
     ok 3 - does not force unknown into wrong family
       ---
-      duration_ms: 0.539019
+      duration_ms: 0.478248
       ...
     1..3
 ok 128 - fresha procedure classify
   ---
-  duration_ms: 9.583107
+  duration_ms: 8.147872
   type: 'suite'
   ...
 # Subtest: fresha FROM price
     # Subtest: picks lowest eligible variant per procedure
     ok 1 - picks lowest eligible variant per procedure
       ---
-      duration_ms: 0.274702
+      duration_ms: 0.251548
       ...
     1..1
 ok 129 - fresha FROM price
   ---
-  duration_ms: 0.362684
+  duration_ms: 0.344708
   type: 'suite'
   ...
 # Subtest: fresha url match
     # Subtest: extracts /a/ venue urls only
     ok 1 - extracts /a/ venue urls only
       ---
-      duration_ms: 15.881811
+      duration_ms: 0.450776
       ...
     # Subtest: matches clinic name in slug
     ok 2 - matches clinic name in slug
       ---
-      duration_ms: 0.564577
+      duration_ms: 0.422965
       ...
     1..2
 ok 130 - fresha url match
   ---
-  duration_ms: 16.617586
+  duration_ms: 1.363977
   type: 'suite'
   ...
 # Subtest: import usefulness
     # Subtest: requires clinics and prices for useful complete
     ok 1 - requires clinics and prices for useful complete
       ---
-      duration_ms: 0.150806
+      duration_ms: 0.144687
       ...
     1..1
 ok 131 - import usefulness
   ---
-  duration_ms: 0.231308
+  duration_ms: 0.224227
   type: 'suite'
   ...
 # Subtest: fresha provider normalize malikgen
     # Subtest: normalizes categories[].services with priceValue
     ok 1 - normalizes categories[].services with priceValue
       ---
-      duration_ms: 0.812439
+      duration_ms: 0.749826
       ...
     1..1
 ok 132 - fresha provider normalize malikgen
   ---
-  duration_ms: 0.890076
+  duration_ms: 0.822955
   type: 'suite'
   ...
 # global urlRank + parsePrice unit tests passed
 # Subtest: /workspace/ae-journey/functions/explore/test/globalDiscovery.test.js
 ok 21 - /workspace/ae-journey/functions/explore/test/globalDiscovery.test.js
   ---
-  duration_ms: 152.829006
+  duration_ms: 143.129737
   ...
 # Subtest: ClinicPoint as provider is rejected
 ok 134 - ClinicPoint as provider is rejected
   ---
-  duration_ms: 2.088034
+  duration_ms: 2.001074
   ...
 # Subtest: marketplace HTML with Clínica Londres extracts provider
 ok 135 - marketplace HTML with Clínica Londres extracts provider
   ---
-  duration_ms: 1.354273
+  duration_ms: 1.3453
   ...
 # Subtest: Booksy barber listing is not an aesthetic provider
 ok 136 - Booksy barber listing is not an aesthetic provider
   ---
-  duration_ms: 1.5318
+  duration_ms: 2.412191
   ...
 # Subtest: Tienda is a generic shop identity
 ok 137 - Tienda is a generic shop identity
   ---
-  duration_ms: 0.128893
+  duration_ms: 0.143385
   ...
 # Subtest: Turó Park variants collapse
 ok 138 - Turó Park variants collapse
   ---
-  duration_ms: 0.163816
+  duration_ms: 0.168013
   ...
 # Subtest: raw comment text is not a procedure title
 ok 139 - raw comment text is not a procedure title
   ---
-  duration_ms: 2.468916
+  duration_ms: 2.818942
   ...
 # Subtest: GetClearBeauty is a market-estimate directory, not a clinic
 ok 140 - GetClearBeauty is a market-estimate directory, not a clinic
   ---
-  duration_ms: 0.285178
+  duration_ms: 0.418228
   ...
 # Subtest: scraped price copy is not a clinic name
 ok 141 - scraped price copy is not a clinic name
   ---
-  duration_ms: 0.49284
+  duration_ms: 0.438858
   ...
 # Subtest: Romanian Serp page titles are not clinic names
 ok 142 - Romanian Serp page titles are not clinic names
   ---
-  duration_ms: 0.683306
+  duration_ms: 0.662334
   ...
 # Subtest: Breast surgery financing is not a procedure title
 ok 143 - Breast surgery financing is not a procedure title
   ---
-  duration_ms: 0.317066
+  duration_ms: 0.326761
   ...
 # Subtest: excludeClinicKeys ingest keeps prefixed identity keys as-is
 ok 144 - excludeClinicKeys ingest keeps prefixed identity keys as-is
   ---
-  duration_ms: 0.20669
+  duration_ms: 0.214422
+  ...
+# [EXTRACT] method=html_table
+# [EXTRACT] procedure="Aumento de labios · 1VIAL"
+# [EXTRACT] rawPrice="330 €"
+# [PARSE] 330 EUR
+# [PRICE LITERAL FOUND] 330 EUR · "330 €"
+# [PROCEDURE RELATION] exact · same_treatment · "Aumento de labios · 1VIAL"
+# [MATCH] "Aumento de labios · 1VIAL" → filler/lip_filler
+# [GP PRICE] PICK · "Aumento de labios · 1VIAL" · 330 EUR · html_table · https://clinic.example/precios/
+# [PRICE SOURCE] html_table · https://clinic.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="lip filler" relation=exact raw="330 €" parsed=330 EUR method=html_table url=https://clinic.example/precios/
+# [EXTRACT] method=html_table
+# [EXTRACT] procedure="Lip filler 1 ml"
+# [EXTRACT] rawPrice="350 €"
+# [PARSE] 350 EUR
+# [PRICE LITERAL FOUND] 350 EUR · "350 €"
+# [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Lip filler 1 ml"
+# [MATCH] "Lip filler 1 ml" → filler/lip_filler
+# [GP PRICE] PICK · "Lip filler 1 ml" · 350 EUR · html_table · https://clinic.example/precios/
+# [PRICE SOURCE] html_table · https://clinic.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="lip filler" relation=variant raw="350 €" parsed=350 EUR method=html_table url=https://clinic.example/precios/
+# [EXTRACT] method=dom_block
+# [EXTRACT] procedure="Aumento de labios 1 ml"
+# [EXTRACT] rawPrice="Aumento de labios 1 ml 380 €"
+# [PARSE] 380 EUR
+# [PRICE LITERAL FOUND] 380 EUR · "Aumento de labios 1 ml 380 €"
+# [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Aumento de labios 1 ml"
+# [MATCH] "Aumento de labios 1 ml" → filler/lip_filler
+# [GP PRICE] PICK · "Aumento de labios 1 ml" · 380 EUR · dom_block · https://clinic.example/precios/
+# [PRICE SOURCE] dom_block · https://clinic.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="lip filler" relation=variant raw="Aumento de labios 1 ml 380 €" parsed=380 EUR method=dom_block url=https://clinic.example/precios/
+# Subtest: ANTES never supplies an active filler fee or contaminates its range
+ok 145 - ANTES never supplies an active filler fee or contaminates its range
+  ---
+  duration_ms: 57.542693
+  ...
+# Subtest: current column is selected even when it costs more than the old column
+ok 146 - current column is selected even when it costs more than the old column
+  ---
+  duration_ms: 9.206451
+  ...
+# Subtest: conditional friends-pack DOM cannot leak into a standalone filler tariff
+ok 147 - conditional friends-pack DOM cannot leak into a standalone filler tariff
+  ---
+  duration_ms: 8.364307
+  ...
+# Subtest: explicit national-average nonownership overrides a price menu and own wording
+ok 148 - explicit national-average nonownership overrides a price menu and own wording
+  ---
+  duration_ms: 1.559762
+  ...
+# Subtest: a platform that disclaims being a medical office cannot become the treating clinic
+ok 149 - a platform that disclaims being a medical office cannot become the treating clinic
+  ---
+  duration_ms: 0.535063
+  ...
+# [PRICE LITERAL FOUND] 2500 EUR · "2500 EUR"
+# [PROCEDURE RELATION] different_procedure · surgical_chin_not_filler · "Chin filler"
+# [PRICE REJECT] relation_different_procedure · surgical_chin_not_filler
+# [PRICE REJECT] relation_different_procedure · surgical_chin_not_filler
+# [PRICE LITERAL FOUND] 2500 EUR · "2500 EUR"
+# [PRICE REJECT] relation_different_procedure · surgical_chin_not_filler
+# [PRICE LITERAL FOUND] 2500 EUR · "2500 EUR"
+# [PROCEDURE RELATION] different_procedure · surgical_chin_not_filler · "Chin filler / genioplasty"
+# [PRICE REJECT] relation_different_procedure · surgical_chin_not_filler
+# [PRICE REJECT] relation_different_procedure · surgical_chin_not_filler
+# [PRICE LITERAL FOUND] 2500 EUR · "2500 EUR"
+# [PROCEDURE RELATION] different_procedure · surgical_chin_not_filler · "Chin implant filler"
+# [PRICE REJECT] relation_different_procedure · surgical_chin_not_filler
+# [PRICE REJECT] relation_different_procedure · surgical_chin_not_filler
+# [PRICE LITERAL FOUND] 2500 EUR · "2500 EUR"
+# [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Chin filler 1 ml"
+# [MATCH] "Chin filler 1 ml" → filler/filler
+# [GP PRICE] PICK · "Chin filler 1 ml" · 2500 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Fillers" relation=variant raw="2500 EUR" parsed=2500 EUR method=html_table url=https://aster.example/precios/
+# [MATCH] "Chin filler 1 ml" → filler/filler
+# [PRICE LITERAL FOUND] 2500 EUR · "2500 EUR"
+# [PROCEDURE RELATION] exact · same_treatment · "Relleno de mentón con ácido hialurónico"
+# [MATCH] "Relleno de mentón con ácido hialurónico" → filler/filler
+# [GP PRICE] PICK · "Relleno de mentón con ácido hialurónico" · 2500 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Fillers" relation=exact raw="2500 EUR" parsed=2500 EUR method=html_table url=https://aster.example/precios/
+# [MATCH] "Relleno de mentón con ácido hialurónico" → filler/filler
+# [PRICE LITERAL FOUND] 2500 EUR · "2500 EUR"
+# [PROCEDURE RELATION] exact · same_treatment · "Non-surgical chin augmentation with hyaluronic acid filler"
+# [MATCH] "Non-surgical chin augmentation with hyaluronic acid filler" → filler/filler
+# [GP PRICE] PICK · "Non-surgical chin augmentation with hyaluronic acid filler" · 2500 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Fillers" relation=exact raw="2500 EUR" parsed=2500 EUR method=html_table url=https://aster.example/precios/
+# [MATCH] "Non-surgical chin augmentation with hyaluronic acid filler" → filler/filler
+# [PRICE LITERAL FOUND] 2500 EUR · "2500 EUR"
+# [PROCEDURE RELATION] exact · same_treatment · "Non-surgical mentoplasty with hyaluronic acid filler"
+# [MATCH] "Non-surgical mentoplasty with hyaluronic acid filler" → filler/filler
+# [GP PRICE] PICK · "Non-surgical mentoplasty with hyaluronic acid filler" · 2500 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Fillers" relation=exact raw="2500 EUR" parsed=2500 EUR method=html_table url=https://aster.example/precios/
+# [MATCH] "Non-surgical mentoplasty with hyaluronic acid filler" → filler/filler
+# [PRICE LITERAL FOUND] 2500 EUR · "2500 EUR"
+# [PROCEDURE RELATION] exact · same_treatment · "Mentoplastia con ácido hialurónico"
+# [MATCH] "Mentoplastia con ácido hialurónico" → filler/filler
+# [GP PRICE] PICK · "Mentoplastia con ácido hialurónico" · 2500 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Fillers" relation=exact raw="2500 EUR" parsed=2500 EUR method=html_table url=https://aster.example/precios/
+# [MATCH] "Mentoplastia con ácido hialurónico" → filler/filler
+# [PRICE LITERAL FOUND] 510 EUR · "510 EUR"
+# [PROCEDURE RELATION] bundle · combo_with_skin · "NeuroSkin (Skinbooster + Neuromoduladores)"
+# [PRICE REJECT] relation_bundle · combo_with_skin
+# [PRICE REJECT] relation_bundle · combo_with_skin
+# [PRICE LITERAL FOUND] 300 EUR · "300 EUR"
+# [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Neuromoduladores (3 zonas)"
+# [MATCH] "Neuromoduladores (3 zonas)" → botox/botox
+# [PRICE LITERAL FOUND] 210 EUR · "210 EUR"
+# [RELATION REJECT] "Skinbooster" → different_procedure:skin
+# [PROCEDURE RELATION] different_procedure · competing_family_skin · "Skinbooster"
+# [PRICE REJECT] relation_different_procedure · competing_family_skin
+# [PRICE REJECT] relation_different_procedure · competing_family_skin
+# [GP PRICE] PICK · "Neuromoduladores (3 zonas)" · 300 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Botox" relation=variant raw="300 EUR" parsed=300 EUR method=html_table url=https://aster.example/precios/
+# [MATCH] "Neuromoduladores (3 zonas)" → botox/botox
+# [PRICE LITERAL FOUND] 300 EUR · "300 EUR"
+# [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Botox 3 areas"
+# [MATCH] "Botox 3 areas" → botox/botox
+# [PRICE LITERAL FOUND] 210 EUR · "210 EUR"
+# [RELATION REJECT] "Skinbooster" → different_procedure:skin
+# [PRICE REJECT] relation_different_procedure · competing_family_skin
+# [GP PRICE] PICK · "Botox 3 areas" · 300 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Botox" relation=variant raw="300 EUR" parsed=300 EUR method=html_table url=https://aster.example/precios/
+# [MATCH] "Botox 3 areas" → botox/botox
+# [PRICE LITERAL FOUND] 8500 EUR · "8500 EUR"
+# [PROCEDURE RELATION] different_procedure · rhino_tip_or_partial · "Rinoplastia parcial"
+# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
+# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
+# [PRICE LITERAL FOUND] 8500 EUR · "8500 EUR"
+# [PROCEDURE RELATION] different_procedure · rhino_tip_or_partial · "Rinoplastia de punta"
+# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
+# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
+# [PRICE LITERAL FOUND] 8500 EUR · "8500 EUR"
+# [PROCEDURE RELATION] different_procedure · rhino_tip_or_partial · "Rinoplastia secundaria"
+# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
+# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
+# [PRICE LITERAL FOUND] 8500 EUR · "8500 EUR"
+# [PROCEDURE RELATION] different_procedure · rhino_tip_or_partial · "Rinoplastia Post-Traumática"
+# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
+# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
+# [PRICE LITERAL FOUND] 8500 EUR · "8500 EUR"
+# [PROCEDURE RELATION] exact · same_treatment · "Rinoplastia primaria"
+# [MATCH] "Rinoplastia primaria" → rhinoplasty/rhinoplasty
+# [GP PRICE] PICK · "Rinoplastia primaria" · 8500 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Rhinoplasty" relation=exact raw="8500 EUR" parsed=8500 EUR method=html_table url=https://aster.example/precios/
+# [PRICE LITERAL FOUND] 7500 EUR · "7500 EUR"
+# [PROCEDURE RELATION] exact · same_treatment · "Rinoplastia Ultrasónica"
+# [MATCH] "Rinoplastia Ultrasónica" → rhinoplasty/rhinoplasty
+# [GP PRICE] PICK · "Rinoplastia Ultrasónica" · 7500 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Rhinoplasty" relation=exact raw="7500 EUR" parsed=7500 EUR method=html_table url=https://aster.example/precios/
+# [PRICE LITERAL FOUND] 2500 EUR · "2500 EUR"
+# [PROCEDURE RELATION] exact · same_treatment · "Chin filler"
+# [PRICE REJECT] sanity_reject
+# [PRICE LITERAL FOUND] 350 EUR · "350 EUR"
+# [MATCH] "Chin filler" → filler/filler
+# [GP PRICE] PICK · "Chin filler" · 350 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Fillers" relation=exact raw="350 EUR" parsed=350 EUR method=html_table url=https://aster.example/precios/
+# [EXTRACT] method=html_table
+# [EXTRACT] procedure="Botox 3 areas"
+# [EXTRACT] rawPrice="approximately 300 EUR"
+# [PARSE] 300 EUR
+# [PRICE LITERAL FOUND] 300 EUR · "approximately 300 EUR"
+# [MATCH] "Botox 3 areas" → botox/botox
+# [GP PRICE] PICK · "Botox 3 areas" · 300 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Botox" relation=variant raw="approximately 300 EUR" parsed=300 EUR method=html_table url=https://aster.example/precios/
+# [PRICE LITERAL FOUND] 6500 EUR · "6500 EUR – 10000 EUR"
+# [PROCEDURE RELATION] market_information · spanish_market_price_quote · "Rinoplastia"
+# [PRICE REJECT] relation_market_information · spanish_market_price_quote
+# [PRICE REJECT] relation_market_information · spanish_market_price_quote
+# [PRICE LITERAL FOUND] 6500 EUR · "6500 EUR – 10000 EUR"
+# [PRICE REJECT] relation_market_information · spanish_market_price_quote
+# [PRICE LITERAL FOUND] 6500 EUR · "6500 EUR – 10000 EUR"
+# [PRICE REJECT] procedure_price_block_mismatch · Rinoplastia
+# [PRICE LITERAL FOUND] 8000 EUR · "8000 EUR"
+# [MATCH] "Rinoplastia Ultrasónica" → rhinoplasty/rhinoplasty
+# [GP PRICE] PICK · "Rinoplastia Ultrasónica" · 8000 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Rhinoplasty" relation=exact raw="8000 EUR" parsed=8000 EUR method=html_table url=https://aster.example/precios/
+# [PRICE LITERAL FOUND] 250 EUR · "250 EUR"
+# [PROCEDURE RELATION] different_procedure · lip_hydration_not_augmentation · "Hidratación de labios con ácido hialurónico"
+# [PRICE REJECT] relation_different_procedure · lip_hydration_not_augmentation
+# [PRICE REJECT] relation_different_procedure · lip_hydration_not_augmentation
+# [PRICE LITERAL FOUND] 250 EUR · "250 EUR"
+# [PRICE REJECT] relation_different_procedure · lip_hydration_not_augmentation
+# [PRICE LITERAL FOUND] 250 EUR · "250 EUR"
+# [PRICE REJECT] relation_different_procedure · lip_hydration_not_augmentation
+# [PRICE LITERAL FOUND] 250 EUR · "250 EUR"
+# [PRICE REJECT] relation_different_procedure · lip_hydration_not_augmentation
+# [PRICE LITERAL FOUND] 349 EUR · "349 EUR"
+# [PROCEDURE RELATION] exact · same_treatment · "Aumento de labios con ácido hialurónico"
+# [MATCH] "Aumento de labios con ácido hialurónico" → filler/lip_filler
+# [GP PRICE] PICK · "Aumento de labios con ácido hialurónico" · 349 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Lip filler" relation=exact raw="349 EUR" parsed=349 EUR method=html_table url=https://aster.example/precios/
+# [PRICE LITERAL FOUND] 250 EUR · "250 EUR"
+# [PRICE REJECT] relation_different_procedure · lip_hydration_not_augmentation
+# [PRICE LITERAL FOUND] 349 EUR · "349 EUR"
+# [MATCH] "Aumento de labios con ácido hialurónico" → filler/lip_filler
+# [GP PRICE] PICK · "Aumento de labios con ácido hialurónico" · 349 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Lip filler" relation=exact raw="349 EUR" parsed=349 EUR method=html_table url=https://aster.example/precios/
+# [PRICE LITERAL FOUND] 250 EUR · "250 EUR"
+# [PROCEDURE RELATION] exact · same_treatment · "Hidratación de labios con ácido hialurónico"
+# [MATCH] "Hidratación de labios con ácido hialurónico" → filler/lip_filler
+# [GP PRICE] PICK · "Hidratación de labios con ácido hialurónico" · 250 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Fillers" relation=exact raw="250 EUR" parsed=250 EUR method=html_table url=https://aster.example/precios/
+# [PRICE LITERAL FOUND] 210 EUR · "210 EUR"
+# [PROCEDURE RELATION] different_procedure · skin_mesotherapy_not_toxin · "Mesoterapia NCTF"
+# [PRICE REJECT] relation_different_procedure · skin_mesotherapy_not_toxin
+# [PRICE REJECT] relation_different_procedure · skin_mesotherapy_not_toxin
+# [PRICE LITERAL FOUND] 210 EUR · "210 EUR"
+# [PROCEDURE RELATION] bundle · extra_procedure_skin · "Neuromoduladores"
+# [PRICE REJECT] relation_bundle · extra_procedure_skin
+# [PRICE REJECT] relation_bundle · extra_procedure_skin
+# [MATCH] "Neuromoduladores (3 zonas)" → botox/botox
+# [PRICE LITERAL FOUND] 210 EUR · "210 EUR"
+# [PRICE REJECT] relation_different_procedure · skin_mesotherapy_not_toxin
+# [PRICE LITERAL FOUND] 350 EUR · "350 EUR"
+# [MATCH] "Neuromoduladores (3 zonas)" → botox/botox
+# [GP PRICE] PICK · "Neuromoduladores (3 zonas)" · 350 EUR · html_table · https://aster.example/precios/
+# [PRICE SOURCE] html_table · https://aster.example/precios/
+# [PRICE ACCEPT] clinic="" procedure="Botox" relation=variant raw="350 EUR" parsed=350 EUR method=html_table url=https://aster.example/precios/
+# Subtest: surgical chin context cannot become live or cached injectable filler
+ok 150 - surgical chin context cannot become live or cached injectable filler
+  ---
+  duration_ms: 32.58741
+  ...
+# Subtest: injectable chin fillers stay valid regardless of amount
+ok 151 - injectable chin fillers stay valid regardless of amount
+  ---
+  duration_ms: 25.125698
+  ...
+# Subtest: toxin and skinbooster combination is rejected through every cache path
+ok 152 - toxin and skinbooster combination is rejected through every cache path
+  ---
+  duration_ms: 4.646586
+  ...
+# Subtest: standalone toxin and separate neighboring skinbooster tariffs remain valid
+ok 153 - standalone toxin and separate neighboring skinbooster tariffs remain valid
+  ---
+  duration_ms: 10.347653
+  ...
+# Subtest: Spanish partial and secondary rhinoplasty cannot supply a primary tariff
+ok 154 - Spanish partial and secondary rhinoplasty cannot supply a primary tariff
+  ---
+  duration_ms: 13.903763
+  ...
+# Subtest: financing caps cannot become fees while a distinct treatment tariff stays valid
+ok 155 - financing caps cannot become fees while a distinct treatment tariff stays valid
+  ---
+  duration_ms: 6.262892
+  ...
+# Subtest: amount-bound approximate cues survive parsing, extraction and output without inventing a range
+ok 156 - amount-bound approximate cues survive parsing, extraction and output without inventing a range
+  ---
+  duration_ms: 23.933619
+  ...
+# Subtest: Spanish market ranges stay excluded beside a genuine owned primary tariff
+ok 157 - Spanish market ranges stay excluded beside a genuine owned primary tariff
+  ---
+  duration_ms: 4.725835
+  ...
+# Subtest: an explicit lip augmentation request does not borrow a hydration-only HA tariff
+ok 158 - an explicit lip augmentation request does not borrow a hydration-only HA tariff
+  ---
+  duration_ms: 6.031965
+  ...
+# Subtest: mesotherapy keeps its own amount despite a preceding toxin heading
+ok 159 - mesotherapy keeps its own amount despite a preceding toxin heading
+  ---
+  duration_ms: 4.237882
   ...
 # [GP PRICE] REJECT · monthly_financing
 # [GP PRICE] REJECT · market_average
@@ -4943,24 +5226,24 @@ ok 144 - excludeClinicKeys ingest keeps prefixed identity keys as-is
 # [PRICE ACCEPT] clinic="" procedure="chemical peel" relation=exact raw="Chemical Peel $300" parsed=300 USD method=dom_block url=https://clinic.example/pricing
 # [RELATION REJECT] "Lip Flip Standalone Treatment Session" → different_procedure:botox
 # Subtest: syringe price survives results-last-a-month copy
-ok 145 - syringe price survives results-last-a-month copy
+ok 160 - syringe price survives results-last-a-month copy
   ---
-  duration_ms: 32.061901
+  duration_ms: 21.413586
   ...
 # Subtest: monthly installment is still rejected
-ok 146 - monthly installment is still rejected
+ok 161 - monthly installment is still rejected
   ---
-  duration_ms: 3.979724
+  duration_ms: 2.97823
   ...
 # Subtest: typical sessions ranging is not a menu FROM
-ok 147 - typical sessions ranging is not a menu FROM
+ok 162 - typical sessions ranging is not a menu FROM
   ---
-  duration_ms: 0.946972
+  duration_ms: 1.315745
   ...
 # Subtest: mixed menu Restylane and Chemical Peel, not add-on or typical
-ok 148 - mixed menu Restylane and Chemical Peel, not add-on or typical
+ok 163 - mixed menu Restylane and Chemical Peel, not add-on or typical
   ---
-  duration_ms: 64.933398
+  duration_ms: 46.468859
   ...
 # [MATCH] "Botox 1 Area" → botox/botox
 # [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Botox 1 Area"
@@ -4986,114 +5269,114 @@ ok 148 - mixed menu Restylane and Chemical Peel, not add-on or typical
 # [MATCH] "Lip Filler" → filler/lip_filler
 # [PROCEDURE RELATION] exact · same_treatment · "Lip Filler"
 # Subtest: stripPriceFields drops all price-related LLM keys
-ok 149 - stripPriceFields drops all price-related LLM keys
+ok 164 - stripPriceFields drops all price-related LLM keys
   ---
-  duration_ms: 1.224769
+  duration_ms: 1.103116
   ...
 # Subtest: inferUnitsFromLabel preserves area/ml quantities literally
-ok 150 - inferUnitsFromLabel preserves area/ml quantities literally
+ok 165 - inferUnitsFromLabel preserves area/ml quantities literally
   ---
-  duration_ms: 1.003987
+  duration_ms: 0.956676
   ...
 # Subtest: Botox 1 Area — AED 700 → botox / variant / area=1 / 700 preserved
-ok 151 - Botox 1 Area — AED 700 → botox / variant / area=1 / 700 preserved
+ok 166 - Botox 1 Area — AED 700 → botox / variant / area=1 / 700 preserved
   ---
-  duration_ms: 10.376387
+  duration_ms: 30.03894
   ...
 # Subtest: Botox 2 Areas — AED 1,100 → area=2
-ok 152 - Botox 2 Areas — AED 1,100 → area=2
+ok 167 - Botox 2 Areas — AED 1,100 → area=2
   ---
-  duration_ms: 1.538059
+  duration_ms: 1.447323
   ...
 # Subtest: Russian Lips 1ml — AED 990 → lip_filler / variant / ml=1
-ok 153 - Russian Lips 1ml — AED 990 → lip_filler / variant / ml=1
+ok 168 - Russian Lips 1ml — AED 990 → lip_filler / variant / ml=1
   ---
-  duration_ms: 0.902625
+  duration_ms: 1.156646
   ...
 # Subtest: Anti-Wrinkle Treatment Three Areas — £250 → botox / variant / area=3
-ok 154 - Anti-Wrinkle Treatment Three Areas — £250 → botox / variant / area=3
+ok 169 - Anti-Wrinkle Treatment Three Areas — £250 → botox / variant / area=3
   ---
-  duration_ms: 0.79895
+  duration_ms: 1.416587
   ...
 # Subtest: Botox + Filler Package — rejected bundle
-ok 155 - Botox + Filler Package — rejected bundle
+ok 170 - Botox + Filler Package — rejected bundle
   ---
-  duration_ms: 2.090067
+  duration_ms: 1.267053
   ...
 # Subtest: Breast Augmentation + Lift — rejected bundle
-ok 156 - Breast Augmentation + Lift — rejected bundle
+ok 171 - Breast Augmentation + Lift — rejected bundle
   ---
-  duration_ms: 0.895455
+  duration_ms: 0.894813
   ...
 # Subtest: Average filler cost in Dubai — market_information rejected
-ok 157 - Average filler cost in Dubai — market_information rejected
+ok 172 - Average filler cost in Dubai — market_information rejected
   ---
-  duration_ms: 1.515746
+  duration_ms: 1.557468
   ...
 # Subtest: Consultation AED 500 rejected for Botox
-ok 158 - Consultation AED 500 rejected for Botox
+ok 173 - Consultation AED 500 rejected for Botox
   ---
-  duration_ms: 20.77
+  duration_ms: 1.782686
   ...
 # Subtest: clinic-owned "start from" filler may be eligible as from pricing
-ok 159 - clinic-owned "start from" filler may be eligible as from pricing
+ok 174 - clinic-owned "start from" filler may be eligible as from pricing
   ---
-  duration_ms: 0.831989
+  duration_ms: 0.783366
   ...
 # Subtest: AI cannot override strong deterministic rejection
-ok 160 - AI cannot override strong deterministic rejection
+ok 175 - AI cannot override strong deterministic rejection
   ---
-  duration_ms: 0.143246
+  duration_ms: 0.138958
   ...
 # Subtest: legacy_untrusted never trusted; identity preserved on invalidate
-ok 161 - legacy_untrusted never trusted; identity preserved on invalidate
+ok 176 - legacy_untrusted never trusted; identity preserved on invalidate
   ---
-  duration_ms: 9.439711
+  duration_ms: 12.275878
   ...
 # Subtest: merge never lets semantics overwrite locked numeric evidence
-ok 162 - merge never lets semantics overwrite locked numeric evidence
+ok 177 - merge never lets semantics overwrite locked numeric evidence
   ---
-  duration_ms: 0.208633
+  duration_ms: 0.22004
   ...
 # Subtest: body peels cannot be promoted to chemical facial peels
-ok 163 - body peels cannot be promoted to chemical facial peels
+ok 178 - body peels cannot be promoted to chemical facial peels
   ---
-  duration_ms: 6.979557
+  duration_ms: 13.625695
   ...
 # Subtest: provider hair identity rejects otherwise bare Botox service
-ok 164 - provider hair identity rejects otherwise bare Botox service
+ok 179 - provider hair identity rejects otherwise bare Botox service
   ---
-  duration_ms: 0.801454
+  duration_ms: 2.521194
   ...
 # Subtest: directory cards and booking category pages are rejected
-ok 165 - directory cards and booking category pages are rejected
+ok 180 - directory cards and booking category pages are rejected
   ---
-  duration_ms: 0.369715
+  duration_ms: 0.718578
   ...
 # Subtest: Spanish multipacks and named rhinoplasty subtypes keep their scope
-ok 166 - Spanish multipacks and named rhinoplasty subtypes keep their scope
+ok 181 - Spanish multipacks and named rhinoplasty subtypes keep their scope
   ---
-  duration_ms: 1.247073
+  duration_ms: 1.107683
   ...
 # Subtest: dose averages on an official menu do not classify its price as average
-ok 167 - dose averages on an official menu do not classify its price as average
+ok 182 - dose averages on an official menu do not classify its price as average
   ---
-  duration_ms: 3.075136
+  duration_ms: 2.476598
   ...
 # Subtest: a dosage sentence containing a monetary claim remains market average
-ok 168 - a dosage sentence containing a monetary claim remains market average
+ok 183 - a dosage sentence containing a monetary claim remains market average
   ---
-  duration_ms: 1.888475
+  duration_ms: 1.913202
   ...
 # Subtest: English price menus do not bypass city cost-guide rejection
-ok 169 - English price menus do not bypass city cost-guide rejection
+ok 184 - English price menus do not bypass city cost-guide rejection
   ---
-  duration_ms: 0.267
+  duration_ms: 0.256705
   ...
 # Subtest: explicit Arabic own offer differs from an Arabic market average
-ok 170 - explicit Arabic own offer differs from an Arabic market average
+ok 185 - explicit Arabic own offer differs from an Arabic market average
   ---
-  duration_ms: 1.019631
+  duration_ms: 1.115826
   ...
 # [GP PRICE] REJECT · phone_number
 # [GP PRICE] REJECT · address_number
@@ -5925,20 +6208,12 @@ ok 170 - explicit Arabic own offer differs from an Arabic market average
 # [EXTRACT] procedure="Typical London Price Ranges · Open Rhinoplasty"
 # [EXTRACT] rawPrice="from £7,999"
 # [PARSE] 7999 GBP
-# [EXTRACT] method=html_table
-# [EXTRACT] procedure="Typical London Price Ranges · Tip Rhinoplasty"
-# [EXTRACT] rawPrice="from £4,900"
-# [PARSE] 4900 GBP
 # [PRICE LITERAL FOUND] 6900 GBP · "from £6,900"
 # [PROCEDURE RELATION] exact · same_treatment · "Typical London Price Ranges · Closed Rhinoplasty"
 # [MATCH] "Typical London Price Ranges · Closed Rhinoplasty" → rhinoplasty/rhinoplasty
 # [PRICE LITERAL FOUND] 7999 GBP · "from £7,999"
 # [PROCEDURE RELATION] exact · same_treatment · "Typical London Price Ranges · Open Rhinoplasty"
 # [MATCH] "Typical London Price Ranges · Open Rhinoplasty" → rhinoplasty/rhinoplasty
-# [PRICE LITERAL FOUND] 4900 GBP · "from £4,900"
-# [PROCEDURE RELATION] different_procedure · rhino_tip_or_partial · "Typical London Price Ranges · Tip Rhinoplasty"
-# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
-# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
 # [GP PRICE] PICK · "Typical London Price Ranges · Closed Rhinoplasty" · 6900 GBP · html_table · https://londonprivatehospital.uk/treatments/rhinoplasty/
 # [PRICE SOURCE] html_table · https://londonprivatehospital.uk/treatments/rhinoplasty/
 # [PRICE ACCEPT] clinic="" procedure="rhinoplasty nose job" relation=exact raw="from £6,900" parsed=6900 GBP method=html_table url=https://londonprivatehospital.uk/treatments/rhinoplasty/
@@ -5950,10 +6225,6 @@ ok 170 - explicit Arabic own offer differs from an Arabic market average
 # [EXTRACT] procedure="Ultrasonic Rhinoplasty"
 # [EXTRACT] rawPrice="£8,395"
 # [PARSE] 8395 GBP
-# [EXTRACT] method=html_table
-# [EXTRACT] procedure="Revision Rhinoplasty"
-# [EXTRACT] rawPrice="£10,995"
-# [PARSE] 10995 GBP
 # [EXTRACT] method=dom_block
 # [EXTRACT] procedure="A male nose job procedure"
 # [EXTRACT] rawPrice="A male nose job procedure starts from £6,900 at the Cadogan Clinic."
@@ -5964,10 +6235,6 @@ ok 170 - explicit Arabic own offer differs from an Arabic market average
 # [PRICE LITERAL FOUND] 8395 GBP · "£8,395"
 # [PROCEDURE RELATION] exact · same_treatment · "Ultrasonic Rhinoplasty"
 # [MATCH] "Ultrasonic Rhinoplasty" → rhinoplasty/rhinoplasty
-# [PRICE LITERAL FOUND] 10995 GBP · "£10,995"
-# [PROCEDURE RELATION] different_procedure · rhino_tip_or_partial · "Revision Rhinoplasty"
-# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
-# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
 # [PRICE LITERAL FOUND] 6900 GBP · "A male nose job procedure starts from £6,900 at the Cadogan Clinic."
 # [PROCEDURE RELATION] exact · same_treatment · "A male nose job procedure"
 # [MATCH] "A male nose job procedure" → rhinoplasty/rhinoplasty
@@ -5989,7 +6256,6 @@ ok 170 - explicit Arabic own offer differs from an Arabic market average
 # [PROCEDURE RELATION] exact · same_treatment · "Rhinoplasty (Nose Job)"
 # [MATCH] "Rhinoplasty (Nose Job)" → rhinoplasty/rhinoplasty
 # [PRICE LITERAL FOUND] 6295 GBP · "Rhinoplasty from £6,295"
-# [PROCEDURE RELATION] exact · same_treatment · "Rhinoplasty"
 # [MATCH] "Rhinoplasty" → rhinoplasty/rhinoplasty
 # [GP PRICE] PICK · "Rhinoplasty (Nose Job)" · 6295 GBP · html_table · https://enhancemedicalgroup.com/face-surgery/rhinoplasty
 # [PRICE SOURCE] html_table · https://enhancemedicalgroup.com/face-surgery/rhinoplasty
@@ -6001,10 +6267,6 @@ ok 170 - explicit Arabic own offer differs from an Arabic market average
 # [PARSE] 6995 GBP
 # [GP PRICE] REJECT · wrong_page_family
 # [EXTRACT] method=html_table
-# [EXTRACT] procedure="Rhinoplasty on tip - alar base reduction"
-# [EXTRACT] rawPrice="£8,995"
-# [PARSE] 8995 GBP
-# [EXTRACT] method=html_table
 # [EXTRACT] procedure="Rhinoplasty (closed)"
 # [EXTRACT] rawPrice="£8,995"
 # [PARSE] 8995 GBP
@@ -6012,10 +6274,6 @@ ok 170 - explicit Arabic own offer differs from an Arabic market average
 # [EXTRACT] procedure="Rhinoplasty - reconstruction/secondary"
 # [EXTRACT] rawPrice="£12,995"
 # [PARSE] 12995 GBP
-# [PRICE LITERAL FOUND] 8995 GBP · "£8,995"
-# [PROCEDURE RELATION] different_procedure · rhino_tip_or_partial · "Rhinoplasty on tip - alar base reduction"
-# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
-# [PRICE REJECT] relation_different_procedure · rhino_tip_or_partial
 # [PRICE LITERAL FOUND] 8995 GBP · "£8,995"
 # [PROCEDURE RELATION] exact · same_treatment · "Rhinoplasty (closed)"
 # [MATCH] "Rhinoplasty (closed)" → rhinoplasty/rhinoplasty
@@ -6043,6 +6301,7 @@ ok 170 - explicit Arabic own offer differs from an Arabic market average
 # [GP PRICE] PICK · "Cost of 500 FUE grafts" · 3500 GBP · list_item · https://westminsterclinic.co.uk/cost-and-prices-for-hair-transplants-in-london/
 # [PRICE SOURCE] list_item · https://westminsterclinic.co.uk/cost-and-prices-for-hair-transplants-in-london/
 # [PRICE ACCEPT] clinic="" procedure="hair transplant FUE" relation=exact raw="Cost of 500 FUE grafts – from £3500" parsed=3500 GBP method=list_item url=https://westminsterclinic.co.uk/cost-and-prices-for-hair-transplants-in-london/
+# [GP PRICE] REJECT · hair_larger_package
 # [EXTRACT] method=html_table
 # [EXTRACT] procedure="Lowest package price"
 # [EXTRACT] rawPrice="£2,999"
@@ -6055,10 +6314,6 @@ ok 170 - explicit Arabic own offer differs from an Arabic market average
 # [EXTRACT] procedure="Arrangement fee"
 # [EXTRACT] rawPrice="£200"
 # [PARSE] 200 GBP
-# [EXTRACT] method=html_table
-# [EXTRACT] procedure="Package 2"
-# [EXTRACT] rawPrice="£3,799"
-# [PARSE] 3799 GBP
 # [GP PRICE] REJECT · hair_larger_package
 # [EXTRACT] method=dom_block
 # [EXTRACT] procedure="Micro Sapphire FUE"
@@ -6078,10 +6333,6 @@ ok 170 - explicit Arabic own offer differs from an Arabic market average
 # [PRICE REJECT] relation_different_procedure · named_row_not_requested_treatment
 # [PRICE LITERAL FOUND] 200 GBP · "£200"
 # [PROCEDURE RELATION] different_procedure · named_row_not_requested_treatment · "Arrangement fee"
-# [PRICE REJECT] relation_different_procedure · named_row_not_requested_treatment
-# [PRICE REJECT] relation_different_procedure · named_row_not_requested_treatment
-# [PRICE LITERAL FOUND] 3799 GBP · "£3,799"
-# [PROCEDURE RELATION] different_procedure · named_row_not_requested_treatment · "Package 2"
 # [PRICE REJECT] relation_different_procedure · named_row_not_requested_treatment
 # [PRICE REJECT] relation_different_procedure · named_row_not_requested_treatment
 # [PRICE LITERAL FOUND] 3199 GBP · "Micro Sapphire FUE starts at £2,999 for up to 3,000 grafts. A £200 arrangement fee applies to every package, so the total payable ranges from £3,199 to £4,999."
@@ -6150,334 +6401,334 @@ ok 170 - explicit Arabic own offer differs from an Arabic market average
 # [MATCH] "FUE hair transplant" → hair_transplant/hair_transplant
 # [MATCH] "Hair transplant" → hair_transplant/hair_transplant
 # Subtest: phone numbers are never prices
-ok 171 - phone numbers are never prices
+ok 186 - phone numbers are never prices
   ---
-  duration_ms: 11.329888
+  duration_ms: 20.196119
   ...
 # Subtest: address, year, duration, reviews rejected; priced rows accepted
-ok 172 - address, year, duration, reviews rejected; priced rows accepted
+ok 187 - address, year, duration, reviews rejected; priced rows accepted
   ---
-  duration_ms: 34.760222
+  duration_ms: 16.895594
   ...
 # Subtest: botox unit price survives duration copy
-ok 173 - botox unit price survives duration copy
+ok 188 - botox unit price survives duration copy
   ---
-  duration_ms: 2.782357
+  duration_ms: 2.968587
   ...
 # Subtest: average-dose range beside a per-unit fee is not the price
-ok 174 - average-dose range beside a per-unit fee is not the price
+ok 189 - average-dose range beside a per-unit fee is not the price
   ---
-  duration_ms: 4.39676
+  duration_ms: 4.961859
   ...
 # Subtest: locale and currency forms
-ok 175 - locale and currency forms
+ok 190 - locale and currency forms
   ---
-  duration_ms: 3.834897
+  duration_ms: 6.170754
   ...
 # Subtest: A — Spanish botox table
-ok 176 - A — Spanish botox table
+ok 191 - A — Spanish botox table
   ---
-  duration_ms: 30.207167
+  duration_ms: 28.166148
   ...
 # Subtest: B — Lip Lift must not become filler
-ok 177 - B — Lip Lift must not become filler
+ok 192 - B — Lip Lift must not become filler
   ---
-  duration_ms: 10.802557
+  duration_ms: 10.221625
   ...
 # Subtest: C — WooCommerce sale uses ins as active price
-ok 178 - C — WooCommerce sale uses ins as active price
+ok 193 - C — WooCommerce sale uses ins as active price
   ---
-  duration_ms: 8.857797
+  duration_ms: 9.358999
   ...
 # Subtest: D — number elsewhere is not Botox
-ok 179 - D — number elsewhere is not Botox
+ok 194 - D — number elsewhere is not Botox
   ---
-  duration_ms: 6.482632
+  duration_ms: 5.633778
   ...
 # Subtest: E — consultation is not the filler price
-ok 180 - E — consultation is not the filler price
+ok 195 - E — consultation is not the filler price
   ---
-  duration_ms: 25.862664
+  duration_ms: 7.331626
   ...
 # Subtest: F — invalid clinic title
-ok 181 - F — invalid clinic title
+ok 196 - F — invalid clinic title
   ---
-  duration_ms: 1.554133
+  duration_ms: 1.622897
   ...
 # Subtest: G — AI cannot mutate parsed price
-ok 182 - G — AI cannot mutate parsed price
+ok 197 - G — AI cannot mutate parsed price
   ---
-  duration_ms: 0.31287
+  duration_ms: 0.254713
   ...
 # Subtest: H — JS shell requests renderer, not AI
-ok 183 - H — JS shell requests renderer, not AI
+ok 198 - H — JS shell requests renderer, not AI
   ---
-  duration_ms: 5.41583
+  duration_ms: 3.777992
   ...
 # Subtest: I — De Felipe HA 1 vial beats rhinomodelación for Fillers
-ok 184 - I — De Felipe HA 1 vial beats rhinomodelación for Fillers
+ok 199 - I — De Felipe HA 1 vial beats rhinomodelación for Fillers
   ---
-  duration_ms: 10.710358
+  duration_ms: 11.11117
   ...
 # Subtest: J — Sermed lip min is 180 not Radiesse 250
-ok 185 - J — Sermed lip min is 180 not Radiesse 250
+ok 200 - J — Sermed lip min is 180 not Radiesse 250
   ---
-  duration_ms: 16.136879
+  duration_ms: 10.083438
   ...
 # Subtest: K — Londres sale is 299 not 300
-ok 186 - K — Londres sale is 299 not 300
+ok 201 - K — Londres sale is 299 not 300
   ---
-  duration_ms: 4.56965
+  duration_ms: 4.419014
   ...
 # Subtest: L — blog cost guide is not official clinic evidence
-ok 187 - L — blog cost guide is not official clinic evidence
+ok 202 - L — blog cost guide is not official clinic evidence
   ---
-  duration_ms: 0.214822
+  duration_ms: 0.194562
   ...
 # Subtest: N — BePerfect lip filler is Juvederm 1900, not JSON-LD 600-5200
-ok 188 - N — BePerfect lip filler is Juvederm 1900, not JSON-LD 600-5200
+ok 203 - N — BePerfect lip filler is Juvederm 1900, not JSON-LD 600-5200
   ---
-  duration_ms: 12.271201
+  duration_ms: 16.671978
   ...
 # Subtest: O — BePerfect Botox 1-zone is 900, not hyaluronidase 600
-ok 189 - O — BePerfect Botox 1-zone is 900, not hyaluronidase 600
+ok 204 - O — BePerfect Botox 1-zone is 900, not hyaluronidase 600
   ---
-  duration_ms: 13.39597
+  duration_ms: 15.128942
   ...
 # Subtest: Miami Forma RF is not Botox FROM
-ok 190 - Miami Forma RF is not Botox FROM
+ok 205 - Miami Forma RF is not Botox FROM
   ---
-  duration_ms: 3.088357
+  duration_ms: 4.339795
   ...
 # Subtest: P — Dr. Estetix Botox 1 zona is 800, not lip filler
-ok 191 - P — Dr. Estetix Botox 1 zona is 800, not lip filler
+ok 206 - P — Dr. Estetix Botox 1 zona is 800, not lip filler
   ---
-  duration_ms: 13.759786
+  duration_ms: 16.027149
   ...
 # Subtest: Q — Doctor SKiN Botox is 1-zone wrinkle, not laser 429
-ok 192 - Q — Doctor SKiN Botox is 1-zone wrinkle, not laser 429
+ok 207 - Q — Doctor SKiN Botox is 1-zone wrinkle, not laser 429
   ---
-  duration_ms: 13.070162
+  duration_ms: 12.538623
   ...
 # Subtest: R — Arabic Dubai menus match every family and price in dirhams
-ok 193 - R — Arabic Dubai menus match every family and price in dirhams
+ok 208 - R — Arabic Dubai menus match every family and price in dirhams
   ---
-  duration_ms: 80.286018
+  duration_ms: 50.250055
   ...
 # Subtest: S — clinic articles keep single amounts, drop brand ranges
-ok 194 - S — clinic articles keep single amounts, drop brand ranges
+ok 209 - S — clinic articles keep single amounts, drop brand ranges
   ---
-  duration_ms: 12.14993
+  duration_ms: 7.563515
   ...
 # Subtest: Premier Laser 1 Area beats Chin Dimpling
-ok 195 - Premier Laser 1 Area beats Chin Dimpling
+ok 210 - Premier Laser 1 Area beats Chin Dimpling
   ---
-  duration_ms: 11.998547
+  duration_ms: 14.630153
   ...
 # Subtest: generic Botox FROM is 1-area, not Jawline £299 or competitor £120/£99
-ok 196 - generic Botox FROM is 1-area, not Jawline £299 or competitor £120/£99
+ok 211 - generic Botox FROM is 1-area, not Jawline £299 or competitor £120/£99
   ---
-  duration_ms: 30.044974
+  duration_ms: 40.437349
   ...
 # Subtest: 2Glow 1 AREA is 99 GBP, not Shopify template 399.99 USD
-ok 197 - 2Glow 1 AREA is 99 GBP, not Shopify template 399.99 USD
+ok 212 - 2Glow 1 AREA is 99 GBP, not Shopify template 399.99 USD
   ---
-  duration_ms: 5.416311
+  duration_ms: 5.644764
   ...
 # Subtest: laser hair vs skin named rows; generic laser treatment skipped
-ok 198 - laser hair vs skin named rows; generic laser treatment skipped
+ok 213 - laser hair vs skin named rows; generic laser treatment skipped
   ---
-  duration_ms: 19.575262
+  duration_ms: 14.619147
   ...
 # Subtest: Enhance BA is 4595 from the menu row, not the financing heading
-ok 199 - Enhance BA is 4595 from the menu row, not the financing heading
+ok 214 - Enhance BA is 4595 from the menu row, not the financing heading
   ---
-  duration_ms: 6.935081
+  duration_ms: 6.84819
   ...
 # Subtest: Harley bilateral FROM; Cadogan not 5k-7k market band; Nuffield not pain H3
-ok 200 - Harley bilateral FROM; Cadogan not 5k-7k market band; Nuffield not pain H3
+ok 215 - Harley bilateral FROM; Cadogan not 5k-7k market band; Nuffield not pain H3
   ---
-  duration_ms: 14.096211
+  duration_ms: 18.929817
   ...
 # Subtest: London peel menu prefers Juliette Armand over Cosmelan kit
-ok 201 - London peel menu prefers Juliette Armand over Cosmelan kit
+ok 216 - London peel menu prefers Juliette Armand over Cosmelan kit
   ---
-  duration_ms: 9.236887
+  duration_ms: 8.751728
   ...
 # Subtest: Face Clinic targeted add-on is not the Botox FROM
-ok 202 - Face Clinic targeted add-on is not the Botox FROM
+ok 217 - Face Clinic targeted add-on is not the Botox FROM
   ---
-  duration_ms: 4.974197
+  duration_ms: 7.009077
   ...
 # Subtest: London rhinoplasty — closed FROM not tip band; price-guide beats male copy
-ok 203 - London rhinoplasty — closed FROM not tip band; price-guide beats male copy
+ok 218 - London rhinoplasty — closed FROM not tip band; price-guide beats male copy
   ---
-  duration_ms: 19.905601
+  duration_ms: 37.093454
   ...
 # Subtest: London rhinoplasty market guide rejected; hospital guide not typical
-ok 204 - London rhinoplasty market guide rejected; hospital guide not typical
+ok 219 - London rhinoplasty market guide rejected; hospital guide not typical
   ---
-  duration_ms: 7.316533
+  duration_ms: 11.029157
   ...
 # Subtest: Harley Medical official nose-job-cost, not finance or boob-job-cost
-ok 205 - Harley Medical official nose-job-cost, not finance or boob-job-cost
+ok 220 - Harley Medical official nose-job-cost, not finance or boob-job-cost
   ---
-  duration_ms: 15.68086
+  duration_ms: 16.57277
   ...
 # Subtest: London hair package FROM not graft count or effective per-graft
-ok 206 - London hair package FROM not graft count or effective per-graft
+ok 221 - London hair package FROM not graft count or effective per-graft
   ---
-  duration_ms: 39.960729
+  duration_ms: 56.076813
   ...
 # Subtest: catalog site: search is worldwide, not Spain-only precio
-ok 207 - catalog site: search is worldwide, not Spain-only precio
+ok 222 - catalog site: search is worldwide, not Spain-only precio
   ---
-  duration_ms: 6.30921
+  duration_ms: 1.394564
   ...
 # Subtest: city queries use local price words in every market
-ok 208 - city queries use local price words in every market
+ok 223 - city queries use local price words in every market
   ---
-  duration_ms: 1.096226
+  duration_ms: 0.615394
   ...
 # Subtest: Places clinic word follows the city language
-ok 209 - Places clinic word follows the city language
+ok 224 - Places clinic word follows the city language
   ---
-  duration_ms: 0.269555
+  duration_ms: 0.203716
   ...
 # Subtest: Google gl follows the city, unknown cities are not pinned to ES/RO
-ok 210 - Google gl follows the city, unknown cities are not pinned to ES/RO
+ok 225 - Google gl follows the city, unknown cities are not pinned to ES/RO
   ---
-  duration_ms: 0.345368
+  duration_ms: 0.213481
   ...
 # Subtest: countryCode overrides city name for locale (BG)
-ok 211 - countryCode overrides city name for locale (BG)
+ok 226 - countryCode overrides city name for locale (BG)
   ---
-  duration_ms: 0.515023
+  duration_ms: 0.34671
   ...
 # Subtest: price menu probes are generic by TLD, not a clinic allowlist
-ok 212 - price menu probes are generic by TLD, not a clinic allowlist
+ok 227 - price menu probes are generic by TLD, not a clinic allowlist
   ---
-  duration_ms: 4.38269
+  duration_ms: 0.288964
   ...
 # Subtest: A — Serper leads, then DataForSEO, then SerpApi
-ok 213 - A — Serper leads, then DataForSEO, then SerpApi
+ok 228 - A — Serper leads, then DataForSEO, then SerpApi
   ---
-  duration_ms: 1.373572
+  duration_ms: 0.891889
   ...
 # Subtest: A2 — Serper asks Google plainly and reads URLs, not prices
-ok 214 - A2 — Serper asks Google plainly and reads URLs, not prices
+ok 229 - A2 — Serper asks Google plainly and reads URLs, not prices
   ---
-  duration_ms: 0.355824
+  duration_ms: 0.25301
   ...
 # Subtest: B — Dubai queries carry the UAE location and Arabic language
-ok 215 - B — Dubai queries carry the UAE location and Arabic language
+ok 230 - B — Dubai queries carry the UAE location and Arabic language
   ---
-  duration_ms: 0.257237
+  duration_ms: 0.177376
   ...
 # Subtest: B2 — DataForSEO city sweeps go deep, site: stays shallow
-ok 216 - B2 — DataForSEO city sweeps go deep, site: stays shallow
+ok 231 - B2 — DataForSEO city sweeps go deep, site: stays shallow
   ---
-  duration_ms: 0.207001
+  duration_ms: 0.143525
   ...
 # Subtest: C — unmapped markets fall back to google.com instead of failing
-ok 217 - C — unmapped markets fall back to google.com instead of failing
+ok 232 - C — unmapped markets fall back to google.com instead of failing
   ---
-  duration_ms: 0.162864
+  duration_ms: 0.145618
   ...
 # Subtest: D — auth header is Basic base64(login:password)
-ok 218 - D — auth header is Basic base64(login:password)
+ok 233 - D — auth header is Basic base64(login:password)
   ---
-  duration_ms: 0.375924
+  duration_ms: 0.216886
   ...
 # Subtest: E — organic rows parse to url/title/snippet, other items ignored
-ok 219 - E — organic rows parse to url/title/snippet, other items ignored
+ok 234 - E — organic rows parse to url/title/snippet, other items ignored
   ---
-  duration_ms: 0.858028
+  duration_ms: 0.564397
   ...
 # Subtest: F — task-level errors are reported, not silently parsed
-ok 220 - F — task-level errors are reported, not silently parsed
+ok 235 - F — task-level errors are reported, not silently parsed
   ---
-  duration_ms: 0.383086
+  duration_ms: 0.283896
   ...
 # Subtest: G — account problems disable the provider, SE hiccups only retry
-ok 221 - G — account problems disable the provider, SE hiccups only retry
+ok 236 - G — account problems disable the provider, SE hiccups only retry
   ---
-  duration_ms: 1.368024
+  duration_ms: 0.986121
   ...
 # Subtest: H — SerpApi rows still parse while the fallback exists
-ok 222 - H — SerpApi rows still parse while the fallback exists
+ok 237 - H — SerpApi rows still parse while the fallback exists
   ---
-  duration_ms: 0.369604
+  duration_ms: 0.240641
   ...
 # Subtest: normalizeExploreLocality prefers explicit fields and fills defaults
-ok 223 - normalizeExploreLocality prefers explicit fields and fills defaults
+ok 238 - normalizeExploreLocality prefers explicit fields and fills defaults
   ---
-  duration_ms: 1.456086
+  duration_ms: 2.147664
   ...
 # Subtest: normalizeExploreLocality falls back to city→country when cc missing
-ok 224 - normalizeExploreLocality falls back to city→country when cc missing
+ok 239 - normalizeExploreLocality falls back to city→country when cc missing
   ---
-  duration_ms: 1.058759
+  duration_ms: 1.122094
   ...
 # Subtest: docIdWithLocality prefers cityId and dual-reads legacy revision
-ok 225 - docIdWithLocality prefers cityId and dual-reads legacy revision
+ok 240 - docIdWithLocality prefers cityId and dual-reads legacy revision
   ---
-  duration_ms: 0.931148
+  duration_ms: 0.312549
   ...
 # Subtest: Paris FR vs Paris TX cityIds never collide
-ok 226 - Paris FR vs Paris TX cityIds never collide
+ok 241 - Paris FR vs Paris TX cityIds never collide
   ---
-  duration_ms: 1.58573
+  duration_ms: 0.984578
   ...
 # Subtest: London UK vs London Ontario cityIds never collide
-ok 227 - London UK vs London Ontario cityIds never collide
+ok 242 - London UK vs London Ontario cityIds never collide
   ---
-  duration_ms: 0.479419
+  duration_ms: 0.316786
   ...
 # Subtest: multiple Springfield cities stay distinct
-ok 228 - multiple Springfield cities stay distinct
+ok 243 - multiple Springfield cities stay distinct
   ---
-  duration_ms: 0.308022
+  duration_ms: 0.169815
   ...
 # Subtest: missing country/coords is unresolved and does not merge
-ok 229 - missing country/coords is unresolved and does not merge
+ok 244 - missing country/coords is unresolved and does not merge
   ---
-  duration_ms: 0.237957
+  duration_ms: 0.205879
   ...
 # Subtest: legacy London UK record cannot leak into London Ontario
-ok 230 - legacy London UK record cannot leak into London Ontario
+ok 245 - legacy London UK record cannot leak into London Ontario
   ---
-  duration_ms: 0.198388
+  duration_ms: 0.202845
   ...
 # Subtest: legacy Paris FR record cannot leak into Paris Texas
-ok 231 - legacy Paris FR record cannot leak into Paris Texas
+ok 246 - legacy Paris FR record cannot leak into Paris Texas
   ---
-  duration_ms: 0.336385
+  duration_ms: 0.17325
   ...
 # Subtest: Cronosmed Timisoara page preferred; Iasi/Brasov rejected
-ok 232 - Cronosmed Timisoara page preferred; Iasi/Brasov rejected
+ok 247 - Cronosmed Timisoara page preferred; Iasi/Brasov rejected
   ---
-  duration_ms: 6.653427
+  duration_ms: 4.193084
   ...
 # Subtest: contaminated Iasi cache row invalidated for Timisoara search
-ok 233 - contaminated Iasi cache row invalidated for Timisoara search
+ok 248 - contaminated Iasi cache row invalidated for Timisoara search
   ---
-  duration_ms: 0.534492
+  duration_ms: 0.496395
   ...
 # Subtest: Bright Data is optional via feature flag
-ok 234 - Bright Data is optional via feature flag
+ok 249 - Bright Data is optional via feature flag
   ---
-  duration_ms: 0.252219
+  duration_ms: 0.200741
   ...
-1..234
-# tests 243
+1..249
+# tests 258
 # suites 13
-# pass 243
+# pass 258
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 2550.167602
+# duration_ms 1913.700645
 npm notice
 npm notice New major version of npm available! 10.8.2 -> 12.2.0
 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
