@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.89 — bounded display snapshots and responsive polling
+Aesthetic Procedure Price Discovery v0.11.90 — preserve public provider names and repair cached identities
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -3892,6 +3892,14 @@ def weak_business_name(name: str, city: str, url: str) -> bool:
         if any(term in n for term in GENERIC_SERVICE_NAME_TERMS):
             return True
 
+    # Domains join words and omit accents. An actual source name such as
+    # "Op. Dr. Akın Şahin" still agrees with drakinsahin; it is not a service
+    # title merely because the site's brand is one unbroken token.
+    compact_name = re.sub(r"[^a-z0-9]", "", n.replace("ı", "i"))
+    compact_brand = re.sub(r"[^a-z0-9]", "", brand.replace("ı", "i"))
+    if len(compact_brand) >= 5 and compact_brand in compact_name:
+        return False
+
     # If a short service/title name has no lexical relation to the site's domain
     # brand, inspect the homepage before trusting it.
     brand_words = {w for w in re.findall(r"[a-z0-9]+", brand) if len(w) >= 4}
@@ -3908,7 +3916,8 @@ def homepage_url(url: str) -> str:
     return urlunparse((p.scheme or "https", p.netloc, "/", "", "", ""))
 
 
-def structured_business_name(html: str, city: str = "", url: str = "") -> str:
+def structured_business_name(html: str, city: str = "", url: str = "",
+                             require_source_match: bool = False) -> str:
     soup = BeautifulSoup(html, "lxml")
     candidates = []
 
@@ -3970,6 +3979,8 @@ def structured_business_name(html: str, city: str = "", url: str = "") -> str:
             elif isinstance(item, list):
                 stack.extend(item)
 
+    if require_source_match:
+        candidates = [item for item in candidates if item[0] == 0]
     return min(candidates, key=lambda item: item[:3])[3] if candidates else ""
 
 
@@ -4059,6 +4070,13 @@ async def resolve_clinic_name(
         marketplace_name = marketplace_profile_name(html, url, serp_title, city)
         if marketplace_name:
             return marketplace_name
+
+    # The provider's own schema is stronger than a hostname guess, including
+    # when a transliterated domain differs from a native-script public name.
+    source_name = await asyncio.to_thread(structured_business_name,
+        html, city, url, True)
+    if source_name:
+        return source_name
 
     # 1) current page structured/site identity
     name = await asyncio.to_thread(guess_clinic_name_from_html, html, url, serp_title, city)
@@ -18014,7 +18032,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.89",
+    version="0.11.90",
     lifespan=app_lifespan,
 )
 

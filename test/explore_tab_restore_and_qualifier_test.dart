@@ -79,6 +79,35 @@ void main() {
     }
   });
 
+  test('worker name repair reaches a cached card even when its tariff is unchanged', () {
+    final service = offlineService();
+    final old = fixtures.clinic(name: 'Dra Kinsahin', city: 'İstanbul',
+        procedure: 'Botox', canonical: 'botox', rawTitle: 'Botoks',
+        amount: 5000, currency: 'TRY').copyWith(
+          area: 'İstanbul · drakinsahin.com',
+          priceSourceUrl: 'https://drakinsahin.com/bonta/',
+          rating: 4.9, reviews: 80);
+    final previous = OpenAIComparisonResult(city: 'İstanbul', topic: 'Botox',
+        topicType: OpenAISearchItemType.procedure, summary: '', rangeLabel: '',
+        mapCenter: old.coord, clinics: [old]);
+    for (final origin in ['live_search', 'firestore']) {
+      final repaired = service.comparisonWithDiscoveryRows(city: 'İstanbul',
+          procedure: 'Botox', previous: previous, rows: [ExploreDiscoveryToolRow(
+            clinicName: 'Op. Dr. Akın Şahin', priceMin: old.priceMin,
+            currency: old.currency, sourceUrl: old.priceSourceUrl,
+            rawProcedureText: old.rawProcedureText,
+            rawEvidence: old.priceEvidenceText, rawPriceText: old.rawPriceText,
+            clinicOwnPrice: true, cityMatch: true, sourceType: 'official_clinic',
+            evidenceType: 'official_price_menu', procedureDisplayName: 'Botoks',
+            procedureCanonical: 'botox', origin: origin, qualifier: 'exact',
+          )]);
+      expect(repaired.clinics.single.name, 'Op. Dr. Akın Şahin', reason: origin);
+      expect(repaired.clinics.single.priceMin, old.priceMin);
+      expect(repaired.clinics.single.rating, old.rating);
+      expect(repaired.clinics.single.reviews, old.reviews);
+    }
+  });
+
   test(
     'returning between full verified tabs uses their snapshots without I/O',
     () async {

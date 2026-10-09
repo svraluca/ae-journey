@@ -1717,7 +1717,7 @@ void main() {
             'Rinoplastie București — Preț Operație Nas de la 5.000€',
             'drdiana.ro',
           ),
-          'Dr Diana',
+          'Drdiana', // Host placeholder; the public name needs source metadata.
         );
         expect(
           exploreClinicNameFromSerpTitle(
@@ -2540,7 +2540,7 @@ void main() {
             sourceUrl: 'https://drazra.com/laser',
           ),
         ),
-        'Dra Zra',
+        'Drazra',
       );
       expect(
         looksLikeRawScrapedProcedureTitle(

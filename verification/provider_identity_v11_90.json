@@ -1,0 +1,116 @@
+{
+  "checked_at_utc": "2026-10-09T18:56:16.841874+00:00",
+  "base_commit": "7bccf2293e69095dd2581ab93169876a83d2a51d",
+  "runtime_version": "0.11.90",
+  "worker_version": "0.11.90",
+  "price_extract_revision": "e26",
+  "verified_public_name": "Op. Dr. Akın Şahin",
+  "sources": [
+    {
+      "url": "https://www.drakinsahin.com/",
+      "http_status": 200,
+      "sha256": "a7e0f0e0f36dcf308670257eef5e670d80c2876b01ac590f92b651b445fd24cf",
+      "title": "Op. Dr. Akın Şahin | Op. Dr. Akın Şahin",
+      "og_site_name": "Op. Dr. Akın Şahin",
+      "structured_public_name": "Op. Dr. Akın Şahin",
+      "resolved_public_name_after_fix": "Op. Dr. Akın Şahin"
+    },
+    {
+      "url": "https://drakinsahin.com/bonta/",
+      "http_status": 200,
+      "sha256": "3b30a13aa67737e499609246af40e7c9735a0f3643b9c79f25217ff3f4d48942",
+      "title": "Bonta Uygulamaları, Kırışıklık Tedavisi | Op. Dr. Akın Şahin",
+      "og_site_name": "Op. Dr. Akın Şahin",
+      "structured_public_name": "Op. Dr. Akın Şahin",
+      "resolved_public_name_after_fix": "Op. Dr. Akın Şahin"
+    }
+  ],
+  "root_causes": [
+    "Flutter greedy dra? prefix split turns drakinsahin into Dra Kinsahin.",
+    "Python word overlap treats joined transliterated domains as conflicts with spaced public names.",
+    "Cached card handoff previously updated ratings and tariffs without copying corrected names when the tariff timestamp was unchanged."
+  ],
+  "general_fixes": [
+    "Prefer provider schema whose URL or id belongs to the source host; preserve Unicode.",
+    "Do not infer doctor titles or personal word breaks from joined hostnames.",
+    "Known-source tariff refresh repairs names from source-bound provider metadata.",
+    "Apply matched Maps names for the verified website even when the brand differs from its domain.",
+    "Carry name-only corrections through the full worker/card/cache pool without changing fee evidence or rating.",
+    "Keep stale host fallbacks from overwriting corrected public names."
+  ],
+  "price_check": {
+    "displayed_amount": 5000,
+    "currency": "TRY",
+    "status": "unverified",
+    "current_official_treatment_page": "https://drakinsahin.com/bonta/",
+    "numeric_botox_evidence_rows": 0,
+    "published_numeric_fee_found_on_checked_page": false,
+    "source_statement": "Kırışıklık tedavisi fiyatları 2026 hakkındaki en sağlıklı bilgiye, yüz yapınızın analiz edildiği ve ihtiyaçlarınızın belirlendiği bir ön muayene sonrasında ulaşmanız mümkündür.",
+    "limits": "The screenshot supplies a domain, not the exact retained source URL. A Google AI overview is not evidence of a clinic-owned fee. No replacement fee was invented."
+  },
+  "production_provider_or_price_overrides_added": false,
+  "validation": {
+    "python": {
+      "passed": 140,
+      "failed": 0
+    },
+    "flutter_name_and_cache_handoff": {
+      "passed": 13,
+      "failed": 0
+    },
+    "broader_flutter": {
+      "passed": 139,
+      "failed": 6,
+      "existing_failures": [
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "pool mix plan 2+ pool paints 2 Firestore seeds and still hunts 2 Google"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "procedure display title 14. Serp page titles are not clinic names"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "Places name looks medical keeps named plastic clinics Google may type as gym/lodging"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "Places name looks medical 25g. Abu Dhabi keeps verified quotes and skips Dubai-only URLs"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "SERP fetch uses any listed price, not a snippet amount London hair cards show package FROM, not /graft on graft counts"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "canonical city + early discovery rejects Budapest Botox does not keep a Tiranë clinic"
+        }
+      ],
+      "new_failures": []
+    },
+    "analysis": "No errors in changed Dart production files or new name tests; existing unused declarations/style diagnostics remain.",
+    "live_health": {
+      "version": "0.11.90",
+      "worker_version": "0.11.90"
+    },
+    "logs": {
+      "python": {
+        "sha256": "c82e57918a179e79cd9aa917c285907221a316ee3c360131bed27758ecabc479"
+      },
+      "flutter": {
+        "sha256": "8a22a448579f7f09a5b4f953fd951c84e8374f57391105b58ffe315e848bd43c"
+      },
+      "name_cache_handoff": {
+        "sha256": "903f73a433309ba474f0aebbe3bda0f198e4ca63d7ecb83a13c829c4a25e12f0"
+      },
+      "analysis": {
+        "sha256": "c450c453d11df6cb1f1ad9727cc16503b5eecd9f64cad8708df437fd7f9545c2"
+      }
+    }
+  },
+  "deployment_limits": [
+    "These cloud changes are not installed on the user Mac or iPhone.",
+    "The naming fix does not require a new Functions extraction revision or a hardcoded provider mapping."
+  ]
+}

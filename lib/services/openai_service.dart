@@ -1811,7 +1811,7 @@ Return JSON only.
       preferIncoming: exploreVerifiedTariffSupersedes,
     );
     final clinics = overlayExploreClinicRatings(
-      shown: stable, enriched: [...candidates, ...retained],
+      shown: stable, enriched: [...saved, ...fresh, ...candidates, ...retained],
     );
     final meta = previous ?? OpenAIComparisonResult(
       city: city, topic: procedure, topicType: OpenAISearchItemType.procedure,
@@ -13068,12 +13068,11 @@ Return JSON only.
         // Public-price audit names must stay as imported.
         if (curated) return clinic.name;
         final mapsName = cached.mapsName.trim();
-        if (mapsName.isNotEmpty &&
-            !exploreClinicNameLooksLikeSeoHeadline(mapsName) &&
-            (aiHost.isEmpty || _mapsNameAgreesWithHost(mapsName, aiHost))) {
-          return mapsName;
-        }
-        return clinic.name;
+        return exploreClinicNameFromVerifiedMaps(
+          sourceName: clinic.name, mapsName: mapsName,
+          sourceHost: aiHost, mapsHost: placesHost,
+          marketplace: exploreClinicUsesMarketplacePriceSource(clinic),
+        );
       }(),
       area: _withSourceUrl(correctedArea, sourceUrl ?? ''),
       rating: rating,
@@ -13182,6 +13181,8 @@ Return JSON only.
             !_serpTitleLooksLikeSeoHeadline(mapsName) &&
             (explicit.isNotEmpty ||
                 clinicNameIsSeo ||
+                (aiHost.isNotEmpty && _hostsSameDomainOrSubdomain(
+                    aiHost, _normalizeProbeHost(matched.website))) ||
                 _mapsNameAgreesWithHost(mapsName, aiHost));
         final nextName = mapsOk
             ? mapsName
@@ -13407,7 +13408,9 @@ Return JSON only.
           !curated &&
           mapsName.isNotEmpty &&
           !_serpTitleLooksLikeSeoHeadline(mapsName) &&
-          (aiHost.isEmpty || _mapsNameAgreesWithHost(mapsName, aiHost));
+          (aiHost.isEmpty ||
+              (placesHost.isNotEmpty && _hostsSameDomainOrSubdomain(aiHost, placesHost)) ||
+              _mapsNameAgreesWithHost(mapsName, aiHost));
       return withMapsRating(
         area: curated
             ? clinic.area
@@ -19466,6 +19469,28 @@ bool _mapsNameAgreesWithHost(String mapsName, String host) {
   return compactBrand.length >= 5 && mapsCompact.contains(compactBrand);
 }
 
+/// Reuse an already matched Maps identity, including a cached one. Exact
+/// website agreement is sufficient; brands need not be guessed from domains.
+String exploreClinicNameFromVerifiedMaps({
+  required String sourceName, required String mapsName,
+  required String sourceHost, required String mapsHost,
+  bool marketplace = false,
+}) {
+  final name = mapsName.trim();
+  if (name.isEmpty || isInvalidClinicIdentity(name) ||
+      exploreClinicNameLooksLikeSeoHeadline(name) ||
+      exploreClinicNameLooksLikeCategoryOrServiceTitle(name)) return sourceName;
+  final source = normalizeExploreHost(sourceHost);
+  final candidate = normalizeExploreHost(mapsHost);
+  final sameWebsite = source.isNotEmpty && candidate.isNotEmpty &&
+      (source == candidate || source.endsWith('.$candidate') ||
+          candidate.endsWith('.$source'));
+  if (sameWebsite || _mapsNameAgreesWithHost(name, source) ||
+      exploreMapsProviderIdentityMatches(sourceName: sourceName, mapsName: name,
+          sourceHost: source, mapsHost: candidate, marketplace: marketplace)) return name;
+  return sourceName;
+}
+
 /// A provider may use an aesthetic site and a medical site for the same brand.
 /// Require both the distinctive host stem and Maps name to agree.
 bool exploreMapsProviderIdentityMatches({
@@ -19502,18 +19527,12 @@ bool exploreClinicNameLooksPackedFromHost(OpenAIClinic c) {
   return packed.length >= 5 && compact == packed;
 }
 
-/// `doctorskin` → `doctor skin`; `drsanmiguel` → `dr sanmiguel`.
+/// Split business words and locations, keeping ambiguous doctor domains intact.
 String _splitPackedClinicBrand(String raw) {
   var n = raw.trim();
   if (n.isEmpty) return n;
-  n = n.replaceFirstMapped(
-    cachedRegExp(r'^(doctor)(?=[a-z])', caseSensitive: false),
-    (m) => '${m[1]} ',
-  );
-  n = n.replaceFirstMapped(
-    cachedRegExp(r'^(dra?)(?=[a-z])', caseSensitive: false),
-    (m) => '${m[1]} ',
-  );
+  // "dra..." can be Dr + a first name beginning with A, or Dra + another
+  // name. The domain alone cannot tell us the person's title or word breaks.
   n = n.replaceFirstMapped(
     cachedRegExp(r'^(clinica|clinique|clinic)(?=[a-z])', caseSensitive: false),
     (m) => '${m[1]} ',
@@ -19835,12 +19854,19 @@ bool exploreClinicNameNeedsMapsRefresh(OpenAIClinic c) {
   if (exploreClinicNameLooksPackedFromHost(c)) return true;
   final hostBrand = exploreClinicBrandFromHost(exploreClinicWebsiteHost(c));
   if (hostBrand.isEmpty) return false;
-  final compactName = name.toLowerCase().replaceAll(cachedRegExp(r'[^a-z0-9]'), '');
-  final compactHost = hostBrand.toLowerCase().replaceAll(
+  final compactName = foldExploreCityText(name).replaceAll(cachedRegExp(r'[^a-z0-9]'), '');
+  final compactHost = foldExploreCityText(hostBrand).replaceAll(
     cachedRegExp(r'[^a-z0-9]'),
     '',
   );
-  return compactName.length >= 5 && compactName == compactHost;
+  if (compactName.length < 5 || compactName != compactHost) return false;
+  if (foldExploreCityText(name) == foldExploreCityText(hostBrand)) return true;
+  // Recognize cached output from the old greedy doctor-prefix splitter so
+  // it can receive a real source name. Legitimate spaced names stay intact.
+  final legacy = compactHost.replaceFirstMapped(
+    cachedRegExp(r'^(dra?)(?=[a-z])'), (m) => '${m[1]} ',
+  );
+  return foldExploreCityText(name) == legacy;
 }
 
 /// Card title: Google business / website brand — never the Serp SEO snippet

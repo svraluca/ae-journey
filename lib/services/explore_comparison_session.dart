@@ -532,7 +532,9 @@ bool exploreClinicsAreSameProvider(OpenAIClinic a, OpenAIClinic b) {
   return namesLookLikeSameProvider(a.name, b.name);
 }
 
-/// Copy Places ratings onto cards already on screen. Matches by website /
+/// Copy public provider names and Places ratings onto cards already on screen.
+/// Name corrections do not require a changed fee or a positive Maps rating.
+/// Matches by website /
 /// place identity so a host-only row still receives the Maps rating after a
 /// `placeId` and a different Google name are attached.
 List<OpenAIClinic> overlayExploreClinicRatings({
@@ -544,30 +546,31 @@ List<OpenAIClinic> overlayExploreClinicRatings({
   final next = <OpenAIClinic>[];
   for (final prev in shown) {
     OpenAIClinic? match;
+    var name = prev.name;
     for (final c in enriched) {
-      if ((c.rating > 0 || c.reviews > 0) &&
-          exploreClinicsAreSameProvider(prev, c)) {
-        match = c;
-        break;
-      }
+      if (!exploreClinicsAreSameProvider(prev, c)) continue;
+      if (exploreClinicNameNeedsMapsRefresh(prev) &&
+          !exploreClinicNameNeedsMapsRefresh(c) &&
+          !isInvalidClinicIdentity(c.name)) name = c.name;
+      if (match == null && (c.rating > 0 || c.reviews > 0)) match = c;
     }
-    if (match == null) {
+    if (match == null && name == prev.name) {
       next.add(prev);
       continue;
     }
-    final rating = match.rating > 0 ? match.rating : prev.rating;
-    final reviews = match.reviews > 0 ? match.reviews : prev.reviews;
-    final placeId = match.placeId.trim().isNotEmpty
-        ? match.placeId
+    final rating = (match?.rating ?? 0) > 0 ? match!.rating : prev.rating;
+    final reviews = (match?.reviews ?? 0) > 0 ? match!.reviews : prev.reviews;
+    final placeId = (match?.placeId.trim().isNotEmpty ?? false)
+        ? match!.placeId
         : prev.placeId;
     if (rating == prev.rating &&
         reviews == prev.reviews &&
-        placeId == prev.placeId) {
+        placeId == prev.placeId && name == prev.name) {
       next.add(prev);
       continue;
     }
     changed = true;
-    next.add(prev.copyWith(placeId: placeId, rating: rating, reviews: reviews));
+    next.add(prev.copyWith(name: name, placeId: placeId, rating: rating, reviews: reviews));
   }
   return changed ? next : shown;
 }
@@ -577,7 +580,10 @@ OpenAIClinic mergeExploreClinicRecord(OpenAIClinic prev, OpenAIClinic next) {
       !isMarketplaceBrandName(next.name) && !isGenericShopIdentity(next.name);
   final prevNameOk =
       !isMarketplaceBrandName(prev.name) && !isGenericShopIdentity(prev.name);
-  final name = nextNameOk
+  final preferPublicPreviousName = prevNameOk &&
+      !exploreClinicNameNeedsMapsRefresh(prev) &&
+      exploreClinicNameNeedsMapsRefresh(next);
+  final name = preferPublicPreviousName ? prev.name : nextNameOk
       ? (next.name.trim().isNotEmpty ? next.name : prev.name)
       : (prevNameOk ? prev.name : next.name);
   final nextE12 =

@@ -25,7 +25,7 @@ import httpx
 from fastapi import HTTPException
 from pydantic import BaseModel, Field
 
-JOB_ENGINE_VERSION = "0.11.89"
+JOB_ENGINE_VERSION = "0.11.90"
 
 # HTML extraction/Firestore calls can occupy asyncio's default executor.
 # Queue acceptance, focus changes and polling must not wait behind crawlers.
@@ -736,6 +736,11 @@ class IndexJobs:
                 ):
                     return
                 evidence = await asyncio.to_thread(self.e.extract_price_evidence, html, stored.source_url, req.procedure)
+                # A known-source refresh must also repair old hostname-derived
+                # names. Only replace them with source metadata, never another
+                # guessed title or an invented split of the domain.
+                source_name = await asyncio.to_thread(self.e.structured_business_name,
+                    html, req.city, stored.source_url, True)
                 for ev in evidence:
                     accepted, own, confidence, _, evidence_type = await asyncio.to_thread(self.e.validate_evidence,
                         ev, text, html, req.city,
@@ -743,6 +748,7 @@ class IndexJobs:
                     if not accepted or not own:
                         continue
                     row = stored.model_copy(update={
+                        "clinic_name": source_name or stored.clinic_name,
                         "price_min": ev.price_min, "price_max": ev.price_max,
                         "currency": ev.currency, "qualifier": ev.qualifier, "unit": ev.unit,
                         "raw_procedure_text": ev.raw_procedure_text, "raw_evidence": ev.raw_evidence,
