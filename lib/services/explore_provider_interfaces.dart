@@ -4,6 +4,28 @@ import 'explore_city_identity.dart';
 import 'explore_search_locale.dart';
 import 'google_places_service.dart';
 import 'openai_service.dart';
+import 'session_prefs.dart';
+
+/// Prefer the saved resolved locality before contacting Places. A timeout
+/// must not replace a proven place ID with an approximate cache key.
+Future<ExploreCityIdentity?> resolveExploreCitySelection({
+  required String rawCity,
+  required CityResolver resolver,
+  String countryHint = '',
+}) async {
+  try {
+    final saved = await SessionPrefs.compareSearchCityIdentity();
+    if (saved != null &&
+        saved.isResolved &&
+        saved.placeId.trim().isNotEmpty &&
+        saved.matchesAliasLabel(rawCity) &&
+        (countryHint.isEmpty ||
+            saved.countryCode.toUpperCase() == countryHint.toUpperCase())) {
+      return saved;
+    }
+  } catch (_) {}
+  return resolver.resolve(rawCity: rawCity, countryHint: countryHint);
+}
 
 /// Resolves a typed / Places locality into [ExploreCityIdentity].
 abstract class CityResolver {
@@ -69,17 +91,14 @@ class DefaultCityResolver implements CityResolver {
     final cc = countryHint.trim().isNotEmpty
         ? countryHint.trim().toUpperCase()
         : exploreCountryCodeForCity(t);
-    return ExploreCityIdentity.resolve(
-      rawCity: t,
-      countryCode: cc,
-    );
+    return ExploreCityIdentity.resolve(rawCity: t, countryCode: cc);
   }
 }
 
 /// Google Places locality resolver — preferred for Explore location picker.
 class PlacesCityResolver implements CityResolver {
   PlacesCityResolver({GooglePlacesService? places})
-      : _places = places ?? GooglePlacesService();
+    : _places = places ?? GooglePlacesService();
 
   final GooglePlacesService _places;
 
@@ -111,7 +130,9 @@ class PlacesCityResolver implements CityResolver {
           longitude: hit.lng,
         );
       }
-    } catch (_) {/* fall through */}
+    } catch (_) {
+      /* fall through */
+    }
     final approx = ExploreCityIdentity.approxCoordinatesForCity(t);
     return ExploreCityIdentity.resolve(
       rawCity: t,

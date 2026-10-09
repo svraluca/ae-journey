@@ -1,15 +1,17 @@
+import 'explore_regex_cache.dart';
+
 /// Bind a published amount and procedure subtype to the same menu row.
 /// Pure Dart so the price rules can be checked without Flutter or Firebase.
 const _publishedNumber =
     r'(?:\d{1,3}(?:[., \u00a0\u202f]\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?)';
 const _publishedCurrency =
     r'(?:EUR\b|euros?\b|€|GBP\b|£|USD\b|\$|AED\b|HUF\b|Ft\b|RON\b|lei\b|BGN\b|TRY\b|TL\b|ALL\b|Lek\b)';
-final _publishedPrice = RegExp(
+final _publishedPrice = cachedRegExp(
   '(?<![\\d.,])(?:($_publishedCurrency)\\s*($_publishedNumber)|'
   '($_publishedNumber)\\s*($_publishedCurrency))(?!\\d|[.,]\\d)',
   caseSensitive: false,
 );
-final _repeatedStartingPrice = RegExp(
+final _repeatedStartingPrice = cachedRegExp(
   r'^\s*(?:(?:from|starting\s+from|starts?\s+from|de\s+la|desde|a\s+partir\s+de|a\s+partire\s+da|nga|ab)\s*)?[€$£\s]*$',
   caseSensitive: false,
 );
@@ -58,9 +60,9 @@ String _bindingCurrency(String value) {
 }
 
 double? _bindingAmount(String value) {
-  var text = value.replaceAll(RegExp(r'[\s\u00a0\u202f]'), '');
-  if (RegExp(r'^\d{1,3}(?:[.,]\d{3})+$').hasMatch(text)) {
-    return double.tryParse(text.replaceAll(RegExp(r'[.,]'), ''));
+  var text = value.replaceAll(cachedRegExp(r'[\s\u00a0\u202f]'), '');
+  if (cachedRegExp(r'^\d{1,3}(?:[.,]\d{3})+$').hasMatch(text)) {
+    return double.tryParse(text.replaceAll(cachedRegExp(r'[.,]'), ''));
   }
   final comma = text.lastIndexOf(',');
   final dot = text.lastIndexOf('.');
@@ -109,8 +111,8 @@ bool exploreBotoxAmountOwnedByFiller({
     if (price.currency != code || (price.amount - priceMin).abs() > .011) continue;
     final start = i == 0 ? 0 : prices[i - 1].match.end;
     final prefix = _bindingFold(evidence.substring(start, price.match.start));
-    final toxin = RegExp(r'\b(?:botox|botulin\w*|neuromodulat\w*)\b').allMatches(prefix).toList();
-    final filler = RegExp(r'\b(?:hyaluronic\s+acid|acid[ou]\s+hialuronic[ou]?|fillers?|aumento\s+(?:labial|de\s+labios)|relleno\s+de\s+labios)\b').allMatches(prefix).toList();
+    final toxin = cachedRegExp(r'\b(?:botox|botulin\w*|neuromodulat\w*)\b').allMatches(prefix).toList();
+    final filler = cachedRegExp(r'\b(?:hyaluronic\s+acid|acid[ou]\s+hialuronic[ou]?|fillers?|aumento\s+(?:labial|de\s+labios)|relleno\s+de\s+labios)\b').allMatches(prefix).toList();
     if (toxin.isNotEmpty && (filler.isEmpty || toxin.last.start > filler.last.start)) return false;
     if (filler.isNotEmpty) conflicts++;
   }
@@ -123,7 +125,7 @@ String? exploreNonTreatmentPriceReason({
 }) {
   final folded = _bindingFold(evidence);
   const months = r'january|february|march|april|may|june|july|august|september|october|november|december|enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre';
-  if (RegExp('\\b(?:promo\\w*|oferta|offer)\\b.{0,110}\\b(?:$months)\\b|'
+  if (cachedRegExp('\\b(?:promo\\w*|oferta|offer)\\b.{0,110}\\b(?:$months)\\b|'
       '\\b(?:$months)\\b.{0,45}\\b(?:promo\\w*|offer)\\b|'
       '\\b(?:durante el mes de|during the month of)\\s+(?:$months)\\b').hasMatch(folded)) {
     return 'seasonal_offer_unconfirmed';
@@ -144,29 +146,29 @@ String? exploreNonTreatmentPriceReason({
       (p.match.start - 240).clamp(0, evidence.length),
       (p.match.end + 240).clamp(0, evidence.length),
     ));
-    final creditContext = RegExp(
+    final creditContext = cachedRegExp(
       r'\b(?:financi\w*|credit\w*|prestamo\w*|loans?|cuotas?|installments?)\b',
     ).hasMatch(near);
-    final creditCap = RegExp(
+    final creditCap = cachedRegExp(
       r'\b(?:hasta|up\s+to|maximum|maximo|limite(?:\s+de)?\s+credito|credit\s+limit|loan\s+limit)\s*[:=-]?\s*$',
     ).hasMatch(prefix);
     if (creditContext && creditCap) {
       rejected = 'credit_limit';
-    } else if (RegExp(
+    } else if (cachedRegExp(
       r'\b(?:pack\s+amigas?|friends?\s+pack|bring\s+(?:a\s+)?friend|ven\s+con\s+una\s+amiga|'
       r'en\s+pareja|couples?\s+offer|couples?\s+price|per\s+couple)\b',
     ).hasMatch(prefix)) {
       rejected = 'conditional_offer';
-    } else if (RegExp(r'\b(?:promedio|(?:precio|coste|costo)s?\s+medi[oa]s?|clinicas? low cost|precio orientativo (?:en|de)|precios orientativos|rangos orientativos)\b').hasMatch(prefix)) {
+    } else if (cachedRegExp(r'\b(?:promedio|(?:precio|coste|costo)s?\s+medi[oa]s?|clinicas? low cost|precio orientativo (?:en|de)|precios orientativos|rangos orientativos)\b').hasMatch(prefix)) {
       rejected = 'market_average';
-    } else if (RegExp(r'\brinoplastia\s+parcial\b').hasMatch(prefix)) {
+    } else if (cachedRegExp(r'\brinoplastia\s+parcial\b').hasMatch(prefix)) {
       rejected = 'partial_rhinoplasty';
-    } else if (RegExp(r'\b(?:cuanto cuestan los implantes mamarios|por par de implantes|precio de (?:los )?implantes mamarios en espana)\b').hasMatch(prefix)) {
+    } else if (cachedRegExp(r'\b(?:cuanto cuestan los implantes mamarios|por par de implantes|precio de (?:los )?implantes mamarios en espana)\b').hasMatch(prefix)) {
       rejected = 'implant_component_price';
-    } else if (RegExp(r'\b(?:en pareja|couples? offer|couples? price|per couple)\b').hasMatch(prefix)) {
+    } else if (cachedRegExp(r'\b(?:en pareja|couples? offer|couples? price|per couple)\b').hasMatch(prefix)) {
       rejected = 'conditional_offer';
-    } else if (RegExp(r'\b(?:aesthetic medicine appointment|consultation fee|initial consultation|consulta inicial|primera visita)\b').hasMatch(prefix) ||
-        (RegExp(r'\bappointment\b').hasMatch(prefix) && RegExp(r'^.{0,40}\bredeemable\b').hasMatch(tail))) {
+    } else if (cachedRegExp(r'\b(?:aesthetic medicine appointment|consultation fee|initial consultation|consulta inicial|primera visita)\b').hasMatch(prefix) ||
+        (cachedRegExp(r'\bappointment\b').hasMatch(prefix) && cachedRegExp(r'^.{0,40}\bredeemable\b').hasMatch(tail))) {
       rejected = 'consultation_fee';
     } else {
       return null;
@@ -180,7 +182,7 @@ bool explorePublishedPriceIsApproximate({
   required String evidence,
   double priceMin = 0,
 }) {
-  final qualifier = RegExp(
+  final qualifier = cachedRegExp(
     r'\b(?:approximately|approx\.?|roughly|around|about|aproximadamente|'
     r'aproximad[oa]s?|suele\s+rondar|ronda|en\s+torno\s+a)'
     r'\s+(?:(?:los?|unos?|entre)\s+)?$',
@@ -197,9 +199,9 @@ bool explorePublishedPriceIsApproximate({
 }
 
 String exploreProcedureTitleWithoutPromotion(String raw) => raw
-    .replaceAll(RegExp(r'\b\d+(?:[.,]\d+)?\s*%\s*off\b', caseSensitive: false), '')
-    .replaceAll(RegExp(r'\bsave\s+(?:AED|EUR|USD|GBP|[$€£])?\s*\d[\d.,]*\s*(?:AED|EUR|USD|GBP)?\b', caseSensitive: false), '')
-    .replaceAll(RegExp(r'\s+'), ' ').trim().replaceAll(RegExp(r'[|·:\s]+$'), '');
+    .replaceAll(cachedRegExp(r'\b\d+(?:[.,]\d+)?\s*%\s*off\b', caseSensitive: false), '')
+    .replaceAll(cachedRegExp(r'\bsave\s+(?:AED|EUR|USD|GBP|[$€£])?\s*\d[\d.,]*\s*(?:AED|EUR|USD|GBP)?\b', caseSensitive: false), '')
+    .replaceAll(cachedRegExp(r'\s+'), ' ').trim().replaceAll(cachedRegExp(r'[|·:\s]+$'), '');
 
 /// A discount amount or gift value is not the clinic's payable procedure price.
 bool explorePublishedPriceIsIncentive({
@@ -217,17 +219,17 @@ bool explorePublishedPriceIsIncentive({
         (price.match.start - 100).clamp(0, evidence.length),
         price.match.start,
       ),
-    ).split(RegExp(r'[|;\n]')).last;
+    ).split(cachedRegExp(r'[|;\n]')).last;
     final after = _bindingFold(
       evidence.substring(
         price.match.end,
         (price.match.end + 100).clamp(0, evidence.length),
       ),
-    ).split(RegExp(r'[|;\n]')).first;
-    if (RegExp(
+    ).split(cachedRegExp(r'[|;\n]')).first;
+    if (cachedRegExp(
           r'\b(?:save(?:\s+up\s+to)?|saving(?:s)?\s+(?:of|up\s+to)|(?:discount|gift|bonus)\s+(?:package|voucher)(?:\s+worth)?|(?:gift|bonus)\s+(?:value|worth)|kedvezmenycsomag|ajandek(?:csomag)?\s+erteke)\s*[:=-]?\s*$',
         ).hasMatch(before) ||
-        RegExp(
+        cachedRegExp(
           r'^\s*(?:worth\b.{0,65}\b(?:discount|gift|bonus)|(?:price\s+)?discount\b|off\b|erteku\b|(?:worth\s+)?(?:gift|bonus)\s+(?:package|voucher)|kedvezmeny(?:csomag)?\b)',
         ).hasMatch(after)) {
       return true;
@@ -270,12 +272,12 @@ bool _publishedPriceIsSuperseded(
       i == 0 ? 0 : prices[i - 1].match.end,
       old.match.start,
     ));
-    if (RegExp(r'\b(?:antes|was|old\s+price|previous\s+price|precio\s+anterior)\s*[:=-]?\s*$')
+    if (cachedRegExp(r'\b(?:antes|was|old\s+price|previous\s+price|precio\s+anterior)\s*[:=-]?\s*$')
             .hasMatch(before) ||
-        RegExp(r'^\s*(?:ahora|now|current\s+price|precio\s+actual)\s*[:=-]?\s*$',
+        cachedRegExp(r'^\s*(?:ahora|now|current\s+price|precio\s+actual)\s*[:=-]?\s*$',
                 caseSensitive: false)
             .hasMatch(between) ||
-        RegExp(r'\bantes\b.{0,50}\bahora\b').hasMatch(before)) {
+        cachedRegExp(r'\bantes\b.{0,50}\bahora\b').hasMatch(before)) {
       return true;
     }
   }
@@ -302,7 +304,7 @@ String _breastPricedRow(String text, double? amount, String currency) {
   }
   final start = previous < 0 ? 0 : prices[previous].match.end;
   var row = text.substring(start, target.match.end);
-  final services = RegExp(
+  final services = cachedRegExp(
     r'augmentation\s+mastopexy|breast\s+(?:augmentation|enlargement|fat\s+transfer|lift|reduction|reconstruction|implant(?:s|\s+(?:replacement|removal))?)|mastoplastica\s+(?:additt?iva|riduttiva)|mastopessi|aumento\s+seno|mellnagyobbitas|mellfelvarras|mellkisebbites|zmadhim\w*\s+(?:i\s+)?(?:gjoks|gjir)|zvogelim\w*\s+(?:i\s+)?gj',
   ).allMatches(_bindingFold(row)).toList();
   if (services.isNotEmpty) {
@@ -312,7 +314,7 @@ String _breastPricedRow(String text, double? amount, String currency) {
       final second = services[1];
       final between = row.substring(first.end, second.start);
       if (first.group(0)!.contains('mastopexy') ||
-          RegExp(
+          cachedRegExp(
             r'\(\s*$|\b(?:and|plus|with)\s*$|\+\s*$',
             caseSensitive: false,
           ).hasMatch(between)) {
@@ -331,7 +333,7 @@ String _breastPricedRow(String text, double? amount, String currency) {
         '${text.substring(target.match.end, end).trim()} '
         '${target.match.group(0)}';
   }
-  final note = RegExp(r'^\s*(\([^()]{1,240}\))')
+  final note = cachedRegExp(r'^\s*(\([^()]{1,240}\))')
       .firstMatch(text.substring(target.match.end));
   if (note != null && exploreBreastImplantCostExcluded(note.group(1)!)) {
     row = '$row ${note.group(1)}';
@@ -341,7 +343,7 @@ String _breastPricedRow(String text, double? amount, String currency) {
 
 bool exploreBreastImplantCostExcluded(String text) {
   final folded = _bindingFold(text);
-  return folded.contains('implant cost excluded') || RegExp(
+  return folded.contains('implant cost excluded') || cachedRegExp(
     r'(?:nu\s+include|nu\s+includ|fara\s+costul|exclud(?:e[sd]?|ing)|does\s+not\s+include|not\s+including|hors|ohne|sin)\s+(?:(?:the|cost|costul|of|de|des|der)\s+){0,3}(?:implant\w*|protez\w*|prothes\w*)|(?:implant\w*|protez\w*|prothes\w*)\s+(?:(?:are|is|costs?)\s+){0,2}(?:not\s+included|excluded|extra|separately|nu\s+sunt\s+incluse|non\s+inclusi)',
   ).hasMatch(folded);
 }
@@ -349,17 +351,17 @@ bool exploreBreastImplantCostExcluded(String text) {
 String _breastMethod(String text) {
   final folded = _bindingFold(text);
   if (exploreBreastImplantCostExcluded(text)) return 'Implant cost excluded';
-  final fat = RegExp(
+  final fat = cachedRegExp(
     r'fat\s+(?:transfer|graft)|(?:own|autologous|autolog|sajat)\s+(?:fat|zsir)|lipofill|lipotransfer|lipomodel|zsiratultet|zsirtolt|grasso|eigenfett|grasime\s+proprie|grasa\s+propia|transfert\s+de\s+graisse|me\s+yndyre',
   ).hasMatch(folded);
   final implants =
-      RegExp(
+      cachedRegExp(
         r'implant|protesi|prothese|protesis|silicone\s+breast|saline\s+breast|\b(?:mentor|motiva|polytech|nagor|allergan)\b',
       ).hasMatch(folded) &&
-      !RegExp(
+      !cachedRegExp(
         r'without\s+implants?|no\s+implants?|implant\w*\s+nelkul',
       ).hasMatch(folded);
-  final lift = RegExp(
+  final lift = cachedRegExp(
     r'mastopex\w*|mastopessi|breast\s+lift|mellfelvarras|lifting\s+al\s+seno|lift\s*\+|ridicar\w*',
   ).hasMatch(folded);
   if (lift && implants) return 'Lift + implants';
@@ -403,7 +405,7 @@ String exploreBreastProcedureDisplayName({
     priceMin: priceMin,
     currency: currency,
   );
-  final size = RegExp(r'\b\d+\s*[-–—]\s*\d+\s*cc\b', caseSensitive: false)
+  final size = cachedRegExp(r'\b\d+\s*[-–—]\s*\d+\s*cc\b', caseSensitive: false)
       .firstMatch(rawProcedureText)?.group(0);
   return [
     'Breast augmentation',
@@ -418,12 +420,12 @@ bool exploreBreastPriceIsOtherSurgery({
   required String currency,
 }) {
   final row = _bindingFold(_breastPricedRow(evidence, priceMin, currency));
-  if (RegExp(
+  if (cachedRegExp(
     r'\b(?:replacement|exchange|removal|explantation|reconstruction|reduction|revision|gynecomastia|gynaecomastia)\b|riduttiv|zvogelimi|mellkisebbites|implantatumcsere|\b(?:schimbar\w*|inlocuir\w*|indepartar\w*|explantar\w*|reconstruct\w*|reduct\w*|micsorar\w*|revizie)\b',
   ).hasMatch(row)) {
     return true;
   }
-  if (RegExp(
+  if (cachedRegExp(
     r'mastopex\w*|mastopessi|breast\s+lift|mellfelvarras|ridicar\w*',
   ).hasMatch(row)) {
     return true;

@@ -1,3 +1,4 @@
+import 'explore_regex_cache.dart';
 import 'package:flutter/foundation.dart';
 
 import 'explore_price_sanity.dart';
@@ -199,7 +200,7 @@ const _kGenericNameTokens = <String>{
   'the',
 };
 
-final _monthCue = RegExp(
+final _monthCue = cachedRegExp(
   r'\b(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|'
   r'octubre|noviembre|diciembre|january|february|march|april|june|july|'
   r'august|september|october|november|december)\b',
@@ -207,9 +208,9 @@ final _monthCue = RegExp(
 );
 
 /// Arabic FAQ openers ("كم تكلفة…", "ما هو…") scraped as treatment names.
-final _kArabicQuestionStart = RegExp(r'^(كم|ما هو|ما هي|لماذا|هل)(\s|$)');
+final _kArabicQuestionStart = cachedRegExp(r'^(كم|ما هو|ما هي|لماذا|هل)(\s|$)');
 
-final _procedureKeyword = RegExp(
+final _procedureKeyword = cachedRegExp(
   r'\b(botox|filler|fillers|labios|lip|laser|peel|peeling|rinoplast|'
   r'rhinoplast|hair|transplant|breast|boob|toxina|hyaluron|juvederm|'
   r'restylane|dysport|chemical|skin\s+booster|buze|hialuron|'
@@ -222,8 +223,8 @@ final _procedureKeyword = RegExp(
 String normalizeExploreHost(String raw) {
   var h = raw.trim().toLowerCase();
   if (h.isEmpty) return '';
-  h = h.replaceFirst(RegExp(r'^https?://'), '');
-  h = h.replaceFirst(RegExp(r'^www\.'), '');
+  h = h.replaceFirst(cachedRegExp(r'^https?://'), '');
+  h = h.replaceFirst(cachedRegExp(r'^www\.'), '');
   h = h.split('/').first.split(':').first.split('?').first.trim();
   return h;
 }
@@ -252,7 +253,7 @@ bool looksLikeMarketEstimateDirectoryUrl(String sourceUrl) {
   if (h.isEmpty) return false;
   final path = Uri.tryParse(sourceUrl)?.path.toLowerCase() ?? '';
   if ((h == 'booksy.com' || h.endsWith('.booksy.com')) &&
-      RegExp(r'/(?:s|l|search|category|categories|explore)/').hasMatch(path)) return true;
+      cachedRegExp(r'/(?:s|l|search|category|categories|explore)/').hasMatch(path)) return true;
   const hosts = {
     'multiestetica.com',
     'gorgeousgetaways.com',
@@ -352,9 +353,9 @@ bool exploreSourceIsNewsReport(String rawUrl) {
   final uri = Uri.tryParse(withScheme);
   if (uri == null) return false;
   final path = uri.path.toLowerCase();
-  if (RegExp(r'(?:^|[-/])(?:guia|guide)(?:[-/]|$)').hasMatch(path) &&
-      RegExp(r'precio|price|cost').hasMatch(path) &&
-      !RegExp(r'^/(?:price|pricing|precio|precios)[-_](?:guide|guia)/?$').hasMatch(path)) {
+  if (cachedRegExp(r'(?:^|[-/])(?:guia|guide)(?:[-/]|$)').hasMatch(path) &&
+      cachedRegExp(r'precio|price|cost').hasMatch(path) &&
+      !cachedRegExp(r'^/(?:price|pricing|precio|precios)[-_](?:guide|guia)/?$').hasMatch(path)) {
     return true;
   }
   const segments = {
@@ -394,7 +395,7 @@ bool exploreListedPriceIsNonClinicContent({
 bool looksLikeProcedureNameAsClinicIdentity(String name) {
   final t = foldExploreIdentityText(name).trim();
   if (t.isEmpty) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'^(?:dermal\s+)?fillers?$'
     r'|^(?:lip|cheek|jaw|chin)\s+fillers?$'
     r'|^botox(?:\s+treatment|\s+injection|\s+injections)?$'
@@ -420,7 +421,7 @@ bool looksLikeProcedureNameAsClinicIdentity(String name) {
     return true;
   }
   // Classified listing chrome / breast-pump product SERP titles.
-  if (RegExp(
+  if (cachedRegExp(
     r'(ne\s+shitje|kerkohet|me\s+qera|pompe?\s+gjiri|breast\s+pump|'
     r'for\s+sale|wanted\s+ads?)',
   ).hasMatch(t)) {
@@ -428,21 +429,21 @@ bool looksLikeProcedureNameAsClinicIdentity(String name) {
   }
   // Turkish / SEO procedure headlines used as SERP titles:
   // "Ankara Botoks Fiyatları 2026", "Kalıcı Botoks Fiyatları".
-  final hasPriceWord = RegExp(
+  final hasPriceWord = cachedRegExp(
     r'(fiyat|fiyati|fiyatlari|ucret|ucreti|ucretleri|maliyet|'
     r'price|prices|cost|costs|pret|precio|precios|cmim|cmimet)',
   ).hasMatch(t);
-  final hasClinicMarker = RegExp(
+  final hasClinicMarker = cachedRegExp(
     r'(clinic|clinica|klinik|hastane|hospital|doctor|dr\.?|doc\.?|'
     r'op\.?\s*dr|centre|center|salon|estetik merkezi|spital)',
   ).hasMatch(t);
-  final hasProcedureCue = RegExp(
+  final hasProcedureCue = cachedRegExp(
     r'(botoks|botox|botulinum|kirisiklik|dolgu|filler|rinoplasti|'
     r'rhinoplast|burun estet|meme buyut|gogus buyut|implant|'
     r'sac ekimi|hair transplant|kalici botoks|breast|zmadhim|'
     r'mamoplast|prosthesis)',
   ).hasMatch(t);
-  final hasYearOrCityLead = RegExp(
+  final hasYearOrCityLead = cachedRegExp(
     r'(20\d{2}|ankara|istanbul|izmir|antalya|bursa|london|paris|'
     r'dubai|bucharest|bucuresti|tirane|tirana)',
   ).hasMatch(t);
@@ -450,10 +451,10 @@ bool looksLikeProcedureNameAsClinicIdentity(String name) {
   if (hasPriceWord && hasYearOrCityLead && !hasClinicMarker) return true;
   // "Breast prosthesis at Family Hospital partner of Albania Doctor" —
   // procedure lead + partner/directory phrasing, not a clinic brand.
-  if (RegExp(
+  if (cachedRegExp(
         r'^(?:breast|zmadhim|mamoplast|prosthes)',
       ).hasMatch(t) &&
-      RegExp(r'\b(partner|of\s+albania|read\s+\d+\s+review)\b').hasMatch(t)) {
+      cachedRegExp(r'\b(partner|of\s+albania|read\s+\d+\s+review)\b').hasMatch(t)) {
     return true;
   }
   return false;
@@ -506,7 +507,7 @@ String foldExploreIdentityText(String raw) {
 String packedCanonicalClinicName(String raw) {
   var packed = foldExploreIdentityText(
     raw,
-  ).replaceAll(RegExp(r'[^a-z0-9]+'), '');
+  ).replaceAll(cachedRegExp(r'[^a-z0-9]+'), '');
   if (packed.isEmpty) return '';
   var changed = true;
   while (changed) {
@@ -527,8 +528,8 @@ String packedCanonicalClinicName(String raw) {
 
 String spacedCanonicalClinicName(String raw) {
   var name = foldExploreIdentityText(raw)
-      .replaceAll(RegExp(r'[^a-z0-9]+'), ' ')
-      .replaceAll(RegExp(r'\s+'), ' ')
+      .replaceAll(cachedRegExp(r'[^a-z0-9]+'), ' ')
+      .replaceAll(cachedRegExp(r'\s+'), ' ')
       .trim();
   final kept = <String>[];
   for (final part in name.split(' ')) {
@@ -559,8 +560,8 @@ bool isMarketplaceBrandName(String name) {
 
 bool isGenericShopIdentity(String name) {
   final folded = foldExploreIdentityText(name)
-      .replaceAll(RegExp(r'[^a-z0-9 ]+'), ' ')
-      .replaceAll(RegExp(r'\s+'), ' ')
+      .replaceAll(cachedRegExp(r'[^a-z0-9 ]+'), ' ')
+      .replaceAll(cachedRegExp(r'\s+'), ' ')
       .trim();
   if (folded.isEmpty) return true;
   if (kExploreGenericShopNames.contains(folded)) return true;
@@ -599,8 +600,8 @@ bool isGenericShopIdentity(String name) {
 /// A med-spa that happens to mention "barber" plus clinic/aesthetic cues stays.
 bool looksLikeNonAestheticVenueName(String name) {
   final n = foldExploreIdentityText(name)
-      .replaceAll(RegExp(r'[^a-z0-9 ]+'), ' ')
-      .replaceAll(RegExp(r'\s+'), ' ')
+      .replaceAll(cachedRegExp(r'[^a-z0-9 ]+'), ' ')
+      .replaceAll(cachedRegExp(r'\s+'), ' ')
       .trim();
   if (n.isEmpty) return false;
   const medicalCue = {
@@ -623,15 +624,15 @@ bool looksLikeNonAestheticVenueName(String name) {
     'chirurgie',
   };
   final hasMedicalCue = medicalCue.any((cue) => n.contains(cue));
-  if (RegExp(r'\b(barber|barbershop|frizer|frizerie)\b').hasMatch(n) &&
+  if (cachedRegExp(r'\b(barber|barbershop|frizer|frizerie)\b').hasMatch(n) &&
       !hasMedicalCue) {
     return true;
   }
-  if (RegExp(r'\b(nail salon|lash bar|lash lounge)\b').hasMatch(n) &&
+  if (cachedRegExp(r'\b(nail salon|lash bar|lash lounge)\b').hasMatch(n) &&
       !hasMedicalCue) {
     return true;
   }
-  if (RegExp(r'\bhair salon\b').hasMatch(n) && !hasMedicalCue) {
+  if (cachedRegExp(r'\bhair salon\b').hasMatch(n) && !hasMedicalCue) {
     return true;
   }
   return false;
@@ -654,7 +655,7 @@ String marketplaceListingBusinessNameFromUrl(String sourceUrl) {
     return '';
   }
   final path = uri.path;
-  final m = RegExp(
+  final m = cachedRegExp(
     r'/(\d+)_([a-z0-9-]+)_([a-z0-9-]+)(?:_|/|\?|$)',
     caseSensitive: false,
   ).firstMatch(path);
@@ -675,7 +676,7 @@ bool marketplaceListingCategoryIsNonAesthetic(String sourceUrl) {
   } catch (_) {
     return false;
   }
-  final m = RegExp(
+  final m = cachedRegExp(
     r'/(\d+)_([a-z0-9-]+)_([a-z0-9-]+)(?:_|/|\?|$)',
     caseSensitive: false,
   ).firstMatch(uri.path);
@@ -737,25 +738,25 @@ bool looksLikePriceQuotedClinicName(String raw) {
   if (t.isEmpty) return false;
   if (looksLikeBarePriceLabel(t)) return true;
   final lower = t.toLowerCase();
-  if (RegExp(
+  if (cachedRegExp(
     r'\b(cl[ií]nica|clinic|doctor|dra?\.?|hospital|centre|center|salon|medspa)\b',
     caseSensitive: false,
   ).hasMatch(lower)) {
     return false;
   }
-  final money = RegExp(
+  final money = cachedRegExp(
     r'[$£€]|aed|usd|eur|gbp|ron|lei|\d',
     caseSensitive: false,
   ).hasMatch(t);
   if (!money) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'^(?:cost|costs|price|prices|from|starting(?:\s+(?:at|from))?|'
     r'starts\s+(?:at|from)|desde|de la)\b',
     caseSensitive: false,
   ).hasMatch(t)) {
     return true;
   }
-  return t.length <= 48 && RegExp(r'[$£€]\s*[\d.,]+').hasMatch(t);
+  return t.length <= 48 && cachedRegExp(r'[$£€]\s*[\d.,]+').hasMatch(t);
 }
 
 /// Promo titles, marketplace-as-provider, and generic shop names.
@@ -775,7 +776,7 @@ String? clinicIdentityRejectReason(
     return 'non_clinic_content_host';
   }
   final lower = t.toLowerCase();
-  if (RegExp(
+  if (cachedRegExp(
     r'^\d[\d.,\s]*\s*(?:€|£|\$|%|aed|eur|gbp|ron|lei|درهم|د\.إ)?\s*$',
     caseSensitive: false,
   ).hasMatch(t)) {
@@ -786,52 +787,52 @@ String? clinicIdentityRejectReason(
       looksLikePriceQuotedClinicName(t)) {
     return 'invalid_identity';
   }
-  if (RegExp(r'hasta un\s+\d+\s*%').hasMatch(lower)) return 'invalid_identity';
+  if (cachedRegExp(r'hasta un\s+\d+\s*%').hasMatch(lower)) return 'invalid_identity';
   // Promo chrome must never become the clinic card title ("56% OFF").
-  if (RegExp(r'^\s*\d+[\d.,]*\s*%\s*off\b').hasMatch(lower) ||
-      RegExp(
+  if (cachedRegExp(r'^\s*\d+[\d.,]*\s*%\s*off\b').hasMatch(lower) ||
+      cachedRegExp(
         r'^\s*(?:up\s+to\s+)?\d+[\d.,]*\s*%\s*(?:off|descuento|reducere)\b',
       ).hasMatch(lower) ||
-      RegExp(r'^\s*(?:sale|offer|promo|discount)\s*!?\s*$').hasMatch(lower)) {
+      cachedRegExp(r'^\s*(?:sale|offer|promo|discount)\s*!?\s*$').hasMatch(lower)) {
     return 'invalid_identity';
   }
   if (lower.contains('dto.') ||
       lower.contains('dto ') ||
       lower.endsWith('dto')) {
-    if (!RegExp(
+    if (!cachedRegExp(
       r'\b(cl[ií]nica|clinic|doctor|dr\.?|centre|center)\b',
     ).hasMatch(lower)) {
       return 'invalid_identity';
     }
   }
-  if (RegExp(
+  if (cachedRegExp(
     r'\b(oferta especial|special offer|best .+ prices?)\b',
   ).hasMatch(lower)) {
     return 'invalid_identity';
   }
-  if (RegExp(r'pre[tț]\s*20\d{2}').hasMatch(lower)) {
+  if (cachedRegExp(r'pre[tț]\s*20\d{2}').hasMatch(lower)) {
     return 'invalid_identity';
   }
-  if (RegExp(
+  if (cachedRegExp(
         r'\b(precio|precios|price|prices|cost|costs|pret|preț|preturi|tarife|'
         r'fiyat|fiyatı|fiyatları|fiyatlari|ücret|ucret|ücretleri|ucretleri)\b',
       ).hasMatch(lower) &&
-      !RegExp(
+      !cachedRegExp(
         r'\b(cl[ií]nica|clinic|doctor|hospital|centre|center|salon|klinik|hastane)\b',
       ).hasMatch(lower)) {
     return 'invalid_identity';
   }
-  if (RegExp(
+  if (cachedRegExp(
         r'\b(botox|filler|labios|buze|peel|laser|rinoplast|hialuronic)\b',
         caseSensitive: false,
       ).hasMatch(lower) &&
-      RegExp(r'\b(desde|from|de la)\s*\d').hasMatch(lower)) {
+      cachedRegExp(r'\b(desde|from|de la)\s*\d').hasMatch(lower)) {
     return 'invalid_identity';
   }
   if (isGenericShopIdentity(t)) return 'generic_business_name';
   if (looksLikeNonAestheticVenueName(t)) return 'wrong_business_type';
   // SERP / menu CTAs — never clinic card titles.
-  if (RegExp(
+  if (cachedRegExp(
     r'^(?:book\s+now|our\s+pricing|our\s+prices|price\s+list|pricing|'
     r'prices?|tariffs?|book\s+online|learn\s+more|read\s+more|'
     r'view\s+prices?|see\s+prices?|what\s+to\s+pay|how\s+much|'
@@ -841,7 +842,7 @@ String? clinicIdentityRejectReason(
     return 'invalid_identity';
   }
   // Article / guide H1s scraped as the clinic name (familybeautyal.com).
-  if (RegExp(
+  if (cachedRegExp(
     r'^(?:what\s+to\s+pay|how\s+much(?:\s+does|\s+is)?|cost\s+guide|'
     r'pricing\s+guide|complete\s+guide)\b',
     caseSensitive: false,
@@ -910,10 +911,10 @@ String exploreClinicDisplayNameFromHost(String rawHostOrUrl) {
   } else if (labels.length >= 2) {
     base = labels[labels.length - 2];
   }
-  base = base.replaceAll(RegExp(r'[^a-zA-Z0-9]+'), ' ').trim();
+  base = base.replaceAll(cachedRegExp(r'[^a-zA-Z0-9]+'), ' ').trim();
   if (base.length < 3) return '';
   final titled = base
-      .split(RegExp(r'\s+'))
+      .split(cachedRegExp(r'\s+'))
       .where((w) => w.isNotEmpty)
       .map((w) => '${w[0].toUpperCase()}${w.substring(1).toLowerCase()}')
       .join(' ');
@@ -946,15 +947,15 @@ String extractMarketplaceProviderName(
     if (fromFresha.isNotEmpty) return fromFresha;
   }
   if (html.trim().isEmpty) return '';
-  final raw = html.replaceAll(RegExp(r'\s+'), ' ');
+  final raw = html.replaceAll(cachedRegExp(r'\s+'), ' ');
   final candidates = <String>[];
 
   void consider(String value) {
-    final t = decodeExploreHtmlEntities(value).replaceAll(RegExp(r'\s+'), ' ').trim();
+    final t = decodeExploreHtmlEntities(value).replaceAll(cachedRegExp(r'\s+'), ' ').trim();
     if (t.length < 4 || t.length > 80) return;
     if (isMarketplaceBrandName(t) || isGenericShopIdentity(t)) return;
     if (clinicIdentityRejectReason(t) != null) return;
-    if (!RegExp(
+    if (!cachedRegExp(
       r'\b(cl[ií]nica|clinic|doctor|dra?\.?|centro|centre|center|hospital)\b',
       caseSensitive: false,
     ).hasMatch(t)) {
@@ -964,14 +965,14 @@ String extractMarketplaceProviderName(
     candidates.add(t);
   }
 
-  for (final m in RegExp(
+  for (final m in cachedRegExp(
     r'"(?:clinicName|clinic_name|providerName|provider_name|businessName)"\s*:\s*"([^"]{4,80})"',
     caseSensitive: false,
   ).allMatches(raw)) {
     consider(m.group(1) ?? '');
   }
 
-  for (final m in RegExp(
+  for (final m in cachedRegExp(
     r'itemprop=["'
     "'"
     r']name["'
@@ -982,7 +983,7 @@ String extractMarketplaceProviderName(
     consider(m.group(1) ?? '');
   }
 
-  for (final m in RegExp(
+  for (final m in cachedRegExp(
     r'(?:cl[ií]nica|clinic|doctor(?:a)?|dra?\.?)\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑáéíóúñ'
     "'"
     r'’.\-\s]{2,50}',
@@ -1014,17 +1015,17 @@ String _freshaProviderNameFromHtml(String html, {String sourceUrl = ''}) {
     if (t.isEmpty) return '';
     t = t
         .replaceAll(
-          RegExp(r'\s*[|\-–—]\s*fresha\s*$', caseSensitive: false),
+          cachedRegExp(r'\s*[|\-–—]\s*fresha\s*$', caseSensitive: false),
           '',
         )
         .trim();
     for (var i = 0; i < 4; i++) {
-      final m = RegExp(r'\s+[|\-–—]\s+.+$').firstMatch(t);
+      final m = cachedRegExp(r'\s+[|\-–—]\s+.+$').firstMatch(t);
       if (m == null) break;
       final head = t.substring(0, m.start).trim();
       if (head.length < 3) break;
       final tail = m.group(0)!.toLowerCase();
-      if (!RegExp(
+      if (!cachedRegExp(
         r'tiran|rruga|street|road|avenue|blvd|pallati|near|'
         r'albania|fresha|\d{3,}|,',
         caseSensitive: false,
@@ -1039,14 +1040,14 @@ String _freshaProviderNameFromHtml(String html, {String sourceUrl = ''}) {
     return t.length >= 3 ? t : '';
   }
 
-  final title = RegExp(
+  final title = cachedRegExp(
     r'<title[^>]*>([^<]{3,120})</title>',
     caseSensitive: false,
   ).firstMatch(html);
   final fromTitle = clean(title?.group(1) ?? '');
   if (fromTitle.isNotEmpty) return fromTitle;
 
-  final ldName = RegExp(
+  final ldName = cachedRegExp(
     r'"@type"\s*:\s*(?:\[[^\]]*HealthAndBeautyBusiness[^\]]*\]|"BeautySalon")'
     r'[\s\S]{0,400}?"name"\s*:\s*"([^"]{3,120})"',
     caseSensitive: false,
@@ -1055,7 +1056,7 @@ String _freshaProviderNameFromHtml(String html, {String sourceUrl = ''}) {
   if (fromLd.isNotEmpty) return fromLd;
 
   // Last resort: /a/slug tokens before the city/address suffix.
-  final m = RegExp(
+  final m = cachedRegExp(
     r'fresha\.com/(?:[a-z]{2}(?:-[a-z]{2})?/)?a/([a-z0-9][a-z0-9\-]+)',
     caseSensitive: false,
   ).firstMatch(sourceUrl);
@@ -1063,7 +1064,7 @@ String _freshaProviderNameFromHtml(String html, {String sourceUrl = ''}) {
     final parts = m.group(1)!.toLowerCase().split('-');
     final kept = <String>[];
     for (final p in parts) {
-      if (p.length >= 6 && RegExp(r'\d').hasMatch(p)) break;
+      if (p.length >= 6 && cachedRegExp(r'\d').hasMatch(p)) break;
       if ({'tirane', 'tirana', 'rruga', 'albania', 'al'}.contains(p)) break;
       kept.add(p);
       if (kept.length >= 3) break;
@@ -1098,12 +1099,12 @@ String decodeExploreHtmlEntities(String raw) {
       .replaceAll('&#39;', "'")
       .replaceAll('&#x27;', "'")
       .replaceAll('&#x2F;', '/');
-  t = t.replaceAllMapped(RegExp(r'&#(\d{1,7});'), (m) {
+  t = t.replaceAllMapped(cachedRegExp(r'&#(\d{1,7});'), (m) {
     final n = int.tryParse(m.group(1)!);
     if (n == null || n <= 0 || n > 0x10FFFF) return m.group(0)!;
     return String.fromCharCode(n);
   });
-  t = t.replaceAllMapped(RegExp(r'&#x([0-9a-fA-F]{1,6});'), (m) {
+  t = t.replaceAllMapped(cachedRegExp(r'&#x([0-9a-fA-F]{1,6});'), (m) {
     final n = int.tryParse(m.group(1)!, radix: 16);
     if (n == null || n <= 0 || n > 0x10FFFF) return m.group(0)!;
     return String.fromCharCode(n);
@@ -1121,7 +1122,7 @@ bool looksLikeRawScrapedProcedureTitle(String raw) {
   // FAQ / SEO headings scraped as the "treatment" name
   // ("How much does lip augmentation cost?").
   if (t.endsWith('?') || t.endsWith('؟')) return true;
-  if (RegExp(
+  if (cachedRegExp(
     r'^(how|what|why|when|where|which|is|are|does|do|can|'
     r'c[aâ]t|cu[aá]nto)\b',
     caseSensitive: false,
@@ -1130,7 +1131,7 @@ bool looksLikeRawScrapedProcedureTitle(String raw) {
   }
   // Arabic letters are not \w, so these need their own anchored check.
   if (_kArabicQuestionStart.hasMatch(t)) return true;
-  if (RegExp(
+  if (cachedRegExp(
     r'\b(how much|what is the cost|c[aâ]t cost[aă]|'
     r'cu[aá]nto cuesta|cat costa)\b|'
     r'(كم يكلف|كم تكلفة|كم سعر|ما هي تكلفة)',
@@ -1139,7 +1140,7 @@ bool looksLikeRawScrapedProcedureTitle(String raw) {
     return true;
   }
   // "Cost of 500 FUE grafts" is a menu row, not an SEO question.
-  if (RegExp(r'\bcost of\b', caseSensitive: false).hasMatch(t) &&
+  if (cachedRegExp(r'\bcost of\b', caseSensitive: false).hasMatch(t) &&
       !looksLikeHairGraftPackageMenuLabel(t)) {
     return true;
   }
@@ -1151,29 +1152,29 @@ bool looksLikeRawScrapedProcedureTitle(String raw) {
   if (looksLikePricingProseProcedureTitle(t)) return true;
   // `<title>` SEO: "Anti-Wrinkle Injections London | Botox | Dr L'Art Clinic"
   if (t.contains('|')) return true;
-  if (RegExp(
+  if (cachedRegExp(
     r'^(achieve|discover|experience|welcome|enjoy|unlock|reveal)\b',
     caseSensitive: false,
   ).hasMatch(t)) {
     return true;
   }
-  if (RegExp(r'\bwith\b.+\btreatments?\b', caseSensitive: false).hasMatch(t)) {
+  if (cachedRegExp(r'\bwith\b.+\btreatments?\b', caseSensitive: false).hasMatch(t)) {
     return true;
   }
   if (t.length > 70) return true;
-  if (RegExp(r'\d{1,2}[\/.\-]\d{1,2}[\/.\-]\d{2,4}').hasMatch(t)) return true;
-  if (_monthCue.hasMatch(t) && RegExp(r'\d{4}').hasMatch(t)) return true;
-  if (RegExp(
+  if (cachedRegExp(r'\d{1,2}[\/.\-]\d{1,2}[\/.\-]\d{2,4}').hasMatch(t)) return true;
+  if (_monthCue.hasMatch(t) && cachedRegExp(r'\d{4}').hasMatch(t)) return true;
+  if (cachedRegExp(
     r'\b(opini[oó]n|review|comentario|hace\s+\d+|pinchazos|magia en)\b',
     caseSensitive: false,
   ).hasMatch(t)) {
     return true;
   }
-  final words = t.split(RegExp(r'\s+'));
+  final words = t.split(cachedRegExp(r'\s+'));
   if (words.length >= 8 && !_procedureKeyword.hasMatch(t)) return true;
   if (words.length >= 4 &&
       !_procedureKeyword.hasMatch(t) &&
-      RegExp(r'[.!?…]').hasMatch(t)) {
+      cachedRegExp(r'[.!?…]').hasMatch(t)) {
     return true;
   }
   return false;
@@ -1183,7 +1184,7 @@ bool looksLikeRawScrapedProcedureTitle(String raw) {
 bool looksLikePricingProseProcedureTitle(String raw) {
   final t = decodeExploreHtmlEntities(raw).replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'\b(?:precio|precios|coste|costo|promedio|desde|cu[aá]nto|entre los|'
     r'prix|tarifs?|combien|a partir|prezzo|prezzi|quanto|durchschnitt)\b|'
     r'\bare priced\b|'
@@ -1295,14 +1296,14 @@ bool placesNameLooksLikeMedicalClinic(String name) {
       n.contains('med spa') ||
       n.contains('medspa');
   // "SnB Aesthetic Clinic … DENTAL Implants" is still a med-spa.
-  if (RegExp(
+  if (cachedRegExp(
         r'stomat|dental|dentist|farmac|unghii|manichi|frizer|barber|nail salon',
       ).hasMatch(n) &&
       !aesthetic) {
     return false;
   }
   if (aesthetic) return true;
-  return RegExp(r'\bdr\.?\b').hasMatch(n) || RegExp(r'\bmed\b').hasMatch(n);
+  return cachedRegExp(r'\bdr\.?\b').hasMatch(n) || cachedRegExp(r'\bmed\b').hasMatch(n);
 }
 
 /// Table/H2 section titles glued onto a menu row
@@ -1315,10 +1316,10 @@ bool looksLikeCatalogSectionHeading(String left) {
   if (looksLikeSeoCostPageHeading(lo)) return true;
   if (looksLikePriceMenuHeadingOnly(lo)) return true;
   if (looksLikeGenericInjectableCategoryHeading(lo)) return true;
-  if (RegExp(r'^treatments?$').hasMatch(lo)) return true;
+  if (cachedRegExp(r'^treatments?$').hasMatch(lo)) return true;
   if (lo.contains('?') || lo.contains('؟')) return true;
   if (_kArabicQuestionStart.hasMatch(lo)) return true;
-  if (RegExp(
+  if (cachedRegExp(
     r'^(how|what|why|when|where|which|is|are|does|do|can|'
     r'c[aâ]t|cu[aá]nto)\b',
     caseSensitive: false,
@@ -1326,7 +1327,7 @@ bool looksLikeCatalogSectionHeading(String left) {
     return true;
   }
   // RO menus use "Chirurgia …" (a) as a sticky table section, not a row.
-  if (RegExp(
+  if (cachedRegExp(
     r'dermatolog|dermatocosmetolog|estetic|chirurgi[ae]|surgery|'
     r'ginecolog|genital|injectabil|'
     r'procedee|proceduri|\bprocedures\b|'
@@ -1340,7 +1341,7 @@ bool looksLikeCatalogSectionHeading(String left) {
   ).hasMatch(lo)) {
     return true;
   }
-  final letters = left.replaceAll(RegExp(r'[^A-Za-zĂÂÎȘȚăâîșț]'), '');
+  final letters = left.replaceAll(cachedRegExp(r'[^A-Za-zĂÂÎȘȚăâîșț]'), '');
   return letters.length >= 10 && left == left.toUpperCase();
 }
 
@@ -1348,7 +1349,7 @@ bool looksLikeCatalogSectionHeading(String left) {
 bool looksLikeGenericInjectableCategoryHeading(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim().toLowerCase();
   if (t.isEmpty) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'^(?:filler\s+)?dermatolog(?:ical|ice)?\s+'
     r'(?:injections?|procedures?|inject[aă]ri)|'
     r'^inject[aă]ri\s+dermatolog|'
@@ -1365,16 +1366,16 @@ bool looksLikeGenericInjectableCategoryHeading(String raw) {
 bool looksLikeLaundryListProcedureTitle(String raw) {
   final parts = raw
       .replaceAll('\u00a0', ' ')
-      .split(RegExp(r'\s*,\s*'))
+      .split(cachedRegExp(r'\s*,\s*'))
       .map((p) => p.trim())
       .where((p) => p.length >= 3)
       .toList();
   if (parts.length < 3) return false;
-  return parts.every((p) => RegExp(r'[A-Za-zĂÂÎȘȚăâîșț]').hasMatch(p));
+  return parts.every((p) => cachedRegExp(r'[A-Za-zĂÂÎȘȚăâîșț]').hasMatch(p));
 }
 
 /// Keep the first named treatment from a comma-separated clinic heading.
 String firstTreatmentClauseFromLaundryList(String raw) {
   if (!looksLikeLaundryListProcedureTitle(raw)) return raw.trim();
-  return raw.replaceAll('\u00a0', ' ').split(RegExp(r'\s*,\s*')).first.trim();
+  return raw.replaceAll('\u00a0', ' ').split(cachedRegExp(r'\s*,\s*')).first.trim();
 }

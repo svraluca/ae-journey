@@ -1,3 +1,4 @@
+import 'explore_regex_cache.dart';
 import 'filter_currency.dart';
 
 /// City → search language, local "price" words, and procedure names as
@@ -1114,7 +1115,7 @@ String exploreGoogleGlFromCountryCode(String countryCode) {
   if (cc.isEmpty || cc == 'ZZ' || cc == 'XX') return '';
   // Google uses `uk` for the United Kingdom, not `gb`.
   if (cc == 'GB') return 'uk';
-  if (cc.length == 2 && RegExp(r'^[A-Z]{2}$').hasMatch(cc)) {
+  if (cc.length == 2 && cachedRegExp(r'^[A-Z]{2}$').hasMatch(cc)) {
     return cc.toLowerCase();
   }
   return '';
@@ -1139,7 +1140,7 @@ String exploreHostFromListing({String sourceUrl = '', String area = ''}) {
     final host = _hostFromBlob(raw);
     if (host.contains('.')) return host;
   }
-  for (final part in area.split(RegExp(r'[·|,]'))) {
+  for (final part in area.split(cachedRegExp(r'[·|,]'))) {
     final host = _hostFromBlob(part.trim());
     if (host.contains('.')) return host;
   }
@@ -1149,24 +1150,24 @@ String exploreHostFromListing({String sourceUrl = '', String area = ''}) {
 String _hostFromBlob(String raw) {
   var s = raw.trim().toLowerCase();
   if (s.isEmpty || !s.contains('.')) return '';
-  s = s.replaceFirst(RegExp(r'^https?://'), '');
+  s = s.replaceFirst(cachedRegExp(r'^https?://'), '');
   if (s.startsWith('src:')) s = s.substring(4);
-  s = s.split(RegExp(r'[/?#\s]')).first;
-  s = s.replaceFirst(RegExp(r'^www\.'), '');
+  s = s.split(cachedRegExp(r'[/?#\s]')).first;
+  s = s.replaceFirst(cachedRegExp(r'^www\.'), '');
   if (!s.contains('.') || s.contains(' ')) return '';
   return s;
 }
 
 /// Country from a clinic ccTLD. Generic `.com` / `.net` return empty.
 String exploreCountryFromHost(String host) {
-  final h = host.trim().toLowerCase().replaceFirst(RegExp(r'^www\.'), '');
+  final h = host.trim().toLowerCase().replaceFirst(cachedRegExp(r'^www\.'), '');
   if (h.isEmpty) return '';
   if (h.endsWith('.co.uk') || h.endsWith('.uk')) return 'GB';
   if (h.endsWith('.com.au') || h.endsWith('.au')) return 'AU';
   if (h.endsWith('.co.ae') || h.endsWith('.ae')) return 'AE';
   if (h.endsWith('.co.za') || h.endsWith('.za')) return 'ZA';
   if (h.endsWith('.com.br') || h.endsWith('.br')) return 'BR';
-  final m = RegExp(r'\.([a-z]{2})$').firstMatch(h);
+  final m = cachedRegExp(r'\.([a-z]{2})$').firstMatch(h);
   if (m == null) return '';
   final tld = m.group(1)!;
   const generic = {
@@ -1347,7 +1348,7 @@ const _kExplorePeerCityMarks = <({String key, List<String> aliases})>[
 String exploreCanonicalCityKey(String city) {
   final folded = foldExploreCityText(city).trim().toLowerCase();
   if (folded.isEmpty) return '';
-  final packed = folded.replaceAll(RegExp(r'[\s_-]+'), '');
+  final packed = folded.replaceAll(cachedRegExp(r'[\s_-]+'), '');
   for (final peer in _kExplorePeerCityMarks) {
     if (folded == peer.key || packed == peer.key.replaceAll(' ', '')) {
       return peer.key;
@@ -1355,7 +1356,7 @@ String exploreCanonicalCityKey(String city) {
     for (final alias in peer.aliases) {
       final a = foldExploreCityText(alias).toLowerCase();
       if (a.isEmpty) continue;
-      if (folded == a || packed == a.replaceAll(RegExp(r'[\s_-]+'), '')) {
+      if (folded == a || packed == a.replaceAll(cachedRegExp(r'[\s_-]+'), '')) {
         return peer.key;
       }
     }
@@ -1373,7 +1374,7 @@ String foldExploreCityText(String raw) {
       .replaceAll('İ', 'i')
       .replaceAll('ß', 'ss');
   // Strip combining marks after NFD so São/München fold without a city list.
-  final decomposed = nfd.replaceAll(RegExp(r'[\u0300-\u036f]'), '');
+  final decomposed = nfd.replaceAll(cachedRegExp(r'[\u0300-\u036f]'), '');
   const from = 'áàäâãåéèëêíìïîóòöôõúùüûñçýăâîșşțţğ';
   const to = 'aaaaaaeeeeiiiiooooouuuuncyaaissttg';
   final buf = StringBuffer();
@@ -1396,15 +1397,15 @@ bool exploreCityLabelsAliasMatch(
   final fb = foldExploreCityText(b);
   if (fa.isEmpty || fb.isEmpty) return false;
   if (fa == fb) return true;
-  final pa = fa.replaceAll(RegExp(r'[\s_-]+'), '');
-  final pb = fb.replaceAll(RegExp(r'[\s_-]+'), '');
+  final pa = fa.replaceAll(cachedRegExp(r'[\s_-]+'), '');
+  final pb = fb.replaceAll(cachedRegExp(r'[\s_-]+'), '');
   if (pa == pb) return true;
   final set = <String>{
     fa,
     pa,
     for (final x in aliases) foldExploreCityText(x),
     for (final x in aliases)
-      foldExploreCityText(x).replaceAll(RegExp(r'[\s_-]+'), ''),
+      foldExploreCityText(x).replaceAll(cachedRegExp(r'[\s_-]+'), ''),
   }..removeWhere((e) => e.isEmpty);
   return set.contains(fb) || set.contains(pb);
 }
@@ -1417,14 +1418,14 @@ String? _explorePeerCityKey(String city) {
   }
   final lo = city.trim().toLowerCase();
   if (lo.isEmpty) return null;
-  final packed = lo.replaceAll(RegExp(r'[\s_-]+'), '');
+  final packed = lo.replaceAll(cachedRegExp(r'[\s_-]+'), '');
   for (final peer in _kExplorePeerCityMarks) {
     if (lo.contains(peer.key) ||
         packed.contains(peer.key.replaceAll(' ', ''))) {
       return peer.key;
     }
     for (final alias in peer.aliases) {
-      if (alias.contains(RegExp(r'[a-z]')) && lo.contains(alias)) {
+      if (alias.contains(cachedRegExp(r'[a-z]')) && lo.contains(alias)) {
         return peer.key;
       }
       if (city.contains(alias)) return peer.key;
@@ -1437,18 +1438,18 @@ String? _explorePeerCityKey(String city) {
 bool _exploreLatinCityTokenIn(String foldedText, String aliasFold) {
   final token = aliasFold.trim();
   if (token.length < 4) return false;
-  if (!RegExp(r'^[a-z0-9 \-]+$').hasMatch(token)) return false;
+  if (!cachedRegExp(r'^[a-z0-9 \-]+$').hasMatch(token)) return false;
   bool bounded(String needle) {
     if (needle.length < 4) return false;
-    return RegExp(
+    return cachedRegExp(
       '(?:^|[^a-z0-9])${RegExp.escape(needle)}(?:[^a-z0-9]|\$)',
     ).hasMatch(foldedText);
   }
 
   if (bounded(token)) return true;
-  final dashed = token.replaceAll(RegExp(r'\s+'), '-');
+  final dashed = token.replaceAll(cachedRegExp(r'\s+'), '-');
   if (dashed != token && bounded(dashed)) return true;
-  final packed = token.replaceAll(RegExp(r'[\s_-]+'), '');
+  final packed = token.replaceAll(cachedRegExp(r'[\s_-]+'), '');
   if (packed != token && packed.length >= 6 && bounded(packed)) return true;
   return false;
 }
@@ -1468,7 +1469,7 @@ bool _blobMentionsCityKey(String blob, String cityKey) {
     if (alias.isEmpty) continue;
     final aliasFold = foldExploreCityText(alias);
     if (_exploreLatinCityTokenIn(folded, aliasFold)) return true;
-    if (!RegExp(r'^[a-z0-9 \-]+$').hasMatch(aliasFold) &&
+    if (!cachedRegExp(r'^[a-z0-9 \-]+$').hasMatch(aliasFold) &&
         blob.contains(alias)) {
       return true;
     }
@@ -1503,7 +1504,7 @@ bool exploreMarketplaceLocationStronglyMatches({
   final blob = '${explorePlacesAddressLocalityText(placeAddress)} $sourceUrl $pageText'.toLowerCase();
   final cityLo = c.toLowerCase();
   final tokens = cityLo
-      .split(RegExp(r'[^a-z0-9\u0600-\u06ff]+'))
+      .split(cachedRegExp(r'[^a-z0-9\u0600-\u06ff]+'))
       .where((t) => t.length >= 3)
       .toList();
   if (tokens.any(blob.contains)) return true;
@@ -1512,9 +1513,9 @@ bool exploreMarketplaceLocationStronglyMatches({
   if (key != null && _blobMentionsCityKey(blob, key)) return true;
 
   // Packed city form: "abu dhabi" → "abudhabi" in URLs.
-  final packed = cityLo.replaceAll(RegExp(r'[\s_-]+'), '');
+  final packed = cityLo.replaceAll(cachedRegExp(r'[\s_-]+'), '');
   if (packed.length >= 5 &&
-      blob.replaceAll(RegExp(r'[\s_-]+'), '').contains(packed)) {
+      blob.replaceAll(cachedRegExp(r'[\s_-]+'), '').contains(packed)) {
     return true;
   }
   return false;
@@ -1527,7 +1528,7 @@ String explorePlacesAddressLocalityText(String address) {
   final first = foldExploreCityText(parts.first).trim();
   // City-named streets are not the address locality ("C. de Murcia" in
   // Madrid, "London Road" in Dubai). Retain district, postal city and country.
-  if (RegExp(r'^(?:\d+\s|c\s*[./]|calle\b|avenida\b|av\.|paseo\b|plaza\b|'
+  if (cachedRegExp(r'^(?:\d+\s|c\s*[./]|calle\b|avenida\b|av\.|paseo\b|plaza\b|'
       r'rue\b|boulevard\b|via\b|viale\b|strada\b|street\b)|'
       r'\b(?:road|street|avenue|boulevard|lane)\s*$', caseSensitive: false)
       .hasMatch(first)) return parts.skip(1).join(',');
@@ -1571,10 +1572,10 @@ bool exploreProviderIdentityConflictsWithSearchCity({
   if (key == null) return false;
   final uri = Uri.tryParse(sourceUrl);
   final identity = foldExploreCityText('$name ${uri?.host ?? ''}')
-      .replaceAll(RegExp(r'[^a-z0-9\u0600-\u06ff]'), '');
+      .replaceAll(cachedRegExp(r'[^a-z0-9\u0600-\u06ff]'), '');
   bool identityMentions(String cityKey) => _kExplorePeerCityMarks
       .where((p) => p.key == cityKey).expand((p) => p.aliases)
-      .map((a) => foldExploreCityText(a).replaceAll(RegExp(r'[^a-z0-9\u0600-\u06ff]'), ''))
+      .map((a) => foldExploreCityText(a).replaceAll(cachedRegExp(r'[^a-z0-9\u0600-\u06ff]'), ''))
       .where((a) => a.length >= 4).any(identity.contains);
   if (identityMentions(key)) return false;
   final foreign = _kExplorePeerCityMarks.any((p) => p.key != key && identityMentions(p.key));
@@ -1616,9 +1617,9 @@ bool exploreUrlStronglyMatchesSearchCity(String url, String city) {
     path = url.toLowerCase();
   }
   for (final token in tokens) {
-    final packed = token.replaceAll(RegExp(r'[\s_-]+'), '');
+    final packed = token.replaceAll(cachedRegExp(r'[\s_-]+'), '');
     if (packed.length < 4) continue;
-    if (RegExp(
+    if (cachedRegExp(
           '/$packed(?:-\\d+)?(?:/|\$)',
           caseSensitive: false,
         ).hasMatch(path) ||
@@ -1642,7 +1643,7 @@ bool exploreQuotedPriceConflictsWithSearchCity({
   if (exploreQuotedPriceDestinationConflicts(evidence, city)) return true;
   // Explicit tariff headings can name any branch, including cities absent
   // from the peer-city list. Do not let the URL override that branch.
-  final scope = RegExp(
+  final scope = cachedRegExp(
     r'(?:precio|coste|costo|price|cost)\b[^|:!?€$]{0,85}\b(?:en|in)\s+([^|:!?€$\d]{1,45})\s*[|:]',
     caseSensitive: false,
   ).firstMatch(evidence);
@@ -1662,7 +1663,7 @@ bool exploreQuotedPriceConflictsWithSearchCity({
   if (_blobMentionsCityKey(blob, searchKey)) return false;
   // "Motor City" is Dubai even when the sentence never writes the city name.
   if (searchKey != 'dubai' &&
-      RegExp(r'\bmotor city\b|\bdubai marina\b', caseSensitive: false)
+      cachedRegExp(r'\bmotor city\b|\bdubai marina\b', caseSensitive: false)
           .hasMatch(blob)) {
     return true;
   }
@@ -1671,7 +1672,7 @@ bool exploreQuotedPriceConflictsWithSearchCity({
     for (final alias in peer.aliases) {
       if (alias.isEmpty) continue;
       final a = RegExp.escape(alias);
-      if (RegExp(
+      if (cachedRegExp(
         '(?:precio|coste|costo|cost|costs|price|prices|pricing|أسعار|تكلفة).{0,48}$a',
         caseSensitive: false,
       ).hasMatch(blob)) {
@@ -1694,7 +1695,7 @@ bool exploreQuotedPriceDestinationConflicts(String evidence, String city) {
   for (final entry in destinations.entries) {
     if (entry.key == requested) continue;
     for (final name in entry.value) {
-      if (RegExp(
+      if (cachedRegExp(
         r'(?:\b(?:costs?|prices?|pricing|tariffs?|fees?|prezzi|prezzo|costo)\b|تكلفة|أسعار)'
         r'[^.!?\n|]{0,80}(?:\bin\s+(?:the\s+)?|في\s+)' +
         RegExp.escape(name) + r'(?!\w)', caseSensitive: false,
@@ -1731,7 +1732,7 @@ bool exploreUrlConflictsWithSearchCity(String url, String city) {
     for (final alias in peer.aliases) {
       final a = foldExploreCityText(alias);
       if (a.length < 4) continue;
-      if (!RegExp(r'^[a-z0-9 \-]+$').hasMatch(a)) continue;
+      if (!cachedRegExp(r'^[a-z0-9 \-]+$').hasMatch(a)) continue;
       if (_urlHasCityToken(url, a)) return true;
     }
   }
@@ -1743,14 +1744,14 @@ bool exploreUrlConflictsWithSearchCity(String url, String city) {
 bool exploreDisplayedLocalityConflictsWithSearchCity(String area, String city) {
   final searchCc = exploreCountryCodeForCity(city);
   if (searchCc.isEmpty || area.trim().isEmpty) return false;
-  final head = area.split(RegExp(r'[·|]')).first.trim();
+  final head = area.split(cachedRegExp(r'[·|]')).first.trim();
   if (head.isEmpty || head.contains('.')) return false;
   final headFold = foldExploreCityText(
     head,
-  ).replaceAll(RegExp(r'[^a-z0-9]+'), '');
+  ).replaceAll(cachedRegExp(r'[^a-z0-9]+'), '');
   final searchFold = foldExploreCityText(
     city,
-  ).replaceAll(RegExp(r'[^a-z0-9]+'), '');
+  ).replaceAll(cachedRegExp(r'[^a-z0-9]+'), '');
   if (searchFold.length >= 4 && headFold.contains(searchFold)) return false;
   if (exploreCityLabelsAliasMatch(head, city)) return false;
   final headCc = exploreCountryCodeForCity(head);
@@ -1805,14 +1806,14 @@ bool exploreListingFitsSearchCity({
   if (t.isEmpty) return true;
   if (loc.lang != 'ro' &&
       loc.lang != 'en' &&
-      RegExp(
+      cachedRegExp(
         r'peeling chimic|rinoplastie|m[aă]rire|acid hialuronic|'
         r'toxina botulinica|transplant de par',
       ).hasMatch(t)) {
     return false;
   }
   if (loc.lang != 'nl' &&
-      RegExp(r'\boplossen\b|\bprijzen\b|\bbehandeling\b').hasMatch(t)) {
+      cachedRegExp(r'\boplossen\b|\bprijzen\b|\bbehandeling\b').hasMatch(t)) {
     return false;
   }
   return true;

@@ -1,0 +1,96 @@
+{
+  "checked_at_utc": "2026-10-09T08:43:04Z",
+  "official_page_checks": [
+    {
+      "url": "https://www.svenson.es/",
+      "checked_at_utc": "2026-10-09T08:43:04.412850+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://clinicacapilarvelazquez.es/",
+      "checked_at_utc": "2026-10-09T08:43:04.413673+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://hospitalcapilar.com/",
+      "checked_at_utc": "2026-10-09T08:43:04.414290+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://madrid.defelipe.com/precios/",
+      "checked_at_utc": "2026-10-09T08:43:04.414784+00:00",
+      "status": 200,
+      "final_url": "https://madrid.defelipe.com/precios/",
+      "sha256": "0cbaa81b707db5532a5a152121affb56578adca4e96ef033f175c43df81c09db",
+      "price_links": [
+        "#menu-precios-acne",
+        "#menu-precios-caida-pelo",
+        "#menu-precios-cicatrices",
+        "#menu-precios-cirugia-plastica",
+        "#menu-precios-dermatologia",
+        "#menu-precios-dermatologia-estetica",
+        "#menu-precios-hiperhidrosis",
+        "#menu-precios-laser-picosegundos",
+        "#menu-precios-manchas",
+        "#menu-precios-medicina-regenerativa",
+        "#menu-precios-morpheus8",
+        "#menu-precios-onicomicosis",
+        "#menu-precios-peeling",
+        "#menu-precios-psoriasis",
+        "#menu-precios-rejuvenecimiento",
+        "#menu-precios-resurfacing",
+        "#menu-precios-rosacea",
+        "#menu-precios-tatuajes"
+      ],
+      "excerpts": [
+        "pelo De Felipe pago fraccionado 3 x 350€ Trasplante capilar Trasplante capilar FUE Zafiro < 1.000UF 2900€ Trasplante capilar FUE Zafiro 1.000-2.000UF 3400€ Trasplante capilar FUE Zafiro 2.000-3.500UF 3900€ Trasplante capilar FUE Zafiro 3.500-5.000UF 4400€ Trasplan",
+        "2.000UF 3400€ Trasplante capilar FUE Zafiro 2.000-3.500UF 3900€ Trasplante capilar FUE Zafiro 3.500-5.000UF 4400€ Trasplante folicular Zafiro número de folículos personalizado A consultar Manchas Microdermabrasión 50€ Terapia fotobiológica rojo – 635nm 50€ Láser de",
+        "n reconstrucción en una oreja 600€ Lobuloplastia con reconstrucción en dos orejas 1.000€ Otoplastia 2.900€ Dermatología estética Liquid lift 1 vial 305€ 2 viales 550€ 3 viales 785€ 4 viales 1.005€ 1 vial de ácido hiaiurónico gama Restylane 405€ Precio por vial a pa"
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "clinic": "Svenson",
+      "displayed_eur": 2495,
+      "status": "unverified_access_blocked",
+      "qualification": "Do not claim exact/current fee without its procedure source page."
+    },
+    {
+      "clinic": "Clínica Capilar Velázquez",
+      "displayed_eur": 9000,
+      "status": "unverified_access_blocked",
+      "qualification": "Could be a package or range; source evidence unavailable."
+    },
+    {
+      "clinic": "Hospital Capilar",
+      "displayed_eur": 5000,
+      "status": "unverified_access_blocked",
+      "qualification": "Current package, graft allowance and Madrid branch fee not verified."
+    },
+    {
+      "clinic": "De Felipe Madrid",
+      "displayed_eur": 2900,
+      "status": "verified_conditional_package",
+      "source_url": "https://madrid.defelipe.com/precios/",
+      "literal_treatment": "Trasplante capilar FUE Zafiro < 1.000UF",
+      "other_published_packages": [
+        {
+          "follicular_units": "1,000–2,000",
+          "eur": 3400
+        },
+        {
+          "follicular_units": "2,000–3,500",
+          "eur": 3900
+        },
+        {
+          "follicular_units": "3,500–5,000",
+          "eur": 4400
+        }
+      ],
+      "python_replay": "Extracted all four distinct tariff rows with their printed UF brackets. Flutter price presentation discarded the bracket."
+    }
+  ],
+  "live_google_ratings_verified": false,
+  "production_clinic_prices_hardcoded": false
+}

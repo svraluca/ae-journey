@@ -41,12 +41,15 @@ bool isExploreBuiltInPopularCity(String city) {
 Future<ExploreCityIdentity?> showLocationChangeSheet(
   BuildContext context, {
   required String selectedCity,
-}) {
-  return Navigator.of(context).push<ExploreCityIdentity>(
-    MaterialPageRoute<ExploreCityIdentity>(
-      builder: (_) => LocationChangeScreen(selectedCity: selectedCity),
-    ),
+}) async {
+  final route = MaterialPageRoute<ExploreCityIdentity>(
+    builder: (_) => LocationChangeScreen(selectedCity: selectedCity),
   );
+  final picked = await Navigator.of(context).push<ExploreCityIdentity>(route);
+  // Pop resolves before its animation finishes. Keep cache validation and
+  // map work out of the transition frames.
+  await route.completed;
+  return picked;
 }
 
 /// Tokens aligned with [BottomNav] dark pill (Instagram-style chrome).
@@ -64,33 +67,31 @@ abstract final class _LocTheme {
     double size = 13,
     FontWeight weight = FontWeight.w700,
     Color? color,
-  }) =>
-      GoogleFonts.plusJakartaSans(
-        fontSize: size,
-        fontWeight: weight,
-        color: color ?? ink,
-        height: 1.15,
-      );
+  }) => GoogleFonts.plusJakartaSans(
+    fontSize: size,
+    fontWeight: weight,
+    color: color ?? ink,
+    height: 1.15,
+  );
 
   static TextStyle body({
     double size = 11,
     FontWeight weight = FontWeight.w500,
     Color? color,
-  }) =>
-      GoogleFonts.plusJakartaSans(
-        fontSize: size,
-        fontWeight: weight,
-        color: color ?? muted,
-        height: 1.35,
-      );
+  }) => GoogleFonts.plusJakartaSans(
+    fontSize: size,
+    fontWeight: weight,
+    color: color ?? muted,
+    height: 1.35,
+  );
 
   static TextStyle section({double size = 11}) => GoogleFonts.plusJakartaSans(
-        fontSize: size,
-        fontWeight: FontWeight.w800,
-        letterSpacing: 1.6,
-        color: faint,
-        height: 1.1,
-      );
+    fontSize: size,
+    fontWeight: FontWeight.w800,
+    letterSpacing: 1.6,
+    color: faint,
+    height: 1.1,
+  );
 }
 
 class _RecentPlace {
@@ -102,15 +103,19 @@ class _RecentPlace {
   bool matchesQuery(String q) {
     final s = q.trim().toLowerCase();
     if (s.isEmpty) return true;
-    return name.toLowerCase().contains(s) ||
-        subtitle.toLowerCase().contains(s);
+    return name.toLowerCase().contains(s) || subtitle.toLowerCase().contains(s);
   }
 }
 
 class LocationChangeScreen extends StatefulWidget {
-  const LocationChangeScreen({super.key, required this.selectedCity});
+  const LocationChangeScreen({
+    super.key,
+    required this.selectedCity,
+    this.cityResolver,
+  });
 
   final String selectedCity;
+  final CityResolver? cityResolver;
 
   static const _defaultRecent = <_RecentPlace>[
     _RecentPlace(name: 'Worldwide', subtitle: 'International curated clinics'),
@@ -133,6 +138,7 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
   bool _recentExpanded = false;
   bool _locating = false;
   bool _suggesting = false;
+  bool _selecting = false;
   Timer? _suggestDebounce;
   int _suggestGen = 0;
 
@@ -204,11 +210,14 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
   String _titleCaseCity(String raw) {
     final t = raw.trim().replaceAll(RegExp(r'\s+'), ' ');
     if (t.isEmpty) return t;
-    return t.split(' ').map((w) {
-      if (w.isEmpty) return w;
-      if (w.length == 1) return w.toUpperCase();
-      return '${w[0].toUpperCase()}${w.substring(1)}';
-    }).join(' ');
+    return t
+        .split(' ')
+        .map((w) {
+          if (w.isEmpty) return w;
+          if (w.length == 1) return w.toUpperCase();
+          return '${w[0].toUpperCase()}${w.substring(1)}';
+        })
+        .join(' ');
   }
 
   Future<void> _pickCity(
@@ -217,7 +226,11 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
     GooglePlacesLocalityHit? placesHit,
   }) async {
     final normalized = normalizeExploreCity(_titleCaseCity(city));
-    if (normalized.isEmpty) return;
+    if (normalized.isEmpty || _selecting) return;
+
+    setState(() => _selecting = true);
+    _suggestDebounce?.cancel();
+    _suggestGen++;
 
     HapticFeedback.selectionClick();
 
@@ -232,11 +245,16 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
         longitude: placesHit.lng,
       );
     } else {
-      identity = await PlacesCityResolver(places: _places)
-          .resolve(rawCity: normalized);
+      try {
+        identity = await resolveExploreCitySelection(
+          rawCity: normalized,
+          resolver: widget.cityResolver ?? PlacesCityResolver(places: _places),
+        );
+      } catch (_) {
+        identity = ExploreCityIdentity.resolve(rawCity: normalized);
+      }
     }
-    var resolved =
-        identity ?? ExploreCityIdentity.resolve(rawCity: normalized);
+    var resolved = identity ?? ExploreCityIdentity.resolve(rawCity: normalized);
     // Places 429 / timeout must not downgrade a previously resolved placeId
     // to unresolved_* / geo_* — that forks the Firestore cache key.
     if (!resolved.isResolved || resolved.placeId.trim().isEmpty) {
@@ -254,22 +272,16 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
         ? resolved.displayName.trim()
         : normalized;
 
-    try {
-      await SessionPrefs.pushExploreRecentCity(display);
-      await SessionPrefs.setCompareSearchCityIdentity(resolved);
-      final shouldSave = addToSavedList ||
-          (!isExploreBuiltInPopularCity(display) &&
-              !_savedCities.any(
-                (c) => c.toLowerCase() == display.toLowerCase(),
-              ));
-      if (shouldSave &&
-          display.toLowerCase() != 'worldwide' &&
-          display.toLowerCase() != 'near me') {
-        await SessionPrefs.addExploreSavedCity(display);
-      }
-    } catch (_) {}
-
-    if (!mounted) return;
+    if (!mounted || ModalRoute.of(context)?.isCurrent != true) return;
+    // The comparison screen persists the selection after painting it. Only
+    // the explicit "save" action for built-in cities belongs to the picker.
+    if (addToSavedList &&
+        isExploreBuiltInPopularCity(display) &&
+        display.toLowerCase() != 'worldwide') {
+      unawaited(
+        SessionPrefs.addExploreSavedCity(display).catchError((Object _) {}),
+      );
+    }
     Navigator.of(context).pop(resolved);
   }
 
@@ -315,6 +327,7 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
   }
 
   Future<void> _onUseCurrent() async {
+    if (_selecting) return;
     if (_locating) return;
     HapticFeedback.selectionClick();
     setState(() => _locating = true);
@@ -413,8 +426,9 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
 
     final qRaw = _query.text.trim();
     final q = qRaw.toLowerCase();
-    final filteredRecent =
-        _recentRows.where((p) => p.matchesQuery(_query.text)).toList();
+    final filteredRecent = _recentRows
+        .where((p) => p.matchesQuery(_query.text))
+        .toList();
     final visibleRecent = (_recentExpanded || q.isNotEmpty)
         ? filteredRecent
         : filteredRecent.take(_kRecentPreviewCount).toList();
@@ -427,15 +441,14 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
     final filteredPopular = q.isEmpty
         ? kExplorePopularCities
         : kExplorePopularCities
-            .where((c) => c.toLowerCase().contains(q))
-            .toList();
+              .where((c) => c.toLowerCase().contains(q))
+              .toList();
     final customQuery = qRaw.isNotEmpty && !_queryMatchesKnown(qRaw)
         ? normalizeExploreCity(_titleCaseCity(qRaw))
         : null;
-    final customAlreadySaved = customQuery != null &&
-        _savedCities.any(
-          (c) => c.toLowerCase() == customQuery.toLowerCase(),
-        );
+    final customAlreadySaved =
+        customQuery != null &&
+        _savedCities.any((c) => c.toLowerCase() == customQuery.toLowerCase());
     final showPlaces = q.length >= 2 && (_placesHits.isNotEmpty || _suggesting);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -448,11 +461,15 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              if (_selecting)
+                const LinearProgressIndicator(
+                  minHeight: 2,
+                  color: Colors.white,
+                  backgroundColor: _LocTheme.surface,
+                ),
               SafeArea(
                 bottom: false,
-                child: _TopBar(
-                  onClose: () => Navigator.of(context).maybePop(),
-                ),
+                child: _TopBar(onClose: () => Navigator.of(context).maybePop()),
               ),
               Expanded(
                 child: ListView(
@@ -533,8 +550,11 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
                       title: _locating
                           ? 'Detecting location…'
                           : 'Use current location',
-                      subtitle: 'Google Maps · automatically detect where you are',
-                      onTap: _locating ? () {} : () => unawaited(_onUseCurrent()),
+                      subtitle:
+                          'Google Maps · automatically detect where you are',
+                      onTap: _locating
+                          ? () {}
+                          : () => unawaited(_onUseCurrent()),
                       trailing: _locating
                           ? SizedBox(
                               width: 18,
@@ -556,9 +576,8 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
                             _RecentRow(
                               place: visibleRecent[i],
                               showDivider: i < visibleRecent.length - 1,
-                              onTap: () => unawaited(
-                                _pickCity(visibleRecent[i].name),
-                              ),
+                              onTap: () =>
+                                  unawaited(_pickCity(visibleRecent[i].name)),
                             ),
                           if (canExpandRecent)
                             Material(
@@ -599,7 +618,8 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
                           for (final city in savedForChips)
                             _CityChip(
                               city: city,
-                              selected: city.toLowerCase() ==
+                              selected:
+                                  city.toLowerCase() ==
                                   widget.selectedCity.toLowerCase(),
                               showRemove: true,
                               onTap: () => unawaited(_pickCity(city)),
@@ -628,7 +648,8 @@ class _LocationChangeScreenState extends State<LocationChangeScreen> {
                           for (final city in filteredPopular)
                             _CityChip(
                               city: city,
-                              selected: city.toLowerCase() ==
+                              selected:
+                                  city.toLowerCase() ==
                                   widget.selectedCity.toLowerCase(),
                               onTap: () => unawaited(_pickCity(city)),
                             ),
@@ -656,20 +677,14 @@ class _TopBar extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(22, 10, 22, 10),
       child: Align(
         alignment: Alignment.centerLeft,
-        child: _SoftCircleIconButton(
-          icon: Icons.close_rounded,
-          onTap: onClose,
-        ),
+        child: _SoftCircleIconButton(icon: Icons.close_rounded, onTap: onClose),
       ),
     );
   }
 }
 
 class _SoftCircleIconButton extends StatelessWidget {
-  const _SoftCircleIconButton({
-    required this.icon,
-    required this.onTap,
-  });
+  const _SoftCircleIconButton({required this.icon, required this.onTap});
 
   final IconData icon;
   final VoidCallback onTap;
@@ -1086,10 +1101,7 @@ class _RecentRow extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 2),
-                        Text(
-                          place.subtitle,
-                          style: _LocTheme.body(size: 10),
-                        ),
+                        Text(place.subtitle, style: _LocTheme.body(size: 10)),
                       ],
                     ),
                   ),

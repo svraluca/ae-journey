@@ -40,14 +40,12 @@ import 'procedure_selection_theme.dart';
 import 'subscription_screen.dart';
 import 'widgets/procedure_selection_widgets.dart';
 import 'widgets/thinking_orb.dart';
+import 'widgets/explore_clinic_loading.dart';
 
 const Color _searchDivider = Color(0x241A1A1F);
 
 class SearchCompareScreen extends StatefulWidget {
-  const SearchCompareScreen({
-    super.key,
-    this.active = true,
-  });
+  const SearchCompareScreen({super.key, this.active = true});
 
   /// False while another bottom-nav tab is selected. IndexedStack keeps this
   /// widget alive off-stage; hosting GoogleMap then paints a white/broken map.
@@ -162,14 +160,19 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
   bool get _discoveryActiveForCurrentPill {
     if (_visibleCompareComplete) return false;
     final note = _openAI.backgroundHuntNote.value;
-    return note != null && note.city == _city && note.pill == _pill &&
+    return note != null &&
+        note.city == _city &&
+        note.pill == _pill &&
         (note.isSearching || note.jobId.isNotEmpty);
   }
 
-  bool get _visibleCompareComplete => clinicsForCompareDisplay(
-    _comparison?.clinics ?? const [], procedure: exploreVisibleComparePill(_pill),
-    city: _city,
-  ).length >= kExploreCompareMaxClinics;
+  bool get _visibleCompareComplete =>
+      clinicsForCompareDisplay(
+        _comparison?.clinics ?? const [],
+        procedure: exploreVisibleComparePill(_pill),
+        city: _city,
+      ).length >=
+      kExploreCompareMaxClinics;
 
   static bool _isValidMapCoord(double lat, double lng) {
     if (lat.abs() < 0.5 && lng.abs() < 0.5) return false;
@@ -290,6 +293,12 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     final note = _openAI.backgroundHuntNote.value;
     // Other city/pill jobs must not rebuild and revalidate the visible list.
     if (note != null && (note.pill != _pill || note.city != _city)) return;
+    // Job progress is hidden once four cards are visible. Rebuilding the
+    // entire map/list for invisible status updates caused scroll stalls.
+    if (_comparison != null &&
+        _comparison!.clinics.length >= kExploreCompareMaxClinics &&
+        !_isLoadingMoreClinics)
+      return;
     setState(() {});
     if (note == null || note.pill != _pill || note.city != _city) return;
     // Automatic jobs are watched by OpenAIService. Manual jobs use the
@@ -305,7 +314,9 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
   }
 
   Future<void> _quietFirestoreReload(String pill, int buildId) async {
-    if (!mounted || pill == 'All' || !_isCurrentComparisonBuild(buildId, pill)) {
+    if (!mounted ||
+        pill == 'All' ||
+        !_isCurrentComparisonBuild(buildId, pill)) {
       return;
     }
     if (_pill != pill) return;
@@ -316,19 +327,25 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     if (startedAt != null &&
         DateTime.now().difference(startedAt) > const Duration(minutes: 11)) {
       _openAI.backgroundHuntNote.value = ExploreBackgroundHunt(
-        city: _city, pill: pill,
+        city: _city,
+        pill: pill,
         message: 'Discovery is still running. You can check again later.',
       );
       return;
     }
     if (note.jobId.isNotEmpty) {
-      final state = await ExplorePriceDiscoveryTool.instance.readDiscoveryJob(note.jobId);
+      final state = await ExplorePriceDiscoveryTool.instance.readDiscoveryJob(
+        note.jobId,
+      );
       if (!mounted || !_isCurrentComparisonBuild(buildId, pill)) return;
       if (state != null && state.rows.isNotEmpty) {
-        final partial = _openAI.comparisonWithDiscoveryRows(
-          city: _city, procedure: explorePillAiSearchQuery(pill),
-          rows: state.rows, previous: _comparison,
+        final partial = await _openAI.comparisonWithDiscoveryRowsAsync(
+          city: _city,
+          procedure: explorePillAiSearchQuery(pill),
+          rows: state.rows,
+          previous: _comparison,
         );
+        if (!mounted || !_isCurrentComparisonBuild(buildId, pill)) return;
         setState(() {
           _comparison = _withResolvedMapCenter(partial);
           _isMapLoading = false;
@@ -337,7 +354,10 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
       if (state == null || !state.isFinished) {
         if (state != null) {
           _openAI.backgroundHuntNote.value = ExploreBackgroundHunt(
-            city: _city, pill: pill, jobId: note.jobId, message: state.message,
+            city: _city,
+            pill: pill,
+            jobId: note.jobId,
+            message: state.message,
           );
         }
         _scheduleBackgroundPoll(pill);
@@ -355,17 +375,22 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
       forceRefresh: false,
       backgroundRefresh: false,
     );
-    if (!mounted || !_isCurrentComparisonBuild(buildId, pill) || _pill != pill) {
+    if (!mounted ||
+        !_isCurrentComparisonBuild(buildId, pill) ||
+        _pill != pill) {
       return;
     }
     final shown = _exploreShownCount(res, procedure: selection);
     _openAI.backgroundHuntNote.value = ExploreBackgroundHunt(
-      city: _city, pill: pill,
+      city: _city,
+      pill: pill,
       message: jobState?.status == 'failed'
           ? 'Search could not finish. Try Find more clinics again.'
-          : shown == 0 ? 'No verified public prices found yet.'
+          : shown == 0
+          ? 'No verified public prices found yet.'
           : shown < kExploreCompareMaxClinics
-          ? 'Search finished. No more verified public prices found this time.' : '',
+          ? 'Search finished. No more verified public prices found this time.'
+          : '',
     );
     setState(() {
       _comparison = res;
@@ -381,29 +406,51 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     if (_pill == 'All' || _isWorldwide) return;
     final city = _city;
     final pill = _pill;
+    final buildId = _comparisonBuildId;
+    final key =
+        'comparison|$kExploreComparisonCacheRevision|'
+        '${explorePillAiSearchQuery(pill)}|$_localityCacheSeg|$_modeString';
+    final rotated = _openAI.rotateCachedExploreComparison(key);
+    if (rotated != null) {
+      setState(() => _comparison = _withResolvedMapCenter(rotated));
+      _storePillComparison(pill, _comparison!);
+      unawaited(_loadPreviewMapMarkers(_comparison!));
+      _kickRatingBackfill(pill: pill, shown: _comparison!);
+    }
     final job = await ExplorePriceDiscoveryTool.instance.enqueueDiscoveryJob(
-      city: city, procedure: explorePillAiSearchQuery(pill), pill: pill,
-      countryCode: _effectiveCountryCode, reason: 'user',
+      city: city,
+      procedure: explorePillAiSearchQuery(pill),
+      pill: pill,
+      countryCode: _effectiveCountryCode,
+      reason: 'user',
       clientStoredCount: _comparison?.clinics.length ?? 0,
       knownClinicHosts: [
         for (final c in _comparison?.clinics ?? const <OpenAIClinic>[])
-          if (exploreClinicWebsiteHost(c).isNotEmpty) exploreClinicWebsiteHost(c),
+          if (exploreClinicWebsiteHost(c).isNotEmpty)
+            exploreClinicWebsiteHost(c),
       ],
-      knownClinicNames: [for (final c in _comparison?.clinics ?? const <OpenAIClinic>[]) c.name],
+      knownClinicNames: [
+        for (final c in _comparison?.clinics ?? const <OpenAIClinic>[]) c.name,
+      ],
     );
-    if (!mounted || city != _city || pill != _pill) return;
+    if (!mounted || city != _city || !_isCurrentComparisonBuild(buildId, pill))
+      return;
     if (job != null && job.rows.isNotEmpty) {
-      final result = _openAI.comparisonWithDiscoveryRows(
-        city: city, procedure: explorePillAiSearchQuery(pill),
-        rows: job.rows, previous: _comparison,
+      final result = await _openAI.comparisonWithDiscoveryRowsAsync(
+        city: city,
+        procedure: explorePillAiSearchQuery(pill),
+        rows: job.rows,
+        previous: _comparison,
       );
+      if (!mounted || !_isCurrentComparisonBuild(buildId, pill)) return;
       setState(() {
         _comparison = _withResolvedMapCenter(result);
         _isMapLoading = false;
       });
     }
     _openAI.backgroundHuntNote.value = ExploreBackgroundHunt(
-      city: city, pill: pill,
+      city: city,
+      pill: pill,
       jobId: job != null && !job.isFinished ? job.id : '',
       message: job == null
           ? 'Search could not connect. Please try again.'
@@ -646,19 +693,15 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
 
     final city = normalizeExploreCity(picked.displayName);
 
-    try {
-      await SessionPrefs.setCompareSearchCity(city);
-      await SessionPrefs.setCompareSearchCityIdentity(picked);
-      await SessionPrefs.pushExploreRecentCity(city);
-      if (city.toLowerCase() != 'worldwide' &&
-          city.toLowerCase() != 'near me' &&
-          !isExploreBuiltInPopularCity(city)) {
-        await SessionPrefs.addExploreSavedCity(city);
-      }
-    } catch (_) {}
-
     ExploreBackendService.instance.setActiveCityIdentity(picked);
     _openAI.setActiveCityIdentity(picked);
+    final cachedVisit =
+        _pill == 'All' || WorldwideCuratedClinics.isWorldwide(city)
+        ? null
+        : _openAI.rotateCachedExploreComparison(
+            'comparison|$kExploreComparisonCacheRevision|${explorePillAiSearchQuery(_pill)}|'
+            '${picked.storageKey.isNotEmpty ? picked.storageKey : city}|$_modeString',
+          );
 
     _cancelBackgroundAiWarm();
     _mapReadyCompleter = Completer<void>();
@@ -667,12 +710,12 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
       _city = city;
       _cityIdentity = picked;
       _comparisonBuildId++;
-      _comparison = null;
+      _comparison = cachedVisit;
       _comparisonByPill.clear();
       _previewMapMarkers = const {};
       _mapError = null;
       _mapReady = false;
-      _isLoadingMoreClinics = false;
+      _isLoadingMoreClinics = true;
       // Stale search results belong to the previous city — clear them.
       _items = const [];
       _error = null;
@@ -680,13 +723,27 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     });
     _prewarmQueued.clear();
 
-    unawaited(
-      _openAI.prewarmExploreCachesForCity(city: _city, mode: _modeString),
-    );
+    // Paint first and serialize writes independently of navigation. Starting
+    // every pill's Firestore aliases here starved the foreground selection.
+    _locationPersistence = _locationPersistence.then((_) async {
+      try {
+        await SessionPrefs.setCompareSearchCity(city);
+        await SessionPrefs.setCompareSearchCityIdentity(picked);
+        await SessionPrefs.pushExploreRecentCity(city);
+        if (city.toLowerCase() != 'worldwide' &&
+            city.toLowerCase() != 'near me' &&
+            !isExploreBuiltInPopularCity(city)) {
+          await SessionPrefs.addExploreSavedCity(city);
+        }
+      } catch (_) {}
+    });
 
     // Card reads run immediately; map initialization is independent of them.
     unawaited(_loadTrendingProcedures());
-    final comparisonBuild = _buildComparisonFromPill(_pill);
+    final comparisonBuild = _buildComparisonFromPill(
+      _pill,
+      clearExisting: cachedVisit == null,
+    );
 
     // Move the map camera to the new city once the map channel is ready.
     try {
@@ -1062,7 +1119,12 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     final selection = pill == 'All'
         ? 'All-mixed'
         : explorePillAiSearchQuery(pill);
-    var cached = _comparisonByPill[pill];
+    var cached = pill == 'All'
+        ? _comparisonByPill[pill]
+        : _openAI.rotateCachedExploreComparison(
+            'comparison|$kExploreComparisonCacheRevision|$selection|$_localityCacheSeg|$_modeString',
+          );
+    cached ??= _comparisonByPill[pill];
     if (cached == null && pill != 'All') {
       cached = _openAI.getCachedComparison(
         'comparison|$kExploreComparisonCacheRevision|$selection|$_localityCacheSeg|$_modeString',
@@ -1483,7 +1545,7 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     if (previous == null || previous.clinics.isEmpty) return incoming;
     if (ExplorePriceDiscoveryTool.instance.enabled ||
         (incoming.clinics.isNotEmpty &&
-        incoming.clinics.any((c) => c.sourceType == 'discovery_tool'))) {
+            incoming.clinics.any((c) => c.sourceType == 'discovery_tool'))) {
       // The tool stabilizes valid providers before publishing. Its snapshot
       // can also remove a source positively invalidated during rechecking.
       return incoming.copyWith(
@@ -1532,8 +1594,7 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     } else if (mounted) {
       setState(() {
         _mapError = null;
-        final hasCards =
-            _comparison != null && _comparison!.clinics.isNotEmpty;
+        final hasCards = _comparison != null && _comparison!.clinics.isNotEmpty;
         _isMapLoading = !hasCards;
         _isLoadingMoreClinics = !hasCards;
       });
@@ -1611,7 +1672,8 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
           if (alreadyN > 0) {
             setState(() {
               _isMapLoading = false;
-              _isLoadingMoreClinics = !ExplorePriceDiscoveryTool.instance.enabled &&
+              _isLoadingMoreClinics =
+                  !ExplorePriceDiscoveryTool.instance.enabled &&
                   alreadyN < kExploreCompareMaxClinics;
               _mapError = null;
             });
@@ -1655,7 +1717,8 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
         setState(() {
           _comparison = best;
           _isMapLoading = false;
-          _isLoadingMoreClinics = !ExplorePriceDiscoveryTool.instance.enabled &&
+          _isLoadingMoreClinics =
+              !ExplorePriceDiscoveryTool.instance.enabled &&
               shown < kExploreCompareMaxClinics;
         });
         await _loadPreviewMapMarkers(best, buildId: buildId, pill: pill);
@@ -1743,7 +1806,8 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
         }
         // Never shrink a list the user already saw (4 → 2 Firestore seeds
         // on tab return). Google can still append via merge when it lands.
-        if (shown < prevCount && prevCount > 0 &&
+        if (shown < prevCount &&
+            prevCount > 0 &&
             !ExplorePriceDiscoveryTool.instance.enabled) {
           setState(() {
             _isLoadingMoreClinics = _compareStillFillingSlots(
@@ -1768,8 +1832,14 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
           );
         });
         _storePillComparison(pill, toShow);
-        _openAI.reportCompareDisplayCount(cacheKey,
-            clinicsForCompareDisplay(toShow.clinics, procedure: selection, city: _city).length);
+        _openAI.reportCompareDisplayCount(
+          cacheKey,
+          clinicsForCompareDisplay(
+            toShow.clinics,
+            procedure: selection,
+            city: _city,
+          ).length,
+        );
         // The city-tab painter can apply this same partial first, so the
         // count often does not grow here. Still look up Maps scores for
         // any card that arrived with rating 0.
@@ -1829,8 +1899,14 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
         });
         if (bestShown > 0) {
           _storePillComparison(pill, toShow);
-          _openAI.reportCompareDisplayCount(cacheKey,
-              clinicsForCompareDisplay(toShow.clinics, procedure: selection, city: _city).length);
+          _openAI.reportCompareDisplayCount(
+            cacheKey,
+            clinicsForCompareDisplay(
+              toShow.clinics,
+              procedure: selection,
+              city: _city,
+            ).length,
+          );
           _kickRatingBackfill(pill: pill, shown: toShow);
         }
       }
@@ -1967,19 +2043,24 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     final countryCode = _effectiveCountryCode;
     // The selected tab submits independently with foreground priority.
     // Queue warmups one at a time; stale city work must not flood acceptance.
-    for (final pill in kDiscoveryToolCityPills.where((pill) => pill != currentPill)) {
-      if (!mounted || city != _city || generation != _cityDiscoveryGeneration) return;
+    for (final pill in kDiscoveryToolCityPills.where(
+      (pill) => pill != currentPill,
+    )) {
+      if (!mounted || city != _city || generation != _cityDiscoveryGeneration)
+        return;
       try {
         final accepted = await ExplorePriceDiscoveryTool.instance
             .enqueueBackgroundDiscovery(
-          city: city,
-          countryCode: countryCode,
-          procedure: explorePillAiSearchQuery(pill),
-          pill: pill,
-          reason: 'city_collection',
+              city: city,
+              countryCode: countryCode,
+              procedure: explorePillAiSearchQuery(pill),
+              pill: pill,
+              reason: 'city_collection',
+            );
+        debugPrint(
+          '[GP TOOL] city collection · $pill · $city · '
+          '${accepted ? "accepted" : "unavailable"}',
         );
-        debugPrint('[GP TOOL] city collection · $pill · $city · '
-            '${accepted ? "accepted" : "unavailable"}');
         if (!accepted) return;
       } catch (error) {
         debugPrint('[GP TOOL] city collection failed · $pill · $error');
@@ -1991,6 +2072,7 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
   /// shows cached clinics immediately instead of waiting on a new search.
   final Set<String> _preloadInFlight = {};
   int _bgAiWarmGeneration = 0;
+  Future<void> _locationPersistence = Future<void>.value();
 
   void _cancelBackgroundAiWarm() {
     _bgAiWarmGeneration++;
@@ -2004,9 +2086,12 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     if (OpenAIService.disableClinicPreload) return;
     final live = searchGoogle && !OpenAIService.disableClinicPreload;
     final city = _city;
+    final generation = _bgAiWarmGeneration;
     for (final pill in _comparePills) {
       if (pill == currentPill) continue;
-      if (city != _city) return;
+      await Future<void>.delayed(const Duration(milliseconds: 400));
+      if (!mounted || city != _city || generation != _bgAiWarmGeneration)
+        return;
       await _warmComparePill(pill, city, searchGoogle: live);
     }
   }
@@ -2107,9 +2192,7 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
                 warmed,
                 procedure: explorePillAiSearchQuery(pill),
               );
-        debugPrint(
-          '[GP] Warm pill done: $pill · $city · $n verified',
-        );
+        debugPrint('[GP] Warm pill done: $pill · $city · $n verified');
         if (warmed != null) {
           _kickRatingBackfill(pill: pill, shown: warmed);
         }
@@ -2255,11 +2338,12 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
       setState(() {
         _comparison = next;
         _isMapLoading = false;
-        _isLoadingMoreClinics = !ExplorePriceDiscoveryTool.instance.enabled &&
+        _isLoadingMoreClinics =
+            !ExplorePriceDiscoveryTool.instance.enabled &&
             (merged.length < kExploreCompareMaxClinics ||
-            preferred.any(
-              (e) => !allHasPill(e.pill) && !picks.containsKey(e.pill),
-            ));
+                preferred.any(
+                  (e) => !allHasPill(e.pill) && !picks.containsKey(e.pill),
+                ));
       });
       _openAI.putCachedComparison(
         'comparison|$kExploreComparisonCacheRevision|All-mixed|$_localityCacheSeg|$_modeString',
@@ -2462,22 +2546,22 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
           final cacheKey =
               'comparison|$kExploreComparisonCacheRevision|$query|$_localityCacheSeg|$_modeString';
           final mem = _openAI.getCachedComparison(cacheKey);
-          final storedRawFuture = ExploreGooglePriceStore.instance.load(
-            city: _city,
-            procedure: query,
-          ).timeout(const Duration(seconds: 3), onTimeout: () => const []);
-          final firestoreFuture = _openAI.loadComparisonFromFirestore(
-            cacheKey,
-            queryOrSelection: query,
-            city: _city,
-            mode: _modeString,
-          ).timeout(const Duration(seconds: 3), onTimeout: () => null);
+          final storedRawFuture = ExploreGooglePriceStore.instance
+              .load(city: _city, procedure: query)
+              .timeout(const Duration(seconds: 3), onTimeout: () => const []);
+          final firestoreFuture = _openAI
+              .loadComparisonFromFirestore(
+                cacheKey,
+                queryOrSelection: query,
+                city: _city,
+                mode: _modeString,
+              )
+              .timeout(const Duration(seconds: 3), onTimeout: () => null);
           // Curated rows fill All's slots from Firestore, so a covered city
           // never needs four live searches before the first paint.
-          final curatedFuture = ExploreCuratedPriceStore.instance.load(
-            city: _city,
-            procedure: query,
-          ).timeout(const Duration(seconds: 3), onTimeout: () => const []);
+          final curatedFuture = ExploreCuratedPriceStore.instance
+              .load(city: _city, procedure: query)
+              .timeout(const Duration(seconds: 3), onTimeout: () => const []);
           final storedRaw = await storedRawFuture;
           final firestorePool = await firestoreFuture;
           final curated = await curatedFuture;
@@ -2627,36 +2711,41 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
         // Kick search; do not await the full scrape — wait only until this
         // procedure paints one clinic or the shared All deadline hits.
         unawaited(
-          _openAI.buildComparison(
-            queryOrSelection: query,
-            city: _city,
-            mode: _modeString,
-            categoryPill: entry.pill,
-            awaitEmptyAi: false,
-            searchNewGoogle: true,
-            backgroundRefresh: true,
-            googleLiveTargetOverride: 1,
-            claimLiveSearch: false,
-            joinInFlight: false,
-            allowDeepFallbacks: false,
-            onProgress: (partial) {
-              if (!_isCurrentComparisonBuild(buildId, 'All')) return;
-              tryPickFromResult(entry.pill, partial);
-              if (slotByPill[entry.pill] != null && !painted.isCompleted) {
-                painted.complete();
-              }
-              unawaited(
-                publishSlots(
-                  loadingMore:
-                      slottedClinics().length < kExploreCompareMaxClinics,
-                ),
-              );
-            },
-          ).then((_) {
-            if (!painted.isCompleted) painted.complete();
-          }, onError: (Object error, StackTrace stack) {
-            if (!painted.isCompleted) painted.complete();
-          }),
+          _openAI
+              .buildComparison(
+                queryOrSelection: query,
+                city: _city,
+                mode: _modeString,
+                categoryPill: entry.pill,
+                awaitEmptyAi: false,
+                searchNewGoogle: true,
+                backgroundRefresh: true,
+                googleLiveTargetOverride: 1,
+                claimLiveSearch: false,
+                joinInFlight: false,
+                allowDeepFallbacks: false,
+                onProgress: (partial) {
+                  if (!_isCurrentComparisonBuild(buildId, 'All')) return;
+                  tryPickFromResult(entry.pill, partial);
+                  if (slotByPill[entry.pill] != null && !painted.isCompleted) {
+                    painted.complete();
+                  }
+                  unawaited(
+                    publishSlots(
+                      loadingMore:
+                          slottedClinics().length < kExploreCompareMaxClinics,
+                    ),
+                  );
+                },
+              )
+              .then(
+                (_) {
+                  if (!painted.isCompleted) painted.complete();
+                },
+                onError: (Object error, StackTrace stack) {
+                  if (!painted.isCompleted) painted.complete();
+                },
+              ),
         );
         // Also check memory/cache that may already have a card.
         tryPickFromResult(
@@ -3575,8 +3664,10 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
                         displayCurrency: _priceDisplayCurrencyFor(
                           cmp?.clinics ?? const [],
                         ),
-                        loadingMore: !_visibleCompareComplete &&
-                            (_isLoadingMoreClinics || _discoveryActiveForCurrentPill),
+                        loadingMore:
+                            !_visibleCompareComplete &&
+                            (_isLoadingMoreClinics ||
+                                _discoveryActiveForCurrentPill),
                         backgroundNote: _backgroundNoteForCurrentPill,
                         onFindMore: _pill == 'All' || _isWorldwide
                             ? null
@@ -4106,11 +4197,6 @@ class _ProcedureResultCard extends StatelessWidget {
       verifiedCount: sortedClinics.length,
       loadingMore: loadingMore,
     );
-    final searchMessage = backgroundNote.isNotEmpty
-        ? backgroundNote
-        : exploreSearchingVerifiedMessage(
-            subtitleCity.trim().isEmpty ? city : subtitleCity,
-          );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -4164,22 +4250,8 @@ class _ProcedureResultCard extends StatelessWidget {
               compact: true,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(18, 22, 18, 22),
-                child: Column(
-                  children: [
-                    AgentWorkingIndicator(
-                      orbSize: 36,
-                      label: searchMessage.split('\n').first,
-                    ),
-                    const SizedBox(height: 14),
-                    Text(
-                      searchMessage,
-                      textAlign: TextAlign.center,
-                      style: ProcedureSelectionTypography.body(
-                        size: 13,
-                        color: ProcedureSelectionTheme.muted,
-                      ).copyWith(height: 1.45),
-                    ),
-                  ],
+                child: ExploreClinicLoading(
+                  city: subtitleCity.trim().isEmpty ? city : subtitleCity,
                 ),
               ),
             ),
@@ -4239,94 +4311,97 @@ class _ProcedureResultCard extends StatelessWidget {
                 children: [
                   for (var i = 0; i < sortedClinics.length; i++) ...[
                     if (i > 0) const SizedBox(height: 10),
-                    _ClinicCompareCard(
-                      procedureName: _cardProcedureLabel(
-                        sortedClinics[i],
-                        selectedPill,
-                        topic: cmp?.topic,
-                      ),
-                      clinic: sortedClinics[i],
-                      location: _cityOnly(sortedClinics[i].area),
-                      price: () {
-                        final cl = sortedClinics[i];
-                        final cardProc = _cardProcedureLabel(
-                          cl,
-                          selectedPill,
-                          topic: cmp?.topic,
-                        );
-                        final converted = convertClinicPriceLabel(
-                          cl,
-                          displayCurrency,
-                        );
-                        if (converted != null) return converted;
-                        if (WorldwideCuratedClinics.isWorldwide(subtitleCity)) {
-                          final label = cl.priceLabel.trim();
-                          return label.isEmpty
-                              ? 'On request'
-                              : priceLabelCurrencyAfter(label);
-                        }
-                        final anchor = _chartPriceAnchor(cl);
-                        final disp = clinicCompareProcedurePriceDisplay(
-                          cl,
-                          procedure: filterProcedure.isNotEmpty
-                              ? filterProcedure
-                              : cardProc,
-                        );
-                        return anchor > 0
-                            ? (disp.isEmpty ? '—' : disp)
-                            : 'On request';
-                      }(),
-                      avatarColor: _avatarColor(
-                        exploreClinicDisplayName(sortedClinics[i]),
-                      ),
-                      initials: _initials(
-                        exploreClinicDisplayName(sortedClinics[i]),
-                      ),
-                      saved: SavedProceduresStore.instance
-                          .containsClinicProcedure(
-                            exploreClinicDisplayName(sortedClinics[i]),
-                            _cardProcedureLabel(
-                              sortedClinics[i],
-                              selectedPill,
-                              topic: cmp?.topic,
-                            ),
-                          ),
-                      onToggleSave: () {
-                        final procTitle = _cardProcedureLabel(
+                    RepaintBoundary(
+                      child: _ClinicCompareCard(
+                        procedureName: _cardProcedureLabel(
                           sortedClinics[i],
                           selectedPill,
                           topic: cmp?.topic,
-                        );
-                        unawaited(
-                          SavedProceduresStore.instance.toggleAtClinic(
-                            clinicName: exploreClinicDisplayName(
-                              sortedClinics[i],
+                        ),
+                        clinic: sortedClinics[i],
+                        location: _cityOnly(sortedClinics[i].area),
+                        price: () {
+                          final cl = sortedClinics[i];
+                          final cardProc = _cardProcedureLabel(
+                            cl,
+                            selectedPill,
+                            topic: cmp?.topic,
+                          );
+                          final converted = convertClinicPriceLabel(
+                            cl,
+                            displayCurrency,
+                          );
+                          if (converted != null) return converted;
+                          if (WorldwideCuratedClinics.isWorldwide(
+                            subtitleCity,
+                          )) {
+                            final label = cl.priceLabel.trim();
+                            return label.isEmpty
+                                ? 'On request'
+                                : priceLabelCurrencyAfter(label);
+                          }
+                          final anchor = _chartPriceAnchor(cl);
+                          final disp = clinicCompareProcedurePriceDisplay(
+                            cl,
+                            procedure: filterProcedure.isNotEmpty
+                                ? filterProcedure
+                                : cardProc,
+                          );
+                          return anchor > 0
+                              ? (disp.isEmpty ? '—' : disp)
+                              : 'On request';
+                        }(),
+                        avatarColor: _avatarColor(
+                          exploreClinicDisplayName(sortedClinics[i]),
+                        ),
+                        initials: _initials(
+                          exploreClinicDisplayName(sortedClinics[i]),
+                        ),
+                        saved: SavedProceduresStore.instance
+                            .containsClinicProcedure(
+                              exploreClinicDisplayName(sortedClinics[i]),
+                              _cardProcedureLabel(
+                                sortedClinics[i],
+                                selectedPill,
+                                topic: cmp?.topic,
+                              ),
                             ),
-                            procedureName: procTitle,
-                            city: _cityOnly(sortedClinics[i].area),
-                            area: sortedClinics[i].area,
-                            priceLabel: sortedClinics[i].priceLabel,
-                            rating: sortedClinics[i].rating,
-                          ),
-                        );
-                      },
+                        onToggleSave: () {
+                          final procTitle = _cardProcedureLabel(
+                            sortedClinics[i],
+                            selectedPill,
+                            topic: cmp?.topic,
+                          );
+                          unawaited(
+                            SavedProceduresStore.instance.toggleAtClinic(
+                              clinicName: exploreClinicDisplayName(
+                                sortedClinics[i],
+                              ),
+                              procedureName: procTitle,
+                              city: _cityOnly(sortedClinics[i].area),
+                              area: sortedClinics[i].area,
+                              priceLabel: sortedClinics[i].priceLabel,
+                              rating: sortedClinics[i].rating,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ],
                   if (loadingMore) ...[
                     const SizedBox(height: 16),
-                    AgentWorkingIndicator(
-                      orbSize: 36,
-                      label: exploreSearchingVerifiedMessage(
-                        subtitleCity.trim().isEmpty ? city : subtitleCity,
-                        hasPartial: true,
-                      ).split('\n').first,
+                    ExploreClinicLoading(
+                      city: subtitleCity.trim().isEmpty ? city : subtitleCity,
+                      compact: true,
                     ),
                   ],
                 ],
               );
             },
           ),
-        if (!showInitialSearch && backgroundNote.isNotEmpty) ...[
+        if (!showInitialSearch &&
+            !loadingMore &&
+            backgroundNote.isNotEmpty) ...[
           const SizedBox(height: 10),
           Text(
             backgroundNote,

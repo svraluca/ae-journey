@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'explore_clinic_identity.dart';
 import 'explore_compare_mix.dart';
 import 'explore_pipeline_config.dart';
@@ -184,7 +186,88 @@ OpenAIClinic withCanonicalExploreProcedureRelation(
 /// Only verified exact/variant procedure prices may grow the shared pool.
 /// Current deterministic relation is authoritative. A stale/unknown stored
 /// relation must not veto an eligible exact/variant row.
+final _poolEligibilityMemo =
+    Expando<Map<String, ({DateTime at, bool valid})>>();
+
 bool exploreClinicEligibleForVerifiedPool(
+  OpenAIClinic c, {
+  required String procedure,
+  required String city,
+}) {
+  final key = '$city|$procedure';
+  final memo = _poolEligibilityMemo[c] ??= {};
+  final hit = memo[key];
+  final now = DateTime.now();
+  if (hit != null && now.difference(hit.at) < const Duration(seconds: 5))
+    return hit.valid;
+  final valid = _clinicEligibleForVerifiedPool(
+    c,
+    procedure: procedure,
+    city: city,
+  );
+  memo[key] = (at: now, valid: valid);
+  return valid;
+}
+
+typedef _SavedPriceValidationInput = ({
+  List<OpenAIClinic> rows,
+  String city,
+  String procedure,
+});
+
+List<OpenAIClinic> _validateSavedPrices(_SavedPriceValidationInput input) =>
+    input.rows
+        .where(
+          (c) =>
+              exploreClinicEligibleForVerifiedPool(
+                c,
+                procedure: input.procedure,
+                city: input.city,
+              ) &&
+              isJustifiedProcedurePrice(c, procedure: input.procedure),
+        )
+        .map(withExploreClinicDisplayName)
+        .where(
+          (c) =>
+              exploreClinicEligibleForVerifiedPool(
+                c,
+                procedure: input.procedure,
+                city: input.city,
+              ) &&
+              isJustifiedProcedurePrice(c, procedure: input.procedure),
+        )
+        .toList();
+
+/// Native/server cache batches use the same strict validator on a worker
+/// isolate. Only accepted immutable records receive the short repaint memo.
+Future<List<OpenAIClinic>> validateExploreSavedComparisonClinics({
+  required List<OpenAIClinic> rows,
+  required String city,
+  required String procedure,
+}) async {
+  if (rows.isEmpty) return const [];
+  final accepted = await compute(_validateSavedPrices, (
+    rows: rows,
+    city: city,
+    procedure: procedure,
+  ), debugLabel: 'explore-cache-validation');
+  final now = DateTime.now();
+  for (final row in accepted) {
+    memoizeExploreWorkerValidatedClinic(
+      row,
+      city: city,
+      procedure: procedure,
+      at: now,
+    );
+    (_poolEligibilityMemo[row] ??= {})['$city|$procedure'] = (
+      at: now,
+      valid: true,
+    );
+  }
+  return accepted;
+}
+
+bool _clinicEligibleForVerifiedPool(
   OpenAIClinic c, {
   required String procedure,
   required String city,

@@ -1,0 +1,128 @@
+{
+  "validated_at_utc": "2026-10-09T09:30:08.948157+00:00",
+  "base_commit": "97bbaebf0ab364bb51730eb2ade6dfb3e7ee4c1f",
+  "backend_version": "0.11.85",
+  "extract_revision": "e23",
+  "backend_changed": false,
+  "flutter": {
+    "suites": 54,
+    "passed": 672,
+    "failed": 14,
+    "baseline_suites": 53,
+    "baseline_passed": 663,
+    "baseline_failed": 14,
+    "new_failures": 0,
+    "all_new_tests_passed": true,
+    "new_tests": 9,
+    "inherited_failures": [
+      {
+        "suite": "explore_currency_cached_pipeline_test.dart",
+        "test": "extract revision is e18"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "Places name looks medical 25g. Abu Dhabi keeps verified quotes and skips Dubai-only URLs"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "Places name looks medical keeps named plastic clinics Google may type as gym/lodging"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "SERP fetch uses any listed price, not a snippet amount London hair cards show package FROM, not /graft on graft counts"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "canonical city + early discovery rejects Budapest Botox does not keep a Tiran\u00eb clinic"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "pool mix plan 2+ pool paints 2 Firestore seeds and still hunts 2 Google"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "procedure display title 14. Serp page titles are not clinic names"
+      },
+      {
+        "suite": "explore_global_price_discovery_test.dart",
+        "test": "units on parsePriceText stores ml quantity and per-unit type"
+      },
+      {
+        "suite": "explore_places_circuit_breaker_test.dart",
+        "test": "Places 429 trips circuit breaker and skips further calls"
+      },
+      {
+        "suite": "explore_price_sanity_test.dart",
+        "test": "price sanity gate gold packages, Quick Facts, and SEO titles are not clinic prices"
+      },
+      {
+        "suite": "explore_price_sanity_test.dart",
+        "test": "price sanity gate hair market \u00a3/graft copy and stale landing quotes are rejected"
+      },
+      {
+        "suite": "explore_price_sanity_test.dart",
+        "test": "price sanity gate rhinoplasty market guide is rejected; hospital guide stays scoped"
+      },
+      {
+        "suite": "explore_progressive_fill_drop_test.dart",
+        "test": "price-list path witness Global Action 1 ml stays eligible after accept-time variant"
+      },
+      {
+        "suite": "explore_worldwide_pipeline_test.dart",
+        "test": "UI states + exact price labelling cold city searching copy"
+      }
+    ],
+    "analysis_errors": 0,
+    "analysis_warnings": 82,
+    "analysis_infos": 174,
+    "device_profile_run": false,
+    "production_firestore_checked": false
+  },
+  "performance": {
+    "worker_cache_batch_accepted": 40,
+    "worker_cache_batch_ms": 2726,
+    "cached_100_validation_passes_ms": 11,
+    "main_event_loop_remained_responsive": true,
+    "unit_test_timings_not_device_frame_rate": true
+  },
+  "pattern_rule_parity": [
+    {
+      "file": "lib/services/explore_price_sanity.dart",
+      "matching_rules_changed": false,
+      "regex_constructors_reused": 155
+    },
+    {
+      "file": "lib/services/explore_price_binding.dart",
+      "matching_rules_changed": false,
+      "regex_constructors_reused": 41
+    },
+    {
+      "file": "lib/services/explore_price_ownership.dart",
+      "matching_rules_changed": false,
+      "regex_constructors_reused": 22
+    },
+    {
+      "file": "lib/services/explore_search_locale.dart",
+      "matching_rules_changed": false,
+      "regex_constructors_reused": 38
+    },
+    {
+      "file": "lib/services/explore_clinic_identity.dart",
+      "matching_rules_changed": false,
+      "regex_constructors_reused": 86
+    },
+    {
+      "file": "lib/services/explore_procedure_family.dart",
+      "matching_rules_changed": false,
+      "regex_constructors_reused": 63
+    },
+    {
+      "file": "lib/services/explore_currency_tokens.dart",
+      "matching_rules_changed": false,
+      "regex_constructors_reused": 44
+    }
+  ],
+  "hair_audit": "verification/madrid_hair_source_audit.json",
+  "production_clinic_prices_hardcoded": false,
+  "deployments_performed": false
+}

@@ -1,3 +1,4 @@
+import 'explore_regex_cache.dart';
 import 'explore_clinic_identity.dart';
 import 'explore_search_locale.dart';
 
@@ -92,7 +93,7 @@ bool explorePageContextBlocksFragmentBypass(ExplorePricePageContext c) {
 bool _looksLikeCostGuideUrl(String sourceUrl) {
   final url = sourceUrl.trim().toLowerCase();
   if (url.isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'/cost-of-[a-z0-9-]+-in-[a-z0-9-]+|'
     r'/prices?-in-[a-z0-9-]+|'
     r'/cost-guide|/price-guide/[^/?#]|/fiyat-rehberi|'
@@ -105,16 +106,16 @@ bool _looksLikeCostGuideUrl(String sourceUrl) {
   ).hasMatch(url);
 }
 
-final _doseAverageSentence = RegExp(
+final _doseAverageSentence = cachedRegExp(
   r'\bon average\s*,?\s*\d+(?:\s*[-–—]\s*\d+)?\s+(?:units?|grafts?)\b'
   r'([^.!?\n]{0,120}\b(?:are|is)\s+(?:used|required|needed)\b[^.!?\n]*(?:[.!?]|$))',
   caseSensitive: false,
 );
-final _monetaryAverage = RegExp(
+final _monetaryAverage = cachedRegExp(
   r'[€£$]|\b(?:costs?|prices?|fees?|aed|eur|usd|gbp|ron|lei)\b',
   caseSensitive: false,
 );
-final _additionalAverageAmount = RegExp(r'\d');
+final _additionalAverageAmount = cachedRegExp(r'\d');
 
 String _withoutDoseAverages(String raw) => raw.replaceAllMapped(
       _doseAverageSentence,
@@ -126,8 +127,8 @@ String _withoutDoseAverages(String raw) => raw.replaceAllMapped(
 
 /// An explicit disclaimer outweighs tariff-shaped fragments on the page.
 bool looksLikeExplicitNonClinicPriceDisclaimer(String raw) {
-  final text = foldExploreCityText(raw).replaceAll(RegExp(r'\s+'), ' ');
-  return RegExp(
+  final text = foldExploreCityText(raw).replaceAll(cachedRegExp(r'\s+'), ' ');
+  return cachedRegExp(
     r'\bno\s+representan\s+(?:los\s+)?precios\s+(?:aplicados|cobrados)\b|'
     r'\b(?:do\s+not|don.t)\s+represent\s+(?:the\s+)?(?:prices|fees)\s+'
     r'(?:charged|applied)\b|'
@@ -157,7 +158,7 @@ ExplorePricePageContext classifyExplorePricePageContext({
     return ExplorePricePageContext.countryCostGuide;
   }
 
-  if (RegExp(
+  if (cachedRegExp(
     r'\bcompared with\b|\bcompare(?:d)?\s+(?:to|with)\b|'
     r'\bvs\.?\s+(?:italy|uk|uk prices|europe|abroad)\b|'
     r'\bpatients? can save\b|\bsave up to\b|'
@@ -166,7 +167,7 @@ ExplorePricePageContext classifyExplorePricePageContext({
     r'\bacross (?:clinics|the country|albania|turkey)\b',
     caseSensitive: false,
   ).hasMatch(blob)) {
-    if (RegExp(
+    if (cachedRegExp(
       r'\bitaly|france|uk|germany|europe|abroad\b',
       caseSensitive: false,
     ).hasMatch(blob)) {
@@ -175,7 +176,7 @@ ExplorePricePageContext classifyExplorePricePageContext({
     return ExplorePricePageContext.comparisonArticle;
   }
 
-  if (RegExp(
+  if (cachedRegExp(
     r'\baverage price\b|\bon average\b|\btypically (?:cost|range|start)\b|'
     r'\bstarts? at roughly\b|\baround \d',
     caseSensitive: false,
@@ -183,14 +184,14 @@ ExplorePricePageContext classifyExplorePricePageContext({
     return ExplorePricePageContext.marketAverage;
   }
 
-  if (RegExp(r'/blog/|/news/|/article/|/insights/', caseSensitive: false)
+  if (cachedRegExp(r'/blog/|/news/|/article/|/insights/', caseSensitive: false)
           .hasMatch(url) ||
-      RegExp(r'\bblog\b|\bin this article\b', caseSensitive: false)
+      cachedRegExp(r'\bblog\b|\bin this article\b', caseSensitive: false)
           .hasMatch(blob)) {
     return ExplorePricePageContext.blog;
   }
 
-  if (RegExp(
+  if (cachedRegExp(
     r'/price-list|/pricelist|/prices?(?:/|$|[?#])|/price-guide(?:/|$|[?#])|/precios|/preturi|/prezzi|/tarifs|'
     r'/cmimet|/çmimet|/fiyat|/cennik|/pricing\b',
     caseSensitive: false,
@@ -198,14 +199,14 @@ ExplorePricePageContext classifyExplorePricePageContext({
     return ExplorePricePageContext.officialPriceList;
   }
 
-  if (RegExp(
+  if (cachedRegExp(
     r'\bprice list\b|\bour prices?\b|\btariffs?\b|\bcmimet\b|\bçmimet\b',
     caseSensitive: false,
   ).hasMatch(blob)) {
     return ExplorePricePageContext.officialPriceList;
   }
 
-  if (RegExp(
+  if (cachedRegExp(
     r'\bour package\b|\bpackage (?:includes|starts|price)\b|'
     r'\bincludes 1 pair of implants\b',
     caseSensitive: false,
@@ -213,7 +214,7 @@ ExplorePricePageContext classifyExplorePricePageContext({
     return ExplorePricePageContext.officialPackagePrice;
   }
 
-  if (RegExp(
+  if (cachedRegExp(
     r'\bour (?:breast|botox|filler|rhinoplast|peel).{0,40}\bprice\b|'
     r'\bstarting (?:at|from)\b|'
     r'(?:^|\s)(?:عرضنا|أسعارنا)(?:\s|$)',
@@ -222,7 +223,7 @@ ExplorePricePageContext classifyExplorePricePageContext({
     return ExplorePricePageContext.officialServicePrice;
   }
 
-  if (RegExp(
+  if (cachedRegExp(
     r'\bin (?:albania|turkey|dubai|london|italy)\b.{0,48}\b(?:offers|starts)|'
     r'\bwith only\b.{0,48}\b(?:breast|botox|filler|euros?|€)',
     caseSensitive: false,
@@ -240,7 +241,7 @@ bool looksLikeExplicitClinicOwnPriceLanguage(
 }) {
   final t = raw.replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'\bour (?:breast|botox|filler|rhinoplast|peel|package|price|prices)\b|'
     r'\bour package starts\b|'
     r'\bour\s+(?:clinic|hospital|practice)\s+charges?\b|'
@@ -258,7 +259,7 @@ bool looksLikeExplicitClinicOwnPriceLanguage(
     final folded = foldExploreCityText(clinic);
     if (folded.isNotEmpty &&
         foldExploreCityText(t).contains(folded) &&
-        RegExp(r'(€|£|\$|eur|gbp|usd|\d)', caseSensitive: false).hasMatch(t)) {
+        cachedRegExp(r'(€|£|\$|eur|gbp|usd|\d)', caseSensitive: false).hasMatch(t)) {
       return true;
     }
   }
@@ -269,7 +270,7 @@ bool looksLikeExplicitClinicOwnPriceLanguage(
 bool looksLikeCountryMarketPriceMarketing(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'\bstarts? at roughly\b|'
     r'\bwith only\b.{0,48}\b(?:breast|botox|filler|euros?|€)\b|'
     r'\bbreast augmentation in \w+ offers\b|'
@@ -324,8 +325,8 @@ bool exploreEvidenceIsClinicOwnedPrice({
 String exploreNormalizeProcedureDetail(String rawProcedureText) {
   final t = rawProcedureText.replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return '';
-  final mentor = RegExp(r'\bmentor\b', caseSensitive: false).hasMatch(t);
-  final includes = RegExp(
+  final mentor = cachedRegExp(r'\bmentor\b', caseSensitive: false).hasMatch(t);
+  final includes = cachedRegExp(
     r'\bincludes?\b.{0,40}\bimplants?\b',
     caseSensitive: false,
   ).hasMatch(t);
@@ -394,7 +395,7 @@ String exploreNormalizeProcedureDisplayName({
       continue;
     }
     if (cleaned.length <= 48 &&
-        !RegExp(
+        !cachedRegExp(
           r'\b(includes|starts at|with only|roughly|offers:)\b',
           caseSensitive: false,
         ).hasMatch(cleaned)) {

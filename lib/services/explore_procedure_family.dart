@@ -1,3 +1,4 @@
+import 'explore_regex_cache.dart';
 import 'package:flutter/foundation.dart';
 
 import 'explore_price_evidence.dart';
@@ -137,7 +138,7 @@ final _kLaserPositive = [
 ];
 
 /// Hair-removal body zones vs facial/IPL/device skin work.
-final _kLaserHairCue = RegExp(
+final _kLaserHairCue = cachedRegExp(
   r'\b(?:hair\s*remov|epilare|depilacion|depilación|diode|alexandrite|'
   r'underarm|under[\s-]?arms?|bikini|brazilian|hollywood|peri[\s-]?anal|'
   r'intimate|full\s+body|full\s+leg|half\s+leg|upper\s+lip|'
@@ -146,7 +147,7 @@ final _kLaserHairCue = RegExp(
   caseSensitive: false,
 );
 
-final _kLaserSkinCue = RegExp(
+final _kLaserSkinCue = cachedRegExp(
   r'\b(?:byonik|fraxel|co2|moxi|genesis|photofacial|'
   r'photo\s*rejuvenation|photorejuvenation|pigment|pigmentation|'
   r'vascular|rosacea|acne\s+ipl|ipl\s+(?:face|skin|rejuven)|'
@@ -155,7 +156,7 @@ final _kLaserSkinCue = RegExp(
   caseSensitive: false,
 );
 
-final _kLaserGenericCue = RegExp(
+final _kLaserGenericCue = cachedRegExp(
   r'^(?:laser(?:\s+hair)?(?:\s+removal)?(?:\s+treatments?)?|'
   r'laser\s+skin\s+treatment)\s*$',
   caseSensitive: false,
@@ -197,7 +198,7 @@ String exploreLaserRowSubtype(String raw) {
   if (hair && skin) {
     return t.contains('hair') ? 'hair' : 'skin';
   }
-  if (RegExp(
+  if (cachedRegExp(
         r'\b(?:underarm|bikini|leg|arm|chest|back|body|full\s+face)\b',
       ).hasMatch(t) &&
       !skin &&
@@ -389,7 +390,7 @@ String? competingFamilyRejectReason(String rawLabel, String requestedFamily) {
 
   // DR.CYJ Hair Filler / scalp HA / hair mesotherapy — not facial dermal filler.
   if (want == 'filler' &&
-      RegExp(
+      cachedRegExp(
         r'\bhair\s+filler\b|\bfiller\s+(?:for\s+)?hair\b|\bdr\.?\s*cyj\b|'
         r'\bhair\s+mesotherap|\bmesotherap(?:y|ie)\s+(?:for\s+)?hair\b|'
         r'\bxl\s*hair\b|\bplinest\s+hair\b|\bhair\s+loss\s+treatment\b|'
@@ -407,7 +408,7 @@ String? competingFamilyRejectReason(String rawLabel, String requestedFamily) {
 
   // Shaving / waxing prep is not laser hair removal.
   if (want == 'laser') {
-    final shaveOrWax = RegExp(
+    final shaveOrWax = cachedRegExp(
       r'\b(?:shav(?:e|ing)|wax(?:ing)?|thread(?:ing)?|sugaring)\b',
       caseSensitive: false,
     ).hasMatch(t);
@@ -417,7 +418,7 @@ String? competingFamilyRejectReason(String rawLabel, String requestedFamily) {
     // Mixed spa menus: HydraFacial / HIFU / cupping are not laser hair removal.
     if ((t.contains('hydrafacial') ||
             t.contains('hifu') ||
-            RegExp(r'\b\d+\s*cups?\b').hasMatch(t) ||
+            cachedRegExp(r'\b\d+\s*cups?\b').hasMatch(t) ||
             t.contains('fat dissolv')) &&
         !_hasAny(t, _kLaserPositive) &&
         !t.contains('ipl') &&
@@ -433,7 +434,7 @@ String? competingFamilyRejectReason(String rawLabel, String requestedFamily) {
     return 'wrong_family_energy_device';
   }
   if (want == 'filler' &&
-      RegExp(
+      cachedRegExp(
         r'\bmasseter\b|\bbruxism\b|teeth grind',
         caseSensitive: false,
       ).hasMatch(t) &&
@@ -771,12 +772,12 @@ bool explorePriceLooksLikeCatalogAggregate({
 }) {
   if (clinicOwnPublishedPriceWindow(rawPriceText) != null) return false;
   if (priceMin > 0 && priceMax >= priceMin * 3) return true;
-  final range = RegExp(
+  final range = cachedRegExp(
     r'(\d+(?:[.,]\d{3})*)\s*[–—-]\s*(\d+(?:[.,]\d{3})*)',
   ).firstMatch(rawPriceText.replaceAll('\u00a0', ' '));
   if (range == null) return false;
   double parse(String raw) {
-    final compact = raw.replaceAll(RegExp(r'[.\s]'), '').replaceAll(',', '.');
+    final compact = raw.replaceAll(cachedRegExp(r'[.\s]'), '').replaceAll(',', '.');
     return double.tryParse(compact) ?? 0;
   }
 
@@ -836,7 +837,7 @@ String _urlPathAsProcedureLabel(String sourceUrl) {
     final path = Uri.parse(
       sourceUrl.contains('://') ? sourceUrl : 'https://$sourceUrl',
     ).path;
-    return path.replaceAll(RegExp(r'[/_\-]+'), ' ').trim();
+    return path.replaceAll(cachedRegExp(r'[/_\-]+'), ' ').trim();
   } catch (_) {
     return '';
   }
@@ -850,10 +851,10 @@ String _canonicalForInheritedAreaLabel({
   final folded = _fold(label);
   switch (requested) {
     case 'filler':
-      if (RegExp(r'\b(?:lip|lips|labio|buze)\b').hasMatch(folded)) {
+      if (cachedRegExp(r'\b(?:lip|lips|labio|buze)\b').hasMatch(folded)) {
         return 'lip_filler';
       }
-      if (RegExp(
+      if (cachedRegExp(
         r'\b(?:cheek|cheeks|pomet|tear\s*trough)\b',
       ).hasMatch(folded)) {
         return 'cheek_filler';
@@ -893,7 +894,7 @@ String procedureLabelFromPricedBlob({
         !looksLikeSearchQuickFactsBlob(blob) &&
         !looksLikeSeoQuotedPriceHeadline(blob) &&
         !looksLikeMixedServiceBundle(blob) &&
-        !RegExp(r'^\s*quick facts\b', caseSensitive: false).hasMatch(blob)) {
+        !cachedRegExp(r'^\s*quick facts\b', caseSensitive: false).hasMatch(blob)) {
       return blob.trim();
     }
   }
@@ -1011,24 +1012,24 @@ ProcedureFamilyMatch _matchEvidenceRow(
   final want = _requestedFamily(procedure);
   final foldedLabel = _fold(label);
   final genericChromeLabel = foldedLabel
-      .replaceAll(RegExp(r'[^a-z0-9]+'), ' ')
+      .replaceAll(cachedRegExp(r'[^a-z0-9]+'), ' ')
       .trim()
       .split(' ')
       .where((w) => w.isNotEmpty)
       .toList();
   final areaLabelForRequest =
       (want == 'botox' &&
-          RegExp(
+          cachedRegExp(
             r'\b(?:periocular|glabel|forehead|masseter|neck|chin|zona|zone|area)\b',
             caseSensitive: false,
           ).hasMatch(foldedLabel)) ||
       (want == 'laser' &&
-          RegExp(
+          cachedRegExp(
             r'\b(?:face|body|legs?|arms?|bikini|brazilian|underarm|chest|back)\b',
             caseSensitive: false,
           ).hasMatch(foldedLabel)) ||
       (want == 'filler' &&
-          RegExp(
+          cachedRegExp(
             r'\b(?:lips?|cheeks?|tear\s*trough|smile\s*line|jaw\s*line|ml)\b',
             caseSensitive: false,
           ).hasMatch(foldedLabel));
@@ -1283,7 +1284,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
     } else if (evidenceLen > 220) {
       score -= (evidenceLen / 1800).clamp(0.0, 0.18);
     }
-    final startsFromListed = RegExp(
+    final startsFromListed = cachedRegExp(
       r'(?:starts?\s+from|starting(?:\s+from)?|يبدأ من|تبدأ من)\s*'
               r'(?:aed|usd|eur|gbp|د\.إ|درهم)?\s*' +
           RegExp.escape(row.priceMin.round().toString()),
@@ -1303,7 +1304,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
     final foldedLabel = _fold(row.rawProcedureText);
     if (requested == 'filler') {
       final fillerBlob = '$foldedLabel ${_fold(row.rawEvidence)}';
-      if (RegExp(
+      if (cachedRegExp(
         r'\b1(?:[.,]0)?\s*ml\b|\bbuze\b|\blips?\b|\bjuvederm\b|\bstylage\s+[mlx]\b',
       ).hasMatch(fillerBlob)) {
         score += 0.32;
@@ -1320,22 +1321,22 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
     if (requested == 'botox') {
       final evidenceFold = _fold(row.rawPriceText);
       final blobFold = '$foldedLabel $evidenceFold';
-      final oneZone = RegExp(
+      final oneZone = cachedRegExp(
         r'\b1\s*zon|\buna\s*zona|\bperiocular|\bglabel|\bfrontal|\bfrunte\b|'
         r'\bcrow|\bcoada och',
       ).hasMatch(foldedLabel);
-      final multiZone = RegExp(
+      final multiZone = cachedRegExp(
         r'\b[2-4]\s*zon|\bfull face|\b3 zone|\bfull\s*3|'
         r'\bpackage\b|\b3-zone|\bmulti[- ]?zone',
       ).hasMatch(foldedLabel);
       final perUnit =
           row.priceType == PriceType.perUnit ||
-          RegExp(
+          cachedRegExp(
             r'(?:per|/)\s*(?:iu|unit|units|unidad)\b|por\s+unidad',
             caseSensitive: false,
           ).hasMatch('${row.rawPriceText} ${row.rawEvidence}');
       if (oneZone && !multiZone) score += 0.3;
-      if (RegExp(r'\b(?:1|one)\s*area\b').hasMatch(foldedLabel)) {
+      if (cachedRegExp(r'\b(?:1|one)\s*area\b').hasMatch(foldedLabel)) {
         score += 0.35;
       }
       if (_botoxLooksLikeAddOnOrTargeted(evidenceFold) &&
@@ -1371,7 +1372,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
       if (perUnit) score += 0.55;
       if (multiZone && !perUnit) score -= 0.45;
       if (row.priceType == PriceType.from) score += 0.18;
-      if (RegExp(
+      if (cachedRegExp(
         r'gummy|gingival|zambet gingival|brux|hiperhidroz|hyperhidros|'
         r'platism|masseter|slimming face|cicatrici|mouth corner',
       ).hasMatch(foldedLabel)) {
@@ -1383,7 +1384,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
       // Weekday / special-offer pages are real quotes, but demote them so a
       // Google-AI-style "approximately AED 600" overview is never needed —
       // prefer a normal menu / unit row when the same clinic has one.
-      if (RegExp(
+      if (cachedRegExp(
         r'special-?offers?|botox-monday|كل يوم إثنين|عرضنا الحصري',
         caseSensitive: false,
       ).hasMatch('${row.sourceUrl} ${row.rawEvidence}')) {
@@ -1424,7 +1425,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
       if (looksLikeOfficialPriceListUrl(row.sourceUrl) &&
           (row.extractionMethod == PriceExtractionMethod.textProximity ||
               row.extractionMethod == PriceExtractionMethod.domBlock) &&
-          RegExp(
+          cachedRegExp(
             r'\bmale\s+(?:nose|rhino)|\ba male nose|\brhinoplasty\s+for\s+men',
             caseSensitive: false,
           ).hasMatch(rhinoBlob)) {
@@ -1435,14 +1436,14 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
           looksLikePrimaryRhinoplastyStarting(row.rawPriceText)) {
         score += 0.48;
       }
-      if (RegExp(
+      if (cachedRegExp(
         r'\bmale\s+(?:nose|rhino)|\brhinoplasty\s+for\s+men\b|'
         r'\bfor men\b|\ba male nose',
         caseSensitive: false,
       ).hasMatch(rhinoBlob)) {
         score -= 0.4;
       }
-      if (RegExp(
+      if (cachedRegExp(
             r'\bultrasonic\b|\bpiezo\b|\bpreservation\s+rhino',
             caseSensitive: false,
           ).hasMatch(foldedLabel) &&
@@ -1450,7 +1451,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
         score -= 0.35;
       }
       if (looksLikeClinicArticlePriceUrl(row.sourceUrl) ||
-          RegExp(
+          cachedRegExp(
             r'/for-men/|/for-women/',
           ).hasMatch(row.sourceUrl.toLowerCase())) {
         score -= 0.45;
@@ -1470,7 +1471,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
               row.priceType == PriceType.from)) {
         score += 0.2;
       }
-      if (RegExp(
+      if (cachedRegExp(
             r'\b(normal|dislocation|c shape|s shape)\b',
           ).hasMatch(foldedLabel) &&
           row.priceMax >= row.priceMin * 1.05) {
@@ -1493,19 +1494,19 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
         rejectLog('[GP PRICE] REJECT · breast_addon_or_areola');
         continue;
       }
-      if (RegExp(
+      if (cachedRegExp(
             r'\binverted nipple\b|\bnipple (?:lift|reduction|correction)\b',
           ).hasMatch(foldedLabel) &&
-          !RegExp(
+          !cachedRegExp(
             r'augment|enlargement|implant|memorygel|boob job',
           ).hasMatch(foldedLabel)) {
         rejectLog('[GP PRICE] REJECT · breast_nipple_only');
         continue;
       }
-      if (RegExp(
+      if (cachedRegExp(
             r'\bbreast augmentation\b|\bboob job\b|\benlargement\b|\bmemorygel\b',
           ).hasMatch(foldedLabel) &&
-          !RegExp(
+          !cachedRegExp(
             r'unilateral|lift|mastopex|reduction',
           ).hasMatch(foldedLabel)) {
         score += 0.28;
@@ -1524,7 +1525,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
       if (looksLikeDepigmentationPeelPackage(peelBlob)) {
         rejectLog('[GP PRICE] REJECT · peel_package');
         continue;
-      } else if (RegExp(
+      } else if (cachedRegExp(
         r'chemical peel|skin peel|glycolic|mandelic|salicylic|\btca\b|'
         r'\b(?:1|one|single)\s*session\b',
         caseSensitive: false,
@@ -1534,13 +1535,13 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
     }
     if (requested == 'laser') {
       // Prefer a concrete body-area session over a vague “laser treatment”.
-      if (RegExp(
+      if (cachedRegExp(
         r'bikini|underarm|half\s+leg|full\s+leg|face|back|chest|'
         r'session|/session|per session',
       ).hasMatch(foldedLabel)) {
         score += 0.2;
       }
-      if (RegExp(r'tattoo|bleaching|hair bleach').hasMatch(foldedLabel)) {
+      if (cachedRegExp(r'tattoo|bleaching|hair bleach').hasMatch(foldedLabel)) {
         score -= 0.5;
       }
     }
@@ -1619,7 +1620,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
         continue;
       }
       if (looksLikeHairNonStartingRow(foldedLabel) &&
-          !RegExp(r'\bfue\b|\bdhi\b|\bsapphire\b').hasMatch(foldedLabel)) {
+          !cachedRegExp(r'\bfue\b|\bdhi\b|\bsapphire\b').hasMatch(foldedLabel)) {
         rejectLog('[GP PRICE] REJECT · hair_addon_or_consult');
         continue;
       }
@@ -1631,8 +1632,8 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
         continue;
       }
       if (looksLikeUnshavenHairVariant(foldedLabel)) score -= 0.45;
-      if (RegExp(r'\bmin(?:imum)?\s+fee\b').hasMatch(foldedLabel) ||
-          RegExp(r'\bmin(?:imum)?\s+fee\b').hasMatch(hairBlob)) {
+      if (cachedRegExp(r'\bmin(?:imum)?\s+fee\b').hasMatch(foldedLabel) ||
+          cachedRegExp(r'\bmin(?:imum)?\s+fee\b').hasMatch(hairBlob)) {
         score += 0.38;
       }
       if (looksLikeHairStartingPackageRow(foldedLabel) ||
@@ -1640,12 +1641,12 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
         score += 0.5;
       }
       if (looksLikeOfficialPriceListUrl(row.sourceUrl)) score += 0.42;
-      if (RegExp(
+      if (cachedRegExp(
         r'\bbarb|\bbeard|\bsprancean|\beyebrow',
       ).hasMatch(foldedLabel)) {
         score -= 0.4;
       }
-      if (RegExp(
+      if (cachedRegExp(
         r'\bscalp|\bcapil|\bfue|\bdhi|\bsapphire|\bgraft|\bfir cu fir|'
         r'\btransplant de par|\btransplant par|\bimplant de par|\bimplant par',
       ).hasMatch(foldedLabel)) {
@@ -1658,7 +1659,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
         score += 0.42;
       }
     }
-    if (RegExp(
+    if (cachedRegExp(
       r'\boferta|\bflash\b|\bpromo\b|\bspecial offer\b|\boffer\b|\bdeal\b|'
       r'\bdiscount\b|\bsale\b|%\s*off\b',
     ).hasMatch(foldedLabel)) {
@@ -1668,7 +1669,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
     // section heading, not a menu line — the card then falls back to a family
     // title instead of "Underarm laser hair removal".
     final labelWords = foldedLabel
-        .replaceAll(RegExp(r'[^a-z0-9]+'), ' ')
+        .replaceAll(cachedRegExp(r'[^a-z0-9]+'), ' ')
         .trim()
         .split(' ')
         .where((w) => w.isNotEmpty)
@@ -1676,7 +1677,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
     if (labelWords.isNotEmpty &&
         labelWords.every(_kGenericRowLabelWords.contains)) {
       score -= 0.3;
-    } else if (RegExp(
+    } else if (cachedRegExp(
       r'\b(?:1|one|single)\s*(?:session|sesion|sedinta)\b|per session|'
       r'\b\d+\s*ml\b|\b\d+\s*units?\b|\bunderarm|\bupper lip|\bfull face|'
       r'\bfull body|\bbikini|\bunder ?arms?\b|\bper area\b',
@@ -1710,8 +1711,8 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
             ? row.sourceUrl
             : 'https://${row.sourceUrl}',
       ).path.toLowerCase();
-      if (RegExp(r'(^|/)en(/|$)').hasMatch(path)) score += 0.2;
-      if (RegExp(r'(^|/)ar(/|$)').hasMatch(path)) score -= 0.18;
+      if (cachedRegExp(r'(^|/)en(/|$)').hasMatch(path)) score += 0.2;
+      if (cachedRegExp(r'(^|/)ar(/|$)').hasMatch(path)) score -= 0.18;
     } catch (_) {}
     final cheaperIsMicroBotox =
         requested == 'botox' &&
@@ -1726,7 +1727,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
         );
     final cheaperIsPromo =
         _looksLikePromoSavingLabel(foldedLabel) ||
-        RegExp(
+        cachedRegExp(
           r'\boferta|\bflash\b|\bpromo\b|\bspecial offer\b|\boffer\b|\bdeal\b|'
           r'\bdiscount\b|\bsale\b|%\s*off\b',
         ).hasMatch(foldedLabel);
@@ -1843,7 +1844,7 @@ ExtractedPriceEvidence? selectEvidenceForProcedure({
 /// Tiny promo zones and body Botox are not the advertised facial starting price.
 bool _botoxMicroOrBodyArea(String folded) {
   return _botoxIsSpecialtyStarting(folded) ||
-      RegExp(
+      cachedRegExp(
         r'small area|small areas|مناطق صغيرة|منطقة صغيرة|'
         r'\bfeet\b|\bfoot\b|القدمين|'
         r'\bshoulders?\b|الأكتاف|'
@@ -1857,7 +1858,7 @@ bool _botoxMicroOrBodyArea(String folded) {
 
 /// Forehead / frown / 1 area — the Explore Botox starting card.
 bool _botoxIsStandardStartingArea(String folded) {
-  return RegExp(
+  return cachedRegExp(
     r'\b(?:1|one|single)\s*area\b|'
     r'\b(?:1|una|o)\s*zon|'
     r'одна\s*зон|'
@@ -1869,7 +1870,7 @@ bool _botoxIsStandardStartingArea(String folded) {
 
 /// Add-on / extra targeted zones sold on top of a 1-area treatment.
 bool _botoxLooksLikeAddOnOrTargeted(String folded) {
-  return RegExp(
+  return cachedRegExp(
     r'when added to another|'
     r'\badd[\s-]?ons?\b|'
     r'targeted areas?|'
@@ -1882,7 +1883,7 @@ bool _botoxLooksLikeAddOnOrTargeted(String folded) {
 
 /// Chin dimpling / bunny lines / masseter — not the advertised 1-area start.
 bool _botoxIsSpecialtyStarting(String folded) {
-  return RegExp(
+  return cachedRegExp(
     r'chin\s*dimpl|pebbled\s*chin|mentalis|'
     r'down[- ]?turned|mouth\s*corner|corners?\s+(?:of\s+(?:the\s+)?)?mouth|'
     r'lip[- ]?flip|gummy\s*smile|bunny\s*line|'
@@ -1896,7 +1897,7 @@ bool _botoxIsSpecialtyStarting(String folded) {
 }
 
 bool _botoxAdvertisedStartArea(String folded) {
-  return RegExp(
+  return cachedRegExp(
     r'full face|كامل الوجه|'
     r'any area|اي منطقة|أي منطقة|'
     r'\b(?:1|one)\s*area\b|منطقة واحدة|'
@@ -1907,13 +1908,13 @@ bool _botoxAdvertisedStartArea(String folded) {
 bool _looksLikeGenericBotoxFamilyLabel(String folded) {
   final t = folded.trim();
   if (t.isEmpty) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'^(?:botox|anti[- ]?wrinkle)(?:\s+(?:treatment|treatments|'
     r'injections?|injectables?|prices?|cost|costs))?$',
   ).hasMatch(t)) {
     return true;
   }
-  final words = t.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).toList();
+  final words = t.split(cachedRegExp(r'\s+')).where((w) => w.isNotEmpty).toList();
   return words.isNotEmpty && words.every(_kGenericRowLabelWords.contains);
 }
 
@@ -1924,25 +1925,25 @@ bool _looksLikeGenericBotoxFamilyLabel(String folded) {
 /// interchangeable, since roughly 2.5-3 Dysport units do the work of one Botox
 /// unit. A clinic charging $6/unit for Dysport and $18/unit for Botox is not
 /// offering a cheaper Botox, so the two rows must not be compared on price.
-bool _looksLikeAlternativeBotulinumBrand(String folded) => RegExp(
+bool _looksLikeAlternativeBotulinumBrand(String folded) => cachedRegExp(
   r'\bdysport\b|\bxeomin\b|\bneuronox\b|\bazzalure\b|\bvistabel\b|\bjeuveau\b|'
   r'\bbocouture\b|\bdaxxify\b|\bnuceiva\b|\bletybo\b|\brelfydess\b',
 ).hasMatch(folded);
 
-bool _mentionsBotoxByName(String folded) => RegExp(
+bool _mentionsBotoxByName(String folded) => cachedRegExp(
   r'\bbotox\b|\bbotulinum\b|toxina\s*botulin|botulotoxin|'
   r'ботокс|ботулин',
 ).hasMatch(folded);
 
 bool _looksLikePromoSavingLabel(String folded) {
-  return RegExp(
+  return cachedRegExp(
     r'your\s+saving|you\s+save|\bsaving\b|was\s*(?:£|\$|€)|'
     r'strikethrough|before\s+price',
   ).hasMatch(folded);
 }
 
 bool _rhinoplastyLooksNonsurgical(String folded) {
-  return RegExp(
+  return cachedRegExp(
     r'non[- ]?surgical|nonsurgical|liquid rhino|nose filler|'
     r'rinoplastia no quir|filler nariz|cheaper alternative',
   ).hasMatch(folded);
@@ -2107,7 +2108,7 @@ bool exploreCachedPriceNeedsReselect({
   }
   final folded = raw
       .toLowerCase()
-      .replaceAll(RegExp(r'[^a-z0-9]+'), ' ')
+      .replaceAll(cachedRegExp(r'[^a-z0-9]+'), ' ')
       .trim();
   if (_looksLikePromoSavingLabel(_fold(raw))) return true;
   if (want == 'botox' &&
@@ -2191,8 +2192,8 @@ bool exploreCachedPriceNeedsReselect({
     }
     if (priceMin > 0 &&
         priceMin < 7500 &&
-        RegExp(r'rhinoplasty-cost', caseSensitive: false).hasMatch(sourceUrl) &&
-        !RegExp(
+        cachedRegExp(r'rhinoplasty-cost', caseSensitive: false).hasMatch(sourceUrl) &&
+        !cachedRegExp(
           r'price-guide|price-list|pricelist',
           caseSensitive: false,
         ).hasMatch(sourceUrl)) {

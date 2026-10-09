@@ -1,3 +1,4 @@
+import 'explore_regex_cache.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math' as math;
@@ -662,9 +663,9 @@ Return JSON only.
   static String _cleanKey(String s) => s
       .trim()
       .toLowerCase()
-      .replaceAll(RegExp(r'\s+'), ' ')
+      .replaceAll(cachedRegExp(r'\s+'), ' ')
       .replaceAll(
-        RegExp(
+        cachedRegExp(
           r'[^\w\s\u00C0-\u024F\u0400-\u04FF\u0600-\u06FF\u4E00-\u9FFF\uAC00-\uD7AF]',
         ),
         '',
@@ -784,9 +785,53 @@ Return JSON only.
   final Map<String, _ExplorePersistJob> _explorePersistPending = {};
 
   /// Full Compare pool per cache key (grows toward [kExploreFirestorePoolMax]).
-  /// Separate from the 6 on-screen cards so the next visit can shuffle a
-  /// different 3 from everything already saved, including the last 3 Google.
+  /// Separate from the four on-screen cards so subsequent visits can rotate
+  /// across every independently verified provider already discovered.
   final Map<String, List<OpenAIClinic>> _exploreComparisonPool = {};
+  final ExploreCompareRotation _compareRotation = ExploreCompareRotation();
+
+  void _rememberVerifiedComparePool(String cacheKey, Iterable<OpenAIClinic> rows) {
+    final pool = List<OpenAIClinic>.of(_exploreComparisonPool[cacheKey] ?? const []);
+    for (final row in rows) {
+      final index = pool.indexWhere((c) => exploreClinicsAreSameProvider(c, row));
+      if (index < 0) {
+        pool.add(row);
+      } else if (exploreVerifiedTariffSupersedes(pool[index], row)) {
+        pool[index] = overlayExploreClinicRatings(shown: [row], enriched: [pool[index]]).first;
+      } else {
+        pool[index] = overlayExploreClinicRatings(shown: [pool[index]], enriched: [row]).first;
+      }
+    }
+    _exploreComparisonPool[cacheKey] = pool.take(kExploreFirestorePoolMax).toList();
+  }
+
+  List<OpenAIClinic> _rotateVerifiedPool(String cacheKey, String city, String procedure) {
+    return _compareRotation.select<OpenAIClinic>(
+      city: city, procedure: procedure,
+      eligible: (_exploreComparisonPool[cacheKey] ?? const <OpenAIClinic>[])
+          .where((c) => exploreClinicEligibleForVerifiedPool(c,
+              procedure: procedure, city: city)),
+      providerKey: exploreClinicDedupKey,
+    );
+  }
+
+  /// Synchronous tab return: choose from the retained verified pool, with no
+  /// Firestore, Places or discovery request. Background events keep this window.
+  OpenAIComparisonResult? rotateCachedExploreComparison(String cacheKey) {
+    final current = _comparisonMemoryCache[cacheKey];
+    if (current == null) return null;
+    _rememberVerifiedComparePool(cacheKey, current.clinics);
+    final selected = _rotateVerifiedPool(cacheKey, current.city, current.topic);
+    if (selected.isEmpty) return null;
+    final rotated = _postprocessPreviewComparison(
+        current.copyWith(clinics: selected), preserveOrder: true);
+    _comparisonMemoryCache[cacheKey] = rotated;
+    _verifiedTabSnapshots[cacheKey] = (
+      source: rotated, revision: kExplorePriceExtractRevision,
+      validatedAt: DateTime.now(), verified: rotated,
+    );
+    return rotated;
+  }
 
   /// Clinics currently shown per city + Explore pill, so Botox / Fillers /
   /// Laser lists do not keep repeating the same names.
@@ -1054,20 +1099,32 @@ Return JSON only.
     };
     for (final cacheOnly in [true, false]) {
       final first = Completer<OpenAIComparisonResult?>();
+      var validation = Future<void>.value();
       final reads = [for (final key in keys) () async {
         final result = await _loadFromFirestore(key,
             cacheOnly: cacheOnly, allowStale: true);
+        if (first.isCompleted) return;
         // Cache TTL schedules refresh; every price still needs current
         // evidence, correct procedure and the requested city before painting.
-        final eligible = (result?.clinics ?? const <OpenAIClinic>[])
-            .where((c) => exploreClinicEligibleForVerifiedPool(c,
-                procedure: queryOrSelection, city: city)).toList();
-        if (eligible.isNotEmpty && !first.isCompleted) {
-          first.complete(result!.copyWith(clinics: eligible));
-        }
+        if (result == null || result.clinics.isEmpty) return;
+        // Native aliases can all finish on the same event-loop turn. Queue
+        // their validation so one hit cannot spawn a worker for every alias.
+        final queued = validation.then((_) async {
+          if (first.isCompleted) return;
+          final eligible = await validateExploreSavedComparisonClinics(
+              rows: result.clinics, procedure: queryOrSelection, city: city);
+          if (eligible.isNotEmpty && !first.isCompleted) {
+            first.complete(result.copyWith(clinics: eligible));
+          }
+        });
+        validation = queued.catchError((Object _) {});
+        await queued;
       }()];
       unawaited(Future.wait(reads).then((_) {
         if (!first.isCompleted) first.complete(null);
+      }).catchError((Object error) {
+        if (!first.isCompleted) first.complete(null);
+        debugPrint('[GP CACHE] comparison alias read failed · $error');
       }));
       final result = await first.future;
       if (result != null) return result;
@@ -1506,7 +1563,7 @@ Return JSON only.
       return [
         for (final l in lines)
           OpenAISearchItem(
-            title: l.replaceFirst(RegExp(r'^[\-\*\d\.\)\s]+'), ''),
+            title: l.replaceFirst(cachedRegExp(r'^[\-\*\d\.\)\s]+'), ''),
             subtitle: '$city · $categoryPill',
             type: fallbackClinic
                 ? OpenAISearchItemType.clinic
@@ -1623,9 +1680,7 @@ Return JSON only.
         continue;
       }
       final candidate = withExploreClinicDisplayName(original);
-      if (!explorePriceIsVerified(candidate) ||
-          !isJustifiedProcedurePrice(candidate, procedure: queryOrSelection) ||
-          candidate.name.trim().isEmpty ||
+      if (candidate.name.trim().isEmpty ||
           isMarketplaceBrandName(candidate.name) ||
           exploreListedPriceIsNonClinicContent(
             sourceUrl: candidate.priceSourceUrl,
@@ -1658,9 +1713,13 @@ Return JSON only.
       sources: {
         'google_prices': ExploreGooglePriceStore.instance
             .load(city: city, procedure: queryOrSelection, forceReload: forceReload)
-            .then(_clinicsFromGooglePriceJson),
+            .then(_clinicsFromGooglePriceJson)
+            .then((rows) => validateExploreSavedComparisonClinics(
+                rows: rows, city: city, procedure: queryOrSelection)),
         'curated': ExploreCuratedPriceStore.instance
-            .load(city: city, procedure: queryOrSelection),
+            .load(city: city, procedure: queryOrSelection)
+            .then((rows) => validateExploreSavedComparisonClinics(
+                rows: rows, city: city, procedure: queryOrSelection)),
         'comparison': _loadExploreComparisonPool(
           cacheKey: cacheKey, queryOrSelection: queryOrSelection,
           city: city, mode: mode,
@@ -1707,10 +1766,38 @@ Return JSON only.
       rows.where((r) => !r.origin.startsWith('firestore')).toList(),
       city: city, procedure: procedure,
     );
+    return _comparisonWithAcceptedRows(city: city, procedure: procedure,
+      saved: saved, fresh: fresh, previous: previous);
+  }
+
+  Future<OpenAIComparisonResult> comparisonWithDiscoveryRowsAsync({
+    required String city, required String procedure,
+    required List<ExploreDiscoveryToolRow> rows,
+    OpenAIComparisonResult? previous,
+  }) async {
+    final validated = await validateExploreDiscoveryCompareRows(
+      rows: rows, city: city,
+      procedure: ExplorePriceDiscoveryTool.procedureForTool(procedure), selection: procedure);
+    return _comparisonWithAcceptedRows(city: city, procedure: procedure,
+      saved: validated.accepted.where((c) =>
+          (validated.origins[c.priceSourceUrl] ?? '').startsWith('firestore')).toList(),
+      fresh: validated.accepted.where((c) =>
+          !(validated.origins[c.priceSourceUrl] ?? '').startsWith('firestore')).toList(),
+      previous: previous);
+  }
+
+  OpenAIComparisonResult _comparisonWithAcceptedRows({
+    required String city, required String procedure,
+    required List<OpenAIClinic> saved, required List<OpenAIClinic> fresh,
+    OpenAIComparisonResult? previous,
+  }) {
     final retained = (previous?.clinics ?? const <OpenAIClinic>[])
         .where((c) => explorePriceIsVerified(c) &&
             exploreClinicFitsSearchCity(c, city) &&
             exploreClinicFitsCompareProcedure(c, procedure));
+    _rememberVerifiedComparePool(
+      'comparison|$kExploreComparisonCacheRevision|$procedure|${_localityCacheSegment(city)}|procedure',
+      [...retained, ...saved, ...fresh]);
     final candidates = selectExploreCompareRows<OpenAIClinic>(
       saved: mergeExploreAcceptedRows<OpenAIClinic>(retained, saved,
         sameProvider: exploreClinicsAreSameProvider),
@@ -2116,8 +2203,11 @@ Return JSON only.
               final retained = _comparisonMemoryCache[cacheKey]?.clinics ?? const <OpenAIClinic>[];
               final eligible = saved.where((c) =>
                   !rejectedToolUrls.contains(c.priceSourceUrl)).toList();
+              _rememberVerifiedComparePool(cacheKey, eligible);
+              final candidates = retained.isEmpty
+                  ? _rotateVerifiedPool(cacheKey, city, queryOrSelection) : eligible;
               final rows = stabilizeExploreCompareRows<OpenAIClinic>(
-                shown: retained, incoming: eligible,
+                shown: retained, incoming: candidates,
                 stillEligible: (c) => !rejectedToolUrls.contains(c.priceSourceUrl) &&
                     explorePriceIsVerified(c) && exploreClinicFitsSearchCity(c, city),
                 sameProvider: exploreClinicsAreSameProvider,
@@ -2169,101 +2259,19 @@ Return JSON only.
           // Each stream event may contain a different subset. Accumulate
           // accepted providers across events and the bounded continuation.
           var acceptedToolRows = <OpenAIClinic>[];
-          List<OpenAIClinic> mapToolRows(List<ExploreDiscoveryToolRow> rows) {
+          Future<List<OpenAIClinic>> mapToolRows(List<ExploreDiscoveryToolRow> rows) async {
             final saved = <OpenAIClinic>[
               for (final row in appStored)
                 if (!rejectedToolUrls.contains(row.priceSourceUrl)) row,
             ];
             final live = <OpenAIClinic>[];
-            final acceptedThisEvent = <OpenAIClinic>[];
-            for (final row in rows) {
-              void dropRow(String reason) {
-                if (row.sourceUrl.isNotEmpty) {
-                  rejectedToolUrls.add(row.sourceUrl);
-                }
-                debugPrint(
-                  'DROP ${row.clinicName} $reason ${row.sourceUrl}',
-                );
-              }
-
-              if (exploreUrlConflictsWithSearchCity(row.sourceUrl, city) ||
-                  exploreQuotedPriceConflictsWithSearchCity(
-                    city: city,
-                    url: row.sourceUrl,
-                    evidence: row.rawEvidence,
-                  )) {
-                dropRow('city_url_conflict');
-                continue;
-              }
-              if (isMarketplaceOrDirectoryHost(row.sourceUrl) &&
-                  !ExplorePriceDiscoveryTool.canUseMarketplacePrice(row)) {
-                dropRow('directory');
-                continue;
-              }
-              final sourcePath = row.sourceUrl.toLowerCase();
-              if (sourcePath.contains('price-guide') ||
-                  sourcePath.contains('masseter') ||
-                  sourcePath.contains('facial-palsy') ||
-                  sourcePath.contains('facial_palsy')) {
-                dropRow('procedure_mismatch');
-                continue;
-              }
-              if (!ExplorePriceDiscoveryTool.rowMatchesRequestedProcedure(
-                row,
-                requestedProcedure,
-              )) {
-                dropRow('procedure_mismatch');
-                continue;
-              }
-              final mapped = _clinicFromDiscoveryToolRow(
-                row,
-                city: city,
-                procedure: requestedProcedure,
-              );
-              if (mapped == null || !explorePriceIsVerified(mapped) ||
-                  !isJustifiedProcedurePrice(mapped, procedure: requestedProcedure)) {
-                dropRow('sanity');
-                continue;
-              }
-              final named = withExploreClinicDisplayName(mapped);
-              if (named.name.trim().isEmpty) {
-                dropRow('sanity');
-                continue;
-              }
-              if (isMarketplaceBrandName(named.name)) {
-                dropRow('marketplace');
-                continue;
-              }
-              if (exploreUrlConflictsWithSearchCity(
-                named.priceSourceUrl,
-                city,
-              )) {
-                dropRow('city_url_conflict');
-                continue;
-              }
-              if (!exploreClinicFitsSearchCity(named, city)) {
-                dropRow('city_fit');
-                continue;
-              }
-              if (!exploreClinicFitsCompareProcedure(named, queryOrSelection)) {
-                dropRow('procedure_mismatch');
-                continue;
-              }
-              if (exploreListedPriceIsNonClinicContent(
-                sourceUrl: named.priceSourceUrl,
-                website: named.area,
-              )) {
-                dropRow('sanity');
-                continue;
-              }
-              if (acceptedThisEvent.any(
-                (c) => exploreClinicsAreSameProvider(c, named),
-              )) {
-                continue;
-              }
-              acceptedThisEvent.add(named);
-              toolOriginsByUrl[named.priceSourceUrl] = row.origin;
-            }
+            final validated = await validateExploreDiscoveryCompareRows(
+              rows: rows, city: city, procedure: requestedProcedure, selection: queryOrSelection,
+            );
+            if ((_comparisonDisplayEpoch[cacheKey] ?? 0) != displayEpoch) return const [];
+            final acceptedThisEvent = validated.accepted;
+            rejectedToolUrls.addAll(validated.rejectedUrls);
+            toolOriginsByUrl.addAll(validated.origins);
             acceptedToolRows = mergeExploreAcceptedRows<OpenAIClinic>(
               acceptedToolRows,
               acceptedThisEvent,
@@ -2297,11 +2305,12 @@ Return JSON only.
               final destination = origin.startsWith('firestore') ? saved : live;
               destination.add(named);
             }
-            return selectExploreCompareRows<OpenAIClinic>(
-              saved: saved.where((c) => exploreClinicFitsSearchCity(c, city)),
-              live: live,
-              sameProvider: exploreClinicsAreSameProvider,
-            );
+            // Retain every eligible provider; the four-card cap belongs to
+            // display selection, not discovery or the reusable city pool.
+            _rememberVerifiedComparePool(cacheKey, [...saved, ...live]);
+            _exploreComparisonPool[cacheKey]?.removeWhere(
+                (c) => rejectedToolUrls.contains(c.priceSourceUrl));
+            return [...saved, ...live];
           }
 
           // Keep the last valid display during refresh; partials cannot shrink it.
@@ -2316,17 +2325,19 @@ Return JSON only.
                   )
                   .toList() ??
               <OpenAIClinic>[];
-          void publishToolRows(
+          Future<void> publishToolRows(
             List<ExploreDiscoveryToolRow> rows, {
             bool replace = false,
-          }) {
+          }) async {
             if ((_comparisonDisplayEpoch[cacheKey] ?? 0) != displayEpoch) return;
             if (replace) acceptedToolRows = <OpenAIClinic>[];
-            final candidates = mapToolRows(rows);
+            final candidates = await mapToolRows(rows);
+            if ((_comparisonDisplayEpoch[cacheKey] ?? 0) != displayEpoch) return;
             final retained = _comparisonMemoryCache[cacheKey]?.clinics ?? shown;
             final stable = stabilizeExploreCompareRows<OpenAIClinic>(
               shown: retained,
-              incoming: candidates,
+              incoming: retained.isEmpty
+                  ? _rotateVerifiedPool(cacheKey, city, queryOrSelection) : candidates,
               stillEligible: (c) => !rejectedToolUrls.contains(c.priceSourceUrl) &&
                   explorePriceIsVerified(c) &&
                   isJustifiedProcedurePrice(c, procedure: queryOrSelection) &&
@@ -2350,7 +2361,7 @@ Return JSON only.
             );
           }
 
-          if (appStored.isNotEmpty) publishToolRows(const []);
+          if (appStored.isNotEmpty) await publishToolRows(const []);
 
           OpenAIComparisonResult finishInteractive(String source) {
             if ((_comparisonDisplayEpoch[cacheKey] ?? 0) != displayEpoch) {
@@ -2391,7 +2402,7 @@ Return JSON only.
             );
             if (outcome.searchCompleted) {
               rejectedToolUrls.addAll(outcome.invalidatedSourceUrls);
-              publishToolRows(outcome.rows);
+              await publishToolRows(outcome.rows);
               unawaited(persistAcceptedRows());
             }
           }
@@ -2418,7 +2429,7 @@ Return JSON only.
             // An existing completed ticket already carries verified prices.
             // Paint them before the separate index/refresh network requests.
             if (job != null && job.rows.isNotEmpty) {
-              publishToolRows(job.rows);
+              await publishToolRows(job.rows);
               unawaited(persistAcceptedRows());
             }
             final sw = Stopwatch()..start();
@@ -2433,7 +2444,7 @@ Return JSON only.
               );
               if (fresh.searchCompleted) {
                 rejectedToolUrls.addAll(fresh.invalidatedSourceUrls);
-                publishToolRows(fresh.rows);
+                await publishToolRows(fresh.rows);
                 unawaited(persistAcceptedRows());
               }
             }
@@ -2465,7 +2476,7 @@ Return JSON only.
               if (state.rows.isNotEmpty && (changedRows || firstCompletion)) {
                 lastPublishedRows = state.rowsFingerprint;
                 completionPublished = completionPublished || firstCompletion;
-                publishToolRows(state.rows, replace: state.status == 'completed');
+                await publishToolRows(state.rows, replace: state.status == 'completed');
                 // Intermediate rows are shown while final identity checks run.
                 // Persist only the completed accepted set to the app cache.
                 if (state.status == 'completed') unawaited(persistAcceptedRows());
@@ -2540,7 +2551,7 @@ Return JSON only.
               excludedSourceUrls: rejectedToolUrls.toList(),
             );
             if (job != null) {
-              if (job.rows.isNotEmpty) publishToolRows(job.rows);
+              if (job.rows.isNotEmpty) await publishToolRows(job.rows);
               backgroundHuntNote.value = ExploreBackgroundHunt(
                 city: city, pill: categoryPill, jobId: job.isFinished ? '' : job.id,
                 message: job.message,
@@ -3290,7 +3301,7 @@ Return JSON only.
                         nameFold == '$cityFold bulgaria' ||
                         nameFold == '$cityFold turkiye' ||
                         nameFold == '$cityFold turkey' ||
-                        (RegExp(
+                        (cachedRegExp(
                               r'^(?:ceni|цени|prices?|pricing|tarife|preturi)\b',
                               caseSensitive: false,
                             ).hasMatch(nameFold) &&
@@ -5474,6 +5485,8 @@ Return JSON only.
 
   /// Stores a comparison in the in-memory cache (e.g. Explore All-mixed).
   void putCachedComparison(String cacheKey, OpenAIComparisonResult result) {
+    _rememberVerifiedComparePool(cacheKey, result.clinics.where((c) =>
+        exploreClinicEligibleForVerifiedPool(c, procedure: result.topic, city: result.city)));
     final prev = _comparisonMemoryCache[cacheKey];
     _comparisonMemoryCache[cacheKey] = putBestComparison(
       previous: prev,
@@ -6198,7 +6211,7 @@ Return JSON only.
     final hostBrand = _clinicNameFromHost(aiHost);
     final out = <String>[];
     void add(String raw) {
-      final t = raw.trim().replaceAll(RegExp(r'\s+'), ' ');
+      final t = raw.trim().replaceAll(cachedRegExp(r'\s+'), ' ');
       if (t.length < 3) return;
       final key = t.toLowerCase();
       if (out.any((e) => e.toLowerCase() == key)) return;
@@ -6734,7 +6747,7 @@ Return JSON only.
 
       OpenAIClinic? withSrc;
       if (resolvePlaces && _places.isConfigured) {
-        final brand = host.split('.').first.replaceAll(RegExp(r'[-_]+'), ' ');
+        final brand = host.split('.').first.replaceAll(cachedRegExp(r'[-_]+'), ' ');
         if (brand.trim().length < 3) continue;
         final hits = await _places.searchText(
           query: '$brand $city',
@@ -7096,7 +7109,7 @@ Return JSON only.
     if (looksLikePriceMenuUrl(r.link) ||
         r.link.toLowerCase().contains('package') ||
         r.link.toLowerCase().contains('offer') ||
-        RegExp(
+        cachedRegExp(
           r'/(?:preturi|prețuri|tarife|prices|pricing)(?:/|$)',
           caseSensitive: false,
         ).hasMatch(r.link)) {
@@ -7151,27 +7164,27 @@ Return JSON only.
     final name = hit.name;
     final lo = name.toLowerCase();
     if (placesNameLooksLikeMedicalClinic(name)) score += 18;
-    if (RegExp(r'\bdr\.?\b', caseSensitive: false).hasMatch(name)) {
+    if (cachedRegExp(r'\bdr\.?\b', caseSensitive: false).hasMatch(name)) {
       score += 28;
     }
     if (name.length > 55) score -= 30;
-    if (RegExp(r',').allMatches(name).length >= 2) score -= 25;
+    if (cachedRegExp(r',').allMatches(name).length >= 2) score -= 25;
     if (exploreClinicNameLooksLikeSeoHeadline(name)) score -= 20;
     if (hit.rating >= 4.0) score += 6;
     if (hit.reviewsTotal >= 30) score += 8;
     final fam = exploreTreatmentFamily(procedure);
     if (fam == ExploreTreatmentFamily.breast &&
         name.length < 55 &&
-        RegExp(r'mamar|breast|sani').hasMatch(lo)) {
+        cachedRegExp(r'mamar|breast|sani').hasMatch(lo)) {
       score += 8;
     }
     if (fam == ExploreTreatmentFamily.rhinoplasty &&
         name.length < 55 &&
-        RegExp(r'rino|rhino|nas').hasMatch(lo)) {
+        cachedRegExp(r'rino|rhino|nas').hasMatch(lo)) {
       score += 8;
     }
     if (fam == ExploreTreatmentFamily.hair &&
-        RegExp(r'hair|par|fue|capilar').hasMatch(lo)) {
+        cachedRegExp(r'hair|par|fue|capilar').hasMatch(lo)) {
       score += 8;
     }
     return score;
@@ -7207,16 +7220,16 @@ Return JSON only.
         name.contains('medspa')) {
       score += 15;
     }
-    if (RegExp(r'\bdr\.?\b').hasMatch(name)) score += 22;
+    if (cachedRegExp(r'\bdr\.?\b').hasMatch(name)) score += 22;
     if (stub.name.length > 55) score -= 30;
-    if (RegExp(r',').allMatches(stub.name).length >= 2) score -= 25;
+    if (cachedRegExp(r',').allMatches(stub.name).length >= 2) score -= 25;
     if (exploreClinicNameLooksLikeSeoHeadline(stub.name)) score -= 20;
     if (_priceLinkScore(website) >= 2) score += 12;
     if (stub.reviews >= 50) score += 5;
     final fam = exploreTreatmentFamily(procedure);
     if (fam == ExploreTreatmentFamily.hair) {
       final blob = '$name $area $website';
-      if (RegExp(
+      if (cachedRegExp(
         r'hair implant|hair transplant|transplant de par|implant de par|'
         r'implant par|fue|dhi|barbatilor',
       ).hasMatch(blob)) {
@@ -7225,7 +7238,7 @@ Return JSON only.
     }
     if (fam == ExploreTreatmentFamily.breast) {
       final blob = '$name $area $website';
-      if (RegExp(
+      if (cachedRegExp(
         r'marire sani|breast|mamar|implant mamar|boob',
       ).hasMatch(blob)) {
         score += 25;
@@ -7282,12 +7295,22 @@ Return JSON only.
         _ when rank == n && n >= 3 => ('Premium', 'hi'),
         _ => ('Highly rated', 'mid'),
       };
+      final nextBadge = preserveOrder ? 'Verified price' : badge;
+      final nextVariant = preserveOrder ? 'mid' : bv;
+      final ranked = c.rank == rank && c.badge == nextBadge &&
+          c.badgeVariant == nextVariant ? c :
+          c.copyWith(rank: rank, badge: nextBadge, badgeVariant: nextVariant);
+      if (!identical(c, ranked)) {
+        // Only display metadata changed; keep the immutable price validation
+        // result rather than redoing source ownership on the next UI frame.
+        _verifiedPriceMemo[ranked] = _verifiedPriceMemo[c];
+        _justifiedPriceMemo[ranked] = _justifiedPriceMemo[c];
+        _cityFitMemo[ranked] = _cityFitMemo[c];
+      }
       out.add(
         _fixRomanianPublishedCurrency(
           _alignClinicCurrencyToCity(
-            c.copyWith(rank: rank,
-              badge: preserveOrder ? 'Verified price' : badge,
-              badgeVariant: preserveOrder ? 'mid' : bv),
+            ranked,
             r.city,
           ),
           city: r.city,
@@ -8590,7 +8613,7 @@ Return JSON only.
     final want = exploreTreatmentFamily(procedure);
     if (want == ExploreTreatmentFamily.other) return false;
     final pathFam = exploreTreatmentFamily(
-      u.replaceAll(RegExp(r'[/_\-?=&]+'), ' '),
+      u.replaceAll(cachedRegExp(r'[/_\-?=&]+'), ' '),
     );
     if (u.contains('aftercare') ||
         u.contains('how-long') ||
@@ -8675,7 +8698,7 @@ Return JSON only.
         u.contains('/testimonial')) {
       return true;
     }
-    if (RegExp(r'/page/\d+').hasMatch(u)) return true;
+    if (cachedRegExp(r'/page/\d+').hasMatch(u)) return true;
     if (u.contains('serum') ||
         u.contains('moisturizer') ||
         u.contains('anti-blemish') ||
@@ -8748,7 +8771,7 @@ Return JSON only.
     final parsed = Uri.tryParse(url.trim());
     if (parsed == null || parsed.host.isEmpty) return false;
     if (!_hostsSameDomainOrSubdomain(url, host)) return false;
-    final path = parsed.path.replaceAll(RegExp(r'/+$'), '');
+    final path = parsed.path.replaceAll(cachedRegExp(r'/+$'), '');
     return path.isEmpty || path == '/';
   }
 
@@ -8894,8 +8917,8 @@ Return JSON only.
     final citySlug = city
         .trim()
         .toLowerCase()
-        .replaceAll(RegExp(r'[^a-z0-9]+'), '-')
-        .replaceAll(RegExp(r'^-+|-+$'), '');
+        .replaceAll(cachedRegExp(r'[^a-z0-9]+'), '-')
+        .replaceAll(cachedRegExp(r'^-+|-+$'), '');
     final base = 'https://$domain';
     final out = <String>[];
     for (final slug in slugs) {
@@ -9277,7 +9300,7 @@ Return JSON only.
           final keys = _procedureConfirmKeywords(procedure, clinic.brand);
           if (keys.any((k) => k.length >= 3 && u.contains(k))) return true;
           for (final path in _procedurePricePathHints(procedure)) {
-            final slug = path.replaceAll(RegExp(r'^/+|/+$'), '').toLowerCase();
+            final slug = path.replaceAll(cachedRegExp(r'^/+|/+$'), '').toLowerCase();
             if (slug.length >= 3 && u.contains(slug)) return true;
           }
           final fam = exploreTreatmentFamily(procedure);
@@ -9914,7 +9937,7 @@ Return JSON only.
           }
           if (coreKeyword == null) {
             final meaningful = normalizedProc
-                .split(RegExp(r'[\s\+\-\/]+'))
+                .split(cachedRegExp(r'[\s\+\-\/]+'))
                 .where((t) => t.length > 2)
                 .toList();
             if (meaningful.isNotEmpty) {
@@ -10259,7 +10282,7 @@ Return JSON only.
             // standalone procedure price
             if (match != null && match.priceMin > 0) {
               final chosenMatch = match;
-              final comboPatterns = RegExp(
+              final comboPatterns = cachedRegExp(
                 r'\+|\bsi\b|\band\b|\bpackage\b|\bcombo\b|\bset\b'
                 r'|\bpachet\b|\bsedinta\b|\bprotocol\b|\bsesiune\b'
                 r'|\bsession\b',
@@ -10669,7 +10692,7 @@ Return JSON only.
           unit == 'iu' ||
           unit == 'units';
       final variesWithAreas =
-          RegExp(
+          cachedRegExp(
             r'varies\s+with\s+(?:the\s+)?(?:number\s+of\s+)?(?:areas?|zones?)',
             caseSensitive: false,
           ).hasMatch(
@@ -10698,7 +10721,7 @@ Return JSON only.
         label = 'from ${priceMin.round()} $currency$suffix';
       } else {
         label =
-            'from ${_formatPrice(priceMin, currency).replaceFirst(RegExp(r'^from\s+', caseSensitive: false), '')}';
+            'from ${_formatPrice(priceMin, currency).replaceFirst(cachedRegExp(r'^from\s+', caseSensitive: false), '')}';
         if (!label.toLowerCase().startsWith('from ')) {
           label = 'from $label';
         }
@@ -11088,7 +11111,7 @@ Return JSON only.
     final cityFold = foldExploreIdentityText(city);
     if (cityFold.isNotEmpty &&
         (nameFold == cityFold ||
-            (RegExp(
+            (cachedRegExp(
                   r'^(?:ceni|цени|prices?|pricing|tarife|preturi)\b',
                   caseSensitive: false,
                 ).hasMatch(nameFold) &&
@@ -11147,7 +11170,7 @@ Return JSON only.
   }) async {
     if (_apiKey.isEmpty) return null;
     final excerpt = sanitizePriceEvidence('$label\n$evidence', maxChars: 700);
-    final scrubbed = excerpt.replaceAll(RegExp(r'\d[\d.,\s]*'), '[n]');
+    final scrubbed = excerpt.replaceAll(cachedRegExp(r'\d[\d.,\s]*'), '[n]');
     if (scrubbed.trim().length < 12) return null;
     try {
       debugPrint('[PROCEDURE RELATION] ambiguous · asking AI (no price field)');
@@ -11466,8 +11489,8 @@ Return JSON only.
       // Re-anchor: the quote must appear verbatim (case-insensitive,
       // whitespace-tolerant) in the excerpt so the LLM cannot fabricate.
       if (quote.isNotEmpty) {
-        final normQuote = quote.toLowerCase().replaceAll(RegExp(r'\s+'), ' ');
-        final normText = excerpt.toLowerCase().replaceAll(RegExp(r'\s+'), ' ');
+        final normQuote = quote.toLowerCase().replaceAll(cachedRegExp(r'\s+'), ' ');
+        final normText = excerpt.toLowerCase().replaceAll(cachedRegExp(r'\s+'), ' ');
         if (!normText.contains(normQuote)) {
           debugPrint(
             '[GP PRICE] LLM extract quote not found in source — '
@@ -11710,18 +11733,18 @@ Return JSON only.
   /// "EXCELENTE 4.6 1839 reseñas" on defelipe.com was parsed as €1,839.
   bool _windowLooksLikeReviewCount(String window) {
     final t = window.toLowerCase();
-    return RegExp(
+    return cachedRegExp(
           r'\d{2,5}\s*(?:rese[nñ]as|reviews?|valoraciones|opiniones|'
           r'google\s*reviews|estrellas)\b',
         ).hasMatch(t) ||
-        RegExp(
+        cachedRegExp(
           r'(?:rese[nñ]as|reviews?|valoraciones|opiniones)\s*\d{2,5}',
         ).hasMatch(t);
   }
 
   bool _windowLooksLikeClinicProgram(String window) {
     final t = window.toLowerCase();
-    return RegExp(
+    return cachedRegExp(
       r'\bprograma\b|pago unico|pago único|pago fraccionado|'
       r'\b(?:4|6|8|10)\s*sesiones\b|\d\s*x\s*tratamientos',
     ).hasMatch(t);
@@ -11731,7 +11754,7 @@ Return JSON only.
     final t = window.toLowerCase();
     if (_zoneCountHint(t) != null) return true;
     if (t.contains('|') || t.contains('\t')) return true;
-    if (RegExp(r'(zona|zone|area|zonă).{0,16}\d').hasMatch(t)) return true;
+    if (cachedRegExp(r'(zona|zone|area|zonă).{0,16}\d').hasMatch(t)) return true;
     return false;
   }
 
@@ -11809,25 +11832,25 @@ Return JSON only.
     }
 
     final z1 = firstEuroAfter(
-      RegExp(
+      cachedRegExp(
         r'(?:1|una)\s*(?:area|zona)[^0-9]{0,48}(\d{2,4})\s*(?:€|eur)',
         caseSensitive: false,
       ),
     );
     final z2 = firstEuroAfter(
-      RegExp(
+      cachedRegExp(
         r'(?:2|dos)\s*(?:areas|zonas)[^0-9]{0,48}(\d{2,4})\s*(?:€|eur)',
         caseSensitive: false,
       ),
     );
     final z3 = firstEuroAfter(
-      RegExp(
+      cachedRegExp(
         r'(?:3|tres)\s*(?:areas|zonas)[^0-9]{0,48}(\d{2,4})\s*(?:€|eur)',
         caseSensitive: false,
       ),
     );
     final full = firstEuroAfter(
-      RegExp(
+      cachedRegExp(
         r'(?:full[\s-]?tox|fulltox|100\s*iu)[\s\S]{0,80}?(\d{2,4})\s*(?:€|eur)',
         caseSensitive: false,
       ),
@@ -11870,7 +11893,7 @@ Return JSON only.
       if (k.isEmpty) continue;
       final escaped = RegExp.escape(k);
       final suffix = k.length >= 5 ? r'[a-zà-ÿ]{0,8}' : '';
-      final kr = RegExp(
+      final kr = cachedRegExp(
         '(^|[^a-zà-ÿ])$escaped$suffix([^a-zà-ÿ]|\$)',
         caseSensitive: false,
       );
@@ -11880,7 +11903,7 @@ Return JSON only.
     }
     if (keywordSpans.isEmpty) return null;
 
-    final re = RegExp(
+    final re = cachedRegExp(
       r'(from|de\s+la|ab|desde|à\s+partir\s+de|porneste(?:\s+de\s+la)?|'
       r'pornește(?:\s+de\s+la)?|începe(?:\s+de\s+la)?|'
       r'starting(?:\s+from|\s+at)?|approximately)?\s*'
@@ -12246,23 +12269,23 @@ Return JSON only.
   /// 1 / 2 / 3 from "Botox 3 areas", "3 zone", "o zonă", etc.
   int? _zoneCountHint(String text) {
     final t = text.toLowerCase();
-    if (RegExp(
+    if (cachedRegExp(
       r'(?:^|[^a-z0-9])(?:3|three|trei)\s*(?:area|areas|zone|zones|zonas|zon[eăa]s?)',
     ).hasMatch(t)) {
       return 3;
     }
-    if (RegExp(
+    if (cachedRegExp(
       r'(?:^|[^a-z0-9])(?:2|two|dou[aă])\s*(?:area|areas|zone|zones|zonas|zon[eăa]s?)',
     ).hasMatch(t)) {
       return 2;
     }
-    if (RegExp(
+    if (cachedRegExp(
       r'(?:^|[^a-z0-9])(?:1|one|o)\s*(?:area|areas|zone|zones|zonas|zon[eăa]|zonă)',
     ).hasMatch(t)) {
       return 1;
     }
     // Current Romanian lists often name the 1-zone row by anatomy only.
-    if (RegExp(r'periocular|laba\s*g[aâ]s|crow.?s?\s*feet').hasMatch(t)) {
+    if (cachedRegExp(r'periocular|laba\s*g[aâ]s|crow.?s?\s*feet').hasMatch(t)) {
       return 1;
     }
     return null;
@@ -12271,7 +12294,7 @@ Return JSON only.
   /// One facial area (forehead / crow's feet) — a subset, not the base Botox price.
   bool _extractedRowLooksLikeAnatomySubset(String name) {
     final t = name.toLowerCase();
-    return RegExp(
+    return cachedRegExp(
       r'\b(?:forehead|frente|glabella|entrecejo|crow.?s?\s*feet|periocular|'
       r'laba\s*g[aâ]s)\b',
     ).hasMatch(t);
@@ -12281,12 +12304,12 @@ Return JSON only.
   bool _extractedRowLooksLikeSingleArea(String name) {
     final t = name.toLowerCase();
     if (_extractedRowLooksLikeAnatomySubset(t)) return true;
-    return RegExp(r'\b(?:one\s+area|only\s+one|una\s+sola)\b').hasMatch(t);
+    return cachedRegExp(r'\b(?:one\s+area|only\s+one|una\s+sola)\b').hasMatch(t);
   }
 
   bool _extractedRowLooksLikeClinicProgram(String name) {
     final t = name.toLowerCase();
-    return RegExp(
+    return cachedRegExp(
       r'\bprograma\b|pago unico|pago único|pago fraccionado|'
       r'\b(?:4|6|8|10)\s*sesiones\b|\d\s*x\s*tratamientos|'
       r'rejuvenecimiento',
@@ -12302,23 +12325,23 @@ Return JSON only.
     if (_zoneCountHint(n) == 1) return false;
     var rest = n.replaceAll(top, ' ');
     rest = rest.replaceAll(
-      RegExp(
+      cachedRegExp(
         r'\b(?:treatment|treatments|injection|injections|inyeccion|inyección|'
         r'tratamiento|facial|face|anti.?wrinkle|arrugas|toxina|botul[ií]nica|'
         r'botulinum|toxin|vials?|units?|precio|price|desde|from)\b',
       ),
       ' ',
     );
-    rest = rest.replaceAll(RegExp(r'[^a-zà-ÿ0-9]+'), ' ').trim();
+    rest = rest.replaceAll(cachedRegExp(r'[^a-zà-ÿ0-9]+'), ' ').trim();
     if (rest.isEmpty) return true;
     // "3 zonas" / "full face" still counts as the advertised base package.
     if (_zoneCountHint(n) == 3 ||
-        RegExp(
+        cachedRegExp(
           r'\b(?:full\s*face|paquete|package|standard|completo)\b',
         ).hasMatch(n)) {
       return true;
     }
-    return rest.split(RegExp(r'\s+')).where((w) => w.length > 1).length <= 1;
+    return rest.split(cachedRegExp(r'\s+')).where((w) => w.length > 1).length <= 1;
   }
 
   /// Higher = more like the representative / standard row for [procedure].
@@ -12343,24 +12366,24 @@ Return JSON only.
       if (_extractedRowLooksLikeAnatomySubset(n)) rank -= 22;
     }
     if (_extractedRowLooksLikeClinicProgram(n)) rank -= 50;
-    if (RegExp(r'full[\s-]?tox|fulltox|100\s*iu|completo').hasMatch(n)) {
+    if (cachedRegExp(r'full[\s-]?tox|fulltox|100\s*iu|completo').hasMatch(n)) {
       rank -= 20;
     }
     if (_labelLooksLikePerUnitOrGraft(row.priceLabel) ||
-        RegExp(r'(?:per|/)\s*(?:iu|unit|unidad)').hasMatch(n)) {
+        cachedRegExp(r'(?:per|/)\s*(?:iu|unit|unidad)').hasMatch(n)) {
       rank -= 45;
     }
     if (_extractedRowLooksLikePromo(row)) rank -= 12;
-    if (RegExp(
+    if (cachedRegExp(
       r'masseter|brux|hiperhidros|hyperhidros|platism|gingival|gummy',
     ).hasMatch(n)) {
       rank -= 40;
     }
-    if (RegExp(r'lip[\s-]?lift|queiloplast').hasMatch(n)) {
+    if (cachedRegExp(r'lip[\s-]?lift|queiloplast').hasMatch(n)) {
       rank -= 40;
     }
-    if (RegExp(r'\b(?:desde|from|ab)\b').hasMatch(n) ||
-        RegExp(
+    if (cachedRegExp(r'\b(?:desde|from|ab)\b').hasMatch(n) ||
+        cachedRegExp(
           r'\b(?:desde|from|ab)\b',
         ).hasMatch(row.priceLabel.toLowerCase())) {
       rank += 6;
@@ -12590,7 +12613,7 @@ Return JSON only.
     }
 
     if (out.isEmpty) {
-      for (final token in text.split(RegExp(r'[^a-záéíóúàèìòùäëïöüñ]+'))) {
+      for (final token in text.split(cachedRegExp(r'[^a-záéíóúàèìòùäëïöüñ]+'))) {
         if (token.length < 4) continue;
         if (_genericPriceStopwords.contains(token)) continue;
         out.add(token);
@@ -12773,7 +12796,7 @@ Return JSON only.
       score = 20;
     }
 
-    if (RegExp(
+    if (cachedRegExp(
       r'\b(second|2nd|extra|additional)\s+session\b'
       r'|\bsession\s*[2-9]\b'
       r'|\bsesiune\b'
@@ -12782,13 +12805,13 @@ Return JSON only.
     ).hasMatch(n)) {
       score -= 50;
     }
-    if (RegExp(
+    if (cachedRegExp(
       r'\+|\bpackage\b|\bcombo\b|\bpachet\b',
       caseSensitive: false,
     ).hasMatch(n)) {
       score -= 15;
     }
-    if (RegExp(r'(?:per|/)\s*(?:iu|unit|unidad|graft)').hasMatch(n)) {
+    if (cachedRegExp(r'(?:per|/)\s*(?:iu|unit|unidad|graft)').hasMatch(n)) {
       score -= 40;
     }
     return score;
@@ -12927,7 +12950,7 @@ Return JSON only.
     // Allow a short suffix so "neuromodul" matches "neuromodulators"
     // and "labio" matches "labios", without "lip" matching "liposuction".
     final suffix = keyword.length >= 5 ? r'[a-zà-ÿ]{0,8}' : '';
-    return RegExp(
+    return cachedRegExp(
       '(^|[^a-zà-ÿ])$escaped$suffix([^a-zà-ÿ]|\$)',
       caseSensitive: false,
     ).hasMatch(window);
@@ -13184,10 +13207,10 @@ Return JSON only.
       final cityLo = city.trim().toLowerCase();
       final cityKey = cityLo.isEmpty
           ? ''
-          : cityLo.split(RegExp(r'[,·]')).first.trim();
+          : cityLo.split(cachedRegExp(r'[,·]')).first.trim();
       if (cityKey.isNotEmpty && addressLo.isNotEmpty) {
         final cityTokens = cityKey
-            .split(RegExp(r'\s+'))
+            .split(cachedRegExp(r'\s+'))
             .where((t) => t.length >= 3)
             .toList();
         final tokensMatch =
@@ -13359,7 +13382,7 @@ Return JSON only.
             : '';
         if (realDistrict.isNotEmpty) {
           correctedArea = correctedArea.replaceAll(
-            RegExp(r'\bDistrict\b', caseSensitive: false),
+            cachedRegExp(r'\bDistrict\b', caseSensitive: false),
             realDistrict,
           );
           debugPrint(
@@ -14009,7 +14032,7 @@ Return JSON only.
     }
     final want = exploreTreatmentFamily(procedure);
     final linkFam = exploreTreatmentFamily(
-      r.link.toLowerCase().replaceAll(RegExp(r'[/_\-]+'), ' '),
+      r.link.toLowerCase().replaceAll(cachedRegExp(r'[/_\-]+'), ' '),
     );
     if (want != ExploreTreatmentFamily.other &&
         linkFam != ExploreTreatmentFamily.other &&
@@ -14492,7 +14515,7 @@ Return JSON only.
   bool _blobHasWholeWord(String blob, String word) {
     final w = word.trim().toLowerCase();
     if (w.isEmpty) return false;
-    return RegExp('\\b${RegExp.escape(w)}\\b').hasMatch(blob);
+    return cachedRegExp('\\b${RegExp.escape(w)}\\b').hasMatch(blob);
   }
 
   bool _looksLikeAestheticMedicalBusiness({
@@ -15509,7 +15532,7 @@ Return JSON only.
     );
 
     if (url.isNotEmpty) {
-      final base = url.replaceAll(RegExp(r'/+$'), '');
+      final base = url.replaceAll(cachedRegExp(r'/+$'), '');
 
       // Fetch homepage — detect if site blocks scrapers (Shopify, Cloudflare).
       final homeResult = await _fetchPageTextWithShopify(base);
@@ -15897,15 +15920,15 @@ Return JSON only.
   /// BEFORE HTML stripping. Returns null if no og:price:amount is present.
   ({double? price, String? currency})? _extractShopifyMeta(String html) {
     final amountStr =
-        RegExp(
+        cachedRegExp(
           r'''(?:property|name)=["']og:price:amount["'][^>]*content=["']([^"']+)["']''',
           caseSensitive: false,
         ).firstMatch(html)?.group(1)?.trim() ??
-        RegExp(
+        cachedRegExp(
           r'''content=["']([^"']+)["'][^>]*(?:property|name)=["']og:price:amount["']''',
           caseSensitive: false,
         ).firstMatch(html)?.group(1)?.trim() ??
-        RegExp(
+        cachedRegExp(
           r'''og:price:amount["\s]+content=["']([^"']+)["']''',
           caseSensitive: false,
         ).firstMatch(html)?.group(1)?.trim();
@@ -15913,18 +15936,18 @@ Return JSON only.
     if (amountStr == null || amountStr.isEmpty) return null;
 
     final cur =
-        RegExp(
+        cachedRegExp(
           r'''(?:property|name)=["']og:price:currency["'][^>]*content=["']([^"']+)["']''',
           caseSensitive: false,
         ).firstMatch(html)?.group(1)?.trim() ??
-        RegExp(
+        cachedRegExp(
           r'''og:price:currency["\s]+content=["']([^"']+)["']''',
           caseSensitive: false,
         ).firstMatch(html)?.group(1)?.trim();
     final currency = (cur != null && cur.isNotEmpty) ? cur : 'RON';
 
     double? price;
-    final roMatch = RegExp(r'^([\d.]+),\d{2}$').firstMatch(amountStr);
+    final roMatch = cachedRegExp(r'^([\d.]+),\d{2}$').firstMatch(amountStr);
     if (roMatch != null) {
       price = double.tryParse(roMatch.group(1)!.replaceAll('.', ''));
     } else {
@@ -15944,7 +15967,7 @@ Return JSON only.
         ? metaCur
         : 'RON';
 
-    final jsonScripts = RegExp(
+    final jsonScripts = cachedRegExp(
       r'''type=["']application/json["'][^>]*>([\s\S]*?)</script>''',
       caseSensitive: false,
     ).allMatches(html);
@@ -16399,7 +16422,7 @@ Return JSON only.
 
   String _extractClinicNameFromHtml(String html) {
     // 1) Organization / Physician JSON-LD (most reliable provider identity).
-    final jsonLdBlocks = RegExp(
+    final jsonLdBlocks = cachedRegExp(
       r'<script[^>]*type=["'
       ']application/ld\+json["'
       '][^>]*>([\s\S]*?)</script>',
@@ -16423,7 +16446,7 @@ Return JSON only.
     }
 
     // 2) og:site_name
-    final ogSite = RegExp(
+    final ogSite = cachedRegExp(
       r'og:site_name["\s]+content="([^"]+)"',
       caseSensitive: false,
     ).firstMatch(html);
@@ -16438,7 +16461,7 @@ Return JSON only.
     }
 
     // 3) Header / logo text
-    final logoAlt = RegExp(
+    final logoAlt = cachedRegExp(
       r'<img[^>]*(?:class|id)=["'
       '][^"'
       ']*(?:logo|brand)[^"'
@@ -16461,20 +16484,20 @@ Return JSON only.
 
     // 4) <title> — prefer provider after "|" / "—" when left side is SEO
     //    ("Kalıcı Botoks Fiyatları 2026 | Dr. Mutlu Adıgüzel").
-    final titleMatch = RegExp(
+    final titleMatch = cachedRegExp(
       r'<title[^>]*>([^<]+)</title>',
       caseSensitive: false,
     ).firstMatch(html);
     if (titleMatch != null) {
       var title = titleMatch.group(1)?.trim() ?? '';
       title = title
-          .replaceAll(RegExp(r'\s+'), ' ')
+          .replaceAll(cachedRegExp(r'\s+'), ' ')
           .replaceAll(
-            RegExp(r'\s*[|–—]\s*WhatsApp.*$', caseSensitive: false),
+            cachedRegExp(r'\s*[|–—]\s*WhatsApp.*$', caseSensitive: false),
             '',
           )
           .trim();
-      final pipeParts = title.split(RegExp(r'\s*[|–—]\s*'));
+      final pipeParts = title.split(cachedRegExp(r'\s*[|–—]\s*'));
       if (pipeParts.length >= 2) {
         final right = pipeParts.last.trim();
         if (right.isNotEmpty &&
@@ -16486,7 +16509,7 @@ Return JSON only.
       }
       title = title
           .replaceAll(
-            RegExp(
+            cachedRegExp(
               r'\s*[-–|]\s*(tarife|preturi|home|acasa|prices|about|'
               r'fiyatlar|fiyatları|ücretler|detaylı\s+rehber).*',
               caseSensitive: false,
@@ -16503,7 +16526,7 @@ Return JSON only.
     }
 
     // 4b) Turkish physician byline on the page body.
-    final trDoctor = RegExp(
+    final trDoctor = cachedRegExp(
       r'(?:Uzm\.?\s*)?Dr\.?\s+([A-ZÇĞİÖŞÜ][\wçğıöşüÇĞİÖŞÜ'
       '\-]+'
       r'(?:\s+[A-ZÇĞİÖŞÜ][\wçğıöşüÇĞİÖŞÜ'
@@ -16512,7 +16535,7 @@ Return JSON only.
       '\-]+'
       r'(?:\s+[A-ZÇĞİÖŞÜ][\wçğıöşüÇĞİÖŞÜ'
       '\-]+){0,3})',
-    ).firstMatch(html.replaceAll(RegExp(r'<[^>]+>'), ' '));
+    ).firstMatch(html.replaceAll(cachedRegExp(r'<[^>]+>'), ' '));
     if (trDoctor != null) {
       final person = (trDoctor.group(1) ?? trDoctor.group(2) ?? '').trim();
       if (person.isNotEmpty) {
@@ -16526,13 +16549,13 @@ Return JSON only.
     }
 
     // 5) og:title — same guard
-    final ogTitle = RegExp(
+    final ogTitle = cachedRegExp(
       r'property="og:title"[^>]+content="([^"]+)"',
       caseSensitive: false,
     ).firstMatch(html);
     if (ogTitle != null) {
       var name = ogTitle.group(1)?.trim() ?? '';
-      name = name.replaceAll(RegExp(r'\s*[-–|].*'), '').trim();
+      name = name.replaceAll(cachedRegExp(r'\s*[-–|].*'), '').trim();
       if (name.isNotEmpty &&
           name.length < 80 &&
           !looksLikeProcedureNameAsClinicIdentity(name) &&
@@ -16596,7 +16619,7 @@ Return JSON only.
     final host = Uri.parse(baseUrl).host;
     final seen = <String>{};
 
-    final hrefRegex = RegExp(
+    final hrefRegex = cachedRegExp(
       r'''href=["']([^"'#?][^"']*?)["']''',
       caseSensitive: false,
     );
@@ -16622,7 +16645,7 @@ Return JSON only.
           href.contains('mailto:') ||
           href.contains('tel:'))
         continue;
-      seen.add(href.replaceAll(RegExp(r'/+$'), ''));
+      seen.add(href.replaceAll(cachedRegExp(r'/+$'), ''));
     }
 
     final priorityKeywords = <String>[
@@ -16683,7 +16706,7 @@ Return JSON only.
     for (final u in ordered) {
       final lower = u.toLowerCase();
       if (lower.contains('/shop') || lower.contains('/produse')) {
-        final shopBase = u.replaceAll(RegExp(r'/page/\d+/?$'), '');
+        final shopBase = u.replaceAll(cachedRegExp(r'/page/\d+/?$'), '');
         shopPaths
           ..add('$shopBase/page/2/')
           ..add('$shopBase/page/3/');
@@ -16755,7 +16778,7 @@ Return JSON only.
 
     // Smart discovery: find price links in HTML text
     // Matches any internal URL containing price keywords
-    final pricePageRegex = RegExp(
+    final pricePageRegex = cachedRegExp(
       r'''href=["']([^"']*(?:preturi[-/]|tarife[-/]|preturi|tarife|tarif|price|cost|fees|'''
       r'''servicii|lista|oferte|chirurgicale|tratamente|collections)[^"']*)["']''',
       caseSensitive: false,
@@ -17403,11 +17426,11 @@ Return JSON only.
     // Step 1: remove parentheticals (brand names, subtitles)
     // "Botox (Allergan)" → "Botox"
     // "Terapia Vampir (PRP Saga)" → "Terapia Vampir"
-    s = s.replaceAll(RegExp(r'\s*\([^)]*\)'), '').trim();
+    s = s.replaceAll(cachedRegExp(r'\s*\([^)]*\)'), '').trim();
 
     // Step 2: remove after dash/colon separators
     // "PRP – Vampire Facial" → "PRP"
-    s = s.replaceAll(RegExp(r'\s*[-–:]\s+.*$'), '').trim();
+    s = s.replaceAll(cachedRegExp(r'\s*[-–:]\s+.*$'), '').trim();
 
     // Step 3: remove qualifier phrases in any language
     // "Lipoliză pentru contur" → "Lipoliză"
@@ -17439,7 +17462,7 @@ Return JSON only.
     // Step 4: strip generic medical suffixes
     // "Profhilo Injections" → "Profhilo"
     // "PRP Treatment" → "PRP"
-    final suffixPattern = RegExp(
+    final suffixPattern = cachedRegExp(
       r'\s+(injections?|injection|treatments?|therapy|procedure|'
       r'sessions?|injectabil[eă]?|tratament[e]?|terapie|'
       r'procedura|şedinta|sedinta|séance|sitzung|seans|'
@@ -17627,7 +17650,7 @@ Return JSON only.
 
     // Step 6: if still long (>25 chars), take only first
     // 2-3 words — likely still a long description
-    final words = s.split(RegExp(r'\s+'));
+    final words = s.split(cachedRegExp(r'\s+'));
     if (s.length > 25 && words.length > 3) {
       s = words.take(2).join(' ');
     }
@@ -18107,7 +18130,19 @@ List<OpenAIProfileProcedureRow> _dedupeProcs(
 
 String _inferCurrencyFromCity(String city) => CityCurrency.localCode(city);
 
+final _cityFitMemo = Expando<Map<String, ({DateTime at, bool valid})>>();
+
 bool exploreClinicFitsSearchCity(OpenAIClinic c, String city) {
+  final memo = _cityFitMemo[c] ??= {};
+  final hit = memo[city];
+  final now = DateTime.now();
+  if (hit != null && now.difference(hit.at) < const Duration(seconds: 5)) return hit.valid;
+  final valid = _clinicFitsSearchCityUncached(c, city);
+  memo[city] = (at: now, valid: valid);
+  return valid;
+}
+
+bool _clinicFitsSearchCityUncached(OpenAIClinic c, String city) {
   if (exploreProviderIdentityConflictsWithSearchCity(
     city: city, name: c.name, sourceUrl: c.priceSourceUrl,
     evidence: '${c.priceEvidenceText} ${c.rawProcedureText}',
@@ -18188,23 +18223,23 @@ OpenAIClinic _alignClinicCurrencyToCity(OpenAIClinic c, String city) {
 String _rewritePriceLabelToCurrency(String label, String toCurrency) {
   var t = label;
   // Strip common currency tokens first, then append target.
-  t = t.replaceAll(RegExp(r'[€$£₽₺¥₩฿]'), '');
+  t = t.replaceAll(cachedRegExp(r'[€$£₽₺¥₩฿]'), '');
   t = t.replaceAll(
-    RegExp(
+    cachedRegExp(
       r'\b(EUR|USD|GBP|RON|LEI|TRY|AED|RUB|KRW|JPY|HKD|SGD|THB|AUD|CAD|CHF|CNY)\b',
       caseSensitive: false,
     ),
     '',
   );
-  t = t.replaceAll(RegExp(r'\s{2,}'), ' ').trim();
+  t = t.replaceAll(cachedRegExp(r'\s{2,}'), ' ').trim();
   // "from 1,450" → "from 1,450 HKD"
   if (t.isEmpty) return t;
   final cur = toCurrency.trim();
   if (cur.isEmpty) return t;
-  if (RegExp(r'(from\s+)?[\d.,]+', caseSensitive: false).hasMatch(t) &&
+  if (cachedRegExp(r'(from\s+)?[\d.,]+', caseSensitive: false).hasMatch(t) &&
       !t.contains(cur)) {
     // Keep "from" prefix; put currency after the amount.
-    final m = RegExp(r'^(from\s+)?(.+)$', caseSensitive: false).firstMatch(t);
+    final m = cachedRegExp(r'^(from\s+)?(.+)$', caseSensitive: false).firstMatch(t);
     if (m != null) {
       final from = m.group(1) ?? '';
       final rest = m.group(2)!.trim();
@@ -18216,14 +18251,14 @@ String _rewritePriceLabelToCurrency(String label, String toCurrency) {
 
 String _stripHtmlContent(String html) {
   var t = html.replaceAll(
-    RegExp(r'<script[^>]*>[\s\S]*?</script>', caseSensitive: false),
+    cachedRegExp(r'<script[^>]*>[\s\S]*?</script>', caseSensitive: false),
     ' ',
   );
   t = t.replaceAll(
-    RegExp(r'<style[^>]*>[\s\S]*?</style>', caseSensitive: false),
+    cachedRegExp(r'<style[^>]*>[\s\S]*?</style>', caseSensitive: false),
     ' ',
   );
-  t = t.replaceAll(RegExp(r'<[^>]+>'), ' ');
+  t = t.replaceAll(cachedRegExp(r'<[^>]+>'), ' ');
   t = t
       .replaceAll('&nbsp;', ' ')
       .replaceAll('&amp;', '&')
@@ -18231,7 +18266,7 @@ String _stripHtmlContent(String html) {
       .replaceAll('&gt;', '>')
       .replaceAll('&quot;', '"')
       .replaceAll('&#39;', "'");
-  t = t.replaceAll(RegExp(r'\s{3,}'), '\n').trim();
+  t = t.replaceAll(cachedRegExp(r'\s{3,}'), '\n').trim();
   return t;
 }
 
@@ -18283,12 +18318,12 @@ String _sanitizeAiJsonText(String raw) {
   var t = raw.trim();
   // Incomplete decimal: `"lat": 37.` / `"lng": 126.` → `37.0` / `126.0`
   t = t.replaceAllMapped(
-    RegExp(r'(:\s*-?\d+)\.(?=\s*[,}\]])'),
+    cachedRegExp(r'(:\s*-?\d+)\.(?=\s*[,}\]])'),
     (m) => '${m.group(1)}.0',
   );
   // Trailing incomplete number at EOF: `"lat": 37.`
   t = t.replaceAllMapped(
-    RegExp(r'(:\s*-?\d+)\.\s*$'),
+    cachedRegExp(r'(:\s*-?\d+)\.\s*$'),
     (m) => '${m.group(1)}.0',
   );
   t = _escapeRawControlsInJsonStrings(t);
@@ -18351,8 +18386,8 @@ Map<String, dynamic> _decodeAiComparisonJson(String raw) {
     // Truncated mid-object — try closing open braces/brackets roughly.
     var repaired = sanitized;
     // Drop a trailing incomplete key/value like `"price_label":`
-    repaired = repaired.replaceAll(RegExp(r',\s*"[^"]*"\s*:\s*$'), '');
-    repaired = repaired.replaceAll(RegExp(r',\s*"[^"]*"\s*:\s*"[^"]*$'), '');
+    repaired = repaired.replaceAll(cachedRegExp(r',\s*"[^"]*"\s*:\s*$'), '');
+    repaired = repaired.replaceAll(cachedRegExp(r',\s*"[^"]*"\s*:\s*"[^"]*$'), '');
     final openCurly = '{'.allMatches(repaired).length;
     final closeCurly = '}'.allMatches(repaired).length;
     final openSquare = '['.allMatches(repaired).length;
@@ -18387,10 +18422,10 @@ void _logJsonParseContext(String json, FormatException e) {
   final from = math.max(0, offset - 80);
   final to = math.min(json.length, offset + 80);
   final before = json.substring(0, offset);
-  final fields = RegExp(r'"([a-zA-Z_]+)"\s*:').allMatches(before);
+  final fields = cachedRegExp(r'"([a-zA-Z_]+)"\s*:').allMatches(before);
   final field = fields.isEmpty ? '?' : fields.last.group(1)!;
   final name =
-      RegExp(
+      cachedRegExp(
         r'"name"\s*:\s*"((?:\\.|[^"\\])*)"',
       ).firstMatch(before)?.group(1) ??
       '?';
@@ -18402,13 +18437,13 @@ void _logJsonParseContext(String json, FormatException e) {
 
 void _logDroppedClinicJson(String slice, FormatException e) {
   final name =
-      RegExp(r'"name"\s*:\s*"((?:\\.|[^"\\])*)"').firstMatch(slice)?.group(1) ??
+      cachedRegExp(r'"name"\s*:\s*"((?:\\.|[^"\\])*)"').firstMatch(slice)?.group(1) ??
       '?';
   final offset = e.offset;
   var field = '?';
   if (offset != null && offset >= 0 && offset <= slice.length) {
     final before = slice.substring(0, math.min(offset, slice.length));
-    final fields = RegExp(r'"([a-zA-Z_]+)"\s*:').allMatches(before);
+    final fields = cachedRegExp(r'"([a-zA-Z_]+)"\s*:').allMatches(before);
     if (fields.isNotEmpty) field = fields.last.group(1)!;
   }
   debugPrint(
@@ -18418,7 +18453,7 @@ void _logDroppedClinicJson(String slice, FormatException e) {
 }
 
 List<Map<String, dynamic>> _extractParseableClinicMaps(String json) {
-  final key = RegExp(r'"clinics"\s*:\s*\[').firstMatch(json);
+  final key = cachedRegExp(r'"clinics"\s*:\s*\[').firstMatch(json);
   if (key == null) return const [];
   final start = key.end;
   var depth = 0;
@@ -18471,7 +18506,7 @@ List<Map<String, dynamic>> _extractParseableClinicMaps(String json) {
 String _stripCodeFences(String s) {
   var out = s.trim();
   if (out.startsWith('```')) {
-    out = out.replaceFirst(RegExp(r'^```[a-zA-Z]*\s*'), '');
+    out = out.replaceFirst(cachedRegExp(r'^```[a-zA-Z]*\s*'), '');
     if (out.endsWith('```')) {
       out = out.substring(0, out.length - 3);
     }
@@ -18500,11 +18535,11 @@ bool _subtitleSuggestsClinicListing(String subtitle) {
   if (s.contains('• clinic')) return true;
   if (s.contains('· clinic')) return true;
   if (s.contains('clinică')) return true;
-  if (RegExp(r'\bclinica\b').hasMatch(s)) return true;
+  if (cachedRegExp(r'\bclinica\b').hasMatch(s)) return true;
   if (s.contains('clinique')) return true;
   if (s.contains('aesthetics')) return true;
   if (s.contains('estetic')) return true;
-  if (RegExp(r'\bstudio\b').hasMatch(s)) return true;
+  if (cachedRegExp(r'\bstudio\b').hasMatch(s)) return true;
   return false;
 }
 
@@ -18512,8 +18547,8 @@ bool _subtitleSuggestsClinicListing(String subtitle) {
 bool _fallbackQueryLooksLikeClinicName(String query) {
   final q = query.toLowerCase().trim();
   if (q.isEmpty) return false;
-  if (RegExp(r'^dr\.?\s').hasMatch(q)) return true;
-  if (RegExp(r'^dr\.[a-z]').hasMatch(q)) return true;
+  if (cachedRegExp(r'^dr\.?\s').hasMatch(q)) return true;
+  if (cachedRegExp(r'^dr\.[a-z]').hasMatch(q)) return true;
   if (q.startsWith('drs ') || q.startsWith('drs.')) return true;
   const clinicWords = [
     'clinic',
@@ -18541,7 +18576,7 @@ bool _fallbackQueryLooksLikeClinicName(String query) {
 bool _userMeansEzGelPrfIntent(String trimmed) {
   final s = trimmed.toLowerCase();
   final isEzGel =
-      RegExp(r'\bez\s*gel\b').hasMatch(s) || RegExp(r'\bezgel\b').hasMatch(s);
+      cachedRegExp(r'\bez\s*gel\b').hasMatch(s) || cachedRegExp(r'\bezgel\b').hasMatch(s);
   if (!isEzGel) return false;
   if (s.contains('eyebrow') ||
       s.contains('eye brow') ||
@@ -18556,11 +18591,11 @@ bool _userMeansEzGelPrfIntent(String trimmed) {
 bool _searchItemLooksLikeBrowBeautyMisread(OpenAISearchItem it) {
   final blob = '${it.title} ${it.subtitle} ${it.aliases.join(' ')}'
       .toLowerCase();
-  final browBeauty = RegExp(
+  final browBeauty = cachedRegExp(
     r'eyebrow|\bsprân|\bsprän|sprancene|sprâncene|vopsire spr|modelare spr|brow\s+tint|brow\s+shaping|gene\b|sprancen\b',
     caseSensitive: false,
   ).hasMatch(blob);
-  final medical = RegExp(
+  final medical = cachedRegExp(
     r'\bprf\b|platelet|plasma|fibrin|bio-?stimul|skin\s+booster|\binject|autolog|mesotherapy|\bprp\b|alucell|rejuvenat',
     caseSensitive: false,
   ).hasMatch(blob);
@@ -18869,7 +18904,7 @@ OpenAIClinic repairHighTicketExploreClinicPrice(
     if (fromLabel != null && fromLabel >= 1500) min = fromLabel;
   }
 
-  final kMatch = RegExp(r'(\d+(?:[.,]\d+)?)\s*[kK]\b').firstMatch(label);
+  final kMatch = cachedRegExp(r'(\d+(?:[.,]\d+)?)\s*[kK]\b').firstMatch(label);
   if (kMatch != null) {
     final n = double.tryParse(kMatch.group(1)!.replaceAll(',', '.'));
     if (n != null && n > 0) min = n * 1000;
@@ -18881,7 +18916,7 @@ OpenAIClinic repairHighTicketExploreClinicPrice(
       }
     } else if (min >= 3 &&
         min <= 40 &&
-        RegExp(r'\d,\d{3}|\d\s000\b').hasMatch(label)) {
+        cachedRegExp(r'\d,\d{3}|\d\s000\b').hasMatch(label)) {
       min = min * 1000;
     }
   }
@@ -18893,7 +18928,7 @@ OpenAIClinic repairHighTicketExploreClinicPrice(
 
   var nextLabel = label;
   if (nextLabel.isEmpty ||
-      !RegExp(r'\d').hasMatch(nextLabel) ||
+      !cachedRegExp(r'\d').hasMatch(nextLabel) ||
       min != c.priceMin) {
     nextLabel = 'from ${min.round()} $curr';
   }
@@ -18907,7 +18942,22 @@ OpenAIClinic repairHighTicketExploreClinicPrice(
 }
 
 /// Minimum believable clinic price for compare / enrichment (by currency + procedure).
+final _justifiedPriceMemo = Expando<Map<String, ({DateTime at, bool valid})>>();
+
 bool isJustifiedProcedurePrice(OpenAIClinic c, {String? procedure}) {
+  final proc = procedure ?? c.brand;
+  final memo = _justifiedPriceMemo[c] ??= {};
+  final hit = memo[proc];
+  final now = DateTime.now();
+  if (hit != null && now.difference(hit.at) < const Duration(seconds: 5)) {
+    return hit.valid;
+  }
+  final valid = _isJustifiedProcedurePriceUncached(c, procedure: proc);
+  memo[proc] = (at: now, valid: valid);
+  return valid;
+}
+
+bool _isJustifiedProcedurePriceUncached(OpenAIClinic c, {String? procedure}) {
   final proc = procedure ?? c.brand;
   // Curated public-site rows have no DOM evidence / extract revision. The
   // scrape sanity lock would drop every Miami JSON card and leave two live
@@ -19253,8 +19303,8 @@ String exploreClinicHostDedupKey(OpenAIClinic c) {
     if (t.isEmpty) continue;
     if (!t.contains('.') || t.contains(' ') || t.length < 5) continue;
     final host = t
-        .replaceFirst(RegExp(r'^https?://'), '')
-        .replaceFirst(RegExp(r'^www\.'), '')
+        .replaceFirst(cachedRegExp(r'^https?://'), '')
+        .replaceFirst(cachedRegExp(r'^www\.'), '')
         .split('/')
         .first
         .split(':')
@@ -19286,8 +19336,8 @@ String exploreClinicNameDedupKey(String rawName) {
   // period) becomes "clinica dr paul" — otherwise the prefix "clinica dr "
   // never matches because of the double-space "clinica dr  paul".
   name = name
-      .replaceAll(RegExp(r'[\.,]'), ' ')
-      .replaceAll(RegExp(r'\s+'), ' ')
+      .replaceAll(cachedRegExp(r'[\.,]'), ' ')
+      .replaceAll(cachedRegExp(r'\s+'), ' ')
       .trim();
   const stripPrefixes = <String>[
     'clinica de ',
@@ -19320,7 +19370,7 @@ String exploreClinicNameDedupKey(String rawName) {
     }
   }
   // Collapse remaining whitespace so "paul  nistor" == "paul nistor".
-  name = name.replaceAll(RegExp(r'\s+'), ' ').trim();
+  name = name.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
   return name.isEmpty ? 'name:${rawName.toLowerCase().trim()}' : 'name:$name';
 }
 
@@ -19358,8 +19408,8 @@ String exploreClinicWebsiteHost(OpenAIClinic c) {
 
 String exploreClinicBrandFromHost(String host) {
   var h = host.toLowerCase().trim();
-  h = h.replaceFirst(RegExp(r'^https?://'), '');
-  h = h.replaceFirst(RegExp(r'^www\.'), '');
+  h = h.replaceFirst(cachedRegExp(r'^https?://'), '');
+  h = h.replaceFirst(cachedRegExp(r'^www\.'), '');
   h = h.split('/').first.split(':').first.trim();
   if (h.isEmpty) return '';
   const known = {
@@ -19371,11 +19421,11 @@ String exploreClinicBrandFromHost(String host) {
     'beautysphera.md': 'Beauty Sphera',
   };
   if (known.containsKey(h)) return known[h]!;
-  var brand = h.split('.').first.replaceAll(RegExp(r'[-_]+'), ' ').trim();
+  var brand = h.split('.').first.replaceAll(cachedRegExp(r'[-_]+'), ' ').trim();
   brand = _splitPackedClinicBrand(brand);
   if (brand.length < 3) return '';
   return brand
-      .split(RegExp(r'\s+'))
+      .split(cachedRegExp(r'\s+'))
       .map((w) {
         if (w.isEmpty) return w;
         if (w.toLowerCase() == 'dr' || w.toLowerCase() == 'dra') {
@@ -19392,13 +19442,13 @@ bool _mapsNameAgreesWithHost(String mapsName, String host) {
   final packed = host
       .split('.')
       .first
-      .replaceAll(RegExp(r'[-_]'), '')
+      .replaceAll(cachedRegExp(r'[-_]'), '')
       .toLowerCase();
-  final mapsCompact = maps.replaceAll(RegExp(r'[^a-z0-9]'), '');
+  final mapsCompact = maps.replaceAll(cachedRegExp(r'[^a-z0-9]'), '');
   if (packed.length >= 5 && mapsCompact.contains(packed)) return true;
   final brand = exploreClinicBrandFromHost(host).toLowerCase();
   final parts = brand
-      .split(RegExp(r'\s+'))
+      .split(cachedRegExp(r'\s+'))
       .where((w) => w.length >= 3)
       .toList();
   if (parts.length >= 2 && parts.every(maps.contains)) return true;
@@ -19415,11 +19465,11 @@ bool exploreMapsProviderIdentityMatches({
 }) {
   if (marketplace) return namesLookLikeSameProvider(sourceName, mapsName);
   String stem(String host) => foldExploreCityText(host.split('.').first)
-      .replaceAll(RegExp(r'[^a-z0-9]'), '')
-      .replaceFirst(RegExp(r'(?:aesthetic|aesthetics|medical|clinic|clinics|dental)$'), '');
+      .replaceAll(cachedRegExp(r'[^a-z0-9]'), '')
+      .replaceFirst(cachedRegExp(r'(?:aesthetic|aesthetics|medical|clinic|clinics|dental)$'), '');
   final source = stem(sourceHost);
   final candidate = stem(mapsHost);
-  final name = foldExploreCityText(mapsName).replaceAll(RegExp(r'[^a-z0-9]'), '');
+  final name = foldExploreCityText(mapsName).replaceAll(cachedRegExp(r'[^a-z0-9]'), '');
   return source.length >= 7 && source == candidate && name.contains(source);
 }
 
@@ -19432,13 +19482,13 @@ bool exploreClinicNameLooksPackedFromHost(OpenAIClinic c) {
   final host = exploreClinicWebsiteHost(c);
   if (host.isEmpty) return false;
   final name = c.name.trim();
-  if (name.contains(RegExp(r'\s'))) return false;
+  if (name.contains(cachedRegExp(r'\s'))) return false;
   final packed = host
       .split('.')
       .first
-      .replaceAll(RegExp(r'[-_]'), '')
+      .replaceAll(cachedRegExp(r'[-_]'), '')
       .toLowerCase();
-  final compact = name.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+  final compact = name.toLowerCase().replaceAll(cachedRegExp(r'[^a-z0-9]'), '');
   return packed.length >= 5 && compact == packed;
 }
 
@@ -19447,33 +19497,33 @@ String _splitPackedClinicBrand(String raw) {
   var n = raw.trim();
   if (n.isEmpty) return n;
   n = n.replaceFirstMapped(
-    RegExp(r'^(doctor)(?=[a-z])', caseSensitive: false),
+    cachedRegExp(r'^(doctor)(?=[a-z])', caseSensitive: false),
     (m) => '${m[1]} ',
   );
   n = n.replaceFirstMapped(
-    RegExp(r'^(dra?)(?=[a-z])', caseSensitive: false),
+    cachedRegExp(r'^(dra?)(?=[a-z])', caseSensitive: false),
     (m) => '${m[1]} ',
   );
   n = n.replaceFirstMapped(
-    RegExp(r'^(clinica|clinique|clinic)(?=[a-z])', caseSensitive: false),
+    cachedRegExp(r'^(clinica|clinique|clinic)(?=[a-z])', caseSensitive: false),
     (m) => '${m[1]} ',
   );
   n = n.replaceFirstMapped(
-    RegExp(r'^(elena)(?=martin)', caseSensitive: false),
+    cachedRegExp(r'^(elena)(?=martin)', caseSensitive: false),
     (m) => '${m[1]} ',
   );
   n = n.replaceFirstMapped(
-    RegExp(r'^(beauty)(?=sphera)', caseSensitive: false),
+    cachedRegExp(r'^(beauty)(?=sphera)', caseSensitive: false),
     (m) => '${m[1]} ',
   );
   n = n.replaceFirstMapped(
-    RegExp(
+    cachedRegExp(
       r'(barcelona|madrid|valencia|sevilla|london|paris|roma|milan)$',
       caseSensitive: false,
     ),
     (m) => ' ${m[1]}',
   );
-  return n.replaceAll(RegExp(r'\s+'), ' ').trim();
+  return n.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
 }
 
 /// Prefer domain branding over SEO SERP titles for broad discovery leads.
@@ -19488,14 +19538,14 @@ String resolveBroadSerpClinicCandidateName(String title, String host) {
     return hostName;
   }
   // "Breast Augmentation Tirana - Prices and Clinics" → host brand.
-  if (RegExp(
+  if (cachedRegExp(
         r'\b(?:prices?|cost|clinics?|procedures?)\b',
         caseSensitive: false,
       ).hasMatch(fromTitle) &&
       looksLikeProcedureNameAsClinicIdentity(
         fromTitle
             .replaceAll(
-              RegExp(
+              cachedRegExp(
                 r'\b(?:prices?|cost|clinics?|in\s+\w+)\b',
                 caseSensitive: false,
               ),
@@ -19518,7 +19568,7 @@ String exploreClinicNameFromSerpTitle(String title, String host) {
     return hostName;
   }
   final parts = t
-      .split(RegExp(r'\s[\|\-–—]\s+|:\s+'))
+      .split(cachedRegExp(r'\s[\|\-–—]\s+|:\s+'))
       .map((s) => s.trim())
       .where((s) => s.length >= 3 && s.length <= 80)
       .toList();
@@ -19530,7 +19580,7 @@ String exploreClinicNameFromSerpTitle(String title, String host) {
   }
   if (hostName.isNotEmpty) return hostName;
   t = parts.isNotEmpty ? parts.first : t;
-  t = t.replaceAll(RegExp(r'\s+[-–—]\s+.*$'), '').trim();
+  t = t.replaceAll(cachedRegExp(r'\s+[-–—]\s+.*$'), '').trim();
   if (t.length >= 3 &&
       !exploreClinicNameLooksLikeSeoHeadline(t) &&
       !isInvalidClinicIdentity(t) &&
@@ -19548,7 +19598,7 @@ bool exploreSerpTitleLooksLikeNonClinicIdentity(
   final t = title.replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return true;
   final lo = t.toLowerCase();
-  if (RegExp(
+  if (cachedRegExp(
     r'^(?:tarife|preturi|prețuri|prices?|pricing|fees?|cost|costs)$',
     caseSensitive: false,
   ).hasMatch(lo)) {
@@ -19557,14 +19607,14 @@ bool exploreSerpTitleLooksLikeNonClinicIdentity(
   if (looksLikeProcedureNameAsClinicIdentity(t)) return true;
   if (looksLikeCountryMarketPriceMarketing(t)) return true;
   if (looksLikePricingProseProcedureTitle(t)) return true;
-  if (RegExp(
+  if (cachedRegExp(
     r'^(?:breast|botox|filler|rhinoplast|chemical\s+peel|hair\s+transplant).{0,40}'
     r'(?:prices?|cost|tirana|london|paris|dubai|albania)\b',
     caseSensitive: false,
   ).hasMatch(lo)) {
     return true;
   }
-  if (RegExp(
+  if (cachedRegExp(
     r'\bprices?\s+and\s+clinics\b|\bclinics?\s+in\s+\w+\b|'
     r'\bprocedures?\s+in\s+\w+\b',
     caseSensitive: false,
@@ -19575,7 +19625,7 @@ bool exploreSerpTitleLooksLikeNonClinicIdentity(
   final titleFold = foldExploreCityText(t);
   if (cityFold.isNotEmpty && titleFold == cityFold) return true;
   // Title is only a city name (with optional country).
-  if (RegExp(
+  if (cachedRegExp(
     r'^(?:brasov|brașov|braşov|timisoara|timișoara|bucharest|bucurești|'
     r'chisinau|chișinău|iasi|iași|cluj)(?:\s*,?\s*\w+)?$',
     caseSensitive: false,
@@ -19654,7 +19704,7 @@ bool exploreClinicNameLooksLikeSeoHeadline(String title) {
       !lo.contains('clinic') &&
       !lo.contains('clínic') &&
       !lo.contains('clinica') &&
-      !RegExp(r'\bdr\.?\b').hasMatch(lo)) {
+      !cachedRegExp(r'\bdr\.?\b').hasMatch(lo)) {
     return true;
   }
   return false;
@@ -19666,13 +19716,13 @@ bool exploreClinicNameLooksLikeCategoryOrServiceTitle(String title) {
   final t = decodeExploreHtmlEntities(title).replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return true;
   final lo = foldExploreIdentityText(t)
-      .replaceAll(RegExp(r'[^a-z0-9 ]+'), ' ')
-      .replaceAll(RegExp(r'\s+'), ' ')
+      .replaceAll(cachedRegExp(r'[^a-z0-9 ]+'), ' ')
+      .replaceAll(cachedRegExp(r'\s+'), ' ')
       .trim();
   if (lo.isEmpty) return true;
 
   // Real clinic brands usually carry a proper name cue.
-  if (RegExp(
+  if (cachedRegExp(
     r'\b(clinic|clinica|clinique|klinik|hospital|centre|center|medspa|'
     r'doctor|dra?|md)\b',
   ).hasMatch(lo)) {
@@ -19715,7 +19765,7 @@ bool exploreClinicNameLooksLikeCategoryOrServiceTitle(String title) {
   if (tokens.every(categoryOnly.contains)) return true;
 
   // "Aesthetic cosmetology procedures", "Buy Cosmetics and Products…"
-  if (RegExp(
+  if (cachedRegExp(
     r'\b(procedures?|treatments?|services?|servicii|tratamente|products?|'
     r'produse|cosmetics?)\b',
   ).hasMatch(lo)) {
@@ -19737,7 +19787,7 @@ bool exploreClinicNameLooksLikeCategoryOrServiceTitle(String title) {
     );
     if (brandish.isEmpty) return true;
   }
-  if (RegExp(r'^(buy|shop|online|catalog|catalogue|magazin)\b').hasMatch(lo)) {
+  if (cachedRegExp(r'^(buy|shop|online|catalog|catalogue|magazin)\b').hasMatch(lo)) {
     return true;
   }
   return false;
@@ -19759,9 +19809,9 @@ bool exploreClinicNameLooksLikeMarketingSlogan(String title) {
       lo.contains('clinic') ||
       lo.contains('clinique') ||
       lo.contains('doctor') ||
-      RegExp(r'\bdr\.?\b').hasMatch(t.toLowerCase());
+      cachedRegExp(r'\bdr\.?\b').hasMatch(t.toLowerCase());
   if (t.contains('&') && !clinicCue) return true;
-  final words = t.split(RegExp(r'\s+'));
+  final words = t.split(cachedRegExp(r'\s+'));
   return words.length >= 4 && !clinicCue;
 }
 
@@ -19775,9 +19825,9 @@ bool exploreClinicNameNeedsMapsRefresh(OpenAIClinic c) {
   if (exploreClinicNameLooksPackedFromHost(c)) return true;
   final hostBrand = exploreClinicBrandFromHost(exploreClinicWebsiteHost(c));
   if (hostBrand.isEmpty) return false;
-  final compactName = name.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+  final compactName = name.toLowerCase().replaceAll(cachedRegExp(r'[^a-z0-9]'), '');
   final compactHost = hostBrand.toLowerCase().replaceAll(
-    RegExp(r'[^a-z0-9]'),
+    cachedRegExp(r'[^a-z0-9]'),
     '',
   );
   return compactName.length >= 5 && compactName == compactHost;
@@ -19845,8 +19895,8 @@ bool exploreRevalidationRemovesCard(OpenAIClinic revalidated) {
 /// "TajClinic SRL" when Maps only knows "TajClinic".
 String _normalizeClinicNameForPlaces(String raw) {
   var n = raw.toLowerCase().trim();
-  n = n.replaceAll(RegExp(r'[^\w\sà-ÿăâîșțÁ-ÝĂÂÎȘȚ]+'), ' ');
-  n = n.replaceAll(RegExp(r'\s+'), ' ').trim();
+  n = n.replaceAll(cachedRegExp(r'[^\w\sà-ÿăâîșțÁ-ÝĂÂÎȘȚ]+'), ' ');
+  n = n.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
   const suffixes = <String>[
     ' srl d',
     ' srl-d',
@@ -20148,7 +20198,7 @@ ExploreTreatmentFamily exploreTreatmentFamily(String raw) {
       has('radiofrequen') ||
       has('radiofrecven') ||
       has('pbserum') ||
-      RegExp(r'\brf\b').hasMatch(t)) {
+      cachedRegExp(r'\brf\b').hasMatch(t)) {
     return ExploreTreatmentFamily.skin;
   }
 
@@ -20463,7 +20513,7 @@ bool _procedureLabelLacksFamilySignal(String raw) {
     return true;
   }
   final lo = t.toLowerCase();
-  return RegExp(
+  return cachedRegExp(
     r'^(price|prices|pricing|cost|costs|from)(\b|$)',
     caseSensitive: false,
   ).hasMatch(lo);
@@ -20609,7 +20659,7 @@ List<String> buildBroadProcedureDiscoveryQueries({
   final out = <String>[];
   void add(String raw) {
     if (out.length >= maxQueries) return;
-    final q = raw.replaceAll(RegExp(r'\s+'), ' ').trim();
+    final q = raw.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
     if (q.isEmpty) return;
     final lo = q.toLowerCase();
     if (out.any((e) => e.toLowerCase() == lo)) return;
@@ -20657,7 +20707,7 @@ List<String> exploreLocalizedSearchQueries({
   final out = <String>[];
   void add(String raw) {
     if (out.length >= maxQueries) return;
-    final q = raw.replaceAll(RegExp(r'\s+'), ' ').trim();
+    final q = raw.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
     if (q.isEmpty) return;
     final lo = q.toLowerCase();
     if (out.any((e) => e.toLowerCase() == lo)) return;
@@ -20824,8 +20874,8 @@ bool exploreSearchQueryLooksEnglish(String query) {
   final lo = query.toLowerCase();
   return lo.contains('prices in') ||
       lo.contains('price in') ||
-      RegExp(r'\bprices\b').hasMatch(lo) ||
-      RegExp(r'\bprice\b').hasMatch(lo);
+      cachedRegExp(r'\bprices\b').hasMatch(lo) ||
+      cachedRegExp(r'\bprice\b').hasMatch(lo);
 }
 
 /// The queries every Google/Places lookup must run: local language + English,
@@ -20928,7 +20978,7 @@ List<String> exploreLocalizedPlacesQueries({
   final out = <String>[];
   void add(String raw) {
     if (out.length >= maxQueries) return;
-    final q = raw.replaceAll(RegExp(r'\s+'), ' ').trim();
+    final q = raw.replaceAll(cachedRegExp(r'\s+'), ' ').trim();
     if (q.isEmpty) return;
     final lo = q.toLowerCase();
     if (out.any((e) => e.toLowerCase() == lo)) return;
@@ -21102,7 +21152,7 @@ List<String> _placesBroadFallbackQueries({
 }
 
 String? _sourceUrlFromArea(String area) {
-  final m = RegExp(r'src:(https?://[^\s·]+)').firstMatch(area);
+  final m = cachedRegExp(r'src:(https?://[^\s·]+)').firstMatch(area);
   return m?.group(1);
 }
 
@@ -21134,6 +21184,142 @@ bool exploreCuratedPriceIsTrusted(OpenAIClinic c) {
   if (c.priceSourceUrl.trim().isEmpty) return false;
   if (c.lastCheckedAt == null) return false;
   return true;
+}
+
+typedef ExploreValidatedRows = ({
+  List<OpenAIClinic> accepted, Set<String> rejectedUrls, Map<String, String> origins,
+});
+
+typedef _ExploreRowValidationInput = ({
+  List<ExploreDiscoveryToolRow> rows, String city, String requestedProcedure,
+  String queryOrSelection,
+});
+
+ExploreValidatedRows _validateToolCompareRows(
+  _ExploreRowValidationInput input,
+) {
+  final rows = input.rows;
+  final city = input.city;
+  final requestedProcedure = input.requestedProcedure;
+  final queryOrSelection = input.queryOrSelection;
+  final acceptedThisEvent = <OpenAIClinic>[];
+  final rejectedToolUrls = <String>{};
+  final origins = <String, String>{};
+  for (final row in rows) {
+    void dropRow(String reason) {
+      if (row.sourceUrl.isNotEmpty) {
+        rejectedToolUrls.add(row.sourceUrl);
+      }
+      debugPrint('DROP ${row.clinicName} $reason ${row.sourceUrl}');
+    }
+
+    if (exploreUrlConflictsWithSearchCity(row.sourceUrl, city) ||
+        exploreQuotedPriceConflictsWithSearchCity(
+          city: city,
+          url: row.sourceUrl,
+          evidence: row.rawEvidence,
+        )) {
+      dropRow('city_url_conflict');
+      continue;
+    }
+    if (isMarketplaceOrDirectoryHost(row.sourceUrl) &&
+        !ExplorePriceDiscoveryTool.canUseMarketplacePrice(row)) {
+      dropRow('directory');
+      continue;
+    }
+    final sourcePath = row.sourceUrl.toLowerCase();
+    if (sourcePath.contains('masseter') ||
+        sourcePath.contains('facial-palsy') ||
+        sourcePath.contains('facial_palsy')) {
+      dropRow('procedure_mismatch');
+      continue;
+    }
+    if (!ExplorePriceDiscoveryTool.rowMatchesRequestedProcedure(
+      row,
+      requestedProcedure,
+    )) {
+      dropRow('procedure_mismatch');
+      continue;
+    }
+    final mapped = _clinicFromDiscoveryToolRow(
+      row,
+      city: city,
+      procedure: requestedProcedure,
+    );
+    if (mapped == null ||
+        !explorePriceIsVerified(mapped) ||
+        !isJustifiedProcedurePrice(mapped, procedure: requestedProcedure)) {
+      dropRow('sanity');
+      continue;
+    }
+    final named = withExploreClinicDisplayName(mapped);
+    if (named.name.trim().isEmpty) {
+      dropRow('sanity');
+      continue;
+    }
+    if (isMarketplaceBrandName(named.name)) {
+      dropRow('marketplace');
+      continue;
+    }
+    if (exploreUrlConflictsWithSearchCity(named.priceSourceUrl, city)) {
+      dropRow('city_url_conflict');
+      continue;
+    }
+    if (!exploreClinicFitsSearchCity(named, city)) {
+      dropRow('city_fit');
+      continue;
+    }
+    if (!exploreClinicFitsCompareProcedure(named, queryOrSelection)) {
+      dropRow('procedure_mismatch');
+      continue;
+    }
+    if (exploreListedPriceIsNonClinicContent(
+      sourceUrl: named.priceSourceUrl,
+      website: named.area,
+    )) {
+      dropRow('sanity');
+      continue;
+    }
+    if (acceptedThisEvent.any((c) => exploreClinicsAreSameProvider(c, named))) {
+      continue;
+    }
+    acceptedThisEvent.add(named);
+    origins[named.priceSourceUrl] = row.origin;
+  }
+  return (
+    accepted: acceptedThisEvent,
+    rejectedUrls: rejectedToolUrls,
+    origins: origins,
+  );
+}
+
+
+/// Validate a discovery batch away from animation, gesture and scroll frames.
+/// The worker receives plain immutable data and makes no network/Firebase calls.
+Future<ExploreValidatedRows> validateExploreDiscoveryCompareRows({
+  required List<ExploreDiscoveryToolRow> rows,
+  required String city, required String procedure, required String selection,
+}) async {
+  if (rows.isEmpty) return (accepted: <OpenAIClinic>[], rejectedUrls: <String>{}, origins: <String, String>{});
+  final result = await compute(_validateToolCompareRows,
+    (rows: rows, city: city, requestedProcedure: procedure, queryOrSelection: selection),
+    debugLabel: 'explore-price-validation');
+  final now = DateTime.now();
+  for (final row in result.accepted) {
+    memoizeExploreWorkerValidatedClinic(row, city: city, procedure: procedure, at: now);
+  }
+  return result;
+}
+
+/// Internal handoff after the full worker validator accepts this immutable
+/// record. Scope/time stay part of the memo; changed prices get new records.
+void memoizeExploreWorkerValidatedClinic(OpenAIClinic row, {
+  required String city, required String procedure, DateTime? at,
+}) {
+  final checked = at ?? DateTime.now();
+  _verifiedPriceMemo[row] = (at: checked, valid: true);
+  (_justifiedPriceMemo[row] ??= {})[procedure] = (at: checked, valid: true);
+  (_cityFitMemo[row] ??= {})[city] = (at: checked, valid: true);
 }
 
 /// True when Explore may show / persist this number as the procedure price.
@@ -21240,7 +21426,23 @@ OpenAIClinic? _clinicFromDiscoveryToolRow(
   );
 }
 
+// Clinic records are immutable. Repaints of the same record must not repeat
+// ownership/procedure/currency regex scans on the UI isolate. Expando releases
+// entries with the record; a short TTL retains time-based verification checks.
+final _verifiedPriceMemo = Expando<({DateTime at, bool valid})>();
+
 bool explorePriceIsVerified(OpenAIClinic c) {
+  final now = DateTime.now();
+  final hit = _verifiedPriceMemo[c];
+  if (hit != null && now.difference(hit.at) < const Duration(seconds: 5)) {
+    return hit.valid;
+  }
+  final valid = _explorePriceIsVerifiedUncached(c);
+  _verifiedPriceMemo[c] = (at: now, valid: valid);
+  return valid;
+}
+
+bool _explorePriceIsVerifiedUncached(OpenAIClinic c) {
   if (exploreListedPriceIsNonClinicContent(sourceUrl: c.priceSourceUrl,
       website: c.area)) return false;
   if (looksLikeNonInjectableBotox(
@@ -21316,7 +21518,7 @@ bool explorePriceHasNonfacialScope(OpenAIClinic c) {
   if (family != ExploreTreatmentFamily.filler &&
       family != ExploreTreatmentFamily.peel) return false;
   final row = '${c.rawProcedureText} ${c.procedureDetail} ${c.priceEvidenceText}';
-  return RegExp(
+  return cachedRegExp(
     r'\b(?:intim\w*|genital\w*|vagin\w*|vulv\w*|labial?\s+major\w*|penis|penile|buttock\w*)\b|'
     r'\b(?:breast|body)\s+fillers?\b|\bzona\s+corporala\b',
     caseSensitive: false,
@@ -21440,7 +21642,7 @@ String exploreVerifiedAndOnRequestSummary({
 
 String _withSourceUrl(String area, String url) {
   final cleaned = area
-      .replaceAll(RegExp(r'\s*·\s*src:https?://[^\s·]+'), '')
+      .replaceAll(cachedRegExp(r'\s*·\s*src:https?://[^\s·]+'), '')
       .trim();
   if (url.isEmpty) return cleaned;
   final parsed = Uri.tryParse(url);
@@ -21455,31 +21657,31 @@ String _withSourceUrl(String area, String url) {
 bool _pageHasPricedAmounts(String text) {
   if (text.trim().isEmpty) return false;
   final t = text.toLowerCase();
-  if (RegExp(r'[€£$₩]\s*\d{1,5}(?:[.,]\d{1,2})?').hasMatch(t)) {
+  if (cachedRegExp(r'[€£$₩]\s*\d{1,5}(?:[.,]\d{1,2})?').hasMatch(t)) {
     return true;
   }
-  if (RegExp(
+  if (cachedRegExp(
     r'(?:aed|eur|euro|£|gbp|usd|ron|lei|try|₩|krw|hkd|sgd|thb|درهم|د\.إ)'
     r'\s*\d{2,6}',
     caseSensitive: false,
   ).hasMatch(t)) {
     return true;
   }
-  if (RegExp(
+  if (cachedRegExp(
     r'\d{1,5}(?:[.,]\d{1,2})?\s*(?:€|eur|£|gbp|usd|\$|ron|lei|try|'
     r'₩|krw|aed|hkd|sgd|thb|pln|zł|yen|jpy|درهم|د\.إ)',
     caseSensitive: false,
   ).hasMatch(t)) {
     return true;
   }
-  if (RegExp(
+  if (cachedRegExp(
     r'\d{1,3}(?:[.,]\d{1,2})?\s*(?:/|per)\s*'
     r'(?:unit|unitate|zona|zone|area|graft)',
     caseSensitive: false,
   ).hasMatch(t)) {
     return true;
   }
-  if (RegExp(
+  if (cachedRegExp(
     r'(?:from|starting at|de la|desde|ab|from only)\s*[€£$]?\s*\d{1,5}',
     caseSensitive: false,
   ).hasMatch(t)) {
@@ -21755,7 +21957,7 @@ class OpenAIComparisonResult {
             if (fromLabel.isNotEmpty) {
               cast['currency'] = fromLabel == 'LEI' ? 'RON' : fromLabel;
             } else if (rootCurrency.isNotEmpty &&
-                !RegExp(r'lei|\bron\b', caseSensitive: false).hasMatch(label)) {
+                !cachedRegExp(r'lei|\bron\b', caseSensitive: false).hasMatch(label)) {
               cast['currency'] = rootCurrency;
             }
           }
@@ -22194,7 +22396,7 @@ String _stripPriceSuffix(String raw) {
   var s = raw.trim();
   // "... | 1400 RON", "... - 900", "... — €350" (loop: some titles
   // stack more than one separator+price segment).
-  final pipeOrDashPrice = RegExp(
+  final pipeOrDashPrice = cachedRegExp(
     r'\s*[\|\-–—]\s*[£€$]?\s*\d[\d.,]*\s*'
     r'(RON|LEI|EUR|GBP|USD|TRY|PLN|KRW|JPY|BRL|INR|AED|RUB|AUD|€|£|\$)?'
     r'\s*$',
@@ -22206,7 +22408,7 @@ String _stripPriceSuffix(String raw) {
     s = next;
   }
   // "Lip filler 1400 RON" — price glued on with no separator at all.
-  final trailingPrice = RegExp(
+  final trailingPrice = cachedRegExp(
     r'\s+[£€$]?\s*\d{2,6}[\d.,]*\s*'
     r'(RON|LEI|EUR|GBP|USD|TRY|PLN|KRW|JPY|BRL|INR|AED|RUB|AUD|€|£|\$)\s*$',
     caseSensitive: false,
@@ -22445,7 +22647,7 @@ String _fixPriceLabel({
   // before any other processing.
   raw = raw
       .replaceAll(
-        RegExp(r'\(\s*[\d.,]+\s*(?:lei|RON|ron)\s*\)', caseSensitive: false),
+        cachedRegExp(r'\(\s*[\d.,]+\s*(?:lei|RON|ron)\s*\)', caseSensitive: false),
         '',
       )
       .trim();
@@ -22456,7 +22658,7 @@ String _fixPriceLabel({
   // When the second number is ~5x the first, treat it as the RON conversion and
   // collapse to a single EUR price.
   if (raw.contains('€')) {
-    final nums = RegExp(r'(\d+)')
+    final nums = cachedRegExp(r'(\d+)')
         .allMatches(raw)
         .map((m) => double.tryParse(m.group(1) ?? '') ?? 0)
         .where((n) => n > 0)
@@ -22472,7 +22674,7 @@ String _fixPriceLabel({
 
   // If label ends with RON but numbers look like an EUR/RON pair.
   if (raw.contains('RON')) {
-    final nums = RegExp(r'(\d+)')
+    final nums = cachedRegExp(r'(\d+)')
         .allMatches(raw)
         .map((m) => double.tryParse(m.group(1) ?? '') ?? 0)
         .where((n) => n > 0)
@@ -22680,7 +22882,7 @@ class OpenAIClinicReview {
     String inits = (json['initials'] as String?)?.trim() ?? '';
     if (inits.isEmpty && author.isNotEmpty) {
       final parts = author
-          .split(RegExp(r'\s+'))
+          .split(cachedRegExp(r'\s+'))
           .where((e) => e.isNotEmpty)
           .toList();
       inits = parts.take(2).map((p) => p[0]).join().toUpperCase();
@@ -22945,7 +23147,7 @@ class OpenAIProfileDoctor {
     String inits = (json['initials'] as String?)?.trim() ?? '';
     if (inits.isEmpty && name.isNotEmpty) {
       final parts = name
-          .split(RegExp(r'\s+'))
+          .split(cachedRegExp(r'\s+'))
           .where((e) => e.isNotEmpty)
           .toList();
       inits = parts.take(2).map((p) => p[0]).join().toUpperCase();
@@ -23096,7 +23298,7 @@ bool _leiMislabeledAsEuro(
   final cur = CityCurrency.normalizeCode(c.currency);
   final label = c.priceLabel.toUpperCase();
   final looksEuro =
-      cur == '€' || label.contains('€') || RegExp(r'\bEUR\b').hasMatch(label);
+      cur == '€' || label.contains('€') || cachedRegExp(r'\bEUR\b').hasMatch(label);
   if (!looksEuro || c.priceMin <= 0) return false;
 
   if (pageText.isNotEmpty) {
@@ -23104,7 +23306,7 @@ bool _leiMislabeledAsEuro(
     final hasEuro = _pageTextHasEuro(pageText);
     if (hasLei && !hasEuro) return true;
     if (hasLei &&
-        RegExp(r'\d[\d.\s]*lei\b', caseSensitive: false).hasMatch(pageText) &&
+        cachedRegExp(r'\d[\d.\s]*lei\b', caseSensitive: false).hasMatch(pageText) &&
         !pageText.contains('€')) {
       return true;
     }
@@ -23173,7 +23375,7 @@ bool _euroMislabeledAsLei(
       label.contains('RON') ||
       label.contains('LEI');
   final looksEuro =
-      cur == '€' || label.contains('€') || RegExp(r'\bEUR\b').hasMatch(label);
+      cur == '€' || label.contains('€') || cachedRegExp(r'\bEUR\b').hasMatch(label);
   if (looksEuro) return false;
   if (!looksRon || c.priceMin <= 0) return false;
   return c.priceMin >= 2000 && c.priceMin < 16000;
@@ -23215,7 +23417,7 @@ String _effectiveCurrencyFromPageText(String trimmed, String currency) {
   final hasEuro = _pageTextHasEuro(trimmed);
   final hasLei = _pageTextHasLei(trimmed);
   final hasGbp = trimmed.contains('£');
-  final hasAed = RegExp(
+  final hasAed = cachedRegExp(
     r'\baed\b|\bdirhams?\b|درهم|د\.إ',
     caseSensitive: false,
   ).hasMatch(trimmed);
@@ -23235,8 +23437,8 @@ String _effectiveCurrencyFromPageText(String trimmed, String currency) {
   if (hasEuro && hasLei) {
     final euroCount =
         '€'.allMatches(trimmed).length +
-        RegExp(r'\beuros?\b', caseSensitive: false).allMatches(trimmed).length;
-    final leiCount = RegExp(
+        cachedRegExp(r'\beuros?\b', caseSensitive: false).allMatches(trimmed).length;
+    final leiCount = cachedRegExp(
       r'(?:\d\s*)lei\b|\blei\b|\bron\b',
       caseSensitive: false,
     ).allMatches(trimmed).length;
@@ -23250,13 +23452,13 @@ String _effectiveCurrencyFromPageText(String trimmed, String currency) {
 /// True for real EUR amounts — not Romanian "Europene" / "European".
 bool _pageTextHasEuro(String text) {
   return text.contains('€') ||
-      RegExp(r'\beuros?\b', caseSensitive: false).hasMatch(text) ||
-      RegExp(r'\beur\b', caseSensitive: false).hasMatch(text);
+      cachedRegExp(r'\beuros?\b', caseSensitive: false).hasMatch(text) ||
+      cachedRegExp(r'\beur\b', caseSensitive: false).hasMatch(text);
 }
 
 /// True for lei/RON, including glued amounts like "900lei".
 bool _pageTextHasLei(String text) {
-  return RegExp(
+  return cachedRegExp(
     r'(?:\d[\d.\s]*)lei\b|\blei\b|\bron\b',
     caseSensitive: false,
   ).hasMatch(text);
@@ -23285,7 +23487,7 @@ String _detectCurrency({
   if (l.contains('CAD')) return 'CAD';
   if (l.contains('AED')) return 'AED';
   if (l.contains('BGN') ||
-      RegExp(r'\bLV\.?\b').hasMatch(l) ||
+      cachedRegExp(r'\bLV\.?\b').hasMatch(l) ||
       l.contains('ЛВ')) {
     return 'BGN';
   }
@@ -23329,7 +23531,7 @@ double? _parseAnyPrice(Object? v) {
   if (s.isEmpty) return null;
 
   // "4k" / "4.5k" / "$4k–$9k" → thousands
-  final kMatch = RegExp(r'(\d+(?:[.,]\d+)?)\s*[kK]\b').firstMatch(s);
+  final kMatch = cachedRegExp(r'(\d+(?:[.,]\d+)?)\s*[kK]\b').firstMatch(s);
   if (kMatch != null) {
     final n = double.tryParse(kMatch.group(1)!.replaceAll(',', '.'));
     if (n != null && n > 0) return n * 1000;
@@ -23337,7 +23539,7 @@ double? _parseAnyPrice(Object? v) {
 
   // "1.000 lei", "1,200 lei", "1.750 lei" — never take the trailing
   // "200" out of "1,200 lei" (that made UpEstetique lips/cheeks = 200 RON).
-  final leiMatch = RegExp(
+  final leiMatch = cachedRegExp(
     r'([\d]{1,3}(?:[.,\s]\d{3})+|\d+(?:[.,]\d{1,2})?)\s*(?:lei|LEI|Lei)\b',
     caseSensitive: false,
   ).firstMatch(s);
@@ -23346,7 +23548,7 @@ double? _parseAnyPrice(Object? v) {
   }
 
   // Handle "from X" / "de la X" / "ab X" / "desde X"
-  final fromMatch = RegExp(
+  final fromMatch = cachedRegExp(
     r'(?:from|de\s+la|ab|desde|da|vanaf|od)\s*([\d\s.,]+)',
     caseSensitive: false,
   ).firstMatch(s);
@@ -23357,7 +23559,7 @@ double? _parseAnyPrice(Object? v) {
   // DUAL CURRENCY FORMAT: "275€ (1375 lei)" or "650 € (3250 lei)"
   // The EUR value comes first, RON in brackets is just conversion.
   // Extract ONLY the EUR value and ignore the bracketed RON.
-  final dualCurrencyMatch = RegExp(
+  final dualCurrencyMatch = cachedRegExp(
     r'([\d.,]+)\s*€\s*\(\s*[\d.,]+\s*(?:lei|ron|RON)\s*\)',
     caseSensitive: false,
   ).firstMatch(s);
@@ -23366,7 +23568,7 @@ double? _parseAnyPrice(Object? v) {
   }
 
   // Also handle: "de la 400€ (2000 lei)"
-  final dualFromMatch = RegExp(
+  final dualFromMatch = cachedRegExp(
     r'(?:de\s+la|from|ab|desde)\s*([\d.,]+)\s*€\s*\(',
     caseSensitive: false,
   ).firstMatch(s);
@@ -23376,7 +23578,7 @@ double? _parseAnyPrice(Object? v) {
 
   // Handle ranges "X–Y" / "X-Y" / "X to Y" → take minimum
   // Use \u2013 for en-dash in a non-raw string
-  final rangeMatch = RegExp(
+  final rangeMatch = cachedRegExp(
     '([\\d\\s.,]+)\\s*(?:[-\u2013]|to)\\s*([\\d\\s.,]+)',
   ).firstMatch(s);
   if (rangeMatch != null) {
@@ -23384,7 +23586,7 @@ double? _parseAnyPrice(Object? v) {
   }
 
   // Strip everything that is not a digit, dot, comma, or whitespace
-  final digits = s.replaceAll(RegExp(r'[^\d.,\s]'), '').trim();
+  final digits = s.replaceAll(cachedRegExp(r'[^\d.,\s]'), '').trim();
   if (digits.isEmpty) return null;
   return _cleanNumber(digits);
 }
@@ -23395,7 +23597,7 @@ double? _cleanNumber(String s) {
   if (s.isEmpty) return null;
 
   // Remove space/NBSP thousand separators (Russian, Swedish style: "1 500")
-  s = s.replaceAll(RegExp(r'[\s\u00a0]'), '');
+  s = s.replaceAll(cachedRegExp(r'[\s\u00a0]'), '');
 
   // Remove apostrophe/right-single-quote thousand separators (Swiss: "1'500")
   s = s.replaceAll("'", '').replaceAll('\u2019', '');
@@ -23403,24 +23605,24 @@ double? _cleanNumber(String s) {
   if (s.isEmpty) return null;
 
   // Case 1: ends with ",XX" (1 or 2 digits) → comma is decimal separator (e.g. "1.500,50")
-  if (RegExp(r',\d{1,2}$').hasMatch(s)) {
+  if (cachedRegExp(r',\d{1,2}$').hasMatch(s)) {
     s = s.replaceAll('.', '').replaceAll(',', '.');
     return double.tryParse(s);
   }
 
   // Case 2: ends with ".XX" (1 or 2 digits) → dot is decimal separator (e.g. "1,500.50")
-  if (RegExp(r'\.\d{1,2}$').hasMatch(s)) {
+  if (cachedRegExp(r'\.\d{1,2}$').hasMatch(s)) {
     s = s.replaceAll(',', '');
     return double.tryParse(s);
   }
 
   // Case 3: dot is thousand separator (e.g. "1.500" or "1.500.000")
-  if (RegExp(r'^\d{1,3}(\.\d{3})+$').hasMatch(s)) {
+  if (cachedRegExp(r'^\d{1,3}(\.\d{3})+$').hasMatch(s)) {
     return double.tryParse(s.replaceAll('.', ''));
   }
 
   // Case 4: comma is thousand separator (e.g. "1,500" or "1,500,000")
-  if (RegExp(r'^\d{1,3}(,\d{3})+$').hasMatch(s)) {
+  if (cachedRegExp(r'^\d{1,3}(,\d{3})+$').hasMatch(s)) {
     return double.tryParse(s.replaceAll(',', ''));
   }
 

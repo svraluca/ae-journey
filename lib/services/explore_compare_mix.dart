@@ -1,9 +1,54 @@
+import 'dart:math';
+
 /// Selection rules shared by the Python-first path and the legacy pool planner.
 /// Kept independent of Flutter and Firebase so partial streams are testable.
 const kExploreCompareDisplayLimit = 4;
 const kExploreCompareGoodEnough = 4;
 const kExploreCompareSavedTarget = 2;
 const kExploreCompareFreshTarget = 2;
+
+/// Fair exposure within a city. Ratings and prices never buy a display slot;
+/// equally exposed providers are shuffled, and sibling tabs prefer variety.
+/// The caller selects once per visit, then stabilizes progressive updates.
+class ExploreCompareRotation {
+  ExploreCompareRotation({Random? random}) : _random = random ?? Random();
+  final Random _random;
+  final Map<String, Map<String, int>> _exposures = {};
+  final Map<String, Map<String, Set<String>>> _shown = {};
+
+  List<T> select<T>({
+    required String city,
+    required String procedure,
+    required Iterable<T> eligible,
+    required String Function(T) providerKey,
+  }) {
+    final cityKey = city.trim().toLowerCase();
+    final topic = procedure.trim().toLowerCase();
+    final counts = _exposures.putIfAbsent('$cityKey|$topic', () => {});
+    final siblings = _shown.putIfAbsent(cityKey, () => {});
+    final otherProviders = <String>{
+      for (final entry in siblings.entries)
+        if (entry.key != topic) ...entry.value,
+    };
+    final unique = <String, T>{};
+    for (final row in eligible) {
+      final key = providerKey(row);
+      if (key.isNotEmpty) unique.putIfAbsent(key, () => row);
+    }
+    final keys = unique.keys.toList()..shuffle(_random);
+    keys.sort((a, b) {
+      final exposure = (counts[a] ?? 0).compareTo(counts[b] ?? 0);
+      if (exposure != 0) return exposure;
+      return (otherProviders.contains(a) ? 1 : 0).compareTo(
+        otherProviders.contains(b) ? 1 : 0,
+      );
+    });
+    final selected = keys.take(kExploreCompareDisplayLimit).toList();
+    siblings[topic] = selected.toSet();
+    for (final key in selected) counts[key] = (counts[key] ?? 0) + 1;
+    return [for (final key in selected) unique[key]!];
+  }
+}
 
 /// Keep displayed providers in their slots. A verified newer tariff may update
 /// its own slot; background pool order cannot rotate providers.
@@ -16,7 +61,8 @@ List<T> stabilizeExploreCompareRows<T>({
 }) {
   final out = <T>[];
   for (final row in shown) {
-    if (!stillEligible(row) || out.any((old) => sameProvider(old, row))) continue;
+    if (!stillEligible(row) || out.any((old) => sameProvider(old, row)))
+      continue;
     out.add(row);
     if (out.length == kExploreCompareDisplayLimit) break;
   }

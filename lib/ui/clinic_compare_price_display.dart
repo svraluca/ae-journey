@@ -1353,13 +1353,31 @@ String _withHairGraftAllowanceSuffix(
   if (t.isEmpty) return t;
   if (looksLikeHairPerGraftPrice(c, procedure: procedure)) return t;
   if (RegExp(r'graft', caseSensitive: false).hasMatch(t)) return t;
-  final qty = c.priceQuantity;
-  if (qty == null || qty < 50 || qty > 12000) return t;
   if (!isHairExploreProcedure(procedure) &&
       !isHairExploreProcedure(c.brand) &&
       !isHairExploreProcedure(c.rawProcedureText)) {
     return t;
   }
+  // UF/FU are follicular units, not a per-graft rate. Preserve the package
+  // boundary printed on this treatment row, including < and count ranges.
+  final allowance = RegExp(
+    r'(<|≤|>|≥|up\s+to|less\s+than|hasta|menos\s+de)?\s*'
+    r'(\d[\d., ]*)(?:\s*[–—-]\s*(\d[\d., ]*))?\s*'
+    r'(?:UF|FU|grafts?|follicular\s+units?|unidades\s+foliculares)\b',
+    caseSensitive: false,
+  ).firstMatch('${c.rawProcedureText} ${c.procedureDetail}');
+  if (allowance != null) {
+    String count(String raw) {
+      final digits = raw.replaceAll(RegExp(r'[^\d]'), '');
+      return digits.replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+$)'), (m) => '${m[1]},');
+    }
+    final lo = count(allowance[2]!);
+    final hi = allowance[3] == null ? '' : count(allowance[3]!);
+    final bound = allowance[1]?.trim() ?? '';
+    return '$t / ${bound.isEmpty ? "" : "$bound "}$lo${hi.isEmpty ? "" : "–$hi"} grafts';
+  }
+  final qty = c.priceQuantity;
+  if (qty == null || qty < 50 || qty > 12000) return t;
   final n = qty.round();
   final formatted = n >= 1000
       ? n.toString().replaceAllMapped(

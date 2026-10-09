@@ -1,3 +1,4 @@
+import 'explore_regex_cache.dart';
 import 'package:flutter/foundation.dart';
 
 import 'explore_url_discovery.dart';
@@ -71,14 +72,14 @@ bool isStructuredPriceExtractionMethod(String method) {
   }
 }
 
-final _phoneCue = RegExp(
+final _phoneCue = cachedRegExp(
   r'\b(?:tel(?:e(?:fono|phone))?|tel[eé]fono|whatsapp|m[oó]vil|mobile|'
   r'contact(?:o|ar)?|llam(?:ar|enos)|call\s+us)\b',
   caseSensitive: false,
 );
 
 /// UAE 999/998, US 911, EU 112 — Mediclinic pages say "ring 999".
-final _emergencyHelpCue = RegExp(
+final _emergencyHelpCue = cachedRegExp(
   r'\b(?:emergency|emergencias|urgencias|ambulance|ambulancia|'
   r'helpline|help[\s-]*line|help[\s-]*desk|help\s+number|hotline|'
   r'toll[\s-]*free|police|polic[ií]a|'
@@ -92,34 +93,34 @@ final _emergencyHelpCue = RegExp(
   caseSensitive: false,
 );
 
-final _addressCue = RegExp(
+final _addressCue = cachedRegExp(
   r'\b(?:c\/|calle|carrer|avenida|avda\.?|av\.|street|road|plaza|passeig|'
   r'postal|c\.?p\.?|codigo postal|c[oó]digo postal|building|floor|'
   r'planta|izq\.?|dcha\.?|izquierda|derecha)\b',
   caseSensitive: false,
 );
 
-final _durationCue = RegExp(
+final _durationCue = cachedRegExp(
   r'\b(?:\d+\s*(?:min|mins|minutes?|hora?s?|hours?|h|days?|d[ií]as?|'
   r'months?|meses|sesiones?|sessions?))\b',
   caseSensitive: false,
 );
 
-final _percentCue = RegExp(r'\d+(?:[.,]\d+)?\s*%');
+final _percentCue = cachedRegExp(r'\d+(?:[.,]\d+)?\s*%');
 
-final _reviewCue = RegExp(
+final _reviewCue = cachedRegExp(
   r'\b(?:reviews?|rese[nñ]as|opiniones|valoraciones|google\s+reviews?)\b',
   caseSensitive: false,
 );
 
-final _pricingLanguage = RegExp(
+final _pricingLanguage = cachedRegExp(
   r'\b(?:price|precio|precios|preț|pret|tarifa|tarifas|cost|coste|costo|'
   r'from|desde|a\s+partir\s+de|de\s+la|starting(?:\s+at)?|starts\s+from)\b|'
   r'(?:سعر|بسعر|أسعار|اسعار|تكلفة|يبدأ من|تبدأ من|تبدا من)',
   caseSensitive: false,
 );
 
-String digitsOnly(String raw) => raw.replaceAll(RegExp(r'\D'), '');
+String digitsOnly(String raw) => raw.replaceAll(cachedRegExp(r'\D'), '');
 
 bool looksLikePhoneNumber(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim();
@@ -136,19 +137,19 @@ bool looksLikePhoneNumber(String raw) {
   }
   if (_phoneCue.hasMatch(lower)) return true;
 
-  final compact = t.replaceAll(RegExp(r'[\s().\-./]'), '');
-  if (RegExp(r'^\+\d{8,15}$').hasMatch(compact)) return true;
-  if (RegExp(r'^00\d{8,15}$').hasMatch(compact) &&
+  final compact = t.replaceAll(cachedRegExp(r'[\s().\-./]'), '');
+  if (cachedRegExp(r'^\+\d{8,15}$').hasMatch(compact)) return true;
+  if (cachedRegExp(r'^00\d{8,15}$').hasMatch(compact) &&
       !hasCurrencySignal(t) &&
       !_pricingLanguage.hasMatch(t)) {
     return true;
   }
-  if (RegExp(r'(?:\+|00)\s*3[0-9]\b').hasMatch(t) &&
+  if (cachedRegExp(r'(?:\+|00)\s*3[0-9]\b').hasMatch(t) &&
       digitsOnly(t).length >= 9) {
     return true;
   }
   // Grouped ES mobiles/landlines: 621 145 099, 933 623 707.
-  if (RegExp(
+  if (cachedRegExp(
         r'(?:\+|00)?\s*(?:34[\s.\-/]*)?[6-9]\d{2}[\s.\-/]+\d{3}[\s.\-/]+\d{3}\b',
       ).hasMatch(t) &&
       digitsOnly(t).length >= 9) {
@@ -192,14 +193,14 @@ bool looksLikeAddressNumber(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return false;
   if (_addressCue.hasMatch(t)) return true;
-  if (RegExp(r'\b\d{5}\s+[A-Za-zÀ-ÿ]').hasMatch(t) &&
+  if (cachedRegExp(r'\b\d{5}\s+[A-Za-zÀ-ÿ]').hasMatch(t) &&
       !hasCurrencySignal(t) &&
       !hasPricingLanguage(t)) {
     return true; // 08021 Barcelona
   }
-  if (RegExp(r'\b\d{4,5}\s*[-–]\s*[A-Za-zÀ-ÿ]').hasMatch(t)) return true;
-  if (RegExp(r'\b\d+º').hasMatch(t)) return true;
-  if (RegExp(r'\bE-\d\b').hasMatch(t)) return true;
+  if (cachedRegExp(r'\b\d{4,5}\s*[-–]\s*[A-Za-zÀ-ÿ]').hasMatch(t)) return true;
+  if (cachedRegExp(r'\b\d+º').hasMatch(t)) return true;
+  if (cachedRegExp(r'\bE-\d\b').hasMatch(t)) return true;
   return false;
 }
 
@@ -211,7 +212,7 @@ const _kDurationUnit =
 bool _amountHasCurrencyQuote(int n, String raw) {
   if (n <= 0 || raw.trim().isEmpty) return false;
   final amount = RegExp.escape('$n');
-  return RegExp(
+  return cachedRegExp(
     r'(?:\$|€|£)\s*'
     '$amount'
     r'(?:[.,]\d+)?'
@@ -225,7 +226,7 @@ bool _amountHasCurrencyQuote(int n, String raw) {
 bool _amountAttachedToDurationUnit(int n, String raw) {
   if (n <= 0 || raw.trim().isEmpty) return false;
   final amount = RegExp.escape('$n');
-  return RegExp(
+  return cachedRegExp(
     '(?<![\\d.,\$€£])$amount(?:[.,]\\d+)?\\s*$_kDurationUnit\\b',
     caseSensitive: false,
   ).hasMatch(raw);
@@ -253,7 +254,7 @@ bool looksLikeDurationQuotedAsPrice({
 bool _amountAttachedToMonthlyUnit(int n, String raw) {
   if (n <= 0 || raw.trim().isEmpty) return false;
   final amount = RegExp.escape('$n');
-  return RegExp(
+  return cachedRegExp(
     r'(?:\$|€|£)?\s*'
     '$amount'
     r'(?:[.,]\d+)?\s*(?:/\s*mo(?:nth)?s?\b|\bper\s+month\b|\ba\s+month\b)',
@@ -264,7 +265,7 @@ bool _amountAttachedToMonthlyUnit(int n, String raw) {
 bool _amountLooksLikeMonthlyInstallment(int n, String raw) {
   if (_amountAttachedToMonthlyUnit(n, raw)) return true;
   final amount = RegExp.escape('$n');
-  return RegExp(
+  return cachedRegExp(
     r'\bmonthly\s+(?:from|payment|instalments?|installments?|finance|financing)\b'
     r'.{0,32}(?:\$|€|£)?\s*'
     '$amount'
@@ -288,7 +289,7 @@ bool looksLikeMonthlyFinancingQuotedAsPrice({
   if (n <= 0) return false;
   final price = rawPriceText.replaceAll('\u00a0', ' ');
   final all = '$blob\n$price'.replaceAll('\u00a0', ' ');
-  if (RegExp(
+  if (cachedRegExp(
     r'(?:per|/)\s*(?:unit|syringe|ml|vial|session|area|graft)\b',
     caseSensitive: false,
   ).hasMatch(price)) {
@@ -314,7 +315,7 @@ bool looksLikeTypicalMarketRangeQuotedAsPrice({
   final price = rawPriceText.replaceAll('\u00a0', ' ');
   final hay = '$price\n$blob';
   if (price.length <= 90 &&
-      !RegExp(
+      !cachedRegExp(
         r'\btypical|\bprices?\s+vary|\bon average\b|\branging from\b|'
         r'\bmight\s+cost\b|\bwill\s+vary\b|\bcost\s+between\b',
         caseSensitive: false,
@@ -322,7 +323,7 @@ bool looksLikeTypicalMarketRangeQuotedAsPrice({
       _amountHasCurrencyQuote(n, price)) {
     return false;
   }
-  return RegExp(
+  return cachedRegExp(
     r'\btypical(?:ly)?\s+sessions?\s+rang|'
     r'\bprices?\s+vary\s+depending\b|'
     r'\b(?:cost|price)s?\s+will\s+vary\s+depending\b|'
@@ -355,7 +356,7 @@ bool looksLikeGraftOrFollicleQuantity(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return false;
   if (looksLikePerGraftQuotedPrice(t)) return false;
-  return RegExp(
+  return cachedRegExp(
     r'^\s*(?:up\s+to\s+|area\s*\d+\s*[–\-—]\s*)?'
     r'\d[\d.,\s]*'
     r'(?:\s*(?:–|—|-|to|و|\+)\s*\d[\d.,\s]*)?'
@@ -374,7 +375,7 @@ bool looksLikeHairGraftPackageMenuLabel(String raw) {
   if (t.isEmpty || t.length > 90 || t.contains('?') || t.contains('؟')) {
     return false;
   }
-  return RegExp(
+  return cachedRegExp(
     r'\d[\d.,]*\s*(?:' +
         _kHairTechniqueWord +
         r'\s+)?-?\s*'
@@ -388,7 +389,7 @@ bool looksLikePerGraftQuotedPrice(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.isEmpty) return false;
   if (looksLikeEffectivePerGraftMarketing(t)) return false;
-  return RegExp(
+  return cachedRegExp(
     r'(?:per\s+graft|/graft|per\s+follicle|/follicle|'
     r'لكل\s+بصيلة|للبصيلة|per\s+grafturi)',
     caseSensitive: false,
@@ -398,7 +399,7 @@ bool looksLikePerGraftQuotedPrice(String raw) {
 bool looksLikeBotoxPerUnitQuote(String raw, {String procedure = ''}) {
   final t = '$raw $procedure'.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
-  if (!RegExp(
+  if (!cachedRegExp(
     r'(?:per|/)\s*units?\b|'
     r'(?:per|/)\s*iu\b|'
     r'\b1\s*units?\b|'
@@ -410,7 +411,7 @@ bool looksLikeBotoxPerUnitQuote(String raw, {String procedure = ''}) {
   ).hasMatch(t)) {
     return false;
   }
-  return RegExp(
+  return cachedRegExp(
     r'botox|toxin|dysport|xeomin|neuromod|wrinkle\s+relax|toxina|botulin',
   ).hasMatch(t);
 }
@@ -418,8 +419,8 @@ bool looksLikeBotoxPerUnitQuote(String raw, {String procedure = ''}) {
 /// Hair conditioning products called Botox are not injectable neurotoxin.
 bool looksLikeNonInjectableBotox(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
-  if (!RegExp(r'botox|bótox|botulin').hasMatch(t)) return false;
-  return RegExp(
+  if (!cachedRegExp(r'botox|bótox|botulin').hasMatch(t)) return false;
+  return cachedRegExp(
     r'anti[- ]?frizz|anti[- ]?pluis|antiencresp|anti[- ]?encresp|'
     r'botox\s+(?:capilar|hair|haar|capillaire)|(?:hair|haar|capillary)\s+botox|'
     r'haar[- ]?botox|botox[- ]?haar|'
@@ -441,7 +442,7 @@ double botoxPerUnitJustifiedMax(String currency) {
 bool looksLikeEffectivePerGraftMarketing(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'effective\s+cost\s+per\s+graft|'
     r'lowest\s+effective\s+cost|'
     r'cost\s+per\s+graft\s+at\s+full|'
@@ -457,7 +458,7 @@ bool looksLikeEffectivePerGraftMarketing(String raw) {
 bool looksLikeHairNonStartingRow(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.isEmpty) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'\bconsultation\b|theatre\s+deposit|non[- ]?refundable|'
     r'no\s+wait\s+booking|'
     r'female\s+hair\s+loss\s+specialist|'
@@ -471,7 +472,7 @@ bool looksLikeHairNonStartingRow(String raw) {
     return true;
   }
   // Standalone add-on line, not "£3,199 including the £200 arrangement fee".
-  return RegExp(r'arrangement\s+fee', caseSensitive: false).hasMatch(t) &&
+  return cachedRegExp(r'arrangement\s+fee', caseSensitive: false).hasMatch(t) &&
       !hairRowIncludesMandatoryAddOnFee(t);
 }
 
@@ -479,14 +480,14 @@ bool looksLikeHairNonStartingRow(String raw) {
 bool looksLikeHairLargerThanStartingPackage(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'lowest (?:total )?payable|lowest package|package\s*1\b|'
     r'min(?:imum)?\s+fee|up to\s*3[.,]?000',
     caseSensitive: false,
   ).hasMatch(t)) {
     return false;
   }
-  return RegExp(
+  return cachedRegExp(
     r'package\s*[2-9]\b|up to\s*5[.,]?000|5,?000\s*grafts|'
     r'full coverage|including the crown',
     caseSensitive: false,
@@ -497,7 +498,7 @@ bool looksLikeHairLargerThanStartingPackage(String raw) {
 bool looksLikeHairMarketComparisonRow(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'uk average|central london and harley|greater london,|'
     r'grafts actually needed|estimated market|wimpole|'
     r'estimated difference|around £\s*\d|market range|'
@@ -511,17 +512,17 @@ bool looksLikeHairDhiWhenFueRequested({
   required String blob,
 }) {
   final want = procedure.replaceAll('\u00a0', ' ').toLowerCase();
-  if (!RegExp(r'\bfue\b').hasMatch(want)) return false;
+  if (!cachedRegExp(r'\bfue\b').hasMatch(want)) return false;
   final t = blob.replaceAll('\u00a0', ' ').toLowerCase();
-  if (!RegExp(r'\bdhi\b|\bchoi pen\b').hasMatch(t)) return false;
-  if (RegExp(r'\bfue\b|\bsapphire\b').hasMatch(t)) return false;
+  if (!cachedRegExp(r'\bdhi\b|\bchoi pen\b').hasMatch(t)) return false;
+  if (cachedRegExp(r'\bfue\b|\bsapphire\b').hasMatch(t)) return false;
   return true;
 }
 
 bool looksLikeHairStartingPackageRow(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'lowest total payable|lowest package|'
     r'package\s*1\b|min(?:imum)?\s+fee|'
     r'starts?\s+at|up to\s*3[.,]?000',
@@ -531,7 +532,7 @@ bool looksLikeHairStartingPackageRow(String raw) {
 
 bool hairRowIncludesMandatoryAddOnFee(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
-  return RegExp(
+  return cachedRegExp(
     r'total payable|including the .{0,24}(?:arrangement|admin|booking) fee|'
     r'incl(?:udes|uding)?\.?\s*(?:the\s+)?(?:arrangement|admin|booking) fee',
     caseSensitive: false,
@@ -542,20 +543,20 @@ bool hairRowIncludesMandatoryAddOnFee(String raw) {
 double? exploreMandatoryPackageAddOnFee(String blob) {
   final t = blob.replaceAll('\u00a0', ' ');
   if (t.trim().isEmpty) return null;
-  if (!RegExp(
+  if (!cachedRegExp(
     r'arrangement fee|admin(?:istration)? fee|booking fee',
     caseSensitive: false,
   ).hasMatch(t)) {
     return null;
   }
-  if (!RegExp(
+  if (!cachedRegExp(
     r'every package|all packages|applies to every|added to every|'
     r'total payable.{0,40}arrangement',
     caseSensitive: false,
   ).hasMatch(t)) {
     return null;
   }
-  final m = RegExp(
+  final m = cachedRegExp(
     r'(?:arrangement|admin(?:istration)?|booking)\s+fee[^£$€\d]{0,48}'
     r'[£$€]\s*(\d{2,4})|'
     r'[£$€]\s*(\d{2,4})\s+(?:arrangement|admin(?:istration)?|booking)\s+fee',
@@ -577,7 +578,7 @@ bool looksLikeHairOfficialCostMenuUrl(String sourceUrl) {
     path =
         Uri.parse(raw.contains('://') ? raw : 'https://$raw').path.toLowerCase();
   } catch (_) {}
-  return RegExp(
+  return cachedRegExp(
     r'(?:^|/)(?:fees|our-fees|prices?|pricing|price-list|pricelist|'
     r'price-guide|hair-transplant-cost|cost-and-prices|cost)'
     r'(?:/|$|\.|-)',
@@ -617,12 +618,12 @@ bool looksLikeHairCachedNonStartingPackageFrom({
 bool looksLikeHairMarketPerGraftBlurb(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.isEmpty) return false;
-  if (!RegExp(
+  if (!cachedRegExp(
     r'\b(?:fue|fut|grafts?|follicles?|hair transplants?)\b',
   ).hasMatch(t)) {
     return false;
   }
-  return RegExp(
+  return cachedRegExp(
     r'\bhair transplants?\s+in\s+(?:london|the\s+uk)\s+typically\b|'
     r'(?:often|typically|usually|commonly).{0,48}\bper graft\b|'
     r'\bper graft\b.{0,40}(?:often|typically|usually|common)|'
@@ -640,14 +641,14 @@ bool looksLikeHairFutWhenFueRequested({
   required String blob,
 }) {
   final want = procedure.replaceAll('\u00a0', ' ').toLowerCase();
-  if (!RegExp(r'\bfue\b').hasMatch(want)) return false;
+  if (!cachedRegExp(r'\bfue\b').hasMatch(want)) return false;
   final t = blob.replaceAll('\u00a0', ' ').toLowerCase();
-  if (!RegExp(r'\bfut\b|\bstrip method\b|\bstrip (?:surgery|procedure)\b')
+  if (!cachedRegExp(r'\bfut\b|\bstrip method\b|\bstrip (?:surgery|procedure)\b')
       .hasMatch(t)) {
     return false;
   }
-  if (RegExp(r'\bfue\b').hasMatch(t) &&
-      !RegExp(
+  if (cachedRegExp(r'\bfue\b').hasMatch(t) &&
+      !cachedRegExp(
         r'\bfut\b.{0,48}(?:£|gbp|per graft)|(?:£|gbp|per graft).{0,24}\bfut\b',
       ).hasMatch(t)) {
     return false;
@@ -664,14 +665,14 @@ bool looksLikeHairProcedureLandingUrl(String sourceUrl) {
     path =
         Uri.parse(raw.contains('://') ? raw : 'https://$raw').path.toLowerCase();
   } catch (_) {}
-  if (RegExp(
+  if (cachedRegExp(
     r'cost-and-prices|hair-transplant-cost|transplant-cost|'
     r'/(?:our-)?fees(?:/|$)|/prices?(?:/|$)|/pricing(?:/|$)|'
     r'/price-list|/pricelist|/price-guide',
   ).hasMatch(path)) {
     return false;
   }
-  return RegExp(
+  return cachedRegExp(
     r'fue-hair-transplant|/fue(?:/|$)|hair-restoration|'
     r'/hair-transplant(?:/|$)',
   ).hasMatch(path);
@@ -686,7 +687,7 @@ bool looksLikeCityMarketPricingGuideUrl(String sourceUrl) {
     path =
         Uri.parse(raw.contains('://') ? raw : 'https://$raw').path.toLowerCase();
   } catch (_) {}
-  return RegExp(
+  return cachedRegExp(
     r'complete-pricing-guide|complete-price-guide|complete-cost-guide|'
     r'complete-pricing|typical-[-]?cost|cost-in-london-complete',
     caseSensitive: false,
@@ -702,7 +703,7 @@ bool looksLikeHairStaleLandingQuote({
 }) {
   if (!looksLikeHairProcedureLandingUrl(sourceUrl)) return false;
   if (hairGraftSessionQuantity(blob) != null) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'min(?:imum)?\s+fee|2,?400\s*[-–—]\s*3,?000\s*grafts',
     caseSensitive: false,
   ).hasMatch(blob)) {
@@ -710,7 +711,7 @@ bool looksLikeHairStaleLandingQuote({
   }
   // Amount, currency and the absence of a graft table cannot establish age.
   // Ownership, location and method are checked independently by the caller.
-  return RegExp(
+  return cachedRegExp(
     r'\b(?:expired|superseded|archived|discontinued|no longer available)\b'
     r'.{0,70}\b(?:price|offer|tariff|package)\b|'
     r'\b(?:price|offer|tariff|package)\b.{0,70}'
@@ -720,7 +721,7 @@ bool looksLikeHairStaleLandingQuote({
 }
 
 bool looksLikeUnshavenHairVariant(String raw) {
-  return RegExp(
+  return cachedRegExp(
     r'\bunshaven\b|\bun-shaven\b|\bno[- ]shave\b',
     caseSensitive: false,
   ).hasMatch(raw);
@@ -731,7 +732,7 @@ double? hairGraftSessionQuantity(String raw) {
   final t = raw.replaceAll('\u00a0', ' ');
   if (t.trim().isEmpty) return null;
   if (looksLikePerGraftQuotedPrice(t)) return null;
-  final m = RegExp(
+  final m = cachedRegExp(
     r'(?:up\s+to\s+)?'
     r'(\d{1,3}(?:[.,]\d{3})+|\d{2,4})'
     r'\s*(?:' +
@@ -749,13 +750,13 @@ double? hairGraftSessionQuantity(String raw) {
   // when the source used a thousands separator.
   final rawNum = m.group(1) ?? '';
   if (rawNum.contains('.') &&
-      !RegExp(r'^\d{1,3}(?:\.\d{3})+$').hasMatch(rawNum) &&
-      RegExp(r'^\d+\.\d{1,2}$').hasMatch(rawNum)) {
+      !cachedRegExp(r'^\d{1,3}(?:\.\d{3})+$').hasMatch(rawNum) &&
+      cachedRegExp(r'^\d+\.\d{1,2}$').hasMatch(rawNum)) {
     final dec = double.tryParse(rawNum);
     if (dec != null && dec >= 50 && dec <= 12000) return dec;
     return null;
   }
-  if (rawNum.contains('.') && RegExp(r'^\d{1,3}(?:\.\d{3})+$').hasMatch(rawNum)) {
+  if (rawNum.contains('.') && cachedRegExp(r'^\d{1,3}(?:\.\d{3})+$').hasMatch(rawNum)) {
     return double.tryParse(rawNum.replaceAll('.', ''));
   }
   return n;
@@ -777,7 +778,7 @@ bool looksLikeGraftCountMistakenForPrice({
 /// Strip "3,000-graft" / "1,000 FUE grafts" so the parser sees "from £3,500".
 String stripGraftQuantityPhrases(String raw) {
   return raw.replaceAll(
-    RegExp(
+    cachedRegExp(
       r'\b(?:up\s+to\s+)?\d{1,3}(?:[.,]\d{3})+\s*(?:' +
           _kHairTechniqueWord +
           r'\s+)?-?\s*grafts?\+?\b|'
@@ -808,7 +809,7 @@ String stripGraftQuantityPhrases(String raw) {
 /// range because "per" sits between the amount and the unit.
 String stripDosageQuantityPhrases(String raw) {
   var out = raw.replaceAll(
-    RegExp(
+    cachedRegExp(
       r'\b(?:up\s+to\s+)?\d[\d.,]*\s*(?:–|—|-|to|and)\s*\d[\d.,]*\s*'
       r'(?:units?|unitate|unitati|unități|iu|ml|cc|syringes?|vials?|ampoules?|'
       r'areas?|zones?|zone|sessions?|sedinte|ședințe|sedințe|'
@@ -819,7 +820,7 @@ String stripDosageQuantityPhrases(String raw) {
   );
   // Singular doses must not become prices: "50 unități", "3 zone".
   out = out.replaceAll(
-    RegExp(
+    cachedRegExp(
       r'\b\d[\d.,]*\s*(?:units?|unitate|unitati|unități|iu|ml|cc|syringes?|'
       r'vials?|ampoules?|areas?|zones?|zone|sessions?|sedinte|ședințe|sedințe|'
       r'%|cm|mm|وحدات|مل|منطقة|جلسة)\b',
@@ -861,7 +862,7 @@ bool looksLikeCalendarYearPrice(double amount, String raw) {
   final n = amount.round();
   if (n < 2000 || n > 2100) return false;
   final t = raw.toLowerCase();
-  return RegExp(
+  return cachedRegExp(
     r'(?:pre[tț]|price|precio|tarife?|preturi)\s*20\d{2}|'
     r'20\d{2}\s*(?:pre[tț]|edition|ghid|guide)',
   ).hasMatch(t);
@@ -878,7 +879,7 @@ const _kClinicOwnAttachedRange =
     r')?)?';
 
 /// Menu fact rows (`Cost: 500 AED to 1000 AED`) and "starts from AED 1500".
-final _kClinicLabeledCostRe = RegExp(
+final _kClinicLabeledCostRe = cachedRegExp(
   r'(?:cost|price|fee)\s*:\s*'
   '$_kClinicOwnCurrency?'
   r'\s*\d[\d.,]*'
@@ -898,7 +899,7 @@ final _kClinicLabeledCostRe = RegExp(
   caseSensitive: false,
 );
 
-final _kClinicOwnPublishedPriceRe = RegExp(
+final _kClinicOwnPublishedPriceRe = cachedRegExp(
   r'(?:cost|price|fee)\s*:\s*'
   '$_kClinicOwnCurrency?'
   r'\s*\d[\d.,]*'
@@ -1018,12 +1019,12 @@ bool looksLikeBrandEmbeddedDigitPrice(double priceMin, String blob) {
   if (n < 100 || n > 9999) return false;
   final t = blob.replaceAll('\u00a0', ' ');
   final digits = n.toString();
-  final brand = RegExp(
+  final brand = cachedRegExp(
     r'\b(?:at\s+)?skin\s*-?\s*' + digits + r'\b',
     caseSensitive: false,
   );
   if (!brand.hasMatch(t)) return false;
-  final listed = RegExp(
+  final listed = cachedRegExp(
     r'(?:starts?\s+from|starting(?:\s+from)?|cost\s*:|price\s*:)\s*'
     r'(?:aed|usd|eur|gbp|€|£|\$|درهم|د\.إ)\s*' +
         digits +
@@ -1040,7 +1041,7 @@ bool looksLikeBarePriceLabel(String raw) {
   const cur = r'(?:aed|usd|eur|gbp|ron|lei|try|dhs|dirhams?|€|£|\$|د\.إ|درهم)';
   const unit = r'(?:(?:per|/)\s*(?:unit|units|iu|unidad(?:es)?|syringe|'
       r'ml|vial|session|area|graft)s?)';
-  return RegExp(
+  return cachedRegExp(
     r'^(?:from|starting(?:\s+(?:at|from))?|starts\s+(?:at|from)|'
     r'cost|price|de la|desde|يبدأ من|تبدأ من)?\s*'
     '$cur?' r'\s*'
@@ -1057,10 +1058,10 @@ bool looksLikePublishedPriceUnitLabel(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim().toLowerCase();
   if (t.isEmpty) return false;
   final compact = t
-      .replaceAll(RegExp(r'[–—/,]+'), ' ')
-      .replaceAll(RegExp(r'\s+'), ' ')
+      .replaceAll(cachedRegExp(r'[–—/,]+'), ' ')
+      .replaceAll(cachedRegExp(r'\s+'), ' ')
       .trim();
-  return RegExp(
+  return cachedRegExp(
     r'^(?:per\s+|/\s*)?(?:unit|units|iu|unidad(?:es)?|syringe|ml|cc|'
     r'vial|session|area|areas|zone|zones|graft|grafts)$',
     caseSensitive: false,
@@ -1072,7 +1073,7 @@ bool looksLikePublishedPriceUnitLabel(String raw) {
 bool looksLikeFinancingOrPaymentHeading(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim().toLowerCase();
   if (t.isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'\bfinanc(?:e|ing|ial|iaci[oó]n)\b|'
     r'\bmonthly payments?\b|'
     r'\bpayment plans?\b|'
@@ -1087,7 +1088,7 @@ bool looksLikeFinancingOrPaymentHeading(String raw) {
 }
 
 /// Previous/list-price columns do not own the current payable treatment fee.
-bool looksLikeSupersededPriceColumnHeader(String raw) => RegExp(
+bool looksLikeSupersededPriceColumnHeader(String raw) => cachedRegExp(
       r'^(?:antes|was|old\s+price|previous\s+price|precio\s+anterior)'
       r'(?:\s*\([^()]*\))?\s*$',
     ).hasMatch(foldExploreCityText(raw).trim());
@@ -1096,7 +1097,7 @@ bool looksLikeSupersededPriceColumnHeader(String raw) => RegExp(
 bool looksLikeUnilateralBreastStartingRow(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'\bunilateral\b|\bone[- ]breast\b|\bsingle[- ]breast\b',
     caseSensitive: false,
   ).hasMatch(t);
@@ -1107,7 +1108,7 @@ bool looksLikeUnilateralBreastStartingRow(String raw) {
 bool looksLikeComplicationOrAftercareHeading(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim().toLowerCase();
   if (t.isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'\bpain following\b|'
     r'\bfollowing .{0,48}(?:surgery|augmentation|enlargement|procedure)\b|'
     r'\bside effects?\b|'
@@ -1124,13 +1125,13 @@ bool looksLikeSeoCostPageHeading(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return false;
   final lo = t.toLowerCase();
-  if (RegExp(
+  if (cachedRegExp(
     r'\bcosts?\s+from\b|\bprices?\s+from\b|\bfrom\s+[£$€]?\s*\d',
     caseSensitive: false,
   ).hasMatch(lo)) {
     return false;
   }
-  return RegExp(
+  return cachedRegExp(
     r'\b(?:breast|boob|enlargement|augmentation|implants?|surgery|'
     r'procedure|rhinoplast|botox|filler|laser|peel|hair)\b'
     r'.{0,48}\b(?:cost|costs|prices?|pricing)\s*$',
@@ -1186,10 +1187,10 @@ bool looksLikePriceMenuHeadingOnly(String raw) {
   final t = raw
       .replaceAll('\u00a0', ' ')
       .toLowerCase()
-      .replaceAll(RegExp(r'[^a-z0-9ăâîșț]+'), ' ')
+      .replaceAll(cachedRegExp(r'[^a-z0-9ăâîșț]+'), ' ')
       .trim();
   if (t.isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'^(?:price guide|price list|our fees|our prices|prices|pricing|'
     r'tariffs?|fees|cost|costs|'
     r'(?:the )?price of the procedures?|'
@@ -1205,13 +1206,13 @@ bool looksLikePriceMenuHeadingOnly(String raw) {
 bool looksLikeBreastAugmentationAddOnRow(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'\bareolas?\b|\bareole\b|\bareolei\b|\bareolelor\b',
     caseSensitive: false,
   ).hasMatch(t)) {
     return true;
   }
-  return RegExp(
+  return cachedRegExp(
     r'in case of breast augment|'
     r'correction of areola|'
     r'corec[tț]ie(?:a)? (?:de )?areol|'
@@ -1228,7 +1229,7 @@ bool looksLikeBreastAugmentationAddOnRow(String raw) {
 bool looksLikePartialRhinoplastyStarting(String raw) {
   final folded = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (folded.trim().isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'\btip\s+rhino|\brhinoplasty\s+tip|\bnose\s+tip|'
     r'\btip-only|\balarplasty|\balar\s+base|'
     r'revision\s+rhino|\bsecondary\s+rhino|\bethnic\s+rhino|'
@@ -1246,7 +1247,7 @@ bool looksLikePartialRhinoplastyStarting(String raw) {
 bool looksLikeHospitalFeesOnlyQuote(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'inclusive of.{0,48}hospital|'
     r'includes?.{0,32}hospital (?:stay|costs?|fees?)|'
     r'night.?s stay in hospital|'
@@ -1255,7 +1256,7 @@ bool looksLikeHospitalFeesOnlyQuote(String raw) {
   ).hasMatch(t)) {
     return false;
   }
-  return RegExp(
+  return cachedRegExp(
     r'hospital charges|'
     r'\bguide price\b|'
     r'estimated guide to the hospital|'
@@ -1281,13 +1282,13 @@ bool looksLikeStarredHospitalGuidePrice({
     return false;
   }
   if (priceMin <= 0 || priceMin >= 5000) return false;
-  return RegExp(r'\d[\d,]*\s*\*').hasMatch(blob.replaceAll('\u00a0', ' '));
+  return cachedRegExp(r'\d[\d,]*\s*\*').hasMatch(blob.replaceAll('\u00a0', ' '));
 }
 
 bool looksLikePrimaryRhinoplastyStarting(String raw) {
   final folded = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (looksLikePartialRhinoplastyStarting(folded)) return false;
-  return RegExp(
+  return cachedRegExp(
     r'\bprimary\b|\bstandard primary\b|\bopen rhino|\bclosed rhino',
     caseSensitive: false,
   ).hasMatch(folded);
@@ -1297,7 +1298,7 @@ bool looksLikePrimaryRhinoplastyStarting(String raw) {
 bool looksLikePatientAnecdotePrice(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'\bi paid\b|\bwe paid\b|'
     r'\bpatient(?:s)?\s+(?:reported|paid|who reported|who paid)\b|'
     r'\breviews?\s+mention\b|'
@@ -1310,7 +1311,7 @@ bool looksLikePatientAnecdotePrice(String raw) {
 int explorePublishedOrReviewedYear(String raw) {
   final t = raw.replaceAll('\u00a0', ' ');
   if (t.trim().isEmpty) return 0;
-  final m = RegExp(
+  final m = cachedRegExp(
     r'(?:last\s+(?:reviewed|updated|modified)|published(?:\s+on)?|'
     r'revised(?:\s+in)?|updated(?:\s+on)?|medically reviewed)'
     r'[^\d]{0,48}((?:19|20)\d{2})|'
@@ -1331,7 +1332,7 @@ int explorePublishedOrReviewedYear(String raw) {
 bool looksLikeNonTreatmentPriceLabel(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'\bworth\s+(?:aed|usd|eur|gbp|€|£|\$|د\.إ|درهم)?\s*\d|'
     r'\(\s*worth\b|'
     r'\bfree\s+(?:comprehensive\s+)?assessment\b|'
@@ -1351,7 +1352,7 @@ String _hostFromSourceUrl(String sourceUrl) {
   if (raw.isEmpty) return '';
   try {
     final uri = Uri.parse(raw.contains('://') ? raw : 'https://$raw');
-    return uri.host.toLowerCase().replaceFirst(RegExp(r'^www\.'), '');
+    return uri.host.toLowerCase().replaceFirst(cachedRegExp(r'^www\.'), '');
   } catch (_) {
     return '';
   }
@@ -1371,10 +1372,10 @@ bool currencyLooksLikeUsd(String currency, String blob) {
   if (t.contains('£') ||
       t.contains('gbp') ||
       t.contains('€') ||
-      RegExp(r'\beur\b').hasMatch(t)) {
+      cachedRegExp(r'\beur\b').hasMatch(t)) {
     return false;
   }
-  return t.contains(r'$') || RegExp(r'\busd\b').hasMatch(t);
+  return t.contains(r'$') || cachedRegExp(r'\busd\b').hasMatch(t);
 }
 
 /// Shopify Dawn/page-editor default product (`from $399.99`), not a clinic menu.
@@ -1388,18 +1389,18 @@ bool looksLikeShopifyThemeDummyPrice({
   final blob = '$rawPriceText\n$rawEvidence\n$procedure'
       .replaceAll('\u00a0', ' ')
       .toLowerCase();
-  if (RegExp(
+  if (cachedRegExp(
     r'page\s*editor|lorem ipsum|placeholder product|theme preview',
   ).hasMatch(blob)) {
     return true;
   }
   if (!currencyLooksLikeUsd(currency, blob)) return false;
-  if (RegExp(r'\$\s*399(?:\.99)?\b|\b399\.99\b').hasMatch(blob)) {
+  if (cachedRegExp(r'\$\s*399(?:\.99)?\b|\b399\.99\b').hasMatch(blob)) {
     return true;
   }
   final rounded = priceMin.round();
   if ((priceMin - 399.99).abs() < 0.02 || rounded == 399 || rounded == 400) {
-    return RegExp(r'399|from\s*\$').hasMatch(blob);
+    return cachedRegExp(r'399|from\s*\$').hasMatch(blob);
   }
   return false;
 }
@@ -1420,7 +1421,7 @@ bool looksLikeUsdQuotedOnUkHost({
 bool looksLikeSearchQuickFactsBlob(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'rezumat generat de ai|'
     r'\bai overview\b|'
     r'\bwhat to expect\b|'
@@ -1432,7 +1433,7 @@ bool looksLikeSearchQuickFactsBlob(String raw) {
   ).hasMatch(t)) {
     return true;
   }
-  if (!RegExp(r'\bquick facts\b', caseSensitive: false).hasMatch(t)) {
+  if (!cachedRegExp(r'\bquick facts\b', caseSensitive: false).hasMatch(t)) {
     return false;
   }
   return !looksLikeClinicLabeledCostFact(t);
@@ -1442,28 +1443,28 @@ bool looksLikeSearchQuickFactsBlob(String raw) {
 bool looksLikeSeoQuotedPriceHeadline(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return false;
-  if (RegExp(r'\bquick facts\b', caseSensitive: false).hasMatch(t) &&
+  if (cachedRegExp(r'\bquick facts\b', caseSensitive: false).hasMatch(t) &&
       !looksLikeClinicLabeledCostFact(t)) {
     return true;
   }
   final lo = t.toLowerCase();
-  final hasPriceWord = RegExp(
+  final hasPriceWord = cachedRegExp(
     r'\b(price|prices|cost|costs|pricing|tarif|precio|preț|pret)\b',
     caseSensitive: false,
   ).hasMatch(lo);
   if (!hasPriceWord) return false;
   final titleLike = t.contains('|') ||
-      RegExp(r'[—–-]\s*from\b', caseSensitive: false).hasMatch(lo) ||
-      RegExp(
+      cachedRegExp(r'[—–-]\s*from\b', caseSensitive: false).hasMatch(lo) ||
+      cachedRegExp(
         r'\bprice\s+(?:in\s+)?(?:abu dhabi|dubai|sharjah)\b',
         caseSensitive: false,
       ).hasMatch(lo);
   if (!titleLike) return false;
-  final stuffedCity = RegExp(
+  final stuffedCity = cachedRegExp(
     r'\b(abu dhabi|dubai|sharjah|uae|united arab emirates)\b',
     caseSensitive: false,
   ).hasMatch(lo);
-  final fromAmount = RegExp(
+  final fromAmount = cachedRegExp(
     r'\b(from|starting(?:\s+from)?|starts\s+from)\b.{0,24}'
     r'(?:aed|usd|eur|gbp|dhs|dirhams?|€|£|\$)?\s*\d',
     caseSensitive: false,
@@ -1479,7 +1480,7 @@ bool looksLikeSeoQuotedPriceHeadline(String raw) {
 bool looksLikeMixedServiceBundle(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'الباقة\s*(الذهبية|الماسية|البلاتينية)|'
     r'\b(gold|diamond|platinum)\s+package\b|'
     r'اختر أي\s*\d|'
@@ -1498,7 +1499,7 @@ bool looksLikeMixedServiceBundle(String raw) {
       r'(?:neuromodul\w*|neurotoxin\w*|botox|b[oó]tox|botulin\w*|'
       r'toxina\s+botulin\w*|anti[\s-]?wrinkle)';
   const connector = r'\s*(?:\+|&|and|y|con|with|plus)\s*';
-  return RegExp(
+  return cachedRegExp(
     '\\b$booster$connector$toxin\\b|\\b$toxin$connector$booster\\b',
     caseSensitive: false,
   ).hasMatch(t);
@@ -1517,8 +1518,8 @@ bool looksLikeSurgicalChinProcedure({
   final local = '$rowLabel\n$rowEvidence';
   final uri = Uri.tryParse(sourceUrl);
   final path = foldExploreCityText(uri?.path ?? '')
-      .replaceAll(RegExp(r'[/_.-]+'), ' ');
-  final surgery = RegExp(
+      .replaceAll(cachedRegExp(r'[/_.-]+'), ' ');
+  final surgery = cachedRegExp(
     r'\b(?:mentoplast\w*|genioplast\w*)\b|'
     r'\bchin\s+(?:implants?|reduction|surgery|osteotomy)\b|'
     r'\b(?:implants?|reduction|osteotomy)\s+(?:of\s+(?:the\s+)?)?chin\b|'
@@ -1526,12 +1527,12 @@ bool looksLikeSurgicalChinProcedure({
     r'(?:de\s+|del\s+)?menton\b|'
     r'\bmenton\s+(?:con\s+)?(?:implante\w*|protesis)\b',
   );
-  final nonSurgical = RegExp(
+  final nonSurgical = cachedRegExp(
     r'\bnon[\s-]?surgical\b|\bnonsurgical\b|'
     r'\bsin\s+cirugia\b|\bno\s+quirurgic\w*\b|'
     r'\bfara\s+operatie\b',
   );
-  final injectable = RegExp(
+  final injectable = cachedRegExp(
     r'\bhyaluron\w*\b|\b(?:acido|acid)\s+hialuron\w*\b|'
     r'\b(?:juvederm|restylane|teosyal|belotero|revolax|radiesse)\b|'
     r'\binject\w*\b|\binfiltrac\w*\b|\bsyringes?\b|\bjeringas?\b',
@@ -1560,12 +1561,12 @@ bool looksLikeNonGenericRhinoplastyVariant({
   String sourceUrl = '',
 }) {
   final requested = foldExploreCityText(procedure);
-  if (!RegExp(r'rhinoplast|rinoplast|nose\s+job').hasMatch(requested)) {
+  if (!cachedRegExp(r'rhinoplast|rinoplast|nose\s+job').hasMatch(requested)) {
     return false;
   }
   final candidate = foldExploreCityText('$label\n$evidence');
   final path = foldExploreCityText(Uri.tryParse(sourceUrl)?.path ?? '')
-      .replaceAll(RegExp(r'[/_.-]+'), ' ');
+      .replaceAll(cachedRegExp(r'[/_.-]+'), ' ');
   for (final subtype in _distinctRhinoplastySubtypes) {
     if ((subtype.hasMatch(candidate) || subtype.hasMatch(path)) &&
         !subtype.hasMatch(requested)) {
@@ -1576,9 +1577,9 @@ bool looksLikeNonGenericRhinoplastyVariant({
 }
 
 final _distinctRhinoplastySubtypes = [
-  RegExp(r'\b(?:secondary|secondaria|secundaria|secondaire|revision\w*)\b'),
-  RegExp(r'\bpost[\s-]*traum\w*\b|\btraumati\w*\b'),
-  RegExp(r'\bfunctional\b|\bfuncional\b|\bfunzional\w*\b|'
+  cachedRegExp(r'\b(?:secondary|secondaria|secundaria|secondaire|revision\w*)\b'),
+  cachedRegExp(r'\bpost[\s-]*traum\w*\b|\btraumati\w*\b'),
+  cachedRegExp(r'\bfunctional\b|\bfuncional\b|\bfunzional\w*\b|'
       r'\bseptor?hinoplast\w*\b|\bseptoplast\w*\b'),
 ];
 
@@ -1596,7 +1597,7 @@ bool looksLikeRequestedRhinoplastySubtype({
 bool looksLikeMultiSessionSeriesQuote(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'\b(?:a\s+)?(?:full\s+)?series\s+(?:of\s+)?\d|'
     r'\bfull series\b|'
     r'\bpackage of\s+\d|'
@@ -1615,15 +1616,15 @@ bool looksLikeMultiSessionSeriesQuote(String raw) {
 bool looksLikeDepigmentationPeelPackage(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.isEmpty) return false;
-  if (RegExp(
+  if (cachedRegExp(
     r'cosmelan|dermamelan|melanostop|'
     r'depigmentation\s+peel|pigmentation\s+peel\s+kit',
     caseSensitive: false,
   ).hasMatch(t)) {
     return true;
   }
-  if (RegExp(r'starter\s+kit').hasMatch(t) &&
-      RegExp(r'peel|homecare|home[\s-]?care').hasMatch(t)) {
+  if (cachedRegExp(r'starter\s+kit').hasMatch(t) &&
+      cachedRegExp(r'peel|homecare|home[\s-]?care').hasMatch(t)) {
     return true;
   }
   return false;
@@ -1634,11 +1635,11 @@ String exploreLineOwningAmount(String evidence, double priceMin) {
   final text = evidence.replaceAll('\u00a0', ' ');
   if (text.trim().isEmpty || priceMin <= 0) return text;
   final target = priceMin.round().toString();
-  final amount = RegExp(r'\d{1,3}(?:[.\s]\d{3})+|\d+(?:[.,]\d+)?');
+  final amount = cachedRegExp(r'\d{1,3}(?:[.\s]\d{3})+|\d+(?:[.,]\d+)?');
   final matches = amount.allMatches(text).toList();
   RegExpMatch? hit;
   for (final match in matches) {
-    final digits = match.group(0)!.replaceAll(RegExp(r'[.\s,]'), '');
+    final digits = match.group(0)!.replaceAll(cachedRegExp(r'[.\s,]'), '');
     if (digits == target) {
       hit = match;
       break;
@@ -1657,7 +1658,7 @@ String exploreLineOwningAmount(String evidence, double priceMin) {
     }
   }
   final later = text.substring(hit.end, end);
-  final cut = RegExp(
+  final cut = cachedRegExp(
     r'cosmelan|dermamelan|\bkit\b|home\s*care|home\s*kit|pachet',
     caseSensitive: false,
   ).firstMatch(later);
@@ -1681,18 +1682,18 @@ bool explorePricedLineIsIncomparablePackage({
       want.contains('breast') || want.contains('augment') || want.contains('boob');
   final botox = want.contains('botox') || want.contains('wrinkle');
   if (peel &&
-      (RegExp(r'\bcorporal\w*|\bcuerpo\b|\bbody\b|\bscrub\b|\bsales\b|'
+      (cachedRegExp(r'\bcorporal\w*|\bcuerpo\b|\bbody\b|\bscrub\b|\bsales\b|'
           r'\bsalt\b|\bsugar\b|autobronceador|enzim[aá]tic|enzymatic|'
           r'microdermabrasion|peel\s*off|gommage\s+corporel',
           caseSensitive: false).hasMatch('$procedure $line') ||
        looksLikeDepigmentationPeelPackage(line) ||
-          RegExp(r'\bdiamond\s+peel|carbon\s+(?:laser|peel)|microdermabrasion',
+          cachedRegExp(r'\bdiamond\s+peel|carbon\s+(?:laser|peel)|microdermabrasion',
               caseSensitive: false).hasMatch(line) ||
           looksLikeMultiSessionSeriesQuote(line))) {
     return true;
   }
   if (filler &&
-      RegExp(
+      cachedRegExp(
         r'box of|pack of|buy online|buy now|add to cart|shopping cart|webshop',
       ).hasMatch(line)) {
     return true;
@@ -1702,21 +1703,21 @@ bool explorePricedLineIsIncomparablePackage({
         procedure: procedure,
         evidence: line,
       ) ||
-          RegExp(
+          cachedRegExp(
             r'all[- ]inclusive|tutto incluso|\bflight\b|\bhotel\b|'
             r'ethnic\s+rhino|rinoplastia\s+(?:racial|[eé]tnica)',
           ).hasMatch(line))) {
     return true;
   }
   if (breast &&
-      RegExp(
+      cachedRegExp(
         r'mastopexy|breast\s+lift|reconstruction|\blift\s*\+\s*implant',
       ).hasMatch(line)) {
     return true;
   }
   if (botox &&
-      RegExp(r'hyperhidrosis|masseter|bruxism').hasMatch(line) &&
-      !RegExp(r'forehead|glabella|crow|wrinkle|one area').hasMatch(line)) {
+      cachedRegExp(r'hyperhidrosis|masseter|bruxism').hasMatch(line) &&
+      !cachedRegExp(r'forehead|glabella|crow|wrinkle|one area').hasMatch(line)) {
     return true;
   }
   return false;
@@ -1725,7 +1726,7 @@ bool explorePricedLineIsIncomparablePackage({
 bool publishedAmountMatchesWindow(String window, double priceMin) {
   if (window.trim().isEmpty || priceMin <= 0) return false;
   final digits = priceMin.round().toString();
-  final compact = window.replaceAll(RegExp(r'[,\s]'), '');
+  final compact = window.replaceAll(cachedRegExp(r'[,\s]'), '');
   return compact.contains(digits);
 }
 
@@ -1735,7 +1736,7 @@ bool publishedAmountMatchesWindow(String window, double priceMin) {
 bool looksLikeGoogleAreaEstimateBlurb(String raw) {
   final t = raw.replaceAll('\u00a0', ' ');
   if (t.trim().isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'\bin the area\b|'
     r'\bgeneral aesthetic\b|'
     r'\btypically range\b|'
@@ -1762,7 +1763,7 @@ bool looksLikeMarketAveragePriceBlurb(String raw) {
   final t = raw.toLowerCase();
   if (t.trim().isEmpty) return false;
   if (looksLikeGoogleAreaEstimateBlurb(raw)) return true;
-  if (RegExp(
+  if (cachedRegExp(
     r'\bpromedio\b|\b(?:precio|coste|costo)s?\s+medi[oa]s?\b|'
     r'\baverage\s+(?:price|cost|range)(?:\s+range)?\s+(?:for|in|of)\b|'
     r'\btypical\s+(price|cost|range)\b|'
@@ -1814,7 +1815,7 @@ bool looksLikeMarketAveragePriceBlurb(String raw) {
   ).hasMatch(t)) {
     return true;
   }
-  if (RegExp(
+  if (cachedRegExp(
     r'تتراوح\s+تكلفة.{0,80}في\s+(?:دبي|أبوظبي|أبو ظبي|الشارقة)\s+بين|'
     r'متوسط\s+تكلفة|'
     r'متوسط\s+سعر|'
@@ -1842,7 +1843,7 @@ bool looksLikeMarketAveragePriceBlurb(String raw) {
 bool looksLikeCompetitorPriceColumnHeader(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase().trim();
   if (t.isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'high street salon|'
     r'non[- ]medical|'
     r'harley street average|'
@@ -1859,7 +1860,7 @@ bool looksLikeThirdPartyProviderPriceLabel(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
   if (looksLikeCompetitorPriceColumnHeader(t)) return true;
-  return RegExp(
+  return cachedRegExp(
     r'harley street\s*\((?:doctor[- ]led|avg|average)|'
     r'high street salon|'
     r'central london average|'
@@ -1873,7 +1874,7 @@ bool looksLikeCompetitorOrThirdPartyPriceQuote(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').toLowerCase();
   if (t.trim().isEmpty) return false;
   if (looksLikeCompetitorPriceColumnHeader(t)) return true;
-  return RegExp(
+  return cachedRegExp(
     r'some clinics that are offering|'
     r'ridiculously cheap|'
     r'cheapest is not always best|'
@@ -1894,7 +1895,7 @@ bool looksLikeCompetitorOrThirdPartyPriceQuote(String raw) {
 bool looksLikeCityCommonPriceGuideBlurb(String raw) {
   final t = raw.replaceAll('\u00a0', ' ');
   if (t.trim().isEmpty) return false;
-  return RegExp(
+  return cachedRegExp(
     r'\bcommon prices?\b|'
     r'\bfamous (?:methods|procedures|treatments)\b.{0,60}\bin\b|'
     r'\bbreakdown of (?:common |typical )?prices?\b|'
@@ -2031,7 +2032,7 @@ bool looksLikeCityCommonPriceGuideBlurb(String raw) {
 
 double _priceMaxHintFromRaw(String rawPriceText, double priceMin) {
   final t = rawPriceText.replaceAll('\u00a0', ' ');
-  final m = RegExp(
+  final m = cachedRegExp(
     r'(\d{1,3}(?:,\d{3})+|\d+)\s*(?:€|£|\$|eur|euro|gbp|usd)?\s*[–—-]\s*'
     r'(?:€|£|\$|eur|euro|gbp|usd)?\s*(\d{1,3}(?:,\d{3})+|\d+)',
     caseSensitive: false,
@@ -2114,7 +2115,7 @@ PriceSanityResult evaluateExtractedPriceCandidate({
   final sourceHost = sourceUri?.host.toLowerCase() ?? '';
   if (const ['beautyforqueens.com', 'cliniciestetice.ro', 'clinici-estetice.ro']
       .any((host) => sourceHost == host || sourceHost.endsWith('.$host')) ||
-      RegExp(r'(?:^|/)(?:demo|template|example)(?:[-/]|$)', caseSensitive: false)
+      cachedRegExp(r'(?:^|/)(?:demo|template|example)(?:[-/]|$)', caseSensitive: false)
           .hasMatch(sourceUri?.path ?? '')) {
     logReject('directory_or_demo_price');
     return const PriceSanityResult.reject('directory_or_demo_price');
@@ -2143,7 +2144,7 @@ PriceSanityResult evaluateExtractedPriceCandidate({
     logReject('noninjectable_botox');
     return const PriceSanityResult.reject('noninjectable_botox');
   }
-  if (RegExp(r'botox|botulin|toxin|neuromodulat', caseSensitive: false).hasMatch(procedure) &&
+  if (cachedRegExp(r'botox|botulin|toxin|neuromodulat', caseSensitive: false).hasMatch(procedure) &&
       exploreBotoxAmountOwnedByFiller(evidence: rawEvidence, priceMin: workingMin, currency: currency)) {
     logReject('neighbouring_filler_amount');
     return const PriceSanityResult.reject('neighbouring_filler_amount');
@@ -2312,7 +2313,7 @@ PriceSanityResult evaluateExtractedPriceCandidate({
     logReject('mixed_service_bundle');
     return const PriceSanityResult.reject('mixed_service_bundle');
   }
-  final injectableRequest = RegExp(
+  final injectableRequest = cachedRegExp(
     r'filler|hyaluron|hialuron|relleno|botox|botulin|neuromodul|neurotoxin',
     caseSensitive: false,
   ).hasMatch(procedure);
@@ -2349,7 +2350,7 @@ PriceSanityResult evaluateExtractedPriceCandidate({
     logReject('market_average');
     return const PriceSanityResult.reject('market_average');
   }
-  if (RegExp(
+  if (cachedRegExp(
     r'\baverage\b[^.]{0,48}\bcost\b|\bcost in\b[^.]{0,40}\bis\b|'
     r'\bon average\b.{0,48}\b(?:cost|price|prices|range)\b|'
     r'\btypically costs?\b|'
@@ -2525,7 +2526,7 @@ PriceSanityResult evaluateExtractedPriceCandidate({
 ({double min, double max})? _repairedRangeFromRaw(String raw) {
   final t = raw.replaceAll('\u00a0', ' ').trim();
   if (t.isEmpty) return null;
-  final m = RegExp(
+  final m = cachedRegExp(
     r'(\d{1,3}(?:[.,\s]\d{3})+|\d{3,6})\s*(?:–|—|-|to)\s*'
     r'(?:€|£|\$|eur|euro|gbp|usd)?\s*'
     r'(\d{1,3}(?:[.,\s]\d{3})+|\d{3,6})',
@@ -2533,9 +2534,9 @@ PriceSanityResult evaluateExtractedPriceCandidate({
   ).firstMatch(t);
   if (m == null) return null;
   double? parseChunk(String s) {
-    final cleaned = s.replaceAll(RegExp(r'[^\d.,]'), '');
-    if (RegExp(r'^\d{1,3}([.,]\d{3})+$').hasMatch(cleaned)) {
-      return double.tryParse(cleaned.replaceAll(RegExp(r'[.,]'), ''));
+    final cleaned = s.replaceAll(cachedRegExp(r'[^\d.,]'), '');
+    if (cachedRegExp(r'^\d{1,3}([.,]\d{3})+$').hasMatch(cleaned)) {
+      return double.tryParse(cleaned.replaceAll(cachedRegExp(r'[.,]'), ''));
     }
     return double.tryParse(cleaned.replaceAll(',', ''));
   }
@@ -2696,10 +2697,10 @@ Map<String, Object?>? migrateE17CachedPriceRow(
   final name = '${row['name'] ?? row['clinicName'] ?? ''}'.trim();
   final hostLo = sourceUrl.toLowerCase();
   // Directory domains must never migrate into a visible clinic card.
-  if (RegExp(
+  if (cachedRegExp(
         r'(?:^|[./])(?:med\.ro|whatclinic|bookimed|doctoralia|zwivel|groupon)\b',
       ).hasMatch(hostLo) ||
-      RegExp(
+      cachedRegExp(
         r'\b(?:whatclinic|bookimed|doctoralia|med\.ro)\b',
         caseSensitive: false,
       ).hasMatch(name)) {
@@ -2747,19 +2748,19 @@ Map<String, Object?>? migrateE17CachedPriceRow(
   double priceMin = 0,
 }) {
   final t = blob.toLowerCase();
-  final explicitPerUnit = RegExp(
+  final explicitPerUnit = cachedRegExp(
     r'(?:per|/)\s*(?:ml|cc|iu|unit|units|syringe|syringes|vial)\b',
     caseSensitive: false,
   ).hasMatch(t);
-  final explicitPerArea = RegExp(
+  final explicitPerArea = cachedRegExp(
     r'(?:per|/)\s*(?:area|areas|zone|zones)\b',
     caseSensitive: false,
   ).hasMatch(t);
-  final hasFrom = RegExp(
+  final hasFrom = cachedRegExp(
     r'\b(?:from|starting\s+from|starts?\s+from|de la|desde|a partir)\b',
     caseSensitive: false,
   ).hasMatch(t);
-  final hasRange = RegExp(r'\d[\d.,]*\s*[–\-—]\s*\d').hasMatch(t);
+  final hasRange = cachedRegExp(r'\d[\d.,]*\s*[–\-—]\s*\d').hasMatch(t);
   if (explorePublishedPriceIsApproximate(evidence: blob, priceMin: priceMin)) {
     return (
       priceType: 'approximate',
@@ -2774,7 +2775,7 @@ Map<String, Object?>? migrateE17CachedPriceRow(
 }
 
 String _unitFromBlob(String t) {
-  final m = RegExp(
+  final m = cachedRegExp(
     r'(?:per|/)\s*(ml|cc|iu|unit|units|syringe|area|zone)\b',
     caseSensitive: false,
   ).firstMatch(t);

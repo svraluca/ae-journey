@@ -1,4 +1,4 @@
-/// Compile each literal pattern once per process.
+/// Reuse compiled patterns across price-validation rows.
 ///
 /// Dart has no pattern cache: `RegExp(r'...')` written inside a function body
 /// recompiles that pattern on every call. The price pipeline runs a few dozen
@@ -11,8 +11,8 @@
 /// `lastIndex`), so one instance can serve concurrent `hasMatch` /
 /// `firstMatch` / `allMatches` calls.
 ///
-/// Only for patterns that are literals in source. Never key this on scraped
-/// text — that would grow without bound.
+/// Dynamic patterns (escaped city/price tokens) use the same bounded cache.
+/// Long patterns bypass retention so scraped input cannot grow memory.
 library;
 
 final Map<String, RegExp> _cache = <String, RegExp>{};
@@ -26,13 +26,20 @@ RegExp cachedRegExp(
 }) {
   final key =
       '$pattern\u0000$caseSensitive$unicode$multiLine$dotAll';
-  return _cache[key] ??= RegExp(
+  final hit = _cache[key];
+  if (hit != null) return hit;
+  final compiled = RegExp(
     pattern,
     caseSensitive: caseSensitive,
     unicode: unicode,
     multiLine: multiLine,
     dotAll: dotAll,
   );
+  if (pattern.length <= 8192) {
+    if (_cache.length >= 2048) _cache.remove(_cache.keys.first);
+    _cache[key] = compiled;
+  }
+  return compiled;
 }
 
 /// Patterns compiled so far. Test-only visibility into the cache.
