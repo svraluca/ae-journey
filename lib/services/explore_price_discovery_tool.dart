@@ -153,6 +153,7 @@ class ExploreDiscoveryJob {
   final String city;
   final String procedure;
   bool get isFinished => status == 'completed' || status == 'failed';
+  bool get pollingStopped => progress['polling_stopped'] == true;
 
   /// Progress counters can change without changing any price card.
   String get rowsFingerprint => jsonEncode(rows.map((row) => [
@@ -178,6 +179,7 @@ class ExploreDiscoveryJob {
   }
 
   String get message {
+    if (pollingStopped) return 'Discovery is still running. You can check again later.';
     if (status == 'failed') return 'Search could not finish. Try Find more clinics again.';
     if (status == 'queued') return 'Preparing your clinic price search…';
     if (!isFinished) {
@@ -775,12 +777,18 @@ class ExplorePriceDiscoveryTool {
     return request;
   }
 
-  Future<ExploreDiscoveryJob?> readDiscoveryJob(String jobId) async {
-    if (jobId.isEmpty || !await isReachable()) return null;
+  Future<ExploreDiscoveryJob?> readDiscoveryJob(String jobId, {
+    Duration deadline = const Duration(seconds: 4),
+  }) async {
+    if (jobId.isEmpty) return null;
     try {
-      final response = await _client.get(
-        Uri.parse('$baseUrl/discover-jobs/${Uri.encodeComponent(jobId)}'),
-      ).timeout(const Duration(seconds: 4));
+      final response = await (() async {
+        if (!await isReachable()) return null;
+        return _client.get(
+          Uri.parse('$baseUrl/discover-jobs/${Uri.encodeComponent(jobId)}'),
+        );
+      })().timeout(deadline);
+      if (response == null) return null;
       if (response.statusCode != 200) return null;
       final data = jsonDecode(response.body);
       if (data is! Map) return null;
@@ -807,12 +815,26 @@ class ExplorePriceDiscoveryTool {
     final wall = DateTime.now().add(budget);
     while (!job.isFinished && DateTime.now().isBefore(wall)) {
       final inactive = focusKey.isNotEmpty && focusKey != _focusKey;
-      await Future<void>.delayed(inactive
-          ? const Duration(seconds: 9) : pollInterval);
-      final next = await readDiscoveryJob(job.id);
+      final pause = inactive ? const Duration(seconds: 9) : pollInterval;
+      final remaining = wall.difference(DateTime.now());
+      await Future<void>.delayed(pause < remaining ? pause : remaining);
+      final readBudget = wall.difference(DateTime.now());
+      if (readBudget <= Duration.zero) break;
+      final next = await readDiscoveryJob(job.id,
+          deadline: readBudget < const Duration(seconds: 4)
+              ? readBudget : const Duration(seconds: 4));
       if (next == null) continue;
       job = next;
       yield job;
+    }
+    if (!job.isFinished) {
+      // Ending this client's polling budget does not fail or restart the
+      // durable server job. Retain its last verified pool and clear loading.
+      yield ExploreDiscoveryJob(
+        id: job.id, status: job.status, rows: job.rows, error: job.error,
+        city: job.city, procedure: job.procedure,
+        progress: {...job.progress, 'polling_stopped': true},
+      );
     }
   }
 

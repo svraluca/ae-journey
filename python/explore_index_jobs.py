@@ -25,16 +25,24 @@ import httpx
 from fastapi import HTTPException
 from pydantic import BaseModel, Field
 
-JOB_ENGINE_VERSION = "0.11.88"
+JOB_ENGINE_VERSION = "0.11.89"
 
 # HTML extraction/Firestore calls can occupy asyncio's default executor.
 # Queue acceptance, focus changes and polling must not wait behind crawlers.
 _JOB_CONTROL_EXECUTOR = ThreadPoolExecutor(max_workers=2, thread_name_prefix="explore-control")
+_JOB_VALIDATION_EXECUTOR = ThreadPoolExecutor(max_workers=2, thread_name_prefix="explore-validation")
 
 
 async def job_control_call(fn, *args, **kwargs):
     call = partial(copy_context().run, fn, *args, **kwargs)
     return await asyncio.get_running_loop().run_in_executor(_JOB_CONTROL_EXECUTOR, call)
+
+
+def price_pool_payload(rows, display_limit=4):
+    """Keep rotation candidates while bounding every public display snapshot."""
+    visible = rows[:min(4, max(1, int(display_limit)))]
+    return {"candidate_results": rows, "display_results": visible,
+            "verified_count": len(rows), "displayed_count": len(visible)}
 
 class MarketRequest(BaseModel):
     city: str = Field(min_length=2, max_length=120)
@@ -105,7 +113,8 @@ class JobStore:
             return None
         d = dict(row)
         d["request"] = json.loads(d["request"])
-        d["display_results"] = json.loads(d.pop("results"))
+        d.update(price_pool_payload(json.loads(d.pop("results")),
+                                    d["request"].get("display_limit", 4)))
         d["progress"] = json.loads(d.get("progress") or "{}")
         return d
 
@@ -376,8 +385,10 @@ class IndexJobs:
 
     async def validated_rows(self, rows, req, **kwargs):
         # Validation also reads (and sometimes updates) source quarantine.
-        return await job_control_call(self.safe_rows, rows, req.city, req.procedure,
-                                      country_code=req.country_code, **kwargs)
+        # Keep its potentially large batches off the small polling executor.
+        call = partial(copy_context().run, self.safe_rows, rows, req.city,
+                       req.procedure, country_code=req.country_code, **kwargs)
+        return await asyncio.get_running_loop().run_in_executor(_JOB_VALIDATION_EXECUTOR, call)
 
     def key(self, req):
         # Preserve country identity when a same-named city exists elsewhere.
@@ -435,10 +446,9 @@ class IndexJobs:
         rejected_sources = await self.store_call("rejected_sources", self.key(req))
         return {
             "city": req.city, "procedure": self.e.canonicalize_procedure(req.procedure),
-            "display_results": [r.model_dump(mode="json") for r in rows],
+            **price_pool_payload([r.model_dump(mode="json") for r in rows], req.display_limit),
             "source_collection": self.e._results_collection_name(),
             "source": "firestore" if self.e.firestore_enabled() else "local_verified",
-            "verified_count": len(rows),
             "invalidated_source_urls": list(rejected_sources),
         }
 
@@ -476,10 +486,10 @@ class IndexJobs:
                     self.index(req.model_copy(update={"limit": 60})), timeout=5,
                 )
             except asyncio.TimeoutError:
-                indexed = {"display_results": []}
+                indexed = {"candidate_results": []}
             current = await self.store_call("get", job["job_id"])
-            retained = await self.validated_rows((current or {}).get("display_results", []), req)
-            combined = await self.validated_rows([*rows, *indexed["display_results"]], req)
+            retained = await self.validated_rows((current or {}).get("candidate_results", []), req)
+            combined = await self.validated_rows([*rows, *indexed.get("candidate_results", indexed.get("display_results", []))], req)
             extras = [row for row in retained if not any(self.e.same_clinic_identity(row, old) for old in combined)]
             if extras:
                 # A paused pass may verify a price before final persistence.
@@ -526,7 +536,7 @@ class IndexJobs:
         except Exception as exc:
             current = await self.store_call("get", job["job_id"])
             await self.store_call(
-                "finish", job, (current or {}).get("display_results", []), 0,
+                "finish", job, (current or {}).get("candidate_results", []), 0,
                 type(exc).__name__ + ": " + str(exc)[:300],
             )
             print(f"[GP JOB] {job['job_id']} failed {type(exc).__name__}", flush=True)
@@ -593,9 +603,9 @@ class IndexJobs:
                     break
                 if event.get("event") == "partial":
                     current = await self.store_call("get", job["job_id"])
-                    fresh = await self.validated_rows(event.get("display_results", []), req,
+                    fresh = await self.validated_rows(event.get("candidate_results") or event.get("display_results", []), req,
                                                       recover_quarantined=True)
-                    rows = await self.validated_rows([*fresh, *(current or {}).get("display_results", [])], req)
+                    rows = await self.validated_rows([*fresh, *(current or {}).get("candidate_results", [])], req)
                     elapsed = round((time.monotonic() - started) * 1000)
                     if rows and first_result_ms is None:
                         first_result_ms = elapsed
@@ -701,7 +711,7 @@ class IndexJobs:
 
     async def refresh_known(self, req):
         indexed = await self.index(req, include_quarantined=True)
-        rows = await self.validated_rows(indexed["display_results"], req, include_quarantined=True)
+        rows = await self.validated_rows(indexed.get("candidate_results", indexed["display_results"]), req, include_quarantined=True)
         changed = []
         sem = asyncio.Semaphore(3)
 
@@ -761,9 +771,8 @@ class IndexJobs:
             )
         verified = await self.validated_rows([*changed, *rows], req)
         rejected_sources = await self.store_call("rejected_sources", self.key(req))
-        return {**indexed, "invalidated_source_urls": list(rejected_sources), "display_results": [
-            r.model_dump(mode="json") for r in verified
-        ]}
+        return {**indexed, "invalidated_source_urls": list(rejected_sources),
+                **price_pool_payload([r.model_dump(mode="json") for r in verified], req.display_limit)}
 
     async def clinic_search(self, req):
         query = self.e.fold(req.query)

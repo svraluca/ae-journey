@@ -2486,9 +2486,9 @@ Return JSON only.
               if (canPublishNote() && backgroundHuntNote.value?.jobId == job.id) {
                 backgroundHuntNote.value = ExploreBackgroundHunt(
                   city: city, pill: categoryPill,
-                  jobId: state.isFinished ? '' : job.id,
+                  jobId: state.isFinished || state.pollingStopped ? '' : job.id,
                   message: state.isFinished ? 'Loading saved clinic prices…' : state.message,
-                  isSearching: true,
+                  isSearching: !state.pollingStopped,
                 );
               }
               if (state.isFinished) {
@@ -7318,6 +7318,7 @@ Return JSON only.
           procedure: r.topic,
         ),
       );
+      if (out.length == kExploreCompareMaxClinics) break;
     }
     final rl = _previewRangeLabelFromClinics(out, procedure: r.topic);
     return OpenAIComparisonResult(

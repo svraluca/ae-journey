@@ -1476,7 +1476,7 @@ void main() {
         <table>
           <tr><th>Botox</th><th>Price Before Discount</th>
               <th>Price After Discount</th></tr>
-          <tr><td>Full Face</td><td>1,500 AED</td><td>799 AED</td></tr>
+          <tr><td>Our Botox · Full Face</td><td>1,500 AED</td><td>799 AED</td></tr>
           <tr><td>Small area</td><td>Starting at 799 AED</td></tr>
         </table>
       ''';

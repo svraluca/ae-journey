@@ -1,0 +1,261 @@
+{
+  "source_fetch_time": "2026-10-09T17:56:38.006752+00:00",
+  "replayed_at": "2026-10-09T18:25:22.357427+00:00",
+  "backend_version": "0.11.89",
+  "extract_revision": "e26",
+  "method": "HTTP page fetch followed by replay through the actual Python and Functions parsers",
+  "production_firestore_modified": false,
+  "results": [
+    {
+      "source_url": "https://sule-hairtransplant.com/tr/hair-transplant-price/dhi-hair-transplant-prices/",
+      "http_status": null,
+      "final_url": "https://sule-hairtransplant.com/tr/hair-transplant-price/dhi-hair-transplant-prices/",
+      "verification_status": "unverified_access_blocked",
+      "current_price": null
+    },
+    {
+      "source_url": "https://esteinturkey.com/prices-and-services/",
+      "http_status": null,
+      "final_url": "https://esteinturkey.com/prices-and-services/",
+      "verification_status": "unverified_access_blocked",
+      "current_price": null
+    },
+    {
+      "source_url": "https://istanbuleuropeanclinic.com/treatment-prices-turkey/",
+      "http_status": null,
+      "final_url": "https://istanbuleuropeanclinic.com/treatment-prices-turkey/",
+      "verification_status": "unverified_access_blocked",
+      "current_price": null
+    },
+    {
+      "source_url": "https://emrahcinik.com/prices/",
+      "http_status": null,
+      "final_url": "https://emrahcinik.com/prices/",
+      "verification_status": "unverified_access_blocked",
+      "current_price": null
+    },
+    {
+      "source_url": "https://www.hermestclinic.com/hair-transplant-prices/",
+      "http_status": null,
+      "final_url": "https://www.hermestclinic.com/hair-transplant-prices/",
+      "verification_status": "unverified_access_blocked",
+      "current_price": null
+    },
+    {
+      "source_url": "https://cosmedica.com/price/",
+      "http_status": 200,
+      "final_url": "https://cosmedica.com/price/",
+      "body_sha256": "b83e6927df55a14b854eed23a32257ce8c20398a87777e97024e5038ec7d2d12",
+      "city_evidence_present": true,
+      "python_verified_package_rows": [
+        {
+          "raw_procedure_text": "Hair Transplant · FUE Sapphire",
+          "price_min": 2550.0,
+          "currency": "EUR",
+          "qualifier": "from",
+          "raw_evidence": "Cosmedica Clinic Hair Transplant Prices in Turkey | FUE Sapphire: From €2,550 (up to 4,000 grafts)",
+          "extraction_method": "owned_currency_tariff_table"
+        },
+        {
+          "raw_procedure_text": "Hair Transplant · Micro Sapphire DHI",
+          "price_min": 3290.0,
+          "currency": "EUR",
+          "qualifier": "from",
+          "raw_evidence": "Cosmedica Clinic Hair Transplant Prices in Turkey | Micro Sapphire DHI: From €3,290 (up to 4,000 grafts)",
+          "extraction_method": "owned_currency_tariff_table"
+        },
+        {
+          "raw_procedure_text": "Hair Transplant · VIP DHI Sapphire",
+          "price_min": 8000.0,
+          "currency": "EUR",
+          "qualifier": "from",
+          "raw_evidence": "Cosmedica Clinic Hair Transplant Prices in Turkey | VIP DHI Sapphire: From €8,000 (up to 4,000 grafts)",
+          "extraction_method": "owned_currency_tariff_table"
+        }
+      ],
+      "functions_verified_package_rows": [
+        {
+          "price_min": 2550,
+          "currency": "EUR",
+          "procedure": "Hair Transplant · FUE Sapphire"
+        },
+        {
+          "price_min": 3290,
+          "currency": "EUR",
+          "procedure": "Hair Transplant · Micro Sapphire DHI"
+        },
+        {
+          "price_min": 8000,
+          "currency": "EUR",
+          "procedure": "Hair Transplant · VIP DHI Sapphire"
+        }
+      ],
+      "rejection_reasons": [
+        "agency_or_directory_context",
+        "foreign_market_context",
+        "foreign_quoted_price_city",
+        "generic_multi_clinic_price",
+        "market_context"
+      ],
+      "verification_status": "published_package_table"
+    },
+    {
+      "source_url": "https://natural.clinic/hair-treatment/",
+      "http_status": null,
+      "final_url": "https://natural.clinic/hair-treatment/",
+      "verification_status": "unverified_access_blocked",
+      "current_price": null
+    },
+    {
+      "source_url": "https://www.smilehairclinic.com/sac-ekimi/",
+      "http_status": 200,
+      "final_url": "https://www.smilehairclinic.com/sac-ekimi/",
+      "body_sha256": "6a73e88bc91193a77eddb15498e7374fe61287d49e80f13de8a8b4db25ca4039",
+      "city_evidence_present": true,
+      "python_verified_package_rows": [],
+      "functions_verified_package_rows": [],
+      "rejection_reasons": [
+        "calendar_year_not_price",
+        "generic_multi_clinic_price"
+      ],
+      "verification_status": "no_verified_provider_fee"
+    }
+  ],
+  "limits": [
+    "Six sources were blocked by the environment proxy and remain unverified.",
+    "Three Cosmedica package rows represent one provider, not three clinics.",
+    "These page snapshots do not guarantee future availability or prices.",
+    "City and provider identity gates were retained.",
+    "Marketplace displayed currencies are retained without guessing an original currency.",
+    "The full Flutter suite still has 14 pre-existing failures; all are listed above. Concurrent execution missed a timing threshold by 70ms; serial execution passed.",
+    "This cloud process is not the user Mac LaunchAgent. Production Functions and physical-device profile performance were not deployed or measured here."
+  ],
+  "delivery_checks": {
+    "candidate_pool": 7,
+    "maximum_display_snapshot": 4,
+    "partial_failure_retains_verified_pool": true,
+    "status_poll_works_while_validation_workers_busy": true,
+    "client_polling_stops_with_verified_rows_retained": true
+  },
+  "tests": {
+    "python": {
+      "passed": 136,
+      "failed": 0
+    },
+    "functions": {
+      "passed": 322,
+      "failed": 0
+    },
+    "flutter_focused": {
+      "passed": 83,
+      "failed": 0
+    },
+    "flutter_cache_timing": {
+      "cold_worker_ms": 2887,
+      "cached_100_repaints_ms": 16,
+      "concurrent_suite_cold_worker_ms": 4070,
+      "concurrent_suite_limit_ms": 4000,
+      "serial_timing_check_passed": true
+    },
+    "flutter_broad_serial": {
+      "passed": 766,
+      "failures": [
+        {
+          "suite": "explore_global_price_discovery_test.dart",
+          "test": "units on parsePriceText stores ml quantity and per-unit type"
+        },
+        {
+          "suite": "explore_currency_cached_pipeline_test.dart",
+          "test": "extract revision is e18"
+        },
+        {
+          "suite": "explore_places_circuit_breaker_test.dart",
+          "test": "Places 429 trips circuit breaker and skips further calls"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "pool mix plan 2+ pool paints 2 Firestore seeds and still hunts 2 Google"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "procedure display title 14. Serp page titles are not clinic names"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "Places name looks medical keeps named plastic clinics Google may type as gym/lodging"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "Places name looks medical 25g. Abu Dhabi keeps verified quotes and skips Dubai-only URLs"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "SERP fetch uses any listed price, not a snippet amount London hair cards show package FROM, not /graft on graft counts"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "canonical city + early discovery rejects Budapest Botox does not keep a Tiranë clinic"
+        },
+        {
+          "suite": "explore_worldwide_pipeline_test.dart",
+          "test": "UI states + exact price labelling cold city searching copy"
+        },
+        {
+          "suite": "explore_progressive_fill_drop_test.dart",
+          "test": "price-list path witness Global Action 1 ml stays eligible after accept-time variant"
+        },
+        {
+          "suite": "explore_price_sanity_test.dart",
+          "test": "price sanity gate gold packages, Quick Facts, and SEO titles are not clinic prices"
+        },
+        {
+          "suite": "explore_price_sanity_test.dart",
+          "test": "price sanity gate hair market £/graft copy and stale landing quotes are rejected"
+        },
+        {
+          "suite": "explore_price_sanity_test.dart",
+          "test": "price sanity gate rhinoplasty market guide is rejected; hospital guide stays scoped"
+        }
+      ],
+      "baseline_failure_count": 14,
+      "new_failures": [],
+      "duration_seconds": 111
+    }
+  },
+  "api_smoke": {
+    "health": {
+      "ok": true,
+      "version": "0.11.89",
+      "worker_version": "0.11.89"
+    },
+    "empty_index": {
+      "candidate_results": [],
+      "display_results": [],
+      "verified_count": 0,
+      "displayed_count": 0
+    }
+  },
+  "static_analysis": {
+    "errors": 0,
+    "warnings": 9,
+    "info": 57,
+    "note": "Changed-file analysis; existing unused declarations and style diagnostics remain."
+  },
+  "log_sha256": {
+    "ae-full-python.log": "163a4e0c9a6a5125d4a032061e860755c32fe4739ea5742a7bc692e4b3430f29",
+    "ae-full-functions.log": "f746b2d5c4a2aec78fa7179459b6ab52408ab3a08d7cc7b213178801bc5236b9",
+    "ae-focused-flutter.log": "259ebc08251330609ccd8d79b825b466cd32cfd29e4abe686e6ac2e2e10bb228",
+    "ae-broad-flutter-serial.log": "2e20b0b0e68f6a0d40f3078243d25c1f76ad92315d7518f565c1d964cf39fb4d",
+    "ae-changed-analyze.log": "9c296a53c519d4a895f02cc9856cf2c50f87a0c34bc6a75078e3f716212e8b71",
+    "ae-enfield-check.log": "6de8baec1e2dd47fcab08b9c48e28c7dfa85b1c213f868d300c37cbc5ad5cf7a"
+  },
+  "fixes": [
+    "Every API display snapshot is capped at four while retaining the verified candidate pool.",
+    "Control and validation work use independent executors.",
+    "Client polling deadline covers health and status calls; verified cards remain when polling stops.",
+    "Fresh and cached fees reject ancillary travel/PRP, calendar years and geographical market comparisons.",
+    "Branded own menus preserve source currency, technique, package total and graft cap.",
+    "Explicit before-discount columns are stripped before fallback extraction.",
+    "Positive multilingual tariff fixture requires a clinic-owned fee, rather than an average-price paragraph."
+  ]
+}

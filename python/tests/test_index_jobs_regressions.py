@@ -91,6 +91,31 @@ class FourCardRequests(unittest.TestCase):
 
 
 class SQLiteResponsiveness(unittest.IsolatedAsyncioTestCase):
+    async def test_job_poll_does_not_wait_for_two_busy_validation_batches(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        service = IndexJobs(e, str(Path(directory.name) / 'jobs.sqlite3'))
+        req = MarketRequest(city='Madrid', procedure='botox', country_code='ES')
+        job = service.store.enqueue(service.key(req), req.model_dump())
+        both_started = threading.Barrier(3)
+        release = threading.Event()
+
+        def blocked_validation(*args, **kwargs):
+            both_started.wait(timeout=2)
+            release.wait(timeout=2)
+            return []
+
+        with patch.object(service, 'safe_rows', side_effect=blocked_validation):
+            batches = [asyncio.create_task(service.validated_rows([], req)) for _ in range(2)]
+            try:
+                await asyncio.to_thread(both_started.wait, 2)
+                polled = await asyncio.wait_for(service.store_call('get', job['job_id']), timeout=0.5)
+                self.assertEqual(polled['status'], 'queued')
+                self.assertFalse(release.is_set())
+            finally:
+                release.set()
+                await asyncio.gather(*batches)
+
     async def assert_loop_survives_sqlite_lock(self, operation, path):
         # A real competing SQLite transaction keeps the operation waiting.
         # The lock holder releases immediately after an event-loop heartbeat;
@@ -148,3 +173,53 @@ class SQLiteResponsiveness(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(queued['enqueued'])
         self.assertEqual(queued['status'], 'queued')
         await service.stop()
+
+
+class DisplayAndRotationPools(unittest.IsolatedAsyncioTestCase):
+    def setUp(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        self.service = IndexJobs(e, str(Path(directory.name) / 'jobs.sqlite3'))
+        self.req = MarketRequest(city='Madrid', procedure='botox', country_code='ES')
+        self.rows = [quote(name=f'Aster Medical Clinic {i}', host=f'aster-{i}.example', city='Madrid')
+                     for i in range(7)]
+        self.payload = [row.model_dump(mode='json') for row in self.rows]
+
+    async def test_index_caps_display_but_preserves_seven_rotation_candidates(self):
+        with patch.object(e, 'firestore_load_results', new=AsyncMock(return_value=self.rows)), \
+                patch.object(e, 'firestore_enabled', return_value=True):
+            result = await self.service.index(self.req)
+        self.assertEqual(len(result['display_results']), 4)
+        self.assertEqual(result['displayed_count'], 4)
+        self.assertEqual(len(result['candidate_results']), 7)
+        self.assertEqual(result['verified_count'], 7)
+
+    async def test_partial_completed_and_reused_tickets_never_expose_a_fifth_display_slot(self):
+        store = self.service.store
+        queued = store.enqueue(self.service.key(self.req), self.req.model_dump())
+        job = store.claim()
+        for size in [2, 5, 7]:
+            store.update_progress(job, self.payload[:size])
+            partial = store.get(queued['job_id'])
+            self.assertEqual(len(partial['display_results']), min(4, size))
+            self.assertEqual(len(partial['candidate_results']), size)
+        store.finish(job, self.payload)
+        for result in [store.get(job['job_id']),
+                       store.enqueue(self.service.key(self.req), self.req.model_dump())]:
+            self.assertEqual(result['status'], 'completed')
+            self.assertEqual(len(result['display_results']), 4)
+            self.assertEqual(len(result['candidate_results']), 7)
+        self.assertEqual(len(store.latest_results(self.service.key(self.req))), 7)
+
+    async def test_worker_failure_retains_candidates_beyond_the_four_display_slots(self):
+        store = self.service.store
+        store.enqueue(self.service.key(self.req), self.req.model_dump())
+        job = store.claim()
+        store.update_progress(job, self.payload)
+        with patch.object(self.service, 'discover_with_progress',
+                          new=AsyncMock(side_effect=asyncio.TimeoutError)):
+            await self.service.run_one(job)
+        result = store.get(job['job_id'])
+        self.assertEqual(result['status'], 'failed')
+        self.assertEqual(len(result['display_results']), 4)
+        self.assertEqual(result['candidate_results'], self.payload)

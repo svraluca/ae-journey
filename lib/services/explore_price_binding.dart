@@ -1,11 +1,12 @@
 import 'explore_regex_cache.dart';
+import 'explore_tariff_scope.dart';
 
 /// Bind a published amount and procedure subtype to the same menu row.
 /// Pure Dart so the price rules can be checked without Flutter or Firebase.
 const _publishedNumber =
     r'(?:\d{1,3}(?:[., \u00a0\u202f]\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?)';
 const _publishedCurrency =
-    r'(?:EUR\b|euros?\b|€|GBP\b|£|USD\b|\$|AED\b|HUF\b|Ft\b|RON\b|lei\b|BGN\b|TRY\b|TL\b|ALL\b|Lek\b)';
+    r'(?:EUR\b|euros?\b|€|GBP\b|£|USD\b|\$|AED\b|HUF\b|Ft\b|RON\b|lei\b|BGN\b|TRY\b|TL\b|₺|ALL\b|Lek\b)';
 final _publishedPrice = cachedRegExp(
   '(?<![\\d.,])(?:($_publishedCurrency)\\s*($_publishedNumber)|'
   '($_publishedNumber)\\s*($_publishedCurrency))(?!\\d|[.,]\\d)',
@@ -53,7 +54,7 @@ String _bindingCurrency(String value) {
     r'$' => 'USD',
     'FT' => 'HUF',
     'LEI' => 'RON',
-    'TL' => 'TRY',
+    'TL' || '₺' => 'TRY',
     'LEK' => 'ALL',
     final code => code,
   };
@@ -158,7 +159,9 @@ bool exploreBotoxAmountOwnedByFiller({
 /// Amount-scoped exclusions also apply to saved rows from older extractors.
 String? exploreNonTreatmentPriceReason({
   required String evidence, required double priceMin, required String currency,
+  String procedure = '',
 }) {
+  if (exploreMarketComparisonContext(evidence)) return 'market_comparison_table';
   final folded = _bindingFold(evidence);
   const months = r'january|february|march|april|may|june|july|august|september|october|november|december|enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre';
   if (cachedRegExp('\\b(?:promo\\w*|oferta|offer)\\b.{0,110}\\b(?:$months)\\b|'
@@ -178,6 +181,9 @@ String? exploreNonTreatmentPriceReason({
     final prefix = _bindingFold(evidence.substring(start, p.match.start));
     final end = i+1 < prices.length ? prices[i+1].match.start : evidence.length;
     final tail = _bindingFold(evidence.substring(p.match.end, end));
+    final scopeFailure = exploreAncillaryPriceReason(procedure, prefix) ??
+        exploreCalendarPriceReason(p.amount, prefix, tail);
+    if (scopeFailure != null) return scopeFailure;
     final near = _bindingFold(evidence.substring(
       (p.match.start - 240).clamp(0, evidence.length),
       (p.match.end + 240).clamp(0, evidence.length),

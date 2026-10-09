@@ -1,6 +1,7 @@
 import 'explore_regex_cache.dart';
 import 'explore_clinic_identity.dart';
 import 'explore_search_locale.dart';
+import 'explore_tariff_scope.dart';
 
 /// Page-level ownership of a quoted amount on a clinic (or guide) URL.
 ///
@@ -313,12 +314,22 @@ bool exploreEvidenceIsClinicOwnedPrice({
   String rawPriceText = '',
   String clinicName = '',
   bool treatProseAsUnowned = false,
+  String sourceUrl = '',
+  String extractionMethod = '',
 }) {
   final blob = '$rawProcedureText\n$rawEvidence\n$rawPriceText';
-  if (looksLikeLocalizedMarketPriceEstimate(rawEvidence)) return false;
+  if (looksLikeLocalizedMarketPriceEstimate(rawEvidence) ||
+      exploreMarketComparisonContext(rawEvidence)) return false;
   if (pageContext == ExplorePricePageContext.nonClinicPrices ||
       looksLikeExplicitNonClinicPriceDisclaimer(blob)) {
     return false;
+  }
+  if (extractionMethod == 'owned_currency_tariff_table') {
+    final brand = Uri.tryParse(sourceUrl)?.host.replaceFirst(cachedRegExp(r'^www\.'), '').split('.').first ?? '';
+    final heading = rawEvidence.split('|').first;
+    String key(String s) => foldExploreCityText(s).replaceAll(cachedRegExp(r'[^a-z0-9]'), '');
+    if (brand.length >= 4 && key(heading).contains(key(brand)) &&
+        cachedRegExp(r'\b(?:prices?|fees?|costs?)\b',caseSensitive:false).hasMatch(heading)) return true;
   }
   if (looksLikeCountryMarketPriceMarketing(blob)) {
     if (!looksLikeExplicitClinicOwnPriceLanguage(blob, clinicName: clinicName)) {

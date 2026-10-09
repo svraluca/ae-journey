@@ -826,8 +826,15 @@ test('London rhinoplasty — closed FROM not tip band; price-guide beats male co
     }),
     'rhinoplasty nose job',
   );
-  assert.ok(lphPicked);
-  assert.equal(lphPicked.priceMin, 6900);
+  // This fixture calls the table a typical city range, without ownership.
+  assert.equal(lphPicked, null);
+  const ownedLph = selectEvidenceForProcedure(extractPriceEvidence({
+    html: lph.replace('Closed Rhinoplasty</td>',
+      'Closed Rhinoplasty at London Private Hospital</td>'),
+    sourceUrl: 'https://londonprivatehospital.uk/treatments/rhinoplasty/',
+  }), 'rhinoplasty nose job');
+  assert.ok(ownedLph);
+  assert.equal(ownedLph.priceMin, 6900);
 
   const cadogan = `
     <p>Price guide revised in June 2026</p>

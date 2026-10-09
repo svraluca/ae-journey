@@ -21,6 +21,7 @@
 /// e23: bind current tariffs to their scope; exclude finance, combinations and market disclaimers.
 /// e24: retain marketplace technique; reject hair Botox, topical and needleless fillers.
 /// e25: revalidate informational average tables and literal range endpoints.
-const EXTRACT_REVISION = 'e25';
+/// e26: exclude travel/PRP, FAQ years and multilingual geographic tables.
+const EXTRACT_REVISION = 'e26';
 
 module.exports = {EXTRACT_REVISION};

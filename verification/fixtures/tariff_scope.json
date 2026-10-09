@@ -1,0 +1,15 @@
+[
+  {"name":"travel insurance is not a transplant","procedure":"hair transplant","canonical":"hair_transplant","amount":1500,"currency":"EUR","evidence":"Hair Transplant | Travel insurance: €1,500","accepted":false,"reason":"travel_cost_not_procedure"},
+  {"name":"flight in Spanish","procedure":"rhinoplasty","canonical":"rhinoplasty","amount":2000,"currency":"EUR","evidence":"Rhinoplasty | Vuelos: 2.000 EUR","accepted":false,"reason":"travel_cost_not_procedure"},
+  {"name":"travel insurance in Turkish","procedure":"breast augmentation","canonical":"breast_augmentation","amount":90000,"currency":"TRY","evidence":"Breast augmentation | Seyahat sigortası: 90.000 TL","accepted":false,"reason":"travel_cost_not_procedure"},
+  {"name":"flight in German","procedure":"hair transplant","canonical":"hair_transplant","amount":2500,"currency":"EUR","evidence":"Hair transplant | Flugkosten: 2.500 €","accepted":false,"reason":"travel_cost_not_procedure"},
+  {"name":"insurance in French","procedure":"hair transplant","canonical":"hair_transplant","amount":2500,"currency":"EUR","evidence":"Hair transplant | Assurance voyage: 2 500 EUR","accepted":false,"reason":"travel_cost_not_procedure"},
+  {"name":"flight in Italian","procedure":"hair transplant","canonical":"hair_transplant","amount":2500,"currency":"EUR","evidence":"Hair transplant | Voli: €2.500","accepted":false,"reason":"travel_cost_not_procedure"},
+  {"name":"priced PRP is not surgery","procedure":"hair transplant","canonical":"hair_transplant","amount":3000,"currency":"USD","evidence":"Hair Transplant | PRP hair treatment costs $3,000 per session","accepted":false,"reason":"hair_adjunct_not_transplant"},
+  {"name":"priced mesotherapy is not surgery","procedure":"hair transplant","canonical":"hair_transplant","amount":9000,"currency":"RON","evidence":"Hair transplant | Mesotherapy: 9.000 RON","accepted":false,"reason":"hair_adjunct_not_transplant"},
+  {"name":"Turkish FAQ year","procedure":"hair transplant","canonical":"hair_transplant","amount":2026,"currency":"TRY","evidence":"Saç ektirmek kaç TL 2026?","accepted":false,"reason":"calendar_year_not_price"},
+  {"name":"rhinoplasty FAQ year","procedure":"rhinoplasty","canonical":"rhinoplasty","amount":2025,"currency":"TRY","evidence":"Burun estetiği kaç TL 2025?","accepted":false,"reason":"calendar_year_not_price"},
+  {"name":"owned package with free PRP","procedure":"hair transplant","canonical":"hair_transplant","amount":2550,"currency":"EUR","evidence":"Our hair transplant package starts from €2,550 (up to 4,000 grafts); includes free PRP, transfers and hotel.","accepted":true},
+  {"name":"package before separately priced insurance","procedure":"hair transplant","canonical":"hair_transplant","amount":3290,"currency":"EUR","evidence":"Our hair transplant package starts from €3,290. Travel insurance: €20.","accepted":true},
+  {"name":"2026 is also a legitimate tariff","procedure":"hair transplant","canonical":"hair_transplant","amount":2026,"currency":"EUR","evidence":"Our hair transplant price list: €2,026 per procedure.","accepted":true}
+]

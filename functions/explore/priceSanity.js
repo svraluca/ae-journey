@@ -1,4 +1,5 @@
 'use strict';
+const {quoteScopeReason} = require('./tariffScope');
 const {injectableScopeRejection} = require('./injectableScope');
 
 const {looksLikeSurgicalChinTreatment,
@@ -26,6 +27,7 @@ function isStructuredPriceExtractionMethod(method) {
     case 'schemaoffer':
     case 'schema_offer':
     case 'html_table':
+    case 'owned_currency_tariff_table':
     case 'htmltable':
     case 'woocommerce':
     case 'shopify':
@@ -808,6 +810,8 @@ function evaluateExtractedPriceCandidate({
   if (amount <= 0) {
     return {accepted: false, reason: 'missing_price_semantics'};
   }
+  const scopeFailure = quoteScopeReason({procedure, rawEvidence, priceMin: amount, currency});
+  if (scopeFailure) return {accepted: false, reason: scopeFailure};
   const injectableFailure = injectableScopeRejection({procedure,
     label: rawProcedureText, evidence: rawEvidence, provider: clinicName, sourceUrl});
   if (injectableFailure) return {accepted: false, reason: injectableFailure};
@@ -869,6 +873,8 @@ function evaluateExtractedPriceCandidate({
     rawEvidence,
     rawProcedureText: procedure,
     rawPriceText,
+    sourceUrl,
+    extractionMethod: method,
   })) {
     if (logRejects) console.log('[GP PRICE] REJECT · not_clinic_owned_price');
     return {accepted: false, reason: 'not_clinic_owned_price'};

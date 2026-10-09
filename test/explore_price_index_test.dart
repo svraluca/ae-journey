@@ -84,6 +84,58 @@ void main() {
     expect(result.rows, isEmpty);
   });
 
+  test('four display slots keep all seven job candidates available for rotation', () {
+    final candidates = [for (var i = 0; i < 7; i++)
+      quote('Medical Clinic $i', 'medical-$i.example', 900)];
+    for (final status in ['running', 'completed']) {
+      final job = ExploreDiscoveryJob.fromJson({
+        'job_id': 'pooled', 'status': status,
+        'display_results': candidates.take(4).toList(),
+        'candidate_results': candidates,
+      });
+      expect(job.rows, hasLength(7));
+      final visible = selectExploreCompareRows<ExploreDiscoveryToolRow>(
+        saved: job.rows, live: const [],
+        sameProvider: (a, b) => a.clinicName == b.clinicName,
+      );
+      expect(visible, hasLength(4));
+    }
+  });
+
+  test('poll deadline includes a stalled health request', () async {
+    final gate = Completer<http.Response>();
+    final client = MockClient((_) => gate.future);
+    addTearDown(client.close);
+    final tool = ExplorePriceDiscoveryTool(client: client, baseUrl: 'http://test');
+    final state = await tool.readDiscoveryJob('slow',
+        deadline: const Duration(milliseconds: 20));
+    expect(state, isNull);
+    expect(tool.lastFailure, contains('TimeoutException'));
+    gate.complete(health());
+  });
+
+  test('poll budget stops loading and retains prices without failing the server job', () async {
+    final gate = Completer<http.Response>();
+    final client = MockClient((_) => gate.future);
+    addTearDown(client.close);
+    final tool = ExplorePriceDiscoveryTool(client: client, baseUrl: 'http://test');
+    final job = ExploreDiscoveryJob.fromJson({
+      'job_id': 'still-running', 'status': 'running',
+      'display_results': [quote('Aster Medical Center', 'aster.example', 900)],
+    });
+    final timer = Stopwatch()..start();
+    final states = await tool.watchDiscoveryJob(job,
+        budget: const Duration(milliseconds: 40),
+        pollInterval: const Duration(milliseconds: 1)).toList();
+    expect(timer.elapsedMilliseconds, lessThan(500));
+    expect(states.last.pollingStopped, isTrue);
+    expect(states.last.status, 'running');
+    expect(states.last.isFinished, isFalse);
+    expect(states.last.rowsFingerprint, job.rowsFingerprint);
+    expect(states.last.message, contains('still running'));
+    gate.complete(health());
+  });
+
   test('a malformed index is a failure, not a completed empty market', () async {
     final client = MockClient((request) async => request.url.path == '/health'
         ? health() : jsonResponse({'message': 'wrong server'}));

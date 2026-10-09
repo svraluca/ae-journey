@@ -1,4 +1,5 @@
 'use strict';
+const {comparisonPriceContext} = require('./tariffScope');
 
 /**
  * Page-level price ownership — mirrors lib/services/explore_price_ownership.dart.
@@ -115,14 +116,26 @@ function exploreEvidenceIsClinicOwnedPrice({
   rawEvidence = '',
   rawProcedureText = '',
   rawPriceText = '',
+  sourceUrl = '',
+  extractionMethod = '',
 } = {}) {
   const blob = `${rawProcedureText}\n${rawEvidence}\n${rawPriceText}`;
-  if (looksLikeLocalizedMarketPriceEstimate(rawEvidence)) return false;
+  if (looksLikeLocalizedMarketPriceEstimate(rawEvidence) || comparisonPriceContext(rawEvidence)) return false;
   if (pageContext === 'explicit_non_owned_prices' ||
       pageContext === 'non_clinic_booking_platform' ||
       looksLikeExplicitNonOwnedPriceDisclaimer(blob) ||
       looksLikeNonClinicBookingPlatform(blob) ||
       looksLikeConditionalCompanionOffer(blob)) return false;
+  // The extractor preserved an explicit branded menu section on a page
+  // that also contains geographical comparisons. Never trust the method alone.
+  if (extractionMethod === 'owned_currency_tariff_table') {
+    let brand = '';
+    try { brand = new URL(sourceUrl).hostname.replace(/^www\./, '').split('.')[0]; } catch (_) { /* no proof */ }
+    const heading = String(rawEvidence).split('|')[0];
+    const key = (s) => ownershipFold(s).replace(/[^a-z0-9]/g, '');
+    if (brand.length >= 4 && key(heading).includes(key(brand)) &&
+        /\b(?:prices?|fees?|costs?)\b/i.test(heading)) return true;
+  }
   if (looksLikeCountryMarketPriceMarketing(blob) &&
       !looksLikeExplicitClinicOwnPriceLanguage(blob)) {
     return false;

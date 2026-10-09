@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.88 — provider tariffs and sparse-price rescue
+Aesthetic Procedure Price Discovery v0.11.89 — bounded display snapshots and responsive polling
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -57,6 +57,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 import vertical_search
 from injectable_scope import injectable_scope_rejection
+from tariff_scope import ancillary_price_reason, comparison_price_context, calendar_price_reason
 
 try:
     from google.cloud import firestore
@@ -6472,6 +6473,8 @@ def extract_scoped_tariff_table_rows(soup, out, seen, url, procedure):
             price = cells[column].get_text(" ", strip=True)
             if not label or not price:
                 continue
+            if ancillary_price_reason(canonicalize_procedure(procedure), label):
+                continue
             if (injectable_scope and not contains_requested_procedure(label, procedure)
                     and not requested_filler_areas(label)
                     and not re.search(r"\b(?:relleno\s+de\s+arrugas|codigo\s+de\s+barras|"
@@ -6535,6 +6538,60 @@ def extract_scoped_tariff_table_rows(soup, out, seen, url, procedure):
                 for index, cell in enumerate(cells):
                     if index not in {0, column} and currency_of(cell.get_text(' ', strip=True)):
                         cell.clear()
+
+
+def remove_market_comparison_tables(soup):
+    # Remove these from the private tree before proximity/window fallbacks.
+    # A clinic address does not establish ownership of a country/city average.
+    for table in soup.find_all('table'):
+        heading = table.find_previous(['h1', 'h2', 'h3', 'h4'])
+        caption = table.find('caption')
+        header = table.find('tr')
+        context = ' '.join(node.get_text(' ', strip=True)
+                           for node in [heading, caption, header] if node is not None)
+        if comparison_price_context(context):
+            table.decompose()
+
+
+def extract_owned_currency_tariff_tables(soup, out, seen, url, procedure):
+    """A site's branded package menu may quote parallel explicit currencies."""
+    brand = domain_brand(url)
+    for table in soup.find_all('table'):
+        heading = table.find_previous(['h1', 'h2', 'h3', 'h4'])
+        scope = heading.get_text(' ', strip=True) if heading else ''
+        if (not contains_requested_procedure(scope, procedure) or not brand
+                or clinic_identity_similarity(scope, brand) < .55):
+            continue
+        rows = table.find_all('tr')
+        if len(rows) < 2:
+            continue
+        headings = [c.get_text(' ', strip=True) for c in rows[0].find_all(['th', 'td'], recursive=False)]
+        columns = [(i, currency_of(label)) for i, label in enumerate(headings)
+                   if i > 0 and currency_of(label) and re.search(r'\b(?:prices?|fees?|costs?)\b', fold(label))]
+        if len(columns) < 2 or len({cur for _, cur in columns}) != len(columns):
+            continue  # Same-currency variants need a different selection model.
+        selected, currency = columns[0]
+        initial = len(out)
+        for tr in rows[1:]:
+            cells = tr.find_all(['th', 'td'], recursive=False)
+            if len(cells) != len(headings):
+                continue
+            label = cells[0].get_text(' ', strip=True)
+            price = cells[selected].get_text(' ', strip=True)
+            base = re.split(r'\s*\+\s*', price, maxsplit=1)[0].strip()
+            if len(list(iter_exact_price_matches(base))) != 1 or currency_of(base) != currency:
+                continue
+            if ancillary_price_reason(canonicalize_procedure(procedure), label):
+                continue
+            start = len(out)
+            add_evidence(out, seen, f'{scope} | {label}: {base}', url, procedure,
+                         'owned_currency_tariff_table')
+            for evidence in out[start:]:
+                spans = requested_procedure_spans(scope, procedure)
+                treatment = scope[spans[0][0]:spans[0][1]] if spans else display_name(canonicalize_procedure(procedure))
+                evidence.raw_procedure_text = f'{treatment} · {label}'
+        if len(out) > initial:
+            table.decompose()  # Other currencies/upgrades cannot reappear via windows.
 
 
 def extract_owned_comparison_columns(soup, out, seen, url, procedure):
@@ -6739,6 +6796,8 @@ def extract_price_evidence(
             memo[memo_key] = out
         return out
 
+    remove_market_comparison_tables(soup)
+    extract_owned_currency_tariff_tables(soup, out, seen, url, procedure)
     extract_owned_comparison_columns(soup, out, seen, url, procedure)
     extract_current_dom_price_rows(soup, out, seen, url, procedure)
     extract_named_dom_tariff_rows(soup, out, seen, url, procedure)
@@ -7381,7 +7440,7 @@ def classify_evidence_type(
 
     if (
         is_price_menu_path(url)
-        or evidence.extraction_method in {'clinic_comparison_column', 'semantic_tariff_card',
+        or evidence.extraction_method in {'owned_currency_tariff_table', 'clinic_comparison_column', 'semantic_tariff_card',
                                           'scoped_graft_card', 'standalone_tariff_sentence'}
         or (evidence.extraction_method in {'scoped_tariff_table_row', 'owned_tariff_list', 'dom_tariff_row'}
             and not article_path and not generic_multi_clinic_price_context(full_page_text))
@@ -7892,7 +7951,7 @@ def page_disclaims_clinic_prices(raw: str) -> bool:
 def generic_multi_clinic_price_context(raw: str) -> bool:
     """A national or multi-clinic estimate is not this clinic's own quote."""
     local = fold(raw or "")
-    if localized_market_price_context(raw):
+    if localized_market_price_context(raw) or comparison_price_context(raw):
         return True
     if (re.search(r"\b(?:el|los)\s+(?:precio|coste|costo)s?\s+(?:de|del)\b[^.!?\n|]{0,90}"
                   r"\ben\s+[a-z ]{2,40}\b(?:varian?|oscila[n]?|suele[n]?\s+oscilar)\b", local)
@@ -8335,6 +8394,15 @@ def validate_evidence(
     )
     if scope_failure:
         return False, False, 0.05, scope_failure, evidence_type
+    for match, amount, currency in iter_exact_price_matches(evidence.raw_evidence):
+        if abs(amount - evidence.price_min) <= .011 and currency == evidence.currency:
+            failure = ancillary_price_reason(canonicalize_procedure(evidence.raw_procedure_text),
+                                             evidence.raw_evidence[max(0, match.start()-150):match.start()])
+            failure = failure or calendar_price_reason(amount,
+                evidence.raw_evidence[max(0, match.start()-150):match.start()],
+                evidence.raw_evidence[match.end():])
+            if failure:
+                return False, False, 0.05, failure, evidence_type
     if page_disclaims_clinic_prices(full_page_text):
         return False, False, 0.10, "page_disclaims_clinic_prices", evidence_type
     if source == "marketplace" and not marketplace_price_evidence_is_strong(
@@ -8344,7 +8412,7 @@ def validate_evidence(
         return False, False, 0.10, "foreign_tariff_heading", evidence_type
     if (source == "official_clinic"
             and evidence_type in {"official_price_menu", "official_treatment_page"}
-            and evidence.extraction_method in {"procedure_quick_facts", "scoped_tariff_table_row", "aligned_tariff_columns",
+            and evidence.extraction_method in {"owned_currency_tariff_table", "procedure_quick_facts", "scoped_tariff_table_row", "aligned_tariff_columns",
                                               "scoped_graft_card", "standalone_tariff_sentence", "dom_tariff_row"}):
         # These methods bind an explicit treatment/brand and price in one
         # menu. Article/comparison gates below still run before ownership.
@@ -8383,7 +8451,7 @@ def validate_evidence(
         and comparative_market_article_context(
             evidence.source_url, full_page_text,
         )
-        and evidence.extraction_method not in {"clinic_owned_paragraph", "clinic_comparison_column"}
+        and evidence.extraction_method not in {"owned_currency_tariff_table", "clinic_owned_paragraph", "clinic_comparison_column"}
         and not (evidence.extraction_method == "heading_price_pair"
                  and clinic_paragraph_matches_site(evidence.raw_evidence, evidence.source_url))
     ):
@@ -11719,6 +11787,15 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
         row.raw_procedure_text, blob, row.clinic_name, row.source_url)
     if scope_failure:
         return scope_failure
+    for match, amount, currency in iter_exact_price_matches(row.raw_evidence):
+        if abs(amount - row.price_min) <= .011 and currency == row.currency:
+            failure = ancillary_price_reason(row.procedure_canonical,
+                                             row.raw_evidence[max(0, match.start()-150):match.start()])
+            failure = failure or calendar_price_reason(amount,
+                row.raw_evidence[max(0, match.start()-150):match.start()],
+                row.raw_evidence[match.end():])
+            if failure:
+                return failure
     if generic_multi_clinic_price_context(row.raw_evidence):
         return "market_context"
     if not literal_price_claim_is_supported(row):
@@ -12947,6 +13024,12 @@ def procedure_detail(
             parts.append("Partially shaved")
         elif re.search(r"\bshaved\b", raw, re.I):
             parts.append("Shaved")
+        allowances = list(re.finditer(
+            r'(?:(?:up\s+to|less\s+than|hasta|menos\s+de|bis\s+zu|jusqu[’\']a|<|≤|>|≥)\s*)?'
+            r'\d[\d., ]*(?:\s*[-–—]\s*\d[\d., ]*)?\s*'
+            r'(?:grafts?|UF|FU|follicular\s+units?|unidades\s+foliculares)\b', raw, re.I))
+        if len(allowances) == 1:
+            parts.append(allowances[0].group(0).strip())
 
     # Preserve order, no duplicates.
     deduped = []
@@ -17931,7 +18014,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.88",
+    version="0.11.89",
     lifespan=app_lifespan,
 )
 

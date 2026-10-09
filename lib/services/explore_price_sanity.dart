@@ -23,7 +23,8 @@ import 'explore_price_binding.dart';
 /// e23: bind current tariffs to their scope; exclude finance, combinations and market disclaimers.
 /// e24: retain marketplace technique; reject hair Botox, topical and needleless fillers.
 /// e25: revalidate informational average tables and literal range endpoints.
-const kExplorePriceExtractRevision = 'e25';
+/// e26: exclude travel/PRP, FAQ years and multilingual geographic tables.
+const kExplorePriceExtractRevision = 'e26';
 
 /// Hard gate: a number from clinic HTML is not a procedure price until this
 /// passes. AI must never invent a replacement amount.
@@ -60,6 +61,7 @@ bool isStructuredPriceExtractionMethod(String method) {
     case 'schemaoffer':
     case 'schema_offer':
     case 'html_table':
+    case 'owned_currency_tariff_table':
     case 'htmltable':
     case 'woocommerce':
     case 'shopify':
@@ -1106,6 +1108,7 @@ bool looksLikeFinancingOrPaymentHeading(String raw) {
 /// Previous/list-price columns do not own the current payable treatment fee.
 bool looksLikeSupersededPriceColumnHeader(String raw) => cachedRegExp(
       r'^(?:antes|was|old\s+price|previous\s+price|precio\s+anterior)'
+      r'(?:\s*\([^()]*\))?\s*$|^(?:price\s+before\s+discount|before\s+discount|السعر\s+السابق)'
       r'(?:\s*\([^()]*\))?\s*$',
     ).hasMatch(foldExploreCityText(raw).trim());
 
@@ -2150,7 +2153,7 @@ PriceSanityResult evaluateExtractedPriceCandidate({
   }
   final nonTreatment = exploreNonTreatmentPriceReason(
     evidence: '$rawProcedureText\n${rawEvidence.isNotEmpty ? rawEvidence : rawPriceText}',
-    priceMin: workingMin, currency: currency,
+    priceMin: workingMin, currency: currency, procedure: procedure,
   );
   if (nonTreatment != null) {
     logReject(nonTreatment);
@@ -2202,6 +2205,8 @@ PriceSanityResult evaluateExtractedPriceCandidate({
     rawProcedureText: procedure,
     rawPriceText: rawPriceText,
     clinicName: clinicName,
+    sourceUrl: sourceUrl,
+    extractionMethod: method,
     // A bound tariff table is structured evidence even when its inherited
     // heading describes hair loss in a full sentence. Page-level market and
     // guide contexts still enforce their explicit ownership requirement.

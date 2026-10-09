@@ -1,6 +1,8 @@
 'use strict';
 
 const cheerio = require('cheerio');
+const {comparisonPriceContext, ancillaryPriceReason} = require('./tariffScope');
+const {detectCurrencyToken} = require('./currencyTokens');
 const {injectableScopeRejection} = require('./injectableScope');
 const {isApproximatePriceQuote} = require('./procedureScope');
 const {classifyExplorePricePageContext,
@@ -66,7 +68,7 @@ function isGenericSectionHeading(raw) {
       t.includes('lista de precio');
 }
 
-function nearestSectionHeading($, el) {
+function nearestSectionHeading($, el, includeRawTitles = false) {
   let cur = el;
   for (let i = 0; i < 10 && cur && cur.length; i++) {
     let sib = cur.prev();
@@ -74,7 +76,13 @@ function nearestSectionHeading($, el) {
       const tag = String((sib.get(0) && sib.get(0).tagName) || '').toLowerCase();
       if (/^h[1-6]$/.test(tag)) {
         const t = visibleText($, sib);
+        if (includeRawTitles && t) return t;
         if (looksLikeProcedureLabel(t) && !isGenericSectionHeading(t)) return t;
+      }
+      if (includeRawTitles) {
+        // Page builders often wrap the preceding heading in its own div.
+        const wrapped = sib.find('h1, h2, h3, h4, h5, h6').last();
+        if (wrapped.length) return visibleText($, wrapped);
       }
       sib = sib.prev();
     }
@@ -120,7 +128,7 @@ function makeEvidence(partial) {
       `${partial.rawProcedureText || ''} ${partial.rawEvidence || ''}`)) return null;
   const hash = buildEvidenceHash(
       partial.sourceUrl, partial.rawProcedureText, partial.rawPriceText);
-  const evidence = ['json_ld', 'schema_offer'].includes(partial.extractionMethod)
+  const evidence = ['json_ld', 'schema_offer', 'owned_currency_tariff_table'].includes(partial.extractionMethod)
     ? String(partial.rawEvidence || '') : shrinkEvidenceToProcedureAndPrice({
     block: String(partial.rawEvidence || ''),
     procedure: String(partial.rawProcedureText || ''),
@@ -337,7 +345,7 @@ function tableColumnHeaders($, tr) {
 }
 
 function isFormerPriceHeader(raw) {
-  return /^(?:antes|anterior|precio\s+(?:anterior|original)|(?:previous|original|old)(?:\s+price)?|was)$/i
+  return /^(?:antes|anterior|precio\s+(?:anterior|original)|(?:previous|original|old)(?:\s+price)?|price\s+before\s+discount|before\s+discount|السعر\s+السابق|was)$/i
       .test(String(raw || '').replace(/\s+/g, ' ').trim());
 }
 
@@ -354,6 +362,44 @@ function removeFormerPriceColumns($) {
       for (const i of oldColumns) cells.eq(i).empty();
     });
   });
+}
+
+function extractOwnedCurrencyTables($, sourceUrl) {
+  const out = [];
+  let brand = '';
+  try { brand = new URL(sourceUrl).hostname.replace(/^www\./, '').split('.')[0]; } catch (_) { return out; }
+  const key = (s) => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+  $('table').each((_, table) => {
+    const t = $(table);
+    const scope = nearestSectionHeading($, t, true);
+    if (brand.length < 4 || !key(scope).includes(key(brand)) ||
+        !/hair\s+transplant|saç\s+ekimi|injerto\s+capilar/i.test(scope)) return;
+    const rows = t.find('tr');
+    const headers = rows.first().find('th, td').toArray().map((cell) => visibleText($, $(cell)));
+    const columns = headers.map((label, i) => ({i, currency: detectCurrencyToken(label)}))
+        .filter((c) => c.i > 0 && c.currency && /prices?|fees?|costs?/i.test(headers[c.i]));
+    if (columns.length < 2 || new Set(columns.map((c) => c.currency)).size !== columns.length) return;
+    const selected = columns[0]; // Published first currency; never infer FX.
+    const before = out.length;
+    rows.slice(1).each((__, tr) => {
+      const cells = $(tr).find('th, td');
+      if (cells.length !== headers.length) return;
+      const label = visibleText($, cells.first());
+      if (ancillaryPriceReason(scope, label)) return;
+      const base = visibleText($, cells.eq(selected.i)).split(/\s*\+\s*/, 1)[0];
+      const parsed = parsePriceText(base);
+      if (!parsed || parsed.currency !== selected.currency || parsed.priceMax > parsed.priceMin) return;
+      const treatment = scope.match(/hair\s+transplant|saç\s+ekimi|injerto\s+capilar/i)[0];
+      const procedure = `${treatment} · ${label}`;
+      const evidence = `${scope} | ${procedure} | ${base}`;
+      const row = makeEvidence({rawProcedureText: procedure, rawPriceText: base,
+        ...parsed, sourceUrl, extractionMethod: 'owned_currency_tariff_table',
+        rawEvidence: evidence, confidence: .97});
+      if (row) out.push(row);
+    });
+    if (out.length > before) t.remove();
+  });
+  return out;
 }
 
 function extractTables($, sourceUrl) {
@@ -386,6 +432,8 @@ function extractTables($, sourceUrl) {
     });
     const priceRaw = preferredTablePriceCell(priceCells);
     if (!procedure || !priceRaw) return;
+    // A nearby treatment heading cannot turn a travel item into a procedure.
+    if (ancillaryPriceReason(nearestSectionHeading($, $(tr)), procedure)) return;
     if (looksLikeThirdPartyProviderPriceLabel(procedure) ||
         looksLikeCompetitorPriceColumnHeader(procedure)) {
       return;
@@ -757,6 +805,11 @@ function extractPriceEvidence({html, sourceUrl}) {
   if (pageContext === 'explicit_non_owned_prices' ||
       pageContext === 'non_clinic_booking_platform') return [];
   removeFormerPriceColumns($);
+  $('table').each((_, table) => {
+    const t = $(table);
+    const context = `${nearestSectionHeading($, t, true)} ${t.find('caption').text()} ${t.find('tr').first().text()}`;
+    if (comparisonPriceContext(context)) t.remove();
+  });
   $('article, .promo-card, .promotion').each((_, node) => {
     const text = visibleText($, $(node));
     if (text.length <= 1500 && looksLikeConditionalCompanionOffer(text)) $(node).remove();
@@ -765,6 +818,8 @@ function extractPriceEvidence({html, sourceUrl}) {
   const seen = new Set();
   const add = (row) => {
     if (!row || !(row.priceMin > 0)) return;
+    if (!evaluateExtractedPriceCandidate({...row, procedure: row.rawProcedureText,
+      pageContext, logRejects: false}).accepted) return;
     if (String(row.rawProcedureText || '').trim().length < 3) return;
     const key = `${row.rawProcedureText.toLowerCase()}|${row.priceMin}|${row.extractionMethod}`;
     if (seen.has(key)) return;
@@ -777,6 +832,7 @@ function extractPriceEvidence({html, sourceUrl}) {
   };
 
   for (const row of extractJsonLd($, sourceUrl)) add(row);
+  for (const row of extractOwnedCurrencyTables($, sourceUrl)) add(row);
   for (const row of extractTables($, sourceUrl)) add(row);
   for (const row of extractWooCommerce($, sourceUrl)) add(row);
   for (const row of extractShopify(html, sourceUrl)) add(row);
