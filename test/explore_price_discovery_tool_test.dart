@@ -2,6 +2,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:glowpass/services/explore_price_discovery_tool.dart';
 
 void main() {
+  test('old API or worker cannot bless prices with current client rules', () {
+    expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
+      {'ok': true, 'version': '0.11.88', 'worker_version': '0.11.88'}), false);
+    expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
+      {'ok': true, 'version': '0.11.91', 'worker_version': '0.11.88'}), false);
+    expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
+      {'ok': true, 'version': '0.11.91', 'worker_version': '0.11.91'}), true);
+    expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
+      {'ok': true, 'version': '0.12.0', 'worker_version': '0.12.0'}), true);
+  });
+
   group('price discovery tool mapping', () {
     test('procedure names match the Python canonicalizer', () {
       expect(

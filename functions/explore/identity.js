@@ -1,4 +1,5 @@
 'use strict';
+const {providerLocationConflicts} = require('./providerLocation');
 
 const MARKETPLACE_EXACT_HOSTS = [
   'clinicpoint.com', 'whatclinic.com', 'bookimed.com',
@@ -632,6 +633,7 @@ function ingestExcludeClinicKeys(excludeKeys, seen) {
  * Peer-city conflict always fails. No clinic allowlists.
  */
 function marketplaceLocationStronglyMatches({
+  providerLocation = '',
   city,
   placeAddress = '',
   sourceUrl = '',
@@ -639,8 +641,9 @@ function marketplaceLocationStronglyMatches({
 }) {
   const c = String(city || '').trim();
   if (!c) return false;
-  const blob = `${placeAddress} ${sourceUrl} ${pageText}`.toLowerCase();
-  const cityLo = c.toLowerCase();
+  if (providerLocationConflicts(providerLocation, c)) return false;
+  const blob = `${placeAddress} ${sourceUrl} ${pageText} ${providerLocation}`.normalize('NFKD').toLowerCase().replace(/[\u0300-\u036f]/g, '');
+  const cityLo = c.normalize('NFKD').toLowerCase().replace(/[\u0300-\u036f]/g, '');
   // Peer Gulf / GCC conflict heuristics (same spirit as Dart peer marks).
   const peers = [
     {key: 'dubai', aliases: ['dubai', 'دبي']},

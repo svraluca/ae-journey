@@ -1,5 +1,5 @@
 'use strict';
-const {quoteScopeReason} = require('./tariffScope');
+const {quoteScopeReason, medicalQaPriceContext} = require('./tariffScope');
 const {injectableScopeRejection} = require('./injectableScope');
 
 const {looksLikeSurgicalChinTreatment,
@@ -810,6 +810,7 @@ function evaluateExtractedPriceCandidate({
   if (amount <= 0) {
     return {accepted: false, reason: 'missing_price_semantics'};
   }
+  if (medicalQaPriceContext(sourceUrl, pageText || rawEvidence)) return {accepted: false, reason: 'medical_qa_price'};
   const scopeFailure = quoteScopeReason({procedure, rawEvidence, priceMin: amount, currency});
   if (scopeFailure) return {accepted: false, reason: scopeFailure};
   const injectableFailure = injectableScopeRejection({procedure,

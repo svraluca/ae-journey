@@ -2,6 +2,8 @@ import 'explore_regex_cache.dart';
 import 'explore_search_locale.dart';
 
 bool exploreMarketComparisonContext(String raw) => cachedRegExp(
+  r'\b(?:turkey|world|global|uk|us|eu|europe)\s+price\s*[:|]',
+).hasMatch(foldExploreCityText(raw)) || cachedRegExp(
   r'\b(?:ulkeler\w*\s+gore|sehirler\w*\s+gore|(?:prices?|costs?)\s+(?:by|across)\s+(?:countr\w*|cities)|(?:precios?|costes?)\s+por\s+(?:paises|ciudades)|prix\s+par\s+(?:pays|ville)|preise\s+nach\s+(?:land|stadt)|prezzi\s+per\s+(?:paese|citta)|average\s+\w*(?:\s+\w*){0,3}\s+price|typical\s+price\s+range|worked\s+cost\s+example|global\s+market)\b',
 ).hasMatch(foldExploreCityText(raw));
 
@@ -35,3 +37,8 @@ String? exploreCalendarPriceReason(double amount, String prefix, String tail) {
       ? 'calendar_year_not_price'
       : null;
 }
+
+bool exploreMedicalQaPriceContext(String sourceUrl, String text) =>
+    cachedRegExp(r'/(?:s-s-s|questions?|answers?)/', caseSensitive: false).hasMatch(sourceUrl) &&
+    cachedRegExp(r'\b(?:devlet\s+hastaneler\w*|hastalar\s+soruyor|ask\s+(?:a\s+)?doctor|medical\s+questions?|patient\s+questions?|fiyatlarinin\s+bazi\s+ornekleri|fiyat\w*[^.!?\n]{0,100}ortalama|(?:average|typical|example)\s+(?:\w+\s+){0,3}(?:prices?|fees?))\b')
+        .hasMatch(foldExploreCityText(text));

@@ -1,0 +1,186 @@
+{
+  "checked_at_utc": "2026-10-09T19:39:28.604400+00:00",
+  "base_commit": "1f01a739c601502b8bb448ac48e229519a55fc24",
+  "runtime_version": "0.11.91",
+  "worker_version": "0.11.91",
+  "price_extract_revision": "e27",
+  "production_provider_or_price_overrides_added": false,
+  "sources": [
+    {
+      "provider": "Premier Clinic",
+      "url": "https://us-uk.bookimed.com/clinic/premier-clinic-malaysia/",
+      "fetch_method": "Direct HTTP page fetch",
+      "http_status": 200,
+      "sha256": "27057e163365d3c9c356a0922ab3d9f3bc20c3b8ad8ca5d1eec1a41a0df49e14",
+      "displayed_price": "approx. 72 USD",
+      "provider_locality": "Kuala Lumpur",
+      "provider_country": "MY",
+      "result": "Reject for Istanbul: the profile mainEntity is in Malaysia; the publisher has an Istanbul office. The price is not an Istanbul clinic fee.",
+      "real_page_parser_result": {
+        "provider_locations": [
+          "Kuala Lumpur"
+        ],
+        "istanbul_fit": false,
+        "kuala_lumpur_fit": true
+      }
+    },
+    {
+      "provider": "History Clinic",
+      "url": "https://www.historyclinic.com/filler/liquid-rhinoplasty-nose-filler",
+      "direct_fetch": "Proxy denied (403/ProxyError); no claim that the site itself denied access",
+      "fetch_method": "Exa retrieved page text",
+      "sha256": "eba78ababe56d59b09359eb16d76fc5a7c3b2777277657ebb00e3795d15ba12b",
+      "raw_excerpts": [
+        "Turkey Price: ~€150 – €900 per area/syringe",
+        "World Price: €500 – €1,500+ per area/syringe (UK/US/EU)"
+      ],
+      "result": "Reject regional comparison as a clinic-owned tariff. Provider location in Istanbul does not establish ownership of a Turkey-wide range.",
+      "limits": "Retrieved text supports classification, not proof that a direct live page has not changed."
+    },
+    {
+      "provider": "Hastalarsoruyor (medical Q&A portal)",
+      "url": "https://hastalarsoruyor.com/s-s-s/1-ml-dudak-dolgusu-fiyat-nedir",
+      "direct_fetch": "Proxy denied; direct live HTML unavailable",
+      "fetch_method": "Exa retrieved page text (live crawl requested; response contains no crawl freshness timestamp)",
+      "sha256": "5a3d11ce44ef5ebadd5529d5721788a021ef2d52a2e1fd38501e5376f3ae93c3",
+      "raw_excerpts": [
+        "1 ml dudak dolgusu fiyatı ortalama 6.500 TL ile 11.000 TL arasındadır.",
+        "1 ml dudak dolgusu fiyatlarının bazı örnekleri şunlardır:",
+        "Teosyal Kiss: 8.500 TL - 10.500 TL"
+      ],
+      "result": "Reject a generic brand-price example as a provider tariff; Teosyal Kiss remains a product brand when displayed on an actual verified provider menu."
+    }
+  ],
+  "general_fixes": [
+    "Bind structured medical entity address to the current marketplace profile; ignore publisher, office footer and related clinic metadata.",
+    "Carry source_location_text through job rows, Firestore, merge and card conversion; foreign provider locality overrides generated search-city labels.",
+    "Marketplace backend cache rows without provider-location proof need source revalidation before display.",
+    "Reject geographical price comparisons and medical Q&A example figures before marking them verified.",
+    "Require compatible Python API and worker rules; do not treat an old local worker as newly verified merely because Flutter changed.",
+    "Translate supported medical terms into English only for card labels; preserve provider names, price currencies, brands, dose, technique and original evidence.",
+    "Do not fabricate replacement fees or extra providers to reach four cards."
+  ],
+  "validation": {
+    "python": {
+      "passed": 148,
+      "failed": 0
+    },
+    "functions": {
+      "passed": 326,
+      "failed": 0
+    },
+    "flutter": {
+      "passed": 780,
+      "failed": 14,
+      "existing_failures": [
+        {
+          "suite": "explore_global_price_discovery_test.dart",
+          "test": "units on parsePriceText stores ml quantity and per-unit type"
+        },
+        {
+          "suite": "explore_currency_cached_pipeline_test.dart",
+          "test": "extract revision is e18"
+        },
+        {
+          "suite": "explore_places_circuit_breaker_test.dart",
+          "test": "Places 429 trips circuit breaker and skips further calls"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "pool mix plan 2+ pool paints 2 Firestore seeds and still hunts 2 Google"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "procedure display title 14. Serp page titles are not clinic names"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "Places name looks medical keeps named plastic clinics Google may type as gym/lodging"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "Places name looks medical 25g. Abu Dhabi keeps verified quotes and skips Dubai-only URLs"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "SERP fetch uses any listed price, not a snippet amount London hair cards show package FROM, not /graft on graft counts"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "canonical city + early discovery rejects Budapest Botox does not keep a Tiranë clinic"
+        },
+        {
+          "suite": "explore_worldwide_pipeline_test.dart",
+          "test": "UI states + exact price labelling cold city searching copy"
+        },
+        {
+          "suite": "explore_progressive_fill_drop_test.dart",
+          "test": "price-list path witness Global Action 1 ml stays eligible after accept-time variant"
+        },
+        {
+          "suite": "explore_price_sanity_test.dart",
+          "test": "price sanity gate gold packages, Quick Facts, and SEO titles are not clinic prices"
+        },
+        {
+          "suite": "explore_price_sanity_test.dart",
+          "test": "price sanity gate hair market £/graft copy and stale landing quotes are rejected"
+        },
+        {
+          "suite": "explore_price_sanity_test.dart",
+          "test": "price sanity gate rhinoplasty market guide is rejected; hospital guide stays scoped"
+        }
+      ],
+      "new_failures": [],
+      "baseline_report": "verification/provider_price_sources_validation.json"
+    },
+    "new_regressions": {
+      "python_provider_location_and_quotes": 8,
+      "functions_provider_location_and_quotes": 4,
+      "flutter_provider_location_and_english": 5,
+      "flutter_backend_version": 1,
+      "all_passed": true
+    },
+    "dart_analysis": {
+      "errors": 0,
+      "existing_warnings": 10,
+      "exit_code": 1,
+      "note": "Existing unused declarations and style diagnostics remain; no clean analyzer claim."
+    },
+    "live_cloud_health": {
+      "ok": true,
+      "version": "0.11.91",
+      "price_extract_revision": "e27",
+      "price_index": true,
+      "discovery_jobs": true,
+      "worker_version": "0.11.91",
+      "progressive_jobs": true
+    },
+    "logs": {
+      "python": {
+        "sha256": "d838f7284b75c524d8c61fcb68879b9bec6d17b4bd0a522b6924f1175e339e98"
+      },
+      "functions": {
+        "sha256": "3796115694b865b80c88183cd95d099dfd775f0ca898296db45e8feb35404da3"
+      },
+      "flutter": {
+        "sha256": "4d9cb8d0ea4c45d99281625b72115967e72db255d8f410eaaf9d9ea2f0d332a5"
+      },
+      "dart_analysis": {
+        "sha256": "31b345ef14ba5fac0f3148ed049c3c53b7ad9c3f3df51c144f8a8f3223bf1b60"
+      },
+      "functions_last_locality_check": {
+        "sha256": "10958b4a4fd0f59b94639f4ef55e7325d3fd79cddf96a2c0bc5abe07c6d13c2f"
+      },
+      "python_last_locality_check": {
+        "sha256": "baaeda7dc4cf879e7efc3035f909dfea358288fb5152c157943ca889331d4ac7"
+      }
+    }
+  },
+  "limits": [
+    "The Mac LaunchAgent, iPhone app and production Firebase Functions have not been updated by this cloud change.",
+    "No production Firestore documents were rewritten, deleted or stamped e27 here.",
+    "English labels use a synchronous medical terminology map; unrecognized source wording is retained, not guessed or sent to a blocking translation call.",
+    "No claim that every Istanbul procedure has four published, locally verified prices.",
+    "Fourteen recorded Flutter baseline failures remain and require separate work; this task does not certify all historical bugs resolved."
+  ]
+}

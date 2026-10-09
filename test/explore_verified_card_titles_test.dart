@@ -98,12 +98,12 @@ void main() {
     expect(clinicsForCompareDisplay([stale], procedure: 'Rhinoplasty'), isEmpty);
   });
 
-  test('generic saved filler title does not replace its precise Romanian tariff name', () {
+  test('English filler title preserves the source subtype and brand', () {
     final row = clinic(procedure: 'Dermal filler', canonical: 'filler',
         rawTitle: 'Mărire buze cu acid hialuronic Amalian', displayTitle: 'Dermal Filler',
         amount: 1497, currency: 'RON', city: 'Brașov');
     expect(exploreCardProcedureLabel(row, selectedPill: 'Fillers'),
-        'Mărire buze cu acid hialuronic Amalian');
+        'Lip filler with hyaluronic acid Amalian');
   });
 
   test('published filler technique and dose remain attached to the card', () {
@@ -118,20 +118,20 @@ void main() {
         amount: 1497, currency: 'RON', city: 'Brașov').copyWith(
           priceEvidenceText: 'Servicii în Brașov | Mărire buze cu acid hialuronic Amalian 1497 lei Cumpără');
     expect(exploreCardProcedureLabel(row, selectedPill: 'Fillers'),
-        'Mărire buze cu acid hialuronic Amalian');
+        'Lip filler with hyaluronic acid Amalian');
   });
 
-  test('tear-trough tariff keeps its actual Romanian treatment name', () {
+  test('tear-trough title is English while the source text stays unchanged', () {
     final row = clinic(procedure: 'Dermal filler', canonical: 'filler',
         rawTitle: 'Umplere cearcăne', displayTitle: 'Dermal Filler',
         amount: 1600, currency: 'RON', city: 'Brașov');
-    expect(exploreCardProcedureLabel(row, selectedPill: 'Fillers'), 'Umplere cearcăne');
+    expect(exploreCardProcedureLabel(row, selectedPill: 'Fillers'), 'Tear trough filler');
     final concatenated = clinic(procedure: 'Dermal filler', canonical: 'filler',
         rawTitle: 'Umplere cearcăne Injectare acid hialuronic',
         displayTitle: 'Umplere cearcăne Injectare acid hialuronic',
         amount: 1600, currency: 'RON', city: 'Brașov');
     expect(exploreCardProcedureLabel(concatenated, selectedPill: 'Fillers'),
-        'Umplere cearcăne');
+        'Tear trough filler');
     expect(stripGenericFillerMethodSubtitle(
         'Umplere șanțuri nazo-geniene Injectare acid hialuronic (per ml)'),
         'Umplere șanțuri nazo-geniene Injectare acid hialuronic (per ml)');

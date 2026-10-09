@@ -39,6 +39,7 @@ class ExploreDiscoveryToolRow {
     required this.qualifier,
     this.priceMax,
     this.officialWebsite = '',
+    this.sourceLocationText = '',
     this.rating = 0,
     this.reviews = 0,
     this.origin = '',
@@ -54,6 +55,7 @@ class ExploreDiscoveryToolRow {
   final String currency;
   final String sourceUrl;
   final String officialWebsite;
+  final String sourceLocationText;
   final String rawProcedureText;
   final String rawEvidence;
   final String rawPriceText;
@@ -158,7 +160,7 @@ class ExploreDiscoveryJob {
   /// Progress counters can change without changing any price card.
   String get rowsFingerprint => jsonEncode(rows.map((row) => [
     row.clinicName, row.priceMin, row.priceMax, row.currency, row.sourceUrl,
-    row.officialWebsite, row.rawProcedureText, row.rawEvidence, row.rawPriceText,
+    row.officialWebsite, row.sourceLocationText, row.rawProcedureText, row.rawEvidence, row.rawPriceText,
     row.clinicOwnPrice, row.cityMatch, row.sourceType, row.evidenceType,
     row.procedureDisplayName, row.procedureCanonical, row.procedureDetail,
     row.unit, row.qualifier, row.rating, row.reviews, row.origin,
@@ -200,6 +202,24 @@ class ExploreDiscoveryJob {
 /// Simulator on that Mac. A phone uses [PRICE_DISCOVERY_TOOL_URL]. Search
 /// credentials stay on the server.
 class ExplorePriceDiscoveryTool {
+  static const minimumBackendVersion = '0.11.91';
+
+  /// Older workers can return rows checked with obsolete ownership rules.
+  /// Updating Flutter must not turn those rows into freshly verified prices.
+  static bool supportsCurrentPriceRules(Map health) {
+    bool current(Object? value) {
+      final parts = '$value'.split('.').map(int.tryParse).toList();
+      if (parts.length != 3 || parts.any((n) => n == null)) return false;
+      const minimum = [0, 11, 91];
+      for (var i = 0; i < 3; i++) {
+        if (parts[i]! != minimum[i]) return parts[i]! > minimum[i];
+      }
+      return true;
+    }
+    return health['ok'] == true && current(health['version']) &&
+        current(health['worker_version'] ?? health['version']);
+  }
+
   static const compareDisplayLimit = kExploreCompareDisplayLimit;
   static const compareStoredTarget = kExploreCompareSavedTarget;
   static const compareFreshTarget = kExploreCompareFreshTarget;
@@ -617,6 +637,16 @@ class ExplorePriceDiscoveryTool {
             res.statusCode == 200 &&
             (res.body.contains('"ok"') || res.body.contains('0.11'));
         if (ok) {
+          final decoded = jsonDecode(res.body);
+          if (decoded is! Map || !supportsCurrentPriceRules(decoded)) {
+            if (_activeBaseUrl == url) {
+              _activeBaseUrl = '';
+              _lastHealthyAt = null;
+            }
+            failures.add('$url needs Python API and worker $minimumBackendVersion or newer');
+            debugPrint('[GP TOOL] health · $url · incompatible price rules; update API and worker');
+            continue;
+          }
           _activeBaseUrl = url;
           _lastHealthyAt = DateTime.now();
           lastFailure = '';
@@ -634,13 +664,10 @@ class ExplorePriceDiscoveryTool {
         failures.add('$url HTTP ${res.statusCode}');
         debugPrint('[GP TOOL] health · $url · failed · HTTP ${res.statusCode}');
       } catch (e) {
-        final timedOut =
-            e is TimeoutException || e.toString().contains('TimeoutException');
-        final loopback = url.contains('127.0.0.1') || url.contains('localhost');
         // A search already running on this server can delay /health.
         // Keep using it. Falling through to the old search is what scraped
         // news sites and made a new city feel stuck.
-        if (known || (timedOut && loopback)) {
+        if (known) {
           _activeBaseUrl = url;
           lastFailure = '';
           _downUntil = null;
@@ -1490,6 +1517,7 @@ class ExplorePriceDiscoveryTool {
       currency: currency,
       sourceUrl: url,
       officialWebsite: '${json['official_website'] ?? ''}'.trim(),
+      sourceLocationText: '${json['source_location_text'] ?? ''}'.trim(),
       rawProcedureText: rawProcedure,
       rawEvidence: rawEvidence,
       rawPriceText: rawPrice.isNotEmpty

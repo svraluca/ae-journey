@@ -1,4 +1,5 @@
 'use strict';
+const {providerLocationContext} = require('./providerLocation');
 
 const {HttpsError} = require('firebase-functions/v2/https');
 const {HttpClinicPageFetcher} = require('./pageFetcher');
@@ -199,6 +200,7 @@ function clinicJson({place, evidence, city}) {
     sourceType,
     source_type: sourceType,
     source_platform: evidence.sourcePlatform || '',
+    source_location_text: evidence.sourceLocationText || '',
     provider_clinic: evidence.providerClinic || place.providerClinic || '',
     raw_procedure_text: evidence.rawProcedureText,
     rawProcedureText: evidence.rawProcedureText,
@@ -493,8 +495,9 @@ async function verifyPlace(fetcher, place, {
   if (picked.sourceType === 'marketplace' ||
       picked.sourceType === 'aggregator' ||
       isMarketplaceOrDirectoryHost(picked.sourceUrl || place.website)) {
+    const html = (await htmlForUrl(fetcher, picked.sourceUrl, {deep, deadlineAt})).html || '';
+    const sourceLocation = providerLocationContext(html, picked.sourceUrl);
     if (!providerName) {
-      const html = (await htmlForUrl(fetcher, picked.sourceUrl, {deep, deadlineAt})).html || '';
       providerName = extractMarketplaceProviderName(html, {
         sourceUrl: picked.sourceUrl,
         marketplaceName: place.name,
@@ -509,6 +512,7 @@ async function verifyPlace(fetcher, place, {
     }
     const pageBlob = `${picked.rawEvidence || ''} ${picked.rawProcedureText || ''} ${picked.rawPriceText || ''}`;
     if (!marketplaceLocationStronglyMatches({
+      providerLocation: sourceLocation,
       city,
       placeAddress: place.address || place.formattedAddress || '',
       sourceUrl: picked.sourceUrl,
@@ -531,6 +535,7 @@ async function verifyPlace(fetcher, place, {
     picked = {
       ...picked,
       providerClinic: providerName,
+      sourceLocationText: sourceLocation,
       sourcePlatform: picked.sourcePlatform || marketplacePlatformLabel(picked.sourceUrl),
       sourceType: 'marketplace',
     };

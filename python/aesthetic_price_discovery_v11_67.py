@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.90 — preserve public provider names and repair cached identities
+Aesthetic Procedure Price Discovery v0.11.91 — provider-bound geography and published fee ownership
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -57,7 +57,9 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 import vertical_search
 from injectable_scope import injectable_scope_rejection
-from tariff_scope import ancillary_price_reason, comparison_price_context, calendar_price_reason
+from tariff_scope import ancillary_price_reason, comparison_price_context, calendar_price_reason, medical_qa_price_context
+
+PRICE_EXTRACT_REVISION = "e27"
 
 try:
     from google.cloud import firestore
@@ -1968,6 +1970,8 @@ def classify_page_source(url: str, text: str = "") -> str:
     static = classify_source(url)
     if static != "official_clinic":
         return static
+    if medical_qa_price_context(url, text):
+        return "directory"
     if facilitator_profile_page_context(url, text):
         return "marketplace"
     if directory_like_page_context(url, text):
@@ -4156,6 +4160,22 @@ def strong_local_page_evidence(html: str, text: str, city: str, url: str) -> boo
     # not erase a clinic's actual structured/contact address.
     if country_price_guide_path(url) or cross_country_price_comparison(text):
         return False
+    if classify_page_source(url, text) == "marketplace":
+        # Only the profiled provider can establish locality. A marketplace's
+        # publisher, nearby recommendations and global office footer cannot.
+        locations = marketplace_provider_locations(html, url)
+        if locations:
+            return any(address_matches_search_city(location, city) for location in locations)
+        soup = BeautifulSoup(html or "", "lxml")
+        for node in soup.select('nav, footer, header, [class*="footer"], [id*="footer"]'):
+            node.decompose()
+        addresses = [n.get_text(' ', strip=True) for n in soup.select('address, [itemprop="address"]')]
+        if addresses:
+            return any(address_matches_search_city(address, city) for address in addresses)
+        # A profile's own heading is acceptable when structured metadata is
+        # absent. Never fall back to an arbitrary city anywhere in its body.
+        identity = ' '.join(n.get_text(' ', strip=True) for n in soup.select('title, h1'))
+        return city_in_text(identity, city) and not foreign_city_conflict(identity, city)
     soup = BeautifulSoup(html, "lxml")
     structured_locations: list[str] = []
     structured_localities: list[str] = []
@@ -4248,6 +4268,67 @@ def strong_local_page_evidence(html: str, text: str, city: str, url: str) -> boo
     # Title/meta/URL are acceptable for a provider/tariff page only after the
     # comparison/directory gates above.  General body prose is never used.
     return city_in_text(f"{title} {meta} {url}", city)
+
+
+def marketplace_provider_locations(html: str, url: str) -> list[str]:
+    """Addresses of the profile's main medical entity, not its publisher."""
+    locations = []
+    profile = url.split('#')[0].rstrip('/')
+    medical_types = {'Hospital', 'MedicalClinic', 'MedicalBusiness', 'Physician',
+                     'Dentist', 'LocalBusiness', 'HealthAndBeautyBusiness'}
+
+    def visit(item, main_entity=False):
+        if isinstance(item, list):
+            for child in item:
+                visit(child)
+        elif isinstance(item, dict):
+            types = item.get('@type', [])
+            types = {types} if isinstance(types, str) else set(types)
+            ref = str(item.get('url') or item.get('@id') or '').split('#')[0].rstrip('/')
+            if types & medical_types and (ref == profile or (main_entity and not ref)):
+                address = item.get('address')
+                if isinstance(address, dict):
+                    # Exact locality outranks a city-named street and the
+                    # platform's administrative country/locale.
+                    locality = address.get('addressLocality')
+                    if locality:
+                        locations.append(str(locality))
+                    else:
+                        locations.append(' '.join(str(address.get(k) or '') for k in
+                            ('streetAddress', 'addressRegion', 'addressCountry')).strip())
+                elif isinstance(address, str):
+                    locations.append(address)
+            for key, child in item.items():
+                if isinstance(child, (dict, list)):
+                    visit(child, main_entity=key == 'mainEntity')
+
+    # Read only JSON-LD instead of rebuilding the entire document per card.
+    for script in re.finditer(r'''<script\b[^>]*type=["']application/ld\+json["'][^>]*>(.*?)</script>''',
+                              html or '', re.I | re.S):
+        try:
+            visit(json.loads(script.group(1)))
+        except (ValueError, TypeError):
+            continue
+    return list(dict.fromkeys(location for location in locations if location))
+
+
+def marketplace_source_location_conflict(context: str, city: str) -> bool:
+    locations = [line[len('Provider locality: '):] for line in (context or '').splitlines()
+                 if line.startswith('Provider locality: ')]
+    return bool(locations) and not any(address_matches_search_city(location, city) for location in locations)
+
+
+def marketplace_provider_location_context(html: str, url: str, city: str) -> str:
+    locations = marketplace_provider_locations(html, url)
+    if not locations:
+        soup = BeautifulSoup(html or '', 'lxml')
+        for node in soup.select('nav, footer, header, [class*="footer"], [id*="footer"]'):
+            node.decompose()
+        # Keep the actual provider address/heading, not a fabricated query city.
+        locations = [node.get_text(' ', strip=True) for node in
+                     soup.select('address, [itemprop="address"], title, h1')
+                     if address_matches_search_city(node.get_text(' ', strip=True), city)]
+    return '\n'.join('Provider locality: ' + location for location in locations)
 
 
 # ============================================================
@@ -8503,6 +8584,10 @@ def validate_evidence(
     if source == "official_clinic" and explicit_multi_provider_agency(full_page_text):
         return False, False, 0.10, "multi_provider_agency_price", evidence_type
 
+    if (source == "official_clinic" and comparison_price_context(full_page_text)
+            and not own_language(evidence.raw_evidence)
+            and evidence.extraction_method != "owned_currency_tariff_table"):
+        return False, False, 0.10, "market_comparison_table", evidence_type
     if source == "official_clinic" and generic_multi_clinic_price_context(
         evidence.raw_evidence
     ):
@@ -11796,6 +11881,10 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
         return "classify_source"
     if not row.city_match:
         return "city_unverified"
+    if marketplace_source_location_conflict(row.source_location_text, row.city):
+        return "foreign_provider_locality"
+    if medical_qa_price_context(row.source_url, row.raw_evidence):
+        return "medical_qa_price"
     if tariff_location_conflict(row.source_location_text, row.city):
         return "foreign_tariff_heading"
     if not valid_name(row.clinic_name):
@@ -11805,6 +11894,8 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
         row.raw_procedure_text, blob, row.clinic_name, row.source_url)
     if scope_failure:
         return scope_failure
+    if row.source_type == "marketplace" and 'Provider locality: ' not in row.source_location_text:
+        return "marketplace_provider_location_missing"
     for match, amount, currency in iter_exact_price_matches(row.raw_evidence):
         if abs(amount - row.price_min) <= .011 and currency == row.currency:
             failure = ancillary_price_reason(row.procedure_canonical,
@@ -11952,6 +12043,12 @@ def trusted_price_result(row: ClinicPriceResult) -> bool:
             and classify_source(row.source_url) != "official_clinic"):
         return False
     if not row.city_match or not valid_name(row.clinic_name):
+        return False
+    if row.source_type == "marketplace" and 'Provider locality: ' not in row.source_location_text:
+        return False
+    if marketplace_source_location_conflict(row.source_location_text, row.city):
+        return False
+    if medical_qa_price_context(row.source_url, row.raw_evidence):
         return False
     if tariff_location_conflict(row.source_location_text, row.city):
         return False
@@ -16913,7 +17010,10 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
             diag.places_miss_but_local_page_accepted += 1
 
         # Marketplace must prove requested city.
-        if src == "marketplace" and not (place or local_page):
+        if src == "marketplace" and (
+            (marketplace_provider_locations(html or "", hit.url) and not local_page)
+            or not (place or local_page)
+        ):
             diag.rejected_city += 1
             add_reject(
                 diag,
@@ -17058,7 +17158,10 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                     confidence=max(0, min(0.99, confidence)),
                     raw_procedure_text=e.raw_procedure_text,
                     raw_evidence=e.raw_evidence,
-                    source_location_text=tariff_location_context(html or ""),
+                    source_location_text=(tariff_location_context(html or "") + "\n" +
+                        (marketplace_provider_location_context(html or "", hit.url, req.city)
+                         or ("Provider locality: " + place.formatted_address if src == "marketplace" and place else ""))
+                        if src == "marketplace" else tariff_location_context(html or "")),
                     price_scope=(
                         "implant_excluded"
                         if canonical == "breast_augmentation" and implant_cost_excluded(e.raw_evidence)
@@ -18032,7 +18135,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.90",
+    version="0.11.91",
     lifespan=app_lifespan,
 )
 
@@ -18075,6 +18178,7 @@ async def serper_health(city: str = "Tirana"):
 async def health():
     worker_version = getattr(getattr(app.state, "index_jobs", None), "version", "unknown")
     return {"ok": True, "version": app.version,
+            "price_extract_revision": PRICE_EXTRACT_REVISION,
             "price_index": True, "discovery_jobs": True,
             "worker_version": worker_version, "progressive_jobs": worker_version == app.version}
 

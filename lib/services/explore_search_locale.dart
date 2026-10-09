@@ -1,3 +1,4 @@
+import 'explore_provider_location.dart';
 import 'explore_regex_cache.dart';
 import 'filter_currency.dart';
 
@@ -1481,6 +1482,7 @@ bool _blobMentionsCityKey(String blob, String cityKey) {
 /// matches the searched city (address, URL, or page copy). Peer-city conflict
 /// always fails. No clinic- or city-specific allowlists.
 bool exploreMarketplaceLocationStronglyMatches({
+  String sourceLocationText = '',
   required String city,
   String placeAddress = '',
   String sourceUrl = '',
@@ -1488,6 +1490,7 @@ bool exploreMarketplaceLocationStronglyMatches({
 }) {
   final c = city.trim();
   if (c.isEmpty) return false;
+  if (exploreProviderLocationConflicts(sourceLocationText, c)) return false;
   if (explorePlacesAddressConflictsWithSearchCity(placeAddress, c)) {
     return false;
   }
@@ -1501,7 +1504,7 @@ bool exploreMarketplaceLocationStronglyMatches({
     return false;
   }
 
-  final blob = '${explorePlacesAddressLocalityText(placeAddress)} $sourceUrl $pageText'.toLowerCase();
+  final blob = '${explorePlacesAddressLocalityText(placeAddress)} $sourceUrl $pageText $sourceLocationText'.toLowerCase();
   final cityLo = c.toLowerCase();
   final tokens = cityLo
       .split(cachedRegExp(r'[^a-z0-9\u0600-\u06ff]+'))

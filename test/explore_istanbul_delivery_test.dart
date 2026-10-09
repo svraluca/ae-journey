@@ -352,7 +352,7 @@ void main() {
   });
 
   test(
-    'Turkish SEO headings lose price copy while keeping the published treatment name',
+    'Turkish SEO headings become clean English treatment names',
     () async {
       for (final title in [
         'Botoks fiyatları 2026',
@@ -377,19 +377,19 @@ void main() {
             result.accepted.single,
             selectedPill: 'Botox',
           ),
-          'Botoks',
+          'Botox',
         );
       }
     },
   );
 
   test(
-    'every procedure preserves a usable source-language row over an English display name',
+    'every procedure displays English and preserves its source-language evidence',
     () async {
       const examples = [
-        ('botox', 'Botox', 'Botoks', 'Botox treatment', 5000.0),
-        ('filler', 'Fillers', 'Dudak dolgusu 1 ml', 'Lip filler', 8000.0),
-        ('chemical_peel', 'Peels', 'Kimyasal peeling', 'Chemical Peel', 3000.0),
+        ('botox', 'Botox', 'Botoks', 'Botox', 5000.0),
+        ('filler', 'Fillers', 'Dudak dolgusu 1 ml', 'Lip filler 1 ml', 8000.0),
+        ('chemical_peel', 'Peels', 'Kimyasal peeling', 'Chemical peel', 3000.0),
         (
           'rhinoplasty',
           'Rhinoplasty',
@@ -408,7 +408,7 @@ void main() {
           'hair_transplant',
           'Hair',
           'Saç ekimi FUE',
-          'Hair Transplant',
+          'Hair transplant FUE',
           60000.0,
         ),
       ];
@@ -431,8 +431,9 @@ void main() {
         expect(result.accepted, hasLength(1), reason: title);
         expect(
           exploreCardProcedureLabel(result.accepted.single, selectedPill: pill),
-          title,
+          english,
         );
+        expect(result.accepted.single.rawProcedureText, title);
       }
     },
   );

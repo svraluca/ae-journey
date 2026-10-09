@@ -5,6 +5,7 @@ import '../services/explore_price_ownership.dart';
 import '../services/explore_price_sanity.dart';
 import '../services/explore_procedure_family.dart';
 import '../services/explore_price_binding.dart';
+import 'explore_english_procedure_label.dart';
 
 String _formatComparePriceNum(double v, {bool compactThousands = true}) {
   if (compactThousands && v >= 10000) {
@@ -558,10 +559,18 @@ String exploreCardProcedureLabel(
   OpenAIClinic clinic, {
   String? selectedPill,
   String? topic,
+}) => exploreEnglishProcedureLabel(_exploreSourceProcedureLabel(
+  clinic, selectedPill: selectedPill, topic: topic,
+));
+
+String _exploreSourceProcedureLabel(
+  OpenAIClinic clinic, {
+  String? selectedPill,
+  String? topic,
 }) {
   final pill = selectedPill?.trim() ?? '';
   final topicHead = topic?.split('·').first.trim() ?? '';
-  // Source-language tariff names beat generated English family names.
+  // Select the exact source tariff before translating the display label.
   final persisted = exploreWebsiteProcedureTitle(
       exploreProcedureTitleWithoutPromotion(clinic.procedureDisplayName));
   final isFiller = pill == 'Fillers' || clinic.procedureCanonical == 'filler';
@@ -598,6 +607,7 @@ String exploreCardProcedureLabel(
       (isBroadExploreCategoryName(brand) && brand == 'Rhinoplasty');
 
   bool matchesPill(String label) {
+    label = exploreEnglishProcedureLabel(label);
     if (query.isEmpty) {
       final stored = exploreFamilyFromStoredId(clinic.procedureCanonical);
       return stored == ExploreTreatmentFamily.other || exploreTreatmentFamily(label) == stored;

@@ -1,4 +1,5 @@
 'use strict';
+const {providerLocationConflicts} = require('./providerLocation');
 
 const admin = require('firebase-admin');
 const {
@@ -100,6 +101,9 @@ function sanitizeVerifiedPoolRow(row, procedure = '', {city = ''} = {}) {
   if (!row || typeof row !== 'object') return row;
   const proc = String(procedure || '').trim();
   let next = {...row};
+  if (providerLocationConflicts(next.source_location_text, city || next.city)) {
+    return toReverifyIdentityStub(next, 'foreign_provider_locality');
+  }
   let rev = String(next.price_extract_revision || next.extractRevision || '').trim();
   // Deterministic e17 → e18 when locked evidence is complete.
   if (rev === 'e17') {

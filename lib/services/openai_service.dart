@@ -36,6 +36,7 @@ import 'explore_price_sanity.dart';
 import 'explore_price_ownership.dart';
 import 'explore_currency_tokens.dart';
 import 'explore_clinic_identity.dart';
+import 'explore_provider_location.dart';
 import 'explore_marketplace_discovery.dart';
 import 'explore_price_discovery_tool.dart';
 import 'explore_price_binding.dart';
@@ -1267,6 +1268,7 @@ Return JSON only.
       'price_pending': false,
       'price_source_url': sourceUrl,
       'price_evidence_text': sanitizePriceEvidence(c.priceEvidenceText),
+      'source_location_text': c.sourceLocationText,
       'price_verification_status': c.priceVerificationStatus.wire,
       'price_verification_confidence': c.priceVerificationConfidence,
       if (c.priceVerifiedAt != null)
@@ -10993,6 +10995,7 @@ Return JSON only.
       return null;
     }
     var providerName = locked.providerClinic.trim();
+    var sourceLocation = clinic.sourceLocationText;
     if (exploreClinicNameLooksLikeSeoHeadline(providerName) ||
         exploreClinicNameLooksLikeMarketingSlogan(providerName)) {
       providerName = '';
@@ -11000,10 +11003,9 @@ Return JSON only.
     if (locked.sourceType == PriceSourceType.marketplace ||
         locked.sourceType == PriceSourceType.aggregator ||
         isMarketplaceOrDirectoryHost(locked.sourceUrl)) {
+      final html = ExploreHtmlPriceParseCache.instance.htmlByUrl[locked.sourceUrl] ?? '';
+      sourceLocation = exploreProviderLocationContext(html, locked.sourceUrl);
       if (providerName.isEmpty) {
-        final html =
-            ExploreHtmlPriceParseCache.instance.htmlByUrl[locked.sourceUrl] ??
-            '';
         providerName = extractMarketplaceProviderName(
           html,
           sourceUrl: locked.sourceUrl,
@@ -11023,6 +11025,7 @@ Return JSON only.
       final pageBlob =
           '${locked.rawEvidence} ${locked.rawProcedureText} ${locked.rawPriceText}';
       if (!exploreMarketplaceLocationStronglyMatches(
+        sourceLocationText: sourceLocation,
         city: city,
         placeAddress: clinic.area,
         sourceUrl: locked.sourceUrl,
@@ -11130,6 +11133,7 @@ Return JSON only.
                   ? marketplacePlatformLabel(locked.sourceUrl)
                   : clinic.sourcePlatform),
         providerClinic: providerName,
+        sourceLocationText: sourceLocation,
         procedureRelation: relation.logToken,
       ),
       priceMin: min,
@@ -18148,6 +18152,7 @@ bool exploreClinicFitsSearchCity(OpenAIClinic c, String city) {
 }
 
 bool _clinicFitsSearchCityUncached(OpenAIClinic c, String city) {
+  if (exploreProviderLocationConflicts(c.sourceLocationText, city)) return false;
   if (exploreProviderIdentityConflictsWithSearchCity(
     city: city, name: c.name, sourceUrl: c.priceSourceUrl,
     evidence: '${c.priceEvidenceText} ${c.rawProcedureText}',
@@ -18167,7 +18172,7 @@ bool _clinicFitsSearchCityUncached(OpenAIClinic c, String city) {
     priceLabel: c.priceLabel,
     procedureText:
         '${c.brand} ${c.rawProcedureText} ${c.name} ${c.priceEvidenceText} '
-        '${c.rawPriceText}',
+        '${c.rawPriceText} ${c.sourceLocationText}',
     area: c.area,
     url: c.priceSourceUrl,
     // Discovery rows reach this type only after city_match/clinic_own_price
@@ -21460,6 +21465,7 @@ OpenAIClinic? _clinicFromDiscoveryToolRow(
           )
         : row.procedureDisplayName,
     providerClinic: row.clinicName,
+    sourceLocationText: row.sourceLocationText,
     sourcePlatform: marketplace ? marketplacePlatformLabel(host) : '',
     priceExtractRevision: kExplorePriceExtractRevision,
     procedureRelation: 'exact',
@@ -22088,6 +22094,7 @@ class OpenAIClinic {
     this.currencyConfirmed = false,
     this.priceSourceUrl = '',
     this.priceEvidenceText = '',
+    this.sourceLocationText = '',
     this.priceVerificationStatus = PriceVerificationStatus.unverified,
     this.priceVerificationConfidence = 0,
     this.priceVerifiedAt,
@@ -22152,6 +22159,7 @@ class OpenAIClinic {
   /// Official page the price was read from. Prefer this over encoding URLs in [area].
   final String priceSourceUrl;
   final String priceEvidenceText;
+  final String sourceLocationText;
   final PriceVerificationStatus priceVerificationStatus;
   final double priceVerificationConfidence;
   final DateTime? priceVerifiedAt;
@@ -22209,6 +22217,7 @@ class OpenAIClinic {
     String? badgeVariant,
     String? priceSourceUrl,
     String? priceEvidenceText,
+    String? sourceLocationText,
     PriceVerificationStatus? priceVerificationStatus,
     double? priceVerificationConfidence,
     DateTime? priceVerifiedAt,
@@ -22260,6 +22269,7 @@ class OpenAIClinic {
       pricePending: pricePending ?? this.pricePending,
       priceSourceUrl: priceSourceUrl ?? this.priceSourceUrl,
       priceEvidenceText: priceEvidenceText ?? this.priceEvidenceText,
+      sourceLocationText: sourceLocationText ?? this.sourceLocationText,
       priceVerificationStatus:
           priceVerificationStatus ?? this.priceVerificationStatus,
       priceVerificationConfidence:
@@ -22402,6 +22412,7 @@ class OpenAIClinic {
       priceEvidenceText: sanitizeUtf16(
         (json['price_evidence_text'] as String?)?.trim() ?? '',
       ),
+      sourceLocationText: sanitizeUtf16('${json['source_location_text'] ?? ''}'),
       priceVerificationStatus: status,
       priceVerificationConfidence:
           (json['price_verification_confidence'] as num?)?.toDouble() ?? 0,

@@ -167,6 +167,10 @@ ExplorePricePageContext classifyExplorePricePageContext({
       .replaceAll('\u00a0', ' ')
       .toLowerCase();
 
+  if (cachedRegExp(r'\b(?:turkey|world|global|uk|us|eu|europe)\s+price\s*[:|]', caseSensitive: false).hasMatch(blob)) {
+    return ExplorePricePageContext.foreignPriceComparison;
+  }
+  if (exploreMedicalQaPriceContext(sourceUrl, blob)) return ExplorePricePageContext.nonClinicPrices;
   if (looksLikeExplicitNonClinicPriceDisclaimer(blob)) {
     return ExplorePricePageContext.nonClinicPrices;
   }

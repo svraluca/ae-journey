@@ -1317,7 +1317,7 @@ void main() {
       expect(overlaid.single.reviews, 1090);
     });
 
-    test('21. Fillers cards use the website treatment name', () {
+    test('21. English cards preserve the source treatment subtype and brand', () {
       expect(looksLikeInternalProcedureId('filler'), isTrue);
       expect(looksLikeInternalProcedureId('Lip filler'), isFalse);
       final listed =
@@ -1341,7 +1341,7 @@ void main() {
       );
       expect(
         exploreCardProcedureLabel(sectioned, selectedPill: 'Fillers'),
-        'Augmentare buze 1 ml (Lip Augmentation)',
+        'Lip filler 1 ml (Lip Augmentation)',
       );
 
       final elenamartin = listed.copyWith(
@@ -1352,7 +1352,7 @@ void main() {
       );
       expect(
         exploreCardProcedureLabel(elenamartin, selectedPill: 'Botox'),
-        'Fast botox o zonă',
+        'Fast botox 1 area',
       );
 
       final simple = _clinic(
@@ -1410,7 +1410,7 @@ void main() {
           );
       expect(
         exploreCardProcedureLabel(bundle, selectedPill: 'Fillers'),
-        'mărire buze',
+        'Lip filler',
       );
 
       final sancos =

@@ -6,7 +6,7 @@ function fold(raw) {
 }
 
 function comparisonPriceContext(raw) {
-  return /\b(?:ulkeler\w*\s+gore|sehirler\w*\s+gore|(?:prices?|costs?)\s+(?:by|across)\s+(?:countr\w*|cities)|(?:precios?|costes?)\s+por\s+(?:paises|ciudades)|prix\s+par\s+(?:pays|ville)|preise\s+nach\s+(?:land|stadt)|prezzi\s+per\s+(?:paese|citta)|average\s+\w*(?:\s+\w*){0,3}\s+price|typical\s+price\s+range|worked\s+cost\s+example|global\s+market)\b/.test(fold(raw));
+  return /\b(?:turkey|world|global|uk|us|eu|europe)\s+price\s*[:|]/.test(fold(raw)) || /\b(?:ulkeler\w*\s+gore|sehirler\w*\s+gore|(?:prices?|costs?)\s+(?:by|across)\s+(?:countr\w*|cities)|(?:precios?|costes?)\s+por\s+(?:paises|ciudades)|prix\s+par\s+(?:pays|ville)|preise\s+nach\s+(?:land|stadt)|prezzi\s+per\s+(?:paese|citta)|average\s+\w*(?:\s+\w*){0,3}\s+price|typical\s+price\s+range|worked\s+cost\s+example|global\s+market)\b/.test(fold(raw));
 }
 
 function ancillaryPriceReason(procedure, prefix) {
@@ -55,4 +55,9 @@ function quoteScopeReason({procedure, rawEvidence, priceMin, currency}) {
   return null;
 }
 
-module.exports = {comparisonPriceContext, ancillaryPriceReason, quoteScopeReason};
+function medicalQaPriceContext(sourceUrl, text) {
+  return /\/(?:s-s-s|questions?|answers?)\//i.test(sourceUrl) &&
+    /\b(?:devlet\s+hastaneler\w*|hastalar\s+soruyor|ask\s+(?:a\s+)?doctor|medical\s+questions?|patient\s+questions?|fiyatlarinin\s+bazi\s+ornekleri|fiyat\w*[^.!?\n]{0,100}ortalama|(?:average|typical|example)\s+(?:\w+\s+){0,3}(?:prices?|fees?))\b/.test(fold(text));
+}
+
+module.exports = {comparisonPriceContext, ancillaryPriceReason, quoteScopeReason, medicalQaPriceContext};

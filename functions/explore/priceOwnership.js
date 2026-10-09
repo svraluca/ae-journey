@@ -1,5 +1,5 @@
 'use strict';
-const {comparisonPriceContext} = require('./tariffScope');
+const {comparisonPriceContext, medicalQaPriceContext} = require('./tariffScope');
 
 /**
  * Page-level price ownership — mirrors lib/services/explore_price_ownership.dart.
@@ -43,6 +43,8 @@ function classifyExplorePricePageContext({sourceUrl = '', pageText = '', title =
   const url = String(sourceUrl || '').trim().toLowerCase();
   const blob = withoutDoseAverages(`${title}\n${pageText}`).replace(/\u00a0/g, ' ').toLowerCase();
 
+  if (/\b(?:turkey|world|global|uk|us|eu|europe)\s+price\s*[:|]/i.test(blob)) return 'foreign_price_comparison';
+  if (medicalQaPriceContext(url, blob)) return 'non_clinic_booking_platform';
   if (looksLikeExplicitNonOwnedPriceDisclaimer(blob)) return 'explicit_non_owned_prices';
   if (looksLikeNonClinicBookingPlatform(blob)) return 'non_clinic_booking_platform';
 

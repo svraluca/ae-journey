@@ -38,7 +38,21 @@ def ancillary_price_reason(procedure, price_prefix):
 
 
 def comparison_price_context(raw):
-    return bool(COMPARISON_CONTEXT.search(fold(raw)))
+    text = fold(raw)
+    # Geography-labelled amounts describe a market, even on a provider's site.
+    # An address in Turkey and an exact table layout do not make them its fee.
+    return bool(COMPARISON_CONTEXT.search(text) or re.search(
+        r'\b(?:turkey|world|global|uk|us|eu|europe)\s+price\s*[:|]', text))
+
+
+def medical_qa_price_context(url, raw):
+    """FAQ portals discuss fees; they are not the provider of the treatment."""
+    return bool(re.search(r'/(?:s-s-s|questions?|answers?)/', str(url).lower())
+                and re.search(r'\b(?:devlet\s+hastaneler\w*|hastalar\s+soruyor|'
+                              r'ask\s+(?:a\s+)?doctor|medical\s+questions?|'
+                              r'patient\s+questions?|fiyatlarinin\s+bazi\s+ornekleri|'
+                              r'fiyat\w*[^.!?\n]{0,100}ortalama|'
+                              r'(?:average|typical|example)\s+(?:\w+\s+){0,3}(?:prices?|fees?))\b', fold(raw)))
 
 
 def calendar_price_reason(amount, price_prefix, price_tail):

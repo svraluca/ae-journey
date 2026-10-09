@@ -22,6 +22,7 @@
 /// e24: retain marketplace technique; reject hair Botox, topical and needleless fillers.
 /// e25: revalidate informational average tables and literal range endpoints.
 /// e26: exclude travel/PRP, FAQ years and multilingual geographic tables.
-const EXTRACT_REVISION = 'e26';
+/// e27: provider-bound marketplace locality, geographic quotes and Q&A price guides.
+const EXTRACT_REVISION = 'e27';
 
 module.exports = {EXTRACT_REVISION};

@@ -1,3 +1,5 @@
+import 'explore_tariff_scope.dart';
+import 'explore_provider_location.dart';
 import 'explore_regex_cache.dart';
 import 'explore_injectable_scope.dart';
 import 'package:flutter/foundation.dart';
@@ -24,7 +26,8 @@ import 'explore_price_binding.dart';
 /// e24: retain marketplace technique; reject hair Botox, topical and needleless fillers.
 /// e25: revalidate informational average tables and literal range endpoints.
 /// e26: exclude travel/PRP, FAQ years and multilingual geographic tables.
-const kExplorePriceExtractRevision = 'e26';
+/// e27: provider-bound marketplace locality, geographic quotes and Q&A price guides.
+const kExplorePriceExtractRevision = 'e27';
 
 /// Hard gate: a number from clinic HTML is not a procedure price until this
 /// passes. AI must never invent a replacement amount.
@@ -2131,6 +2134,9 @@ PriceSanityResult evaluateExtractedPriceCandidate({
     debugPrint('[GP PRICE] REJECT · $reason');
   }
 
+  if (exploreMedicalQaPriceContext(sourceUrl, pageText.isNotEmpty ? pageText : rawEvidence)) {
+    return const PriceSanityResult.reject('medical_qa_price');
+  }
   final sourceUri = Uri.tryParse(sourceUrl);
   final sourceHost = sourceUri?.host.toLowerCase() ?? '';
   if (const ['beautyforqueens.com', 'cliniciestetice.ro', 'clinici-estetice.ro']
@@ -2640,7 +2646,9 @@ Map<String, Object?> stripInvalidCachedPriceJson(
 }) {
   final min = (row['price_min'] as num?)?.toDouble() ?? 0;
   if (min <= 0) return row;
-  final scopeFailure = exploreInjectableScopeRejection(
+  final scopeFailure = exploreProviderLocationConflicts(
+    '${row['source_location_text'] ?? ''}', city,
+  ) ? 'foreign_provider_locality' : exploreInjectableScopeRejection(
     procedure: procedure.isNotEmpty ? procedure : '${row['procedure_canonical'] ?? row['brand'] ?? ''}',
     label: '${row['raw_procedure_text'] ?? ''}',
     evidence: '${row['procedure_detail'] ?? ''} ${row['price_evidence_text'] ?? ''}',
