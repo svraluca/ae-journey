@@ -19,6 +19,7 @@
 /// e21: synchronize with the supplied Flutter verifier and preserve menu labels.
 /// e22: preserve owned tariffs beside dosage averages and multilingual offers.
 /// e23: bind current tariffs to their scope; exclude finance, combinations and market disclaimers.
-const EXTRACT_REVISION = 'e23';
+/// e24: retain marketplace technique; reject hair Botox, topical and needleless fillers.
+const EXTRACT_REVISION = 'e24';
 
 module.exports = {EXTRACT_REVISION};

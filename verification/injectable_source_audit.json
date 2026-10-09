@@ -1,0 +1,189 @@
+{
+  "checked_at_utc": "2026-10-09T10:40:42.664015+00:00",
+  "backend_version": "0.11.86",
+  "extract_revision": "e24",
+  "cleopatra": {
+    "fetch": {
+      "url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr",
+      "checked_at_utc": "2026-10-09T10:16:07.988266+00:00",
+      "status": 200,
+      "final_url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr",
+      "sha256": "9f9a7b34e0d2718a7249349abb29c8277e9bbbea370b8d519cd117edcdadc406",
+      "bytes": 731217
+    },
+    "published_offers": [
+      {
+        "@type": "Offer",
+        "@id": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr#offer-s:23728068",
+        "url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr/booking?offerItemId=s:23728068",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "category": "OFERTAS",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Aumento de labios",
+          "description": "INCLUYE 1 VIAL",
+          "category": "OFERTAS",
+          "provider": {
+            "@id": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr#business"
+          },
+          "additionalProperty": {
+            "@type": "PropertyValue",
+            "name": "Duration",
+            "value": "PT1H"
+          }
+        },
+        "price": 150
+      },
+      {
+        "@type": "Offer",
+        "@id": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr#offer-s:21741805",
+        "url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr/booking?offerItemId=s:21741805",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "category": "HYALURON PEN",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Aumento de labios",
+          "description": "INCLUYE 1 VIAL",
+          "category": "HYALURON PEN",
+          "provider": {
+            "@id": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr#business"
+          },
+          "additionalProperty": {
+            "@type": "PropertyValue",
+            "name": "Duration",
+            "value": "PT1H"
+          }
+        },
+        "price": 199
+      },
+      {
+        "@type": "Offer",
+        "@id": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr#offer-s:21741816",
+        "url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr/booking?offerItemId=s:21741816",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "category": "HYALURON PEN",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Retoque aumento de labios",
+          "description": "Al realizar un aumento de labios siempre se inflama un 30% lo cual, si queda alguna pequeña asimetría, a partir de los 15 dias se realiza el retoque.\n\n¡PARA QUE QUEDEN COMPLETAMENTE PERFECTOS!",
+          "category": "HYALURON PEN",
+          "provider": {
+            "@id": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr#business"
+          },
+          "additionalProperty": {
+            "@type": "PropertyValue",
+            "name": "Duration",
+            "value": "PT30M"
+          }
+        },
+        "price": 10
+      },
+      {
+        "@type": "Offer",
+        "@id": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr#offer-s:21741802",
+        "url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr/booking?offerItemId=s:21741802",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "category": "HYALURON PEN",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Hidratación de labios",
+          "description": "La hidratación labial consiste en la aplicación de unas microinyecciones y ácido hialurónico de baja reticulación con el fin de eliminar arrugas finas y aumentar el atractivo de los labios de manera natural. Este procedimiento mejora la estructura, la elasticidad y el aspecto de la piel, sin aumentar el volumen.",
+          "category": "HYALURON PEN",
+          "provider": {
+            "@id": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr#business"
+          },
+          "additionalProperty": {
+            "@type": "PropertyValue",
+            "name": "Duration",
+            "value": "PT1H"
+          }
+        },
+        "price": 99
+      }
+    ],
+    "before": [
+      {
+        "raw_procedure_text": "Aumento de labios",
+        "raw_price_text": "150 EUR",
+        "price_min": 150.0,
+        "price_max": null,
+        "currency": "EUR",
+        "unit": "procedure",
+        "qualifier": "exact",
+        "original_price_min": null,
+        "original_price_max": null,
+        "raw_evidence": "Aumento de labios 150 EUR",
+        "source_url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr",
+        "extraction_method": "fresha_offer"
+      },
+      {
+        "raw_procedure_text": "Aumento de labios",
+        "raw_price_text": "199 EUR",
+        "price_min": 199.0,
+        "price_max": null,
+        "currency": "EUR",
+        "unit": "procedure",
+        "qualifier": "exact",
+        "original_price_min": null,
+        "original_price_max": null,
+        "raw_evidence": "Aumento de labios 199 EUR",
+        "source_url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr",
+        "extraction_method": "fresha_offer"
+      },
+      {
+        "raw_procedure_text": "Retoque aumento de labios",
+        "raw_price_text": "10 EUR",
+        "price_min": 10.0,
+        "price_max": null,
+        "currency": "EUR",
+        "unit": "procedure",
+        "qualifier": "exact",
+        "original_price_min": null,
+        "original_price_max": null,
+        "raw_evidence": "Retoque aumento de labios 10 EUR",
+        "source_url": "https://www.fresha.com/a/cleopatra-nails-madrid-calle-arroyo-21-wmsg3rrr",
+        "extraction_method": "fresha_offer"
+      }
+    ],
+    "after": [],
+    "verdict": "150 EUR and 199 EUR are both literal published offers. The 199 EUR service is explicitly HYALURON PEN; the 150 EUR offer at a nail venue has no proof of injectable technique. Neither certifies a medical filler card."
+  },
+  "coqueta": {
+    "reported_name": "La Coqueta Hair Nails Studio Alcala",
+    "reported_title": "Tratamiento Botox",
+    "reported_eur": 80,
+    "access_check": {
+      "url": "https://booksy.com/es-es/s/botox/53009_madrid",
+      "checked_at_utc": "2026-10-09T10:16:07.989206+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    "exact_profile_url_available": false,
+    "verdict": "Reject ambiguous Botox at a hair/nail provider. This reproduction uses reported card identity and title; its live profile was not fetched."
+  },
+  "alos": {
+    "user_supplied_host": "clinicaalos.com",
+    "reported_eur": 350,
+    "user_report": "Cream / no filler procedure on website",
+    "access_check": {
+      "url": "https://clinicaalos.com/",
+      "checked_at_utc": "2026-10-09T10:16:07.989636+00:00",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    "exact_original_card_evidence_available": false,
+    "verdict": "Live page unavailable. Generic topical-product fixtures and legacy-cache tests pass; no current Alos price or treatment independently verified."
+  },
+  "production_prices_hardcoded": false,
+  "production_firestore_modified": false,
+  "physical_device_profiled": false,
+  "network_draft_domains_added": [
+    "booksy.com",
+    "www.booksy.com",
+    "clinicaalos.com",
+    "www.clinicaalos.com"
+  ],
+  "network_draft_applied_or_published": false
+}

@@ -1,6 +1,7 @@
 'use strict';
 
 const cheerio = require('cheerio');
+const {injectableScopeRejection} = require('./injectableScope');
 const {isApproximatePriceQuote} = require('./procedureScope');
 const {classifyExplorePricePageContext,
   looksLikeConditionalCompanionOffer} = require('./priceOwnership');
@@ -113,11 +114,14 @@ function listedRawPriceText(raw, parsed) {
 }
 
 function makeEvidence(partial) {
+  if (injectableScopeRejection({procedure: partial.rawProcedureText,
+    label: partial.rawProcedureText, evidence: partial.rawEvidence, sourceUrl: partial.sourceUrl})) return null;
   if (looksLikeConditionalCompanionOffer(
       `${partial.rawProcedureText || ''} ${partial.rawEvidence || ''}`)) return null;
   const hash = buildEvidenceHash(
       partial.sourceUrl, partial.rawProcedureText, partial.rawPriceText);
-  const evidence = shrinkEvidenceToProcedureAndPrice({
+  const evidence = ['json_ld', 'schema_offer'].includes(partial.extractionMethod)
+    ? String(partial.rawEvidence || '') : shrinkEvidenceToProcedureAndPrice({
     block: String(partial.rawEvidence || ''),
     procedure: String(partial.rawProcedureText || ''),
     priceRaw: String(partial.rawPriceText || ''),
@@ -157,6 +161,7 @@ function makeEvidence(partial) {
     currency: row.currency,
     extractionMethod: row.extractionMethod,
     rawEvidence: row.rawEvidence,
+    rawProcedureText: row.rawProcedureText,
     procedure: row.rawProcedureText,
     sourceUrl: row.sourceUrl,
     priceMax: row.priceMax,
@@ -212,7 +217,11 @@ function walkJsonLd(node, sourceUrl, out) {
       sourceUrl,
       extractionMethod: type.includes('offer') && !type.includes('product')
         ? 'schema_offer' : 'json_ld',
-      rawEvidence: JSON.stringify(offer).slice(0, 240),
+      rawEvidence: [proc, rawPrice.trim(), offer.category || node.category,
+        offer.description || description,
+        offer.itemOffered && offer.itemOffered.category,
+        offer.itemOffered && offer.itemOffered.description]
+          .filter(Boolean).join(' | '),
       confidence: 0.98,
     }));
   };

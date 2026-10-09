@@ -84,6 +84,7 @@ async function saveRawServices(city, venue, googleClinic, services) {
       currency: s.currency,
       duration: s.duration || '',
       category: s.category || '',
+      description: s.description || '',
       source_url: s.venueUrl || venue.venueUrl,
     })),
     updatedAt: admin.firestore.FieldValue.serverTimestamp(),
@@ -105,6 +106,8 @@ function buildFreshaPoolRow({
   if (!(priceMin > 0) || !rawPriceText || !sourceUrl) return null;
   const clinicName = String((place && place.name) || venue.name || '').trim();
   if (identityReject(clinicName)) return null;
+  const rawEvidence = [rawProcedure, rawPriceText, service.category, service.description]
+      .filter(Boolean).join(' | ');
 
   const row = {
     name: clinicName,
@@ -138,8 +141,8 @@ function buildFreshaPoolRow({
     provider_clinic: clinicName,
     extraction_method: 'fresha_menu',
     extractionMethod: 'fresha_menu',
-    price_evidence_text: rawPriceText,
-    rawEvidence: rawPriceText,
+    price_evidence_text: rawEvidence,
+    rawEvidence,
     verified: true,
     price_verified: true,
     price_verification_status: 'fresha_marketplace',
@@ -155,8 +158,11 @@ function buildFreshaPoolRow({
     priceMin,
     currency,
     extractionMethod: 'fresha_menu',
-    rawEvidence: rawPriceText,
+    rawEvidence,
+    rawProcedureText: rawProcedure,
     procedure: exploreProcedure || rawProcedure,
+    sourceUrl,
+    clinicName,
     logRejects: false,
   })) {
     return null;

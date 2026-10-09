@@ -1,0 +1,132 @@
+{
+  "validated_at_utc": "2026-10-09T10:46:35.563676+00:00",
+  "base_commit": "3c02767166f4132f52356610bddc96ea669dc757",
+  "backend_version": "0.11.86",
+  "extract_revision": "e24",
+  "python": {
+    "passed": 113,
+    "failed": 0,
+    "new_tests": 10
+  },
+  "functions": {
+    "passed": 314,
+    "failed": 0,
+    "new_tests": 54
+  },
+  "flutter": {
+    "completed": true,
+    "suites": 55,
+    "counts": {
+      "success": 727,
+      "failure": 13,
+      "error": 1
+    },
+    "new_tests": {
+      "success": 55
+    },
+    "failures": [
+      {
+        "suite": "explore_currency_cached_pipeline_test.dart",
+        "test": "extract revision is e18"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "pool mix plan 2+ pool paints 2 Firestore seeds and still hunts 2 Google"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "procedure display title 14. Serp page titles are not clinic names"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "Places name looks medical keeps named plastic clinics Google may type as gym/lodging"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "Places name looks medical 25g. Abu Dhabi keeps verified quotes and skips Dubai-only URLs"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "SERP fetch uses any listed price, not a snippet amount London hair cards show package FROM, not /graft on graft counts"
+      },
+      {
+        "suite": "explore_discovery_identity_test.dart",
+        "test": "canonical city + early discovery rejects Budapest Botox does not keep a Tiran\u00eb clinic"
+      },
+      {
+        "suite": "explore_global_price_discovery_test.dart",
+        "test": "units on parsePriceText stores ml quantity and per-unit type"
+      },
+      {
+        "suite": "explore_places_circuit_breaker_test.dart",
+        "test": "Places 429 trips circuit breaker and skips further calls"
+      },
+      {
+        "suite": "explore_price_sanity_test.dart",
+        "test": "price sanity gate gold packages, Quick Facts, and SEO titles are not clinic prices"
+      },
+      {
+        "suite": "explore_price_sanity_test.dart",
+        "test": "price sanity gate hair market \u00a3/graft copy and stale landing quotes are rejected"
+      },
+      {
+        "suite": "explore_price_sanity_test.dart",
+        "test": "price sanity gate rhinoplasty market guide is rejected; hospital guide stays scoped"
+      },
+      {
+        "suite": "explore_progressive_fill_drop_test.dart",
+        "test": "price-list path witness Global Action 1 ml stays eligible after accept-time variant"
+      },
+      {
+        "suite": "explore_worldwide_pipeline_test.dart",
+        "test": "UI states + exact price labelling cold city searching copy"
+      }
+    ],
+    "new_failures": [],
+    "baseline_passed": 672,
+    "baseline_failed": 14,
+    "new_tests_passed": 55,
+    "new_failure_count": 0
+  },
+  "analysis": {
+    "errors": 0,
+    "warnings": 82,
+    "infos": 176
+  },
+  "shared_fixture_cases": 51,
+  "language_contexts": 13,
+  "api_smoke": {
+    "health": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "version": "0.11.86",
+        "price_index": true,
+        "discovery_jobs": true,
+        "worker_version": "0.11.86",
+        "progressive_jobs": true
+      }
+    },
+    "botox_index": {
+      "status": 200,
+      "data": {
+        "city": "Madrid",
+        "procedure": "botox",
+        "display_results": [],
+        "source_collection": "aesthetic_price_results",
+        "source": "local_verified",
+        "verified_count": 0,
+        "invalidated_source_urls": []
+      }
+    }
+  },
+  "physical_iphone_profiled": false,
+  "production_firestore_verified": false,
+  "production_deployed": false,
+  "log_sha256": {
+    "ae-injectable-python-final.log": "d7ac0543a48a6c9a7e37db6a4d3b4ce296c022c2299196f4562f53d07ee681fd",
+    "ae-injectable-functions-final.log": "4ac46afcdeb53fa28d066b5a528cbdd5e44e491b70bbbc0c35e57b43ed60f059",
+    "ae-injectable-flutter-final-broad.log": "3fed604c9b0d0eeeb0e956ef9c51d22c7b883954aa7cbb3d58d7536355367115",
+    "ae-injectable-flutter-final-analysis.log": "9a88c001739b0d476b2418b7e949954318035baaf54a0910de8f0cf300a73c9f"
+  }
+}

@@ -1,0 +1,461 @@
+[
+  {
+    "id": "hair_en",
+    "procedure": "botox",
+    "label": "Hair Botox",
+    "evidence": "Hair Botox",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_es",
+    "procedure": "botox",
+    "label": "Bótox capilar",
+    "evidence": "Bótox capilar",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_ro",
+    "procedure": "botox",
+    "label": "Botox păr",
+    "evidence": "Botox păr",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_fr",
+    "procedure": "botox",
+    "label": "Botox capillaire",
+    "evidence": "Botox capillaire",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_de",
+    "procedure": "botox",
+    "label": "Haar-Botox",
+    "evidence": "Haar-Botox",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_pt",
+    "procedure": "botox",
+    "label": "Botox cabelo",
+    "evidence": "Botox cabelo",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_it",
+    "procedure": "botox",
+    "label": "Botox capelli",
+    "evidence": "Botox capelli",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_nl",
+    "procedure": "botox",
+    "label": "Haar botox",
+    "evidence": "Haar botox",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_tr",
+    "procedure": "botox",
+    "label": "Botox saç",
+    "evidence": "Botox saç",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_sq",
+    "procedure": "botox",
+    "label": "Botox flokësh",
+    "evidence": "Botox flokësh",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_ru",
+    "procedure": "botox",
+    "label": "Ботокс для волос",
+    "evidence": "Ботокс для волос",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_bg",
+    "procedure": "botox",
+    "label": "Ботокс за коса",
+    "evidence": "Ботокс за коса",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_ar",
+    "procedure": "botox",
+    "label": "بوتوكس للشعر",
+    "evidence": "بوتوكس للشعر",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "hair_es_length",
+    "procedure": "botox",
+    "label": "Bótox (Media Melena)",
+    "evidence": "Bótox (Media Melena)",
+    "provider": "Aster Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "coqueta_identity",
+    "procedure": "botox",
+    "label": "Tratamiento Botox",
+    "evidence": "Tratamiento Botox | 80 EUR",
+    "provider": "La Coqueta Hair Nails Studio Alcala",
+    "source_url": "https://booksy.com/es-es/123_la-coqueta-hair-nails-studio-alcala_53009_madrid",
+    "expected": "noninjectable_botox"
+  },
+  {
+    "id": "cleopatra_ambiguous",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | INCLUYE 1 VIAL | 150 EUR",
+    "provider": "Cleopatra Nails",
+    "source_url": "https://www.fresha.com/a/cleopatra-nails-madrid-venue",
+    "expected": "injectable_technique_unverified"
+  },
+  {
+    "id": "topical_en",
+    "procedure": "filler",
+    "label": "Dermal filler cream",
+    "evidence": "Dermal filler cream",
+    "provider": "Aster Medical Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "topical_product_not_injectable"
+  },
+  {
+    "id": "topical_es",
+    "procedure": "filler",
+    "label": "Dermal filler crema",
+    "evidence": "Dermal filler crema",
+    "provider": "Aster Medical Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "topical_product_not_injectable"
+  },
+  {
+    "id": "topical_ro",
+    "procedure": "filler",
+    "label": "Acid hialuronic cremă",
+    "evidence": "Acid hialuronic cremă",
+    "provider": "Aster Medical Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "topical_product_not_injectable"
+  },
+  {
+    "id": "topical_fr",
+    "procedure": "filler",
+    "label": "Filler crème",
+    "evidence": "Filler crème",
+    "provider": "Aster Medical Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "topical_product_not_injectable"
+  },
+  {
+    "id": "topical_de",
+    "procedure": "filler",
+    "label": "Hyaluron Creme",
+    "evidence": "Hyaluron Creme",
+    "provider": "Aster Medical Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "topical_product_not_injectable"
+  },
+  {
+    "id": "topical_pt",
+    "procedure": "filler",
+    "label": "Preenchimento creme",
+    "evidence": "Preenchimento creme",
+    "provider": "Aster Medical Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "topical_product_not_injectable"
+  },
+  {
+    "id": "topical_it",
+    "procedure": "filler",
+    "label": "Filler crema",
+    "evidence": "Filler crema",
+    "provider": "Aster Medical Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "topical_product_not_injectable"
+  },
+  {
+    "id": "topical_ru",
+    "procedure": "filler",
+    "label": "Филлер крем",
+    "evidence": "Филлер крем",
+    "provider": "Aster Medical Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "topical_product_not_injectable"
+  },
+  {
+    "id": "topical_ar",
+    "procedure": "filler",
+    "label": "فيلر كريم",
+    "evidence": "فيلر كريم",
+    "provider": "Aster Medical Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "topical_product_not_injectable"
+  },
+  {
+    "id": "topical_serum",
+    "procedure": "filler",
+    "label": "Dermal filler serum",
+    "evidence": "Dermal filler serum",
+    "provider": "Aster Medical Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "topical_product_not_injectable"
+  },
+  {
+    "id": "needleless_category",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | HYALURON PEN | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "needleless_en",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | needle-free | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "needleless_en2",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | needleless | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "needleless_es",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | sin agujas | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "needleless_ro",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | fără ace | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "needleless_fr",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | sans aiguilles | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "needleless_de",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | ohne Nadeln | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "needleless_pt",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | sem agulhas | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "needleless_it",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | senza aghi | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "needleless_tr",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | iğnesiz | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "needleless_sq",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | pa gjilpëra | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "needleless_ru",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | без игл | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "needleless_ar",
+    "procedure": "filler",
+    "label": "Aumento de labios",
+    "evidence": "Aumento de labios | بدون إبر | 199 EUR",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": "needleless_not_injectable_filler"
+  },
+  {
+    "id": "valid_toxin_es",
+    "procedure": "botox",
+    "label": "Toxina botulínica 3 zonas",
+    "evidence": "Toxina botulínica 3 zonas",
+    "provider": "Aster Hair Nails Medical Studio",
+    "source_url": "https://provider.example/prices/",
+    "expected": null
+  },
+  {
+    "id": "valid_toxin_en",
+    "procedure": "botox",
+    "label": "Botulinum toxin injections",
+    "evidence": "Botulinum toxin injections",
+    "provider": "Hair & Skin Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": null
+  },
+  {
+    "id": "valid_toxin_brand",
+    "procedure": "botox",
+    "label": "Dysport per unit",
+    "evidence": "Dysport per unit",
+    "provider": "Aster Medical Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": null
+  },
+  {
+    "id": "valid_filler_es",
+    "procedure": "filler",
+    "label": "Aumento de labios con inyecciones 1 vial",
+    "evidence": "Aumento de labios con inyecciones 1 vial",
+    "provider": "Aster Nails",
+    "source_url": "https://provider.example/prices/",
+    "expected": null
+  },
+  {
+    "id": "valid_filler_en",
+    "procedure": "filler",
+    "label": "Lip filler 1 ml syringe",
+    "evidence": "Lip filler 1 ml syringe",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": null
+  },
+  {
+    "id": "valid_filler_brand",
+    "procedure": "filler",
+    "label": "Juvederm 1 ml",
+    "evidence": "Juvederm 1 ml",
+    "provider": "Aster Nails",
+    "source_url": "https://provider.example/prices/",
+    "expected": null
+  },
+  {
+    "id": "valid_filler_ro",
+    "procedure": "filler",
+    "label": "Injectare acid hialuronic 1 ml",
+    "evidence": "Injectare acid hialuronic 1 ml",
+    "provider": "Aster Medical Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": null
+  },
+  {
+    "id": "valid_filler_fr",
+    "procedure": "filler",
+    "label": "Injection acide hyaluronique",
+    "evidence": "Injection acide hyaluronique",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": null
+  },
+  {
+    "id": "valid_filler_it",
+    "procedure": "filler",
+    "label": "Filler iniezioni 1 ml",
+    "evidence": "Filler iniezioni 1 ml",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": null
+  },
+  {
+    "id": "valid_anaesthetic_en",
+    "procedure": "filler",
+    "label": "Lip filler with numbing cream",
+    "evidence": "Lip filler with numbing cream",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": null
+  },
+  {
+    "id": "valid_anaesthetic_es",
+    "procedure": "filler",
+    "label": "Relleno de labios incluye crema anestésica",
+    "evidence": "Relleno de labios incluye crema anestésica",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": null
+  },
+  {
+    "id": "valid_other_skincare",
+    "procedure": "chemical_peel",
+    "label": "Topical cream after peeling",
+    "evidence": "Topical cream after peeling",
+    "provider": "Aster Clinic",
+    "source_url": "https://provider.example/prices/",
+    "expected": null
+  }
+]

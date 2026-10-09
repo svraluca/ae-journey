@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.76 — public tariff layouts and eight-card target
+Aesthetic Procedure Price Discovery v0.11.86 — injectable treatment evidence
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -56,6 +56,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 import vertical_search
+from injectable_scope import injectable_scope_rejection
 
 try:
     from google.cloud import firestore
@@ -2436,6 +2437,8 @@ def is_hard_retail_url(url: str, procedure: str) -> bool:
 def is_retail_evidence_block(text: str, procedure: str) -> bool:
     if canonicalize_procedure(procedure) != "filler":
         return False
+    if injectable_scope_rejection("filler", evidence=text):
+        return True
 
     t = fold(text)
 
@@ -2475,6 +2478,8 @@ def is_retail_product_page(url: str, text: str, procedure: str) -> bool:
 
 
 def injectable_filler_match(text: str) -> bool:
+    if injectable_scope_rejection("filler", evidence=text):
+        return False
     t = fold(text)
     if any(term in t for term in INJECTABLE_FILLER_POSITIVE):
         return True
@@ -5446,6 +5451,9 @@ def add_evidence(
     procedure: str,
     method: str,
 ):
+    if injectable_scope_rejection(canonicalize_procedure(procedure),
+            evidence=text, source_url=url):
+        return
     if not contains_requested_procedure(text, procedure):
         return
 
@@ -6076,10 +6084,10 @@ def fresha_offer_evidence(
     html: str,
     url: str,
     procedure: str,
-) -> list[ExtractedEvidence]:
+) -> list[ExtractedEvidence] | None:
     """Read bookable service prices from Fresha's JSON-LD menu."""
     if "fresha.com" not in host_of(url) or not html:
-        return []
+        return None
     soup = BeautifulSoup(html, "lxml")
     offers = []
 
@@ -6088,7 +6096,11 @@ def fresha_offer_evidence(
             if node.get("@type") == "Offer" and node.get("price") not in (None, ""):
                 item = node.get("itemOffered") or {}
                 name = item.get("name") if isinstance(item, dict) else ""
-                offers.append((str(name or ""), node.get("price"), node.get("priceCurrency")))
+                description = item.get("description", "") if isinstance(item, dict) else ""
+                category = item.get("category", "") if isinstance(item, dict) else ""
+                offers.append((str(name or ""), node.get("price"), node.get("priceCurrency"),
+                               str(description or ""), str(category or node.get("category", "")),
+                               str(node.get("url", ""))))
             for value in node.values():
                 walk(value)
         elif isinstance(node, list):
@@ -6102,12 +6114,20 @@ def fresha_offer_evidence(
         except Exception:
             continue
 
+    if not offers:
+        return None
+    # Empty after filtering means the authoritative service menu rejected all
+    # offers. Never resurrect those offers through a prose/DOM fallback.
     out = []
     seen = set()
     canonical = canonicalize_procedure(procedure)
-    for name, price, currency in offers:
+    provider = soup.title.get_text(" ", strip=True) if soup.title else ""
+    for name, price, currency, description, category, offer_url in offers:
         name = re.sub(r"\s+", " ", unescape(name)).strip()
         if not name or not fresha_service_matches(name, procedure):
+            continue
+        scope = " | ".join(part for part in (name, category, description) if part)
+        if injectable_scope_rejection(canonical, name, scope, provider, url):
             continue
         if canonical == "botox" and botox_noninjectable_context(name):
             continue
@@ -6122,18 +6142,18 @@ def fresha_offer_evidence(
             continue
         if not plausible(amount, code):
             continue
-        key = (fold(name), round(amount, 2), code)
+        key = (fold(scope), round(amount, 2), code)
         if key in seen:
             continue
         seen.add(key)
         label = name
-        volume = re.search(r"(\d+(?:[.,]\d+)?)\s*ml\b", name, re.I)
+        volume = re.search(r"(\d+(?:[.,]\d+)?)\s*ml\b", scope, re.I)
         unit = (
             f"{volume.group(1).replace(',', '.')} ml"
             if volume and canonical == "filler"
-            else "procedure"
+            else "vial" if re.search(r"\b(?:1|one)\s*vial\b", scope, re.I) else "procedure"
         )
-        raw = f"{label} {amount:g} {code}"
+        raw = f"{scope} | {amount:g} {code}"
         out.append(ExtractedEvidence(
             raw_procedure_text=label[:160],
             raw_price_text=f"{amount:g} {code}",
@@ -6141,8 +6161,8 @@ def fresha_offer_evidence(
             currency=code,
             unit=unit,
             qualifier="exact",
-            raw_evidence=raw[:240],
-            source_url=url,
+            raw_evidence=raw,
+            source_url=offer_url if offer_url.startswith(url.rstrip("/") + "/booking") else url,
             extraction_method="fresha_offer",
         ))
         if len(out) >= 8:
@@ -6683,7 +6703,7 @@ def extract_price_evidence(
         return []
 
     fresha_offers = fresha_offer_evidence(html, url, procedure)
-    if fresha_offers:
+    if fresha_offers is not None:
         if memo is not None:
             memo[memo_key] = fresha_offers
         return fresha_offers
@@ -8278,6 +8298,12 @@ def validate_evidence(
         full_page_text,
         evidence,
     )
+    scope_failure = injectable_scope_rejection(
+        canonicalize_procedure(evidence.raw_procedure_text),
+        evidence.raw_procedure_text, evidence.raw_evidence, source_url=evidence.source_url,
+    )
+    if scope_failure:
+        return False, False, 0.05, scope_failure, evidence_type
     if page_disclaims_clinic_prices(full_page_text):
         return False, False, 0.10, "page_disclaims_clinic_prices", evidence_type
     if source == "marketplace" and not marketplace_price_evidence_is_strong(
@@ -10606,9 +10632,13 @@ async def firestore_deactivate_weak_results(
             except Exception:
                 continue
 
-            reason = ""
+            reason = injectable_scope_rejection(row.procedure_canonical,
+                row.raw_procedure_text, f"{row.procedure_detail} {row.raw_evidence}",
+                row.clinic_name, row.source_url) or ""
 
-            if not row.city_match:
+            if reason:
+                pass
+            elif not row.city_match:
                 reason = "city_not_verified"
             elif not valid_name(row.clinic_name):
                 reason = "generic_page_title_not_clinic"
@@ -11654,6 +11684,10 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
     if not valid_name(row.clinic_name):
         return "bad_identity"
     blob = f"{row.raw_procedure_text} {row.procedure_detail} {row.raw_evidence}"
+    scope_failure = injectable_scope_rejection(row.procedure_canonical,
+        row.raw_procedure_text, blob, row.clinic_name, row.source_url)
+    if scope_failure:
+        return scope_failure
     if generic_multi_clinic_price_context(row.raw_evidence):
         return "market_context"
     if consultation_fee_evidence(row):
@@ -11747,6 +11781,9 @@ def trusted_price_result(row: ClinicPriceResult) -> bool:
     market price must not become a clinic-owned app price.
     """
     blob = f"{row.raw_procedure_text} {row.procedure_detail} {row.raw_evidence}"
+    if injectable_scope_rejection(row.procedure_canonical,
+            row.raw_procedure_text, blob, row.clinic_name, row.source_url):
+        return False
     if (generic_multi_clinic_price_context(row.raw_evidence)
             or consultation_fee_evidence(row)
             or seasonal_offer_needs_confirmation(row.raw_evidence)):
@@ -17806,7 +17843,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.85",
+    version="0.11.86",
     lifespan=app_lifespan,
 )
 

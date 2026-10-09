@@ -1,4 +1,5 @@
 import 'explore_regex_cache.dart';
+import 'explore_injectable_scope.dart';
 import 'package:flutter/foundation.dart';
 
 import 'explore_url_discovery.dart';
@@ -20,7 +21,8 @@ import 'explore_price_binding.dart';
 /// e21: service-bound marketplace prices; consultation/market/seasonal exclusions.
 /// e22: preserve owned tariffs beside dosage averages and multilingual offers.
 /// e23: bind current tariffs to their scope; exclude finance, combinations and market disclaimers.
-const kExplorePriceExtractRevision = 'e23';
+/// e24: retain marketplace technique; reject hair Botox, topical and needleless fillers.
+const kExplorePriceExtractRevision = 'e24';
 
 /// Hard gate: a number from clinic HTML is not a procedure price until this
 /// passes. AI must never invent a replacement amount.
@@ -2123,6 +2125,14 @@ PriceSanityResult evaluateExtractedPriceCandidate({
   if (workingMin <= 0) {
     return const PriceSanityResult.reject('missing_price_semantics');
   }
+  final injectableFailure = exploreInjectableScopeRejection(
+    procedure: procedure, label: rawProcedureText, evidence: rawEvidence,
+    provider: clinicName, sourceUrl: sourceUrl,
+  );
+  if (injectableFailure != null) {
+    logReject(injectableFailure);
+    return PriceSanityResult.reject(injectableFailure);
+  }
   final nonTreatment = exploreNonTreatmentPriceReason(
     evidence: '$rawProcedureText\n${rawEvidence.isNotEmpty ? rawEvidence : rawPriceText}',
     priceMin: workingMin, currency: currency,
@@ -2559,6 +2569,7 @@ bool isValidExtractedPriceCandidate({
   double priceMax = 0,
   bool structuredOffer = false,
   bool logRejects = true,
+  String clinicName = '',
 }) {
   return evaluateExtractedPriceCandidate(
     rawPriceText: rawPriceText,
@@ -2572,6 +2583,7 @@ bool isValidExtractedPriceCandidate({
     priceMax: priceMax,
     structuredOffer: structuredOffer,
     logRejects: logRejects,
+    clinicName: clinicName,
   ).accepted;
 }
 
@@ -2603,6 +2615,18 @@ Map<String, Object?> stripInvalidCachedPriceJson(
 }) {
   final min = (row['price_min'] as num?)?.toDouble() ?? 0;
   if (min <= 0) return row;
+  final scopeFailure = exploreInjectableScopeRejection(
+    procedure: procedure.isNotEmpty ? procedure : '${row['procedure_canonical'] ?? row['brand'] ?? ''}',
+    label: '${row['raw_procedure_text'] ?? ''}',
+    evidence: '${row['procedure_detail'] ?? ''} ${row['price_evidence_text'] ?? ''}',
+    provider: '${row['provider_clinic'] ?? row['name'] ?? ''}',
+    sourceUrl: '${row['price_source_url'] ?? row['source_url'] ?? ''}',
+  );
+  if (scopeFailure != null) return {
+    ...row, 'price_min': 0, 'price_max': 0, 'price_gbp': 0, 'price_label': '',
+    'price_verified': false, 'verified': false, 'needs_revalidation': true,
+    'price_verification_status': 'legacy_unverified', 'price_rejection_reason': scopeFailure,
+  };
   final sourceType = '${row['source_type'] ?? row['source'] ?? ''}'.trim();
   final status = '${row['price_verification_status'] ?? ''}'.trim();
   if (sourceType == 'curated_public_site' && status == 'curated_public_site') {
@@ -2654,6 +2678,7 @@ Map<String, Object?> stripInvalidCachedPriceJson(
         rawProcedureText: rawProc,
         procedure: proc,
         sourceUrl: sourceUrl,
+        clinicName: '${working['provider_clinic'] ?? working['name'] ?? ''}',
         priceMax: (working['price_max'] as num?)?.toDouble() ?? 0,
         logRejects: logRejects,
       )

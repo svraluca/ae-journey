@@ -1,4 +1,5 @@
 'use strict';
+const {injectableScopeRejection} = require('./injectableScope');
 
 const {looksLikeSurgicalChinTreatment,
   looksLikeCombinedToxinSkinTreatment, looksLikeCreditLimitQuote,
@@ -787,6 +788,7 @@ function evaluateExtractedPriceCandidate({
   currency,
   extractionMethod,
   rawEvidence = '',
+  rawProcedureText = '',
   procedure = '',
   sourceUrl = '',
   priceMax = 0,
@@ -806,6 +808,9 @@ function evaluateExtractedPriceCandidate({
   if (amount <= 0) {
     return {accepted: false, reason: 'missing_price_semantics'};
   }
+  const injectableFailure = injectableScopeRejection({procedure,
+    label: rawProcedureText, evidence: rawEvidence, provider: clinicName, sourceUrl});
+  if (injectableFailure) return {accepted: false, reason: injectableFailure};
   if (looksLikeCreditLimitQuote({rawPriceText, rawEvidence, priceMin: amount})) {
     return {accepted: false, reason: 'financing_credit_limit'};
   }
@@ -1086,6 +1091,8 @@ function stripInvalidCachedPrice(row, procedure, {logRejects = true} = {}) {
     procedure: proc,
     sourceUrl,
     priceMax: Number(row && (row.price_max || row.priceMax) || 0),
+    rawProcedureText: String(row.raw_procedure_text || row.rawProcedureText || ''),
+    clinicName: String(row.provider_clinic || row.providerClinic || row.name || row.clinicName || ''),
     logRejects,
   });
   if (verdict.accepted) return row;

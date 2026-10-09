@@ -257,6 +257,7 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
       currency: row.currency,
       extractionMethod: row.extractionMethod.wire,
       rawEvidence: row.rawEvidence,
+      rawProcedureText: row.rawProcedureText,
       procedure: row.rawProcedureText,
       sourceUrl: row.sourceUrl,
       priceMax: row.priceMax,
@@ -584,7 +585,14 @@ void _walkJsonLd(
             : (type.contains('offer') && !type.contains('product')
                   ? PriceExtractionMethod.schemaOffer
                   : PriceExtractionMethod.jsonLd),
-        rawEvidence: jsonEncode(o),
+        rawEvidence: [
+          proc, rawPrice.trim(),
+          '${o['category'] ?? map['category'] ?? ''}',
+          '${o['description'] ?? description}',
+          if (o['itemOffered'] is Map)
+            '${(o['itemOffered'] as Map)['category'] ?? ''} | '
+                '${(o['itemOffered'] as Map)['description'] ?? ''}',
+        ].where((part) => part.trim().isNotEmpty).join(' | '),
         confidence: 0.98,
         priceType: parsed.priceType,
         unit: (parsed.unit.isNotEmpty ? parsed.unit : qty.$1),

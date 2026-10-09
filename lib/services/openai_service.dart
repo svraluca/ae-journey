@@ -1,4 +1,5 @@
 import 'explore_regex_cache.dart';
+import 'explore_injectable_scope.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math' as math;
@@ -21443,6 +21444,13 @@ bool explorePriceIsVerified(OpenAIClinic c) {
 }
 
 bool _explorePriceIsVerifiedUncached(OpenAIClinic c) {
+  if (exploreInjectableScopeRejection(
+    procedure: c.procedureCanonical.isNotEmpty ? c.procedureCanonical : c.brand,
+    label: c.rawProcedureText,
+    evidence: '${c.procedureDetail}\n${c.priceEvidenceText}',
+    provider: c.providerClinic.isNotEmpty ? c.providerClinic : c.name,
+    sourceUrl: c.priceSourceUrl,
+  ) != null) return false;
   if (exploreListedPriceIsNonClinicContent(sourceUrl: c.priceSourceUrl,
       website: c.area)) return false;
   if (looksLikeNonInjectableBotox(
@@ -21494,6 +21502,7 @@ bool _explorePriceIsVerifiedUncached(OpenAIClinic c) {
     procedure: c.brand,
     sourceUrl: c.priceSourceUrl,
     priceMax: c.priceMax,
+    clinicName: c.providerClinic.isNotEmpty ? c.providerClinic : c.name,
   )) {
     return false;
   }
@@ -22306,6 +22315,7 @@ class OpenAIClinic {
           ),
           procedure: _readClinicProcedureName(json),
           sourceUrl: sourceUrl,
+          clinicName: sanitizeUtf16('${json['provider_clinic'] ?? json['name'] ?? ''}'),
         )) {
       status = PriceVerificationStatus.legacyUnverified;
       pMin = 0;

@@ -1,6 +1,7 @@
 'use strict';
 
 const {MarketplaceProvider} = require('./marketplaceProvider');
+const {injectableScopeRejection} = require('../injectableScope');
 const {
   FRESHA_ACTOR_ID,
   FRESHA_VENUE_BATCH_SIZE,
@@ -88,6 +89,7 @@ function expandServicePriceRows(item, venueCurrency) {
       (item && item.currency) || venueCurrency || '').trim().toUpperCase();
   const duration = String((item && item.duration) || '').trim();
   const category = String((item && item.category) || '').trim();
+  const description = String((item && item.description) || '').trim();
 
   const pushRow = (name, priceRaw, formatted) => {
     const price = parseNumericPrice(priceRaw);
@@ -102,6 +104,7 @@ function expandServicePriceRows(item, venueCurrency) {
       rawPriceText,
       duration,
       category,
+      description,
       isVariant: name !== baseName,
     });
   };
@@ -148,6 +151,7 @@ function fold(s) {
 
 function serviceLooksAesthetic(name, category = '') {
   const t = fold(`${name} ${category}`);
+  if (injectableScopeRejection({procedure: name, label: name, evidence: category})) return false;
   return AESTHETIC_SERVICE_NEEDLES.some((n) => t.includes(n));
 }
 
