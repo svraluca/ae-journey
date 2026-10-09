@@ -23,6 +23,7 @@
 /// e25: revalidate informational average tables and literal range endpoints.
 /// e26: exclude travel/PRP, FAQ years and multilingual geographic tables.
 /// e27: provider-bound marketplace locality, geographic quotes and Q&A price guides.
-const EXTRACT_REVISION = 'e27';
+/// e28: complete price paragraphs and backend extraction provenance.
+const EXTRACT_REVISION = 'e28';
 
 module.exports = {EXTRACT_REVISION};

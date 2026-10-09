@@ -31,6 +31,7 @@ def accepted(body, url="https://aster.example/services/botox/"):
         if not ok:
             continue
         row = e.ClinicPriceResult(
+            price_extract_revision=e.PRICE_EXTRACT_REVISION,
             clinic_name="Aster Medical Clinic", city="Dubai", procedure_canonical="botox",
             procedure_display_name="Botox", price_min=evidence.price_min,
             price_max=evidence.price_max, currency=evidence.currency, qualifier=evidence.qualifier,
@@ -187,7 +188,7 @@ class FetchEvidence(unittest.IsolatedAsyncioTestCase):
                                      base_url="http://test") as client:
             response = await client.get("/health")
         data = response.json()
-        self.assertEqual(data["version"], "0.11.91")
+        self.assertEqual(data["version"], "0.11.92")
         self.assertEqual(data["worker_version"], data["version"])
         self.assertTrue(data["progressive_jobs"])
 

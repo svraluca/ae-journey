@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.91 — provider-bound geography and published fee ownership
+Aesthetic Procedure Price Discovery v0.11.92 — provider-bound geography and published fee ownership
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -59,7 +59,7 @@ import vertical_search
 from injectable_scope import injectable_scope_rejection
 from tariff_scope import ancillary_price_reason, comparison_price_context, calendar_price_reason, medical_qa_price_context
 
-PRICE_EXTRACT_REVISION = "e27"
+PRICE_EXTRACT_REVISION = "e28"
 
 try:
     from google.cloud import firestore
@@ -159,6 +159,9 @@ class ExtractedEvidence(BaseModel):
 
 
 class ClinicPriceResult(BaseModel):
+    # Only a real extraction writes this revision. Reading an old saved row
+    # must not silently certify it under the current ownership rules.
+    price_extract_revision: str = ""
     clinic_name: str
     city: str
     procedure_canonical: str
@@ -1878,6 +1881,8 @@ def safe_http_urljoin(base_url: str, href: str) -> str:
 
 def classify_source(url: str) -> str:
     h = host_of(url)
+    if re.search(r"/[^/]+-procedures-in-[^/]+/?$", urlparse(url).path, re.I):
+        return "directory"
     if re.search(r"/(?:demo|template|example)[-/]", urlparse(url).path, re.I):
         return "directory"
     if "wupdoc.com" in h and not re.fullmatch(
@@ -2398,7 +2403,7 @@ INJECTABLE_FILLER_POSITIVE = [
     "preenchimento labial", "preenchimento dermico", "dudak dolgusu",
     "ajakfeltoltes", "hialuronsavas feltoltes", "lippenunterspritzung",
     "dermalen filar", "филър за устни", "дермален филър",
-    "lip filler", "dermal filler", "filler injection", "injectable filler",
+    "lip filler", "dermal filler", "filler injection", "filler injections", "fillers injection", "injectable filler",
     "chin filler", "jawline filler", "nasolabial filler", "tear trough filler",
     "under eye filler", "under-eye filler", "rhinofiller", "nose filler",
     "cheek filler", "temple filler", "hyaluronic filler",
@@ -3486,6 +3491,21 @@ def is_probable_single_business_page(url: str) -> bool:
     return False
 
 
+def bookimed_treatment_profile_url(url: str, procedure: str) -> str:
+    """Provider menus can be paged by treatment on Bookimed's public profiles."""
+    if 'bookimed.com' not in host_of(url) or not is_probable_single_business_page(url):
+        return ''
+    slug = {'botox': 'botox-injections', 'filler': 'fillers-injection',
+            'chemical_peel': 'chemical-peel', 'rhinoplasty': 'rhinoplasty',
+            'breast_augmentation': 'breast-augmentation',
+            'hair_transplant': 'hair-transplant'}.get(canonicalize_procedure(procedure))
+    if not slug:
+        return ''
+    parsed = urlparse(url)
+    provider = parsed.path.split('/')[2]
+    return f'{parsed.scheme}://{parsed.netloc}/clinic/{provider}/procedure={slug}/'
+
+
 
 MARKETPLACE_LOCALE_COUNTRY = {
     "en-gb": "GB",
@@ -4273,7 +4293,17 @@ def strong_local_page_evidence(html: str, text: str, city: str, url: str) -> boo
 def marketplace_provider_locations(html: str, url: str) -> list[str]:
     """Addresses of the profile's main medical entity, not its publisher."""
     locations = []
-    profile = url.split('#')[0].rstrip('/')
+    def provider_url(value):
+        value = str(value or '').split('#')[0].rstrip('/')
+        parsed = urlparse(value)
+        if (is_marketplace_host(host_of(value)) and 'bookimed.com' in host_of(value)
+                and is_probable_single_business_page(value + '/')):
+            # A treatment tab is still the same profiled provider. Schema
+            # often points to its root profile; related clinic slugs differ.
+            return f'{parsed.scheme}://{parsed.netloc}/clinic/{parsed.path.split("/")[2]}'
+        return value
+
+    profile = provider_url(url)
     medical_types = {'Hospital', 'MedicalClinic', 'MedicalBusiness', 'Physician',
                      'Dentist', 'LocalBusiness', 'HealthAndBeautyBusiness'}
 
@@ -4284,7 +4314,7 @@ def marketplace_provider_locations(html: str, url: str) -> list[str]:
         elif isinstance(item, dict):
             types = item.get('@type', [])
             types = {types} if isinstance(types, str) else set(types)
-            ref = str(item.get('url') or item.get('@id') or '').split('#')[0].rstrip('/')
+            ref = provider_url(item.get('url') or item.get('@id'))
             if types & medical_types and (ref == profile or (main_entity and not ref)):
                 address = item.get('address')
                 if isinstance(address, dict):
@@ -5142,7 +5172,15 @@ def botox_result_is_trusted(row: ClinicPriceResult) -> bool:
     # Botox variant/detail. Re-discover it rather than trusting stale binding.
     prices = list(iter_exact_price_matches(row.raw_evidence or ""))
     if len(prices) >= 2 and not (row.procedure_detail or "").strip():
-        return False
+        # Two endpoints of one literal service range are not two treatments.
+        attached = find_attached_range(row.raw_evidence, row.currency, prices[0][0])
+        single_range = (len(prices) == 2 and len(row.raw_evidence) <= 220
+                        and all(code == row.currency for _, _, code in prices)
+                        and attached and abs(attached[0] - row.price_min) < .011
+                        and row.price_max is not None
+                        and abs(attached[1] - row.price_max) < .011)
+        if not single_range:
+            return False
 
     return True
 
@@ -7150,6 +7188,15 @@ def extract_price_evidence(
         if not contains_requested_procedure(title, procedure):
             continue
 
+        # Inline emphasis is not a section boundary. Following only the bold
+        # siblings loses preceding qualifiers such as "national average".
+        paragraph = h.find_parent("p") if h.name in {"strong", "b"} else None
+        if paragraph is not None:
+            joined = contextual_block_text(paragraph, " ".join(paragraph.stripped_strings))
+            if len(joined) <= 1260:
+                add_evidence(out, seen, joined, url, procedure, "heading_siblings")
+            continue
+
         parts = [title]
         sib = h
 
@@ -8064,6 +8111,7 @@ def generic_multi_clinic_price_context(raw: str) -> bool:
         r"(?:cmimet|prices)\s+variojne|"
         r"\brreth\s+\d+\s+klinika\b|"
         r"average (?:price|cost)|typical (?:price|cost)|"
+        r"(?:national\s+)?average\s+(?:[a-z]+\s+){0,4}(?:prices?|costs?|fees?)|"
         r"promedio|(?:precio|coste|costo)s?\s+medi[oa]s?|"
         r"depend(?:e|iendo)\s+(?:del\s+cirujano\s+y\s+)?(?:de\s+)?(?:la\s+clinica|del\s+centro)|"
         r"(?:en|entre)\s+(?:otras|distintas|diferentes|varias)\s+clinicas|"
@@ -10680,6 +10728,9 @@ def cached_nonclinic_source_row_needs_revalidation(
     if actual in {"directory", "social"}:
         return True
 
+    if actual == "marketplace" and not is_probable_single_business_page(row.source_url):
+        return True
+
     # A marketplace page must remain a marketplace row. It must never be
     # reinterpreted as the clinic's own official site.
     if actual == "marketplace" and row.source_type != "marketplace":
@@ -11011,7 +11062,7 @@ async def firestore_load_results(
             age = _age_days(last_verified)
             if not include_stale and (age is None or age > max_age_days):
                 continue
-            if not trusted_price_result(row):
+            if row.price_extract_revision != PRICE_EXTRACT_REVISION or not trusted_price_result(row):
                 continue
 
             if "whatclinic.com" in (
@@ -12235,6 +12286,20 @@ def dedupe_live_results(
         ), None)
         if index is None:
             best.append(row)
+        elif (row.price_max is not None and best[index].price_max is None
+              and abs(row.price_min - best[index].price_min) < .011
+              and row.currency == best[index].currency and row.unit == best[index].unit
+              and best[index].raw_evidence.strip() in row.raw_evidence
+              and len(row.raw_evidence) <= 220):
+            # A nested price span can contain only the lower endpoint of its
+            # parent menu row. Keep the complete offer, including its range.
+            best[index] = row
+        elif (best[index].price_max is not None and row.price_max is None
+              and abs(row.price_min - best[index].price_min) < .011
+              and row.currency == best[index].currency and row.unit == best[index].unit
+              and row.raw_evidence.strip() in best[index].raw_evidence
+              and len(best[index].raw_evidence) <= 220):
+            continue
         elif _result_quality(row) > _result_quality(best[index]):
             best[index] = row
 
@@ -13895,7 +13960,8 @@ def select_discovery_work(unique: list[SearchHit], req: DiscoverRequest, rank_fn
             "MAX_ADAPTIVE_ROOT_PAGES" if req.adaptive_rescue else "MAX_INTERACTIVE_ROOT_PAGES",
             "18" if req.adaptive_rescue else "10",
         ))
-        max_marketplace = 4 if req.app_fast_queries else 2
+        max_marketplace = (min(8, max_total) if req.progressive_stage == "marketplace"
+                           else 4 if req.app_fast_queries else 2)
         max_price_like = 4 if req.app_fast_queries else (10 if req.adaptive_rescue else 6)
         max_directory = 2 if req.app_fast_queries else (14 if req.adaptive_rescue else 8)
     elif req.interactive_fast:
@@ -14018,7 +14084,8 @@ def select_discovery_work(unique: list[SearchHit], req: DiscoverRequest, rank_fn
     add(directory_roots, "directory", max_directory)
 
     remaining = sorted(
-        [h for h in unique if h.url not in seen],
+        [h for h in unique if h.url not in seen
+         and classify_source(h.url) != "marketplace"],
         key=lambda h: (-price_page_signal(h, req.procedure), rank_fn(h)),
     )
     add(remaining, "general", max_total)
@@ -15617,6 +15684,12 @@ async def enrich_marketplace_rows_with_official_sites(
     if not env_bool("ENABLE_MARKETPLACE_OFFICIAL_VERIFICATION", True):
         return rows, stats
 
+    if req.hybrid_interactive:
+        # Interactive delivery already requires a fetched provider menu with
+        # literal fee and provider locality. Official-site upgrades are useful
+        # in noninteractive audits, but cannot block these published offers.
+        return rows, stats
+
     grouped: dict[str, list[tuple[int, ClinicPriceResult]]] = {}
     for idx, row in enumerate(rows):
         if row.source_type != "marketplace":
@@ -16080,7 +16153,9 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
         blob = f"{hit.title} {hit.snippet} {hit.url}"
         # Off-city directory pages cannot provide a local clinic identity.
         # Reject them before any HTML or Places request consumes the budget.
-        if source in {"directory", "marketplace", "social"} and not city_in_text(blob, req.city):
+        if (source in {"directory", "marketplace", "social"}
+                and not city_in_text(blob, req.city)
+                and not (source == "marketplace" and is_probable_single_business_page(hit.url))):
             return False
         if is_retail_product_page(hit.url, blob, req.procedure):
             return False
@@ -16157,9 +16232,11 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
     hits = []
     explicit_hosts = set()
     for url in req.priority_site_urls:
+        source = classify_source(url)
         if (urlparse(url).scheme not in {"http", "https"} or bad_host(url)
                 or url in req.previously_fetched_urls
-                or classify_source(url) != "official_clinic"
+                or not (source == "official_clinic" or (
+                    source == "marketplace" and is_probable_single_business_page(url)))
                 or foreign_price_source_path(url, req.city)):
             continue
         hits.append(SearchHit(title=domain_brand(url), url=url,
@@ -16750,7 +16827,7 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                 continue
 
             blob = f"{hit.title} {hit.snippet} {hit.url}"
-            if not city_in_text(blob, req.city):
+            if not city_in_text(blob, req.city) and not is_probable_single_business_page(hit.url):
                 diag.rejected_marketplace_serp_city += 1
                 continue
 
@@ -17118,6 +17195,7 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
 
             rows.append(
                 ClinicPriceResult(
+                    price_extract_revision=PRICE_EXTRACT_REVISION,
                     clinic_name=clinic_name,
                     city=req.city,
                     procedure_canonical=canonical,
@@ -17341,12 +17419,11 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                         budget["left"] = 0
                 follow_navigation = False
         if _hybrid_progress.get() is not None:
-            # Official rows have passed the same city, ownership and evidence
-            # gates as the final response. Marketplace rows wait for the
-            # existing official-site verification below.
+            # Both owned fees and fetched provider menus have passed the final
+            # city, scope and literal-evidence gates. Publish as they arrive.
             eligible = dedupe_live_results([
                 row for row in rows
-                if row.source_type == "official_clinic" and _app_can_show_row(row)
+                if _app_can_show_row(row)
             ])
             signature = tuple((row.source_url, row.price_min, row.price_max,
                                row.raw_evidence) for row in eligible)
@@ -17391,6 +17468,18 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                     if req.debug:
                         diag.price_navigation_candidate_urls.append(url)
                     child = lead.model_copy(update={"url": url, "query": "google_places_sitecrawl"})
+                    immediate_processed.append(await process_and_publish(child, follow_navigation=False))
+            elif (status == "ok" and html and classify_source(lead.url) == "marketplace"
+                    and await asyncio.to_thread(strong_local_page_evidence,
+                                                html, text or "", req.city, lead.url)
+                    and not any(row.source_url == lead.url and _app_can_show_row(row) for row in rows)):
+                # The default profile may show only popular services. Fetch one
+                # treatment-specific menu instead of searching unrelated sites.
+                url = bookimed_treatment_profile_url(lead.url, req.procedure)
+                if url and url != lead.url and url not in navigation_seen_urls:
+                    navigation_seen_urls.add(url)
+                    diag.pages_attempted += 1
+                    child = lead.model_copy(update={"url": url})
                     immediate_processed.append(await process_and_publish(child, follow_navigation=False))
         return item
 
@@ -17968,6 +18057,7 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
             evidence_quality.get(r.evidence_type, 0),
             1 if r.identity_verified else 0,
             1 if r.clinic_own_price else 0,
+            1 if r.price_max is not None and r.qualifier == "range" else 0,
             r.confidence,
             -len(r.raw_evidence or ""),
         )
@@ -17983,6 +18073,7 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
             evidence_quality.get(prev.evidence_type, 0),
             1 if prev.identity_verified else 0,
             1 if prev.clinic_own_price else 0,
+            1 if prev.price_max is not None and prev.qualifier == "range" else 0,
             prev.confidence,
             -len(prev.raw_evidence or ""),
         )
@@ -18135,7 +18226,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.91",
+    version="0.11.92",
     lifespan=app_lifespan,
 )
 
@@ -18805,6 +18896,8 @@ def _app_can_show_row(row) -> bool:
     Same cards the terminal hybrid display keeps: an owned clinic price, or a
     bookable service menu. Country-comparison articles stay out.
     """
+    if row.price_extract_revision != PRICE_EXTRACT_REVISION:
+        return False
     if not trusted_price_result(row):
         return False
     if news_report_url(row.source_url):

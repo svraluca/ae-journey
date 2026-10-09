@@ -47,6 +47,9 @@ void _logGpMatch(String message) {
 final _kFillerPositive = [
   'filler',
   'dermal filler',
+  'filler injection',
+  'filler injections',
+  'fillers injection',
   'hyaluronic acid',
   'acido hialuronico',
   'ácido hialurónico',

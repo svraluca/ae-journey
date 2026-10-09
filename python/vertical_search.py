@@ -83,8 +83,9 @@ class Catalog:
         if stage == 'marketplace':
             # These platforms already have provider-profile verifiers. Search
             # their published menus, never turn a directory range into a fee.
-            return [f'site:bookimed.com/clinic/ "{city}" "{term}" price',
-                    f'site:whatclinic.com "{city}" "{term}" prices']
+            provider_term = 'fillers injection' if procedure == 'filler' else term
+            return [f'site:bookimed.com/clinic/ "{city}" {provider_term} price',
+                    f'site:whatclinic.com "{city}" {term} prices']
         config = self.country(country)
         for language in config.get('search_languages', []):
             if language == 'en':

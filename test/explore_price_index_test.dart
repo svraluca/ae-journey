@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:glowpass/services/explore_price_sanity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -10,6 +11,7 @@ import '../lib/services/explore_compare_mix.dart';
 
 Map<String, Object?> quote(String name, String host, int amount) => {
   'clinic_name': name,
+  'price_extract_revision': kExplorePriceExtractRevision,
   'city': 'Abu Dhabi',
   'procedure_canonical': 'botox',
   'procedure_display_name': 'Botox',
@@ -32,7 +34,7 @@ http.Response jsonResponse(Object body, [int status = 200]) =>
     http.Response(jsonEncode(body), status,
       headers: {'content-type': 'application/json'});
 
-http.Response health() => jsonResponse({'ok': true, 'version': '0.11.91', 'progressive_jobs': true});
+http.Response health() => jsonResponse({'ok': true, 'version': '0.11.92', 'progressive_jobs': true});
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

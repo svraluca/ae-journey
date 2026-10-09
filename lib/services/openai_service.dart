@@ -21254,6 +21254,11 @@ ExploreValidatedRows _validateToolCompareRows(
       debugPrint('DROP ${row.clinicName} $reason ${row.sourceUrl}');
     }
 
+    if (row.priceExtractRevision != kExplorePriceExtractRevision) {
+      dropRow('extraction_revision');
+      continue;
+    }
+
     if (exploreUrlConflictsWithSearchCity(row.sourceUrl, city) ||
         exploreQuotedPriceConflictsWithSearchCity(
           city: city,
@@ -21370,6 +21375,7 @@ OpenAIClinic? _clinicFromDiscoveryToolRow(
   required String city,
   required String procedure,
 }) {
+  if (row.priceExtractRevision != kExplorePriceExtractRevision) return null;
   final host = normalizeExploreHost(row.sourceUrl);
   if (host.isEmpty) return null;
   final marketplace =
@@ -21467,7 +21473,7 @@ OpenAIClinic? _clinicFromDiscoveryToolRow(
     providerClinic: row.clinicName,
     sourceLocationText: row.sourceLocationText,
     sourcePlatform: marketplace ? marketplacePlatformLabel(host) : '',
-    priceExtractRevision: kExplorePriceExtractRevision,
+    priceExtractRevision: row.priceExtractRevision,
     procedureRelation: 'exact',
   );
 }

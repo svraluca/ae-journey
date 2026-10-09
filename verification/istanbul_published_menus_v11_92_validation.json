@@ -1,0 +1,194 @@
+{
+  "validated_at": "2026-10-09T20:59:22.923172+00:00",
+  "baseline_commit": "541c83d77077f07bf0852a122cc3686aea6434c6",
+  "backend_version": "0.11.92",
+  "extract_revision": "e28",
+  "python": {
+    "passed": 159,
+    "failed": 0,
+    "command": "PYTHON_DOTENV_DISABLED=1 ENABLE_FIRESTORE=false ENABLE_BACKGROUND_REFRESH=false python -m unittest discover -s python/tests -v"
+  },
+  "functions": {
+    "passed": 326,
+    "failed": 0,
+    "command": "node --test functions/explore/test/*.test.js"
+  },
+  "flutter": {
+    "focused_passed": 74,
+    "focused_failed": 0,
+    "full_passed": 787,
+    "full_failed": 14,
+    "baseline_failure_count": 14,
+    "new_failures": [],
+    "unchanged_baseline_failures": [
+      "explore_currency_cached_pipeline_test.dart: extract revision is e18",
+      "explore_discovery_identity_test.dart: Places name looks medical 25g. Abu Dhabi keeps verified quotes and skips Dubai-only URLs",
+      "explore_discovery_identity_test.dart: Places name looks medical keeps named plastic clinics Google may type as gym/lodging",
+      "explore_discovery_identity_test.dart: SERP fetch uses any listed price, not a snippet amount London hair cards show package FROM, not /graft on graft counts",
+      "explore_discovery_identity_test.dart: canonical city + early discovery rejects Budapest Botox does not keep a Tiranë clinic",
+      "explore_discovery_identity_test.dart: pool mix plan 2+ pool paints 2 Firestore seeds and still hunts 2 Google",
+      "explore_discovery_identity_test.dart: procedure display title 14. Serp page titles are not clinic names",
+      "explore_global_price_discovery_test.dart: units on parsePriceText stores ml quantity and per-unit type",
+      "explore_places_circuit_breaker_test.dart: Places 429 trips circuit breaker and skips further calls",
+      "explore_price_sanity_test.dart: price sanity gate gold packages, Quick Facts, and SEO titles are not clinic prices",
+      "explore_price_sanity_test.dart: price sanity gate hair market £/graft copy and stale landing quotes are rejected",
+      "explore_price_sanity_test.dart: price sanity gate rhinoplasty market guide is rejected; hospital guide stays scoped",
+      "explore_progressive_fill_drop_test.dart: price-list path witness Global Action 1 ml stays eligible after accept-time variant",
+      "explore_worldwide_pipeline_test.dart: UI states + exact price labelling cold city searching copy"
+    ],
+    "command": "flutter test --no-pub --reporter expanded"
+  },
+  "analyzer": {
+    "errors": 0,
+    "warnings": 11,
+    "infos": 51,
+    "scope": "Five changed production/replay Dart files; existing unused/style diagnostics remain."
+  },
+  "captured_source_replay": {
+    "botox": {
+      "accepted": 8,
+      "replay_elapsed_ms": 9871,
+      "partial_sizes": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    "filler": {
+      "accepted": 3,
+      "replay_elapsed_ms": 5240,
+      "partial_sizes": [
+        1,
+        2,
+        3
+      ]
+    },
+    "chemical_peel": {
+      "accepted": 2,
+      "replay_elapsed_ms": 4685,
+      "partial_sizes": [
+        1,
+        2
+      ]
+    },
+    "rhinoplasty": {
+      "accepted": 1,
+      "replay_elapsed_ms": 6885,
+      "partial_sizes": [
+        1
+      ]
+    },
+    "breast_augmentation": {
+      "accepted": 2,
+      "replay_elapsed_ms": 7449,
+      "partial_sizes": [
+        1,
+        2
+      ]
+    },
+    "hair_transplant": {
+      "accepted": 1,
+      "replay_elapsed_ms": 6684,
+      "partial_sizes": [
+        1
+      ]
+    }
+  },
+  "cache_delivery": {
+    "health": {
+      "ok": true,
+      "version": "0.11.92",
+      "price_extract_revision": "e28",
+      "price_index": true,
+      "discovery_jobs": true,
+      "worker_version": "0.11.92",
+      "progressive_jobs": true
+    },
+    "seed_scope": "Isolated local SQLite populated with captured direct HTTPS source evidence; external Firestore unchanged.",
+    "requests": [
+      {
+        "procedure": "botox",
+        "elapsed_ms": 78.33,
+        "candidate_count": 8,
+        "display_count": 4,
+        "source": "local_verified",
+        "source_urls": [
+          "https://us-uk.bookimed.com/clinic/dr-kadri-akinci-plastic-surgery-clinic-ai/",
+          "https://us-uk.bookimed.com/clinic/trustmed-clinic/",
+          "https://us-uk.bookimed.com/clinic/dr-hasan-duygulu-private-practice/",
+          "https://us-uk.bookimed.com/clinic/happy-esthetic/",
+          "https://us-uk.bookimed.com/clinic/blanc-clinic/",
+          "https://us-uk.bookimed.com/clinic/grand-clinic/",
+          "https://us-uk.bookimed.com/clinic/estherian-clinic/",
+          "https://us-uk.bookimed.com/clinic/oezel-okmeydani-hastanesi/"
+        ]
+      },
+      {
+        "procedure": "filler",
+        "elapsed_ms": 20.57,
+        "candidate_count": 3,
+        "display_count": 3,
+        "source": "local_verified",
+        "source_urls": [
+          "https://us-uk.bookimed.com/clinic/dr-kadri-akinci-plastic-surgery-clinic-ai/procedure=fillers-injection/",
+          "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=fillers-injection/",
+          "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=fillers-injection/"
+        ]
+      },
+      {
+        "procedure": "chemical_peel",
+        "elapsed_ms": 14.26,
+        "candidate_count": 2,
+        "display_count": 2,
+        "source": "local_verified",
+        "source_urls": [
+          "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+          "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/"
+        ]
+      },
+      {
+        "procedure": "rhinoplasty",
+        "elapsed_ms": 8.82,
+        "candidate_count": 1,
+        "display_count": 1,
+        "source": "local_verified",
+        "source_urls": [
+          "https://us-uk.bookimed.com/clinic/dr-hasan-duygulu-private-practice/"
+        ]
+      },
+      {
+        "procedure": "breast_augmentation",
+        "elapsed_ms": 11.68,
+        "candidate_count": 2,
+        "display_count": 2,
+        "source": "local_verified",
+        "source_urls": [
+          "https://us-uk.bookimed.com/clinic/happy-esthetic/",
+          "https://us-uk.bookimed.com/clinic/estherian-clinic/"
+        ]
+      },
+      {
+        "procedure": "hair_transplant",
+        "elapsed_ms": 6.77,
+        "candidate_count": 1,
+        "display_count": 1,
+        "source": "local_verified",
+        "source_urls": [
+          "https://us-uk.bookimed.com/clinic/oezel-okmeydani-hastanesi/"
+        ]
+      }
+    ],
+    "invalid_display_limit_http_status": 422
+  },
+  "limitations": [
+    "Directly fetched public Bookimed fees are marketplace provider offers, not clinic-owned official tariff claims.",
+    "Targeted source replay and seeded isolated local SQLite verify extraction and delivery, not a full live city discovery benchmark.",
+    "External Firestore, Mac LaunchAgent, iPhone and production Firebase Functions were not updated by this cloud task.",
+    "Physical iPhone scrolling/frame timings require local profile-mode measurement.",
+    "Four is a display maximum, not a required minimum; no fabricated padding."
+  ]
+}

@@ -27,7 +27,8 @@ import 'explore_price_binding.dart';
 /// e25: revalidate informational average tables and literal range endpoints.
 /// e26: exclude travel/PRP, FAQ years and multilingual geographic tables.
 /// e27: provider-bound marketplace locality, geographic quotes and Q&A price guides.
-const kExplorePriceExtractRevision = 'e27';
+/// e28: complete price paragraphs and backend extraction provenance.
+const kExplorePriceExtractRevision = 'e28';
 
 /// Hard gate: a number from clinic HTML is not a procedure price until this
 /// passes. AI must never invent a replacement amount.

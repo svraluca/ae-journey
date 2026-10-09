@@ -47,6 +47,7 @@ class ExploreDiscoveryToolRow {
     this.procedureDetail = '',
     this.unit = '',
     this.lastVerifiedAt,
+    this.priceExtractRevision = '',
   });
 
   final String clinicName;
@@ -68,6 +69,7 @@ class ExploreDiscoveryToolRow {
   final String procedureDetail;
   final String unit;
   final DateTime? lastVerifiedAt;
+  final String priceExtractRevision;
   final String qualifier;
   final double rating;
   final int reviews;
@@ -202,7 +204,7 @@ class ExploreDiscoveryJob {
 /// Simulator on that Mac. A phone uses [PRICE_DISCOVERY_TOOL_URL]. Search
 /// credentials stay on the server.
 class ExplorePriceDiscoveryTool {
-  static const minimumBackendVersion = '0.11.91';
+  static const minimumBackendVersion = '0.11.92';
 
   /// Older workers can return rows checked with obsolete ownership rules.
   /// Updating Flutter must not turn those rows into freshly verified prices.
@@ -210,7 +212,7 @@ class ExplorePriceDiscoveryTool {
     bool current(Object? value) {
       final parts = '$value'.split('.').map(int.tryParse).toList();
       if (parts.length != 3 || parts.any((n) => n == null)) return false;
-      const minimum = [0, 11, 91];
+      final minimum = minimumBackendVersion.split('.').map(int.parse).toList();
       for (var i = 0; i < 3; i++) {
         if (parts[i]! != minimum[i]) return parts[i]! > minimum[i];
       }
@@ -1540,6 +1542,7 @@ class ExplorePriceDiscoveryTool {
       reviews: _asDouble(json['user_rating_count']).round(),
       lastVerifiedAt: DateTime.tryParse('${json['last_verified_at'] ?? ''}'),
       origin: '${json['origin'] ?? ''}'.trim(),
+      priceExtractRevision: '${json['price_extract_revision'] ?? ''}'.trim(),
     );
   }
 

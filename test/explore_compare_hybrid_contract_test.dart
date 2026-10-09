@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:glowpass/services/explore_price_sanity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:glowpass/services/explore_price_discovery_tool.dart';
 import 'package:http/http.dart' as http;
@@ -19,6 +20,7 @@ Map<String, Object?> _card({
 }) {
   return {
     'clinic_name': name,
+    'price_extract_revision': kExplorePriceExtractRevision,
     'origin': origin,
     'price_min': price,
     'currency': currency,
@@ -43,7 +45,7 @@ MockClient _client(
       if (!healthOk) {
         throw http.ClientException('Connection refused', request.url);
       }
-      return http.Response('{"ok":true,"version":"0.11.91"}', 200);
+      return http.Response('{"ok":true,"version":"0.11.92"}', 200);
     }
     final body = onDiscover(request);
     if (body is Future) {
@@ -102,6 +104,7 @@ void main() {
       expect(
         ExplorePriceDiscoveryTool.rowMatchesRequestedProcedure(
           const ExploreDiscoveryToolRow(
+            priceExtractRevision: kExplorePriceExtractRevision,
             clinicName: 'Cheek Room',
             priceMin: 180,
             currency: 'EUR',

@@ -21,6 +21,7 @@ ExploreDiscoveryToolRow tariff(
   String evidenceType = 'html_table',
 }) => ExplorePriceDiscoveryTool.rowFromJson({
   'clinic_name': name,
+  'price_extract_revision': kExplorePriceExtractRevision,
   'source_url': 'https://$host/prices/',
   'source_type': 'official_clinic',
   'evidence_type': evidenceType,
@@ -45,6 +46,7 @@ void main() {
     () async {
       Map<String, Object?> payload(String url) => {
         'clinic_name': 'Aster Hospital',
+        'price_extract_revision': kExplorePriceExtractRevision,
         'source_url': url,
         'source_type': 'marketplace',
         'evidence_type': 'marketplace_service_menu',

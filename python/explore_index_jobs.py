@@ -25,7 +25,7 @@ import httpx
 from fastapi import HTTPException
 from pydantic import BaseModel, Field
 
-JOB_ENGINE_VERSION = "0.11.91"
+JOB_ENGINE_VERSION = "0.11.92"
 
 # HTML extraction/Firestore calls can occupy asyncio's default executor.
 # Queue acceptance, focus changes and polling must not wait behind crawlers.
@@ -763,11 +763,19 @@ class IndexJobs:
                         "evidence_type": evidence_type, "confidence": confidence,
                         "last_verified_at": datetime.now(timezone.utc).isoformat(),
                         "cache_age_days": 0,
+                        "price_extract_revision": self.e.PRICE_EXTRACT_REVISION,
                     })
                     if await self.validated_rows([row], req, include_quarantined=True):
                         await self.store_call("source_check", self.key(req), stored.source_url)
                         changed.append(row)
                         break
+                else:
+                    # Positive evidence of a market estimate invalidates the
+                    # old fee. Missing metadata or a failed fetch alone do not.
+                    if any(self.e.generic_multi_clinic_price_context(ev.raw_evidence)
+                           and abs(ev.price_min - stored.price_min) < .011
+                           and ev.currency == stored.currency for ev in evidence):
+                        await self.store_call("source_check", self.key(req), stored.source_url, "market_context")
             except (httpx.HTTPError, ValueError):
                 return
 

@@ -23,6 +23,7 @@ def accepted(body, procedure, url="https://aster.example/precios/"):
             continue
         canonical = e.canonicalize_procedure(procedure)
         row = e.ClinicPriceResult(
+            price_extract_revision=e.PRICE_EXTRACT_REVISION,
             clinic_name="Aster Medical Clinic", city="Madrid", procedure_canonical=canonical,
             procedure_display_name=e.published_procedure_display_name(
                 canonical, evidence.raw_procedure_text, evidence.raw_evidence, evidence.raw_price_text),

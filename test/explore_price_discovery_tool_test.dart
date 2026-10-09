@@ -8,7 +8,9 @@ void main() {
     expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
       {'ok': true, 'version': '0.11.91', 'worker_version': '0.11.88'}), false);
     expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
-      {'ok': true, 'version': '0.11.91', 'worker_version': '0.11.91'}), true);
+      {'ok': true, 'version': '0.11.91', 'worker_version': '0.11.91'}), false);
+    expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
+      {'ok': true, 'version': '0.11.92', 'worker_version': '0.11.92'}), true);
     expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
       {'ok': true, 'version': '0.12.0', 'worker_version': '0.12.0'}), true);
   });

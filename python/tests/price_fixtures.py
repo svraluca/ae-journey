@@ -44,6 +44,7 @@ def quote(name="Aster Medical Clinic", host="aster.example", *, amount=900,
         raise AssertionError("Fictional tariff was rejected by the price verifier")
     verified = datetime.now(timezone.utc) - timedelta(days=age)
     return e.DisplayClinicPrice(
+        price_extract_revision=e.PRICE_EXTRACT_REVISION,
         clinic_name=name, city=city, procedure_canonical="botox",
         procedure_display_name="Botox", price_min=evidence.price_min,
         price_max=evidence.price_max, currency=evidence.currency,

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:glowpass/services/explore_price_sanity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -248,6 +249,7 @@ void main() {
   test('discovery worker preserves the same price safety checks', () async {
     ExploreDiscoveryToolRow row(String host, {String path = 'prices'}) =>
         ExploreDiscoveryToolRow(
+          priceExtractRevision: kExplorePriceExtractRevision,
           clinicName: 'Aster Medical Clinic',
           priceMin: 350,
           currency: 'EUR',

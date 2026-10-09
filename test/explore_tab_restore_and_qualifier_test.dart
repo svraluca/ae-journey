@@ -62,6 +62,7 @@ void main() {
     for (final origin in ['live_search', 'firestore']) {
       final refreshed = service.comparisonWithDiscoveryRows(city: 'Madrid',
           procedure: 'Botox', previous: previous, rows: [ExploreDiscoveryToolRow(
+            priceExtractRevision: kExplorePriceExtractRevision,
             clinicName: old.name, priceMin: 299, currency: 'EUR',
             sourceUrl: old.priceSourceUrl, rawProcedureText: 'Botox 3 zones',
             rawEvidence: 'Botox 3 zones | 299 EUR', rawPriceText: '299 EUR',
@@ -93,6 +94,7 @@ void main() {
     for (final origin in ['live_search', 'firestore']) {
       final repaired = service.comparisonWithDiscoveryRows(city: 'İstanbul',
           procedure: 'Botox', previous: previous, rows: [ExploreDiscoveryToolRow(
+            priceExtractRevision: kExplorePriceExtractRevision,
             clinicName: 'Op. Dr. Akın Şahin', priceMin: old.priceMin,
             currency: old.currency, sourceUrl: old.priceSourceUrl,
             rawProcedureText: old.rawProcedureText,
@@ -239,6 +241,7 @@ void main() {
       procedure: 'Botox',
       rows: [
         ExploreDiscoveryToolRow(
+          priceExtractRevision: kExplorePriceExtractRevision,
           clinicName: 'Olmo Test Clinic',
           priceMin: 300,
           currency: 'EUR',
