@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:glowpass/services/explore_price_binding.dart';
 import 'package:glowpass/services/explore_price_discovery_tool.dart';
 import 'package:glowpass/services/explore_price_evidence.dart';
+import 'package:glowpass/services/explore_price_ownership.dart';
 import 'package:glowpass/services/explore_price_sanity.dart';
 import 'package:glowpass/services/explore_search_locale.dart';
 import 'package:glowpass/services/openai_service.dart';
@@ -14,6 +16,7 @@ ExploreDiscoveryToolRow tariff(
   String displayTitle = 'Botox treatment',
   String currency = 'TRY',
   double amount = 5000,
+  double? maximum,
   String? evidence,
   String evidenceType = 'html_table',
 }) => ExplorePriceDiscoveryTool.rowFromJson({
@@ -27,7 +30,7 @@ ExploreDiscoveryToolRow tariff(
   'raw_procedure_text': title,
   'procedure_display_name': displayTitle,
   'price_min': amount,
-  'price_max': amount,
+  'price_max': maximum ?? amount,
   'currency': currency,
   'raw_price_text': '$amount $currency',
   'raw_evidence': evidence ?? '$title | $amount $currency',
@@ -36,6 +39,189 @@ ExploreDiscoveryToolRow tariff(
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  test(
+    'Bookimed provider tariffs keep their source and currency; category ranges are rejected',
+    () async {
+      Map<String, Object?> payload(String url) => {
+        'clinic_name': 'Aster Hospital',
+        'source_url': url,
+        'source_type': 'marketplace',
+        'evidence_type': 'marketplace_service_menu',
+        'clinic_own_price': false,
+        'city_match': true,
+        'procedure_canonical': 'chemical_peel',
+        'raw_procedure_text': 'Chemical Peel',
+        'procedure_display_name': 'Chemical Peel',
+        'price_min': 150,
+        'price_max': 300,
+        'currency': 'USD',
+        'qualifier': 'range',
+        'raw_price_text': r'$150 - $300',
+        'raw_evidence': r'Chemical Peel | $150 - $300',
+        'last_verified_at': DateTime.now().toUtc().toIso8601String(),
+      };
+      const profile =
+          'https://us-uk.bookimed.com/clinic/aster-hospital/procedure=chemical-peel/';
+      final row = ExplorePriceDiscoveryTool.rowFromJson(payload(profile));
+      expect(row, isNotNull);
+      expect(
+        ExplorePriceDiscoveryTool.rowFromJson(
+          payload(
+            'https://us-uk.bookimed.com/clinics/country=turkey/procedure=chemical-peel/',
+          ),
+        ),
+        isNull,
+      );
+      final result = await validateExploreDiscoveryCompareRows(
+        rows: [row!],
+        city: 'İstanbul',
+        procedure: 'Chemical peel',
+        selection: 'Peels',
+      );
+      expect(result.accepted, hasLength(1));
+      expect(result.accepted.single.priceSourceUrl, profile);
+      expect(result.accepted.single.currency, 'USD');
+      expect(result.accepted.single.priceMax, 300);
+    },
+  );
+
+  test(
+    'published ranges prove both endpoints, never a midpoint or unrelated fee',
+    () {
+      for (final quote in [
+        '90.000 TL – 180.000 TL',
+        '90.000 TL ile 180.000 TL',
+        'TL 90.000 ila TL 180.000',
+        '90.000–180.000 TL',
+      ]) {
+        expect(
+          exploreEvidenceQuotesPrice(
+            evidence: quote,
+            amount: 90000,
+            priceMax: 180000,
+            currency: 'TRY',
+          ),
+          isTrue,
+          reason: quote,
+        );
+        expect(
+          exploreEvidenceQuotesPrice(
+            evidence: quote,
+            amount: 135000,
+            currency: 'TRY',
+          ),
+          isFalse,
+          reason: quote,
+        );
+        expect(
+          exploreEvidenceQuotesPrice(
+            evidence: quote,
+            amount: 90000,
+            priceMax: 999999,
+            currency: 'TRY',
+          ),
+          isFalse,
+          reason: quote,
+        );
+      }
+      expect(
+        exploreEvidenceQuotesPrice(
+          evidence: 'Peel 150 EUR | Botox 300 EUR',
+          amount: 150,
+          priceMax: 300,
+          currency: 'EUR',
+        ),
+        isFalse,
+      );
+    },
+  );
+
+  test(
+    'worker rejects an invented upper bound and retains a literal range',
+    () async {
+      for (final maximum in [180000.0, 999999.0]) {
+        final checked = await validateExploreDiscoveryCompareRows(
+          rows: [
+            tariff(
+              'Aster Hospital',
+              'aster.example',
+              canonical: 'rhinoplasty',
+              title: 'Rhinoplasty',
+              displayTitle: 'Rhinoplasty',
+              amount: 90000,
+              maximum: maximum,
+              evidence: 'Rhinoplasty | 90.000 TL – 180.000 TL',
+            ),
+          ],
+          city: 'İstanbul',
+          procedure: 'Rhinoplasty',
+          selection: 'Rhinoplasty',
+        );
+        expect(checked.accepted.length, maximum == 180000 ? 1 : 0);
+        if (checked.accepted.isNotEmpty) {
+          expect(checked.accepted.single.priceMax, 180000);
+        }
+      }
+    },
+  );
+
+  test('a truncated average-price FAQ cannot revive a cached treatment fee', () {
+    expect(
+      evaluateExtractedPriceCandidate(
+        rawPriceText: '120000 TRY',
+        priceMin: 120000,
+        currency: 'TRY',
+        extractionMethod: 'html_table',
+        procedure: 'breast augmentation',
+        rawProcedureText: 'Meme büyütme',
+        rawEvidence:
+            'Meme büyütme ameliyatı ne kadar ortalama? Meme büyütme ameliyatı fiyatı 120.000 TL',
+        sourceUrl: 'https://aster.example/meme-buyutme/',
+        logRejects: false,
+      ).accepted,
+      isFalse,
+    );
+  });
+
+  test(
+    'explicit informational averages override tariff fragments across locales',
+    () {
+      for (final disclaimer in [
+        'Yukarıdaki değerler ortalamadır; kesin ücret muayenede netleşir.',
+        'These prices are only averages; contact us for your quote.',
+        'Estos precios son estimaciones; solicite su presupuesto.',
+      ]) {
+        final pageText = 'Rhinoplasty | 90.000 TL – 180.000 TL. $disclaimer';
+        final context = classifyExplorePricePageContext(
+          sourceUrl: 'https://aster.example/prices/',
+          pageText: pageText,
+        );
+        expect(context, ExplorePricePageContext.nonClinicPrices);
+        expect(
+          exploreEvidenceIsClinicOwnedPrice(
+            pageContext: context,
+            rawProcedureText: 'Rhinoplasty',
+            rawEvidence: 'Our rhinoplasty price starts from 90.000 TL',
+          ),
+          isFalse,
+        );
+        expect(
+          evaluateExtractedPriceCandidate(
+            rawPriceText: '90000 TRY',
+            priceMin: 90000,
+            currency: 'TRY',
+            extractionMethod: 'html_table',
+            rawEvidence: pageText,
+            procedure: 'rhinoplasty',
+            sourceUrl: 'https://aster.example/prices/',
+            logRejects: false,
+          ).accepted,
+          isFalse,
+        );
+      }
+    },
+  );
 
   test(
     'Istanbul verified euro tariff survives worker validation and card filtering',

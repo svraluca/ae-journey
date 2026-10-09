@@ -79,7 +79,7 @@ double? _bindingAmount(String value) {
 /// A generated rawPriceText is not evidence. The retained source excerpt must
 /// contain this amount beside its currency (including either end of a range).
 bool exploreEvidenceQuotesPrice({required String evidence, required double amount,
-  required String currency}) {
+  required String currency, double? priceMax}) {
   final code = _bindingCurrency(currency);
   if (evidence.trim().isEmpty || code.isEmpty || amount <= 0) return false;
   final aliases = switch (code) {
@@ -90,16 +90,23 @@ bool exploreEvidenceQuotesPrice({required String evidence, required double amoun
     _ => '${RegExp.escape(code)}\\b',
   };
   final cur = '(?:$aliases)';
+  const separator = r'(?:[-–—]|to|ile|ila)';
   final quotes = cachedRegExp(
     '(?<![\\w.,])(?:$cur\\s*($_publishedNumber)'
-    '(?:\\s*[-–—]\\s*(?:$cur\\s*)?($_publishedNumber))?|'
-    '($_publishedNumber)(?:\\s*[-–—]\\s*($_publishedNumber))?\\s*$cur)',
+    '(?:\\s*$separator\\s*(?:$cur\\s*)?($_publishedNumber))?|'
+    '($_publishedNumber)(?:\\s*(?:$cur\\s*)?$separator\\s*($_publishedNumber))?\\s*$cur)',
     caseSensitive: false,
   );
   for (final match in quotes.allMatches(evidence)) {
+    final values = <double>[];
     for (var i = 1; i <= 4; i++) {
       final n = _bindingAmount(match.group(i) ?? '');
-      if (n != null && (n - amount).abs() < .011) return true;
+      if (n != null) values.add(n);
+    }
+    if (!values.any((n) => (n - amount).abs() < .011)) continue;
+    if (priceMax == null || (priceMax - amount).abs() < .011) return true;
+    if (values.length == 2 && values.any((n) => (n - priceMax).abs() < .011)) {
+      return true;
     }
   }
   return false;

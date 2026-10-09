@@ -1,0 +1,259 @@
+{
+  "validated_at": "2026-10-09T19:11:39.473206+03:00",
+  "base_commit": "36318b7c484f6d4b195f1d05301edc7dc741de79",
+  "backend_version": "0.11.88",
+  "extract_revision": "e25",
+  "python": {
+    "passed": 127,
+    "failed": 0,
+    "new_tests": 8,
+    "command": "PYTHON_DOTENV_DISABLED=1 ENABLE_FIRESTORE=false ENABLE_BACKGROUND_REFRESH=false python -m unittest discover -s python/tests -v"
+  },
+  "functions": {
+    "passed": 318,
+    "failed": 0,
+    "new_tests": 2,
+    "command": "node --test functions/explore/test/*.test.js"
+  },
+  "flutter": {
+    "broad": {
+      "visible_test_counts": {
+        "success": 741,
+        "failure": 13,
+        "error": 1
+      },
+      "failures": [
+        {
+          "suite": "explore_currency_cached_pipeline_test.dart",
+          "test": "extract revision is e18"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "pool mix plan 2+ pool paints 2 Firestore seeds and still hunts 2 Google"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "procedure display title 14. Serp page titles are not clinic names"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "Places name looks medical keeps named plastic clinics Google may type as gym/lodging"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "Places name looks medical 25g. Abu Dhabi keeps verified quotes and skips Dubai-only URLs"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "SERP fetch uses any listed price, not a snippet amount London hair cards show package FROM, not /graft on graft counts"
+        },
+        {
+          "suite": "explore_discovery_identity_test.dart",
+          "test": "canonical city + early discovery rejects Budapest Botox does not keep a Tiranë clinic"
+        },
+        {
+          "suite": "explore_global_price_discovery_test.dart",
+          "test": "units on parsePriceText stores ml quantity and per-unit type"
+        },
+        {
+          "suite": "explore_places_circuit_breaker_test.dart",
+          "test": "Places 429 trips circuit breaker and skips further calls"
+        },
+        {
+          "suite": "explore_price_sanity_test.dart",
+          "test": "price sanity gate gold packages, Quick Facts, and SEO titles are not clinic prices"
+        },
+        {
+          "suite": "explore_price_sanity_test.dart",
+          "test": "price sanity gate hair market £/graft copy and stale landing quotes are rejected"
+        },
+        {
+          "suite": "explore_price_sanity_test.dart",
+          "test": "price sanity gate rhinoplasty market guide is rejected; hospital guide stays scoped"
+        },
+        {
+          "suite": "explore_progressive_fill_drop_test.dart",
+          "test": "price-list path witness Global Action 1 ml stays eligible after accept-time variant"
+        },
+        {
+          "suite": "explore_worldwide_pipeline_test.dart",
+          "test": "UI states + exact price labelling cold city searching copy"
+        }
+      ],
+      "done": [
+        {
+          "success": false,
+          "type": "done",
+          "time": 70932
+        }
+      ],
+      "suites": 56,
+      "baseline_failure_count": 14,
+      "new_failures": [],
+      "baseline_failures_resolved": []
+    },
+    "focused": {
+      "visible_test_counts": {
+        "success": 14
+      },
+      "failures": [],
+      "done": [
+        {
+          "success": true,
+          "type": "done",
+          "time": 9542
+        }
+      ],
+      "suites": 1
+    },
+    "broad_suite_paths": [
+      "test/explore_any_city_pipeline_test.dart",
+      "test/explore_booking_platform_test.dart",
+      "test/explore_city_and_eight_cards_test.dart",
+      "test/explore_clinic_name_vocabulary_test.dart",
+      "test/explore_cold_city_pipeline_test.dart",
+      "test/explore_compare_hybrid_contract_test.dart",
+      "test/explore_cross_procedure_exclusion_test.dart",
+      "test/explore_curated_price_test.dart",
+      "test/explore_currency_cached_pipeline_test.dart",
+      "test/explore_discovery_identity_test.dart",
+      "test/explore_duplicate_verify_test.dart",
+      "test/explore_extract_performance_test.dart",
+      "test/explore_fill_session_lifecycle_test.dart",
+      "test/explore_filler_ml_lock_test.dart",
+      "test/explore_firecrawl_discovery_test.dart",
+      "test/explore_fresh_tariff_and_rating_test.dart",
+      "test/explore_global_price_discovery_test.dart",
+      "test/explore_html_price_extractor_test.dart",
+      "test/explore_injectable_cached_eligibility_test.dart",
+      "test/explore_market_coverage_test.dart",
+      "test/explore_marketplace_discovery_test.dart",
+      "test/explore_owned_tariff_context_test.dart",
+      "test/explore_peel_discovery_extract_test.dart",
+      "test/explore_perf_coordinator_test.dart",
+      "test/explore_places_circuit_breaker_test.dart",
+      "test/explore_price_discovery_tool_test.dart",
+      "test/explore_price_evidence_lock_test.dart",
+      "test/explore_price_index_test.dart",
+      "test/explore_price_ownership_test.dart",
+      "test/explore_price_sanity_test.dart",
+      "test/explore_procedure_relation_test.dart",
+      "test/explore_progressive_fill_drop_test.dart",
+      "test/explore_queue_and_ratings_test.dart",
+      "test/explore_quote_restrictions_test.dart",
+      "test/explore_regex_flags_test.dart",
+      "test/explore_reject_path_fix_test.dart",
+      "test/explore_renderer_client_test.dart",
+      "test/explore_responsive_rotation_test.dart",
+      "test/explore_rhinoplasty_variant_eligibility_test.dart",
+      "test/explore_saved_price_loading_test.dart",
+      "test/explore_serp_provider_test.dart",
+      "test/explore_snapshot_and_scope_test.dart",
+      "test/explore_source_context_regressions_test.dart",
+      "test/explore_tab_restore_and_qualifier_test.dart",
+      "test/explore_tirana_peel_price_parse_test.dart",
+      "test/explore_turkish_cold_city_test.dart",
+      "test/explore_v76_approx_price_test.dart",
+      "test/explore_valencia_prices_test.dart",
+      "test/explore_verified_card_titles_test.dart",
+      "test/explore_worldwide_gaps_test.dart",
+      "test/explore_worldwide_pipeline_test.dart",
+      "test/explore_zyte_client_test.dart",
+      "test/price_binding_regression_test.dart",
+      "test/worldwide_compare_display_test.dart",
+      "test/explore_injectable_scope_test.dart",
+      "test/explore_istanbul_delivery_test.dart"
+    ],
+    "focused_command": "flutter test --no-pub test/explore_istanbul_delivery_test.dart"
+  },
+  "analysis": {
+    "errors": 0,
+    "warnings": 82,
+    "infos": 175
+  },
+  "api_smoke": {
+    "health": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "version": "0.11.88",
+        "price_index": true,
+        "discovery_jobs": true,
+        "worker_version": "0.11.88",
+        "progressive_jobs": true
+      }
+    },
+    "botox": {
+      "status": 200,
+      "body": {
+        "city": "İstanbul",
+        "procedure": "botox",
+        "display_results": [],
+        "source_collection": "aesthetic_price_results",
+        "source": "local_verified",
+        "verified_count": 0,
+        "invalidated_source_urls": []
+      }
+    },
+    "chemical_peel": {
+      "status": 200,
+      "body": {
+        "city": "İstanbul",
+        "procedure": "chemical_peel",
+        "display_results": [],
+        "source_collection": "aesthetic_price_results",
+        "source": "local_verified",
+        "verified_count": 0,
+        "invalidated_source_urls": []
+      }
+    },
+    "invalid_display_limit": {
+      "status": 422,
+      "body": {
+        "detail": [
+          {
+            "type": "less_than_equal",
+            "loc": [
+              "body",
+              "display_limit"
+            ],
+            "msg": "Input should be less than or equal to 4",
+            "input": 8,
+            "ctx": {
+              "le": 4
+            }
+          }
+        ]
+      }
+    }
+  },
+  "source_audit": "turkey_provider_price_audit.json",
+  "user_log_backend_version": "0.11.86",
+  "fixes": [
+    "Sparse-price discovery tries individual-provider menus on Bookimed and WhatClinic within the existing four-search budget.",
+    "Exa rescue can retain validated individual-provider platform leads while rejecting category estimates.",
+    "Bookimed structured tariff rows classify as service menus; category URLs cannot inherit service-menu trust in Flutter.",
+    "WhatClinic current named-span service-card markup binds only the requested treatment to its adjacent price.",
+    "Turkish ile/ila ranges preserve both endpoints and the estimate qualifier after the upper endpoint.",
+    "Both claimed range endpoints must be present in the same attached source range; invented midpoints and maxima fail validation.",
+    "Explicit informational average disclaimers override tariff-shaped fragments in Python, Flutter and Functions.",
+    "Cached unowned approximate official-page fragments require revalidation; client/Functions cache revision advances to e25.",
+    "Finished or failed discovery jobs preserve verified partial cards and stop the loading state without immediately launching another hunt.",
+    "Four cards remain a maximum; there are no price-on-request or fabricated filler cards."
+  ],
+  "limitations": [
+    "The broader Flutter suite retains the 14 baseline failures listed above; it is not fully passing.",
+    "Production Firestore and paid live search providers were not connected; original-page HTTP fetches and extraction replay were tested.",
+    "Marketplace prices are published provider listings, not independently confirmed official clinic tariffs or personal quotations.",
+    "No production deployment or physical-iPhone frame-timing measurement was performed.",
+    "Cloud configuration draft persistence is separate from environment publication."
+  ],
+  "log_sha256": {
+    "ae-provider-python-final.log": "82ddd768ecb14d83a334e45ede4baa2f5068eecd83c9a4265808bc97b6adab43",
+    "ae-provider-functions-final.log": "ebd2b33931c2524f07a675324ee68e075b1c15ac93c63b7847d91febc203e07d",
+    "ae-provider-flutter-broad.jsonl": "0ed091326febd8a66b9ceecdf4a8558dbf3abfb85a8340f16c5599787892e346",
+    "ae-provider-flutter-focused-final.jsonl": "bf48f58321d78fd5fbb60ae121782f1796ad7912003af207c2d1398d88ad29b7",
+    "ae-provider-analysis-all.log": "65b10cf41560b0a80087c60d94e920f5cb98219a29ba8dd7eadb9ce48ef1c05c",
+    "ae-provider-live-replay.log": "f83f6e28ef5e5ab620667b084edb7535d67c406ca6acd1f7b004811d34af6273"
+  }
+}

@@ -18,7 +18,8 @@ function ownershipFold(raw) {
 }
 
 function looksLikeExplicitNonOwnedPriceDisclaimer(raw) {
-  const t = ownershipFold(raw);
+  const t = ownershipFold(raw).replace(/ı/g, 'i');
+  if (/\b(?:these|listed)\s+(?:prices|fees|figures)\s+are\s+(?:only\s+)?(?:averages|estimates)\b|\b(?:fiyatlar|ucretler|degerler|rakamlar)\s+(?:sadece\s+)?ortalamadir\b|\b(?:bu|yukaridaki)\s+(?:fiyatlar|ucretler|degerler|rakamlar)\s+ortalama\s+olup\b|\b(?:estos|los)\s+(?:precios|importes)\s+son\s+(?:solo\s+)?(?:promedios|estimaciones)\b/.test(t)) return true;
   return /\bno\s+representan\s+los\s+precios\s+aplicados\s+en\s+(?:la\s+)?(?:consulta|clinica)\b|\bno\s+(?:son|representan)\s+(?:nuestros\s+precios|las\s+tarifas\s+de\s+nuestra\s+clinica)\b|\b(?:do\s+not|don't)\s+represent\s+(?:the\s+)?(?:prices|fees)\s+(?:charged|applied)\s+(?:at|in)\s+(?:our|the)\s+(?:clinic|practice)\b/.test(t);
 }
 
@@ -34,7 +35,7 @@ function looksLikeConditionalCompanionOffer(raw) {
 
 function looksLikeLocalizedMarketPriceEstimate(raw) {
   const t = ownershipFold(raw).replace(/ı/g, 'i');
-  return /\b(?:fiyat\w*|ucret\w*|maliyet\w*)\b(?:[^.!?\n|]|\.(?=\d)){0,100}\b(?:genellikle|ortalama|degis\w*|arasinda)\b|\b(?:genellikle|ortalama|genel olarak)\b(?:[^.!?\n|]|\.(?=\d)){0,100}\b(?:fiyat\w*|ucret\w*|maliyet\w*|tl|try)\b/.test(t);
+  return /\b(?:fiyat\w*|ucret\w*|maliyet\w*)\b(?:[^.!?\n|]|\.(?=\d)){0,100}\b(?:genellikle|ortalama|degis\w*|arasinda)\b|\b(?:genellikle|ortalama|genel olarak)\b(?:[^.!?\n|]|\.(?=\d)){0,100}\b(?:fiyat\w*|ucret\w*|maliyet\w*|tl|try)\b|\bne kadar ortalama\b/.test(t);
 }
 
 function classifyExplorePricePageContext({sourceUrl = '', pageText = '', title = ''} = {}) {

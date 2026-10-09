@@ -79,7 +79,12 @@ class Catalog:
         if stage == 'semantic':
             label = term
             return [f'Clinics in {city} publishing their own treatment fees for {label}; '
-                    'official treatment pages and clinic price menus']
+                    'official clinic tariffs and named-provider service menus, not market averages']
+        if stage == 'marketplace':
+            # These platforms already have provider-profile verifiers. Search
+            # their published menus, never turn a directory range into a fee.
+            return [f'site:bookimed.com/clinic/ "{city}" "{term}" price',
+                    f'site:whatclinic.com "{city}" "{term}" prices']
         config = self.country(country)
         for language in config.get('search_languages', []):
             if language == 'en':
@@ -230,6 +235,8 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
     local_queries = CATALOG.queries(selected, city, country, engine.local_terms_for, stage='local')
     local_first = engine.env_bool('ENABLE_MULTILINGUAL_SEARCH', True) and bool(local_queries)
     stages.append('local' if local_first else 'primary')
+    if deep and engine.env_bool('ENABLE_MARKETPLACE_RESCUE', True):
+        stages.append('marketplace')
     if deep and local_first:
         stages.append('primary')
     if deep:
@@ -238,7 +245,7 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
         stages.append('places')
     # Total fast <=24 HTML GETs; total deep <=32 HTML GETs. Per-URL inflight
     # dedupe and the existing bounded HTTP pool still apply.
-    limits = {'known_domains': 8, 'primary': 16, 'local': 12, 'exa': 10, 'places': 10}
+    limits = {'known_domains': 8, 'primary': 16, 'local': 12, 'marketplace': 12, 'exa': 10, 'places': 10}
     for stage in stages:
         if len(stored) + len(merged) >= goal:
             break
@@ -247,7 +254,9 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
             stage_hosts = hosts
             if not hosts:
                 continue
-        elif stage in {'primary', 'local'}:
+        elif stage in {'primary', 'local', 'marketplace'}:
+            if stage == 'marketplace' and len(stored) + len(merged) >= MIN_DISPLAY:
+                continue
             queries = CATALOG.queries(selected, city, country, engine.local_terms_for, stage=stage)
             queries = queries[:min(2, max(0, total_serper_cap-spent))]
             if not queries:
@@ -258,7 +267,9 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
             hits = await provider.search(CATALOG.queries(selected, city, country,
                                         engine.local_terms_for, stage='semantic')[0], country)
             exa_calls += provider.calls
-            urls = [h.url for h in hits if engine.classify_source(h.url) == 'official_clinic']
+            urls = [h.url for h in hits if engine.classify_source(h.url) == 'official_clinic'
+                    or (engine.classify_source(h.url) == 'marketplace'
+                        and engine.is_probable_single_business_hit(h, city))]
             if not urls:
                 await engine._emit_hybrid_status(round=stage, exa_calls=exa_calls,
                                                 provider_error=provider.last_error)

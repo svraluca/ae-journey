@@ -133,7 +133,11 @@ bool looksLikeExplicitNonClinicPriceDisclaimer(String raw) {
     r'\b(?:do\s+not|don.t)\s+represent\s+(?:the\s+)?(?:prices|fees)\s+'
     r'(?:charged|applied)\b|'
     r'\b(?:these|listed)\s+(?:prices|fees)\s+are\s+not\s+'
-    r'(?:our|the\s+clinic.s)\s+(?:prices|fees)\b',
+    r'(?:our|the\s+clinic.s)\s+(?:prices|fees)\b|'
+    r'\b(?:these|listed)\s+(?:prices|fees|figures)\s+are\s+(?:only\s+)?(?:averages|estimates)\b|'
+    r'\b(?:fiyatlar|ucretler|degerler|rakamlar)\s+(?:sadece\s+)?ortalamadir\b|'
+    r'\b(?:bu|yukaridaki)\s+(?:fiyatlar|ucretler|degerler|rakamlar)\s+ortalama\s+olup\b|'
+    r'\b(?:estos|los)\s+(?:precios|importes)\s+son\s+(?:solo\s+)?(?:promedios|estimaciones)\b',
   ).hasMatch(text);
 }
 
@@ -144,7 +148,8 @@ bool looksLikeLocalizedMarketPriceEstimate(String raw) {
     r'\b(?:fiyat\w*|ucret\w*|maliyet\w*)\b(?:[^.!?\n|]|\.(?=\d)){0,100}'
     r'\b(?:genellikle|ortalama|degis\w*|arasinda)\b|'
     r'\b(?:genellikle|ortalama|genel olarak)\b(?:[^.!?\n|]|\.(?=\d)){0,100}'
-    r'\b(?:fiyat\w*|ucret\w*|maliyet\w*|tl|try)\b',
+    r'\b(?:fiyat\w*|ucret\w*|maliyet\w*|tl|try)\b|'
+    r'\bne kadar ortalama\b',
   ).hasMatch(text);
 }
 

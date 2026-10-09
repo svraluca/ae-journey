@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.87 — local-market delivery and price ownership
+Aesthetic Procedure Price Discovery v0.11.88 — provider tariffs and sparse-price rescue
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -5350,9 +5350,9 @@ def find_attached_range(text: str, currency: str, price_match) -> tuple[float, f
 
     patterns = [
         rf"\bentre\s+(?P<a>{AMOUNT_TOKEN})\s*(?:{curr_pat})?\s*(?:y|u|a)\s*(?P<b>{AMOUNT_TOKEN})\s*(?P<c>{curr_pat})",
-        rf"(?P<c1>{curr_pat})\s*(?P<a>{AMOUNT_TOKEN})\s*(?:-|–|—|to)\s*(?:(?P<c2>{curr_pat})\s*)?(?P<b>{AMOUNT_TOKEN})",
-        rf"(?<![\w.,])(?P<a>{AMOUNT_TOKEN})\s*(?:-|–|—|to)\s*(?P<b>{AMOUNT_TOKEN})\s*(?P<c>{curr_pat})",
-        rf"(?<![\w.,])(?P<a>{AMOUNT_TOKEN})\s*(?P<c1>{curr_pat})\s*(?:-|–|—|to|a)\s*(?P<b>{AMOUNT_TOKEN})\s*(?P<c2>{curr_pat})",
+        rf"(?P<c1>{curr_pat})\s*(?P<a>{AMOUNT_TOKEN})\s*(?:-|–|—|to|ile|ila)\s*(?:(?P<c2>{curr_pat})\s*)?(?P<b>{AMOUNT_TOKEN})",
+        rf"(?<![\w.,])(?P<a>{AMOUNT_TOKEN})\s*(?:-|–|—|to|ile|ila)\s*(?P<b>{AMOUNT_TOKEN})\s*(?P<c>{curr_pat})",
+        rf"(?<![\w.,])(?P<a>{AMOUNT_TOKEN})\s*(?P<c1>{curr_pat})\s*(?:-|–|—|to|a|ile|ila)\s*(?P<b>{AMOUNT_TOKEN})\s*(?P<c2>{curr_pat})",
         rf"(?:varia\s+tra|between|tra)\s+(?P<c1>{curr_pat})\s*(?P<a>{AMOUNT_TOKEN})\s*(?:e|and)\s*(?P<c2>{curr_pat})\s*(?P<b>{AMOUNT_TOKEN})",
     ]
 
@@ -5932,7 +5932,11 @@ def extract_whatclinic_service_price_evidence(
     out: list[ExtractedEvidence] = []
     seen = set()
 
-    for heading in soup.find_all(["h2", "h3", "h4", "h5", "strong", "b"]):
+    service_headings = soup.find_all(["h2", "h3", "h4", "h5", "strong", "b"])
+    # Current provider menus use named spans inside individual service cards.
+    # Keep the same small-card binding rather than promoting a page fragment.
+    service_headings += soup.select('div[data-id] > span.name')
+    for heading in service_headings:
         title = " ".join(heading.stripped_strings).strip()
         if not title or not contains_requested_procedure(title, procedure):
             continue
@@ -7346,6 +7350,7 @@ def classify_evidence_type(
             in {
                 "table_row", "semantic_block", "heading_siblings", "heading_price_pair",
                 "service_section", "whatclinic_service_pair", "fresha_offer",
+                "scoped_tariff_table_row", "dom_tariff_row", "aligned_tariff_columns",
             }
         ):
             return "marketplace_service_menu"
@@ -7710,6 +7715,13 @@ def cached_market_or_third_party_row_needs_revalidation(
         return False
 
     raw = row.raw_evidence or ""
+    if (row.evidence_type != "official_price_menu"
+            and not own_language(raw)
+            and not clinic_paragraph_matches_site(raw, row.source_url)
+            and re.search(r"(?:~|≈)\s*" + AMOUNT_TOKEN, raw)):
+        # A stripped estimate table can lose its average-price heading. Its
+        # unowned approximate fragment needs a fresh source check.
+        return True
     if comparative_market_article_context(row.source_url, raw):
         return True
     if generic_multi_clinic_price_context(raw):
@@ -7864,12 +7876,16 @@ def consultation_fee_evidence(evidence: ExtractedEvidence) -> bool:
 
 def page_disclaims_clinic_prices(raw: str) -> bool:
     """An explicit estimate disclaimer overrides menu/table ownership cues."""
-    text = fold(raw or "")
+    text = fold(raw or "").replace('ı', 'i')
     return bool(re.search(
         r"no\s+representan\s+los\s+precios\s+(?:aplicados|cobrados)|"
         r"(?:prices?|fees?)\s+(?:do\s+not|don't)\s+represent\b.{0,70}"
         r"(?:our\s+(?:clinic|consultation|fees?|prices?)|clinic\s+(?:fees?|prices?))|"
-        r"(?:not\s+our\s+(?:menu|prices?|tariff)|no\s+son\s+nuestros\s+precios)", text,
+        r"(?:not\s+our\s+(?:menu|prices?|tariff)|no\s+son\s+nuestros\s+precios)|"
+        r"\b(?:these|listed)\s+(?:prices|fees|figures)\s+are\s+(?:only\s+)?(?:averages|estimates)\b|"
+        r"\b(?:fiyatlar|ucretler|degerler|rakamlar)\s+(?:sadece\s+)?ortalamadir\b|"
+        r"\b(?:bu|yukaridaki)\s+(?:fiyatlar|ucretler|degerler|rakamlar)\s+ortalama\s+olup\b|"
+        r"\b(?:estos|los)\s+(?:precios|importes)\s+son\s+(?:solo\s+)?(?:promedios|estimaciones)\b", text,
     ))
 
 
@@ -7905,7 +7921,8 @@ def localized_market_price_context(raw: str) -> bool:
         r'\b(?:fiyat\w*|ucret\w*|maliyet\w*)\b(?:[^.!?\n|]|\.(?=\d)){0,100}'
         r'\b(?:genellikle|ortalama|degis\w*|arasinda)\b|'
         r'\b(?:genellikle|ortalama|genel olarak)\b(?:[^.!?\n|]|\.(?=\d)){0,100}'
-        r'\b(?:fiyat\w*|ucret\w*|maliyet\w*|tl|try)\b', text))
+        r'\b(?:fiyat\w*|ucret\w*|maliyet\w*|tl|try)\b|'
+        r'\bne kadar ortalama\b', text))
 
 
 def nonprimary_rhinoplasty_variant(raw: str) -> bool:
@@ -8174,7 +8191,7 @@ def priced_line_text(
         gap = raw[anchor.end():next_match.start()]
         if (attached and next_currency == target[2]
                 and abs(next_amount-attached[1]) < .011
-                and re.fullmatch(r'\s*(?:to|y|u|a|[-–—])\s*', gap, re.I)):
+                and re.fullmatch(r'\s*(?:to|y|u|a|ile|ila|[-–—])\s*', gap, re.I)):
             # Keep the upper endpoint and the label after a currency-prefix
             # range. "AED 400 to AED 700 for light peels" is one tariff.
             end = following[1][0].start() if len(following) > 1 else len(raw)
@@ -11704,11 +11721,7 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
         return scope_failure
     if generic_multi_clinic_price_context(row.raw_evidence):
         return "market_context"
-    if not any(code == row.currency and (
-            abs(amount - row.price_min) < .011
-            or (attached := find_attached_range(row.raw_evidence, code, match))
-               and abs(attached[0] - row.price_min) < .011)
-            for match, amount, code in iter_exact_price_matches(row.raw_evidence)):
+    if not literal_price_claim_is_supported(row):
         return "missing_literal_price_evidence"
     if consultation_fee_evidence(row):
         return "consultation_fee"
@@ -11793,6 +11806,23 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
     return ""
 
 
+def literal_price_claim_is_supported(row: ClinicPriceResult) -> bool:
+    """Neither an invented midpoint nor a guessed upper bound is a quote."""
+    for match, amount, code in iter_exact_price_matches(row.raw_evidence):
+        if code != row.currency:
+            continue
+        attached = find_attached_range(row.raw_evidence, code, match)
+        low_matches = abs(amount - row.price_min) < .011 or (
+            attached and abs(attached[0] - row.price_min) < .011)
+        if not low_matches:
+            continue
+        if row.price_max is None or abs(row.price_max - row.price_min) < .011:
+            return True
+        if attached and abs(attached[0] - row.price_min) < .011 and abs(attached[1] - row.price_max) < .011:
+            return True
+    return False
+
+
 def trusted_price_result(row: ClinicPriceResult) -> bool:
     """
     Safe persistence/display gate.
@@ -11800,6 +11830,8 @@ def trusted_price_result(row: ClinicPriceResult) -> bool:
     In particular, an official clinic article that merely quotes a general
     market price must not become a clinic-owned app price.
     """
+    if not literal_price_claim_is_supported(row):
+        return False
     blob = f"{row.raw_procedure_text} {row.procedure_detail} {row.raw_evidence}"
     if injectable_scope_rejection(row.procedure_canonical,
             row.raw_procedure_text, blob, row.clinic_name, row.source_url):
@@ -17899,7 +17931,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.87",
+    version="0.11.88",
     lifespan=app_lifespan,
 )
 

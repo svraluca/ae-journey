@@ -21505,7 +21505,8 @@ bool _explorePriceIsVerifiedUncached(OpenAIClinic c) {
   if (c.priceSourceUrl.trim().isEmpty) return false;
   if (c.extractionMethod.trim().isEmpty) return false;
   if (c.sourceType == 'discovery_tool' && !exploreEvidenceQuotesPrice(
-      evidence: c.priceEvidenceText, amount: c.priceMin, currency: c.currency)) {
+      evidence: c.priceEvidenceText, amount: c.priceMin, currency: c.currency,
+      priceMax: c.priceMax)) {
     return false;
   }
   if (!isValidExtractedPriceCandidate(

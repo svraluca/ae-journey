@@ -1424,6 +1424,13 @@ class ExplorePriceDiscoveryTool {
   static bool _bookableMenu(String sourceType, String evidence, String url) {
     if (sourceType != 'marketplace') return false;
     if (url.trim().isEmpty) return false;
+    final uri = Uri.tryParse(url);
+    final host = uri?.host.toLowerCase() ?? '';
+    if ((host == 'bookimed.com' || host.endsWith('.bookimed.com')) &&
+        !RegExp(r'^/clinic/[a-z0-9-]+/(?:procedure=[a-z0-9-]+/)?$')
+            .hasMatch(uri?.path ?? '')) {
+      return false;
+    }
     return evidence == 'marketplace_service_menu' ||
         evidence == 'marketplace_profile';
   }
@@ -1432,7 +1439,8 @@ class ExplorePriceDiscoveryTool {
   /// Directory hubs and generic market-price pages remain discovery leads.
   static bool canUseMarketplacePrice(ExploreDiscoveryToolRow row) =>
       row.cityMatch && row.priceMin > 0 && row.rawEvidence.trim().isNotEmpty &&
-      row.sourceType == 'marketplace' && row.evidenceType == 'marketplace_service_menu';
+      row.sourceType == 'marketplace' && row.evidenceType == 'marketplace_service_menu' &&
+      _bookableMenu(row.sourceType, row.evidenceType, row.sourceUrl);
 
   static ExploreDiscoveryToolRow? rowFromJson(Map<String, Object?> json) {
     if (json['city_match'] != true) return null;

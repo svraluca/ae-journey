@@ -1,0 +1,1673 @@
+{
+  "checked_at": "2026-10-09T19:09:09.722930+03:00",
+  "backend_version": "0.11.88",
+  "extract_revision": "e25",
+  "user_preference": "Only verified published prices; fewer than four cards is acceptable.",
+  "production_prices_hardcoded": false,
+  "production_firestore_modified": false,
+  "observations": [
+    {
+      "provider": "Doku Clinic",
+      "source_url": "https://www.dokuclinic.com/kimyasal-peeling",
+      "screenshot_price": "5000 TRY",
+      "finding": "The lower endpoint of a national average is not a Doku fee.",
+      "source_quote": "Kimyasal Peeling fiyatları 2026 yılında Türkiye’de ortalama 5.000 TL ile 50.000 TL aralığındadır.",
+      "fetched_http_status": 200,
+      "body_sha256": "83418479e40e6e9c32eeb87c4502924515ead7a51ed396af3ffe08b057854998",
+      "accepted_display_rows": 0,
+      "rejected_reasons": [
+        "generic_multi_clinic_price"
+      ]
+    },
+    {
+      "provider": "Pendik Yüzyıl Hastanesi",
+      "source_url": "https://pendikyuzyilhastanesi.com/kimyasal-peeling/",
+      "screenshot_price": "2000 TRY",
+      "finding": "Average treatment range; exact fee not confirmed.",
+      "source_quote": "Ortalama olarak kimyasal peeling tedavisi fiyatları 2026 yılında 2.000 TL ile 8.000 TL arasında değişebilmektedir.",
+      "fetched_http_status": 200,
+      "body_sha256": "d32966953d9b38590101e509a97fcd786655aed9143a72c50d67cbe3448d3272",
+      "accepted_display_rows": 0,
+      "rejected_reasons": [
+        "generic_multi_clinic_price"
+      ]
+    },
+    {
+      "provider": "Dr Şeyma Demirci",
+      "source_url": "https://www.drseymademirci.com/kimyasal-peeling-tedavisi/",
+      "screenshot_price": "1500 TRY",
+      "finding": "Average range followed by a request for individual assessment; not a verified fixed fee.",
+      "source_quote": "Ortalama fiyat aralığı 1.500 TL ile 6.000 TL arasında değişebilir. Net ücret belirlemek için cildin durumunu değerlendirmek gerekir.",
+      "fetched_http_status": 200,
+      "body_sha256": "708ce99b485b115c56aadff4089fbc2afeb8df0d7cfb2489110d4f032fcdae88",
+      "accepted_display_rows": 0,
+      "rejected_reasons": [
+        "generic_multi_clinic_price"
+      ]
+    },
+    {
+      "provider": "Özel Doğa Hospital",
+      "source_url": "https://dogahospital.com/tibbi-birimler/burun-estetigi-rinoplasti-tedavisi/",
+      "screenshot_price": "135000 TRY",
+      "finding": "The number is actually published as an approximate average. It was not proved to be an invented midpoint; the source explicitly disclaims firm tariffs.",
+      "source_quote": "Kapalı rinoplasti ~135.000 ₺ 90.000 – 180.000 ₺ İz bırakmayan, basit–orta vakalar. Yukarıdaki değerler ortalamadır; teknik, kapsam ve burun yapınıza göre farklılık gösterir.",
+      "fetched_http_status": 200,
+      "body_sha256": "de356f142cc7ba8cb7d62ae23b479978483116ba0dba4b2c5ef0596a6ffe933f",
+      "accepted_display_rows": 0,
+      "rejected_reasons": [
+        "page_disclaims_clinic_prices"
+      ]
+    },
+    {
+      "provider": "Hayati Kale",
+      "source_url": "https://www.hayatikale.com/burun-estetigi-fiyatlari/",
+      "screenshot_price": "70000 TRY",
+      "finding": "A general Istanbul price range rather than the named surgeon’s published fee.",
+      "source_quote": "2026 yılında İstanbul burun estetiği fiyatları, 70.000 TL ile 350.000 TL arasında değişiklik gösteriyor ve bu fiyatlar, hastanın ihtiyacına göre kişiselleştiriliyor.",
+      "fetched_http_status": 200,
+      "body_sha256": "0ce32ef8f8bbd149ca19ea3f807f39857be35faf891db497ad7367a0aa8e2923",
+      "accepted_display_rows": 0,
+      "rejected_reasons": [
+        "generic_multi_clinic_price"
+      ]
+    }
+  ],
+  "marketplace_examples": [
+    {
+      "source_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+      "procedure": "chemical_peel",
+      "published_prices": [
+        {
+          "price_min": 2200.0,
+          "price_max": null,
+          "currency": "USD",
+          "qualifier": "exact",
+          "unit": "procedure",
+          "source_quote": "Chemical Peel: $2200",
+          "extraction_method": "scoped_tariff_table_row",
+          "evidence_type": "marketplace_service_menu"
+        }
+      ],
+      "provider_official_site_confirmed": false,
+      "attribution": "Marketplace provider listing; retain original source and currency."
+    },
+    {
+      "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+      "procedure": "chemical_peel",
+      "published_prices": [
+        {
+          "price_min": 150.0,
+          "price_max": 300.0,
+          "currency": "USD",
+          "qualifier": "range",
+          "unit": "procedure",
+          "source_quote": "Chemical Peel: $150 - $300",
+          "extraction_method": "scoped_tariff_table_row",
+          "evidence_type": "marketplace_service_menu"
+        }
+      ],
+      "provider_official_site_confirmed": false,
+      "attribution": "Marketplace provider listing; retain original source and currency."
+    },
+    {
+      "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/sariyer/dr-siyamek-saleki-esthetics",
+      "procedure": "chemical_peel",
+      "published_prices": [
+        {
+          "price_min": 800.0,
+          "price_max": 900.0,
+          "currency": "EUR",
+          "qualifier": "range",
+          "unit": "procedure",
+          "source_quote": "Chemical Peel 800 € - 900 €",
+          "extraction_method": "whatclinic_service_pair",
+          "evidence_type": "marketplace_service_menu"
+        }
+      ],
+      "provider_official_site_confirmed": false,
+      "attribution": "Marketplace provider listing; retain original source and currency."
+    }
+  ],
+  "doku_six_procedure_replay": [
+    {
+      "procedure": "chemical_peel",
+      "source_url": "https://www.dokuclinic.com/kimyasal-peeling",
+      "accepted_display_rows": 0,
+      "rejected_reasons": [
+        "generic_multi_clinic_price"
+      ]
+    },
+    {
+      "procedure": "botox",
+      "source_url": "https://www.dokuclinic.com/botoks",
+      "accepted_display_rows": 0,
+      "rejected_reasons": [
+        "generic_multi_clinic_price"
+      ]
+    },
+    {
+      "procedure": "filler",
+      "source_url": "https://www.dokuclinic.com/dudak-dolgusu",
+      "accepted_display_rows": 0,
+      "rejected_reasons": [
+        "generic_multi_clinic_price"
+      ]
+    },
+    {
+      "procedure": "rhinoplasty",
+      "source_url": "https://www.dokuclinic.com/burun-estetigi",
+      "accepted_display_rows": 0,
+      "rejected_reasons": [
+        "generic_multi_clinic_price"
+      ]
+    },
+    {
+      "procedure": "breast_augmentation",
+      "source_url": "https://www.dokuclinic.com/meme-buyutme",
+      "accepted_display_rows": 0,
+      "rejected_reasons": [
+        "generic_multi_clinic_price"
+      ]
+    },
+    {
+      "procedure": "hair_transplant",
+      "source_url": "https://www.dokuclinic.com/sac-ekimi",
+      "accepted_display_rows": 0,
+      "rejected_reasons": [
+        "comparative_market_article"
+      ]
+    }
+  ],
+  "source_replay": {
+    "checked_at": "2026-10-09T19:06:52.095493+03:00",
+    "backend_version": "0.11.88",
+    "network_disabled_during_replay": true,
+    "production_firestore_modified": false,
+    "results": [
+      {
+        "source_url": "https://www.dokuclinic.com/kimyasal-peeling",
+        "procedure": "chemical_peel",
+        "fetch_status": 200,
+        "body_sha256": "83418479e40e6e9c32eeb87c4502924515ead7a51ed396af3ffe08b057854998",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Kimyasal Peeling",
+              "raw_price_text": "5.000 TL",
+              "price_min": 5000.0,
+              "price_max": 50000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Kimyasal Peeling Fiyatları 2026 Kimyasal Peeling fiyatları 2026 yılında Türkiye’de ortalama 5.000 TL ile 50.000 TL aralığındadır. Bu fiyat, peeling türüne ve planlanan seans sayısına göre değişir. Yüzeysel uygulamalar genelde daha düşük ücretlidir. Orta ve derin peeling işlemleri toplam maliyeti belirgin biçimde artırabilir. Yüz, boyun ve dekolte gibi ek alanlar fiyatı yükseltebilir. Doktor deneyimi, kullanılan asit içeriği ve klinik konumu da ücret farkı yaratır. Akne, leke ve ince çizgi tedavilerinde seans planı kişiye göre değişebilir. Net kimyasal peeling fiyatı, muayene sonrası cilt tipine ve hedeflenen sonuca göre belirlenir.",
+              "source_url": "https://www.dokuclinic.com/kimyasal-peeling",
+              "extraction_method": "heading_siblings"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_treatment_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Kimyasal Peeling",
+              "raw_price_text": "5.000 TL",
+              "price_min": 5000.0,
+              "price_max": 50000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Kimyasal Peeling fiyatları 2026 yılında Türkiye’de ortalama 5.000 TL ile 50.000 TL aralığındadır. Bu fiyat, peeling türüne ve planlanan seans sayısına göre değişir. Yüzeysel uygulamalar genelde daha düşük ücretlidir. Orta ve derin peeling işlemleri toplam maliyeti belirgin biçimde artırabilir.",
+              "source_url": "https://www.dokuclinic.com/kimyasal-peeling",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_page"
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.dokuclinic.com/botoks",
+        "procedure": "botox",
+        "fetch_status": 200,
+        "body_sha256": "951553541937e3533738adc3a3b0048b09aa6a6b22bb0d914d9318c98d74af79",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Botox",
+              "raw_price_text": "6.500 TL",
+              "price_min": 6500.0,
+              "price_max": null,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "exact",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Botoks Fiyatları 2026 Botoks fiyatları 2026’da genellikle 6.500 TL’den başlayıp",
+              "source_url": "https://www.dokuclinic.com/botoks",
+              "extraction_method": "heading_siblings"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_treatment_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Botox",
+              "raw_price_text": "6.500 TL",
+              "price_min": 6500.0,
+              "price_max": null,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "exact",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Botoks fiyatları 2026’da genellikle 6.500 TL’den başlayıp",
+              "source_url": "https://www.dokuclinic.com/botoks",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Botox",
+              "raw_price_text": "6.500 TL",
+              "price_min": 6500.0,
+              "price_max": null,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "exact",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "ur; deneyimli ellerde Botoks hem öngörülebilir hem de kişiye özel sonuç verir. Botoks Fiyatları 2026 Botoks fiyatları 2026’da genellikle 6.500 TL’den başlayıp",
+              "source_url": "https://www.dokuclinic.com/botoks",
+              "extraction_method": "page_window"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_page"
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.dokuclinic.com/dudak-dolgusu",
+        "procedure": "filler",
+        "fetch_status": 200,
+        "body_sha256": "a32284e52e0dea011e2cae1acdcf6bbe40442fe5b8e4fe3963019899f8da5727",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Dermal Filler",
+              "raw_price_text": "45.000 TL",
+              "price_min": 3900.0,
+              "price_max": 45000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Dudak dolgusu fiyatları ne kadar? | Bazı kliniklerde fiyatlar 3.900 ile 45.000 TL arasında değişebilir. Dudak dolgusu işleminin maliyeti konusunda, kliniğin uzmanları tarafından bilgilendirilmesi en uygun yöntem olacaktır.",
+              "source_url": "https://www.dokuclinic.com/dudak-dolgusu",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Dermal Filler",
+              "raw_price_text": "45.000 TL",
+              "price_min": 3900.0,
+              "price_max": 45000.0,
+              "currency": "TRY",
+              "unit": "1 ml",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Dudak dolgusu fiyatları ne kadar? | Bazı kliniklerde fiyatlar 3.900 ile 45.000 TL arasında değişebilir. Dudak dolgusu işleminin maliyeti konusunda, kliniğin uzmanları tarafından bilgilendirilmesi en uygun yöntem olacaktır. 1 cc dudak dolgusu ne kadar gider? Kişinin yaşı, dudak yapısı, elastikiyeti, enjekte edilen dolgu maddesinin özellikleri, miktarı ve kalitesi gibi çeşitli faktörler dolgunun etkisini etkiler. Hyaluronik asit kaynaklı dermal dolgular, özellikle dudak dolguları, beş ila altı ay gibi bir süre sonra etkisiz hale gelir. 1 ml dudak dolgusu yeterli mi? 1 mililitre veya 1 mililitre dudak dolgusu yeterli midir? Bir mililitre dudak dolgusu genellikle yeterlidir. Daha fazla miktar istenirse, en erken bir ay içinde bir miktar daha eklenebilir. Dudak dolgusu ömrü ne kadar sürer? Aynı zamanda kişilerin kendilerine daha fazla güven vermesine yardımcı olur. Dudak dolgusu, farklı uygulama yöntemlerine ve çeşitli dolgu çeşitlerine göre ortalama on iki ila on sekiz ay sürer.",
+              "source_url": "https://www.dokuclinic.com/dudak-dolgusu",
+              "extraction_method": "parent_3"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_treatment_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Dudak dolgusu",
+              "raw_price_text": "5.000 TL",
+              "price_min": 5000.0,
+              "price_max": 30000.0,
+              "currency": "TRY",
+              "unit": "0.5 ml",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Dudak dolgusu fiyatları 2026 yılında Türkiye’de ortalama 5.000 TL ile 30.000 TL aralığındadır. Bu fiyat, kullanılan dolgu markasına ve uygulanan miktara göre değişir. 0,5 ml işlemler daha düşük ücretlidir. 1 ml ve üzeri uygulamalar toplam maliyeti artırır. Doktor deneyimi ve kliniğin bulunduğu şehir de fiyatı etkiler. Dudak şekillendirme, hacim verme ve kontur belirginleştirme gibi ek talepler fiyat farkı yaratabilir. Net dudak dolgusu fiyatı, muayene sonrası ihtiyaç duyulan dolgu miktarına göre belirlenir.",
+              "source_url": "https://www.dokuclinic.com/dudak-dolgusu",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_treatment_page"
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.dokuclinic.com/burun-estetigi",
+        "procedure": "rhinoplasty",
+        "fetch_status": 200,
+        "body_sha256": "400aacdfe5d2efafca6743a80654aa341fcf6772f5fb34c1b83b024774a17153",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "70.000 TL",
+              "price_min": 70000.0,
+              "price_max": 400000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Burun Estetiği Ameliyatı Ne Kadar Sürer? Cerrahi süre; planın kapsamına, açık/kapalı teknik seçimine, greft ihtiyacına ve eşlik eden fonksiyonel onarımlara bağlı olarak değişir. Hazırlık, anestezi ve uyanma odası süreçleri toplam zamanı uzatabilir; bu güvenlik açısından doğaldır. Operasyon bitiminde nazal splintler ve bantlar yerleştirilir; çoğu hasta aynı gün ayağa kalkar ve kısa bir gözlem sonrası taburcu edilir. Burun Estetiği Fiyatları 2026 Burun estetiği fiyatları 2026 yılında Türkiye’de ortalama 70.000 TL ile 400.000 TL aralığındadır.  Primer rinoplasti işlemleri çoğu zaman alt bantta yer alır. Revizyon, piezo teknik ve fonksiyonel düzeltmeler fiyatı yükseltebilir. Cerrah deneyimi, hastane seçimi ve şehir farkı toplam maliyeti doğrudan etkiler. Septoplasti veya nefes alma sorunlarını gideren ek işlemler toplam ücreti artırabilir. Net burun estetiği fiyatı, muayene sonrası burun yapısı ve ameliyat planına göre belirlenir.",
+              "source_url": "https://www.dokuclinic.com/burun-estetigi",
+              "extraction_method": "heading_siblings"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_treatment_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "70.000 TL",
+              "price_min": 70000.0,
+              "price_max": 400000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Burun Estetiği Fiyatları 2026 Burun estetiği fiyatları 2026 yılında Türkiye’de ortalama 70.000 TL ile 400.000 TL aralığındadır.  Primer rinoplasti işlemleri çoğu zaman alt bantta yer alır. Revizyon, piezo teknik ve fonksiyonel düzeltmeler fiyatı yükseltebilir. Cerrah deneyimi, hastane seçimi ve şehir farkı toplam maliyeti doğrudan etkiler. Septoplasti veya nefes alma sorunlarını gideren ek işlemler toplam ücreti artırabilir. Net burun estetiği fiyatı, muayene sonrası burun yapısı ve ameliyat planına göre belirlenir.",
+              "source_url": "https://www.dokuclinic.com/burun-estetigi",
+              "extraction_method": "heading_siblings"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_treatment_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "70.000 TL",
+              "price_min": 70000.0,
+              "price_max": 400000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Burun estetiği fiyatları 2026 yılında Türkiye’de ortalama 70.000 TL ile 400.000 TL aralığındadır.  Primer rinoplasti işlemleri çoğu zaman alt bantta yer alır. Revizyon, piezo teknik ve fonksiyonel düzeltmeler fiyatı yükseltebilir. Cerrah deneyimi, hastane seçimi ve şehir farkı toplam maliyeti doğrudan etkiler. Septoplasti veya nefes alma sorunlarını gideren ek işlemler toplam ücreti artırabilir. Net burun estetiği fiyatı, muayene sonrası burun yapısı ve ameliyat planına göre belirlenir.",
+              "source_url": "https://www.dokuclinic.com/burun-estetigi",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_page"
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.dokuclinic.com/meme-buyutme",
+        "procedure": "breast_augmentation",
+        "fetch_status": 200,
+        "body_sha256": "da13e51a9619a8ffcfb4499d27354d444b82c335a601d4bf4e57384521850a30",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Meme büyütme ameliyatı ne kadar ortalama? Meme büyütme ameliyatı fiyatı",
+              "raw_price_text": "120.000 TL",
+              "price_min": 120000.0,
+              "price_max": 200000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Meme büyütme ameliyatı ne kadar ortalama? Meme büyütme ameliyatı fiyatı 120.000 TL",
+              "source_url": "https://www.dokuclinic.com/meme-buyutme",
+              "extraction_method": "heading_siblings"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": false,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_treatment_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Meme büyütme ameliyatı nedir? | Meme büyütme ameliyatı ne kadar ortalama? Meme büyütme ameliyatı fiyatı",
+              "raw_price_text": "120.000 TL",
+              "price_min": 120000.0,
+              "price_max": 200000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Meme büyütme ameliyatı nedir? | Meme büyütme ameliyatı ne kadar ortalama? Meme büyütme ameliyatı fiyatı 120.000 TL",
+              "source_url": "https://www.dokuclinic.com/meme-buyutme",
+              "extraction_method": "parent_4"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": false,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Meme büyütme ameliyatı ne kadar ortalama? | Meme büyütme ameliyatı fiyatı",
+              "raw_price_text": "120.000 TL",
+              "price_min": 120000.0,
+              "price_max": 200000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Meme büyütme ameliyatı ne kadar ortalama? | Meme büyütme ameliyatı fiyatı 120.000 TL",
+              "source_url": "https://www.dokuclinic.com/meme-buyutme",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": false,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Meme büyütme ameliyatı fiyatları 2026 yılında Türkiye’de ortalama",
+              "raw_price_text": "140.000 TL",
+              "price_min": 140000.0,
+              "price_max": 250000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Meme büyütme ameliyatı fiyatları 2026 yılında Türkiye’de ortalama 140.000 TL",
+              "source_url": "https://www.dokuclinic.com/meme-buyutme",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": false,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_page"
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.dokuclinic.com/sac-ekimi",
+        "procedure": "hair_transplant",
+        "fetch_status": 200,
+        "body_sha256": "3b019152f5049972d89c88786fab8c3b5eb769847cc5ea60978c9ac6940d567f",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "3000 adet saç ekimi ne kadar? 2026 yılında 3000 greft saç nakli",
+              "raw_price_text": "35.000 TL",
+              "price_min": 35000.0,
+              "price_max": 70000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "3000 adet saç ekimi ne kadar? 2026 yılında 3000 greft saç nakli fiyatı ortalama 35.000 TL ile 70.000 TL arasında değişmektedir. Bu fiyat aralığı, kullanılan teknik (FUE, DHI), kliniğin konumu, doktorun deneyimi ve sunulan ek hizmetlere göre farklılık gösterir. Bazı merkezler paket fiyatlara konaklama, transfer ve ilaç giderlerini de dahil etmektedir. DHI yöntemi genellikle FUE’ye göre daha maliyetli olabilir. İstanbul dışındaki illerde fiyatlar daha uygun olabilirken, ünlü kliniklerde bu rakamlar artabilir. En sağlıklı fiyat bilgisi, ön muayene sonrası kişisel değerlendirme ile alınabilir. Saç yoğunluğu ve beklentiler fiyatı etkileyen temel faktörlerdendir.",
+              "source_url": "https://www.dokuclinic.com/sac-ekimi",
+              "extraction_method": "heading_siblings"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "comparative_market_article",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Hair Transplant",
+              "raw_price_text": "30.000 TL",
+              "price_min": 30000.0,
+              "price_max": 120000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Herkes Dhi Saç Ekimine Uygun Mudur? Bugün geldiğimiz noktada, bilimsel ve teknolojik gelişmeler ışığında, saç ekimi artık çok daha güvenli bir şekilde Choi uçları ile de yapılabiliyor. Uzmanlaşmış kliniklerde bu uçlarla yapılan saç ekiminde etkili, öngörülebilir ve en önemlisi doğal görünümlü sonuçlar elde edilebiliyor. İlk geliştirilen Choi kalemi ile bu yöntem sadece düz ve kalın saçlı kişilere uygulanabiliyorken zaman içerisinde yapılan iyileştirmeler ile kullanım alanı genişledi. Şu anda kullanılan Choi kalemlerinin kalınlığı 0,64 mm ile 1,0 mm arasında değişebiliyor, bu da farklı saç tipleri için DHI yönteminin kullanılabilmesini sağlıyor. Saç Ekimi Fiyatları 2026 Saç ekimi fiyatları 2026’te ortalama 30.000 TL ile 120.000 TL arasında değişmektedir.",
+              "source_url": "https://www.dokuclinic.com/sac-ekimi",
+              "extraction_method": "heading_siblings"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "comparative_market_article",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Saç Ekimi",
+              "raw_price_text": "30.000 TL",
+              "price_min": 30000.0,
+              "price_max": 120000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Saç Ekimi Fiyatları 2026 Saç ekimi fiyatları 2026’te ortalama 30.000 TL ile 120.000 TL arasında değişmektedir. Bu fiyatlar, ekilecek greft sayısı, tercih edilen teknik (FUE, DHI, safir FUE), kliniğin konumu ve doktorun deneyimine göre farklılık gösterir. İstanbul gibi büyük şehirlerde ve uluslararası tanınırlığı olan kliniklerde fiyatlar daha yüksek olabilir. Bazı merkezler, konaklama, transfer ve ilaçları içeren paketler sunar. DHI yöntemi genellikle FUE’ye göre daha maliyetli olup, daha sık ve doğal yerleştirme sağlar. En doğru fiyat bilgisi için ön muayene şarttır. Saç ekimi kalıcılığı yüksek ve estetik sonuçları olan bir işlemdir.",
+              "source_url": "https://www.dokuclinic.com/sac-ekimi",
+              "extraction_method": "heading_siblings"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "comparative_market_article",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Hair Transplant",
+              "raw_price_text": "140.000 TL",
+              "price_min": 70000.0,
+              "price_max": 140000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Saç ektirme ameliyatı kaç TL? | FUE yöntemine kıyasla doğrudan ve tıraşsız saç ekimi olarak da bilinen bu yöntem daha pahalıdır. Ancak genel olarak, 3000 ila 3500 greftlik bir saç ekimi işlemi için 70.000 ila 140.000 TL arasında bir fiyat aralığı var. Fakat kliniğimizde saç ekimi için genel fiyatlama kişisel duruma göre değişmektedir.",
+              "source_url": "https://www.dokuclinic.com/sac-ekimi",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "comparative_market_article",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Hair Transplant",
+              "raw_price_text": "140.000 TL",
+              "price_min": 70000.0,
+              "price_max": 140000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Saç ektirme ameliyatı kaç TL? | FUE yöntemine kıyasla doğrudan ve tıraşsız saç ekimi olarak da bilinen bu yöntem daha pahalıdır. Ancak genel olarak, 3000 ila 3500 greftlik bir saç ekimi işlemi için 70.000 ila 140.000 TL arasında bir fiyat aralığı var. Fakat kliniğimizde saç ekimi için genel fiyatlama kişisel duruma göre değişmektedir. Bu fiyat aralığı gerçeği yansıtmayabilir. Net fiyat için sayfanın üzerinde bulunan formu doldurabilir ya da herhangi iletişim kanallarından birini kullanarak alanında uzman temsilcilerimize ulaşabilirisiniz.",
+              "source_url": "https://www.dokuclinic.com/sac-ekimi",
+              "extraction_method": "parent_2"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "comparative_market_article",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Doku Clinic gibi güvenilir bir saç ekimi kliniğinde 5000 greft saç ekimi operasyonunun",
+              "raw_price_text": "140,000 TL",
+              "price_min": 70000.0,
+              "price_max": 140000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "5000 greft saç ekimi fiyatı ne kadar? | Doku Clinic gibi güvenilir bir saç ekimi kliniğinde 5000 greft saç ekimi operasyonunun fiyatı 70,000 – 140,000 TL civarındadır.",
+              "source_url": "https://www.dokuclinic.com/sac-ekimi",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "comparative_market_article",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "3000 adet saç ekimi ne kadar? 2026 yılında 3000 greft saç nakli",
+              "raw_price_text": "35.000 TL",
+              "price_min": 35000.0,
+              "price_max": 70000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Saç ektirme fiyatları kaç TL? | 3000 adet saç ekimi ne kadar? 2026 yılında 3000 greft saç nakli fiyatı ortalama 35.000 TL ile 70.000 TL arasında değişmektedir. Bu fiyat aralığı, kullanılan teknik (FUE, DHI), kliniğin konumu, doktorun deneyimi ve sunulan ek hizmetlere göre farklılık gösterir. Bazı merkezler paket fiyatlara konaklama, transfer ve ilaç giderlerini de dahil etmektedir. DHI yöntemi genellikle FUE’ye göre daha maliyetli olabilir. İstanbul dışındaki illerde fiyatlar daha uygun olabilirken, ünlü kliniklerde bu rakamlar artabilir. En sağlıklı fiyat bilgisi, ön muayene sonrası kişisel değerlendirme ile alınabilir. Saç yoğunluğu ve beklentiler fiyatı etkileyen temel faktörlerdendir.",
+              "source_url": "https://www.dokuclinic.com/sac-ekimi",
+              "extraction_method": "parent_3"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "comparative_market_article",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Hair Transplant",
+              "raw_price_text": "35.000 TL",
+              "price_min": 35000.0,
+              "price_max": null,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "promo",
+              "original_price_min": 150000.0,
+              "original_price_max": null,
+              "raw_evidence": "arası olabiliyor. Daha düşük greft sayısında (örneğin 1000–2000 greft) fiyatlar daha makul seviyelerde olabilir. Net ücret için seçtiğiniz klinikten muayene sonrası teklif almak en doğru yaklaşımdır. 3000 adet saç ekimi ne kadar? 2026 yılında 3000 greft saç nakli fiyatı ortalama 35.000 TL ile 70.000 TL arasında değişmektedir. Bu fiyat aralığı, kullanılan teknik (FUE, DHI), kliniğin konumu, doktorun deneyimi ve sunulan ek hizmetlere göre farklılık gösterir. Bazı merkezler paket fiyatlara konaklama, transfer ve ilaç giderlerini de dahil etmektedir. DHI yöntemi genellikle FUE’ye göre daha maliyetli olabilir. İstanbul dışındaki illerde fiyatlar daha uygun olabilirken, ünlü kliniklerde bu rakamlar artabilir. En sağlıklı fiyat bilgisi, ön muayene sonrası kişisel değerlendirme ile alınabilir. Saç yoğunluğu ve beklentiler fiyatı etkileyen temel faktörlerdendir.",
+              "source_url": "https://www.dokuclinic.com/sac-ekimi",
+              "extraction_method": "parent_4"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "comparative_market_article",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Saç ekimi",
+              "raw_price_text": "30.000 TL",
+              "price_min": 30000.0,
+              "price_max": 120000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Saç ekimi fiyatları 2026’te ortalama 30.000 TL ile 120.000 TL arasında değişmektedir.",
+              "source_url": "https://www.dokuclinic.com/sac-ekimi",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "comparative_market_article",
+            "evidence_type": "official_article"
+          }
+        ]
+      },
+      {
+        "source_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+        "procedure": "chemical_peel",
+        "fetch_status": 200,
+        "body_sha256": "1f1f420d9114449c83efc931a3be96471f0d3a835d919f13793c3635f5e4aa90",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "$2200",
+              "price_min": 2200.0,
+              "price_max": null,
+              "currency": "USD",
+              "unit": "procedure",
+              "qualifier": "exact",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Chemical Peel: $2200",
+              "source_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+              "extraction_method": "scoped_tariff_table_row"
+            },
+            "accepted": true,
+            "clinic_owned": false,
+            "accepted_for_display": true,
+            "literal_price_supported": true,
+            "confidence": 0.9,
+            "rejection_reason": "",
+            "evidence_type": "marketplace_service_menu"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "$2200",
+              "price_min": 2200.0,
+              "price_max": null,
+              "currency": "USD",
+              "unit": "procedure",
+              "qualifier": "exact",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Chemical Peel $2200",
+              "source_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+              "extraction_method": "table_row"
+            },
+            "accepted": true,
+            "clinic_owned": false,
+            "accepted_for_display": true,
+            "literal_price_supported": true,
+            "confidence": 0.9,
+            "rejection_reason": "",
+            "evidence_type": "marketplace_service_menu"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "$2200",
+              "price_min": 2200.0,
+              "price_max": null,
+              "currency": "USD",
+              "unit": "session",
+              "qualifier": "exact",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "treatment Price Chemical Peel $2200 Brow lift Price on request Scar revision Price on request Acne Laser Treatment (per session) Price on request Laser vaginal rejuvenation Price on request Hair mesotherapy Price on request Show more",
+              "source_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+              "extraction_method": "semantic_block"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "nonfacial_tariff_scope",
+            "evidence_type": "marketplace_service_menu"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "The chemical peel at Quartz Hospital in Istanbul, Turkey may",
+              "raw_price_text": "$2,400",
+              "price_min": 2400.0,
+              "price_max": null,
+              "currency": "USD",
+              "unit": "procedure",
+              "qualifier": "approximate",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "About the clinic | The chemical peel at Quartz Hospital in Istanbul, Turkey may cost around $2,400 for the medical-grade",
+              "source_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.2,
+            "rejection_reason": "market_context",
+            "evidence_type": "marketplace_profile"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "$2200",
+              "price_min": 2200.0,
+              "price_max": null,
+              "currency": "USD",
+              "unit": "procedure",
+              "qualifier": "exact",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Treatments prices in the clinic | Chemical Peel $2200",
+              "source_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+              "extraction_method": "parent_2"
+            },
+            "accepted": true,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.76,
+            "rejection_reason": "",
+            "evidence_type": "marketplace_profile"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "$2200",
+              "price_min": 2200.0,
+              "price_max": null,
+              "currency": "USD",
+              "unit": "session",
+              "qualifier": "exact",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Treatments prices in the clinic | treatment Price Chemical Peel $2200 Brow lift Price on request Scar revision Price on request Acne Laser Treatment (per session) Price on request Laser vaginal rejuvenation Price on request Hair mesotherapy Price on request",
+              "source_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+              "extraction_method": "parent_3"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "nonfacial_tariff_scope",
+            "evidence_type": "marketplace_profile"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "$2,400",
+              "price_min": 2400.0,
+              "price_max": null,
+              "currency": "USD",
+              "unit": "procedure",
+              "qualifier": "approximate",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "call en en ru ar ua kz jp it es id pt de fr pl AU Patient Safety Legal Documents Treatment abroad See all countries treatment\n in\n            Turkey treatment\n in\n            Istanbul Quartz Hospital Show all photos Overview Prices Doctors Certificates reviews Video testimonials Location Turkey, Istanbul Chemical Peel in Quartz Hospital 4.7 159 reviews Doctor\n          4.7 Facilities\n          4.8 Staff\n          4.7 Language assistance\n          4.6 Support\n          4.8 1847\n                  patients chose clinic for Aesthetic Medicine and Cosmetology 88% Patients recommended this clinic Nur Afsar Leading doctor for Aesthetic Medicine and Cosmetology 7 years of experience Top Doctor About the clinic The chemical peel at Quartz Hospital in Istanbul, Turkey may cost around $2,400 for the medical-grade",
+              "source_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+              "extraction_method": "page_window"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "weak_marketplace_price_binding",
+            "evidence_type": "marketplace_profile"
+          }
+        ]
+      },
+      {
+        "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+        "procedure": "chemical_peel",
+        "fetch_status": 200,
+        "body_sha256": "cdff4cf7f9093876390339c7b2a1953525883b7060c8dd127825485371f62434",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "$150",
+              "price_min": 150.0,
+              "price_max": 300.0,
+              "currency": "USD",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Chemical Peel: $150 - $300",
+              "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+              "extraction_method": "scoped_tariff_table_row"
+            },
+            "accepted": true,
+            "clinic_owned": false,
+            "accepted_for_display": true,
+            "literal_price_supported": true,
+            "confidence": 0.9,
+            "rejection_reason": "",
+            "evidence_type": "marketplace_service_menu"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "$150",
+              "price_min": 150.0,
+              "price_max": 300.0,
+              "currency": "USD",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Chemical Peel $150 - $300",
+              "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+              "extraction_method": "table_row"
+            },
+            "accepted": true,
+            "clinic_owned": false,
+            "accepted_for_display": true,
+            "literal_price_supported": true,
+            "confidence": 0.9,
+            "rejection_reason": "",
+            "evidence_type": "marketplace_service_menu"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "$150",
+              "price_min": 150.0,
+              "price_max": 300.0,
+              "currency": "USD",
+              "unit": "session",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "treatment Price Chemical Peel $150 - $300 Botox injections Price on request Brow lift Price on request Laser scar removal Price on request Scar revision Price on request Acne Laser Treatment (per session) Price on request Show more",
+              "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+              "extraction_method": "semantic_block"
+            },
+            "accepted": true,
+            "clinic_owned": false,
+            "accepted_for_display": true,
+            "literal_price_supported": true,
+            "confidence": 0.9,
+            "rejection_reason": "",
+            "evidence_type": "marketplace_service_menu"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "A chemical peel at Memorial Bahçelievler Hospital in Istanbul, Turkey may",
+              "raw_price_text": "€150",
+              "price_min": 150.0,
+              "price_max": null,
+              "currency": "EUR",
+              "unit": "session",
+              "qualifier": "approximate",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "About the clinic | A chemical peel at Memorial Bahçelievler Hospital in Istanbul, Turkey may cost around €150 per session. The JCI-accredited clinic offers this procedure with Dr. Atilla Adnan Eyuboglu, a plastic surgeon with 17 years of experience and 900+ procedures performed.",
+              "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.2,
+            "rejection_reason": "market_context",
+            "evidence_type": "marketplace_profile"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "A chemical peel at Memorial Bahçelievler Hospital in Istanbul, Turkey may",
+              "raw_price_text": "€150",
+              "price_min": 150.0,
+              "price_max": null,
+              "currency": "EUR",
+              "unit": "session",
+              "qualifier": "approximate",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "About the clinic | A chemical peel at Memorial Bahçelievler Hospital in Istanbul, Turkey may cost around €150 per session. The JCI-accredited clinic offers this procedure with Dr. Atilla Adnan Eyuboglu, a plastic surgeon with 17 years of experience and 900+ procedures performed. About the Procedure A chemical peel removes damaged outer skin layers. It helps improve skin texture and appearance. The hospital offers standard peels and deep phenol peels for more significant results. Treatment Details The procedure requires one outpatient session with no hospital stay. Patients receive: Chemical peel treatment Plastic surgery consultation Medical interpreter support Doctor Profile Dr. Eyuboglu specializes in plastic and facial surgery. As an ISAPS member, he follows international standards. His experience includes treating sensitive skin conditions. Clinic Advantages The eco-friendly hospital holds JCI and ISO certifications. It maintains a 4.6-4.7 patient rating from 130+ reviews. Additional specialists are available for comprehensive care. Results vary by individual, but most patients see improvement after one session. Contact the clinic for personalized treatment options.",
+              "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+              "extraction_method": "parent_2"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.2,
+            "rejection_reason": "market_context",
+            "evidence_type": "marketplace_profile"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "$150",
+              "price_min": 150.0,
+              "price_max": 300.0,
+              "currency": "USD",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Treatments prices in the clinic | Chemical Peel $150 - $300",
+              "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+              "extraction_method": "parent_2"
+            },
+            "accepted": true,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.76,
+            "rejection_reason": "",
+            "evidence_type": "marketplace_profile"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "$150",
+              "price_min": 150.0,
+              "price_max": 300.0,
+              "currency": "USD",
+              "unit": "session",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Treatments prices in the clinic | treatment Price Chemical Peel $150 - $300 Botox injections Price on request Brow lift Price on request Laser scar removal Price on request Scar revision Price on request Acne Laser Treatment (per session) Price on request",
+              "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+              "extraction_method": "parent_3"
+            },
+            "accepted": true,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.76,
+            "rejection_reason": "",
+            "evidence_type": "marketplace_profile"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "€150",
+              "price_min": 150.0,
+              "price_max": null,
+              "currency": "EUR",
+              "unit": "session",
+              "qualifier": "approximate",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "a kz jp it es id pt de fr pl AU Patient Safety Legal Documents Treatment abroad See all countries treatment\n in\n            Turkey treatment\n in\n            Istanbul Memorial Bahçelievler Hospital Show all photos Overview Prices Doctors Before & after photos Certificates reviews Location Turkey, Istanbul Chemical Peel in Memorial Bahçelievler Hospital 4.7 Top Clinic Most Popular Clinic for Chemical Peel 161 reviews Most Popular Clinic for Chemical Peel 238\n                  patients chose clinic for Aesthetic Medicine and Cosmetology 91% Patients recommended this clinic Direct Price Guarantee The medical center is a Bookimed Official Partner. Thus, we arrange treatment for international patients as a hospital representative with no intermediaries and extra charges. About the clinic A chemical peel at Memorial Bahçelievler Hospital in Istanbul, Turkey may cost around €150 per session. The JCI-accredited clinic offers this procedure with Dr. Atilla Adnan Eyuboglu, a plastic surgeon with",
+              "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+              "extraction_method": "page_window"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "weak_marketplace_price_binding",
+            "evidence_type": "marketplace_service_menu"
+          }
+        ]
+      },
+      {
+        "source_url": "https://pendikyuzyilhastanesi.com/kimyasal-peeling/",
+        "procedure": "chemical_peel",
+        "fetch_status": 200,
+        "body_sha256": "d32966953d9b38590101e509a97fcd786655aed9143a72c50d67cbe3448d3272",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "2.000 TL",
+              "price_min": 2000.0,
+              "price_max": 8000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Kimyasal Peeling Ne Zaman Etkisini Gösterir? Yenilenme sürecini destekleyen kimyasal peeling uygulamasının etkileri genellikle işlem sonrasında birkaç gün içinde fark edilmeye başlayabilir. Uygulama sonrasında yüzeyde hafif soyulma meydana gelebilir. Bu süreç tamamlandığında daha taze ve parlak bir görünüm ortaya çıkabilir. İlk uygulamadan sonra kimyasal peeling etkisi genellikle bir hafta içinde daha belirgin hale gelebilir. Planlanan seanslar tamamlandıkça kimyasal peeling uygulamasının sağladığı sonuçlar daha net şekilde görülebilir. Elde edilen sonuçların kalıcılığı kişinin cilt yapısına ve bakım rutinine bağlı olarak değişebilir. Kimyasal Peeling Tedavisi Fiyatları 2026 Ortalama olarak kimyasal peeling tedavisi fiyatları 2026 yılında 2.000 TL ile 8.000 TL arasında değişebilmektedir. Sık Sorulan Sorular",
+              "source_url": "https://pendikyuzyilhastanesi.com/kimyasal-peeling/",
+              "extraction_method": "heading_siblings"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_treatment_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Ortalama olarak kimyasal peeling tedavisi",
+              "raw_price_text": "2.000 TL",
+              "price_min": 2000.0,
+              "price_max": 8000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Ortalama olarak kimyasal peeling tedavisi fiyatları 2026 yılında 2.000 TL ile 8.000 TL arasında değişebilmektedir.",
+              "source_url": "https://pendikyuzyilhastanesi.com/kimyasal-peeling/",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_page"
+          }
+        ]
+      },
+      {
+        "source_url": "https://dogahospital.com/tibbi-birimler/burun-estetigi-rinoplasti-tedavisi/",
+        "procedure": "rhinoplasty",
+        "fetch_status": 200,
+        "body_sha256": "de356f142cc7ba8cb7d62ae23b479978483116ba0dba4b2c5ef0596a6ffe933f",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "₺ 90.000",
+              "price_min": 90000.0,
+              "price_max": 180000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Kapalı rinoplasti ~135.000 ₺ 90.000 – 180.000 ₺ İz bırakmayan, basit–orta vakalar",
+              "source_url": "https://dogahospital.com/tibbi-birimler/burun-estetigi-rinoplasti-tedavisi/",
+              "extraction_method": "table_row"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "page_disclaims_clinic_prices",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "₺ 100.000",
+              "price_min": 100000.0,
+              "price_max": 220000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Açık rinoplasti (primer) ~160.000 ₺ 100.000 – 220.000 ₺ Orta–kompleks vakalar",
+              "source_url": "https://dogahospital.com/tibbi-birimler/burun-estetigi-rinoplasti-tedavisi/",
+              "extraction_method": "table_row"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "page_disclaims_clinic_prices",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "₺ 130.000",
+              "price_min": 130000.0,
+              "price_max": 280000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Piezo / ultrasonik rinoplasti ~200.000 ₺ 130.000 – 280.000 ₺ Hassas kemik şekillendirme",
+              "source_url": "https://dogahospital.com/tibbi-birimler/burun-estetigi-rinoplasti-tedavisi/",
+              "extraction_method": "table_row"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "page_disclaims_clinic_prices",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "160.000₺",
+              "price_min": 160000.0,
+              "price_max": null,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "exact",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Burun Estetiği & Rinoplasti Fiyatları 2026 | Primer Rinoplasti ~160.000₺ Ortalama (ilk ameliyat)",
+              "source_url": "https://dogahospital.com/tibbi-birimler/burun-estetigi-rinoplasti-tedavisi/",
+              "extraction_method": "parent_2"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "page_disclaims_clinic_prices",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "₺ 90.000",
+              "price_min": 90000.0,
+              "price_max": 180000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Tekniğe Göre Burun Estetiği Fiyatları (2026) | Kapalı rinoplasti ~135.000 ₺ 90.000 – 180.000 ₺ İz bırakmayan, basit–orta vakalar",
+              "source_url": "https://dogahospital.com/tibbi-birimler/burun-estetigi-rinoplasti-tedavisi/",
+              "extraction_method": "parent_2"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "page_disclaims_clinic_prices",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "₺ 100.000",
+              "price_min": 100000.0,
+              "price_max": 220000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Tekniğe Göre Burun Estetiği Fiyatları (2026) | Açık rinoplasti (primer) ~160.000 ₺ 100.000 – 220.000 ₺ Orta–kompleks vakalar",
+              "source_url": "https://dogahospital.com/tibbi-birimler/burun-estetigi-rinoplasti-tedavisi/",
+              "extraction_method": "parent_2"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "page_disclaims_clinic_prices",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "₺ 130.000",
+              "price_min": 130000.0,
+              "price_max": 280000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Tekniğe Göre Burun Estetiği Fiyatları (2026) | Piezo / ultrasonik rinoplasti ~200.000 ₺ 130.000 – 280.000 ₺ Hassas kemik şekillendirme",
+              "source_url": "https://dogahospital.com/tibbi-birimler/burun-estetigi-rinoplasti-tedavisi/",
+              "extraction_method": "parent_2"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "page_disclaims_clinic_prices",
+            "evidence_type": "official_article"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "160.000 ₺",
+              "price_min": 160000.0,
+              "price_max": null,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "exact",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": ", primer (ilk) rinoplasti ~160.000 ₺, piezo/ultrasonik rinoplasti ~",
+              "source_url": "https://dogahospital.com/tibbi-birimler/burun-estetigi-rinoplasti-tedavisi/",
+              "extraction_method": "parent_2"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.1,
+            "rejection_reason": "page_disclaims_clinic_prices",
+            "evidence_type": "official_article"
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.hayatikale.com/burun-estetigi-fiyatlari/",
+        "procedure": "rhinoplasty",
+        "fetch_status": 200,
+        "body_sha256": "0ce32ef8f8bbd149ca19ea3f807f39857be35faf891db497ad7367a0aa8e2923",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "TL 330.000",
+              "price_min": 330000.0,
+              "price_max": null,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "exact",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "İstanbul ‘ da Burun Estetiği 2026 Fiyatları Ne Kadar? Burun estetiği, estetik görünümün yanı sıra fonksiyonel sorunların da giderilmesini sağlar. Türkiye’nin farklı şehirlerinde uygulanan burun ameliyatı fiyatları; doktorun tecrübesi, kullanılan teknikler ve hastanenin donanımına göre değişiklik gösterebilir. Aşağıdaki tabloda 2026 yılı için şehir bazlı güncellenmiş fiyat aralıklarını inceleyebilirsiniz. Şehirlere Göre 2026 Güncel Burun Estetiği Fiyatları Şehir Taban Fiyat Tavan Fiyat İstanbul 65.000 TL 330.000 TL Ankara 55.000",
+              "source_url": "https://www.hayatikale.com/burun-estetigi-fiyatlari/",
+              "extraction_method": "heading_siblings"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_treatment_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "70.000 TL",
+              "price_min": 70000.0,
+              "price_max": 350000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "2026 yılında İstanbul burun estetiği fiyatları , 70.000 TL ile 350.000 TL arasında değişiklik gösteriyor ve bu fiyatlar, hastanın ihtiyacına göre kişiselleştiriliyor.",
+              "source_url": "https://www.hayatikale.com/burun-estetigi-fiyatlari/",
+              "extraction_method": "heading_siblings"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_treatment_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "70.000 TL",
+              "price_min": 70000.0,
+              "price_max": 350000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Şehirlere Göre 2026 Güncel Burun Estetiği Fiyatları | 2026 yılında İstanbul burun estetiği fiyatları , 70.000 TL ile 350.000 TL arasında değişiklik gösteriyor ve bu fiyatlar, hastanın ihtiyacına göre kişiselleştiriliyor.",
+              "source_url": "https://www.hayatikale.com/burun-estetigi-fiyatlari/",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Rhinoplasty",
+              "raw_price_text": "70.000 TL",
+              "price_min": 70000.0,
+              "price_max": 350000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Şehirlere Göre 2026 Güncel Burun Estetiği Fiyatları | 2026 yılında İstanbul burun estetiği fiyatları , 70.000 TL ile 350.000 TL arasında değişiklik gösteriyor ve bu fiyatlar, hastanın ihtiyacına göre kişiselleştiriliyor. Dr. Hayati Kale, her hastasına özel bir tedavi planı oluşturarak, en uygun teknikleri ve modern yöntemleri kullanır. Böylece sadece estetik olarak değil, aynı zamanda işlevsel anlamda da tatmin edici sonuçlar elde edersiniz.",
+              "source_url": "https://www.hayatikale.com/burun-estetigi-fiyatlari/",
+              "extraction_method": "parent_2"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_page"
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/istanbul-fit-center",
+        "procedure": "chemical_peel",
+        "fetch_status": 200,
+        "body_sha256": "8dcc31651ba63767ceef3418b8b87e25f08e8836d32ff0c3b3df718cfd1cfadf",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Cellulite Treatment (1 hour) Chemical Peel",
+              "raw_price_text": "11 €",
+              "price_min": 11.0,
+              "price_max": 18.0,
+              "currency": "EUR",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Cellulite Treatment (1 hour) Chemical Peel 11 € - 18 € Lip Augmentation (1 hour) 4 € - 5 € IPL Skin Rejuvenation (1 hour) Laser Hair Removal",
+              "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/istanbul-fit-center",
+              "extraction_method": "parent_4"
+            },
+            "accepted": true,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.76,
+            "rejection_reason": "",
+            "evidence_type": "marketplace_profile"
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/sariyer/dr-siyamek-saleki-esthetics",
+        "procedure": "chemical_peel",
+        "fetch_status": 200,
+        "body_sha256": "0707b0ab3ec66c0945195d6d5702612debafd6630f4935d3fb0767f0e9ffad79",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "800 €",
+              "price_min": 800.0,
+              "price_max": 900.0,
+              "currency": "EUR",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Chemical Peel 800 € - 900 €",
+              "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/sariyer/dr-siyamek-saleki-esthetics",
+              "extraction_method": "whatclinic_service_pair"
+            },
+            "accepted": true,
+            "clinic_owned": false,
+            "accepted_for_display": true,
+            "literal_price_supported": true,
+            "confidence": 0.9,
+            "rejection_reason": "",
+            "evidence_type": "marketplace_service_menu"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "800 €",
+              "price_min": 800.0,
+              "price_max": 900.0,
+              "currency": "EUR",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Popular Treatments: | Chemical Peel 800 € - 900 €",
+              "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/sariyer/dr-siyamek-saleki-esthetics",
+              "extraction_method": "parent_2"
+            },
+            "accepted": true,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.76,
+            "rejection_reason": "",
+            "evidence_type": "marketplace_profile"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Chemical Peel",
+              "raw_price_text": "800 €",
+              "price_min": 800.0,
+              "price_max": 900.0,
+              "currency": "EUR",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Chemical Peel 800 € - 900 € Mesotherapy",
+              "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/sariyer/dr-siyamek-saleki-esthetics",
+              "extraction_method": "parent_3"
+            },
+            "accepted": true,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.76,
+            "rejection_reason": "",
+            "evidence_type": "marketplace_profile"
+          }
+        ]
+      },
+      {
+        "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/istanbul-province/istanbul/besiktas/yurdakul-ilker-manavbasi",
+        "procedure": "chemical_peel",
+        "fetch_status": 200,
+        "body_sha256": "78391a23795ba0986596847e42896f1f8f2603a764a4066e5217ae431acf6380",
+        "rows": []
+      },
+      {
+        "source_url": "https://www.drseymademirci.com/kimyasal-peeling-tedavisi/",
+        "procedure": "chemical_peel",
+        "fetch_status": 200,
+        "body_sha256": "708ce99b485b115c56aadff4089fbc2afeb8df0d7cfb2489110d4f032fcdae88",
+        "rows": [
+          {
+            "evidence": {
+              "raw_procedure_text": "Kimyasal Peeling",
+              "raw_price_text": "1.500 TL",
+              "price_min": 1500.0,
+              "price_max": 6000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Kimyasal Peeling Fiyatları 2026 Kimyasal peeling fiyatları 2026 yılında kullanılan asit türüne, seans sayısına ve uygulama bölgesine göre değişir. Yüzeyel peelingler daha ekonomik iken, TCA veya derin peeling uygulamaları daha yüksek fiyatlı olabilir. Ortalama fiyat aralığı 1.500 TL ile 6.000 TL arasında değişebilir. Net ücret belirlemek için cildin durumunu değerlendirmek gerekir. Kişiye özel planlama sonrası bizlerden fiyat alınız, en uygun bakım protokolünü hazırlayarak profesyonel şekilde hizmet veriyoruz. Kimyasal peeling, cilt yenileme sürecini hızlandıran, lekeleri hafifleten ve daha canlı bir cilt dokusu oluşturan etkili bir uygulamadır. Doğru planlama ve düzenli seanslarla uzun süreli ve güçlü sonuçlar elde ediyoruz.",
+              "source_url": "https://www.drseymademirci.com/kimyasal-peeling-tedavisi/",
+              "extraction_method": "heading_siblings"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_treatment_page"
+          },
+          {
+            "evidence": {
+              "raw_procedure_text": "Kimyasal peeling",
+              "raw_price_text": "1.500 TL",
+              "price_min": 1500.0,
+              "price_max": 6000.0,
+              "currency": "TRY",
+              "unit": "procedure",
+              "qualifier": "range",
+              "original_price_min": null,
+              "original_price_max": null,
+              "raw_evidence": "Kimyasal peeling fiyatları 2026 yılında kullanılan asit türüne, seans sayısına ve uygulama bölgesine göre değişir. Yüzeyel peelingler daha ekonomik iken, TCA veya derin peeling uygulamaları daha yüksek fiyatlı olabilir. Ortalama fiyat aralığı 1.500 TL ile 6.000 TL arasında değişebilir. Net ücret belirlemek için cildin durumunu değerlendirmek gerekir. Kişiye özel planlama sonrası bizlerden fiyat alınız, en uygun bakım protokolünü hazırlayarak profesyonel şekilde hizmet veriyoruz.",
+              "source_url": "https://www.drseymademirci.com/kimyasal-peeling-tedavisi/",
+              "extraction_method": "parent_1"
+            },
+            "accepted": false,
+            "clinic_owned": false,
+            "accepted_for_display": false,
+            "literal_price_supported": true,
+            "confidence": 0.15,
+            "rejection_reason": "generic_multi_clinic_price",
+            "evidence_type": "official_page"
+          }
+        ]
+      }
+    ]
+  },
+  "coverage_notes": [
+    "Bookimed and WhatClinic individual-provider menus are usable; category pages remain discovery leads.",
+    "Bookimed generated estimate paragraphs conflicted with price tables and were rejected.",
+    "An inspected Bookimed rhinoplasty category route returned HTTP 410; fallback searches do not hardcode that route.",
+    "Initial proxy denials were superseded by successful live rechecks of Doğa, Hayati, Pendik, Şeyma and WhatClinic.",
+    "This audit confirms literal published statements on inspected pages; it is not a provider-confirmed personal quote or a guarantee for all Istanbul clinics.",
+    "Google AI overview screenshots were not used as primary fee evidence."
+  ]
+}

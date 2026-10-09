@@ -22,7 +22,8 @@ import 'explore_price_binding.dart';
 /// e22: preserve owned tariffs beside dosage averages and multilingual offers.
 /// e23: bind current tariffs to their scope; exclude finance, combinations and market disclaimers.
 /// e24: retain marketplace technique; reject hair Botox, topical and needleless fillers.
-const kExplorePriceExtractRevision = 'e24';
+/// e25: revalidate informational average tables and literal range endpoints.
+const kExplorePriceExtractRevision = 'e25';
 
 /// Hard gate: a number from clinic HTML is not a procedure price until this
 /// passes. AI must never invent a replacement amount.

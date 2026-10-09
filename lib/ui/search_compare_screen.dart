@@ -322,7 +322,6 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     if (_pill != pill) return;
     final note = _openAI.backgroundHuntNote.value;
     if (note == null || note.city != _city || note.pill != pill) return;
-    ExploreDiscoveryJob? jobState;
     final startedAt = _backgroundPollStartedAt;
     if (startedAt != null &&
         DateTime.now().difference(startedAt) > const Duration(minutes: 11)) {
@@ -363,7 +362,26 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
         _scheduleBackgroundPoll(pill);
         return;
       }
-      jobState = state;
+      // The terminal job already supplied its final verified rows. Starting
+      // buildComparison here can launch another hunt and keep three-card
+      // results in a perpetual "Checking more" state after a failure.
+      _backgroundPoll?.cancel();
+      _backgroundPollStartedAt = null;
+      _openAI.backgroundHuntNote.value = ExploreBackgroundHunt(
+        city: _city,
+        pill: pill,
+        message: state.message,
+      );
+      setState(() {
+        _isMapLoading = false;
+        _isLoadingMoreClinics = false;
+      });
+      final completedComparison = _comparison;
+      if (completedComparison != null && completedComparison.clinics.isNotEmpty) {
+        _storePillComparison(pill, completedComparison);
+        _kickRatingBackfill(pill: pill, shown: completedComparison);
+      }
+      return;
     }
     final selection = explorePillAiSearchQuery(pill);
     final res = await _openAI.buildComparison(
@@ -384,9 +402,7 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     _openAI.backgroundHuntNote.value = ExploreBackgroundHunt(
       city: _city,
       pill: pill,
-      message: jobState?.status == 'failed'
-          ? 'Search could not finish. Try Find more clinics again.'
-          : shown == 0
+      message: shown == 0
           ? 'No verified public prices found yet.'
           : shown < kExploreCompareMaxClinics
           ? 'Search finished. No more verified public prices found this time.'
