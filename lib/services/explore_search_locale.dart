@@ -1500,7 +1500,7 @@ bool exploreMarketplaceLocationStronglyMatches({
     return false;
   }
 
-  final blob = '$placeAddress $sourceUrl $pageText'.toLowerCase();
+  final blob = '${explorePlacesAddressLocalityText(placeAddress)} $sourceUrl $pageText'.toLowerCase();
   final cityLo = c.toLowerCase();
   final tokens = cityLo
       .split(RegExp(r'[^a-z0-9\u0600-\u06ff]+'))
@@ -1520,13 +1520,27 @@ bool exploreMarketplaceLocationStronglyMatches({
   return false;
 }
 
+/// Keep locality evidence without mistaking a city-named street for a city.
+String explorePlacesAddressLocalityText(String address) {
+  final parts = address.split(',');
+  if (parts.length < 2) return address;
+  final first = foldExploreCityText(parts.first).trim();
+  // City-named streets are not the address locality ("C. de Murcia" in
+  // Madrid, "London Road" in Dubai). Retain district, postal city and country.
+  if (RegExp(r'^(?:\d+\s|c\s*[./]|calle\b|avenida\b|av\.|paseo\b|plaza\b|'
+      r'rue\b|boulevard\b|via\b|viale\b|strada\b|street\b)|'
+      r'\b(?:road|street|avenue|boulevard|lane)\s*$', caseSensitive: false)
+      .hasMatch(first)) return parts.skip(1).join(',');
+  return address;
+}
+
 /// Maps address is in Dubai while Compare is searching Abu Dhabi.
 bool explorePlacesAddressConflictsWithSearchCity(String address, String city) {
   final searchKey = _explorePeerCityKey(city);
   if (searchKey == null || address.trim().isEmpty) return false;
   for (final peer in _kExplorePeerCityMarks) {
     if (peer.key == searchKey) continue;
-    if (_blobMentionsCityKey(address, peer.key)) return true;
+    if (_blobMentionsCityKey(explorePlacesAddressLocalityText(address), peer.key)) return true;
   }
   return false;
 }

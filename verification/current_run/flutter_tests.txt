@@ -1,7 +1,7 @@
 00:00 +0: loading /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart
-00:00 +0: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
-00:00 +1: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
-00:00 +2: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
+00:00 +0: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:00 +1: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:00 +2: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
 00:01 +2: /workspace/ae-journey/test/explore_injectable_cached_eligibility_test.dart: mixed skin-booster and neurotoxin quote selection takes a standalone quote from a mixed service menu
 [PRICE REJECT]
 reason=mixed_service_bundle
@@ -17,76 +17,62 @@ extractionMethod=html_table
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Neuromoduladores 1 zona"
 [GP MATCH] "Neuromoduladores 1 zona" → botox/botox
 [GP PRICE] PICK · "Neuromoduladores 1 zona" · 180 EUR · html_table · https://clinic.example/precios
-00:01 +3: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
-00:01 +4: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
+00:01 +3: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:01 +4: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
 00:01 +4: /workspace/ae-journey/test/explore_injectable_cached_eligibility_test.dart: surgical chin does not become injectable filler legitimate HA chin filler survives at any supported clinic price
 [GP MATCH] "Chin filler" → filler/filler
 [GP MATCH] "Chin filler ácido hialurónico" → filler/filler
-00:01 +4: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
-[PILL CANCEL] Botox · Madrid
-[GP] Live search focus: Botox · Madrid
-[GP] Compare timing: Botox · Madrid · source=memory-verified · 1884ms
-00:01 +4: /workspace/ae-journey/test/explore_injectable_cached_eligibility_test.dart: surgical chin does not become injectable filler legitimate HA chin filler survives at any supported clinic price
 [GP MATCH] "Mentoplastia no quirúrgica con ácido hialurónico" → filler/filler
-00:01 +5: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
-00:01 +6: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
+00:01 +5: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:01 +6: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
 00:01 +6: /workspace/ae-journey/test/explore_injectable_cached_eligibility_test.dart: surgical chin does not become injectable filler selection retains the actual injectable quote beside chin surgery
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Chin filler ácido hialurónico"
 [GP MATCH] "Chin filler ácido hialurónico" → filler/filler
 [GP PRICE] PICK · "Chin filler ácido hialurónico" · 350 EUR · html_table · https://clinic.example/precios
-00:02 +7: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
-[PILL CANCEL] Fillers · Madrid
-[GP] Live search focus: Fillers · Madrid
-[GP] Compare timing: Fillers · Madrid · source=memory-verified · 405ms
-[PILL CANCEL] Botox · Madrid
-[GP] Live search focus: Botox · Madrid
-[GP] Compare timing: Botox · Madrid · source=memory-verified · 0ms
-Three verified tab restores: 2314ms
-[GP] Compare timing: Botox · Madrid · source=memory-verified · 175ms
-00:02 +8: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: rating backfill without Places configuration performs no I/O
-00:02 +9: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: approximate source quotes retain uncertainty and both range bounds
-00:02 +10: /workspace/ae-journey/test/explore_quote_restrictions_test.dart: credit ceilings reject while owned treatment fees remain valid
-00:03 +11: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: Python approximate qualifier reaches the card and map intact
-00:03 +12: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: Python approximate qualifier reaches the card and map intact
-00:03 +13: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: Python approximate qualifier reaches the card and map intact
-00:04 +13: /workspace/ae-journey/test/explore_quote_restrictions_test.dart: current 1-vial tariff survives old and 2-vial price columns
+00:01 +7: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:03 +8: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:03 +9: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:03 +10: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:04 +10: /workspace/ae-journey/test/explore_quote_restrictions_test.dart: current 1-vial tariff survives old and 2-vial price columns
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Relleno de labios ácido hialurónico · 1 VIAL"
 [GP MATCH] "Relleno de labios ácido hialurónico · 1 VIAL" → filler/lip_filler
-00:04 +14: /workspace/ae-journey/test/explore_quote_restrictions_test.dart: current 1-vial tariff survives old and 2-vial price columns
 [GP PRICE] PICK · "Relleno de labios ácido hialurónico · 1 VIAL" · 330 EUR · html_table · https://clinic.example/precios
-00:05 +15: /workspace/ae-journey/test/explore_quote_restrictions_test.dart: explicit non-clinic disclaimer blocks official URL and own fragments
-00:05 +16: /workspace/ae-journey/test/explore_quote_restrictions_test.dart: locked semantics preserve approximate price and ignore duration
-00:05 +17: /workspace/ae-journey/test/explore_rhinoplasty_variant_eligibility_test.dart: general rhinoplasty cannot borrow reconstructive or functional fees
-00:05 +18: /workspace/ae-journey/test/explore_rhinoplasty_variant_eligibility_test.dart: requested subtype remains eligible for its own quote
-00:06 +19: /workspace/ae-journey/test/explore_rhinoplasty_variant_eligibility_test.dart: requested subtype remains eligible for its own quote
-00:06 +20: /workspace/ae-journey/test/explore_rhinoplasty_variant_eligibility_test.dart: requested subtype remains eligible for its own quote
-00:06 +21: /workspace/ae-journey/test/explore_rhinoplasty_variant_eligibility_test.dart: requested subtype remains eligible for its own quote
-00:06 +22: /workspace/ae-journey/test/explore_rhinoplasty_variant_eligibility_test.dart: requested subtype remains eligible for its own quote
-00:06 +23: /workspace/ae-journey/test/explore_rhinoplasty_variant_eligibility_test.dart: requested subtype remains eligible for its own quote
-00:06 +24: /workspace/ae-journey/test/explore_snapshot_and_scope_test.dart: explicit Botox one-unit tariff keeps its unit on both card and map
-00:08 +24: /workspace/ae-journey/test/explore_rhinoplasty_variant_eligibility_test.dart: ultrasound primary tariff wins over post-traumatic table range
+00:04 +11: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:05 +12: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:05 +13: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:06 +14: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:07 +15: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:08 +15: /workspace/ae-journey/test/explore_rhinoplasty_variant_eligibility_test.dart: ultrasound primary tariff wins over post-traumatic table range
 [PROCEDURE RELATION] exact · same_treatment · "Rinoplastia ultrasónica"
 [GP MATCH] "Rinoplastia ultrasónica" → rhinoplasty/rhinoplasty
-00:09 +25: /workspace/ae-journey/test/explore_rhinoplasty_variant_eligibility_test.dart: ultrasound primary tariff wins over post-traumatic table range
 [GP PRICE] PICK · "Rinoplastia ultrasónica" · 7500 EUR · html_table · https://clinic.example/precios
-00:09 +26: /workspace/ae-journey/test/explore_snapshot_and_scope_test.dart: long surgical range remains a price on the map
-00:09 +27: /workspace/ae-journey/test/explore_snapshot_and_scope_test.dart: Starting Price is a from price even in a previously exact cache row
-00:09 +28: /workspace/ae-journey/test/explore_snapshot_and_scope_test.dart: clinic Maps identity can match shared-brand medical and aesthetic sites
-00:09 +29: /workspace/ae-journey/test/explore_snapshot_and_scope_test.dart: treatment title keeps dose and removes adjacent promotional copy
-00:09 +30: /workspace/ae-journey/test/explore_snapshot_and_scope_test.dart: breast label omits unknown method but retains published implant detail
-00:09 +31: /workspace/ae-journey/test/explore_snapshot_and_scope_test.dart: display priority uses client accepted count and retries a rejected acknowledgement
+00:08 +16: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:09 +17: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:09 +18: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:09 +19: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:09 +20: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:09 +21: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:10 +22: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:10 +23: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +24: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +25: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +26: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +27: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +27: /workspace/ae-journey/test/explore_snapshot_and_scope_test.dart: display priority uses client accepted count and retries a rejected acknowledgement
 [GP TOOL] urls · loopback=true · dev=- · http://test
 [GP TOOL] health · http://test · ok · version=0.11.81
 [GP TOOL] discover-job · Barcelona · botox · queued · active
 [GP TOOL] job-state ·  ·  · active · queued · - · scheduling=- round=- verified=0 fresh=0 pages=0 serper=0 displayReady=false collectionTarget=- queries=[] reason=- rejections={}
-00:09 +32: /workspace/ae-journey/test/explore_queue_and_ratings_test.dart: queue acceptance retries the identical body after timeout
-00:09 +33: /workspace/ae-journey/test/explore_queue_and_ratings_test.dart: a tab switch suppresses a stale foreground retry
-00:09 +34: /workspace/ae-journey/test/explore_queue_and_ratings_test.dart: Places returns identity and rating from a single search request
-00:10 +35: /workspace/ae-journey/test/explore_queue_and_ratings_test.dart: failed Places HTTP is retryable rather than a cached identity miss
-[GP] Places searchText failed · HTTP 503 · UNAVAILABLE · 
-00:10 +36: /workspace/ae-journey/test/explore_queue_and_ratings_test.dart: Places identity miss has a bounded retry cooldown
-00:10 +37: /workspace/ae-journey/test/explore_queue_and_ratings_test.dart: Places unrated business has a bounded retry cooldown
-00:10 +38: /workspace/ae-journey/test/explore_queue_and_ratings_test.dart: repeated city warming joins pending and accepted work, while explicit search retries
+00:11 +28: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +29: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +30: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +31: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +31: /workspace/ae-journey/test/explore_queue_and_ratings_test.dart: failed Places HTTP is retryable rather than a cached identity miss
+[GP] Places searchText failed · HTTP 503 · UNAVAILABLE ·
+00:11 +32: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +33: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +34: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +34: /workspace/ae-journey/test/explore_queue_and_ratings_test.dart: repeated city warming joins pending and accepted work, while explicit search retries
 [GP TOOL] urls · loopback=true · dev=- · http://test
 [GP TOOL] health · http://test · ok · version=0.11.83
 [GP TOOL] discover-job · Madrid · botox · queued · job-1
@@ -95,57 +81,78 @@ Three verified tab restores: 2314ms
 [GP TOOL] job-state ·  ·  · job-2 · queued · - · scheduling=- round=- verified=0 fresh=0 pages=0 serper=0 displayReady=false collectionTarget=- queries=[] reason=- rejections={}
 [GP TOOL] discover-job · Madrid · botox · queued · job-3
 [GP TOOL] job-state ·  ·  · job-3 · queued · - · scheduling=- round=- verified=0 fresh=0 pages=0 serper=0 displayReady=false collectionTarget=- queries=[] reason=- rejections={}
-00:10 +39: /workspace/ae-journey/test/explore_queue_and_ratings_test.dart: a rejected city warming acknowledgement is immediately retryable
+00:11 +35: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:11 +35: /workspace/ae-journey/test/explore_queue_and_ratings_test.dart: a rejected city warming acknowledgement is immediately retryable
 [GP TOOL] urls · loopback=true · dev=- · http://test
 [GP TOOL] health · http://test · ok · version=0.11.83
 [GP TOOL] discover-job · Madrid · dermal filler · null · failed
 [GP TOOL] job-state ·  ·  · failed · failed · - · scheduling=- round=- verified=0 fresh=0 pages=0 serper=0 displayReady=false collectionTarget=- queries=[] reason=- rejections={}
 [GP TOOL] discover-job · Madrid · dermal filler · queued · accepted
 [GP TOOL] job-state ·  ·  · accepted · queued · - · scheduling=- round=- verified=0 fresh=0 pages=0 serper=0 displayReady=false collectionTarget=- queries=[] reason=- rejections={}
-00:10 +40: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: one website verification per clinic + procedure a concurrent duplicate joins instead of scraping again
+00:11 +36: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:12 +36: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: one website verification per clinic + procedure a concurrent duplicate joins instead of scraping again
 [GP VERIFY] join in-flight · davinci.al|chemical peel facial
-00:10 +41: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: one website verification per clinic + procedure a different procedure for the same clinic still verifies
-00:10 +42: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: one website verification per clinic + procedure a later search re-verifies once the first one settled
-00:10 +43: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: one website verification per clinic + procedure verification never exceeds the session-wide cap
-00:10 +44: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a shorter re-fetch keeps the richer parse
-00:10 +45: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a shorter re-fetch keeps the richer parse
-00:10 +46: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a shorter re-fetch keeps the richer parse
-00:10 +47: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a shorter re-fetch keeps the richer parse
-00:11 +48: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a shorter re-fetch keeps the richer parse
-00:11 +49: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a shorter re-fetch keeps the richer parse
-00:11 +50: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a shorter re-fetch keeps the richer parse
-00:11 +51: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a shorter re-fetch keeps the richer parse
-00:11 +52: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a shorter re-fetch keeps the richer parse
-00:11 +53: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a shorter re-fetch keeps the richer parse
+00:12 +37: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:12 +38: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:12 +39: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:12 +40: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:13 +40: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a shorter re-fetch keeps the richer parse
 [GP EXTRACT] cached 2 evidence rows from https://myspatirana.com/services/relax
-00:11 +54: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A — Spanish filler table
-00:11 +54: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a richer fetch does replace the parse
+00:13 +41: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:13 +41: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a richer fetch does replace the parse
 [GP EXTRACT] cached 0 evidence rows from https://myspatirana.com/services/relax
-00:12 +54: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A — Spanish filler table
+[GP EXTRACT] cached 2 evidence rows from https://myspatirana.com/services/relax
+00:14 +42: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:14 +43: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:14 +43: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warming fills the cache so the sync read never parses
+[GP EXTRACT] warmed 2 rows from https://warm.al/cmimet
+00:14 +44: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:14 +44: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warming lets the event loop handle input before parsing finishes
+[GP EXTRACT] warmed 2 rows from https://responsive.al/cmimet
+00:14 +45: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:14 +45: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
+[GP EXTRACT] warmed 2 rows from https://richer.al/cmimet
+00:14 +46: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:15 +46: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
+[GP EXTRACT] warmed 2 rows from https://a.al/cmimet
+[GP EXTRACT] warmed 2 rows from https://a.al/sherbimet
+00:15 +47: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:15 +47: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
+[GP EXTRACT] warmed 2 rows from https://www.a.al/prices
+[GP EXTRACT] warmed 2 rows from https://a.al/services
+[GP EXTRACT] warmed 2 rows from https://booking.a.al/prices
+00:15 +48: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:15 +48: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch the numbered Tirana rows now carry the real fee
+[GP EXTRACT] cached 2 evidence rows from https://myspatirana.com/services/relax
+00:15 +49: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:16 +50: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:16 +51: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:16 +52: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:16 +53: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:16 +54: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:16 +55: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:16 +56: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:16 +57: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:16 +58: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:17 +58: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A — Spanish filler table
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Aumento de labios"
 [GP MATCH] "Aumento de labios" → filler/lip_filler
-00:12 +54: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a richer fetch does replace the parse
-[GP EXTRACT] cached 2 evidence rows from https://myspatirana.com/services/relax
-00:12 +55: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A — Spanish filler table
-00:12 +56: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A — Spanish filler table
 [GP PRICE] PICK · "Aumento de labios" · 150 EUR · html_table · https://clinicasermedbcn.com/precios
-00:12 +57: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warming fills the cache so the sync read never parses
-00:13 +57: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A2 — Dubai AED botox table is extracted
+00:17 +59: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:18 +59: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A2 — Dubai AED botox table is extracted
 [PROCEDURE RELATION] exact · same_treatment · "Botox anti-wrinkle injection"
 [GP MATCH] "Botox anti-wrinkle injection" → botox/botox
 [GP PRICE] PICK · "Botox anti-wrinkle injection" · 499 AED · html_table · https://biolitedubai.com/botox
-00:13 +58: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warming fills the cache so the sync read never parses
-[GP EXTRACT] warmed 2 rows from https://warm.al/cmimet
-00:13 +59: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A3 — Arabic Dubai menu rows are extracted in dirhams
+00:18 +60: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:18 +60: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A3 — Arabic Dubai menu rows are extracted in dirhams
 [PROCEDURE RELATION] exact · same_treatment · "فيلر الشفاه 1 مل"
 [GP MATCH] "فيلر الشفاه 1 مل" → filler/filler
 [GP PRICE] PICK · "فيلر الشفاه 1 مل" · 1500 AED · html_table · https://biolitedubai.com/ar/prices
 [PROCEDURE RELATION] exact · same_treatment · "زراعة الشعر بتقنية القص"
 [GP MATCH] "زراعة الشعر بتقنية القص" → hair_transplant/hair_transplant
 [GP PRICE] PICK · "زراعة الشعر بتقنية القص" · 12000 AED · html_table · https://biolitedubai.com/ar/prices
-00:14 +60: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warming lets the event loop handle input before parsing finishes
-[GP EXTRACT] warmed 2 rows from https://responsive.al/cmimet
-00:14 +61: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A3b — Dubai Google-style clinic copy is a menu row, not a snippet
+00:19 +61: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:19 +61: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A3b — Dubai Google-style clinic copy is a menu row, not a snippet
 [PROCEDURE RELATION] exact · same_treatment · "Botox Treatment - Gummy smile"
 [GP MATCH] "Botox Treatment - Gummy smile" → botox/botox
 [GP PRICE] REJECT · specialty_botox
@@ -159,27 +166,31 @@ At…" → botox/botox
 At Novomed, Botox prices sta…" → botox/botox
 [GP MATCH] "start from approximately AED 1,500 per area
 At Novomed, Botox prices sta…" → botox/botox
+[GP MATCH] "start from approximately AED 1,500 per area
+At Novomed, Botox prices sta…" → botox/botox
+[GP MATCH] "start from approximately AED 1,500 per area
+At Novomed, Botox prices sta…" → botox/botox
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "At Novomed, Botox prices start from approximately"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "At Novomed, Botox prices start from approximately AED 1,500 per area."
 [GP PRICE] PICK · "At Novomed, Botox prices start from approximately AED 1,500 per area." · 1500 AED · dom_block · https://novomed.com/services/cosmetic-dermatology/botox/
-00:15 +62: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:15 +62: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A4 — clinic articles keep single amounts, drop brand ranges
+00:19 +62: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:19 +62: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression A4 — clinic articles keep single amounts, drop brand ranges
 [GP PRICE] REJECT · article_price_range
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Botox one area"
 [GP PRICE] PICK · "Botox one area" · 999 AED · html_table · https://www.edenderma.com/post/best-botox-in-dubai-reviews-and-prices-2025
-00:15 +63: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:15 +64: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:15 +65: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:15 +65: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression C2 — WooCommerce Sale! badge never becomes procedure; prefer current price
+00:20 +63: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +64: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +65: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +65: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression C2 — WooCommerce Sale! badge never becomes procedure; prefer current price
 [PROCEDURE RELATION] exact · same_treatment · "Breast Augmentation"
 [GP PRICE] PICK · "Breast Augmentation" · 12999 AED · woocommerce · https://ziamedicalcenter.com/product/breast-augmentation-boob-job-dubai/
-00:16 +66: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:16 +66: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression D — JSON-LD botox
+00:20 +66: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +66: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression D — JSON-LD botox
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Toxina botulínica 1 zona"
 [GP PRICE] PICK · "Toxina botulínica 1 zona" · 250 EUR · jsonLd · https://clinic.example/botox
-00:16 +67: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:16 +68: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:16 +68: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression F — consultation is not the filler price
+00:20 +67: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +68: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +68: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression F — consultation is not the filler price
 [PRICE REJECT]
 reason=consultation_fee
 priceMin=50
@@ -192,39 +203,31 @@ sourceUrl=https://clinicamedicoesteticadimar.es/precios
 extractionMethod=product_card
 [GP PRICE] REJECT · consultation_fee
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Aumento de labios"
-[GP MATCH] "Aumento de labios" → filler/lip_filler
 [GP PRICE] PICK · "Aumento de labios" · 350 EUR · product_card · https://clinicamedicoesteticadimar.es/precios
-00:16 +69: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:16 +70: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:16 +70: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression H — AI cannot mutate parsed price
+00:20 +69: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +70: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +70: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression H — AI cannot mutate parsed price
 [GP PRICE] AI numeric field ignored
-00:16 +71: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:16 +71: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression I — De Felipe HA 1 vial beats rhinomodelación for Fillers
+00:20 +71: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +71: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression I — De Felipe HA 1 vial beats rhinomodelación for Fillers
 [PROCEDURE RELATION] exact · same_treatment · "Ácido hialurónico · 1 vial"
-[GP MATCH] "Ácido hialurónico · 1 vial" → filler/filler
 [PROCEDURE RELATION] exact · same_treatment · "Ácido hialurónico · 2 viales"
-[GP MATCH] "Ácido hialurónico · 2 viales" → filler/filler
 [PROCEDURE RELATION] exact · same_treatment · "Rinomodelación con ácido hialurónico 1 vial"
-[GP MATCH] skip-line "Rinomodelación con ácido hialurónico 1 vial" → wrong_family_rhinomodeling
 [GP PRICE] PICK · "Ácido hialurónico · 1 vial" · 305 EUR · list_item · https://www.defelipe.com/precios/
-[GP MATCH] skip-line "Rinomodelación con ácido hialurónico 1 vial" → wrong_family_rhinomodeling
-00:16 +72: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:16 +72: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression J — Sermed lip augmentation min is 180, not Radiesse 250
+00:20 +72: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +72: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression J — Sermed lip augmentation min is 180, not Radiesse 250
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "AUMENTO DE LABIOS"
-[GP MATCH] "AUMENTO DE LABIOS" → filler/lip_filler
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "AUMENTO DE LABIOS: OFERTA ACTUAL"
-[GP MATCH] "AUMENTO DE LABIOS: OFERTA ACTUAL" → filler/lip_filler
 [PROCEDURE RELATION] exact · same_treatment · "RADIESSE"
-[GP MATCH] "RADIESSE" → filler/filler
 [PROCEDURE RELATION] exact · same_treatment · "RELLENO DE POMULOS"
 [GP PRICE] PICK · "AUMENTO DE LABIOS" · 180 EUR · product_card · https://www.clinicasermedbcn.com/book-online
-00:16 +73: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:16 +73: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression K — Clínica Londres sale is 299, not rounded to 300
+00:20 +73: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +73: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression K — Clínica Londres sale is 299, not rounded to 300
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Aumento de labios, 1 vial"
 [GP PRICE] PICK · "Aumento de labios, 1 vial" · 299 EUR · woocommerce · https://tienda.clinicalondres.es/barcelona-bonanova/productos-rebajados
-00:16 +74: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:16 +75: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:16 +75: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression M — Santé treatments page lip filler is 400, not blog 300 or Botox 350
+00:20 +74: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +75: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:20 +75: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression M — Santé treatments page lip filler is 400, not blog 300 or Botox 350
 [PRICE REJECT]
 reason=implausible_amount
 priceMin=400
@@ -238,22 +241,22 @@ extractionMethod=product_card
 [GP PRICE] REJECT · implausible_amount
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Lip Augmentation and Hydration"
 [GP PRICE] PICK · "Lip Augmentation and Hydration" · 400 EUR · product_card · https://santeclinics.com/treatments
-00:16 +76: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:17 +76: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression N — BePerfect lip filler is Juvederm 1900, not JSON-LD 600–5200
+00:20 +76: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:21 +76: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression N — BePerfect lip filler is Juvederm 1900, not JSON-LD 600–5200
 [GP PRICE] REJECT · catalog_aggregate_range
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Acid Hialuronic – Juvederm 1 ml (buze, pomeți, jaw line)"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Full face Acid Hialuronic – Juvederm 4 ml"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Acid hialuronic 1 ml"
 [GP PRICE] PICK · "Acid Hialuronic – Juvederm 1 ml (buze, pomeți, jaw line)" · 1900 RON · html_table · https://beperfect.ro/servicii/marire-buze/
-00:17 +77: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:17 +77: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression O — BePerfect Botox 1-zone is 900, not hyaluronidase 600
+00:21 +77: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:21 +77: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression O — BePerfect Botox 1-zone is 900, not hyaluronidase 600
 [GP PRICE] REJECT · catalog_aggregate_range
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "Periocular (coada ochiului/laba gâștii)"
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "Glabelar (între sprâncene)"
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "2 Zone:"
 [GP PRICE] PICK · "Glabelar (între sprâncene)" · 900 RON · html_table · https://beperfect.ro/tarife/
-00:17 +78: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:17 +78: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression P — Dr. Estetix Botox 1 zonă is 800, not lip filler 750
+00:21 +78: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:21 +78: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression P — Dr. Estetix Botox 1 zonă is 800, not lip filler 750
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Tratament toxină botulinică 1 zonă"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Tratament toxină botulinică 2 zone"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Tratament toxină botulinică 3 zone"
@@ -262,37 +265,45 @@ extractionMethod=product_card
 [RELATION REJECT] menu_rows=8 · hair×1, filler×2, laser×1, botox×4 (normal off-family menu filtering — not clinic rejects)
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Juvederm Ultra 1 ml"
 [GP PRICE] PICK · "Juvederm Ultra 1 ml" · 1600 RON · html_table · https://drestetix.ro/pages/preturi-injectari
-00:17 +79: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:17 +79: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression Q — Doctor SKiN Botox is 1-zone wrinkle, not laser 429 or gummy 546
+00:21 +79: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:21 +79: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression Q — Doctor SKiN Botox is 1-zone wrinkle, not laser 429 or gummy 546
 [PROCEDURE RELATION] exact · same_treatment · "Corectarea zâmbetului gingival cu neuromodulator"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Corectie riduri frunte toxina botulinica 1 zona"
+[GP MATCH] "Corectie riduri frunte toxina botulinica 1 zona" → botox/botox
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "Corecție riduri 3 zone"
+[GP MATCH] "Corecție riduri 3 zone" → botox/botox
 [GP PRICE] PICK · "Corectie riduri frunte toxina botulinica 1 zona" · 390 RON · html_table · https://doctorskin.ro/estetica-medicala/eliminare-riduri-neuromodulator/
-00:17 +80: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:17 +81: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:17 +81: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression S — JSON-LD catalog span is dropped; HTML surgery range is kept
+[GP MATCH] skip-line "Cheratoze actinice [zonă mică]" → wrong_family_laser
+[GP MATCH] skip-line "Polinucleotide periocular" → wrong_family_biostim
+00:21 +80: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:21 +81: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:21 +81: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression S — JSON-LD catalog span is dropped; HTML surgery range is kept
 [GP PRICE] REJECT · catalog_aggregate_range
 [PROCEDURE RELATION] exact · same_treatment · "Implant de par FUE + Sapphire"
+[GP MATCH] "Implant de par FUE + Sapphire" → hair_transplant/hair_transplant
 [GP PRICE] PICK · "Implant de par FUE + Sapphire" · 1800 EUR · html_table · https://clinicabarbatilor.ro/transplant-de-par
-00:17 +82: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:17 +82: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression T — breast HTML rows match Romanian menu labels
+00:21 +82: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:21 +82: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression T — breast HTML rows match Romanian menu labels
 [PROCEDURE RELATION] exact · same_treatment · "Mărire de sâni cu implant mamar"
+[GP MATCH] "Mărire de sâni cu implant mamar" → breast_augmentation/breast_augmentation
 [GP PRICE] PICK · "Mărire de sâni cu implant mamar" · 4200 EUR · html_table · https://www.elenamartin.ro/preturi
-00:17 +83: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:17 +83: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression U — scalp hair row beats beard when both match
+00:21 +83: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:21 +83: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression U — scalp hair row beats beard when both match
 [PROCEDURE RELATION] exact · same_treatment · "Interventie chirurgicala Transplant de par · Barba de la"
+[GP MATCH] "Interventie chirurgicala Transplant de par · Barba de la" → hair_transplant/hair_transplant
 [PROCEDURE RELATION] exact · same_treatment · "Interventie chirurgicala Transplant de par · Scalp de la"
+[GP MATCH] "Interventie chirurgicala Transplant de par · Scalp de la" → hair_transplant/hair_transplant
 [GP PRICE] PICK · "Interventie chirurgicala Transplant de par · Scalp de la" · 2500 EUR · html_table · https://eloshairclinic.ro/preturi
-00:17 +84: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:18 +84: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression V — Elena Martin dual EUR (lei) is 7000 EUR, not 35000 RON
+00:21 +84: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:21 +84: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression V — Elena Martin dual EUR (lei) is 7000 EUR, not 35000 RON
 [PROCEDURE RELATION] exact · same_treatment · "Implant mamar"
 [GP PRICE] PICK · "Implant mamar" · 7000 EUR · html_table · https://www.elenamartin.ro/preturi
-00:18 +85: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:18 +85: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression W — Panturu EUR-column bare amount is 5500 EUR
+00:21 +85: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:21 +85: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression W — Panturu EUR-column bare amount is 5500 EUR
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Marirea sanilor (Implant Siliconic Mamar): · – Rotund Mentor / Polytech …"
 [GP PRICE] PICK · "Marirea sanilor (Implant Siliconic Mamar): · – Rotund Mentor / Polytech / Motiva" · 5500 EUR · html_table · https://www.drpanturu.ro/preturi-servicii-chirurgicale-si-non-chirurgicale/
-00:18 +86: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:18 +86: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression X — Radu Ionescu heading range is 8100–9300 EUR
+00:21 +86: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +86: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression X — Radu Ionescu heading range is 8100–9300 EUR
 [PRICE REJECT]
 reason=implausible_amount
 priceMin=900
@@ -305,27 +316,21 @@ sourceUrl=https://raduionescu.doctor/preturi.html
 extractionMethod=dom_block
 [GP PRICE] REJECT · implausible_amount
 [PROCEDURE RELATION] exact · same_treatment · "Augmentare mamară"
-[GP MATCH] "Augmentare mamară" → breast_augmentation/breast_augmentation
 [GP PRICE] PICK · "Augmentare mamară" · 8100 EUR · dom_block · https://raduionescu.doctor/preturi.html
-00:18 +87: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:18 +87: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression Y — Romanian starting-from rhinoplasty quotes extract on official pages
+00:22 +87: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +87: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression Y — Romanian starting-from rhinoplasty quotes extract on official pages
 [PROCEDURE RELATION] exact · same_treatment · "Pretul pentru operatia de rinoplastie"
-[GP MATCH] "Pretul pentru operatia de rinoplastie" → rhinoplasty/rhinoplasty
 [GP PRICE] PICK · "Pretul pentru operatia de rinoplastie" · 2500 EUR · dom_block · https://clinicaark.ro/preturi/preturi_rinoplastie
 [PROCEDURE RELATION] exact · same_treatment · "Rinoplastie București — Preț Operație Nas"
-[GP MATCH] "Rinoplastie București — Preț Operație Nas" → rhinoplasty/rhinoplasty
 [PROCEDURE RELATION] exact · same_treatment · "Rinoplastie în București cu rezultate naturale,"
-[GP MATCH] "Rinoplastie în București cu rezultate naturale," → rhinoplasty/rhinoplasty
 [GP PRICE] PICK · "Rinoplastie București — Preț Operație Nas" · 5000 EUR · dom_block · https://drdiana.ro/chirurgia-fetei/rinoplastie
-00:18 +88: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-00:18 +89: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch a parse in flight cannot overwrite a richer HTML fetch
-[GP EXTRACT] warmed 2 rows from https://richer.al/cmimet
-00:18 +90: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AA — Latin-1 HTTP body of UTF-8 Romanian heading is repaired
+00:22 +88: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +89: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +89: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AA — Latin-1 HTTP body of UTF-8 Romanian heading is repaired
 [PROCEDURE RELATION] exact · same_treatment · "Augmentare mamară"
-[GP MATCH] "Augmentare mamară" → breast_augmentation/breast_augmentation
 [GP PRICE] PICK · "Augmentare mamară" · 8100 EUR · dom_block · https://raduionescu.doctor/preturi.html
-00:18 +91: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:18 +91: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AB — QSH FAQ keeps hospital range, not Dubai typical
+00:22 +90: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +90: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AB — QSH FAQ keeps hospital range, not Dubai typical
 [PRICE REJECT]
 reason=market_average
 priceMin=27299
@@ -348,19 +353,16 @@ rawEvidence=On average, the price of rhinoplasty ranges from AED 23,299 to AED 3
 sourceUrl=https://qsh-dubai.com/rhinoplasty-price-in-dubai/
 extractionMethod=dom_block
 [GP PRICE] REJECT · not_clinic_owned_price
-[GP MATCH] "At Quttainah Specialized Hospital, the price usually ranges from AED 220…" → rhinoplasty/rhinoplasty
-[GP MATCH] "At Quttainah Specialized Hospital, the price usually ranges from AED 220…" → rhinoplasty/rhinoplasty
-[GP MATCH] "At Quttainah Specialized Hospital, the price usually ranges from AED 220…" → rhinoplasty/rhinoplasty
 [PROCEDURE RELATION] exact · same_treatment · "Rhinoplasty costs in Dubai typically range"
 [GP PRICE] PICK · "Rhinoplasty costs in Dubai typically range" · 22000 AED · text_proximity · https://qsh-dubai.com/rhinoplasty-price-in-dubai/
-00:18 +92: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:18 +92: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AC — hair table prefers AED/graft over graft count
+00:22 +91: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +91: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AC — hair table prefers AED/graft over graft count
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "FUE Hair Transplant Cost in Dubai (Per Graft) · Receding hairline or mil…"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "FUE Hair Transplant Cost in Dubai (Per Graft) · زراعة الشعر بتقنية DHI"
 [GP PRICE] REJECT · implausible_per_graft
 [GP PRICE] PICK · "FUE Hair Transplant Cost in Dubai (Per Graft) · Receding hairline or mild-to-moderate hair loss." · 8 AED · html_table · https://www.glamorousdubai.ae/fue
-00:18 +93: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:18 +93: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AA — market peel FAQ is rejected; owned menu row wins
+00:22 +92: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +92: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AA — market peel FAQ is rejected; owned menu row wins
 [PRICE REJECT]
 reason=not_clinic_owned_price
 priceMin=399
@@ -396,8 +398,8 @@ extractionMethod=text_proximity
 [GP PRICE] REJECT · not_clinic_owned_price
 [PROCEDURE RELATION] exact · same_treatment · "Our peel treatment — Glycolic chemical peel"
 [GP PRICE] PICK · "Our peel treatment — Glycolic chemical peel" · 399 AED · html_table · https://tajmeels.ae/chemical-peels-in-dubai/
-00:18 +94: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:18 +94: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AD — city marketing is rejected; clinic tariff ranges stay exact
+00:22 +93: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +93: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AD — city marketing is rejected; clinic tariff ranges stay exact
 [PRICE REJECT]
 reason=not_clinic_owned_price
 priceMin=12999
@@ -468,8 +470,8 @@ extractionMethod=text_proximity
 [GP PRICE] PICK · "Rhinoplasty" · 12999 AED · html_table · https://tajmeels.ae/prices/
 [PROCEDURE RELATION] exact · same_treatment · "FUE hair transplant"
 [GP PRICE] PICK · "FUE hair transplant" · 6000 AED · html_table · https://tajmeels.ae/prices/
-00:18 +95: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:19 +95: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AE — Skin111 starts from AED 490 beats a city typical range
+00:22 +94: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +94: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AE — Skin111 starts from AED 490 beats a city typical range
 [PRICE REJECT]
 reason=not_clinic_owned_price
 priceMin=199
@@ -495,8 +497,8 @@ extractionMethod=dom_block
 [PROCEDURE RELATION] exact · same_treatment · "chemical peel treatment"
 [PROCEDURE RELATION] exact · same_treatment · "At SKIN111, our chemical peel treatment"
 [GP PRICE] PICK · "At SKIN111, our chemical peel treatment" · 490 AED · dom_block · https://skin111.com/chemical-peel-treatment/
-00:19 +96: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:19 +96: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AF — SEO laser title and gold package are not extracted
+00:22 +95: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +95: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AF — SEO laser title and gold package are not extracted
 [PRICE REJECT]
 reason=seo_price_headline
 priceMin=100
@@ -508,8 +510,8 @@ rawEvidence=Laser Hair Removal Price Abu Dhabi — From AED 100 | Dr Azra. Laser
 sourceUrl=https://drazra.com/laser-hair-removal-abu-dhabi/
 extractionMethod=dom_block
 [GP PRICE] REJECT · seo_price_headline
-00:19 +97: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:19 +97: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AG — Tajmeels Quick Facts Cost row is lip filler 500–1000, not peel 399
+00:22 +96: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +96: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AG — Tajmeels Quick Facts Cost row is lip filler 500–1000, not peel 399
 [PRICE REJECT]
 reason=not_clinic_owned_price
 priceMin=399
@@ -534,8 +536,8 @@ extractionMethod=dom_block
 [GP PRICE] REJECT · not_clinic_owned_price
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Lip Augmentation Cost in Dubai"
 [GP PRICE] PICK · "Lip Augmentation Cost in Dubai" · 500 AED · list_item · https://tajmeels.ae/en/lip-augmentation-cost-in-dubai/
-00:19 +98: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:19 +98: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AH — Skin111 Juvederm is AED 1500 per ml, never brand 111
+00:22 +97: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +97: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AH — Skin111 Juvederm is AED 1500 per ml, never brand 111
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Juvéderm Fillers in Dubai & Abu Dhabi"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Juvéderm Fillers in Dubai & Abu Dhabi · At SKIN 111 the price for Juvéde…"
 [GP PRICE] PICK · "Juvéderm Fillers in Dubai & Abu Dhabi" · 1500 AED · list_item · https://skin111.com/juvederm-fillers
@@ -550,14 +552,14 @@ rawEvidence=At SKIN 111 the price for Juvéderm fillers starts from per ml
 sourceUrl=
 extractionMethod=text_proximity
 [GP PRICE] REJECT · brand_embedded_digits
-00:19 +99: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:19 +99: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AH — Enfield laser cost page: published table row wins
+00:22 +98: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +98: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AH — Enfield laser cost page: published table row wins
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Laser Treatments Cost in Abu Dhabi · Underarm · Cost 1 Session"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Laser Treatments Cost in Abu Dhabi · Full Face · Cost 1 Session"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Laser Treatments Cost in Abu Dhabi · Full Female Body Laser · Cost 1 Ses…"
 [GP PRICE] PICK · "Laser Treatments Cost in Abu Dhabi · Underarm · Cost 1 Session" · 150 AED · html_table · https://www.enfieldabudhabi.ae/en/laser-treatments-cost-in-abu-dhabi/
-00:19 +100: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:19 +100: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AH — market prose on a cost page is not a clinic price
+00:22 +99: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:22 +99: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AH — market prose on a cost page is not a clinic price
 [PRICE REJECT]
 reason=not_clinic_owned_price
 priceMin=1200
@@ -569,8 +571,8 @@ rawEvidence=Across Abu Dhabi clinics, lip filler treatments generally range from
 sourceUrl=https://charismamedicalgroup.com/lip-filler-cost-in-abu-dhabi/
 extractionMethod=dom_block
 [GP PRICE] REJECT · not_clinic_owned_price
-00:19 +101: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:19 +101: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AI — Enfield Botox uses English 799, not Arabic small-area 599
+00:22 +100: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:23 +100: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AI — Enfield Botox uses English 799, not Arabic small-area 599
 [PROCEDURE RELATION] exact · same_treatment · "تكلفة حقن البوتوكس في أبو ظبي · كامل الوجه"
 [PROCEDURE RELATION] exact · same_treatment · "تكلفة حقن البوتوكس في أبو ظبي · مناطق صغيرة"
 [PROCEDURE RELATION] exact · same_treatment · "تكلفة حقن البوتوكس في أبو ظبي · الحقن في اي منطقة"
@@ -581,8 +583,8 @@ extractionMethod=dom_block
 [PROCEDURE RELATION] exact · same_treatment · "The average Botox injection Price start from"
 [PROCEDURE RELATION] exact · same_treatment · "The average Botox injection Price start"
 [GP PRICE] PICK · "The average Botox injection Price start from" · 799 AED · dom_block · https://www.enfieldabudhabi.ae/en/cosmetic-injectables/botox-injections/
-00:19 +102: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:19 +102: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AJ — peel URL must not accept GP checkup or Worth promo
+00:23 +101: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:23 +101: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AJ — peel URL must not accept GP checkup or Worth promo
 [PRICE REJECT]
 reason=non_treatment_label
 priceMin=100
@@ -622,24 +624,44 @@ extractionMethod=dom_block
 [PROCEDURE RELATION] exact · same_treatment · "At SKIN111, our chemical peel treatment"
 [PROCEDURE RELATION] exact · same_treatment · "At SKIN111, our chemical peel treatment starts from AED 490."
 [GP PRICE] PICK · "At SKIN111, our chemical peel treatment" · 490 AED · dom_block · https://skin111.com/chemical-peel
-00:19 +103: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:20 +103: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AK — city common-price surgery guide is rejected for rhinoplasty
+00:23 +102: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:23 +102: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AK — city common-price surgery guide is rejected for rhinoplasty
 [GP PRICE] REJECT · city_common_price_guide
 [GP PRICE] REJECT · city_common_price_guide
 [PROCEDURE RELATION] exact · same_treatment · "Primary rhinoplasty"
 [GP PRICE] PICK · "Primary rhinoplasty" · 28000 AED · html_table · https://clinic.example/en/rhinoplasty/
-00:20 +104: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:20 +104: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AL — botox prefers per-unit starting price over package
+00:23 +103: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:23 +103: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AL — botox prefers per-unit starting price over package
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Botox"
 [GP PRICE] PICK · "Botox" · 42 AED · html_table · https://clinic.example/botox
-00:20 +105: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:20 +105: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AM — market filler range on clinic domain is rejected
+00:23 +104: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:23 +104: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AM — market filler range on clinic domain is rejected
 [PRICE REJECT]
 reason=not_clinic_owned_price
 priceMin=1000
 priceMax=2000
 currency=AED
 procedure=Fillers Cost in Dubai · Basic hyaluronic acid fillers
+00:23 +105: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:23 +106: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:23 +107: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AO — Premier Laser 1 Area beats Chin Dimpling
+00:23 +108: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
+00:23 +109: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
+00:23 +110: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
+[PILL CANCEL] Botox · Madrid
+[GP] Live search focus: Botox · Madrid
+[GP] Compare timing: Botox · Madrid · source=memory-verified · 289ms
+00:24 +111: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
+00:24 +112: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
+[PILL CANCEL] Fillers · Madrid
+[GP] Live search focus: Fillers · Madrid
+[GP] Compare timing: Fillers · Madrid · source=memory-verified · 341ms
+[PILL CANCEL] Botox · Madrid
+[GP] Live search focus: Botox · Madrid
+[GP] Compare timing: Botox · Madrid · source=memory-verified · 0ms
+Three verified tab restores: 639ms
+00:24 +113: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
+00:24 +113: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AM — market filler range on clinic domain is rejected
 rawPriceText=Basic hyaluronic acid fillers: AED 1,000 – AED 2,000 per syringe
 rawEvidence=Basic hyaluronic acid fillers: AED 1,000 – AED 2,000 per syringe
 sourceUrl=https://clinic.example/fillers-cost-in-dubai/
@@ -678,33 +700,14 @@ rawEvidence=Premium brand fillers: AED 2,000 – AED 3,500 per syringe
 sourceUrl=https://clinic.example/fillers-cost-in-dubai/
 extractionMethod=dom_block
 [GP PRICE] REJECT · not_clinic_owned_price
-00:20 +106: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:20 +106: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AN — Skin111-style peel starts from 490; lip from 990
 [PROCEDURE RELATION] exact · same_treatment · "chemical peel"
 [PROCEDURE RELATION] exact · same_treatment · "At our clinic, chemical peel treatment"
 [PROCEDURE RELATION] exact · same_treatment · "At our clinic, chemical peel treatment starts from AED 490."
 [GP PRICE] PICK · "At our clinic, chemical peel treatment" · 490 AED · dom_block · https://clinic.example/chemical-peel
-[GP MATCH] "start from AED 990.
-Lip fillers start from AED 990. start from AED 990." → filler/lip_filler
-[GP MATCH] "start from AED 990.
-Lip fillers start from AED 990. start from AED 990." → filler/lip_filler
-[GP MATCH] "start from AED 990.
-Lip fillers start from AED 990. start from AED 990." → filler/lip_filler
-[GP MATCH] "start from AED 990.
-Lip fillers start from AED 990. start from AED 990." → filler/lip_filler
-[GP MATCH] "start from AED 990.
-Lip fillers start from AED 990. start from AED 990." → filler/lip_filler
-[GP MATCH] "start from AED 990.
-Lip fillers start from AED 990. start from AED 990." → filler/lip_filler
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "fillers"
-[GP MATCH] "fillers" → filler/filler
-[GP MATCH] "Lip fillers start from AED 990.
-Lip fillers start from AED 990. start fr…" → filler/lip_filler
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Lip fillers"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Lip fillers start from AED 990."
 [GP PRICE] PICK · "Lip fillers" · 990 AED · dom_block · https://clinic.example/fillers
-00:20 +107: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:20 +107: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AO — Premier Laser 1 Area beats Chin Dimpling
 [PRICE REJECT]
 reason=implausible_amount
 priceMin=999
@@ -727,30 +730,28 @@ rawEvidence=Botox 3 Areas Price: £999.00
 sourceUrl=https://londonpremierlaser.co.uk/prices/injectables/
 extractionMethod=dom_block
 [GP PRICE] REJECT · implausible_amount
-00:20 +107: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-[GP EXTRACT] warmed 2 rows from https://a.al/cmimet
-00:20 +107: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AO — Premier Laser 1 Area beats Chin Dimpling
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "1 Area"
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "2 Areas"
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "3 Areas"
+[GP MATCH] inherit_family_botox "3 Areas" via botox_zone_or_area_variant
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "1 Area"
+[GP MATCH] inherit_family_botox "1 Area" via botox_zone_or_area_variant
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "2 Areas"
+[GP MATCH] inherit_family_botox "2 Areas" via botox_zone_or_area_variant
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "3 Areas"
+[GP MATCH] inherit_family_botox "3 Areas" via botox_zone_or_area_variant
 [GP PRICE] PICK · "1 Area" · 175 GBP · html_table · https://londonpremierlaser.co.uk/prices/injectables/
-00:20 +108: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:20 +108: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression Miami Forma RF is not Botox FROM
 [GP PRICE] REJECT · wrong_page_family
 [GP PRICE] REJECT · wrong_page_family
 [GP PRICE] REJECT · wrong_page_family
-00:20 +109: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:20 +109: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AP — saving-row Botox loses to 1 Area
 [PROCEDURE RELATION] exact · same_treatment · "Botox Treatment Areas · Your saving"
+[GP MATCH] "Botox Treatment Areas · Your saving" → botox/botox
 [GP PRICE] REJECT · promo_saving
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "1 Area"
+[GP MATCH] "botox" → botox/botox
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "2 Areas"
+[GP MATCH] "botox" → botox/botox
 [GP PRICE] PICK · "1 Area" · 175 GBP · html_table · https://sw11clinic.example/botox
-00:20 +110: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:20 +110: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AR — generic Botox FROM is 1-area, not Jawline £299 or competitor £120/£99
 [PRICE REJECT]
 reason=incomparable_procedure_line
 priceMin=175
@@ -763,6 +764,7 @@ sourceUrl=https://londonpremierlaser.co.uk/prices/injectables/
 extractionMethod=dom_block
 [GP PRICE] REJECT · incomparable_procedure_line
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "1 Area"
+[GP MATCH] inherit_family_botox "1 Area" via botox_zone_or_area_variant
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "1 Area £175.00"
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "1 Area"
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "3 Areas"
@@ -798,15 +800,11 @@ rawEvidence=There are some clinics that are offering Botox® at ridiculously che
 sourceUrl=https://facecliniclondon.com/botox-cost/
 extractionMethod=text_proximity
 [GP PRICE] REJECT · competitor_quote
-00:20 +111: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:20 +111: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AS — BOTOX 50 unități / Pret 1500 Lei is 1500 RON not 50
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "BOTOX TOXINA BOTULINICA (50 unități - 3 zone)"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "BOTOX TOXINA BOTULINICA (50 unități - 3 zone)"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "BOTOX TOXINA BOTULINICA (50 unități - 3 zone) · Pret"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "BOTOX TOXINA BOTULINICA (50 unități - 3 zone)"
 [GP PRICE] PICK · "BOTOX TOXINA BOTULINICA (50 unități - 3 zone)" · 1500 RON · list_item · https://example-clinic.ro/preturi/
-00:20 +112: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:20 +112: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AQ — rhinoplasty prefers primary over tip
 [PRICE REJECT]
 reason=market_price_spread
 priceMin=3500
@@ -831,8 +829,7 @@ extractionMethod=html_table
 [GP PRICE] REJECT · market_price_spread
 [PROCEDURE RELATION] exact · same_treatment · "Standard primary rhinoplasty:"
 [GP PRICE] PICK · "Standard primary rhinoplasty:" · 6500 GBP · html_table · https://londonprivatehospital.uk/rhinoplasty-london-prices/
-00:21 +113: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:21 +113: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AR — liquid rhino £550 is not surgical rhinoplasty
+00:24 +113: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AR — liquid rhino £550 is not surgical rhinoplasty
 [PRICE REJECT]
 reason=implausible_amount
 priceMin=550
@@ -870,9 +867,11 @@ extractionMethod=dom_block
 [PROCEDURE RELATION] exact · same_treatment · "A male nose job procedure"
 [PROCEDURE RELATION] exact · same_treatment · "A male nose job procedure starts"
 [GP PRICE] PICK · "ask the expert facial treatments rhinoplasty for men" · 6900 GBP · list_item · https://www.cadoganclinic.com/ask-the-expert/facial-treatments/rhinoplasty-for-men
-00:21 +114: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:21 +114: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AS — 2Glow 1 AREA £99, not Shopify template $399.99
+00:24 +114: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
+[GP] Compare timing: Botox · Madrid · source=memory-verified · 202ms
+00:24 +115: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AS — 2Glow 1 AREA £99, not Shopify template $399.99
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "2 AREAS"
+00:24 +116: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression AS — 2Glow 1 AREA £99, not Shopify template $399.99
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "3 AREAS"
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "1 AREA"
 [GP PRICE] PICK · "1 AREA" · 99 GBP · dom_block · https://2glow.co.uk/pages/botox
@@ -909,8 +908,8 @@ rawEvidence=
 sourceUrl=https://2glow.co.uk/pages/botox
 extractionMethod=dom_block
 [GP PRICE] REJECT · tld_currency_mismatch
-00:21 +115: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:21 +115: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression laser hair vs skin: named rows win, generic Laser treatment skipped
+00:24 +117: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: approximate source quotes retain uncertainty and both range bounds
+00:24 +117: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression laser hair vs skin: named rows win, generic Laser treatment skipped
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Laser Hair Removal · peri anal"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Photo Rejuvenation Face"
 [GP PRICE] REJECT · laser_subtype_or_generic
@@ -928,8 +927,15 @@ extractionMethod=dom_block
 [GP PRICE] PICK · "Photo Rejuvenation Face" · 180 GBP · html_table · https://the-laserclinic.com/pages/prices
 [PROCEDURE RELATION] exact · same_treatment · "Laser treatment"
 [GP PRICE] REJECT · laser_subtype_or_generic
-00:21 +116: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:21 +116: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression London breast: financing heading is not the row; £2500 is not full BA
+00:24 +118: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: approximate source quotes retain uncertainty and both range bounds
+00:24 +119: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: approximate source quotes retain uncertainty and both range bounds
+00:24 +120: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression London breast: Harley bilateral FROM, Cadogan menu, Nuffield not pain H3
+00:25 +121: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: Python approximate qualifier reaches the card and map intact
+00:25 +122: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: Python approximate qualifier reaches the card and map intact
+00:25 +123: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: Python approximate qualifier reaches the card and map intact
+00:25 +124: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: Python approximate qualifier reaches the card and map intact
+00:25 +125: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: Python approximate qualifier reaches the card and map intact
+00:25 +125: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression London breast: financing heading is not the row; £2500 is not full BA
 [PROCEDURE RELATION] exact · same_treatment · "Breast Enlargement (Boob Job)"
 [PROCEDURE RELATION] exact · same_treatment · "Breast Enlargement with MemoryGel Xtra"
 [GP PRICE] PICK · "Breast Enlargement (Boob Job)" · 4595 GBP · html_table · https://enhancemedicalgroup.com/boob-job-cost
@@ -957,8 +963,6 @@ extractionMethod=dom_block
 [GP PRICE] REJECT · not_clinic_owned_price
 [PROCEDURE RELATION] exact · same_treatment · "Breast Enlargement"
 [GP PRICE] PICK · "Breast Enlargement" · 7500 GBP · html_table · https://harleystreetbreastcentre.com/our-fees/
-00:21 +117: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:21 +117: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression London breast: Harley bilateral FROM, Cadogan menu, Nuffield not pain H3
 [PROCEDURE RELATION] exact · same_treatment · "Breast augmentation"
 [GP PRICE] PICK · "Breast augmentation" · 6995 GBP · html_table · https://www.harleymedical.co.uk/boob-job-cost
 [PRICE REJECT]
@@ -976,8 +980,6 @@ extractionMethod=html_table
 [GP PRICE] PICK · "Breast Enlargement - Bilateral Implants" · 5995 GBP · html_table · https://www.cadoganclinic.com/cosmetic-surgery/breast-surgery/breast-enlargement/
 [PROCEDURE RELATION] exact · url_treatment_match · "Treatment"
 [GP PRICE] PICK · "Treatment" · 8579 GBP · html_table · https://www.nuffieldhealth.com/treatments/breast-augmentation-enlargement
-00:21 +118: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:21 +118: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression London peel — Cosmelan kit is not the facial FROM; Face Clinic add-on is not £90
 [PROCEDURE RELATION] exact · same_treatment · "Medical-Grade Peels · Cosmelan Peel Starter Kit"
 [GP PRICE] REJECT · peel_package
 [PROCEDURE RELATION] exact · same_treatment · "Medical-Grade Peels · Chemical Peel Juliette Armand"
@@ -998,8 +1000,6 @@ extractionMethod=html_table
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "Two Areas"
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "Three Areas"
 [GP PRICE] PICK · "One Area" · 250 GBP · html_table · https://facecliniclondon.com/prices
-00:21 +119: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:21 +119: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression London rhinoplasty — Closed FROM not tip market band; dated menu beats male landing
 [PRICE REJECT]
 reason=not_clinic_owned_price
 priceMin=6900
@@ -1056,8 +1056,6 @@ extractionMethod=html_table
 [PROCEDURE RELATION] exact · same_treatment · "A male nose job procedure starts"
 [GP PRICE] REJECT · rhino_male_landing
 [GP PRICE] PICK · "Rhinoplasty" · 7995 GBP · html_table · https://www.cadoganclinic.com/price-guide/
-00:22 +120: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-00:22 +120: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression London rhinoplasty — clinic FROM vs market guide vs hospital fees only
 [PRICE REJECT]
 reason=not_clinic_owned_price
 priceMin=6000
@@ -1128,21 +1126,29 @@ extractionMethod=dom_block
 [PROCEDURE RELATION] exact · same_treatment · "Rhinoplasty"
 [PROCEDURE RELATION] exact · same_treatment · "Rhinoplasty costs"
 [GP PRICE] PICK · "Rhinoplasty (Nose Job)" · 6295 GBP · html_table · https://enhancemedicalgroup.com/face-surgery/rhinoplasty
+[GP MATCH] "starts from £3,000
+The cost of a private rhinoplasty starts from £3,000*…" → rhinoplasty/rhinoplasty
+[GP MATCH] "starts from £3,000
+The cost of a private rhinoplasty starts from £3,000*…" → rhinoplasty/rhinoplasty
+[GP MATCH] "starts from £3,000
+The cost of a private rhinoplasty starts from £3,000*…" → rhinoplasty/rhinoplasty
+[GP MATCH] "starts from £3,000
+The cost of a private rhinoplasty starts from £3,000*…" → rhinoplasty/rhinoplasty
+[GP MATCH] "starts from £3,000
+The cost of a private rhinoplasty starts from £3,000*…" → rhinoplasty/rhinoplasty
+[GP MATCH] "starts from £3,000
+The cost of a private rhinoplasty starts from £3,000*…" → rhinoplasty/rhinoplasty
 [PROCEDURE RELATION] exact · same_treatment · "treatments rhinoplasty"
+[GP MATCH] "treatments rhinoplasty" → rhinoplasty/rhinoplasty
 [GP PRICE] PICK · "treatments rhinoplasty" · 3000 GBP · list_item · https://hje.org.uk/treatments/rhinoplasty/
 [PROCEDURE RELATION] exact · same_treatment · "At our practice, pricing for ultrasonic rhinoplasty"
 [GP MATCH] "At our practice, pricing for ultrasonic rhinoplasty" → rhinoplasty/rhinoplasty
 [GP PRICE] PICK · "At our practice, pricing for ultrasonic rhinoplasty" · 12500 GBP · dom_block · https://www.williamtownley.co.uk/rhinoplasty/cost/
-00:22 +121: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch warmAllPending covers pages the sync host scan would touch
-[GP EXTRACT] warmed 2 rows from https://a.al/sherbimet
-00:22 +122: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression Harley Medical — official /nose-job-cost, not nav or finance list
 [GP PRICE] REJECT · wrong_page_family
 [GP PRICE] REJECT · wrong_page_family
 [PROCEDURE RELATION] exact · same_treatment · "Breast augmentation"
-[GP MATCH] "Breast augmentation" → breast_augmentation/breast_augmentation
 [GP PRICE] PICK · "Breast augmentation" · 6995 GBP · html_table · https://www.harleymedical.co.uk/boob-job-cost
 [PROCEDURE RELATION] exact · same_treatment · "Rhinoplasty (closed)"
-[GP MATCH] "Rhinoplasty (closed)" → rhinoplasty/rhinoplasty
 [GP PRICE] PICK · "Rhinoplasty (closed)" · 8995 GBP · html_table · https://www.harleymedical.co.uk/nose-job-cost
 [PRICE REJECT]
 reason=finance_page
@@ -1177,18 +1183,12 @@ rawEvidence=Brow Lift £6,300
 sourceUrl=https://www.harleymedical.co.uk/nose-job-on-finance
 extractionMethod=html_table
 [GP PRICE] REJECT · finance_page
-00:22 +123: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:22 +123: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression London hair — package FROM not graft count or effective £/graft
+00:26 +125: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression London hair — package FROM not graft count or effective £/graft
 [PROCEDURE RELATION] exact · same_treatment · "cost and prices for hair transplants in london"
-[GP MATCH] "cost and prices for hair transplants in london" → hair_transplant/hair_transplant
 [PROCEDURE RELATION] exact · same_treatment · "cost and prices for hair transplants in london"
-[GP MATCH] "cost and prices for hair transplants in london" → hair_transplant/hair_transplant
 [PROCEDURE RELATION] exact · same_treatment · "cost and prices for hair transplants in london"
-[GP MATCH] "cost and prices for hair transplants in london" → hair_transplant/hair_transplant
 [PROCEDURE RELATION] exact · same_treatment · "cost and prices for hair transplants in london"
-[GP MATCH] "cost and prices for hair transplants in london" → hair_transplant/hair_transplant
 [PROCEDURE RELATION] exact · same_treatment · "Cost of 500 FUE grafts"
-[GP MATCH] "Cost of 500 FUE grafts" → hair_transplant/hair_transplant
 [PROCEDURE RELATION] exact · same_treatment · "Cost of 1,000 FUE grafts"
 [PROCEDURE RELATION] exact · same_treatment · "Cost of 1500 FUE grafts"
 [PROCEDURE RELATION] exact · same_treatment · "Cost of 2000 FUE grafts"
@@ -1211,6 +1211,23 @@ priceMax=2999
 currency=GBP
 procedure=Hair Transplant Cost in London · Maximum grafts
 rawPriceText=5,000 GBP
+00:26 +126: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression London hair — package FROM not graft count or effective £/graft
+00:26 +127: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices injectables table $13/unit is picked for Botox
+00:26 +128: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices mixed menu keeps Restylane $950, Chemical Peel $300, not add-on or typical
+00:26 +129: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices nested spa wrappers still extract a leaf peel price
+00:26 +130: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices BOTOX $18.00 per unit is picked despite 30 days on the same page
+00:26 +131: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices average-dose range beside a per-unit fee is not the price
+00:26 +132: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices a Botox search prefers BOTOX over cheaper Dysport units
+00:26 +133: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices dose ranges are stripped, published price ranges are not
+00:26 +134: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices SkinLocal frequency copy is not the peel title
+00:26 +135: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices GetClearBeauty series quote is not a clinic peel FROM
+00:26 +136: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices Dubai DCS table inherits Cost (AED) from the header cell
+00:26 +137: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices Dubai Mediclinic Monday offer is a last-resort FROM, not dropped
+00:27 +138: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices hospital menu still keeps Botox after 80 surgical rows
+00:28 +139: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices hospital menu still keeps Botox after 80 surgical rows
+00:28 +140: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices hospital menu still keeps Botox after 80 surgical rows
+00:28 +141: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: a one ml syringe cannot acquire the neighbouring Botox per unit suffix
+00:28 +141: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: HTML extractor regression London hair — package FROM not graft count or effective £/graft
 rawEvidence=Maximum grafts Up to 5,000 in a single session
 sourceUrl=https://www.fksclinic.co.uk/hair-transplant-uk/cost/
 extractionMethod=html_table
@@ -1390,28 +1407,17 @@ extractionMethod=list_item
 [GP PRICE] PICK · "2,400 - 3,000 grafts" · 14400 GBP · html_table · https://drmarktam.co.uk/fees/
 [PROCEDURE RELATION] exact · same_treatment · "Our hair transplant treatment fee"
 [GP PRICE] PICK · "Our hair transplant treatment fee" · 5400 GBP · dom_block · https://drmarktam.co.uk/fue-hair-transplant/
-00:23 +124: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:23 +124: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices injectables table $13/unit is picked for Botox
 [RELATION REJECT] menu_rows=3 · hair×1, rhinoplasty×1, filler×1 (normal off-family menu filtering — not clinic rejects)
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Wrinkle Relaxers"
 [GP PRICE] PICK · "Wrinkle Relaxers" · 13 USD · html_table · https://www.miamiskinspa.com/services/injectable-services-miami/
-00:23 +125: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:23 +125: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices mixed menu keeps Restylane $950, Chemical Peel $300, not add-on or typical
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Injectable Treatments · Restylane®"
 [GP PRICE] PICK · "Injectable Treatments · Restylane®" · 950 USD · list_item · https://clinic.example/pricing
 [PROCEDURE RELATION] exact · same_treatment · "Skin Care · Chemical Peel"
 [GP PRICE] PICK · "Skin Care · Chemical Peel" · 300 USD · dom_block · https://clinic.example/pricing
-00:23 +126: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:23 +126: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices nested spa wrappers still extract a leaf peel price
 [PROCEDURE RELATION] exact · same_treatment · "Chemical Peel"
 [GP PRICE] PICK · "Chemical Peel" · 300 USD · dom_block · https://spa.example/peels
-00:23 +127: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:23 +127: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices BOTOX $18.00 per unit is picked despite 30 days on the same page
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "BOTOX® Cosmetic"
 [GP PRICE] PICK · "BOTOX® Cosmetic" · 18 USD · list_item · https://www.miamiskinandvein.com/pricing/
-00:23 +128: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:23 +129: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:23 +129: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices a Botox search prefers BOTOX over cheaper Dysport units
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "BOTOX® Cosmetic"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Dysport®"
 [GP PRICE] PICK · "BOTOX® Cosmetic" · 18 USD · list_item · https://www.miamiskinandvein.com/pricing/
@@ -1420,9 +1426,6 @@ extractionMethod=list_item
 [GP PRICE] PICK · "BOTOX® Cosmetic" · 18 USD · list_item · https://www.miamiskinandvein.com/pricing/
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Dysport®"
 [GP PRICE] PICK · "Dysport®" · 6 USD · list_item · https://www.miamiskinandvein.com/pricing/
-00:23 +130: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:23 +131: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:23 +131: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices SkinLocal frequency copy is not the peel title
 [PRICE REJECT]
 reason=incomparable_procedure_line
 priceMin=400
@@ -1436,31 +1439,25 @@ extractionMethod=dom_block
 [GP PRICE] REJECT · incomparable_procedure_line
 [PROCEDURE RELATION] exact · same_treatment · "FACE VI PEEL"
 [GP PRICE] PICK · "FACE VI PEEL" · 375 USD · dom_block · https://theskinlocal.com/skin-treatments/peels/
-00:23 +132: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:23 +133: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:23 +133: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices Dubai DCS table inherits Cost (AED) from the header cell
 [PROCEDURE RELATION] variant · botox_zone_or_area_variant · "Forehead starting"
 [PROCEDURE RELATION] exact · same_treatment · "Botox underarms starting"
 [GP PRICE] PICK · "Forehead starting" · 500 AED · html_table · https://www.dubaicosmeticsurgery.com/cosmetic-injectables/injectables-botox-cost/
-00:23 +134: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:23 +134: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices Dubai Mediclinic Monday offer is a last-resort FROM, not dropped
 [PROCEDURE RELATION] exact · same_treatment · "كل يوم إثنين استغلي عرضنا الحصري على البوتوكس بسعر 999 درهمًا إماراتيًا."
 [GP PRICE] PICK · "كل يوم إثنين استغلي عرضنا الحصري على البوتوكس بسعر 999 درهمًا إماراتيًا." · 999 AED · text_proximity · https://www.mediclinic.ae/ar/corporate/special-offers/botox-mondays.html
-00:23 +135: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-[GP EXTRACT] warmed 2 rows from https://www.a.al/prices
-00:25 +135: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices hospital menu still keeps Botox after 80 surgical rows
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Toxina botulinică 1 zonă facial"
 [GP MATCH] "Toxina botulinică 1 zonă facial" → botox/botox
 [PROCEDURE RELATION] exact · same_treatment · "Ботокс лица (одна зона)"
 [GP MATCH] "Ботокс лица (одна зона)" → botox/botox
 [GP PRICE] PICK · "Toxina botulinică 1 zonă facial" · 70 EUR · list_item · https://www.sancos.md/lista-de-preturi
-00:25 +136: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:25 +136: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices Chisinau AMC per-unit lei Botox is kept
+00:28 +142: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices Chisinau AMC per-unit lei Botox is kept
+00:28 +143: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices Chisinau AMC per-unit lei Botox is kept
+00:28 +144: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices Chisinau AMC per-unit lei Botox is kept
+00:28 +145: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices Chisinau AMC per-unit lei Botox is kept
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Correcting facial wrinkles (1 unit botulinum toxin)"
 [GP MATCH] "Correcting facial wrinkles (1 unit botulinum toxin)" → botox/botox
 [GP PRICE] PICK · "Correcting facial wrinkles (1 unit botulinum toxin)" · 150 RON · list_item · https://amc.md/en/prices/
-00:25 +137: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:25 +137: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices Alter-MED peel heading is not the card name
+00:28 +146: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
+00:28 +146: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices Alter-MED peel heading is not the card name
 [PROCEDURE RELATION] exact · same_treatment · "Superficial peeling"
 [GP MATCH] "Superficial peeling" → peel/chemical_peel
 [PROCEDURE RELATION] exact · same_treatment · "Peeling BioRePeel"
@@ -1468,73 +1465,58 @@ extractionMethod=dom_block
 [PROCEDURE RELATION] exact · same_treatment · "Deep peeling"
 [GP MATCH] "Deep peeling" → peel/chemical_peel
 [GP PRICE] PICK · "Superficial peeling" · 850 RON · list_item · https://altermed.md/en/services/peeling
-00:25 +138: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:25 +138: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices chirurgie-estetica BA is implant 4500, not areola 800
+00:29 +147: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
+00:29 +147: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices chirurgie-estetica BA is implant 4500, not areola 800
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Breast augmentation with anatomical implants Mentor USA"
 [GP MATCH] "Breast augmentation with anatomical implants Mentor USA" → breast_augmentation/breast_augmentation
 [GP PRICE] PICK · "Breast augmentation with anatomical implants Mentor USA" · 4500 EUR · html_table · https://www.chirurgie-estetica.md/en/prices/
-00:25 +139: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:25 +139: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices chirurgie-estetica rhinoplasty is multi-zone, not partial tip
+00:29 +148: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
+00:29 +148: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices chirurgie-estetica rhinoplasty is multi-zone, not partial tip
 [PROCEDURE RELATION] exact · same_treatment · "Multi-zone Rhinoplasty"
 [GP MATCH] "Multi-zone Rhinoplasty" → rhinoplasty/rhinoplasty
 [GP PRICE] PICK · "Multi-zone Rhinoplasty" · 3700 EUR · html_table · https://www.chirurgie-estetica.md/en/prices/
-00:25 +140: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:25 +140: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices chirurgie-estetica filler is Stylage M 1 ml, not Hydro heading
+00:29 +149: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
+00:29 +149: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices chirurgie-estetica filler is Stylage M 1 ml, not Hydro heading
 [RELATION REJECT] menu_rows=3 · peel×1, filler×1, skin×1 (normal off-family menu filtering — not clinic rejects)
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Stylage M – 1,0 ml"
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Stylage L – 1,0 ml"
 [GP PRICE] PICK · "Stylage M – 1,0 ml" · 140 EUR · html_table · https://www.chirurgie-estetica.md/en/prices/
-00:25 +140: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-[GP EXTRACT] warmed 2 rows from https://a.al/services
-00:25 +140: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices chirurgie-estetica filler is Stylage M 1 ml, not Hydro heading
 [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Botulinum toxin (neuronox) – 1 unit"
-[GP PRICE] PICK · "Botulinum toxin (neuronox) – 1 unit" · 9 EUR · html_table · https://www.chirurgie-estetica.md/en/prices/
-00:25 +141: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-00:25 +141: /workspace/ae-journey/test/explore_html_price_extractor_test.dart: Miami menu duration copy must not hide Botox unit prices Estetic Sana Prețuri heading is not glued onto lip filler
-[PROCEDURE RELATION] exact · same_treatment · "mărire buze, augmentare riduri, corecție volumetrică pomeți - 3500-5000 …"
-[GP PRICE] PICK · "mărire buze, augmentare riduri, corecție volumetrică pomeți - 3500-5000 lei" · 3500 RON · text_proximity · https://estetic-sana.md/prices
-00:25 +142: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch clinic warming targets all its pages without warming unrelated providers
-[GP EXTRACT] warmed 2 rows from https://booking.a.al/prices
-00:26 +143: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: generic peel cache keeps the named peel from the priced row
-00:26 +144: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch the numbered Tirana rows now carry the real fee
-00:26 +145: /workspace/ae-journey/test/explore_duplicate_verify_test.dart: page parse is not thrown away by a duplicate fetch the numbered Tirana rows now carry the real fee
-[GP EXTRACT] cached 2 evidence rows from https://myspatirana.com/services/relax
-00:27 +146: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: a one ml syringe cannot acquire the neighbouring Botox per unit suffix
-00:27 +147: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: price amount alone cannot mark a current hair tariff stale
-00:27 +148: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: editorial price guide cannot become a clinic tariff from old flags
-00:27 +149: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: diamond peel does not fill a chemical peel comparison slot
-00:27 +150: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
-00:27 +151: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
-00:27 +151: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract keeps 2 Firestore and 2 live clinics from public pages
+00:29 +150: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
+00:29 +151: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
+00:30 +152: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
+00:30 +152: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract keeps 2 Firestore and 2 live clinics from public pages
 [GP TOOL] urls · loopback=true · dev=- · http://127.0.0.1:8080
 [GP TOOL] health · http://127.0.0.1:8080 · ok · version=0.11.67
 [GP TOOL] discover-hybrid · Tirane · botox · http://127.0.0.1:8080
+00:30 +153: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract keeps 2 Firestore and 2 live clinics from public pages
+00:30 +154: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract keeps 2 Firestore and 2 live clinics from public pages
 [GP TOOL] discover-hybrid · http://127.0.0.1:8080 · ok · rows=5 · stored_available=0 · novel_live_available=0 · fallback_used=false · growth_exhausted_reason=-
-00:27 +152: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
-00:27 +152: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract empty live slots are filled from other Firestore clinics
+00:30 +155: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: generic saved filler title does not replace its precise Romanian tariff name
+00:30 +155: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract empty live slots are filled from other Firestore clinics
 [GP TOOL] urls · loopback=true · dev=- · http://127.0.0.1:8080
 [GP TOOL] health · http://127.0.0.1:8080 · ok · version=0.11.67
 [GP TOOL] discover-hybrid · Tirane · botox · http://127.0.0.1:8080
 [GP TOOL] discover-hybrid · http://127.0.0.1:8080 · ok · rows=4 · stored_available=4 · novel_live_available=0 · fallback_used=true · growth_exhausted_reason=-
-00:27 +153: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
-00:27 +153: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract reports one missing live clinic instead of padding the list
+00:30 +156: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: generic saved filler title does not replace its precise Romanian tariff name
+00:30 +156: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract reports one missing live clinic instead of padding the list
 [GP TOOL] urls · loopback=true · dev=- · http://127.0.0.1:8080
 [GP TOOL] health · http://127.0.0.1:8080 · ok · version=0.11.67
 [GP TOOL] discover-hybrid · Tirane · botox · http://127.0.0.1:8080
 [GP TOOL] discover-hybrid · http://127.0.0.1:8080 · ok · rows=3 · stored_available=0 · novel_live_available=0 · fallback_used=false · growth_exhausted_reason=-
-00:27 +154: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
-00:27 +154: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract an unreachable server is not a completed search
+00:30 +157: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: generic saved filler title does not replace its precise Romanian tariff name
+00:30 +157: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract an unreachable server is not a completed search
 [GP TOOL] urls · loopback=true · dev=- · http://127.0.0.1:8080
 [GP TOOL] health · http://127.0.0.1:8080 · failed · ClientException: Connection refused, uri=http://127.0.0.1:8080/health
-00:27 +155: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
-00:27 +155: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract cancellation preserves the injected client for the next selection
+00:30 +158: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: generic saved filler title does not replace its precise Romanian tariff name
+00:30 +158: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract cancellation preserves the injected client for the next selection
 [GP TOOL] urls · loopback=true · dev=- · http://127.0.0.1:8080
 [GP TOOL] health · http://127.0.0.1:8080 · ok · version=0.11.67
 [GP TOOL] discover-hybrid · Tirane · botox · http://127.0.0.1:8080
 [GP TOOL] discover-hybrid · Tirane · dermal filler · http://127.0.0.1:8080
 [GP TOOL] discover-hybrid · http://127.0.0.1:8080 · ok · rows=1 · stored_available=0 · novel_live_available=0 · fallback_used=false · growth_exhausted_reason=-
-00:27 +156: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
-00:27 +156: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract plain JSON and NDJSON both yield the same cards
+00:30 +159: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: generic saved filler title does not replace its precise Romanian tariff name
+00:30 +159: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract plain JSON and NDJSON both yield the same cards
 [GP TOOL] urls · loopback=true · dev=- · http://127.0.0.1:8080
 [GP TOOL] health · http://127.0.0.1:8080 · ok · version=0.11.67
 [GP TOOL] discover-hybrid · Tirane · botox · http://127.0.0.1:8080
@@ -1544,43 +1526,41 @@ extractionMethod=dom_block
 [GP TOOL] discover-hybrid · Tirane · botox · http://127.0.0.1:8080
 [GP TOOL] partial · botox · 1
 [GP TOOL] discover-hybrid · http://127.0.0.1:8080 · ok · rows=2 · stored_available=0 · novel_live_available=0 · fallback_used=false · growth_exhausted_reason=-
-00:27 +157: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
-00:27 +158: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
-00:27 +158: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract three verified prices stay three and report the missing live slot
+00:30 +160: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: generic saved filler title does not replace its precise Romanian tariff name
+00:30 +161: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: generic saved filler title does not replace its precise Romanian tariff name
+00:30 +161: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract three verified prices stay three and report the missing live slot
 [GP TOOL] urls · loopback=true · dev=- · http://127.0.0.1:8080
 [GP TOOL] health · http://127.0.0.1:8080 · ok · version=0.11.67
 [GP TOOL] discover-hybrid · Tirane · botox · http://127.0.0.1:8080
 [GP TOOL] discover-hybrid · http://127.0.0.1:8080 · ok · rows=3 · stored_available=4 · novel_live_available=1 · fallback_used=true · growth_exhausted_reason=no_additional_eligible_clinic_in_searched_sources
 [GP TOOL] rejections · no_price_evidence: https://example.al/menu
-00:27 +159: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: every visible priced card has a nonempty price using the card formatter
-00:27 +159: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract the visible tab is not held behind another tab
+00:30 +162: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: generic saved filler title does not replace its precise Romanian tariff name
+00:30 +162: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract the visible tab is not held behind another tab
 [GP TOOL] urls · loopback=true · dev=- · http://127.0.0.1:8080
 [GP TOOL] health · http://127.0.0.1:8080 · ok · version=0.11.67
 [GP TOOL] discover-hybrid · Tirane · botox · http://127.0.0.1:8080
 [GP TOOL] discover-hybrid · Tirane · dermal filler · http://127.0.0.1:8080
 [GP TOOL] discover-hybrid · http://127.0.0.1:8080 · ok · rows=1 · stored_available=0 · novel_live_available=0 · fallback_used=false · growth_exhausted_reason=-
-00:28 +160: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract the visible tab is not held behind another tab
-00:28 +161: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract the visible tab is not held behind another tab
-00:28 +162: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract the visible tab is not held behind another tab
+00:30 +163: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract the visible tab is not held behind another tab
+00:30 +164: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract the visible tab is not held behind another tab
+00:30 +165: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract the visible tab is not held behind another tab
+00:30 +166: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract the visible tab is not held behind another tab
+00:30 +167: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract the visible tab is not held behind another tab
+00:30 +168: /workspace/ae-journey/test/explore_compare_hybrid_contract_test.dart: compare hybrid contract the visible tab is not held behind another tab
 [GP TOOL] discover-hybrid · http://127.0.0.1:8080 · ok · rows=1 · stored_available=0 · novel_live_available=0 · fallback_used=false · growth_exhausted_reason=-
-00:28 +163: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: published filler technique and dose remain attached to the card
-00:28 +164: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: old generic cache rows recover the exact title from one priced tariff sentence
-00:28 +165: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: tear-trough tariff keeps its actual Romanian treatment name
-00:28 +166: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: intimate filler and intimate peels cannot occupy facial price slots
-00:28 +167: /workspace/ae-journey/test/explore_verified_card_titles_test.dart: an Iran price remains foreign despite an Abu Dhabi area label
-00:29 +168: /workspace/ae-journey/test/explore_price_ownership_test.dart: page-level clinicOwnPrice A breast augmentation starts at roughly → not clinic owned
-00:29 +169: /workspace/ae-journey/test/explore_price_ownership_test.dart: page-level clinicOwnPrice With only 3.999 euros country guide → not owned + no sentence title
-00:29 +170: /workspace/ae-journey/test/explore_price_ownership_test.dart: page-level clinicOwnPrice Mentor package on official page → owned + clean title + detail
-00:29 +171: /workspace/ae-journey/test/explore_price_ownership_test.dart: page-level clinicOwnPrice explicit own price language is clinic owned
-00:29 +172: /workspace/ae-journey/test/explore_price_ownership_test.dart: page-level clinicOwnPrice market page cannot bypass via short list_item fragment
-00:29 +173: /workspace/ae-journey/test/explore_price_ownership_test.dart: broad SERP discovery buildBroadProcedureDiscoveryQueries for Tirana breast
-00:29 +174: /workspace/ae-journey/test/explore_price_ownership_test.dart: broad SERP discovery SERP title is never clinic name
-00:29 +175: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: a treatment page without a fee cannot supply a price card
-00:29 +176: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: a treatment page without a fee cannot supply a price card
-00:29 +177: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: a treatment page without a fee cannot supply a price card
-00:29 +178: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: a treatment page without a fee cannot supply a price card
-00:29 +179: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: an official tariff keeps its published treatment and fee
-00:30 +180: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: a market paragraph cannot hide behind an exact-looking table row
+00:31 +169: /workspace/ae-journey/test/explore_price_ownership_test.dart: page-level clinicOwnPrice A breast augmentation starts at roughly → not clinic owned
+00:31 +170: /workspace/ae-journey/test/explore_price_ownership_test.dart: page-level clinicOwnPrice With only 3.999 euros country guide → not owned + no sentence title
+00:31 +171: /workspace/ae-journey/test/explore_price_ownership_test.dart: page-level clinicOwnPrice Mentor package on official page → owned + clean title + detail
+00:31 +172: /workspace/ae-journey/test/explore_price_ownership_test.dart: page-level clinicOwnPrice explicit own price language is clinic owned
+00:31 +173: /workspace/ae-journey/test/explore_price_ownership_test.dart: page-level clinicOwnPrice market page cannot bypass via short list_item fragment
+00:31 +174: /workspace/ae-journey/test/explore_price_ownership_test.dart: broad SERP discovery buildBroadProcedureDiscoveryQueries for Tirana breast
+00:31 +175: /workspace/ae-journey/test/explore_price_ownership_test.dart: broad SERP discovery SERP title is never clinic name
+00:31 +176: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: a treatment page without a fee cannot supply a price card
+00:31 +177: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: a treatment page without a fee cannot supply a price card
+00:31 +178: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: a treatment page without a fee cannot supply a price card
+00:31 +179: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: a treatment page without a fee cannot supply a price card
+00:31 +180: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: an official tariff keeps its published treatment and fee
+00:32 +181: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: a market paragraph cannot hide behind an exact-looking table row
 [PRICE REJECT]
 reason=not_clinic_owned_price
 priceMin=230
@@ -1592,6 +1572,7 @@ rawEvidence=Botox 3 zones 230 €
 sourceUrl=https://valencia-clinic.example/prices/
 extractionMethod=html_table
 [GP PRICE] REJECT · not_clinic_owned_price
+00:33 +182: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: a market paragraph cannot hide behind an exact-looking table row
 [PRICE REJECT]
 reason=not_clinic_owned_price
 priceMin=150
@@ -1614,5 +1595,23 @@ rawEvidence=On average Botox prices across clinics range from 150 to 400 euros.
 sourceUrl=https://valencia-clinic.example/prices/
 extractionMethod=dom_block
 [GP PRICE] REJECT · not_clinic_owned_price
-00:31 +181: /workspace/ae-journey/test/explore_source_context_regressions_test.dart: foreign price comparisons cannot become local clinic tariffs
-00:31 +182: All tests passed!
+00:33 +183: /workspace/ae-journey/test/explore_saved_price_loading_test.dart: native alias cache paints despite an empty current doc and blocked server
+00:33 +184: /workspace/ae-journey/test/explore_saved_price_loading_test.dart: native alias cache paints despite an empty current doc and blocked server
+[GP CACHE] Google prices · Madrid · dermal filler lips cheeks · cache · 1 usable · v13_7Cplace_test_7Cdermal_20filler
+00:33 +185: /workspace/ae-journey/test/explore_saved_price_loading_test.dart: an invalid newer doc cannot mask an independently valid older alias
+[GP CACHE] Google prices · Madrid · dermal filler lips cheeks · cache · 1 usable · v12_7Cmadrid_7Cdermal_20filler
+00:34 +186: /workspace/ae-journey/test/explore_saved_price_loading_test.dart: an empty read is not cached for the remainder of the session
+[GP CACHE] Google prices · Madrid · dermal filler · 0 usable · rejectedDocs=0 rejectedRows=0
+[GP CACHE] Google prices · Madrid · dermal filler · cache · 1 usable · v14_7Cplace_test_7Cdermal_20filler
+00:34 +187: /workspace/ae-journey/test/explore_fresh_tariff_and_rating_test.dart: a newer verified tariff updates its slot even when all four are filled
+00:34 +187: /workspace/ae-journey/test/explore_saved_price_loading_test.dart: signed-out cache reads are diagnosed without hitting Firestore
+[GP CACHE] Google prices · Madrid · botox · signed out
+00:34 +188: /workspace/ae-journey/test/explore_fresh_tariff_and_rating_test.dart: a newer verified tariff updates its slot even when all four are filled
+00:34 +189: /workspace/ae-journey/test/explore_fresh_tariff_and_rating_test.dart: a newer verified tariff updates its slot even when all four are filled
+00:34 +190: /workspace/ae-journey/test/explore_fresh_tariff_and_rating_test.dart: a newer verified tariff updates its slot even when all four are filled
+00:34 +191: /workspace/ae-journey/test/explore_fresh_tariff_and_rating_test.dart: a newer verified tariff updates its slot even when all four are filled
+00:35 +192: /workspace/ae-journey/test/explore_fresh_tariff_and_rating_test.dart: euro suffixes retain the area of a single scoped Botox tariff
+00:36 +193: /workspace/ae-journey/test/explore_fresh_tariff_and_rating_test.dart: a promotion remains an offer on both the card and map
+00:36 +194: /workspace/ae-journey/test/explore_fresh_tariff_and_rating_test.dart: city-named streets do not reject the correct Maps locality
+00:36 +195: /workspace/ae-journey/test/explore_fresh_tariff_and_rating_test.dart: verified flags cannot turn a publisher or editorial guide into a clinic fee
+00:36 +196: All tests passed!

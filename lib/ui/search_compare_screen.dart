@@ -684,6 +684,10 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
       _openAI.prewarmExploreCachesForCity(city: _city, mode: _modeString),
     );
 
+    // Card reads run immediately; map initialization is independent of them.
+    unawaited(_loadTrendingProcedures());
+    final comparisonBuild = _buildComparisonFromPill(_pill);
+
     // Move the map camera to the new city once the map channel is ready.
     try {
       await _mapReadyCompleter.future.timeout(const Duration(seconds: 3));
@@ -696,10 +700,7 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
 
     if (!mounted) return;
 
-    unawaited(_loadTrendingProcedures());
-
-    // The visible pill paints Firestore first. A short verified list is done.
-    await _buildComparisonFromPill(_pill, forceRefresh: true);
+    await comparisonBuild;
 
     if (_searchController.text.trim().isNotEmpty) {
       await _runSearch(q: _searchController.text);
@@ -1480,8 +1481,11 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     OpenAIComparisonResult incoming,
   ) {
     if (previous == null || previous.clinics.isEmpty) return incoming;
-    if (incoming.clinics.isNotEmpty &&
-        incoming.clinics.any((c) => c.sourceType == 'discovery_tool')) {
+    if (ExplorePriceDiscoveryTool.instance.enabled ||
+        (incoming.clinics.isNotEmpty &&
+        incoming.clinics.any((c) => c.sourceType == 'discovery_tool'))) {
+      // The tool stabilizes valid providers before publishing. Its snapshot
+      // can also remove a source positively invalidated during rechecking.
       return incoming.copyWith(
         clinics: overlayExploreClinicRatings(
           shown: incoming.clinics,
@@ -1739,7 +1743,8 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
         }
         // Never shrink a list the user already saw (4 → 2 Firestore seeds
         // on tab return). Google can still append via merge when it lands.
-        if (shown < prevCount && prevCount > 0) {
+        if (shown < prevCount && prevCount > 0 &&
+            !ExplorePriceDiscoveryTool.instance.enabled) {
           setState(() {
             _isLoadingMoreClinics = _compareStillFillingSlots(
               cacheKey,
@@ -4093,16 +4098,14 @@ class _ProcedureResultCard extends StatelessWidget {
             city: subtitleCity,
             worldwide: WorldwideCuratedClinics.isWorldwide(subtitleCity),
           );
-    final isLoading = cmp == null;
     // One searching card for cold start (null cmp) and empty+still-filling —
     // never stack a bare "Loading" orb with a second "Checking clinic prices…"
     // card (Boob job / Fillers cold pill).
-    final noteIsSearching = RegExp(
-      r'^(?:searching|checking|preparing|looking|discovery is still running)',
-      caseSensitive: false,
-    ).hasMatch(backgroundNote.trim());
-    final showInitialSearch = isLoading ||
-        (sortedClinics.isEmpty && (loadingMore || noteIsSearching));
+    final showInitialSearch = exploreShouldShowInitialSearch(
+      hasComparison: cmp != null,
+      verifiedCount: sortedClinics.length,
+      loadingMore: loadingMore,
+    );
     final searchMessage = backgroundNote.isNotEmpty
         ? backgroundNote
         : exploreSearchingVerifiedMessage(

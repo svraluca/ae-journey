@@ -117,6 +117,24 @@ class PriceLayouts(unittest.TestCase):
         self.assertEqual({row.price_min for row, _ in found}, {700})
         self.assertTrue(any(ev.original_price_min == 900 for _, ev in found))
 
+    def test_named_offer_column_is_current_and_preserves_vial_basis(self):
+        for offer_heading in ['EN OFERTA', 'On offer', 'Sale price']:
+            html = page('<h2>Lip filler prices</h2><table>'
+                '<tr><td>Treatment</td><td>Vial</td><td>Price</td>'
+                f'<td>{offer_heading}</td></tr>'
+                '<tr><td>Lip filler</td><td>1 vial</td><td>400€</td><td>330€</td></tr>'
+                '</table>')
+            url = 'https://aster.example/lip-filler/'
+            candidates = e.extract_price_evidence(html, url, 'filler')
+            valid = [ev for ev in candidates if e.validate_evidence(
+                ev, e.page_text(html), html, 'Dubai')[0]]
+            self.assertTrue(valid, offer_heading)
+            self.assertEqual({ev.price_min for ev in valid}, {330})
+            chosen = next(ev for ev in valid if ev.extraction_method == 'scoped_tariff_table_row')
+            self.assertEqual(chosen.original_price_min, 400)
+            self.assertEqual(chosen.qualifier, 'promo')
+            self.assertIn('1 vial', chosen.raw_procedure_text)
+
     def test_no_currency_is_guessed_from_the_search_city(self):
         found = accepted('<h2>Botox prices</h2><table><tr><th>Option</th><th>Price</th></tr>'
                          '<tr><td>Upper face</td><td>700</td></tr></table>')
@@ -169,7 +187,7 @@ class FetchEvidence(unittest.IsolatedAsyncioTestCase):
                                      base_url="http://test") as client:
             response = await client.get("/health")
         data = response.json()
-        self.assertEqual(data["version"], "0.11.84")
+        self.assertEqual(data["version"], "0.11.85")
         self.assertEqual(data["worker_version"], data["version"])
         self.assertTrue(data["progressive_jobs"])
 

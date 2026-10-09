@@ -6,172 +6,172 @@ TAP version 13
 # Subtest: Barcelona anti-frizz hair service never fills an injectable Botox slot
 ok 1 - Barcelona anti-frizz hair service never fills an injectable Botox slot
   ---
-  duration_ms: 19.544881
+  duration_ms: 33.74989
   ...
 # Subtest: a following Botox label cannot adopt the preceding hyaluronic acid amount
 ok 2 - a following Botox label cannot adopt the preceding hyaluronic acid amount
   ---
-  duration_ms: 2.90478
+  duration_ms: 31.776918
   ...
 # Subtest: related shop products never supply breast augmentation fees
 ok 3 - related shop products never supply breast augmentation fees
   ---
-  duration_ms: 0.622675
+  duration_ms: 0.77972
   ...
 # Subtest: five-digit AED surgery ranges are not postal codes
 ok 4 - five-digit AED surgery ranges are not postal codes
   ---
-  duration_ms: 17.436436
+  duration_ms: 26.511756
   ...
 # Subtest: bright data discovery queries
     # Subtest: builds focused Botox queries not generic aesthetic clinic
     ok 1 - builds focused Botox queries not generic aesthetic clinic
       ---
-      duration_ms: 1.370297
+      duration_ms: 3.534706
       ...
     # Subtest: builds rhinoplasty surgeon queries
     ok 2 - builds rhinoplasty surgeon queries
       ---
-      duration_ms: 0.252419
+      duration_ms: 0.350486
       ...
     1..2
 ok 5 - bright data discovery queries
   ---
-  duration_ms: 2.489347
+  duration_ms: 5.207277
   type: 'suite'
   ...
 # Subtest: bright data serp helpers
     # Subtest: builds google search url with brd_json
     ok 1 - builds google search url with brd_json
       ---
-      duration_ms: 0.667752
+      duration_ms: 0.977477
       ...
     # Subtest: parses organic results without reading prices
     ok 2 - parses organic results without reading prices
       ---
-      duration_ms: 0.279059
+      duration_ms: 0.587212
       ...
     1..2
 ok 6 - bright data serp helpers
   ---
-  duration_ms: 1.086281
+  duration_ms: 1.761004
   type: 'suite'
   ...
 # Subtest: bright data maps normalize
     # Subtest: maps dataset rows to clinic candidates
     ok 1 - maps dataset rows to clinic candidates
       ---
-      duration_ms: 0.231617
+      duration_ms: 0.362444
       ...
     1..1
 ok 7 - bright data maps normalize
   ---
-  duration_ms: 0.321532
+  duration_ms: 0.509635
   type: 'suite'
   ...
 # Subtest: worldwide currencies
     # Subtest: detects expanded currencies
     ok 1 - detects expanded currencies
       ---
-      duration_ms: 1.407743
+      duration_ms: 2.042896
       ...
     # Subtest: uses currency-aware bands
     ok 2 - uses currency-aware bands
       ---
-      duration_ms: 0.400291
+      duration_ms: 0.588113
       ...
     1..2
 ok 8 - worldwide currencies
   ---
-  duration_ms: 2.001795
+  duration_ms: 2.929888
   type: 'suite'
   ...
 # Subtest: feature flags defaults
     # Subtest: disables fresha and zyte by default
     ok 1 - disables fresha and zyte by default
       ---
-      duration_ms: 0.156485
+      duration_ms: 2.074163
       ...
     1..1
 ok 9 - feature flags defaults
   ---
-  duration_ms: 0.249264
+  duration_ms: 6.912576
   type: 'suite'
   ...
 # Subtest: missing coverage is unknown not complete
 ok 10 - missing coverage is unknown not complete
   ---
-  duration_ms: 1.010607
+  duration_ms: 9.836035
   ...
 # Subtest: unknown candidateCount expands discovery
 ok 11 - unknown candidateCount expands discovery
   ---
-  duration_ms: 0.176946
+  duration_ms: 0.330526
   ...
 # Subtest: cityProcedureKey prefers cityId to avoid Paris FR/TX collision
 ok 12 - cityProcedureKey prefers cityId to avoid Paris FR/TX collision
   ---
-  duration_ms: 0.260802
+  duration_ms: 0.414773
   ...
 # Subtest: lease TTL is finite so crashed jobs do not lock forever
 ok 13 - lease TTL is finite so crashed jobs do not lock forever
   ---
-  duration_ms: 0.135273
+  duration_ms: 0.229355
   ...
 # Subtest: localized discovery queries include price word and country context
 ok 14 - localized discovery queries include price word and country context
   ---
-  duration_ms: 1.276316
+  duration_ms: 5.739425
   ...
 # Subtest: expired lease can be reacquired (pure clock logic)
 ok 15 - expired lease can be reacquired (pure clock logic)
   ---
-  duration_ms: 0.179139
+  duration_ms: 0.291788
   ...
 # Subtest: concurrent searches reuse one active lease jobId
 ok 16 - concurrent searches reuse one active lease jobId
   ---
-  duration_ms: 0.134612
+  duration_ms: 0.21336
   ...
 # Subtest: coverageLevel thin vs healthy boundaries
 ok 17 - coverageLevel thin vs healthy boundaries
   ---
-  duration_ms: 0.142994
+  duration_ms: 0.238007
   ...
 # Subtest: provider failure status is failed not empty
 ok 18 - provider failure status is failed not empty
   ---
-  duration_ms: 0.138048
+  duration_ms: 0.276194
   ...
 # Subtest: discoveryResponse never returns successful null identity fields
 ok 19 - discoveryResponse never returns successful null identity fields
   ---
-  duration_ms: 1.482966
+  duration_ms: 2.509888
   ...
 # Subtest: city_unresolved response is ok=false with zeroed counts
 ok 20 - city_unresolved response is ok=false with zeroed counts
   ---
-  duration_ms: 0.278027
+  duration_ms: 0.251978
   ...
 # Subtest: enqueue rejects guide domains and SEO headlines
 ok 21 - enqueue rejects guide domains and SEO headlines
   ---
-  duration_ms: 1.285549
+  duration_ms: 2.214114
   ...
 # Subtest: backend price stamp matches the actual Flutter verifier
 ok 22 - backend price stamp matches the actual Flutter verifier
   ---
-  duration_ms: 1.535365
+  duration_ms: 1.866151
   ...
 # Subtest: published treatment label is preserved instead of the category name
 ok 23 - published treatment label is preserved instead of the category name
   ---
-  duration_ms: 1.008293
+  duration_ms: 1.131258
   ...
 # Subtest: official tariff guide stays owned while averages and foreign guides remain excluded
 ok 24 - official tariff guide stays owned while averages and foreign guides remain excluded
   ---
-  duration_ms: 1.966141
+  duration_ms: 2.560393
   ...
 # [RELATION REJECT] "Endolift JawLine (Under Chin)" → different_procedure:energy_device
 # [GP PRICE] REJECT · missing_price_semantics
@@ -180,97 +180,97 @@ ok 24 - official tariff guide stays owned while averages and foreign guides rema
 # Subtest: same clinic Botox then Fillers retains both families
 ok 25 - same clinic Botox then Fillers retains both families
   ---
-  duration_ms: 1.473482
+  duration_ms: 3.3908
   ...
 # Subtest: same placeId from Bright Data and Places is one candidate id
 ok 26 - same placeId from Bright Data and Places is one candidate id
   ---
-  duration_ms: 0.184437
+  duration_ms: 0.19944
   ...
 # Subtest: legacy candidate docs still load safely
 ok 27 - legacy candidate docs still load safely
   ---
-  duration_ms: 0.658288
+  duration_ms: 1.047462
   ...
 # Subtest: coverage: thin triggers discovery; verified visible gates healthy
 ok 28 - coverage: thin triggers discovery; verified visible gates healthy
   ---
-  duration_ms: 0.222314
+  duration_ms: 0.232038
   ...
 # Subtest: candidate healthy/broad with 0 verified does not imply pool healthy
 ok 29 - candidate healthy/broad with 0 verified does not imply pool healthy
   ---
-  duration_ms: 0.11298
+  duration_ms: 0.133961
   ...
 # Subtest: stored Bright Data candidates rank before new Places
 ok 30 - stored Bright Data candidates rank before new Places
   ---
-  duration_ms: 0.437727
+  duration_ms: 0.304747
   ...
 # Subtest: verified pool accumulates A B C + D
 ok 31 - verified pool accumulates A B C + D
   ---
-  duration_ms: 53.199473
+  duration_ms: 95.397086
   ...
 # Subtest: unknown city still gets English family queries
 ok 32 - unknown city still gets English family queries
   ---
-  duration_ms: 1.348504
+  duration_ms: 0.884318
   ...
 # Subtest: bare anatomy and injectables stay ambiguous for Botox
 ok 33 - bare anatomy and injectables stay ambiguous for Botox
   ---
-  duration_ms: 2.060283
+  duration_ms: 2.583598
   ...
 # Subtest: Endolift JawLine is never Botox
 ok 34 - Endolift JawLine is never Botox
   ---
-  duration_ms: 2.05838
+  duration_ms: 1.819291
   ...
 # Subtest: parent Botox Pricing inherits; Injectables does not
 ok 35 - parent Botox Pricing inherits; Injectables does not
   ---
-  duration_ms: 1.144489
+  duration_ms: 1.005449
   ...
 # Subtest: rediscovery upsert payload never resets workflow status
 ok 36 - rediscovery upsert payload never resets workflow status
   ---
-  duration_ms: 0.282935
+  duration_ms: 0.317015
   ...
 # Subtest: empty rediscovery website does not wipe a stored site
 ok 37 - empty rediscovery website does not wipe a stored site
   ---
-  duration_ms: 0.157066
+  duration_ms: 0.159399
   ...
 # Subtest: family maps keep Botox then Fillers independently
 ok 38 - family maps keep Botox then Fillers independently
   ---
-  duration_ms: 0.25295
+  duration_ms: 0.209004
   ...
 # Subtest: global verified status does not count as Botox verified
 ok 39 - global verified status does not count as Botox verified
   ---
-  duration_ms: 0.21999
+  duration_ms: 0.267171
   ...
 # Subtest: no_public_price gets a multi-day recheck TTL, not permanent
 ok 40 - no_public_price gets a multi-day recheck TTL, not permanent
   ---
-  duration_ms: 0.476655
+  duration_ms: 1.836206
   ...
 # Subtest: Botox $12/unit keeps perUnit type via parse
 ok 41 - Botox $12/unit keeps perUnit type via parse
   ---
-  duration_ms: 3.929659
+  duration_ms: 4.204932
   ...
 # Subtest: price safety rejects reviews, financing, and market averages
 ok 42 - price safety rejects reviews, financing, and market averages
   ---
-  duration_ms: 3.6837
+  duration_ms: 4.93648
   ...
 # Subtest: poolHealthy uses post-validation visible count not raw cache
 ok 43 - poolHealthy uses post-validation visible count not raw cache
   ---
-  duration_ms: 0.179189
+  duration_ms: 0.189695
   ...
 # [MATCH] "Large FUE Hair Transplant" → hair_transplant/hair_transplant
 # [MATCH] "Small Hair Transplant" → hair_transplant/hair_transplant
@@ -724,72 +724,72 @@ ok 43 - poolHealthy uses post-validation visible count not raw cache
 # Subtest: Canada locations import as CA when country or CAD is set
 ok 44 - Canada locations import as CA when country or CAD is set
   ---
-  duration_ms: 1.290618
+  duration_ms: 1.222265
   ...
 # Subtest: toronto clinics with public contact import as CAD
 ok 45 - toronto clinics with public contact import as CAD
   ---
-  duration_ms: 84.945215
+  duration_ms: 119.884583
   ...
 # Subtest: vancouver clinics with public contact import as CAD
 ok 46 - vancouver clinics with public contact import as CAD
   ---
-  duration_ms: 17.220932
+  duration_ms: 10.741163
   ...
 # Subtest: calgary clinics with public contact import as CAD
 ok 47 - calgary clinics with public contact import as CAD
   ---
-  duration_ms: 16.32707
+  duration_ms: 13.91684
   ...
 # Subtest: edmonton clinics with public contact import as CAD
 ok 48 - edmonton clinics with public contact import as CAD
   ---
-  duration_ms: 5.940498
+  duration_ms: 47.947181
   ...
 # Subtest: halifax clinics with public contact import as CAD
 ok 49 - halifax clinics with public contact import as CAD
   ---
-  duration_ms: 5.496862
+  duration_ms: 4.514947
   ...
 # Subtest: hamilton clinics with public contact import as CAD
 ok 50 - hamilton clinics with public contact import as CAD
   ---
-  duration_ms: 0.784417
+  duration_ms: 1.406661
   ...
 # Subtest: kelowna clinics with public contact import as CAD
 ok 51 - kelowna clinics with public contact import as CAD
   ---
-  duration_ms: 2.520814
+  duration_ms: 2.962147
   ...
 # Subtest: montreal clinics with public contact import as CAD
 ok 52 - montreal clinics with public contact import as CAD
   ---
-  duration_ms: 11.685648
+  duration_ms: 26.044635
   ...
 # Subtest: ottawa clinics with public contact import as CAD
 ok 53 - ottawa clinics with public contact import as CAD
   ---
-  duration_ms: 10.233283
+  duration_ms: 12.699432
   ...
 # Subtest: quebec city clinics with public contact import as CAD
 ok 54 - quebec city clinics with public contact import as CAD
   ---
-  duration_ms: 2.477219
+  duration_ms: 3.680475
   ...
 # Subtest: saskatoon clinics with public contact import as CAD
 ok 55 - saskatoon clinics with public contact import as CAD
   ---
-  duration_ms: 0.566701
+  duration_ms: 0.883166
   ...
 # Subtest: victoria clinics with public contact import as CAD
 ok 56 - victoria clinics with public contact import as CAD
   ---
-  duration_ms: 1.424218
+  duration_ms: 2.525631
   ...
 # Subtest: winnipeg clinics with public contact import as CAD
 ok 57 - winnipeg clinics with public contact import as CAD
   ---
-  duration_ms: 3.512573
+  duration_ms: 2.995246
   ...
 # [MATCH] "Hair Transplant" → hair_transplant/hair_transplant
 # [MATCH] "Hair Transplant - Per Graft" → hair_transplant/hair_transplant
@@ -868,12 +868,12 @@ ok 57 - winnipeg clinics with public contact import as CAD
 # Subtest: every Dallas clinic with public contact imports with USD
 ok 58 - every Dallas clinic with public contact imports with USD
   ---
-  duration_ms: 1.69882
+  duration_ms: 1.700533
   ...
 # Subtest: Dallas flagship families are populated from public clinic prices
 ok 59 - Dallas flagship families are populated from public clinic prices
   ---
-  duration_ms: 0.222414
+  duration_ms: 0.200171
   ...
 # [MATCH] "Revision Breast Augmentation / Implant Removal" → breast_augmentation/breast_augmentation
 # [MATCH] "Rhinoplasty" → rhinoplasty/rhinoplasty
@@ -1176,12 +1176,12 @@ ok 59 - Dallas flagship families are populated from public clinic prices
 # Subtest: every Houston clinic imports with USD and a priced procedure
 ok 60 - every Houston clinic imports with USD and a priced procedure
   ---
-  duration_ms: 1.476367
+  duration_ms: 12.194765
   ...
 # Subtest: Houston flagship families are populated from public clinic prices
 ok 61 - Houston flagship families are populated from public clinic prices
   ---
-  duration_ms: 0.375123
+  duration_ms: 2.490378
   ...
 # [MATCH] "Non-Surgical Rhinoplasty" → rhinoplasty/rhinoplasty
 # [MATCH] "Radiesse 0.8" → filler/filler
@@ -1653,17 +1653,17 @@ ok 61 - Houston flagship families are populated from public clinic prices
 # Subtest: United Kingdom locations import as GB, not US
 ok 62 - United Kingdom locations import as GB, not US
   ---
-  duration_ms: 0.965069
+  duration_ms: 2.503798
   ...
 # Subtest: every London clinic imports with GBP and a priced procedure
 ok 63 - every London clinic imports with GBP and a priced procedure
   ---
-  duration_ms: 0.642394
+  duration_ms: 1.141814
   ...
 # Subtest: London flagship families are populated from public clinic prices
 ok 64 - London flagship families are populated from public clinic prices
   ---
-  duration_ms: 0.371808
+  duration_ms: 0.606992
   ...
 # [MATCH] "Breast Augmentation" → breast_augmentation/breast_augmentation
 # [MATCH] "Botox" → botox/botox
@@ -2164,17 +2164,17 @@ ok 64 - London flagship families are populated from public clinic prices
 # Subtest: USA locations import as US
 ok 65 - USA locations import as US
   ---
-  duration_ms: 1.090878
+  duration_ms: 1.404008
   ...
 # Subtest: every Los Angeles clinic imports with USD and a priced procedure
 ok 66 - every Los Angeles clinic imports with USD and a priced procedure
   ---
-  duration_ms: 0.71243
+  duration_ms: 1.789666
   ...
 # Subtest: Los Angeles flagship families are populated from public clinic prices
 ok 67 - Los Angeles flagship families are populated from public clinic prices
   ---
-  duration_ms: 0.294002
+  duration_ms: 0.438238
   ...
 # [MATCH] "VI Peel" → peel/chemical_peel
 # [MATCH] "VI Peel Advanced" → peel/chemical_peel
@@ -2418,17 +2418,17 @@ ok 67 - Los Angeles flagship families are populated from public clinic prices
 # Subtest: USA locations import as US
 ok 68 - USA locations import as US
   ---
-  duration_ms: 0.989105
+  duration_ms: 1.811439
   ...
 # Subtest: every New York clinic imports with USD and a priced procedure
 ok 69 - every New York clinic imports with USD and a priced procedure
   ---
-  duration_ms: 0.830517
+  duration_ms: 2.040473
   ...
 # Subtest: New York flagship families are populated from public clinic prices
 ok 70 - New York flagship families are populated from public clinic prices
   ---
-  duration_ms: 0.443456
+  duration_ms: 0.403746
   ...
 # [MATCH] REJECT "Full Face Consultation" → wrong_family_consultation
 # [MATCH] REJECT "Skin Care Regimen Consultation" → wrong_family_consultation
@@ -3614,67 +3614,67 @@ ok 70 - New York flagship families are populated from public clinic prices
 # Subtest: atlanta clinics with public contact import as USD
 ok 71 - atlanta clinics with public contact import as USD
   ---
-  duration_ms: 146.262429
+  duration_ms: 194.942453
   ...
 # Subtest: austin clinics with public contact import as USD
 ok 72 - austin clinics with public contact import as USD
   ---
-  duration_ms: 7.707076
+  duration_ms: 8.390364
   ...
 # Subtest: boston clinics with public contact import as USD
 ok 73 - boston clinics with public contact import as USD
   ---
-  duration_ms: 4.88296
+  duration_ms: 4.537521
   ...
 # Subtest: charlotte clinics with public contact import as USD
 ok 74 - charlotte clinics with public contact import as USD
   ---
-  duration_ms: 4.440466
+  duration_ms: 5.274547
   ...
 # Subtest: chicago clinics with public contact import as USD
 ok 75 - chicago clinics with public contact import as USD
   ---
-  duration_ms: 2.715476
+  duration_ms: 2.612491
   ...
 # Subtest: denver clinics with public contact import as USD
 ok 76 - denver clinics with public contact import as USD
   ---
-  duration_ms: 8.419669
+  duration_ms: 3.907835
   ...
 # Subtest: las vegas clinics with public contact import as USD
 ok 77 - las vegas clinics with public contact import as USD
   ---
-  duration_ms: 1.159881
+  duration_ms: 1.650688
   ...
 # Subtest: nashville clinics with public contact import as USD
 ok 78 - nashville clinics with public contact import as USD
   ---
-  duration_ms: 2.440193
+  duration_ms: 3.988457
   ...
 # Subtest: orlando clinics with public contact import as USD
 ok 79 - orlando clinics with public contact import as USD
   ---
-  duration_ms: 42.054042
+  duration_ms: 78.875186
   ...
 # Subtest: phoenix clinics with public contact import as USD
 ok 80 - phoenix clinics with public contact import as USD
   ---
-  duration_ms: 3.995037
+  duration_ms: 8.820259
   ...
 # Subtest: washington dc clinics with public contact import as USD
 ok 81 - washington dc clinics with public contact import as USD
   ---
-  duration_ms: 2.343087
+  duration_ms: 2.633032
   ...
 # Subtest: tampa clinics with public contact import as USD
 ok 82 - tampa clinics with public contact import as USD
   ---
-  duration_ms: 72.219376
+  duration_ms: 103.319908
   ...
 # Subtest: san diego clinics with public contact import as USD
 ok 83 - san diego clinics with public contact import as USD
   ---
-  duration_ms: 87.680351
+  duration_ms: 108.44777
   ...
 # [MATCH] "Dermal / Lip Filler - Full Syringe" → filler/lip_filler
 # [MATCH] "Dermal / Lip Filler - Half Syringe" → filler/lip_filler
@@ -4439,132 +4439,132 @@ ok 83 - san diego clinics with public contact import as USD
 # Subtest: every imported clinic has a name, a contact and a priced procedure
 ok 84 - every imported clinic has a name, a contact and a priced procedure
   ---
-  duration_ms: 1.113982
+  duration_ms: 1.054183
   ...
 # Subtest: a procedure with no numeric price is never imported
 ok 85 - a procedure with no numeric price is never imported
   ---
-  duration_ms: 2.26482
+  duration_ms: 1.801975
   ...
 # Subtest: currency comes from the row and never defaults silently to nothing
 ok 86 - currency comes from the row and never defaults silently to nothing
   ---
-  duration_ms: 0.225449
+  duration_ms: 0.2602
   ...
 # Subtest: a published range stays a range
 ok 87 - a published range stays a range
   ---
-  duration_ms: 0.334672
+  duration_ms: 0.379018
   ...
 # Subtest: per-unit Botox stays per-unit and keeps the unit price
 ok 88 - per-unit Botox stays per-unit and keeps the unit price
   ---
-  duration_ms: 0.172038
+  duration_ms: 0.148453
   ...
 # Subtest: per-graft hair transplant stays per-graft
 ok 89 - per-graft hair transplant stays per-graft
   ---
-  duration_ms: 0.122924
+  duration_ms: 0.119179
   ...
 # Subtest: member and regular prices stay separate, regular is the display price
 ok 90 - member and regular prices stay separate, regular is the display price
   ---
-  duration_ms: 0.743817
+  duration_ms: 0.895594
   ...
 # Subtest: a clinic with 161 procedures imports all of them, untruncated
 ok 91 - a clinic with 161 procedures imports all of them, untruncated
   ---
-  duration_ms: 0.151368
+  duration_ms: 0.488764
   ...
 # Subtest: one clinic can belong to many families at once
 ok 92 - one clinic can belong to many families at once
   ---
-  duration_ms: 0.220361
+  duration_ms: 0.323035
   ...
 # Subtest: re-running the import reuses the same document ids
 ok 93 - re-running the import reuses the same document ids
   ---
-  duration_ms: 102.486734
+  duration_ms: 193.104398
   ...
 # Subtest: the published procedure name survives; family is only for querying
 ok 94 - the published procedure name survives; family is only for querying
   ---
-  duration_ms: 0.332239
+  duration_ms: 0.367942
   ...
 # Subtest: unrelated services keep their own family instead of a flagship pill
 ok 95 - unrelated services keep their own family instead of a flagship pill
   ---
-  duration_ms: 0.355553
+  duration_ms: 0.377206
   ...
 # Subtest: dataset categories are aliased onto the Explore family vocabulary
 ok 96 - dataset categories are aliased onto the Explore family vocabulary
   ---
-  duration_ms: 4.697922
+  duration_ms: 0.41289
   ...
 # Subtest: unit labels parse into a token and a quantity
 ok 97 - unit labels parse into a token and a quantity
   ---
-  duration_ms: 0.231287
+  duration_ms: 0.215483
   ...
 # Subtest: a promotional price keeps its unit and is flagged, not relabelled
 ok 98 - a promotional price keeps its unit and is flagged, not relabelled
   ---
-  duration_ms: 0.120822
+  duration_ms: 0.118448
   ...
 # Subtest: a package keeps its session count and is flagged
 ok 99 - a package keeps its session count and is flagged
   ---
-  duration_ms: 0.191888
+  duration_ms: 0.180181
   ...
 # Subtest: every row carries the current extract revision and curated source
 ok 100 - every row carries the current extract revision and curated source
   ---
-  duration_ms: 0.44026
+  duration_ms: 2.831651
   ...
 # Subtest: the whole metro answers a Miami search
 ok 101 - the whole metro answers a Miami search
   ---
-  duration_ms: 0.309415
+  duration_ms: 0.284417
   ...
 # Subtest: a conflicting price on two pages resolves to the more specific page
 ok 102 - a conflicting price on two pages resolves to the more specific page
   ---
-  duration_ms: 0.177065
+  duration_ms: 0.170586
   ...
 # Subtest: duplicate rows on two pages collapse without losing a clinic
 ok 103 - duplicate rows on two pages collapse without losing a clinic
   ---
-  duration_ms: 0.143316
+  duration_ms: 0.197176
   ...
 # Subtest: row ids change with unit and price type but not with price
 ok 104 - row ids change with unit and price type but not with price
   ---
-  duration_ms: 0.18642
+  duration_ms: 0.189224
   ...
 # Subtest: a clinic document records identity without embedding its prices
 ok 105 - a clinic document records identity without embedding its prices
   ---
-  duration_ms: 0.197467
+  duration_ms: 0.216986
   ...
 # Subtest: $13 per unit depending → 13 USD perUnit, never PEN
 ok 106 - $13 per unit depending → 13 USD perUnit, never PEN
   ---
-  duration_ms: 21.848139
+  duration_ms: 82.552379
   ...
 # Subtest: English prose is not a currency token
 ok 107 - English prose is not a currency token
   ---
-  duration_ms: 1.678059
+  duration_ms: 6.180407
   ...
 # Subtest: bounded ISO codes and local symbols still parse
 ok 108 - bounded ISO codes and local symbols still parse
   ---
-  duration_ms: 4.63625
+  duration_ms: 17.957054
   ...
 # Subtest: symbol near the amount beats later prose
 ok 109 - symbol near the amount beats later prose
   ---
-  duration_ms: 0.770346
+  duration_ms: 0.723346
   ...
 # [PRICE LITERAL FOUND] 990 AED · "Starting AED 990"
 # [PROCEDURE RELATION] exact · same_treatment · "Lip Filler"
@@ -4580,7 +4580,7 @@ ok 109 - symbol near the amount beats later prose
 # Subtest: /workspace/ae-journey/functions/explore/test/evidenceLock.test.js
 ok 16 - /workspace/ae-journey/functions/explore/test/evidenceLock.test.js
   ---
-  duration_ms: 124.717466
+  duration_ms: 294.953479
   ...
 # [EXTRACT] method=dom_block
 # [EXTRACT] procedure="Wrinkle relaxers are priced per unit — Dysport and Xeomin"
@@ -4597,67 +4597,67 @@ ok 16 - /workspace/ae-journey/functions/explore/test/evidenceLock.test.js
 # Subtest: extraction revision is e23
 ok 111 - extraction revision is e23
   ---
-  duration_ms: 1.02576
+  duration_ms: 0.952841
   ...
 # Subtest: Miami Skin Spa wrinkle-relaxer paragraph is 13 USD perUnit variant
 ok 112 - Miami Skin Spa wrinkle-relaxer paragraph is 13 USD perUnit variant
   ---
-  duration_ms: 80.69797
+  duration_ms: 124.566195
   ...
 # Subtest: stale e11 numeric row is identity stub, not a trusted cached price
 ok 113 - stale e11 numeric row is identity stub, not a trusted cached price
   ---
-  duration_ms: 2.050458
+  duration_ms: 2.413954
   ...
 # Subtest: current-revision re-verify of the same clinic is trusted numeric
 ok 114 - current-revision re-verify of the same clinic is trusted numeric
   ---
-  duration_ms: 6.617644
+  duration_ms: 4.188517
   ...
 # Subtest: empty stored relation is recomputed; Endolift JawLine stays out
 ok 115 - empty stored relation is recomputed; Endolift JawLine stays out
   ---
-  duration_ms: 10.066011
+  duration_ms: 9.516144
   ...
 # Subtest: missing currency is never trusted as EUR
 ok 116 - missing currency is never trusted as EUR
   ---
-  duration_ms: 0.275473
+  duration_ms: 0.330345
   ...
 # Subtest: unexpected verifier exception is temporary, not a permanent blacklist
 ok 117 - unexpected verifier exception is temporary, not a permanent blacklist
   ---
-  duration_ms: 0.243766
+  duration_ms: 0.283115
   ...
 # Subtest: client-triggered verifier is shallow and short
 ok 118 - client-triggered verifier is shallow and short
   ---
-  duration_ms: 0.155844
+  duration_ms: 0.156655
   ...
 # Subtest: no_public_price still waits for its recheck TTL
 ok 119 - no_public_price still waits for its recheck TTL
   ---
-  duration_ms: 0.459529
+  duration_ms: 0.610366
   ...
 # Subtest: accepted place IDs stay discoverable so stale rows can re-verify
 ok 120 - accepted place IDs stay discoverable so stale rows can re-verify
   ---
-  duration_ms: 0.275604
+  duration_ms: 0.284487
   ...
 # Subtest: empty discovery state skips nothing
 ok 121 - empty discovery state skips nothing
   ---
-  duration_ms: 0.134652
+  duration_ms: 0.135283
   ...
 # Subtest: cached procedure URLs are staged before SERP
 ok 122 - cached procedure URLs are staged before SERP
   ---
-  duration_ms: 2.428706
+  duration_ms: 1.8121
   ...
 # Subtest: interactive deadline is 8 seconds
 ok 123 - interactive deadline is 8 seconds
   ---
-  duration_ms: 0.162854
+  duration_ms: 0.148964
   ...
 # ok urlRank
 # [EXTRACT] method=html_table
@@ -4685,7 +4685,7 @@ ok 123 - interactive deadline is 8 seconds
 # Subtest: /workspace/ae-journey/functions/explore/test/firecrawlDiscovery.test.js
 ok 19 - /workspace/ae-journey/functions/explore/test/firecrawlDiscovery.test.js
   ---
-  duration_ms: 199.757096
+  duration_ms: 421.033291
   ...
 # [MATCH] "Lip Filler 1ml" → filler/lip_filler
 # [FRESHA PROCEDURE] raw → canonical · "Lip Filler 1ml" → filler/lip_filler → dermal filler lips cheeks
@@ -4704,188 +4704,188 @@ ok 19 - /workspace/ae-journey/functions/explore/test/firecrawlDiscovery.test.js
     # Subtest: maps cities dynamically
     ok 1 - maps cities dynamically
       ---
-      duration_ms: 0.924418
+      duration_ms: 1.322375
       ...
     1..1
 ok 125 - fresha locationFormat
   ---
-  duration_ms: 1.75181
+  duration_ms: 2.470008
   type: 'suite'
   ...
 # Subtest: fresha price parse
     # Subtest: never invents prices
     ok 1 - never invents prices
       ---
-      duration_ms: 0.518008
+      duration_ms: 0.661263
       ...
     # Subtest: uses Malikgen priceValue without inventing
     ok 2 - uses Malikgen priceValue without inventing
       ---
-      duration_ms: 0.312489
+      duration_ms: 0.434973
       ...
     # Subtest: skips missing priceValue
     ok 3 - skips missing priceValue
       ---
-      duration_ms: 0.131447
+      duration_ms: 0.167331
       ...
     1..3
 ok 126 - fresha price parse
   ---
-  duration_ms: 1.114663
+  duration_ms: 1.541133
   type: 'suite'
   ...
 # Subtest: service-first gate
     # Subtest: accepts medical aesthetic catalogues
     ok 1 - accepts medical aesthetic catalogues
       ---
-      duration_ms: 0.994523
+      duration_ms: 0.43292
       ...
     # Subtest: rejects haircut/nails/massage only
     ok 2 - rejects haircut/nails/massage only
       ---
-      duration_ms: 0.213641
+      duration_ms: 0.268333
       ...
     1..2
 ok 127 - service-first gate
   ---
-  duration_ms: 1.374714
+  duration_ms: 2.486362
   type: 'suite'
   ...
 # Subtest: fresha procedure classify
     # Subtest: maps common aesthetic services
     ok 1 - maps common aesthetic services
       ---
-      duration_ms: 6.377684
+      duration_ms: 9.553971
       ...
     # Subtest: rejects bundles
     ok 2 - rejects bundles
       ---
-      duration_ms: 1.111809
+      duration_ms: 1.67168
       ...
     # Subtest: does not force unknown into wrong family
     ok 3 - does not force unknown into wrong family
       ---
-      duration_ms: 0.478248
+      duration_ms: 0.684077
       ...
     1..3
 ok 128 - fresha procedure classify
   ---
-  duration_ms: 8.147872
+  duration_ms: 12.181705
   type: 'suite'
   ...
 # Subtest: fresha FROM price
     # Subtest: picks lowest eligible variant per procedure
     ok 1 - picks lowest eligible variant per procedure
       ---
-      duration_ms: 0.251548
+      duration_ms: 0.322544
       ...
     1..1
 ok 129 - fresha FROM price
   ---
-  duration_ms: 0.344708
+  duration_ms: 0.440431
   type: 'suite'
   ...
 # Subtest: fresha url match
     # Subtest: extracts /a/ venue urls only
     ok 1 - extracts /a/ venue urls only
       ---
-      duration_ms: 0.450776
+      duration_ms: 0.515634
       ...
     # Subtest: matches clinic name in slug
     ok 2 - matches clinic name in slug
       ---
-      duration_ms: 0.422965
+      duration_ms: 0.592749
       ...
     1..2
 ok 130 - fresha url match
   ---
-  duration_ms: 1.363977
+  duration_ms: 1.361344
   type: 'suite'
   ...
 # Subtest: import usefulness
     # Subtest: requires clinics and prices for useful complete
     ok 1 - requires clinics and prices for useful complete
       ---
-      duration_ms: 0.144687
+      duration_ms: 0.191988
       ...
     1..1
 ok 131 - import usefulness
   ---
-  duration_ms: 0.224227
+  duration_ms: 0.304757
   type: 'suite'
   ...
 # Subtest: fresha provider normalize malikgen
     # Subtest: normalizes categories[].services with priceValue
     ok 1 - normalizes categories[].services with priceValue
       ---
-      duration_ms: 0.749826
+      duration_ms: 2.210598
       ...
     1..1
 ok 132 - fresha provider normalize malikgen
   ---
-  duration_ms: 0.822955
+  duration_ms: 2.348315
   type: 'suite'
   ...
 # global urlRank + parsePrice unit tests passed
 # Subtest: /workspace/ae-journey/functions/explore/test/globalDiscovery.test.js
 ok 21 - /workspace/ae-journey/functions/explore/test/globalDiscovery.test.js
   ---
-  duration_ms: 143.129737
+  duration_ms: 263.470672
   ...
 # Subtest: ClinicPoint as provider is rejected
 ok 134 - ClinicPoint as provider is rejected
   ---
-  duration_ms: 2.001074
+  duration_ms: 2.970759
   ...
 # Subtest: marketplace HTML with Clínica Londres extracts provider
 ok 135 - marketplace HTML with Clínica Londres extracts provider
   ---
-  duration_ms: 1.3453
+  duration_ms: 2.133432
   ...
 # Subtest: Booksy barber listing is not an aesthetic provider
 ok 136 - Booksy barber listing is not an aesthetic provider
   ---
-  duration_ms: 2.412191
+  duration_ms: 2.606703
   ...
 # Subtest: Tienda is a generic shop identity
 ok 137 - Tienda is a generic shop identity
   ---
-  duration_ms: 0.143385
+  duration_ms: 0.171758
   ...
 # Subtest: Turó Park variants collapse
 ok 138 - Turó Park variants collapse
   ---
-  duration_ms: 0.168013
+  duration_ms: 0.222695
   ...
 # Subtest: raw comment text is not a procedure title
 ok 139 - raw comment text is not a procedure title
   ---
-  duration_ms: 2.818942
+  duration_ms: 3.888918
   ...
 # Subtest: GetClearBeauty is a market-estimate directory, not a clinic
 ok 140 - GetClearBeauty is a market-estimate directory, not a clinic
   ---
-  duration_ms: 0.418228
+  duration_ms: 19.239871
   ...
 # Subtest: scraped price copy is not a clinic name
 ok 141 - scraped price copy is not a clinic name
   ---
-  duration_ms: 0.438858
+  duration_ms: 0.601423
   ...
 # Subtest: Romanian Serp page titles are not clinic names
 ok 142 - Romanian Serp page titles are not clinic names
   ---
-  duration_ms: 0.662334
+  duration_ms: 0.950597
   ...
 # Subtest: Breast surgery financing is not a procedure title
 ok 143 - Breast surgery financing is not a procedure title
   ---
-  duration_ms: 0.326761
+  duration_ms: 0.480221
   ...
 # Subtest: excludeClinicKeys ingest keeps prefixed identity keys as-is
 ok 144 - excludeClinicKeys ingest keeps prefixed identity keys as-is
   ---
-  duration_ms: 0.214422
+  duration_ms: 0.274162
   ...
 # [EXTRACT] method=html_table
 # [EXTRACT] procedure="Aumento de labios · 1VIAL"
@@ -4920,27 +4920,27 @@ ok 144 - excludeClinicKeys ingest keeps prefixed identity keys as-is
 # Subtest: ANTES never supplies an active filler fee or contaminates its range
 ok 145 - ANTES never supplies an active filler fee or contaminates its range
   ---
-  duration_ms: 57.542693
+  duration_ms: 68.818921
   ...
 # Subtest: current column is selected even when it costs more than the old column
 ok 146 - current column is selected even when it costs more than the old column
   ---
-  duration_ms: 9.206451
+  duration_ms: 9.389924
   ...
 # Subtest: conditional friends-pack DOM cannot leak into a standalone filler tariff
 ok 147 - conditional friends-pack DOM cannot leak into a standalone filler tariff
   ---
-  duration_ms: 8.364307
+  duration_ms: 9.151277
   ...
 # Subtest: explicit national-average nonownership overrides a price menu and own wording
 ok 148 - explicit national-average nonownership overrides a price menu and own wording
   ---
-  duration_ms: 1.559762
+  duration_ms: 1.573391
   ...
 # Subtest: a platform that disclaims being a medical office cannot become the treating clinic
 ok 149 - a platform that disclaims being a medical office cannot become the treating clinic
   ---
-  duration_ms: 0.535063
+  duration_ms: 0.81251
   ...
 # [PRICE LITERAL FOUND] 2500 EUR · "2500 EUR"
 # [PROCEDURE RELATION] different_procedure · surgical_chin_not_filler · "Chin filler"
@@ -5123,52 +5123,52 @@ ok 149 - a platform that disclaims being a medical office cannot become the trea
 # Subtest: surgical chin context cannot become live or cached injectable filler
 ok 150 - surgical chin context cannot become live or cached injectable filler
   ---
-  duration_ms: 32.58741
+  duration_ms: 34.964844
   ...
 # Subtest: injectable chin fillers stay valid regardless of amount
 ok 151 - injectable chin fillers stay valid regardless of amount
   ---
-  duration_ms: 25.125698
+  duration_ms: 72.061128
   ...
 # Subtest: toxin and skinbooster combination is rejected through every cache path
 ok 152 - toxin and skinbooster combination is rejected through every cache path
   ---
-  duration_ms: 4.646586
+  duration_ms: 6.076962
   ...
 # Subtest: standalone toxin and separate neighboring skinbooster tariffs remain valid
 ok 153 - standalone toxin and separate neighboring skinbooster tariffs remain valid
   ---
-  duration_ms: 10.347653
+  duration_ms: 20.311258
   ...
 # Subtest: Spanish partial and secondary rhinoplasty cannot supply a primary tariff
 ok 154 - Spanish partial and secondary rhinoplasty cannot supply a primary tariff
   ---
-  duration_ms: 13.903763
+  duration_ms: 17.013708
   ...
 # Subtest: financing caps cannot become fees while a distinct treatment tariff stays valid
 ok 155 - financing caps cannot become fees while a distinct treatment tariff stays valid
   ---
-  duration_ms: 6.262892
+  duration_ms: 4.748738
   ...
 # Subtest: amount-bound approximate cues survive parsing, extraction and output without inventing a range
 ok 156 - amount-bound approximate cues survive parsing, extraction and output without inventing a range
   ---
-  duration_ms: 23.933619
+  duration_ms: 55.913889
   ...
 # Subtest: Spanish market ranges stay excluded beside a genuine owned primary tariff
 ok 157 - Spanish market ranges stay excluded beside a genuine owned primary tariff
   ---
-  duration_ms: 4.725835
+  duration_ms: 12.692402
   ...
 # Subtest: an explicit lip augmentation request does not borrow a hydration-only HA tariff
 ok 158 - an explicit lip augmentation request does not borrow a hydration-only HA tariff
   ---
-  duration_ms: 6.031965
+  duration_ms: 6.690113
   ...
 # Subtest: mesotherapy keeps its own amount despite a preceding toxin heading
 ok 159 - mesotherapy keeps its own amount despite a preceding toxin heading
   ---
-  duration_ms: 4.237882
+  duration_ms: 4.515348
   ...
 # [GP PRICE] REJECT · monthly_financing
 # [GP PRICE] REJECT · market_average
@@ -5228,22 +5228,22 @@ ok 159 - mesotherapy keeps its own amount despite a preceding toxin heading
 # Subtest: syringe price survives results-last-a-month copy
 ok 160 - syringe price survives results-last-a-month copy
   ---
-  duration_ms: 21.413586
+  duration_ms: 76.699269
   ...
 # Subtest: monthly installment is still rejected
 ok 161 - monthly installment is still rejected
   ---
-  duration_ms: 2.97823
+  duration_ms: 7.631035
   ...
 # Subtest: typical sessions ranging is not a menu FROM
 ok 162 - typical sessions ranging is not a menu FROM
   ---
-  duration_ms: 1.315745
+  duration_ms: 5.853907
   ...
 # Subtest: mixed menu Restylane and Chemical Peel, not add-on or typical
 ok 163 - mixed menu Restylane and Chemical Peel, not add-on or typical
   ---
-  duration_ms: 46.468859
+  duration_ms: 170.229608
   ...
 # [MATCH] "Botox 1 Area" → botox/botox
 # [PROCEDURE RELATION] variant · brand_amount_area_or_session_variant · "Botox 1 Area"
@@ -5271,112 +5271,112 @@ ok 163 - mixed menu Restylane and Chemical Peel, not add-on or typical
 # Subtest: stripPriceFields drops all price-related LLM keys
 ok 164 - stripPriceFields drops all price-related LLM keys
   ---
-  duration_ms: 1.103116
+  duration_ms: 1.097507
   ...
 # Subtest: inferUnitsFromLabel preserves area/ml quantities literally
 ok 165 - inferUnitsFromLabel preserves area/ml quantities literally
   ---
-  duration_ms: 0.956676
+  duration_ms: 4.128457
   ...
 # Subtest: Botox 1 Area — AED 700 → botox / variant / area=1 / 700 preserved
 ok 166 - Botox 1 Area — AED 700 → botox / variant / area=1 / 700 preserved
   ---
-  duration_ms: 30.03894
+  duration_ms: 61.728077
   ...
 # Subtest: Botox 2 Areas — AED 1,100 → area=2
 ok 167 - Botox 2 Areas — AED 1,100 → area=2
   ---
-  duration_ms: 1.447323
+  duration_ms: 1.55265
   ...
 # Subtest: Russian Lips 1ml — AED 990 → lip_filler / variant / ml=1
 ok 168 - Russian Lips 1ml — AED 990 → lip_filler / variant / ml=1
   ---
-  duration_ms: 1.156646
+  duration_ms: 7.125606
   ...
 # Subtest: Anti-Wrinkle Treatment Three Areas — £250 → botox / variant / area=3
 ok 169 - Anti-Wrinkle Treatment Three Areas — £250 → botox / variant / area=3
   ---
-  duration_ms: 1.416587
+  duration_ms: 0.91254
   ...
 # Subtest: Botox + Filler Package — rejected bundle
 ok 170 - Botox + Filler Package — rejected bundle
   ---
-  duration_ms: 1.267053
+  duration_ms: 5.576861
   ...
 # Subtest: Breast Augmentation + Lift — rejected bundle
 ok 171 - Breast Augmentation + Lift — rejected bundle
   ---
-  duration_ms: 0.894813
+  duration_ms: 2.906373
   ...
 # Subtest: Average filler cost in Dubai — market_information rejected
 ok 172 - Average filler cost in Dubai — market_information rejected
   ---
-  duration_ms: 1.557468
+  duration_ms: 1.829226
   ...
 # Subtest: Consultation AED 500 rejected for Botox
 ok 173 - Consultation AED 500 rejected for Botox
   ---
-  duration_ms: 1.782686
+  duration_ms: 2.052441
   ...
 # Subtest: clinic-owned "start from" filler may be eligible as from pricing
 ok 174 - clinic-owned "start from" filler may be eligible as from pricing
   ---
-  duration_ms: 0.783366
+  duration_ms: 1.098238
   ...
 # Subtest: AI cannot override strong deterministic rejection
 ok 175 - AI cannot override strong deterministic rejection
   ---
-  duration_ms: 0.138958
+  duration_ms: 0.157557
   ...
 # Subtest: legacy_untrusted never trusted; identity preserved on invalidate
 ok 176 - legacy_untrusted never trusted; identity preserved on invalidate
   ---
-  duration_ms: 12.275878
+  duration_ms: 13.613364
   ...
 # Subtest: merge never lets semantics overwrite locked numeric evidence
 ok 177 - merge never lets semantics overwrite locked numeric evidence
   ---
-  duration_ms: 0.22004
+  duration_ms: 0.795804
   ...
 # Subtest: body peels cannot be promoted to chemical facial peels
 ok 178 - body peels cannot be promoted to chemical facial peels
   ---
-  duration_ms: 13.625695
+  duration_ms: 19.22712
   ...
 # Subtest: provider hair identity rejects otherwise bare Botox service
 ok 179 - provider hair identity rejects otherwise bare Botox service
   ---
-  duration_ms: 2.521194
+  duration_ms: 2.435606
   ...
 # Subtest: directory cards and booking category pages are rejected
 ok 180 - directory cards and booking category pages are rejected
   ---
-  duration_ms: 0.718578
+  duration_ms: 0.603125
   ...
 # Subtest: Spanish multipacks and named rhinoplasty subtypes keep their scope
 ok 181 - Spanish multipacks and named rhinoplasty subtypes keep their scope
   ---
-  duration_ms: 1.107683
+  duration_ms: 1.61226
   ...
 # Subtest: dose averages on an official menu do not classify its price as average
 ok 182 - dose averages on an official menu do not classify its price as average
   ---
-  duration_ms: 2.476598
+  duration_ms: 2.737158
   ...
 # Subtest: a dosage sentence containing a monetary claim remains market average
 ok 183 - a dosage sentence containing a monetary claim remains market average
   ---
-  duration_ms: 1.913202
+  duration_ms: 1.955375
   ...
 # Subtest: English price menus do not bypass city cost-guide rejection
 ok 184 - English price menus do not bypass city cost-guide rejection
   ---
-  duration_ms: 0.256705
+  duration_ms: 0.376124
   ...
 # Subtest: explicit Arabic own offer differs from an Arabic market average
 ok 185 - explicit Arabic own offer differs from an Arabic market average
   ---
-  duration_ms: 1.115826
+  duration_ms: 1.218529
   ...
 # [GP PRICE] REJECT · phone_number
 # [GP PRICE] REJECT · address_number
@@ -6011,7 +6011,7 @@ ok 185 - explicit Arabic own offer differs from an Arabic market average
 # [EXTRACT] method=html_table
 # [EXTRACT] procedure="Treatment"
 # [EXTRACT] rawPrice="SW11 Medical Clinic (Clapham)"
-# [PARSE] 11 
+# [PARSE] 11
 # [EXTRACT] method=html_table
 # [EXTRACT] procedure="Botox (1 Area)"
 # [EXTRACT] rawPrice="£175"
@@ -6403,332 +6403,342 @@ ok 185 - explicit Arabic own offer differs from an Arabic market average
 # Subtest: phone numbers are never prices
 ok 186 - phone numbers are never prices
   ---
-  duration_ms: 20.196119
+  duration_ms: 24.256631
   ...
 # Subtest: address, year, duration, reviews rejected; priced rows accepted
 ok 187 - address, year, duration, reviews rejected; priced rows accepted
   ---
-  duration_ms: 16.895594
+  duration_ms: 12.87113
   ...
 # Subtest: botox unit price survives duration copy
 ok 188 - botox unit price survives duration copy
   ---
-  duration_ms: 2.968587
+  duration_ms: 22.647745
   ...
 # Subtest: average-dose range beside a per-unit fee is not the price
 ok 189 - average-dose range beside a per-unit fee is not the price
   ---
-  duration_ms: 4.961859
+  duration_ms: 5.295369
   ...
 # Subtest: locale and currency forms
 ok 190 - locale and currency forms
   ---
-  duration_ms: 6.170754
+  duration_ms: 5.677503
   ...
 # Subtest: A — Spanish botox table
 ok 191 - A — Spanish botox table
   ---
-  duration_ms: 28.166148
+  duration_ms: 28.261482
   ...
 # Subtest: B — Lip Lift must not become filler
 ok 192 - B — Lip Lift must not become filler
   ---
-  duration_ms: 10.221625
+  duration_ms: 10.32608
   ...
 # Subtest: C — WooCommerce sale uses ins as active price
 ok 193 - C — WooCommerce sale uses ins as active price
   ---
-  duration_ms: 9.358999
+  duration_ms: 24.498524
   ...
 # Subtest: D — number elsewhere is not Botox
 ok 194 - D — number elsewhere is not Botox
   ---
-  duration_ms: 5.633778
+  duration_ms: 26.749076
   ...
 # Subtest: E — consultation is not the filler price
 ok 195 - E — consultation is not the filler price
   ---
-  duration_ms: 7.331626
+  duration_ms: 12.388707
   ...
 # Subtest: F — invalid clinic title
 ok 196 - F — invalid clinic title
   ---
-  duration_ms: 1.622897
+  duration_ms: 1.468564
   ...
 # Subtest: G — AI cannot mutate parsed price
 ok 197 - G — AI cannot mutate parsed price
   ---
-  duration_ms: 0.254713
+  duration_ms: 0.252359
   ...
 # Subtest: H — JS shell requests renderer, not AI
 ok 198 - H — JS shell requests renderer, not AI
   ---
-  duration_ms: 3.777992
+  duration_ms: 5.058913
   ...
 # Subtest: I — De Felipe HA 1 vial beats rhinomodelación for Fillers
 ok 199 - I — De Felipe HA 1 vial beats rhinomodelación for Fillers
   ---
-  duration_ms: 11.11117
+  duration_ms: 18.736871
   ...
 # Subtest: J — Sermed lip min is 180 not Radiesse 250
 ok 200 - J — Sermed lip min is 180 not Radiesse 250
   ---
-  duration_ms: 10.083438
+  duration_ms: 30.617098
   ...
 # Subtest: K — Londres sale is 299 not 300
 ok 201 - K — Londres sale is 299 not 300
   ---
-  duration_ms: 4.419014
+  duration_ms: 7.322882
   ...
 # Subtest: L — blog cost guide is not official clinic evidence
 ok 202 - L — blog cost guide is not official clinic evidence
   ---
-  duration_ms: 0.194562
+  duration_ms: 0.280571
   ...
 # Subtest: N — BePerfect lip filler is Juvederm 1900, not JSON-LD 600-5200
 ok 203 - N — BePerfect lip filler is Juvederm 1900, not JSON-LD 600-5200
   ---
-  duration_ms: 16.671978
+  duration_ms: 35.829602
   ...
 # Subtest: O — BePerfect Botox 1-zone is 900, not hyaluronidase 600
 ok 204 - O — BePerfect Botox 1-zone is 900, not hyaluronidase 600
   ---
-  duration_ms: 15.128942
+  duration_ms: 19.702715
   ...
 # Subtest: Miami Forma RF is not Botox FROM
 ok 205 - Miami Forma RF is not Botox FROM
   ---
-  duration_ms: 4.339795
+  duration_ms: 4.386624
   ...
 # Subtest: P — Dr. Estetix Botox 1 zona is 800, not lip filler
 ok 206 - P — Dr. Estetix Botox 1 zona is 800, not lip filler
   ---
-  duration_ms: 16.027149
+  duration_ms: 32.217921
   ...
 # Subtest: Q — Doctor SKiN Botox is 1-zone wrinkle, not laser 429
 ok 207 - Q — Doctor SKiN Botox is 1-zone wrinkle, not laser 429
   ---
-  duration_ms: 12.538623
+  duration_ms: 38.781583
   ...
 # Subtest: R — Arabic Dubai menus match every family and price in dirhams
 ok 208 - R — Arabic Dubai menus match every family and price in dirhams
   ---
-  duration_ms: 50.250055
+  duration_ms: 108.126544
   ...
 # Subtest: S — clinic articles keep single amounts, drop brand ranges
 ok 209 - S — clinic articles keep single amounts, drop brand ranges
   ---
-  duration_ms: 7.563515
+  duration_ms: 8.335532
   ...
 # Subtest: Premier Laser 1 Area beats Chin Dimpling
 ok 210 - Premier Laser 1 Area beats Chin Dimpling
   ---
-  duration_ms: 14.630153
+  duration_ms: 20.100082
   ...
 # Subtest: generic Botox FROM is 1-area, not Jawline £299 or competitor £120/£99
 ok 211 - generic Botox FROM is 1-area, not Jawline £299 or competitor £120/£99
   ---
-  duration_ms: 40.437349
+  duration_ms: 31.207303
   ...
 # Subtest: 2Glow 1 AREA is 99 GBP, not Shopify template 399.99 USD
 ok 212 - 2Glow 1 AREA is 99 GBP, not Shopify template 399.99 USD
   ---
-  duration_ms: 5.644764
+  duration_ms: 26.08184
   ...
 # Subtest: laser hair vs skin named rows; generic laser treatment skipped
 ok 213 - laser hair vs skin named rows; generic laser treatment skipped
   ---
-  duration_ms: 14.619147
+  duration_ms: 24.544052
   ...
 # Subtest: Enhance BA is 4595 from the menu row, not the financing heading
 ok 214 - Enhance BA is 4595 from the menu row, not the financing heading
   ---
-  duration_ms: 6.84819
+  duration_ms: 8.612257
   ...
 # Subtest: Harley bilateral FROM; Cadogan not 5k-7k market band; Nuffield not pain H3
 ok 215 - Harley bilateral FROM; Cadogan not 5k-7k market band; Nuffield not pain H3
   ---
-  duration_ms: 18.929817
+  duration_ms: 22.198712
   ...
 # Subtest: London peel menu prefers Juliette Armand over Cosmelan kit
 ok 216 - London peel menu prefers Juliette Armand over Cosmelan kit
   ---
-  duration_ms: 8.751728
+  duration_ms: 8.116413
   ...
 # Subtest: Face Clinic targeted add-on is not the Botox FROM
 ok 217 - Face Clinic targeted add-on is not the Botox FROM
   ---
-  duration_ms: 7.009077
+  duration_ms: 6.500037
   ...
 # Subtest: London rhinoplasty — closed FROM not tip band; price-guide beats male copy
 ok 218 - London rhinoplasty — closed FROM not tip band; price-guide beats male copy
   ---
-  duration_ms: 37.093454
+  duration_ms: 41.473644
   ...
 # Subtest: London rhinoplasty market guide rejected; hospital guide not typical
 ok 219 - London rhinoplasty market guide rejected; hospital guide not typical
   ---
-  duration_ms: 11.029157
+  duration_ms: 9.594332
   ...
 # Subtest: Harley Medical official nose-job-cost, not finance or boob-job-cost
 ok 220 - Harley Medical official nose-job-cost, not finance or boob-job-cost
   ---
-  duration_ms: 16.57277
+  duration_ms: 26.188971
   ...
 # Subtest: London hair package FROM not graft count or effective per-graft
 ok 221 - London hair package FROM not graft count or effective per-graft
   ---
-  duration_ms: 56.076813
+  duration_ms: 89.377059
+  ...
+# Subtest: a publication is rejected despite a plausible provider name
+ok 222 - a publication is rejected despite a plausible provider name
+  ---
+  duration_ms: 3.210789
+  ...
+# Subtest: an editorial cost-guide fragment needs its complete page checked
+ok 223 - an editorial cost-guide fragment needs its complete page checked
+  ---
+  duration_ms: 0.261472
   ...
 # Subtest: catalog site: search is worldwide, not Spain-only precio
-ok 222 - catalog site: search is worldwide, not Spain-only precio
+ok 224 - catalog site: search is worldwide, not Spain-only precio
   ---
-  duration_ms: 1.394564
+  duration_ms: 1.496606
   ...
 # Subtest: city queries use local price words in every market
-ok 223 - city queries use local price words in every market
+ok 225 - city queries use local price words in every market
   ---
-  duration_ms: 0.615394
+  duration_ms: 0.844407
   ...
 # Subtest: Places clinic word follows the city language
-ok 224 - Places clinic word follows the city language
+ok 226 - Places clinic word follows the city language
   ---
-  duration_ms: 0.203716
+  duration_ms: 0.206891
   ...
 # Subtest: Google gl follows the city, unknown cities are not pinned to ES/RO
-ok 225 - Google gl follows the city, unknown cities are not pinned to ES/RO
+ok 227 - Google gl follows the city, unknown cities are not pinned to ES/RO
   ---
-  duration_ms: 0.213481
+  duration_ms: 0.209905
   ...
 # Subtest: countryCode overrides city name for locale (BG)
-ok 226 - countryCode overrides city name for locale (BG)
+ok 228 - countryCode overrides city name for locale (BG)
   ---
-  duration_ms: 0.34671
+  duration_ms: 0.402273
   ...
 # Subtest: price menu probes are generic by TLD, not a clinic allowlist
-ok 227 - price menu probes are generic by TLD, not a clinic allowlist
+ok 229 - price menu probes are generic by TLD, not a clinic allowlist
   ---
-  duration_ms: 0.288964
+  duration_ms: 0.242193
   ...
 # Subtest: A — Serper leads, then DataForSEO, then SerpApi
-ok 228 - A — Serper leads, then DataForSEO, then SerpApi
+ok 230 - A — Serper leads, then DataForSEO, then SerpApi
   ---
-  duration_ms: 0.891889
+  duration_ms: 1.167102
   ...
 # Subtest: A2 — Serper asks Google plainly and reads URLs, not prices
-ok 229 - A2 — Serper asks Google plainly and reads URLs, not prices
+ok 231 - A2 — Serper asks Google plainly and reads URLs, not prices
   ---
-  duration_ms: 0.25301
+  duration_ms: 0.272899
   ...
 # Subtest: B — Dubai queries carry the UAE location and Arabic language
-ok 230 - B — Dubai queries carry the UAE location and Arabic language
+ok 232 - B — Dubai queries carry the UAE location and Arabic language
   ---
-  duration_ms: 0.177376
+  duration_ms: 0.224487
   ...
 # Subtest: B2 — DataForSEO city sweeps go deep, site: stays shallow
-ok 231 - B2 — DataForSEO city sweeps go deep, site: stays shallow
+ok 233 - B2 — DataForSEO city sweeps go deep, site: stays shallow
   ---
-  duration_ms: 0.143525
+  duration_ms: 0.152279
   ...
 # Subtest: C — unmapped markets fall back to google.com instead of failing
-ok 232 - C — unmapped markets fall back to google.com instead of failing
+ok 234 - C — unmapped markets fall back to google.com instead of failing
   ---
-  duration_ms: 0.145618
+  duration_ms: 0.145698
   ...
 # Subtest: D — auth header is Basic base64(login:password)
-ok 233 - D — auth header is Basic base64(login:password)
+ok 235 - D — auth header is Basic base64(login:password)
   ---
-  duration_ms: 0.216886
+  duration_ms: 0.231438
   ...
 # Subtest: E — organic rows parse to url/title/snippet, other items ignored
-ok 234 - E — organic rows parse to url/title/snippet, other items ignored
+ok 236 - E — organic rows parse to url/title/snippet, other items ignored
   ---
-  duration_ms: 0.564397
+  duration_ms: 0.820602
   ...
 # Subtest: F — task-level errors are reported, not silently parsed
-ok 235 - F — task-level errors are reported, not silently parsed
+ok 237 - F — task-level errors are reported, not silently parsed
   ---
-  duration_ms: 0.283896
+  duration_ms: 0.404387
   ...
 # Subtest: G — account problems disable the provider, SE hiccups only retry
-ok 236 - G — account problems disable the provider, SE hiccups only retry
+ok 238 - G — account problems disable the provider, SE hiccups only retry
   ---
-  duration_ms: 0.986121
+  duration_ms: 1.477507
   ...
 # Subtest: H — SerpApi rows still parse while the fallback exists
-ok 237 - H — SerpApi rows still parse while the fallback exists
+ok 239 - H — SerpApi rows still parse while the fallback exists
   ---
-  duration_ms: 0.240641
+  duration_ms: 0.254432
   ...
 # Subtest: normalizeExploreLocality prefers explicit fields and fills defaults
-ok 238 - normalizeExploreLocality prefers explicit fields and fills defaults
+ok 240 - normalizeExploreLocality prefers explicit fields and fills defaults
   ---
-  duration_ms: 2.147664
+  duration_ms: 10.354032
   ...
 # Subtest: normalizeExploreLocality falls back to city→country when cc missing
-ok 239 - normalizeExploreLocality falls back to city→country when cc missing
+ok 241 - normalizeExploreLocality falls back to city→country when cc missing
   ---
-  duration_ms: 1.122094
+  duration_ms: 1.280001
   ...
 # Subtest: docIdWithLocality prefers cityId and dual-reads legacy revision
-ok 240 - docIdWithLocality prefers cityId and dual-reads legacy revision
+ok 242 - docIdWithLocality prefers cityId and dual-reads legacy revision
   ---
-  duration_ms: 0.312549
+  duration_ms: 0.328833
   ...
 # Subtest: Paris FR vs Paris TX cityIds never collide
-ok 241 - Paris FR vs Paris TX cityIds never collide
+ok 243 - Paris FR vs Paris TX cityIds never collide
   ---
-  duration_ms: 0.984578
+  duration_ms: 0.875334
   ...
 # Subtest: London UK vs London Ontario cityIds never collide
-ok 242 - London UK vs London Ontario cityIds never collide
+ok 244 - London UK vs London Ontario cityIds never collide
   ---
-  duration_ms: 0.316786
+  duration_ms: 0.24651
   ...
 # Subtest: multiple Springfield cities stay distinct
-ok 243 - multiple Springfield cities stay distinct
+ok 245 - multiple Springfield cities stay distinct
   ---
-  duration_ms: 0.169815
+  duration_ms: 8.452016
   ...
 # Subtest: missing country/coords is unresolved and does not merge
-ok 244 - missing country/coords is unresolved and does not merge
+ok 246 - missing country/coords is unresolved and does not merge
   ---
-  duration_ms: 0.205879
+  duration_ms: 0.202053
   ...
 # Subtest: legacy London UK record cannot leak into London Ontario
-ok 245 - legacy London UK record cannot leak into London Ontario
+ok 247 - legacy London UK record cannot leak into London Ontario
   ---
-  duration_ms: 0.202845
+  duration_ms: 0.348083
   ...
 # Subtest: legacy Paris FR record cannot leak into Paris Texas
-ok 246 - legacy Paris FR record cannot leak into Paris Texas
+ok 248 - legacy Paris FR record cannot leak into Paris Texas
   ---
-  duration_ms: 0.17325
+  duration_ms: 0.245829
   ...
 # Subtest: Cronosmed Timisoara page preferred; Iasi/Brasov rejected
-ok 247 - Cronosmed Timisoara page preferred; Iasi/Brasov rejected
+ok 249 - Cronosmed Timisoara page preferred; Iasi/Brasov rejected
   ---
-  duration_ms: 4.193084
+  duration_ms: 13.700716
   ...
 # Subtest: contaminated Iasi cache row invalidated for Timisoara search
-ok 248 - contaminated Iasi cache row invalidated for Timisoara search
+ok 250 - contaminated Iasi cache row invalidated for Timisoara search
   ---
-  duration_ms: 0.496395
+  duration_ms: 0.455765
   ...
 # Subtest: Bright Data is optional via feature flag
-ok 249 - Bright Data is optional via feature flag
+ok 251 - Bright Data is optional via feature flag
   ---
-  duration_ms: 0.200741
+  duration_ms: 24.652245
   ...
-1..249
-# tests 258
+1..251
+# tests 260
 # suites 13
-# pass 258
+# pass 260
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 1913.700645
+# duration_ms 3646.091621
 npm notice
 npm notice New major version of npm available! 10.8.2 -> 12.2.0
 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0

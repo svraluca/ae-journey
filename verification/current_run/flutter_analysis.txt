@@ -1,4 +1,5 @@
-Analyzing ae-journey...                                         
+Waiting for another flutter command to release the startup lock...
+Analyzing ae-journey...
 
    info • Unnecessary braces in a string interpolation • lib/services/explore_backend_service.dart:248:12 • unnecessary_brace_in_string_interps
    info • Use the null-aware marker '?' rather than a null check via an 'if' • lib/services/explore_backend_service.dart:287:11 • use_null_aware_elements
@@ -8,7 +9,7 @@ warning • The '!' will have no effect because the receiver can't be null • l
    info • Statements in an if should be enclosed in a block • lib/services/explore_clinic_identity.dart:255:79 • curly_braces_in_flow_control_structures
    info • Dangling library doc comment • lib/services/explore_currency_tokens.dart:1:1 • dangling_library_doc_comments
    info • Statements in an if should be enclosed in a block • lib/services/explore_discovery_transport.dart:22:39 • curly_braces_in_flow_control_structures
-warning • The declaration '_ratingUpdatedAt' isn't referenced • lib/services/explore_google_price_store.dart:471:20 • unused_element
+warning • The declaration '_ratingUpdatedAt' isn't referenced • lib/services/explore_google_price_store.dart:517:20 • unused_element
    info • Statements in an if should be enclosed in a block • lib/services/explore_html_price_extractor.dart:2113:5 • curly_braces_in_flow_control_structures
    info • Use the null-aware marker '?' rather than a null check via an 'if' • lib/services/explore_price_binding.dart:411:5 • use_null_aware_elements
    info • Statements in an if should be enclosed in a block • lib/services/explore_price_discovery_tool.dart:579:75 • curly_braces_in_flow_control_structures
@@ -26,9 +27,10 @@ warning • The declaration '_ratingUpdatedAt' isn't referenced • lib/services
 warning • The declaration '_rhinoplastyIsPartialStarting' isn't referenced • lib/services/explore_procedure_family.dart:1951:6 • unused_element
 warning • The declaration '_rhinoplastyIsPrimaryStarting' isn't referenced • lib/services/explore_procedure_family.dart:1955:6 • unused_element
    info • Use 'isNotEmpty' instead of 'length' to test whether the collection is empty • lib/services/explore_procedure_relation.dart:1007:8 • prefer_is_empty
-   info • Use the null-aware marker '?' rather than a null check via an 'if' • lib/services/explore_search_locale.dart:1586:5 • use_null_aware_elements
-   info • Use interpolation to compose strings and values • lib/services/explore_search_locale.dart:1684:9 • prefer_interpolation_to_compose_strings
-   info • Statements in an if should be enclosed in a block • lib/services/explore_search_locale.dart:1687:29 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/services/explore_search_locale.dart:1533:25 • curly_braces_in_flow_control_structures
+   info • Use the null-aware marker '?' rather than a null check via an 'if' • lib/services/explore_search_locale.dart:1600:5 • use_null_aware_elements
+   info • Use interpolation to compose strings and values • lib/services/explore_search_locale.dart:1698:9 • prefer_interpolation_to_compose_strings
+   info • Statements in an if should be enclosed in a block • lib/services/explore_search_locale.dart:1701:29 • curly_braces_in_flow_control_structures
    info • The 'if' statement could be replaced by a null-aware assignment • lib/services/face_scan_quality.dart:104:12 • prefer_conditional_assignment
 warning • Unused import: 'glow_up/clinic_prompt_builder.dart' • lib/services/glow_up_edit_composite.dart:12:8 • unused_import
 warning • Unused import: 'local_glow_retouch.dart' • lib/services/glow_up_edit_composite.dart:13:8 • unused_import
@@ -47,58 +49,61 @@ warning • The declaration '_applyLocalEnhancement' isn't referenced • lib/se
 warning • The declaration '_enhanceLipColor' isn't referenced • lib/services/local_glow_retouch.dart:1665:6 • unused_element
 warning • The declaration '_editBlendStrength' isn't referenced • lib/services/openai_image_edit_service.dart:265:8 • unused_element
 warning • The declaration '_EditAttempt' isn't referenced • lib/services/openai_image_edit_service.dart:272:7 • unused_element
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:1689:84 • curly_braces_in_flow_control_structures
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:1693:66 • curly_braces_in_flow_control_structures
-   info • Unnecessary braces in a string interpolation • lib/services/openai_service.dart:3322:41 • unnecessary_brace_in_string_interps
-warning • The declaration '_fetchExploreComparisonFromAi' isn't referenced • lib/services/openai_service.dart:5827:34 • unused_element
-warning • The declaration '_filterClinicsByMinReviews' isn't referenced • lib/services/openai_service.dart:6031:22 • unused_element
-warning • The declaration '_clinicNameFromSerpTitle' isn't referenced • lib/services/openai_service.dart:6172:10 • unused_element
-warning • A value for optional parameter 'translatedFallback' isn't ever given • lib/services/openai_service.dart:6338:13 • unused_element_parameter
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:7343:7 • curly_braces_in_flow_control_structures
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:8228:11 • curly_braces_in_flow_control_structures
-   info • Angle brackets will be interpreted as HTML • lib/services/openai_service.dart:8815:64 • unintended_html_in_doc_comment
-   info • The local variable '_coreKeywordMap' starts with an underscore • lib/services/openai_service.dart:9807:17 • no_leading_underscores_for_local_identifiers
-   info • The 'if' statement could be replaced by a null-aware assignment • lib/services/openai_service.dart:9865:11 • prefer_conditional_assignment
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:12969:8 • curly_braces_in_flow_control_structures
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:12976:76 • curly_braces_in_flow_control_structures
-   info • Unnecessary braces in a string interpolation • lib/services/openai_service.dart:13122:23 • unnecessary_brace_in_string_interps
-   info • The local variable '_aiSystemPrompt' starts with an underscore • lib/services/openai_service.dart:15350:11 • no_leading_underscores_for_local_identifiers
-   info • The local variable '_aiUserMsg' starts with an underscore • lib/services/openai_service.dart:15433:11 • no_leading_underscores_for_local_identifiers
-   info • Unnecessary braces in a string interpolation • lib/services/openai_service.dart:15435:10 • unnecessary_brace_in_string_interps
-   info • Don't invoke 'print' in production code • lib/services/openai_service.dart:16026:9 • avoid_print
-   info • Don't invoke 'print' in production code • lib/services/openai_service.dart:16030:9 • avoid_print
-   info • Don't invoke 'print' in production code • lib/services/openai_service.dart:16252:9 • avoid_print
-   info • Don't invoke 'print' in production code • lib/services/openai_service.dart:16258:9 • avoid_print
-   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16357:23 • unnecessary_string_escapes
-   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16358:17 • unnecessary_string_escapes
-   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16358:19 • unnecessary_string_escapes
-   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16461:8 • unnecessary_string_escapes
-   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16463:8 • unnecessary_string_escapes
-   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16465:8 • unnecessary_string_escapes
-   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16467:8 • unnecessary_string_escapes
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:16577:9 • curly_braces_in_flow_control_structures
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:18067:6 • curly_braces_in_flow_control_structures
-   info • Use the null-aware marker '?' rather than a null check via an 'if' • lib/services/openai_service.dart:20827:5 • use_null_aware_elements
-warning • The declaration '_placesClinicSearchQueries' isn't referenced • lib/services/openai_service.dart:20983:14 • unused_element
-warning • The declaration '_placesExtraPriceQueries' isn't referenced • lib/services/openai_service.dart:20997:14 • unused_element
-warning • The declaration '_placesBroadFallbackQueries' isn't referenced • lib/services/openai_service.dart:21021:14 • unused_element
-warning • A value for optional parameter 'pill' isn't ever given • lib/services/openai_service.dart:21024:10 • unused_element_parameter
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21107:63 • curly_braces_in_flow_control_structures
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21196:82 • curly_braces_in_flow_control_structures
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21204:5 • curly_braces_in_flow_control_structures
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21210:5 • curly_braces_in_flow_control_structures
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21219:5 • curly_braces_in_flow_control_structures
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21255:46 • curly_braces_in_flow_control_structures
-warning • The declaration '_exploreCityLooksItalian' isn't referenced • lib/services/openai_service.dart:21467:6 • unused_element
-   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:22359:5 • curly_braces_in_flow_control_structures
+   info • The parameter name 'count' matches a visible type name • lib/services/openai_service.dart:1671:26 • avoid_types_as_parameter_names
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:1687:84 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:1691:66 • curly_braces_in_flow_control_structures
+   info • Unnecessary braces in a string interpolation • lib/services/openai_service.dart:3369:41 • unnecessary_brace_in_string_interps
+warning • The declaration '_fetchExploreComparisonFromAi' isn't referenced • lib/services/openai_service.dart:5874:34 • unused_element
+warning • The declaration '_filterClinicsByMinReviews' isn't referenced • lib/services/openai_service.dart:6078:22 • unused_element
+warning • The declaration '_clinicNameFromSerpTitle' isn't referenced • lib/services/openai_service.dart:6219:10 • unused_element
+warning • A value for optional parameter 'translatedFallback' isn't ever given • lib/services/openai_service.dart:6385:13 • unused_element_parameter
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:7390:7 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:8275:11 • curly_braces_in_flow_control_structures
+   info • Angle brackets will be interpreted as HTML • lib/services/openai_service.dart:8862:64 • unintended_html_in_doc_comment
+   info • The local variable '_coreKeywordMap' starts with an underscore • lib/services/openai_service.dart:9854:17 • no_leading_underscores_for_local_identifiers
+   info • The 'if' statement could be replaced by a null-aware assignment • lib/services/openai_service.dart:9912:11 • prefer_conditional_assignment
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:13016:8 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:13023:76 • curly_braces_in_flow_control_structures
+   info • Unnecessary braces in a string interpolation • lib/services/openai_service.dart:13169:23 • unnecessary_brace_in_string_interps
+   info • The local variable '_aiSystemPrompt' starts with an underscore • lib/services/openai_service.dart:15397:11 • no_leading_underscores_for_local_identifiers
+   info • The local variable '_aiUserMsg' starts with an underscore • lib/services/openai_service.dart:15480:11 • no_leading_underscores_for_local_identifiers
+   info • Unnecessary braces in a string interpolation • lib/services/openai_service.dart:15482:10 • unnecessary_brace_in_string_interps
+   info • Don't invoke 'print' in production code • lib/services/openai_service.dart:16073:9 • avoid_print
+   info • Don't invoke 'print' in production code • lib/services/openai_service.dart:16077:9 • avoid_print
+   info • Don't invoke 'print' in production code • lib/services/openai_service.dart:16299:9 • avoid_print
+   info • Don't invoke 'print' in production code • lib/services/openai_service.dart:16305:9 • avoid_print
+   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16404:23 • unnecessary_string_escapes
+   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16405:17 • unnecessary_string_escapes
+   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16405:19 • unnecessary_string_escapes
+   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16508:8 • unnecessary_string_escapes
+   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16510:8 • unnecessary_string_escapes
+   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16512:8 • unnecessary_string_escapes
+   info • Unnecessary escape in string literal • lib/services/openai_service.dart:16514:8 • unnecessary_string_escapes
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:16624:9 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:18114:6 • curly_braces_in_flow_control_structures
+   info • Use the null-aware marker '?' rather than a null check via an 'if' • lib/services/openai_service.dart:20874:5 • use_null_aware_elements
+warning • The declaration '_placesClinicSearchQueries' isn't referenced • lib/services/openai_service.dart:21030:14 • unused_element
+warning • The declaration '_placesExtraPriceQueries' isn't referenced • lib/services/openai_service.dart:21044:14 • unused_element
+warning • The declaration '_placesBroadFallbackQueries' isn't referenced • lib/services/openai_service.dart:21068:14 • unused_element
+warning • A value for optional parameter 'pill' isn't ever given • lib/services/openai_service.dart:21071:10 • unused_element_parameter
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21154:63 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21245:25 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21247:82 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21255:5 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21261:5 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21270:5 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21305:59 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:21317:46 • curly_braces_in_flow_control_structures
+warning • The declaration '_exploreCityLooksItalian' isn't referenced • lib/services/openai_service.dart:21529:6 • unused_element
+   info • Statements in an if should be enclosed in a block • lib/services/openai_service.dart:22421:5 • curly_braces_in_flow_control_structures
    info • The import of 'dart:typed_data' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/foundation.dart' • lib/services/photo_processor.dart:3:8 • unnecessary_import
 warning • The declaration '_blendInt' isn't referenced • lib/services/photo_processor.dart:907:5 • unused_element
    info • Use the null-aware marker '?' rather than a null check via an 'if' • lib/services/transformation_history_store.dart:194:9 • use_null_aware_elements
    info • Unnecessary use of multiple underscores • lib/ui/add_checkpoint_screen.dart:758:55 • unnecessary_underscores
    info • Unnecessary use of multiple underscores • lib/ui/add_checkpoint_screen.dart:758:59 • unnecessary_underscores
 warning • The declaration '_stripLeadingFromPrefix' isn't referenced • lib/ui/clinic_compare_price_display.dart:98:8 • unused_element
-   info • Statements in an if should be enclosed in a block • lib/ui/clinic_compare_price_display.dart:428:41 • curly_braces_in_flow_control_structures
-   info • Statements in an if should be enclosed in a block • lib/ui/clinic_compare_price_display.dart:624:24 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/ui/clinic_compare_price_display.dart:435:41 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/ui/clinic_compare_price_display.dart:631:24 • curly_braces_in_flow_control_structures
 warning • The declaration '_DoctorsSection' isn't referenced • lib/ui/clinic_profile_screen.dart:2002:7 • unused_element
 warning • A value for optional parameter 'key' isn't ever given • lib/ui/clinic_profile_screen.dart:2004:14 • unused_element_parameter
    info • Don't use 'BuildContext's across async gaps • lib/ui/clinics_for_procedure_screen.dart:473:34 • use_build_context_synchronously
@@ -166,33 +171,43 @@ warning • The value of the field 'hint' isn't used • lib/ui/procedure_form_s
    info • Unnecessary use of multiple underscores • lib/ui/profile_screen.dart:1574:45 • unnecessary_underscores
    info • Unnecessary use of multiple underscores • lib/ui/profile_screen.dart:1574:49 • unnecessary_underscores
 warning • Unused import: '../services/explore_procedure_family.dart' • lib/ui/search_compare_screen.dart:29:8 • unused_import
-warning • The declaration '_continueAiFillToMax' isn't referenced • lib/ui/search_compare_screen.dart:1204:16 • unused_element
-warning • The declaration '_exploreSameClinicSet' isn't referenced • lib/ui/search_compare_screen.dart:1428:8 • unused_element
-warning • The value of the field '_bgAiWarmGeneration' isn't used • lib/ui/search_compare_screen.dart:1988:7 • unused_field
-   info • Unnecessary braces in a string interpolation • lib/ui/search_compare_screen.dart:2688:58 • unnecessary_brace_in_string_interps
-warning • The declaration '_LiveResultsStrip' isn't referenced • lib/ui/search_compare_screen.dart:3677:7 • unused_element
-   info • Unnecessary use of multiple underscores • lib/ui/search_compare_screen.dart:3768:35 • unnecessary_underscores
-   info • Unnecessary use of multiple underscores • lib/ui/search_compare_screen.dart:3871:39 • unnecessary_underscores
-   info • Unnecessary use of multiple underscores • lib/ui/search_compare_screen.dart:3871:43 • unnecessary_underscores
-warning • The declaration '_Pill' isn't referenced • lib/ui/search_compare_screen.dart:3930:7 • unused_element
-warning • Dead code • lib/ui/search_compare_screen.dart:4215:60 • dead_code
-warning • The left operand can't be null, so the right operand is never executed • lib/ui/search_compare_screen.dart:4215:63 • dead_null_aware_expression
-warning • The receiver can't be null, so the null-aware operator '?.' is unnecessary • lib/ui/search_compare_screen.dart:4243:35 • invalid_null_aware_operator
-warning • The receiver can't be null, so the null-aware operator '?.' is unnecessary • lib/ui/search_compare_screen.dart:4252:37 • invalid_null_aware_operator
-warning • The receiver can't be null, so the null-aware operator '?.' is unnecessary • lib/ui/search_compare_screen.dart:4288:41 • invalid_null_aware_operator
-warning • The receiver can't be null, so the null-aware operator '?.' is unnecessary • lib/ui/search_compare_screen.dart:4295:37 • invalid_null_aware_operator
-warning • The declaration '_ClinicRow' isn't referenced • lib/ui/search_compare_screen.dart:4779:7 • unused_element
+warning • The declaration '_continueAiFillToMax' isn't referenced • lib/ui/search_compare_screen.dart:1205:16 • unused_element
+warning • The declaration '_exploreSameClinicSet' isn't referenced • lib/ui/search_compare_screen.dart:1429:8 • unused_element
+warning • The value of the field '_bgAiWarmGeneration' isn't used • lib/ui/search_compare_screen.dart:1993:7 • unused_field
+   info • Unnecessary braces in a string interpolation • lib/ui/search_compare_screen.dart:2693:58 • unnecessary_brace_in_string_interps
+warning • The declaration '_LiveResultsStrip' isn't referenced • lib/ui/search_compare_screen.dart:3682:7 • unused_element
+   info • Unnecessary use of multiple underscores • lib/ui/search_compare_screen.dart:3773:35 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/ui/search_compare_screen.dart:3876:39 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/ui/search_compare_screen.dart:3876:43 • unnecessary_underscores
+warning • The declaration '_Pill' isn't referenced • lib/ui/search_compare_screen.dart:3935:7 • unused_element
+warning • Dead code • lib/ui/search_compare_screen.dart:4218:60 • dead_code
+warning • The left operand can't be null, so the right operand is never executed • lib/ui/search_compare_screen.dart:4218:63 • dead_null_aware_expression
+warning • The declaration '_ClinicRow' isn't referenced • lib/ui/search_compare_screen.dart:4782:7 • unused_element
 warning • The operand can't be 'null', so the condition is always 'false' • test/explore_any_city_pipeline_test.dart:143:29 • unnecessary_null_comparison
 warning • The '!' will have no effect because the receiver can't be null • test/explore_any_city_pipeline_test.dart:143:54 • unnecessary_non_null_assertion
    info • Can't use a relative path to import a library in 'lib' • test/explore_city_and_eight_cards_test.dart:3:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_city_and_eight_cards_test.dart:4:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_city_and_eight_cards_test.dart:5:8 • avoid_relative_lib_imports
+   info • Can't use a relative path to import a library in 'lib' • test/explore_fresh_tariff_and_rating_test.dart:3:8 • avoid_relative_lib_imports
+   info • Can't use a relative path to import a library in 'lib' • test/explore_fresh_tariff_and_rating_test.dart:4:8 • avoid_relative_lib_imports
+   info • Can't use a relative path to import a library in 'lib' • test/explore_fresh_tariff_and_rating_test.dart:5:8 • avoid_relative_lib_imports
+   info • Can't use a relative path to import a library in 'lib' • test/explore_fresh_tariff_and_rating_test.dart:6:8 • avoid_relative_lib_imports
+   info • Can't use a relative path to import a library in 'lib' • test/explore_fresh_tariff_and_rating_test.dart:7:8 • avoid_relative_lib_imports
+   info • Can't use a relative path to import a library in 'lib' • test/explore_fresh_tariff_and_rating_test.dart:8:8 • avoid_relative_lib_imports
+   info • Can't use a relative path to import a library in 'lib' • test/explore_fresh_tariff_and_rating_test.dart:9:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_price_index_test.dart:8:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_price_index_test.dart:9:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_queue_and_ratings_test.dart:8:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_queue_and_ratings_test.dart:9:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_queue_and_ratings_test.dart:10:8 • avoid_relative_lib_imports
    info • Statements in an if should be enclosed in a block • test/explore_queue_and_ratings_test.dart:105:11 • curly_braces_in_flow_control_structures
+   info • Can't use a relative path to import a library in 'lib' • test/explore_saved_price_loading_test.dart:6:8 • avoid_relative_lib_imports
+   info • Can't use a relative path to import a library in 'lib' • test/explore_saved_price_loading_test.dart:7:8 • avoid_relative_lib_imports
+   info • Can't use a relative path to import a library in 'lib' • test/explore_saved_price_loading_test.dart:8:8 • avoid_relative_lib_imports
+   info • Can't use a relative path to import a library in 'lib' • test/explore_saved_price_loading_test.dart:9:8 • avoid_relative_lib_imports
+warning • The class 'DocumentSnapshot' shouldn't be extended, mixed in, or implemented because it's sealed • test/explore_saved_price_loading_test.dart:11:1 • subtype_of_sealed_class
+warning • The class 'DocumentReference' shouldn't be extended, mixed in, or implemented because it's sealed • test/explore_saved_price_loading_test.dart:24:1 • subtype_of_sealed_class
+warning • The class 'Query' shouldn't be extended, mixed in, or implemented because it's sealed • test/explore_saved_price_loading_test.dart:40:1 • subtype_of_sealed_class
    info • Can't use a relative path to import a library in 'lib' • test/explore_snapshot_and_scope_test.dart:7:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_snapshot_and_scope_test.dart:8:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_snapshot_and_scope_test.dart:9:8 • avoid_relative_lib_imports
@@ -208,7 +223,7 @@ warning • Unused import: '../lib/services/explore_price_sanity.dart' • test/
    info • Can't use a relative path to import a library in 'lib' • test/explore_tab_restore_and_qualifier_test.dart:10:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_tab_restore_and_qualifier_test.dart:11:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_tab_restore_and_qualifier_test.dart:12:8 • avoid_relative_lib_imports
-   info • Don't invoke 'print' in production code • test/explore_tab_restore_and_qualifier_test.dart:94:7 • avoid_print
+   info • Don't invoke 'print' in production code • test/explore_tab_restore_and_qualifier_test.dart:126:7 • avoid_print
    info • Can't use a relative path to import a library in 'lib' • test/explore_valencia_prices_test.dart:3:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_valencia_prices_test.dart:4:8 • avoid_relative_lib_imports
    info • Can't use a relative path to import a library in 'lib' • test/explore_valencia_prices_test.dart:5:8 • avoid_relative_lib_imports
@@ -226,4 +241,4 @@ warning • Dead code • test/explore_zyte_client_test.dart:42:7 • dead_code
    info • Don't invoke 'print' in production code • test/price_binding_regression_test.dart:32:3 • avoid_print
 warning • Unused import: 'package:glowpass/services/openai_service.dart' • test/worldwide_compare_display_test.dart:2:8 • unused_import
 
-225 issues found. (ran in 9.3s)
+239 issues found. (ran in 4.5s)

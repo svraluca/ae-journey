@@ -1,0 +1,62 @@
+{
+  "validated_at_utc": "2026-10-09T05:29:05.918558+00:00",
+  "backend_version": "0.11.84",
+  "extract_revision": "e23",
+  "python": {
+    "tests": 99,
+    "passed": 99,
+    "failed": 0,
+    "skipped": 0,
+    "runtime": "Python 3.12.14",
+    "working_directory": "python",
+    "command": "PYTHONDONTWRITEBYTECODE=1 /workspace/tooling/ae-journey-venv/bin/python -m unittest discover -s tests -v"
+  },
+  "functions": {
+    "tests": 258,
+    "passed": 258,
+    "failed": 0,
+    "skipped": 0,
+    "runtime": "Node 20.20.2",
+    "working_directory": "functions",
+    "command": "PATH=/workspace/tooling/node-v20.20.2-linux-x64/bin:$PATH npm test"
+  },
+  "flutter": {
+    "tests": 182,
+    "passed": 182,
+    "failed": 0,
+    "skipped": 0,
+    "selected_suites": 12,
+    "full_project_test_suite_run": false,
+    "runtime": "Flutter 3.41.4 / Dart 3.11.1",
+    "command": "flutter test --no-pub --concurrency=2 test/explore_tab_restore_and_qualifier_test.dart test/explore_injectable_cached_eligibility_test.dart test/explore_quote_restrictions_test.dart test/explore_rhinoplasty_variant_eligibility_test.dart test/explore_snapshot_and_scope_test.dart test/explore_queue_and_ratings_test.dart test/explore_duplicate_verify_test.dart test/explore_html_price_extractor_test.dart test/explore_verified_card_titles_test.dart test/explore_compare_hybrid_contract_test.dart test/explore_price_ownership_test.dart test/explore_source_context_regressions_test.dart",
+    "analysis_command": "flutter analyze --no-pub --no-fatal-infos --no-fatal-warnings",
+    "analysis_errors": 0,
+    "analysis_warnings": 84,
+    "analysis_notices": 141,
+    "device_scrolling_test_run": false,
+    "mobile_release_build_run": false
+  },
+  "api_smoke": {
+    "health": true,
+    "backend_version": "0.11.84",
+    "worker_version": "0.11.84",
+    "progressive_jobs": true,
+    "price_index_4": true,
+    "eight_card_requests_rejected": true,
+    "paid_discovery_requested": false
+  },
+  "live_clinic_price_verification": {
+    "performed": true,
+    "screenshots_audited": 5,
+    "cards_audited": 20,
+    "source_records": [
+      "verification/user_followup_source_audit.json",
+      "verification/madrid_surgery_source_audit.json"
+    ],
+    "exact_old_card_evidence_available": false,
+    "fresh_google_ratings_verified": false,
+    "no_production_clinic_price_hardcoding": true
+  },
+  "prior_setup_and_performance_evidence": "verification/prior_validation_7e70ecc.json",
+  "deployments_performed": false
+}

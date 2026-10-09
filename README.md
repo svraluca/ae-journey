@@ -13,6 +13,8 @@ This checkout preserves the complete Flutter app already uploaded to GitHub and 
 - Functions and Flutter share extraction revision **e23**, which invalidates older price evidence. A regression test compares the actual files.
 - General extraction rules exclude financing caps, conditional companion offers, old price columns, and explicitly disclaimed market estimates. They preserve current treatment names, areas, doses, and approximate pricing; clinic prices are not hardcoded.
 - Returning to a verified tab reuses its four cards immediately, with bounded background refresh. Repeated missing-rating lookups and duplicate collection submissions are coalesced. SQLite waits run outside the API event loop.
+- Saved prices paint as each source completes, before map readiness. Native Firestore aliases are tried before server reads; invalid or empty current documents cannot mask usable prior saves. Completed job rows paint before further index requests, and pending jobs retain loading.
+- Newer verified tariffs update an existing clinic's card in place. Explicit offer columns preserve their current amount and vial basis. Publishers are excluded, and city-named streets do not count as foreign cities during rating matching.
 - City matching uses complete words, and explicit foreign branch tariff headings override local SEO titles and shared footers.
 - Index reads preserve rejected-source quarantine and country scope. Fresh verification can restore a rejected source.
 - Discovery counts eligible unique saved providers and respects already-spent search budgets. Malformed Exa responses fail safely.
@@ -32,7 +34,7 @@ The backend helper starts the local service with Firestore and scheduled refresh
 
 ## Validation
 
-**99 Python tests**, **258 Functions tests**, and **182 tests in 12 selected Flutter suites** passed with no failures or skips. Final commands are recorded in [current validation](verification/current_validation.json). The local API and worker both report **0.11.84** and passed health, price-index, and four-card request-limit checks. Flutter analysis reports no errors; warnings and style notices remain. Earlier setup and performance checks are preserved in [prior validation](verification/prior_validation_7e70ecc.json).
+**103 Python tests**, **260 Functions tests**, and **196 tests in 14 selected Flutter suites** passed with no failures or skips. Final commands are recorded in [current validation](verification/current_validation.json). The local API and worker both report **0.11.85** and passed health, price-index, and four-card request-limit checks. Flutter analysis reports no errors; warnings and style notices remain. Earlier setup and performance checks are preserved in [prior validation](verification/prior_validation_7e70ecc.json).
 
 Tests cover the display limit, treatment names, exact fee ranges, active search messages, cancellation, cache ownership, event-loop responsiveness, city scope, tariff ownership, provider budgets, and rejected-source persistence.
 
@@ -41,5 +43,7 @@ Tests cover the display limit, treatment names, exact fee ranges, active search 
 The twenty Madrid screenshot cards were checked against live public source pages. The [Madrid price audit](docs/MADRID_PRICE_AUDIT.md) distinguishes matching amounts from wrong treatments, old prices, promotions, financing and market estimates. The Dra. Olmo FAQ publishes approximately €300 depending on vials. Source URLs, excerpts and fetched-page hashes are recorded in the audit JSON files. The old cards' exact stored extraction evidence was not present in the supplied log, and live Google ratings were not rechecked.
 
 Device scrolling and mobile release builds were not run. No Firebase, app-store, or backend deployment was performed. Deploy the client, Python API and Functions changes together; the corrected API rejects older eight-card requests.
+
+The [latest cache and price-refresh report](docs/PRICE_REFRESH_AND_CACHE.md) covers the subsequent sixteen Madrid cards, missing loading, ELLE, the CEME Maps-address rejection and updated prices. CEME's Google-summary €4,100 is not independently confirmed because its official pages remained proxy-blocked; clinic prices are never hardcoded from screenshots.
 
 `PRICE_AUDIT.md`, original patches, the uploaded README and older verification files are historical upload evidence. This run's results are recorded separately. Local credentials, dependency caches and build output stay excluded from Git.

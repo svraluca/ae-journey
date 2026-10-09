@@ -1792,6 +1792,10 @@ MARKETPLACES = {
     "wupdoc.com",
 }
 DIRECTORIES = {
+    # Editorial publishers are not the treating provider, even if an article
+    # quotes a real surgeon's fee and mentions the requested city.
+    "elle.com", "vogue.com", "vogue.es", "hola.com", "telva.com",
+    "cosmopolitan.com", "harpersbazaar.com", "nytimes.com", "theguardian.com",
     "clinicpoint.com", "doctoralia.es", "multiestetica.com", "gorgeousgetaways.com",
     # Explicitly disclaims being a medical practice; sells reservation vouchers.
     "bonomedico.es",
@@ -2011,6 +2015,14 @@ def comparative_market_article_context(
 ) -> bool:
     """Return true for country/city comparison copy, not a local tariff."""
     path = fold(urlparse(url or "").path)
+    if page_disclaims_clinic_prices(text):
+        return True
+    # Cached fragments can omit the page's ownership disclaimer. A titled
+    # editorial cost guide must be fetched again, not trusted as a tariff.
+    if (re.search(r"(?:^|[-/])(?:guia|guide)(?:[-/]|$)", path)
+            and re.search(r"(?:precio|price|cost)", path)
+            and not re.fullmatch(r"/(?:price|pricing|precio|precios)[-_](?:guide|guia)/?", path)):
+        return True
     # Check this before the price-menu exemption. A slug that both says
     # "prices" and names another country is a market guide.
     if country_price_guide_path(url):
@@ -6408,10 +6420,10 @@ def extract_scoped_tariff_table_rows(soup, out, seen, url, procedure):
                             and bool(re.search(r"\b(?:precio|precios|tarifas?)\b.*\bacido\s+hialuronico\b", fold(scope)))
                             and any(re.search(r"\b\d*\s*viales?\b", fold(label)) for label in headings))
         price_columns = [i for i, label in enumerate(headings)
-                         if i > 0 and re.search(r"\b(?:price|prices|cost|tariff|fee|discount|precio|precios|pvp|antes|ahora)\b", label, re.I)
+                         if i > 0 and re.search(r"\b(?:price|prices|cost|tariff|fee|discount|offer|sale|precio|precios|pvp|antes|ahora|oferta)\b", label, re.I)
                          and not re.search(r"\b(?:dose|quantity|average|typical|market|national|other|units?\s+(?:typical|required))\b", label, re.I)]
         current_columns = [i for i in price_columns
-                           if re.search(r"\b(?:after\s+discount|discounted|current|now|ahora)\b", headings[i], re.I)]
+                           if re.search(r"\b(?:after\s+discount|discounted|current|now|offer|sale|ahora|oferta)\b", headings[i], re.I)]
         if len(current_columns) > 1:
             doses = [(i, re.search(r'\b(\d+)\s*(?:vials?|viales|ml|syringes?)\b', headings[i], re.I))
                      for i in current_columns]
@@ -6465,6 +6477,15 @@ def extract_scoped_tariff_table_rows(soup, out, seen, url, procedure):
             dose = re.search(r'\b\d+\s*(?:vials?|viales|ml|syringes?)\b', headings[column], re.I)
             if dose:
                 unit_label = f' {dose.group(0)}'
+            if not dose:
+                for index, heading in enumerate(headings):
+                    if index in {0, column} or index >= len(cells):
+                        continue
+                    if re.fullmatch(r'(?:vials?|viales?|ml|syringes?)', heading, re.I):
+                        dose_text = cells[index].get_text(' ', strip=True)
+                        if re.fullmatch(r'\d+\s*(?:vials?|viales?|ml|syringes?)', dose_text, re.I):
+                            unit_label = f' {dose_text}'
+                            break
             if re.search(r'\bstarting\s+(?:price|cost)|\b(?:from|starts?)\b', headings[column], re.I):
                 price = f'from {price}'
             add_evidence(out, seen, f"{treatment} | {label}{unit_label}: {price}",
@@ -17785,7 +17806,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.84",
+    version="0.11.85",
     lifespan=app_lifespan,
 )
 

@@ -8,13 +8,22 @@ import 'explore_price_sanity.dart';
 import 'explore_clinic_identity.dart';
 import 'explore_search_locale.dart';
 import 'explore_backend_service.dart';
+import 'explore_saved_price_loader.dart';
 
 /// Shared Explore prices from Google (search / clinic websites).
 ///
 /// First user for a city + procedure pays the Google lookup; everyone else
 /// reads Firestore so we do not call AI on every open.
 class ExploreGooglePriceStore {
-  ExploreGooglePriceStore._();
+  ExploreGooglePriceStore._()
+      : _db = FirebaseFirestore.instance,
+        _isSignedIn = (() => FirebaseAuth.instance.currentUser != null);
+
+  @visibleForTesting
+  ExploreGooglePriceStore.forTesting({
+    required FirebaseFirestore firestore,
+    required bool Function() isSignedIn,
+  }) : _db = firestore, _isSignedIn = isSignedIn;
   static final ExploreGooglePriceStore instance = ExploreGooglePriceStore._();
 
   static const collection = 'explore_google_prices';
@@ -25,7 +34,8 @@ class ExploreGooglePriceStore {
   static const ratingTtl = Duration(days: 90);
   static const maxClinics = 30;
 
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final FirebaseFirestore _db;
+  final bool Function() _isSignedIn;
   final Map<String, List<Map<String, Object?>>> _memory = {};
   final Map<String, Future<List<Map<String, Object?>>>> _readCoalesce = {};
   final Map<String, String> _writeFingerprints = {};
@@ -48,6 +58,20 @@ class ExploreGooglePriceStore {
     return encoded.substring(0, 400);
   }
 
+  static List<String> readDocIds({
+    required String city,
+    required String procedure,
+    String cityId = '',
+  }) => <String>{
+    for (final rev in [revision, ..._previousRevisions])
+      for (final proc in exploreSavedProcedureKeys(procedure)) ...[
+        if (cityId.isNotEmpty)
+          docId(city: city, procedure: proc, cityId: cityId,
+              revisionOverride: rev),
+        docId(city: city, procedure: proc, revisionOverride: rev),
+      ],
+  }.toList();
+
   String _resolvedCityId(String city, String explicit) {
     if (explicit.trim().isNotEmpty) return explicit.trim();
     final active = ExploreBackendService.instance.activeCityIdentity;
@@ -68,43 +92,18 @@ class ExploreGooglePriceStore {
   }) {
     final resolvedCityId = _resolvedCityId(city, cityId);
     final id = docId(city: city, procedure: procedure, cityId: resolvedCityId);
-    final legacyId = resolvedCityId.isNotEmpty
-        ? docId(city: city, procedure: procedure, revisionOverride: 'v12')
-        : '';
     if (!forceReload && _memory.containsKey(id)) {
       return Future.value(_memory[id] ?? const []);
     }
     if (forceReload) {
       _memory.remove(id);
-      _readCoalesce.remove(id);
     }
 
     return _readCoalesce.putIfAbsent(id, () async {
       try {
-        if (FirebaseAuth.instance.currentUser == null) {
+        if (!_isSignedIn()) {
+          debugPrint('[GP CACHE] Google prices · $city · $procedure · signed out');
           return const [];
-        }
-
-        Future<DocumentSnapshot<Map<String, dynamic>>> readId(String docKey) =>
-            _db.collection(collection).doc(docKey).get();
-
-        var doc = await readId(id);
-        final namedId = docId(city: city, procedure: procedure);
-        if (!doc.exists && namedId != id) {
-          doc = await readId(namedId);
-        }
-        if (!doc.exists && legacyId.isNotEmpty && legacyId != id) {
-          doc = await readId(legacyId);
-        }
-        for (final prev in _previousRevisions) {
-          if (doc.exists) break;
-          final prevId = docId(
-            city: city,
-            procedure: procedure,
-            revisionOverride: prev,
-          );
-          if (prevId == id || prevId == legacyId) continue;
-          doc = await readId(prevId);
         }
 
         List<Map<String, Object?>> clinicsFrom(
@@ -151,8 +150,55 @@ class ExploreGooglePriceStore {
           return usable;
         }
 
-        final clinics = clinicsFrom(doc);
-        _memory[id] = clinics;
+        final keys = readDocIds(city: city, procedure: procedure,
+            cityId: resolvedCityId);
+        final rejected = <String, int>{};
+        Future<List<Map<String, Object?>>> read(String key, Source source) async {
+          try {
+            final doc = await _db.collection(collection).doc(key)
+                .get(GetOptions(source: source));
+            final rows = clinicsFrom(doc);
+            if (rows.isNotEmpty) {
+              debugPrint('[GP CACHE] Google prices · $city · $procedure · '
+                  '${source.name} · ${rows.length} usable · $key');
+            } else if (doc.exists) {
+              final raw = doc.data()?['clinics'];
+              if (raw is List && raw.isNotEmpty) rejected[key] = raw.length;
+            }
+            return rows;
+          } catch (error) {
+            // A native cache miss is expected on the first install.
+            if (source != Source.cache) {
+              debugPrint('[GP CACHE] Google prices read failed · $key · $error');
+            }
+            return const [];
+          }
+        }
+        // Check all native-cache keys before any network read. An existing
+        // empty/invalid current doc must not hide a valid older alias doc.
+        for (final key in keys) {
+          final rows = await read(key, Source.cache);
+          if (rows.isNotEmpty) {
+            _memory[id] = rows;
+            return rows;
+          }
+        }
+        // Server misses must not stack round trips across aliases/revisions.
+        final first = Completer<List<Map<String, Object?>>>();
+        final reads = [for (final key in keys) () async {
+          final rows = await read(key, Source.server);
+          if (rows.isNotEmpty && !first.isCompleted) first.complete(rows);
+        }()];
+        unawaited(Future.wait(reads).then((_) {
+          if (!first.isCompleted) first.complete(const []);
+        }));
+        final clinics = await first.future;
+        if (clinics.isNotEmpty) _memory[id] = clinics;
+        if (clinics.isEmpty) {
+          debugPrint('[GP CACHE] Google prices · $city · $procedure · '
+              '0 usable · rejectedDocs=${rejected.length} '
+              'rejectedRows=${rejected.values.fold<int>(0, (a, b) => a + b)}');
+        }
         return clinics;
       } catch (e) {
         debugPrint('[GP] Google prices load error: $e');
@@ -315,7 +361,7 @@ class ExploreGooglePriceStore {
         debugPrint('[GP] Firestore write skipped · unchanged');
         return;
       }
-      if (FirebaseAuth.instance.currentUser == null) return;
+      if (!_isSignedIn()) return;
 
       await _db.collection(collection).doc(id).set({
         'city': city.trim(),

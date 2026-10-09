@@ -1,0 +1,280 @@
+{
+  "audited_at_utc": "2026-10-09T07:10:07.139712+00:00",
+  "city": "Madrid",
+  "cards_audited": 16,
+  "source_fetches": [
+    {
+      "url": "https://clinicamba.com/toxina-botulinica/",
+      "final_url": "https://clinicamba.com/toxina-botulinica/",
+      "status": 200,
+      "sha256": "7e9b2b382fefab25fd6aa9e71eab03d3e1bfed2d72c5ed2157750ed301dd4cba",
+      "checked_at_utc": "2026-10-09T06:35:01.082709+00:00",
+      "excerpts": [
+        "o facial Piel lisa y tersa RESERVA TU CITA AHORA Toxina Botulínica Precios Precio Toxina botulínica 350 € Por sesión REJUVENECE TU PIEL Y ELIMINA LAS ARRUGAS RESERVAR Reserva tu cita para Toxina Botulínica Preguntas frecuentes sobre Toxina Botulínica ¿Dónde se puede inyectar la toxi"
+      ]
+    },
+    {
+      "url": "https://www.clinicaibiza.com/precio-del-botox/",
+      "final_url": "https://www.clinicaibiza.com/precio-del-botox/",
+      "status": 200,
+      "sha256": "0ec36975567e5c29b6c03f3f3cd520778edb48a11b7c0911a3b6bcbf4cf43d7f",
+      "checked_at_utc": "2026-10-09T06:35:02.353746+00:00",
+      "excerpts": [
+        "oduladores Tratamiento antiarrugas con Neuromoduladores. ★★★★★ 4.6/5 · +300 reseñas en Google Desde 190€ / 1 Zona Ver precios y promociones 1ª Consulta Gratuita WhatsApp Preguntas y Respuestas de otros usuarios Indicado para: Resultados naturales 1ª valoración gratuita Sin baja labo",
+        "ada paciente. En Clínica Ibiza, en el distrito de Retiro (Madrid) , el precio por zona oscila entre 190€ y 350€ . Es uno de los protocolos de rejuvenecimiento facial sin cirugía más demandados dentro de nuestros tratamientos faciales en Madrid . Se denomina tratamiento antiarrugas ,",
+        "en esa zona. El precio por 1 zona (frente, entrecejo o patas de gallo) es 190€ ; por 2 zonas sube a 290€ . Los precios por zonas incluyen retoque si el paciente lo necesita en la revisión. Precio del bótox 3 zonas ¿Cuánto cuesta hacerse un tratamiento antiarrugas? El precio del bóto",
+        "esa IVA incl. · Pago en clínica Bótox 2 Zonas 2 zonas a elegir: frente, entrecejo o patas de gallo. 290€ / pack Todo incluido Diagnóstico y Valoración Seguimiento 1 retoque si fuese necesario Retoques extra 80€ Me interesa IVA incl. · Pago en clínica ★ Más solicitado Bótox Completo ",
+        "presoterapia y remodelación 12 tratamientos → Promoción de Octubre Pack Tú Eliges Antiarrugas 445 € 350 € Ahorras 95 € Ver más promociones → 1.ª consulta gratuita DESTACADO Tratamiento antiarrugas Cirugía estética Cirugía estética Aumento de pecho, liposucción, blefaroplastia, abdom",
+        ", blefaroplastia, abdominoplastia y más 8 cirugías → Promoción de Octubre Lip Lift Labio Superior 2.350 € 2.044 € Ahorras 306 € Ver más promociones → Valoración quirúrgica gratuita Capilar Injerto capilar FUE Trasplante permanente con técnica folicular avanzada Ver más → Tratamiento"
+      ]
+    },
+    {
+      "url": "https://drelenaberezo.com/botox",
+      "final_url": "https://drelenaberezo.com/botox",
+      "status": 200,
+      "sha256": "44f5805c1e1c75eb3473a061f279e6d92ac53ff4f0b829f3c4e9fee2e3060b45",
+      "checked_at_utc": "2026-10-09T06:35:02.012296+00:00",
+      "excerpts": [
+        "IÓN 1ª visita, y diagnóstico del tratamiento para quitar las arrugas GRATIS TRATAMIENTO ANTIARRUGAS 299€ COMPRAR AHORA Reserva ahora y realiza tu tratamiento hasta en 3 meses Ver Condiciones SOLICITA CITA GRATIS TRATAMIENTO ANTIARRUGAS ANTES Y DESPUÉS ¿CUAL ES EL PRECIO? TRATAMIENTO",
+        "ilidad de la cara. OBJETIVO Atenuar las arrugas de expresión PRECIO ATENUAR ARRUGAS EXPRESIÓN Desde 299€ DURACIÓN SESIÓN De 15 a 30 minutos ANESTESIA EN EL TRATAMIENTO Crema Anestesía Local Ponemos solución a tus arrugas en la consulta de la Dra. Elena Berezo. Primera consulta gratu",
+        "utar de un gran descuento durante las promociones ya que el precio sin promoción puede variar desde 350€  a 400€ según el periodo del año. El precio es importante para nuestros pacientes pero es mas importante que el precio del medicamento este acorde con la calidad y sea comprado e",
+        "un gran descuento durante las promociones ya que el precio sin promoción puede variar desde 350€  a 400€ según el periodo del año. El precio es importante para nuestros pacientes pero es mas importante que el precio del medicamento este acorde con la calidad y sea comprado en la far"
+      ]
+    },
+    {
+      "url": "https://dermatologia-bagazgoitia.com/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "checked_at_utc": null
+    },
+    {
+      "url": "https://madrid.defelipe.com/precios/",
+      "final_url": "https://madrid.defelipe.com/precios/",
+      "status": 200,
+      "sha256": "35c4ffff90d190a1f0d8b3542c6f44ac7ca5a8a583bc8eed81ec44e219d959dc",
+      "checked_at_utc": "2026-10-09T06:43:58.134158+00:00",
+      "excerpts": [
+        " 150€ Relleno de Poliláctico (PLLA) 450 – 550€ Tratamiento mediante PRP 250€ Relleno de Hialurónico 305€ Láser Co2 550€ Programa De Felipe cicatrices de acné láser CO2 pago único 1300€ Programa De Felipe cicatrices de acné láser CO2 pago fraccionado 3 x 500€ Cicatrices de acné o atr",
+        "rices de acné o atróficas con láser de Er.Yag Subcisión o Técnica CROSS 150€ Relleno de Hialurónico 305€ Relleno de Poliláctico (PLLA) 450-550€ Tratamiento mediante PRP 250€ Carboxiterapia 150€ Láser Er.YAG Resurfacing (colimado y fraccionado) 350€ Programa De Felipe cicatrices de a"
+      ]
+    },
+    {
+      "url": "https://institutomedicinaestetica.com/precios",
+      "final_url": "https://institutomedicinaestetica.com/precios",
+      "status": 200,
+      "sha256": "b2eda54c55352732b49c0f59175639a88342d63e16824edb6bfd7bedc4e185bf",
+      "checked_at_utc": "2026-10-09T06:43:57.696637+00:00",
+      "excerpts": [
+        "tica. Los viales se abren en presencia de los pacientes PRECIOS NEUROMODULADOR PRECIOS ANTES 1VIAL (AHORA) 2VIALES (AHORA) Precio Reafirmante Facial 350 € 299 € 568 € Precio Reafirmante Facial 450 € 369 € Precio Platisma (cuello) 700 € 450 € – € Precio Bruxismo 700 € 450 € 675 € Preci",
+        " se abren en presencia de los pacientes PRECIOS NEUROMODULADOR PRECIOS ANTES 1VIAL (AHORA) 2VIALES (AHORA) Precio Reafirmante Facial 350 € 299 € 568 € Precio Reafirmante Facial 450 € 369 € Precio Platisma (cuello) 700 € 450 € – € Precio Bruxismo 700 € 450 € 675 € Precio Sonrisa gingiv",
+        "rc.Sup.) 400 € 349 € 649 € Precio Código de Barras 400 € 349 € 649 € Precio Aumento de Labios 400 € 330 € Precio  Rinomodelación 450 € 399 € 749 € Precio  Ojeras 400 € 349 € 649 € Precio Surco nasogeniano 400 € 349 € 649 € Precio Líneas Marionetas 400 € 349 € 649 € Precio Aumento de",
+        "Corporal/Blanq Precio Peeling químico (1sesión) 120€ 180€ – Precio Peeling químico (2sesiones) 220€ 330€ – Precio Peeling químico (3sesiones) 300€ 450€ – Precio Peeling químico (4sesiones) 360€ 520€ 640€ PRECIOS DERMAPEN (MICROPUNCIÓN CON M.PEN) PRECIOS ANTES AHORA Arrugas, efecto t",
+        "ÁCIDO HIALURÓNICO PRECIOS ANTES 1VIAL (AHORA) 2VIALES (AHORA) Precio Relleno de arrugas (Terc.Sup.) 400 € 349 € 649 € Precio Código de Barras 400 € 349 € 649 € Precio Aumento de Labios 400 € 330 € Precio  Rinomodelación 450 € 399 € 749 € Precio  Ojeras 400 € 349 € 649 € Precio Surco",
+        "RA) 2VIALES (AHORA) Precio Relleno de arrugas (Terc.Sup.) 400 € 349 € 649 € Precio Código de Barras 400 € 349 € 649 € Precio Aumento de Labios 400 € 330 € Precio  Rinomodelación 450 € 399 € 749 € Precio  Ojeras 400 € 349 € 649 € Precio Surco nasogeniano 400 € 349 € 649 € Precio Líne"
+      ]
+    },
+    {
+      "url": "https://venusmed.clinic/services/aumento-de-labios/",
+      "final_url": "https://venusmed.clinic/services/aumento-de-labios/",
+      "status": 200,
+      "sha256": "6bac07e4c45b55667649197b20c282d8eb1ac044a5539ebebfb73a84fb18b172",
+      "checked_at_utc": "2026-10-09T06:43:59.115199+00:00",
+      "excerpts": [
+        "Reproducir vídeo de VenusMed Precios y opciones Aumento de labios \n(precio depende del producto) de 349€ a 380€ Hidratación de labios (precio depende del producto) de 250€ a 330€ Recomendaciones para el tratamiento de aumento de labios Antes del tratamiento Informa al médico sobre c",
+        " y perfilado a tus labios con molestias que varían según el caso y con resultados inmediatos. Desde 349€ 450€ Ver tratamiento → Tratamiento anti-arrugas Reduce y alisa tus arrugas de frente, entrecejo y patas de gallo en tan solo una sesión con molestias que varían según el caso. De",
+        "cir vídeo de VenusMed Precios y opciones Aumento de labios \n(precio depende del producto) de 349€ a 380€ Hidratación de labios (precio depende del producto) de 250€ a 330€ Recomendaciones para el tratamiento de aumento de labios Antes del tratamiento Informa al médico sobre cualquie"
+      ]
+    },
+    {
+      "url": "https://drelenaberezo.com/",
+      "final_url": "https://drelenaberezo.com/",
+      "status": 200,
+      "sha256": "37781d9e5b0efa6b1a48824a134fcccc7967b41b34907a5652371a2def2e2077",
+      "checked_at_utc": "2026-10-09T06:43:57.918224+00:00",
+      "excerpts": []
+    },
+    {
+      "url": "https://drelenaberezo.com/acido-hialuronico-madrid/aumento-de-labios",
+      "status": 200,
+      "sha256": "a90485ad2da5fed2e6046a388ee48cb141c69b0740d46f81bbff7b72a11ef227",
+      "checked_at_utc": "2026-10-09T07:03:18.960903+00:00",
+      "excerpts": [
+        "s de ácido hialurónico. 1ª visita para aumento de labios GRATIS TRATAMIENTO AUMENTO DE LABIOS Ahora 330€ COMPRAR AHORA Reserva ahora y realiza tu tratamiento hasta en 3 meses Ver Condiciones SOLICITA TU CITA GRATIS ¿QUÉ ES EL AUMENTO DE LABIOS ? TRATAMIENTO DE AUMENTO DE LABIOS CON ",
+        " promociones para el tratamiento de relleno de labios y entonces el precio del aumento de labios es 330€ Cuando vea precios muy agresivos en el relleno de labios desconfíe ya que el ácido hialurónico de calidad no es barato y los médicos con experiencia tienen un prestigio y una gra",
+        "gido por la doctora Elena Berezo. El coste del aumento de labios en la clínica EB tiene un coste de 400€ pero hay en diferentes épocas del año hay promociones para el tratamiento de relleno de labios y entonces el precio del aumento de labios es 330€ Cuando vea precios muy agresivos",
+        " AUMENTO DE LABIOS CON ÁCIDO HIALURÓNICO TRATAMIENTO VIAL PRECIO EN OFERTA Aumento de Labios 1 vial 400€ 330€ Compra Ahora el Tratamiento para aumentar o definir tus labios SÍ, QUIERO RIESGOS DEL AUMENTO DE LABIOS El aumento de labios, o rellenos de labio, es un tratamiento que se r"
+      ]
+    },
+    {
+      "url": "https://www.centroceme.com/rinoplastia/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "checked_at_utc": null
+    },
+    {
+      "url": "https://www.centroceme.com/precios-last-minute/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "checked_at_utc": null
+    },
+    {
+      "url": "https://drjesuslago.com/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "checked_at_utc": null
+    },
+    {
+      "url": "https://drmarcoromeo.com/precios-cirugia-plastica-madrid-guia-dr-romeo/",
+      "final_url": "https://drmarcoromeo.com/precios-cirugia-plastica-madrid-guia-dr-romeo/",
+      "status": 200,
+      "sha256": "9e4195e5ad39f20daae4662e917cc0f773848a75c12518e71cc90711d076abae",
+      "checked_at_utc": "2026-10-09T06:48:07.059285+00:00",
+      "excerpts": [
+        "o Romeo Entrevista al Dr. Marco Romeo Los precios son indicativos de la media en España en el 2026. No representan los precios aplicados en la consulta del Dr. Romeo. En la búsqueda de un cambio estético , una de las preguntas más frecuentes y legítimas es: «¿Cuánto cuesta?» . En la clínica de",
+        "l Dr. Marco Romeo (Guía 2026) 0    Dr. Marco Romeo Entrevista al Dr. Marco Romeo Los precios son indicativos de la media en España en el 2026. No representan los precios aplicados en la consulta del Dr. Romeo. En la búsqueda de un cambio estético , una de las preguntas más frecuentes y l",
+        "a 4.000 – 6.000 € Otoplastia 3.500 – 5.000 € Blefaroplastia 2.500 – 4.000 € Rinoplastia Ultrasónica 7.500 – 9.000 € Rinoplastia Secundaria 9.000 – 19.000 € Rinoplastia Post-Traumática 10.000 – 20.000 € Bichectomía 2.500 – 3.000 € Mentoplastia 3.000 – 4.000 € Lifting de Cuello 5.000 – ",
+        " Estimado (2026) Cirugía Facial Lifting Facial (Deep Plane) 13.000 – 22.000 € Frontoplastia 4.000 – 6.000 € Otoplastia 3.500 – 5.000 € Blefaroplastia 2.500 – 4.000 € Rinoplastia Ultrasónica 7.500 – 9.000 € Rinoplastia Secundaria 9.000 – 19.000 € Rinoplastia Post-Traumática 10.000 – 20",
+        "a 3.000 – 4.000 € Lifting de Cuello 5.000 – 8.000 € Cirugía Mamaria Aumento Mamario (Con implantes) 6.000 – 8.000 € Aumento Mamario (Con grasa autóctona) Precio similar Mastopexia (con o sin implantes) 7.000 – 9.000 € Cirugía Corporal Abdominoplastia 7.000 – 9.000 € Liposucción Abdomi"
+      ]
+    },
+    {
+      "url": "https://gustavosordo.com/",
+      "final_url": "https://gustavosordo.com/",
+      "status": 200,
+      "sha256": "22ee4a24366b6e54df0cf5bf4104da4422762802da8cc482d863527c9514d750",
+      "checked_at_utc": "2026-10-09T06:48:07.106815+00:00",
+      "excerpts": [
+        "tos piezoeléctricos en lugar de con escoplo y martillo: cortes más precisos y menos hematoma. Desde 10.040 €, con simulación en la primera consulta. Más información Rinoplastia secundaria Para narices ya operadas. Reconstruimos el soporte con cartílago costal cuando ya no queda tabique",
+        " ¿Cuánto cuesta y qué incluye? Publicamos los precios de partida: la rinoplastia en Madrid parte de 10.040 € y el aumento de pecho en Madrid , de 6.400 €. El presupuesto es personalizado e incluye todo lo necesario para la operación, también las pruebas preoperatorias. La primera consu",
+        " submamario, en plano dual y sin drenajes ni vendajes, para hacer vida social en 24-48 horas. Desde 6.400 €. Más información Aumento de pecho Preservé La hace el Dr. Alejandro Mendieta: implantes de hasta 330 cc que no van bajo el músculo, con sedación y anestesia local. Desde 7.600 €",
+        "precios de partida: la rinoplastia en Madrid parte de 10.040 € y el aumento de pecho en Madrid , de 6.400 €. El presupuesto es personalizado e incluye todo lo necesario para la operación, también las pruebas preoperatorias. La primera consulta cuesta 100 € con el Dr. Sordo y 50 € con "
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "procedure": "Botox",
+      "provider": "Clínica MBA",
+      "screenshot_price": "350 EUR",
+      "finding": "published_session",
+      "detail": "Published €350 per session; number of areas not stated beside the fee."
+    },
+    {
+      "procedure": "Botox",
+      "provider": "Dra. Lorea Bagazgoitia",
+      "screenshot_price": "350 EUR",
+      "finding": "access_blocked",
+      "detail": "Provider site returned HTTP 403; amount cannot be independently verified here."
+    },
+    {
+      "procedure": "Botox",
+      "provider": "Clínica Ibiza",
+      "screenshot_price": "190 EUR",
+      "finding": "published_scoped",
+      "detail": "€190 for one zone; table separately lists €290 for two and €350 for three. Hero advertises from €190/one zone."
+    },
+    {
+      "procedure": "Botox",
+      "provider": "Elena Berezo",
+      "screenshot_price": "299 EUR",
+      "finding": "published_promotion",
+      "detail": "Published from €299 promotional expression-wrinkle treatment, with booking/treatment conditions. Current Python replay did not bind a Botox tariff on this page; website match alone does not prove the app extraction."
+    },
+    {
+      "procedure": "Fillers",
+      "provider": "De Felipe Madrid",
+      "screenshot_price": "305 EUR",
+      "finding": "published_generic",
+      "detail": "Price menu lists Relleno de Hialurónico at €305 in aesthetic dermatology and in scars. Generic label does not establish lip or chin scope."
+    },
+    {
+      "procedure": "Fillers",
+      "provider": "IME",
+      "screenshot_price": "400 EUR",
+      "finding": "obsolete_column",
+      "detail": "Current one-vial lip augmentation is €330 AHORA; €400 belongs to ANTES."
+    },
+    {
+      "procedure": "Fillers",
+      "provider": "Venusmed",
+      "screenshot_price": "349–380 EUR",
+      "finding": "published_range",
+      "detail": "Lip augmentation page publishes €349–€380 depending on product; hydration is a separate procedure."
+    },
+    {
+      "procedure": "Fillers",
+      "provider": "Elena Berezo",
+      "screenshot_price": "330 EUR",
+      "finding": "published_promotion",
+      "detail": "One-vial lip treatment €330 EN OFERTA; standard €400. Preserve offer terms."
+    },
+    {
+      "procedure": "Breast augmentation",
+      "provider": "Dr. Jesús Lago",
+      "screenshot_price": "from 4800 EUR",
+      "finding": "access_blocked",
+      "detail": "Official site blocked by cloud proxy. No verification of this amount."
+    },
+    {
+      "procedure": "Breast augmentation",
+      "provider": "Dr. Marco Romeo",
+      "screenshot_price": "6000–8000 EUR",
+      "finding": "disclaimed_market_estimate",
+      "detail": "Page explicitly says national indicative averages do not represent fees applied at the practice. Reject as clinic-owned tariff."
+    },
+    {
+      "procedure": "Breast augmentation",
+      "provider": "ELLE ES",
+      "screenshot_price": "from 8000 EUR",
+      "finding": "not_a_clinic",
+      "detail": "ELLE is a publisher. Article amounts cannot become clinic cards or verified clinic fees."
+    },
+    {
+      "procedure": "Breast augmentation",
+      "provider": "Gustavo Sordo",
+      "screenshot_price": "from 6400 EUR",
+      "finding": "published_starting",
+      "detail": "Homepage publishes from €6,400 for its specified implant technique."
+    },
+    {
+      "procedure": "Rhinoplasty",
+      "provider": "Gustavo Sordo",
+      "screenshot_price": "from 10040 EUR",
+      "finding": "published_starting",
+      "detail": "Homepage publishes from €10,040 for primary rhinoplasty."
+    },
+    {
+      "procedure": "Rhinoplasty",
+      "provider": "Dr. Marco Romeo",
+      "screenshot_price": "7500–9000 EUR",
+      "finding": "disclaimed_market_estimate",
+      "detail": "National-average guide; ultrasonic row does not establish his practice fee."
+    },
+    {
+      "procedure": "Rhinoplasty",
+      "provider": "Dr. Jesús Lago",
+      "screenshot_price": "4950 EUR",
+      "finding": "access_blocked",
+      "detail": "Official site blocked by cloud proxy. No verification of this amount."
+    },
+    {
+      "procedure": "Rhinoplasty",
+      "provider": "Centro CEME",
+      "screenshot_price": "from 4599 EUR",
+      "finding": "current_price_unconfirmed",
+      "detail": "User Google AI screenshot suggests €4,100 for complete rhinoplasty without hospitalization, €5,000 ultrasonic and €1,899 partial. Official pages remained proxy-blocked. Do not hardcode or treat the AI summary as source evidence."
+    }
+  ],
+  "log_findings": {
+    "app_firestore_seeds": 0,
+    "fillers_index_empty_ms": 3724,
+    "peels_initial_ms": 6469,
+    "breast_initial_ms": 11690,
+    "completed_job_had_rows_before_display": true,
+    "ceme_maps_address": "C. de Murcia, 4, Arganzuela, 28045 Madrid, España",
+    "incorrect_maps_rejection": "street name Murcia treated as locality",
+    "exa_used_in_user_logs": true
+  },
+  "limits": [
+    "No production Firestore read or write performed.",
+    "No live Google Places rating verification performed.",
+    "No iOS scrolling or startup latency measured.",
+    "Exact original cached evidence for these card amounts was not supplied."
+  ]
+}

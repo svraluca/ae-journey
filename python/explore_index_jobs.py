@@ -25,7 +25,7 @@ import httpx
 from fastapi import HTTPException
 from pydantic import BaseModel, Field
 
-JOB_ENGINE_VERSION = "0.11.84"
+JOB_ENGINE_VERSION = "0.11.85"
 
 # HTML extraction/Firestore calls can occupy asyncio's default executor.
 # Queue acceptance, focus changes and polling must not wait behind crawlers.
@@ -716,7 +716,8 @@ class IndexJobs:
                 # Remove an old city-specific card only with positive proof.
                 # 403, timeout and missing metadata never invalidate a tariff.
                 invalid = "foreign_tariff_heading" if self.e.tariff_location_conflict(context, req.city) else (
-                    "directory_price" if self.e.classify_page_source(stored.source_url, text) == "directory" else "")
+                    "directory_price" if self.e.classify_page_source(stored.source_url, text) == "directory" else
+                    "page_disclaims_clinic_prices" if self.e.page_disclaims_clinic_prices(text) else "")
                 if invalid:
                     await self.store_call("source_check", self.key(req), stored.source_url, invalid)
                     return

@@ -47,6 +47,38 @@ void main() {
         clinics: clinics,
       );
 
+  test('worker snapshot refresh updates a full saved display and keeps its Maps score', () {
+    final service = offlineService();
+    final old = fixtures.clinic(name: 'Aster Medical Clinic', city: 'Madrid',
+        procedure: 'Botox', canonical: 'botox', rawTitle: 'Botox 3 zones',
+        amount: 350, currency: 'EUR').copyWith(
+          priceVerifiedAt: DateTime.utc(2026, 10, 1),
+          rating: 4.8, reviews: 100, placeId: 'aster-place');
+    final previous = comparison([old, for (var i = 0; i < 3; i++)
+      fixtures.clinic(name: 'Other Clinic $i', city: 'Madrid', procedure: 'Botox',
+          canonical: 'botox', rawTitle: 'Botox 3 zones', amount: 400 + i.toDouble(),
+          currency: 'EUR').copyWith(area: 'Madrid · other-$i.example',
+            priceSourceUrl: 'https://other-$i.example/prices/')]);
+    for (final origin in ['live_search', 'firestore']) {
+      final refreshed = service.comparisonWithDiscoveryRows(city: 'Madrid',
+          procedure: 'Botox', previous: previous, rows: [ExploreDiscoveryToolRow(
+            clinicName: old.name, priceMin: 299, currency: 'EUR',
+            sourceUrl: old.priceSourceUrl, rawProcedureText: 'Botox 3 zones',
+            rawEvidence: 'Botox 3 zones | 299 EUR', rawPriceText: '299 EUR',
+            clinicOwnPrice: true, cityMatch: true, sourceType: 'official_clinic',
+            evidenceType: 'official_price_menu', procedureDisplayName: 'Botox 3 zones',
+            qualifier: 'promo', procedureCanonical: 'botox', origin: origin,
+            lastVerifiedAt: DateTime.utc(2026, 10, 9),
+          )]);
+      expect(refreshed.clinics.map((c) => c.name), previous.clinics.map((c) => c.name));
+      expect(refreshed.clinics.first.priceMin, 299, reason: origin);
+      expect(refreshed.clinics.first.rating, 4.8);
+      expect(refreshed.clinics.first.reviews, 100);
+      expect(refreshed.clinics.first.placeId, 'aster-place');
+      expect(refreshed.clinics.first.priceType, 'sale');
+    }
+  });
+
   test(
     'returning between full verified tabs uses their snapshots without I/O',
     () async {

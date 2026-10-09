@@ -37,6 +37,7 @@ import 'explore_clinic_identity.dart';
 import 'explore_marketplace_discovery.dart';
 import 'explore_price_discovery_tool.dart';
 import 'explore_price_binding.dart';
+import 'explore_saved_price_loader.dart';
 import 'explore_compare_mix.dart';
 import 'explore_comparison_session.dart';
 import 'explore_discovery_state_store.dart';
@@ -986,18 +987,22 @@ Return JSON only.
 
   /// Try to load a cached OpenAIComparisonResult from Firestore.
   /// Returns null if missing, expired, or on any error.
-  Future<OpenAIComparisonResult?> _loadFromFirestore(String key) {
-    if (_firestoreMissKeys.contains(key)) {
+  Future<OpenAIComparisonResult?> _loadFromFirestore(String key, {
+    bool allowStale = false,
+    bool cacheOnly = false,
+  }) {
+    if (!allowStale && !cacheOnly && _firestoreMissKeys.contains(key)) {
       return Future<OpenAIComparisonResult?>.value(null);
     }
-    return _firestoreReadCoalesce.putIfAbsent(key, () async {
+    final readKey = '$key|stale=$allowStale|cache=$cacheOnly';
+    return _firestoreReadCoalesce.putIfAbsent(readKey, () async {
       try {
         final doc = await _firestore
             .collection('ai_cache')
             .doc(_firestoreSafeKey(key))
-            .get();
+            .get(GetOptions(source: cacheOnly ? Source.cache : Source.serverAndCache));
         if (!doc.exists) {
-          _firestoreMissKeys.add(key);
+          if (!cacheOnly) _firestoreMissKeys.add(key);
           return null;
         }
         final data = doc.data();
@@ -1008,7 +1013,7 @@ Return JSON only.
         final ttlHours =
             (data['ttl_hours'] as num?)?.toInt() ?? _kFirestoreCacheTtl.inHours;
         final ttl = Duration(hours: ttlHours);
-        if (DateTime.now().difference(ts.toDate()) > ttl) {
+        if (!allowStale && DateTime.now().difference(ts.toDate()) > ttl) {
           debugPrint('[GP] Firestore cache expired (TTL: ${ttlHours}h): $key');
           _firestoreMissKeys.add(key);
           return null;
@@ -1019,14 +1024,14 @@ Return JSON only.
           _firestoreMissKeys.add(key);
           return null;
         }
-        debugPrint('[GP] Firestore cache HIT (TTL: ${ttlHours}h): $key');
+        debugPrint('[GP] Firestore cache HIT (${cacheOnly ? "native" : "server"}, TTL: ${ttlHours}h): $key');
         _firestoreMissKeys.remove(key);
         return OpenAIComparisonResult.fromJson(json.cast<String, Object?>());
       } catch (e) {
-        debugPrint('[GP] Firestore cache read error: $e');
+        if (!cacheOnly) debugPrint('[GP] Firestore cache read error: $e');
         return null;
       } finally {
-        scheduleMicrotask(() => _firestoreReadCoalesce.remove(key));
+        scheduleMicrotask(() => _firestoreReadCoalesce.remove(readKey));
       }
     });
   }
@@ -1039,36 +1044,35 @@ Return JSON only.
     required String city,
     required String mode,
   }) async {
-    final current = await _loadFromFirestore(cacheKey);
-    final currentN = _pricedExploreClinics(
-      current?.clinics ?? const [],
-      procedure: queryOrSelection,
-    ).length;
-    if (currentN >= kExploreFirestoreSeedClinics) return current;
-
-    final oldRevs = _kExploreComparisonPreviousRevisions
-        .where((rev) => rev != kExploreComparisonCacheRevision)
-        .toList();
-    if (oldRevs.isEmpty) return current;
-    final oldResults = await Future.wait([
-      for (final rev in oldRevs)
-        _loadFromFirestore('comparison|$rev|$queryOrSelection|$city|$mode'),
-    ]);
-    for (var i = 0; i < oldResults.length; i++) {
-      final old = oldResults[i];
-      final n = _pricedExploreClinics(
-        old?.clinics ?? const [],
-        procedure: queryOrSelection,
-      ).length;
-      if (n < kExploreFirestoreSeedClinics) continue;
-      debugPrint(
-        '[GP] Comparison pool fallback ${oldRevs[i]} → '
-        '$kExploreComparisonCacheRevision ($n clinics) · '
-        '$queryOrSelection · $city',
-      );
-      return old;
+    final keys = <String>{
+      cacheKey,
+      for (final rev in [kExploreComparisonCacheRevision,
+          ..._kExploreComparisonPreviousRevisions])
+        for (final proc in exploreSavedProcedureKeys(queryOrSelection))
+          for (final locality in {_localityCacheSegment(city), city})
+            'comparison|$rev|$proc|$locality|$mode',
+    };
+    for (final cacheOnly in [true, false]) {
+      final first = Completer<OpenAIComparisonResult?>();
+      final reads = [for (final key in keys) () async {
+        final result = await _loadFromFirestore(key,
+            cacheOnly: cacheOnly, allowStale: true);
+        // Cache TTL schedules refresh; every price still needs current
+        // evidence, correct procedure and the requested city before painting.
+        final eligible = (result?.clinics ?? const <OpenAIClinic>[])
+            .where((c) => exploreClinicEligibleForVerifiedPool(c,
+                procedure: queryOrSelection, city: city)).toList();
+        if (eligible.isNotEmpty && !first.isCompleted) {
+          first.complete(result!.copyWith(clinics: eligible));
+        }
+      }()];
+      unawaited(Future.wait(reads).then((_) {
+        if (!first.isCompleted) first.complete(null);
+      }));
+      final result = await first.future;
+      if (result != null) return result;
     }
-    return current;
+    return null;
   }
 
   /// Write an OpenAIComparisonResult to Firestore cache.
@@ -1606,38 +1610,9 @@ Return JSON only.
     required String city,
     required String mode,
     bool forceReload = false,
+    void Function(List<OpenAIClinic>)? onProgress,
   }) async {
-    final collected = <OpenAIClinic>[];
-    Future<void> collect(Future<List<OpenAIClinic>> read) async {
-      try {
-        collected.addAll(await read);
-      } catch (e) {
-        debugPrint('[GP TOOL] app Firestore read failed · $e');
-      }
-    }
-
-    await Future.wait<void>([
-      collect(
-        ExploreGooglePriceStore.instance
-            .load(city: city, procedure: queryOrSelection, forceReload: forceReload)
-            .then(_clinicsFromGooglePriceJson),
-      ),
-      collect(
-        ExploreCuratedPriceStore.instance.load(
-          city: city,
-          procedure: queryOrSelection,
-        ),
-      ),
-      collect(
-        _loadExploreComparisonPool(
-          cacheKey: cacheKey,
-          queryOrSelection: queryOrSelection,
-          city: city,
-          mode: mode,
-        ).then((result) => result?.clinics ?? const <OpenAIClinic>[]),
-      ),
-    ]).then<void>((_) {}).timeout(const Duration(seconds: 3), onTimeout: () {});
-
+    List<OpenAIClinic> select(List<OpenAIClinic> collected) {
     final verified = <OpenAIClinic>[];
     for (final original in collected) {
       if (!exploreClinicEligibleForVerifiedPool(
@@ -1658,7 +1633,11 @@ Return JSON only.
           )) {
         continue;
       }
-      if (verified.any((c) => exploreClinicsAreSameProvider(c, candidate))) {
+      final index = verified.indexWhere((c) => exploreClinicsAreSameProvider(c, candidate));
+      if (index >= 0) {
+        if (exploreVerifiedTariffSupersedes(verified[index], candidate)) {
+          verified[index] = candidate;
+        }
         continue;
       }
       verified.add(candidate);
@@ -1666,15 +1645,34 @@ Return JSON only.
     }
     final previous =
         _comparisonMemoryCache[cacheKey]?.clinics ?? const <OpenAIClinic>[];
-    // City selection can clear the display memo. Shuffle eligible saves too
-    // so that a fixed Firestore read order does not lock the first two forever.
-    verified.shuffle(math.Random());
+    // Prefer eligible saves outside the previous display, preserving source
+    // order so progressive cache reads do not move cards already on screen.
     bool recentlyShown(OpenAIClinic c) =>
         previous.any((old) => exploreClinicsAreSameProvider(old, c));
     return [
       ...verified.where((c) => !recentlyShown(c)),
       ...verified.where(recentlyShown),
     ];
+    }
+    return loadExploreSavedPrices<OpenAIClinic>(
+      sources: {
+        'google_prices': ExploreGooglePriceStore.instance
+            .load(city: city, procedure: queryOrSelection, forceReload: forceReload)
+            .then(_clinicsFromGooglePriceJson),
+        'curated': ExploreCuratedPriceStore.instance
+            .load(city: city, procedure: queryOrSelection),
+        'comparison': _loadExploreComparisonPool(
+          cacheKey: cacheKey, queryOrSelection: queryOrSelection,
+          city: city, mode: mode,
+        ).then((result) => result?.clinics ?? const <OpenAIClinic>[]),
+      },
+      select: select,
+      onProgress: onProgress,
+      onSource: (source, count) => debugPrint(
+          '[GP CACHE] $source · $city · $queryOrSelection · $count rows'),
+      onError: (source, error) => debugPrint(
+          '[GP CACHE] $source read failed · $error'),
+    );
   }
 
 
@@ -1718,10 +1716,14 @@ Return JSON only.
         sameProvider: exploreClinicsAreSameProvider),
       live: fresh, sameProvider: exploreClinicsAreSameProvider,
     );
-    final clinics = stabilizeExploreCompareRows<OpenAIClinic>(
-      shown: retained, incoming: candidates,
+    final stable = stabilizeExploreCompareRows<OpenAIClinic>(
+      shown: retained, incoming: [...candidates, ...saved, ...fresh],
       stillEligible: (c) => explorePriceIsVerified(c) && exploreClinicFitsSearchCity(c, city),
       sameProvider: exploreClinicsAreSameProvider,
+      preferIncoming: exploreVerifiedTariffSupersedes,
+    );
+    final clinics = overlayExploreClinicRatings(
+      shown: stable, enriched: [...candidates, ...retained],
     );
     final meta = previous ?? OpenAIComparisonResult(
       city: city, topic: procedure, topicType: OpenAISearchItemType.procedure,
@@ -2085,8 +2087,8 @@ Return JSON only.
           );
         }
 
-        // Python hunter is the first search. It does not need an OpenAI key.
-        // Firestore and Google run only when that server cannot be reached.
+        // Validated app Firestore prices paint first. The Python index and
+        // hunter then refresh and grow that pool in the background.
         // A timeout or a broken response is not saved as a finished search.
         if (searchNewGoogle && ExplorePriceDiscoveryTool.instance.enabled) {
           final requestedProcedure = ExplorePriceDiscoveryTool.procedureForTool(
@@ -2102,12 +2104,38 @@ Return JSON only.
             mapCenter: const OpenAICoord(0, 0),
             clinics: const [],
           );
+          final rejectedToolUrls = <String>{};
           final appStored = await _loadDiscoveryToolFirestoreSeeds(
             cacheKey: cacheKey,
             queryOrSelection: queryOrSelection,
             city: city,
             mode: mode,
             forceReload: forceRefresh,
+            onProgress: (saved) {
+              if ((_comparisonDisplayEpoch[cacheKey] ?? 0) != displayEpoch) return;
+              final retained = _comparisonMemoryCache[cacheKey]?.clinics ?? const <OpenAIClinic>[];
+              final eligible = saved.where((c) =>
+                  !rejectedToolUrls.contains(c.priceSourceUrl)).toList();
+              final rows = stabilizeExploreCompareRows<OpenAIClinic>(
+                shown: retained, incoming: eligible,
+                stillEligible: (c) => !rejectedToolUrls.contains(c.priceSourceUrl) &&
+                    explorePriceIsVerified(c) && exploreClinicFitsSearchCity(c, city),
+                sameProvider: exploreClinicsAreSameProvider,
+                preferIncoming: exploreVerifiedTariffSupersedes,
+              );
+              final partial = wrap(rows, toolMeta);
+              if (partial.clinics.isEmpty) return;
+              _comparisonMemoryCache[cacheKey] = partial;
+              emitProgress(partial);
+              // A cache read may outlive the initial deadline and worker.
+              // The screen callback also checks its active request generation.
+              if (onProgress != null &&
+                  !(_comparisonProgressListeners[cacheKey]?.contains(onProgress) ?? false)) {
+                onProgress(partial);
+              }
+              debugPrint('[GP CACHE] paint · $categoryPill · $city · '
+                  '${partial.clinics.length} verified · ${compareSw.elapsedMilliseconds}ms');
+            },
           );
           final storedNames = appStored.map((c) => c.name).toList();
           final storedHosts = <String>{
@@ -2135,7 +2163,6 @@ Return JSON only.
             '[GP TOOL] app Firestore seeds · $categoryPill · $city · '
             '${appStored.length}',
           );
-          final rejectedToolUrls = <String>{};
           final toolOriginsByUrl = <String, String>{
             for (final c in appStored) c.priceSourceUrl: 'firestore_app',
           };
@@ -2306,9 +2333,10 @@ Return JSON only.
                   exploreClinicFitsSearchCity(c, city) &&
                   exploreClinicFitsCompareProcedure(c, queryOrSelection),
               sameProvider: exploreClinicsAreSameProvider,
+              preferIncoming: exploreVerifiedTariffSupersedes,
             );
             final clinics = overlayExploreClinicRatings(
-              shown: stable, enriched: candidates,
+              shown: stable, enriched: [...candidates, ...retained],
             );
             final partialResult = wrap(clinics, toolMeta);
             // Count the processed cards actually sent to the screen, rather
@@ -2383,8 +2411,15 @@ Return JSON only.
             if (job != null && canPublishNote()) {
               backgroundHuntNote.value = ExploreBackgroundHunt(
                 city: city, pill: categoryPill, jobId: job.isFinished ? '' : job.id,
-                message: job.message,
+                message: job.isFinished ? 'Loading saved clinic prices…' : job.message,
+                isSearching: true,
               );
+            }
+            // An existing completed ticket already carries verified prices.
+            // Paint them before the separate index/refresh network requests.
+            if (job != null && job.rows.isNotEmpty) {
+              publishToolRows(job.rows);
+              unawaited(persistAcceptedRows());
             }
             final sw = Stopwatch()..start();
             await loadServerIndex();
@@ -2416,7 +2451,8 @@ Return JSON only.
             if (canPublishNote()) {
               backgroundHuntNote.value = ExploreBackgroundHunt(
                 city: city, pill: categoryPill, jobId: job.isFinished ? '' : job.id,
-                message: job.message,
+                message: job.isFinished ? '' : job.message,
+                isSearching: !job.isFinished,
               );
             }
             var lastPublishedRows = '';
@@ -2438,7 +2474,9 @@ Return JSON only.
               if (canPublishNote() && backgroundHuntNote.value?.jobId == job.id) {
                 backgroundHuntNote.value = ExploreBackgroundHunt(
                   city: city, pill: categoryPill,
-                  jobId: state.isFinished ? '' : job.id, message: state.message,
+                  jobId: state.isFinished ? '' : job.id,
+                  message: state.isFinished ? 'Loading saved clinic prices…' : state.message,
+                  isSearching: true,
                 );
               }
               if (state.isFinished) {
@@ -2479,6 +2517,13 @@ Return JSON only.
             _interactiveRefresh[cacheKey] = refresh;
             unawaited(refresh.catchError((Object error) {
               debugPrint('[GP INDEX] refresh failed · $error');
+              if (_liveCompareTopUpKey == cacheKey &&
+                  (_comparisonDisplayEpoch[cacheKey] ?? 0) == displayEpoch) {
+                backgroundHuntNote.value = ExploreBackgroundHunt(
+                  city: city, pill: categoryPill,
+                  message: 'Price search could not finish. Try Find more clinics again.',
+                );
+              }
             }).whenComplete(() {
               if (identical(_interactiveRefresh[cacheKey], refresh)) {
                 _interactiveRefresh.remove(cacheKey);
@@ -2495,9 +2540,11 @@ Return JSON only.
               excludedSourceUrls: rejectedToolUrls.toList(),
             );
             if (job != null) {
+              if (job.rows.isNotEmpty) publishToolRows(job.rows);
               backgroundHuntNote.value = ExploreBackgroundHunt(
                 city: city, pill: categoryPill, jobId: job.isFinished ? '' : job.id,
                 message: job.message,
+                isSearching: !job.isFinished,
               );
             }
           } else if (!backgroundRefresh) {
@@ -19992,7 +20039,7 @@ enum ExploreTreatmentFamily {
 }
 
 ExploreTreatmentFamily exploreTreatmentFamily(String raw) {
-  final t = raw.toLowerCase().trim();
+  final t = foldExploreCityText(raw).trim();
   if (t.isEmpty) return ExploreTreatmentFamily.other;
 
   bool has(String s) => t.contains(s);
@@ -21127,7 +21174,9 @@ OpenAIClinic? _clinicFromDiscoveryToolRow(
   final qualifier = row.qualifier.toLowerCase();
   final perUnit = row.procedureCanonical == 'botox' &&
       looksLikeBotoxPerUnitQuote('${row.rawProcedureText} ${row.rawEvidence}');
-  final priceType = qualifier == 'approximate'
+  final priceType = qualifier == 'promo'
+      ? 'sale'
+      : qualifier == 'approximate'
       ? 'approximate'
       : qualifier == 'from'
       ? 'from'
@@ -21192,6 +21241,8 @@ OpenAIClinic? _clinicFromDiscoveryToolRow(
 }
 
 bool explorePriceIsVerified(OpenAIClinic c) {
+  if (exploreListedPriceIsNonClinicContent(sourceUrl: c.priceSourceUrl,
+      website: c.area)) return false;
   if (looksLikeNonInjectableBotox(
       '${c.rawProcedureText} ${c.priceEvidenceText} ${c.procedureDisplayName}')) return false;
   if (exploreClinicIsNoPublicPrice(c)) return false;
@@ -21245,6 +21296,17 @@ bool explorePriceIsVerified(OpenAIClinic c) {
     return false;
   }
   return true;
+}
+
+/// Only a newer independently verified quote can replace a displayed tariff.
+/// An older Firestore response must not overwrite a just-checked source page.
+bool exploreVerifiedTariffSupersedes(OpenAIClinic previous, OpenAIClinic incoming) {
+  if (!explorePriceIsVerified(incoming) ||
+      !exploreClinicsAreSameProvider(previous, incoming)) return false;
+  final checked = incoming.priceVerifiedAt ?? incoming.lastCheckedAt;
+  final prior = previous.priceVerifiedAt ?? previous.lastCheckedAt;
+  if (checked == null || (prior != null && !checked.isAfter(prior))) return false;
+  return incoming.procedureCanonical == previous.procedureCanonical;
 }
 
 bool explorePriceHasNonfacialScope(OpenAIClinic c) {

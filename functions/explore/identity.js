@@ -87,7 +87,10 @@ function looksLikeMarketEstimateDirectoryUrl(sourceUrl) {
   const h = normalizeHost(sourceUrl);
   if (!h) return false;
   const hosts = ['getclearbeauty.com'];
-  return hosts.some((exact) => h === exact || h.endsWith('.' + exact));
+  const url = String(sourceUrl || '').toLowerCase();
+  return hosts.some((exact) => h === exact || h.endsWith('.' + exact)) ||
+      (/(?:^|[-/])(?:guia|guide)(?:[-/]|$)/.test(url) && /precio|price|cost/.test(url) &&
+      !/\/(?:price|pricing|precio|precios)[-_](?:guide|guia)\/?(?:[?#].*)?$/.test(url));
 }
 
 function marketplacePlatformLabel(rawHostOrName) {
@@ -310,6 +313,11 @@ function clinicIdentityRejectReason(name, {
     return 'market_estimate';
   }
   const host = normalizeHost(websiteHost);
+  const publishers = ['elle.com', 'vogue.com', 'vogue.es', 'hola.com', 'telva.com',
+    'cosmopolitan.com', 'harpersbazaar.com', 'nytimes.com', 'theguardian.com'];
+  if (publishers.some((domain) => host === domain || host.endsWith('.' + domain))) {
+    return 'non_clinic_content_host';
+  }
   const marketplaceHost = host && isMarketplaceOrDirectoryHost(host);
   const provider = String(providerClinic || '').trim();
   const providerOk = provider &&

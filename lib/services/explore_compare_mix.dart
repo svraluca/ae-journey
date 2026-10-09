@@ -5,19 +5,29 @@ const kExploreCompareGoodEnough = 4;
 const kExploreCompareSavedTarget = 2;
 const kExploreCompareFreshTarget = 2;
 
-/// A displayed tariff is a snapshot until the user explicitly refreshes.
-/// Valid newcomers fill empty slots; background pool order cannot rotate it.
+/// Keep displayed providers in their slots. A verified newer tariff may update
+/// its own slot; background pool order cannot rotate providers.
 List<T> stabilizeExploreCompareRows<T>({
   required Iterable<T> shown,
   required Iterable<T> incoming,
   required bool Function(T row) stillEligible,
   required bool Function(T a, T b) sameProvider,
+  bool Function(T previous, T incoming)? preferIncoming,
 }) {
   final out = <T>[];
-  for (final row in [...shown, ...incoming]) {
+  for (final row in shown) {
     if (!stillEligible(row) || out.any((old) => sameProvider(old, row))) continue;
     out.add(row);
     if (out.length == kExploreCompareDisplayLimit) break;
+  }
+  for (final row in incoming) {
+    if (!stillEligible(row)) continue;
+    final index = out.indexWhere((old) => sameProvider(old, row));
+    if (index >= 0) {
+      if (preferIncoming?.call(out[index], row) == true) out[index] = row;
+    } else if (out.length < kExploreCompareDisplayLimit) {
+      out.add(row);
+    }
   }
   return out;
 }

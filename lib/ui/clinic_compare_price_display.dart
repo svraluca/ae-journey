@@ -327,6 +327,13 @@ bool clinicHasListedComparePrice(OpenAIClinic c, {String? procedure}) {
   return c.priceGbp > 0;
 }
 
+/// Keep the initial search visible until an empty search actually finishes.
+bool exploreShouldShowInitialSearch({
+  required bool hasComparison,
+  required int verifiedCount,
+  required bool loadingMore,
+}) => verifiedCount == 0 && (!hasComparison || loadingMore);
+
 /// User-facing copy when Explore cannot show verified prices for a city.
 String exploreInsufficientDataMessage(
   String city, {
@@ -521,7 +528,7 @@ String _tariffTitleFromEvidence(OpenAIClinic clinic) {
   final text = clinic.priceEvidenceText.replaceAll('\u00a0', ' ');
   final money = RegExp(
     r'(?:\b(?:RON|lei|AED|EUR|USD|GBP)\s*|[$€£]\s*)\d[\d., ]*|'
-    r'(?<![\w.,])\d[\d., ]*\s*(?:RON|lei|AED|EUR|USD|GBP)\b',
+    r'(?<![\w.,])\d[\d., ]*\s*(?:(?:RON|lei|AED|EUR|USD|GBP)\b|[$€£])',
     caseSensitive: false,
   ).allMatches(text).toList();
   // An old cache row with one explicit price still has a usable tariff name.
@@ -1149,6 +1156,15 @@ String clinicCompareProcedurePriceDisplay(OpenAIClinic c, {String? procedure}) {
   if (!explorePriceIsVerified(c)) return '';
 
   if (c.priceMin > 0) {
+    if (c.priceType.trim().toLowerCase() == 'sale' &&
+        isJustifiedProcedurePrice(c, procedure: procedure)) {
+      final amount = c.priceMax > c.priceMin + 0.5
+          ? _formatPublishedCardRange(c.priceMin, c.priceMax, c.currency)
+          : _formatExactComparePrice(c.priceMin, c.currency);
+      final starting = RegExp(r'\b(?:from|starting\s+(?:from|at)|desde|a\s+partir)\b',
+          caseSensitive: false).hasMatch('${c.rawPriceText} ${c.priceEvidenceText}');
+      return _ensurePriceUnitSuffix('offer ${starting ? "from " : ""}$amount', c);
+    }
     if (c.priceType.trim().toLowerCase() == 'approximate' &&
         isJustifiedProcedurePrice(c, procedure: procedure)) {
       final amount = c.priceMax > c.priceMin + 0.5

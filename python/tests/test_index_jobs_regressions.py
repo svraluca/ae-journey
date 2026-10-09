@@ -44,6 +44,41 @@ class IndexPriceTrust(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(rows), 1)
         self.assertIn(self.row.source_url, self.service.store.rejected_sources(self.market))
 
+    async def test_publisher_and_cached_cost_guide_flags_cannot_enter_index(self):
+        for url in ['https://www.elle.com/es/belleza/a123456/arrugas/',
+                    'https://aster.example/precios-madrid-guia-doctor/']:
+            row = self.row.model_copy(update={'source_url': url,
+                'source_host': e.host_of(url), 'official_website': url})
+            self.assertEqual(self.service.safe_rows([row], self.req.city,
+                self.req.procedure, country_code=self.req.country_code), [])
+
+    async def test_refresh_quarantines_an_explicit_nonownership_disclaimer(self):
+        html = ('<html><title>Aster Medical Clinic Springfield</title>'
+                '<p>Los precios son indicativos de la media en España. '
+                'No representan los precios aplicados en la consulta.</p></html>')
+        with patch.object(self.service, 'index', new=AsyncMock(return_value={
+                'display_results': [self.row.model_dump()]})), \
+                patch.object(self.service, 'static_html', new=AsyncMock(return_value=html)):
+            result = await self.service.refresh_known(self.req)
+        self.assertEqual(result['display_results'], [])
+        self.assertIn(self.row.source_url, result['invalidated_source_urls'])
+        self.assertEqual(self.service.store.rejected_sources(self.market)[self.row.source_url],
+                         'page_disclaims_clinic_prices')
+
+    async def test_known_page_refresh_replaces_the_old_amount_with_live_evidence(self):
+        html = ('<html><title>Aster Medical Clinic Springfield</title>'
+                '<h1>Botox prices</h1><table><tr><td>Botox 3 areas</td>'
+                '<td><del>$350</del> <ins>$275</ins></td></tr></table>'
+                '<footer>Our clinic in Springfield. Book an appointment.</footer></html>')
+        with patch.object(self.service, 'index', new=AsyncMock(return_value={
+                'display_results': [self.row.model_dump()]})), \
+                patch.object(self.service, 'static_html', new=AsyncMock(return_value=html)), \
+                patch.object(e, 'firestore_upsert_results', new=AsyncMock()):
+            result = await self.service.refresh_known(self.req)
+        self.assertEqual([row['price_min'] for row in result['display_results']], [275])
+        self.assertIn('275', result['display_results'][0]['raw_evidence'])
+        self.assertNotIn('350', result['display_results'][0]['raw_evidence'])
+
 
 class FourCardRequests(unittest.TestCase):
     def test_compare_defaults_and_explicit_limits_never_allow_a_fifth_card(self):

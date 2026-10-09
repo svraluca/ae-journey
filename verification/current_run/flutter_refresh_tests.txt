@@ -1,0 +1,40 @@
+00:00 +0: loading /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart
+00:00 +0: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:01 +1: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:02 +2: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:02 +3: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:02 +4: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:02 +5: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:03 +6: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:04 +6: /workspace/ae-journey/test/explore_saved_price_loading_test.dart: native alias cache paints despite an empty current doc and blocked server
+[GP CACHE] Google prices · Madrid · dermal filler lips cheeks · cache · 1 usable · v13_7Cplace_test_7Cdermal_20filler
+00:04 +7: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:04 +7: /workspace/ae-journey/test/explore_saved_price_loading_test.dart: an invalid newer doc cannot mask an independently valid older alias
+[GP CACHE] Google prices · Madrid · dermal filler lips cheeks · cache · 1 usable · v12_7Cmadrid_7Cdermal_20filler
+00:04 +8: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:04 +8: /workspace/ae-journey/test/explore_saved_price_loading_test.dart: an empty read is not cached for the remainder of the session
+[GP CACHE] Google prices · Madrid · dermal filler · 0 usable · rejectedDocs=0 rejectedRows=0
+[GP CACHE] Google prices · Madrid · dermal filler · cache · 1 usable · v14_7Cplace_test_7Cdermal_20filler
+00:05 +9: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:05 +9: /workspace/ae-journey/test/explore_saved_price_loading_test.dart: signed-out cache reads are diagnosed without hitting Firestore
+[GP CACHE] Google prices · Madrid · botox · signed out
+00:05 +10: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:05 +11: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:05 +12: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:05 +13: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: worker snapshot refresh updates a full saved display and keeps its Maps score
+00:13 +14: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: returning between full verified tabs uses their snapshots without I/O
+[PILL CANCEL] Botox · Madrid
+[GP] Live search focus: Botox · Madrid
+[GP] Compare timing: Botox · Madrid · source=memory-verified · 191ms
+[PILL CANCEL] Fillers · Madrid
+[GP] Live search focus: Fillers · Madrid
+[GP] Compare timing: Fillers · Madrid · source=memory-verified · 55ms
+[PILL CANCEL] Botox · Madrid
+[GP] Live search focus: Botox · Madrid
+[GP] Compare timing: Botox · Madrid · source=memory-verified · 0ms
+Three verified tab restores: 258ms
+[GP] Compare timing: Botox · Madrid · source=memory-verified · 49ms
+00:14 +15: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: rating backfill without Places configuration performs no I/O
+00:14 +16: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: approximate source quotes retain uncertainty and both range bounds
+00:14 +17: /workspace/ae-journey/test/explore_tab_restore_and_qualifier_test.dart: Python approximate qualifier reaches the card and map intact
+00:16 +18: All tests passed!

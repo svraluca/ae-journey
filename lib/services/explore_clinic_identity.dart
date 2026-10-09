@@ -288,6 +288,9 @@ bool looksLikeNonClinicContentHost(String rawHostOrUrl) {
   final h = normalizeExploreHost(rawHostOrUrl);
   if (h.isEmpty) return false;
   const needles = <String>[
+    // Publishers may mention real surgeons and fees without treating patients.
+    'elle.com', 'vogue.com', 'vogue.es', 'hola.com', 'telva.com',
+    'cosmopolitan.com', 'harpersbazaar.com', 'nytimes.com', 'theguardian.com',
     'veeva.com',
     'clinicaltrials.gov',
     'clinicaltrial',
@@ -348,6 +351,12 @@ bool exploreSourceIsNewsReport(String rawUrl) {
   final withScheme = text.contains('://') ? text : 'https://$text';
   final uri = Uri.tryParse(withScheme);
   if (uri == null) return false;
+  final path = uri.path.toLowerCase();
+  if (RegExp(r'(?:^|[-/])(?:guia|guide)(?:[-/]|$)').hasMatch(path) &&
+      RegExp(r'precio|price|cost').hasMatch(path) &&
+      !RegExp(r'^/(?:price|pricing|precio|precios)[-_](?:guide|guia)/?$').hasMatch(path)) {
+    return true;
+  }
   const segments = {
     'unpublished',
     'artikull',
