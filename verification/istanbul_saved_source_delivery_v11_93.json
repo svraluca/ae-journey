@@ -1,0 +1,246 @@
+{
+  "captured_at": "2026-10-10T08:12:37.409599+00:00",
+  "backend_version": "0.11.93",
+  "extract_revision": "e29",
+  "method": "Fresh source HTTP requests through the actual hybrid engine and durable job worker, starting from stale e28 URLs in an isolated SQLite database. Paid web search mocked empty; no external database writes. This measures saved-source recovery, not cold city discovery or iPhone frames.",
+  "procedures": {
+    "filler": {
+      "time_to_first_card_ms": 2079,
+      "total_ms": 4528,
+      "stale_displayed_before": 0,
+      "final_count": 3,
+      "first_display_ack": {
+        "accepted": true,
+        "display_ready": true,
+        "display_filled": false
+      },
+      "observed_stages": [
+        [
+          null,
+          0
+        ],
+        [
+          "site_focus",
+          0
+        ],
+        [
+          "saved_sources",
+          1
+        ],
+        [
+          "saved_sources",
+          2
+        ],
+        [
+          "saved_sources",
+          3
+        ],
+        [
+          "marketplace",
+          3
+        ],
+        [
+          "primary",
+          3
+        ]
+      ],
+      "offers": [
+        {
+          "clinic_name": "Dr. Kadri Akinci Plastic Surgery Clinic in Turkey",
+          "price_min": 250.0,
+          "price_max": null,
+          "currency": "USD",
+          "source_url": "https://us-uk.bookimed.com/clinic/dr-kadri-akinci-plastic-surgery-clinic-ai/procedure=fillers-injection/",
+          "price_extract_revision": "e29"
+        },
+        {
+          "clinic_name": "Quartz Hospital in Turkey",
+          "price_min": 350.0,
+          "price_max": null,
+          "currency": "USD",
+          "source_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=fillers-injection/",
+          "price_extract_revision": "e29"
+        },
+        {
+          "clinic_name": "Memorial Bahçelievler Hospital in Turkey",
+          "price_min": 500.0,
+          "price_max": 1000.0,
+          "currency": "USD",
+          "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=fillers-injection/",
+          "price_extract_revision": "e29"
+        }
+      ],
+      "progress": {
+        "phase": "completed",
+        "engine_version": "0.11.93",
+        "scheduling": "foreground",
+        "collection_target": 12,
+        "display_limit": 4,
+        "round": "primary",
+        "queries": [
+          "dermal filler Istanbul price",
+          "dermal filler Istanbul clinic price list"
+        ],
+        "search_country_code": "TR",
+        "verified_count": 3,
+        "serper_requests": 0,
+        "exa_calls": 0,
+        "places_calls": 0,
+        "search_language": "tr",
+        "source_lanes": [
+          "official_web",
+          "provider_platforms"
+        ],
+        "ttfr_ms": 2037,
+        "server_display_available": true,
+        "time_to_6_verified_ms": null,
+        "fetched_pages": 3,
+        "pages_attempted": 3,
+        "client_display_seq": 1,
+        "client_display_focus_seq": 1,
+        "client_displayed_count": 1,
+        "display_ready": true,
+        "display_filled": false,
+        "fresh_count": 3,
+        "elapsed_ms": 4272,
+        "good_enough": 6,
+        "target": 8,
+        "desired_fresh": 6,
+        "shortfall_reason": "serper_unavailable",
+        "rounds": [
+          "standard",
+          "expanded",
+          "rescue",
+          "site_focus"
+        ],
+        "search_error_count": 0,
+        "rejections": {
+          "rejected_market_context": 4
+        },
+        "rejected_urls": [
+          {
+            "url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=fillers-injection/",
+            "reason": "market_context"
+          },
+          {
+            "url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=fillers-injection/",
+            "reason": "nonfacial_tariff_scope"
+          },
+          {
+            "url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=fillers-injection/",
+            "reason": "weak_marketplace_price_binding"
+          }
+        ]
+      }
+    },
+    "chemical_peel": {
+      "time_to_first_card_ms": 2173,
+      "total_ms": 2224,
+      "stale_displayed_before": 0,
+      "final_count": 1,
+      "first_display_ack": {
+        "accepted": true,
+        "display_ready": true,
+        "display_filled": false
+      },
+      "observed_stages": [
+        [
+          null,
+          0
+        ],
+        [
+          "site_focus",
+          0
+        ],
+        [
+          "saved_sources",
+          0
+        ],
+        [
+          "marketplace",
+          1
+        ]
+      ],
+      "offers": [
+        {
+          "clinic_name": "Memorial Bahçelievler Hospital in Turkey",
+          "price_min": 150.0,
+          "price_max": 300.0,
+          "currency": "USD",
+          "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+          "price_extract_revision": "e29"
+        }
+      ],
+      "progress": {
+        "phase": "completed",
+        "engine_version": "0.11.93",
+        "scheduling": "foreground",
+        "collection_target": 12,
+        "display_limit": 4,
+        "round": "primary",
+        "queries": [
+          "chemical peel Istanbul price",
+          "chemical peel Istanbul clinic price list"
+        ],
+        "search_country_code": "TR",
+        "verified_count": 1,
+        "serper_requests": 0,
+        "exa_calls": 0,
+        "places_calls": 0,
+        "search_language": "tr",
+        "source_lanes": [
+          "official_web",
+          "provider_platforms"
+        ],
+        "fetched_pages": 2,
+        "pages_attempted": 2,
+        "ttfr_ms": 2147,
+        "server_display_available": true,
+        "time_to_6_verified_ms": null,
+        "fresh_count": 1,
+        "elapsed_ms": 2137,
+        "good_enough": 6,
+        "target": 8,
+        "client_display_seq": 1,
+        "client_display_focus_seq": 1,
+        "client_displayed_count": 1,
+        "display_ready": true,
+        "display_filled": false,
+        "desired_fresh": 6,
+        "shortfall_reason": "serper_unavailable",
+        "rounds": [
+          "standard",
+          "expanded",
+          "rescue",
+          "site_focus"
+        ],
+        "search_error_count": 0,
+        "rejections": {
+          "rejected_market_context": 6
+        },
+        "rejected_urls": [
+          {
+            "url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+            "reason": "ambiguous_marketplace_service_scope"
+          },
+          {
+            "url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+            "reason": "market_context"
+          },
+          {
+            "url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+            "reason": "weak_marketplace_price_binding"
+          },
+          {
+            "url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+            "reason": "market_context"
+          },
+          {
+            "url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+            "reason": "weak_marketplace_price_binding"
+          }
+        ]
+      }
+    }
+  }
+}

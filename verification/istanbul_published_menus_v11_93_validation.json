@@ -1,0 +1,119 @@
+{
+  "validated_at": "2026-10-10T08:22:55.471668+00:00",
+  "backend_version": "0.11.93",
+  "worker_version": "0.11.93",
+  "extract_revision": "e29",
+  "python": {
+    "passed": 169,
+    "failed": 0,
+    "log": "/tmp/ae-v1193-python-final.log"
+  },
+  "functions": {
+    "passed": 329,
+    "failed": 0,
+    "log": "/tmp/ae-v1193-functions-final.log"
+  },
+  "flutter_focused": {
+    "passed": 88,
+    "failed": 0,
+    "log": "/tmp/ae-v1193-flutter-focused-final.log"
+  },
+  "flutter_full": {
+    "passed": 790,
+    "failed": 14,
+    "new_failures": [],
+    "baseline_commit": "9b6cf8767a9bf6113c9c0242c94fab92d360ccb0",
+    "baseline_failures": [
+      "explore_currency_cached_pipeline_test.dart: extract revision is e18",
+      "explore_discovery_identity_test.dart: Places name looks medical 25g. Abu Dhabi keeps verified quotes and skips Dubai-only URLs",
+      "explore_discovery_identity_test.dart: Places name looks medical keeps named plastic clinics Google may type as gym/lodging",
+      "explore_discovery_identity_test.dart: SERP fetch uses any listed price, not a snippet amount London hair cards show package FROM, not /graft on graft counts",
+      "explore_discovery_identity_test.dart: canonical city + early discovery rejects Budapest Botox does not keep a Tiranë clinic",
+      "explore_discovery_identity_test.dart: pool mix plan 2+ pool paints 2 Firestore seeds and still hunts 2 Google",
+      "explore_discovery_identity_test.dart: procedure display title 14. Serp page titles are not clinic names",
+      "explore_global_price_discovery_test.dart: units on parsePriceText stores ml quantity and per-unit type",
+      "explore_places_circuit_breaker_test.dart: Places 429 trips circuit breaker and skips further calls",
+      "explore_price_sanity_test.dart: price sanity gate gold packages, Quick Facts, and SEO titles are not clinic prices",
+      "explore_price_sanity_test.dart: price sanity gate hair market £/graft copy and stale landing quotes are rejected",
+      "explore_price_sanity_test.dart: price sanity gate rhinoplasty market guide is rejected; hospital guide stays scoped",
+      "explore_progressive_fill_drop_test.dart: price-list path witness Global Action 1 ml stays eligible after accept-time variant",
+      "explore_worldwide_pipeline_test.dart: UI states + exact price labelling cold city searching copy"
+    ],
+    "log": "/tmp/ae-v1193-flutter-final.log"
+  },
+  "analysis": {
+    "error": 0,
+    "warning": 9,
+    "info": 25
+  },
+  "earlier_test_runs": "A wall-clock cache test exceeded its 4-second bound when Python and Flutter ran concurrently. The assertion was retained; focused and full Flutter runs without competing heavy processes passed it. An initial test fixture used an existing disallowed depigmentation package, replaced with a valid glycolic-acid scope fixture without weakening that rejection.",
+  "runtime_smoke": {
+    "health": {
+      "ok": true,
+      "version": "0.11.93",
+      "worker_version": "0.11.93",
+      "price_extract_revision": "e29",
+      "progressive_jobs": true
+    },
+    "4": {
+      "status": 200,
+      "displayed_count": 0
+    },
+    "8": {
+      "status": 422,
+      "fields": [
+        [
+          "body",
+          "display_limit"
+        ]
+      ]
+    }
+  },
+  "source_replay": {
+    "botox": {
+      "verified": 8,
+      "source_processing_ms": 11348
+    },
+    "filler": {
+      "verified": 3,
+      "source_processing_ms": 3654
+    },
+    "chemical_peel": {
+      "verified": 1,
+      "source_processing_ms": 2086
+    },
+    "rhinoplasty": {
+      "verified": 1,
+      "source_processing_ms": 670
+    },
+    "breast_augmentation": {
+      "verified": 2,
+      "source_processing_ms": 2173
+    },
+    "hair_transplant": {
+      "verified": 1,
+      "source_processing_ms": 923
+    }
+  },
+  "actual_network_saved_source_test": "verification/istanbul_saved_source_delivery_v11_93.json",
+  "functions_source_capture_replay": [
+    {
+      "sourceUrl": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+      "offers": []
+    },
+    {
+      "sourceUrl": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+      "offers": []
+    }
+  ],
+  "external_database_written": false,
+  "mac_runtime_updated": false,
+  "iphone_tested": false,
+  "production_functions_deployed": false,
+  "limitations": [
+    "Fresh-source recovery timings use known source URLs, not unseeded city discovery. Paid SERP is mocked empty in that check.",
+    "Physical iPhone frame timings and the Mac LaunchAgent require local verification.",
+    "Fourteen preexisting full Flutter suite failures remain.",
+    "A smaller pool must remain smaller when additional valid published offers cannot be verified."
+  ]
+}

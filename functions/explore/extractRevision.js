@@ -24,6 +24,7 @@
 /// e26: exclude travel/PRP, FAQ years and multilingual geographic tables.
 /// e27: provider-bound marketplace locality, geographic quotes and Q&A price guides.
 /// e28: complete price paragraphs and backend extraction provenance.
-const EXTRACT_REVISION = 'e28';
+/// e29: reject unexplained marketplace menu amounts across treatment options.
+const EXTRACT_REVISION = 'e29';
 
 module.exports = {EXTRACT_REVISION};

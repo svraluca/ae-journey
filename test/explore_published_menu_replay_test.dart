@@ -11,7 +11,7 @@ void main() {
   final snapshot =
       jsonDecode(
             File(
-              'verification/istanbul_published_menus_v11_92.json',
+              'verification/istanbul_published_menus_v11_93.json',
             ).readAsStringSync(),
           )
           as Map;
@@ -72,7 +72,7 @@ void main() {
       final raw = Map<String, Object?>.from(
         (procedures['botox'] as Map)['rows'][0] as Map,
       );
-      for (final stale in ['', 'e20', 'e27']) {
+      for (final stale in ['', 'e20', 'e27', 'e28']) {
         final row = ExplorePriceDiscoveryTool.rowFromJson({
           ...raw,
           'price_extract_revision': stale,

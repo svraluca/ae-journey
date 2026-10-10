@@ -68,8 +68,9 @@ class LocalFirstSearch(unittest.IsolatedAsyncioTestCase):
                         stored_pool=[], desired_new=6, limit=8, display_limit=4, debug=False,
                         app_fast=True, background_collection=False, client_known_clinic_hosts=[])
                 with self.subTest(country=cc):
-                    self.assertEqual(requests[0].progressive_stage, 'primary' if cc == 'GB' else 'local')
-                    self.assertIn(term, requests[0].query_override[0])
+                    official = [r for r in requests if r.progressive_stage in {'local','primary'}]
+                    self.assertEqual(official[0].progressive_stage, 'primary' if cc == 'GB' else 'local')
+                    self.assertIn(term, official[0].query_override[0])
                     self.assertLessEqual(sum(r.serper_request_cap for r in requests), 4)
 
 

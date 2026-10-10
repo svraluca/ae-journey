@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.92 — provider-bound geography and published fee ownership
+Aesthetic Procedure Price Discovery v0.11.93 — bounded source refresh and unambiguous provider menus
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -59,7 +59,7 @@ import vertical_search
 from injectable_scope import injectable_scope_rejection
 from tariff_scope import ancillary_price_reason, comparison_price_context, calendar_price_reason, medical_qa_price_context
 
-PRICE_EXTRACT_REVISION = "e28"
+PRICE_EXTRACT_REVISION = "e29"
 
 try:
     from google.cloud import firestore
@@ -456,6 +456,9 @@ class HybridDiscoverRequest(BaseModel):
     client_stored_count: int = Field(default=0, ge=0, le=40)
     client_known_clinic_hosts: list[str] = Field(default_factory=list, max_length=40)
     client_known_clinic_names: list[str] = Field(default_factory=list, max_length=40)
+    # Historical price URLs are fetch leads only; amounts and trust flags from
+    # an old extraction revision never enter the display pool through this field.
+    saved_source_urls: list[str] = Field(default_factory=list, max_length=40)
     # 0 uses MAX_ADAPTIVE_TOTAL_SERPER_REQUESTS. A short city may raise this
     # in-process cap (it is not a Serper credit balance).
     serper_request_budget: int = Field(default=0, ge=0, le=40)
@@ -8517,6 +8520,49 @@ def surgical_chin_quote(text: str, source_url: str = "") -> bool:
     return not (nonsurgical or injectable)
 
 
+def marketplace_menu_scope_conflict(evidence: ExtractedEvidence, html: str) -> bool:
+    """An unqualified menu must agree with the same treatment's options.
+
+    A platform's treatment description can distinguish a standard procedure
+    from a branded package. A third unexplained menu amount cannot be bound
+    to either option just because the generic category name matches.
+    """
+    host = host_of(evidence.source_url)
+    if (not html or not (host == 'bookimed.com' or host.endswith('.bookimed.com'))
+            or '/procedure=' not in urlparse(evidence.source_url).path):
+        return False
+    canonical = canonicalize_procedure(evidence.raw_procedure_text)
+    plain = {'botox': {'botox', 'botox injections', 'botox injection'},
+             'filler': {'dermal filler', 'fillers injection', 'filler injections'},
+             'chemical_peel': {'chemical peel', 'chemical peels'},
+             'rhinoplasty': {'rhinoplasty'},
+             'breast_augmentation': {'breast augmentation'},
+             'hair_transplant': {'hair transplant'}}
+    if fold(evidence.raw_procedure_text.split('·')[-1]).strip() not in plain.get(canonical, set()):
+        return False
+    memo = _hybrid_parse_memo.get()
+    key = ('marketplace_option_context', evidence.source_url)
+    context = memo.get(key) if memo is not None else None
+    if context is None:
+        soup = BeautifulSoup(html, 'html.parser')
+        heading = soup.find('h1')
+        context = (heading.get_text(' ', strip=True) if heading else '',
+                   ' '.join(n.get_text(' ', strip=True)
+                            for n in soup.select('.clinic-page__description')))
+        if memo is not None:
+            memo[key] = context
+    heading, description = context
+    if not heading or not contains_requested_procedure(heading, canonical):
+        return False
+    if not re.search(r'\b(?:both options|standard .{0,45}option|treatment options)\b',
+                     description, re.I):
+        return False
+    amounts = {amount for _, amount, currency in iter_exact_price_matches(description)
+               if currency == evidence.currency}
+    return (len(amounts) >= 2
+            and not any(abs(evidence.price_min - amount) < .011 for amount in amounts))
+
+
 def validate_evidence(
     evidence: ExtractedEvidence,
     full_page_text: str,
@@ -8555,6 +8601,8 @@ def validate_evidence(
     if source == "marketplace" and not marketplace_price_evidence_is_strong(
             evidence, evidence.raw_procedure_text):
         return False, False, 0.10, "weak_marketplace_price_binding", evidence_type
+    if source == "marketplace" and marketplace_menu_scope_conflict(evidence, html):
+        return False, False, 0.10, "ambiguous_marketplace_service_scope", evidence_type
     if tariff_location_conflict(tariff_location_context(html), city):
         return False, False, 0.10, "foreign_tariff_heading", evidence_type
     if (source == "official_clinic"
@@ -12516,6 +12564,7 @@ async def run_growth_search(
     serper_request_budget: int = 0,
     serper_first: bool = False,
     background_collection: bool = False,
+    saved_source_urls: list[str] | None = None,
 ) -> tuple[
     list[DiscoverResponse],
     list[ClinicPriceResult],
@@ -12533,7 +12582,8 @@ async def run_growth_search(
             client_known_clinic_hosts=client_known_clinic_hosts,
             excluded_source_urls=excluded_source_urls, serper_request_budget=serper_request_budget,
             display_limit=display_limit, background_collection=background_collection,
-            initial_serper_requests=initial_serper_requests)
+            initial_serper_requests=initial_serper_requests,
+            saved_source_urls=saved_source_urls)
     if serper_first:
         modes = ["expanded", "site_focus", "rescue"] if enabled else ["standard"]
     elif app_fast and not force_full_growth_search:
@@ -13998,6 +14048,7 @@ def select_discovery_work(unique: list[SearchHit], req: DiscoverRequest, rank_fn
     selected = []
     seen = set()
     seen_provider_hosts = set()
+    seen_marketplace_providers = set()
     counts = {
         "marketplace": 0,
         "price_like": 0,
@@ -14012,12 +14063,20 @@ def select_discovery_work(unique: list[SearchHit], req: DiscoverRequest, rank_fn
             if not hit.url or hit.url in seen:
                 continue
             host = host_of(hit.url)
+            profile = bookimed_treatment_profile_url(hit.url, req.procedure)
+            provider = profile.split('/procedure=')[0] if profile else hit.url
+            marketplace_profile = (classify_source(hit.url) == "marketplace"
+                                   and is_probable_single_business_page(hit.url))
+            if marketplace_profile and provider in seen_marketplace_providers:
+                continue
             if (not repeat_provider and classify_source(hit.url) == "official_clinic"
                     and any(related_clinic_hosts(host, old) for old in seen_provider_hosts)):
                 continue
             seen.add(hit.url)
             if classify_source(hit.url) == "official_clinic":
                 seen_provider_hosts.add(host)
+            if marketplace_profile:
+                seen_marketplace_providers.add(provider)
             selected.append(hit)
             counts[lane] += 1
 
@@ -18226,7 +18285,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.92",
+    version="0.11.93",
     lifespan=app_lifespan,
 )
 
@@ -19109,6 +19168,10 @@ async def _discover_hybrid_impl(req: HybridDiscoverRequest):
             serper_request_budget=req.serper_request_budget,
             serper_first=req.serper_first,
             background_collection=req.background_collection,
+            saved_source_urls=list(dict.fromkeys([
+                *req.saved_source_urls,
+                *(r.source_url for r in historical_pool if r.source_url),
+            ]))[:40],
         )
     finally:
         _hybrid_parse_memo.reset(memo_token)

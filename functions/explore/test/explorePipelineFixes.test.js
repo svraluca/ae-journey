@@ -73,7 +73,7 @@ function miamiRow(overrides = {}) {
 // backend writes. Bump both sides together.
 // e18: exact prices stay exact (no auto /ml from "1 ml"); cross-city cache purge.
 test('extraction revision is e28', () => {
-  assert.equal(EXTRACT_REVISION, 'e28');
+  assert.equal(EXTRACT_REVISION, 'e29');
 });
 
 test('Miami Skin Spa wrinkle-relaxer paragraph is 13 USD perUnit variant', () => {

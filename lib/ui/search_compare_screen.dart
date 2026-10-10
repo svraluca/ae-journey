@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'saved_procedures_screen.dart';
 
@@ -377,7 +378,8 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
         _isLoadingMoreClinics = false;
       });
       final completedComparison = _comparison;
-      if (completedComparison != null && completedComparison.clinics.isNotEmpty) {
+      if (completedComparison != null &&
+          completedComparison.clinics.isNotEmpty) {
         _storePillComparison(pill, completedComparison);
         _kickRatingBackfill(pill: pill, shown: completedComparison);
       }
@@ -4627,6 +4629,11 @@ class _ClinicCompareCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final rating = clinic.rating > 0 ? clinic.rating.toStringAsFixed(1) : '';
     final place = location.isEmpty ? 'Worldwide' : location;
+    final sourceUrl = Uri.tryParse(clinic.priceSourceUrl);
+    final canOpenSource =
+        sourceUrl != null &&
+        (sourceUrl.scheme == 'https' || sourceUrl.scheme == 'http');
+    final platform = marketplacePlatformLabel(clinic.priceSourceUrl);
     final cardTitle = procedureName.startsWith('Breast augmentation · ')
         ? procedureName.replaceFirst(' · ', '\n')
         : procedureName;
@@ -4734,6 +4741,23 @@ class _ClinicCompareCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 if (price.isNotEmpty) _PriceLabel(price: price),
+                if (price.isNotEmpty && canOpenSource)
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 3),
+                      minimumSize: const Size(0, 26),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      foregroundColor: ProcedureSelectionTheme.muted,
+                    ),
+                    onPressed: () => launchUrl(
+                      sourceUrl!,
+                      mode: LaunchMode.externalApplication,
+                    ),
+                    child: Text(
+                      platform.isEmpty ? 'Published price' : '$platform price',
+                      style: const TextStyle(fontSize: 10),
+                    ),
+                  ),
                 if (price.isNotEmpty) const SizedBox(height: 12),
                 Material(
                   color: saved

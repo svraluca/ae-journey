@@ -110,6 +110,7 @@ class Catalog:
 # Imported once per worker process; requests never reopen these files.
 CATALOG = Catalog(Path(__file__).with_name('config'))
 MIN_DISPLAY, GOOD_ENOUGH, TARGET = 4, 6, 8
+SAVED_SOURCE_SECONDS, KNOWN_STAGE_SECONDS = 8, 6
 
 
 class ReasonCache:
@@ -203,7 +204,7 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
                           desired_new, limit, debug, client_known_clinic_hosts=None,
                           excluded_source_urls=None, serper_request_budget=0,
                           display_limit=4, background_collection=False,
-                          initial_serper_requests=0, **unused):
+                          initial_serper_requests=0, saved_source_urls=None, **unused):
     """Reuse discover() for every verification gate; replace only orchestration."""
     started = time.monotonic()
     excluded = set(excluded_source_urls or [])
@@ -229,14 +230,28 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
     remaining = max(0, serper_request_budget - max(0, initial_serper_requests)) if serper_request_budget > 0 else 4
     total_serper_cap = min(4, remaining)
     deep = engine.env_bool('ENABLE_DEEP_DISCOVERY', True)
-    stages = ['known_domains']
+    saved_urls = list(dict.fromkeys(u for u in (saved_source_urls or [])
+        if isinstance(u, str) and u.startswith(('https://', 'http://'))
+        and u not in excluded and u not in {r.source_url for r in stored}
+        and (engine.classify_source(u) == 'official_clinic' or (
+            engine.classify_source(u) == 'marketplace'
+            and engine.is_probable_single_business_page(u)))))[:8]
+    # Re-open actual saved price pages, never use their old amounts as proof.
+    # Published menus must not wait behind speculative roots/navigation on
+    # every clinic discovered for a different procedure in this city.
+    marketplace_first = (deep and engine.env_bool('ENABLE_MARKETPLACE_RESCUE', True)
+                         and len(stored) < MIN_DISPLAY)
+    stages = (['saved_sources'] if saved_urls else [])
+    if marketplace_first:
+        stages.append('marketplace')
+    stages.append('known_domains')
     # Search the market's language first. A slow English round must not hold
     # local tariff pages behind its fetch/navigation budget. Paid search caps
     # and verification gates remain the same; English is the fallback round.
     local_queries = CATALOG.queries(selected, city, country, engine.local_terms_for, stage='local')
     local_first = engine.env_bool('ENABLE_MULTILINGUAL_SEARCH', True) and bool(local_queries)
     stages.append('local' if local_first else 'primary')
-    if deep and engine.env_bool('ENABLE_MARKETPLACE_RESCUE', True):
+    if deep and engine.env_bool('ENABLE_MARKETPLACE_RESCUE', True) and not marketplace_first:
         stages.append('marketplace')
     if deep and local_first:
         stages.append('primary')
@@ -244,14 +259,17 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
         if engine.env_bool('ENABLE_EXA_RESCUE', False):
             stages.append('exa')
         stages.append('places')
-    # Total fast <=24 HTML GETs; total deep <=32 HTML GETs. Per-URL inflight
-    # dedupe and the existing bounded HTTP pool still apply.
-    limits = {'known_domains': 8, 'primary': 16, 'local': 12, 'marketplace': 12, 'exa': 10, 'places': 10}
+    # Each lane has a network cap; remembered-site probes also have a wall
+    # deadline because cached HTML parsing/navigation can bypass GET counters.
+    limits = {'saved_sources': 8, 'known_domains': 4, 'primary': 16,
+              'local': 12, 'marketplace': 12, 'exa': 10, 'places': 10}
     for stage in stages:
         if len(stored) + len(merged) >= goal:
             break
         queries, urls, stage_hosts = [], [], []
-        if stage == 'known_domains':
+        if stage == 'saved_sources':
+            urls = saved_urls
+        elif stage == 'known_domains':
             stage_hosts = hosts
             if not hosts:
                 continue
@@ -299,8 +317,21 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
         token = engine._interactive_fetch_budget.set(budget)
         progress_token = engine._hybrid_round_progress_base.set({
             'fetched_pages': sum(r.fetched_pages for r in responses), 'serper_requests': spent})
+        partial_rows = []
+        partial_progress = {}
+        upstream = engine._hybrid_progress.get()
+        class StageProgress:
+            async def put(self, event):
+                if event.get('event') == 'partial':
+                    partial_rows.extend(engine.ClinicPriceResult.model_validate(r)
+                                        for r in event.get('display_results', []))
+                elif event.get('event') == 'progress':
+                    partial_progress.update(event.get('progress', {}))
+                if upstream is not None:
+                    await upstream.put(event)
+        stage_progress = engine._hybrid_progress.set(StageProgress())
         try:
-            response = await engine.discover(engine.DiscoverRequest(
+            discovery = engine.discover(engine.DiscoverRequest(
                 city=city, procedure=procedure, country_code=country or None,
                 limit=min(20, max(TARGET, limit)), persist=False, debug=debug,
                 search_mode='expanded' if queries else 'site_focus',
@@ -312,7 +343,26 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
                 priority_site_urls=[u for u in urls if u not in fetched][:40],
                 previously_fetched_urls=sorted(fetched),
                 known_clinic_hosts=sorted(priced_hosts)))
+            if stage in {'saved_sources', 'known_domains'}:
+                try:
+                    response = await asyncio.wait_for(discovery,
+                        timeout=SAVED_SOURCE_SECONDS if stage == 'saved_sources' else KNOWN_STAGE_SECONDS)
+                except asyncio.TimeoutError:
+                    # Only free source probes use this deadline. Any verified
+                    # partials survive; no paid query allowance is reset.
+                    response = engine.DiscoverResponse(city=city, procedure=procedure,
+                        country_code=country, queries=[],
+                        results=engine.dedupe_live_results(partial_rows),
+                        searched_urls=0,
+                        fetched_pages=max(0, int(partial_progress.get('fetched_pages', 0))
+                            - sum(r.fetched_pages for r in responses)),
+                        crawled_urls=list(dict.fromkeys(r.source_url for r in partial_rows)),
+                        diagnostics=engine.DiscoveryDiagnostics())
+                    await engine._emit_hybrid_status(round=stage, stage_timed_out=True)
+            else:
+                response = await discovery
         finally:
+            engine._hybrid_progress.reset(stage_progress)
             engine._interactive_fetch_budget.reset(token)
             engine._hybrid_round_progress_base.reset(progress_token)
         responses.append(response)

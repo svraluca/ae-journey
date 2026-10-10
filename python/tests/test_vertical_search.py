@@ -94,32 +94,35 @@ class ProgressivePolicy(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(result[2])
 
     async def test_local_six_stops_before_english_exa_places(self):
-        with patch.object(e,'discover',new=AsyncMock(side_effect=lambda req:self.response(req,6))) as discover:
+        with patch.object(e,'discover',new=AsyncMock(side_effect=lambda req:self.response(
+                req, 0 if req.progressive_stage == 'marketplace' else 6))) as discover:
             _,rows,_=await self.run_search()
         self.assertEqual(len(rows),6)
         self.learned.assert_awaited_once()
         self.assertEqual(len(self.learned.await_args.args[2]), 6)
         self.assertTrue(all('botox' in hit.directory_capabilities for hit in self.learned.await_args.args[2]))
-        self.assertEqual([call.args[0].progressive_stage for call in discover.await_args_list],['local'])
+        self.assertEqual([call.args[0].progressive_stage for call in discover.await_args_list],
+                         ['marketplace','local'])
         self.exa.assert_not_awaited();self.places.assert_not_awaited()
 
-    async def test_insufficient_switches_from_local_to_marketplaces_to_exa(self):
+    async def test_sparse_market_switches_from_menus_to_local_to_exa(self):
         with patch.object(e,'discover',new=AsyncMock(side_effect=lambda req:self.response(req))) as discover:
             await self.run_search()
         stages=[call.args[0] for call in discover.await_args_list]
-        self.assertEqual([r.progressive_stage for r in stages],['local','marketplace'])
+        self.assertEqual([r.progressive_stage for r in stages],['marketplace','local'])
         self.assertEqual(sum(r.serper_request_cap for r in stages),4)
         self.exa.assert_awaited_once()
         self.assertNotIn(self.exa.await_args.args[0],stages[0].query_override)
 
-    async def test_known_domain_reused_before_paid_search(self):
-        self.directory.return_value=[e.SearchHit(title='Aster',url='https://aster.example/')]
+    async def test_filled_display_reuses_known_domain_before_paid_search(self):
+        self.directory.return_value=[e.SearchHit(title='New Clinic',url='https://new.example/')]
+        stored=self.response(e.DiscoverRequest(city='Valencia',procedure='botox'),4).results
         with patch.object(e,'discover',new=AsyncMock(side_effect=lambda req:self.response(req,6))) as discover:
-            await self.run_search()
+            await self.run_search(stored)
         req=discover.await_args.args[0]
         self.assertEqual(req.progressive_stage,'known_domains')
         self.assertFalse(req.enable_serper)
-        self.assertEqual(req.priority_site_hosts,['aster.example'])
+        self.assertEqual(req.priority_site_hosts,['new.example'])
         self.exa.assert_not_awaited()
 
     async def test_background_pass_can_continue_after_six_are_stored(self):

@@ -25,7 +25,7 @@ import httpx
 from fastapi import HTTPException
 from pydantic import BaseModel, Field
 
-JOB_ENGINE_VERSION = "0.11.92"
+JOB_ENGINE_VERSION = "0.11.93"
 
 # HTML extraction/Firestore calls can occupy asyncio's default executor.
 # Queue acceptance, focus changes and polling must not wait behind crawlers.
@@ -231,17 +231,19 @@ class JobStore:
                              if progress.get("client_display_focus_seq") == feedback.focus_seq else 0)
             if feedback.display_seq <= last_sequence:
                 return {"accepted": False, "reason": "stale_display"}
-            ready = feedback.displayed_count >= min(6, int(request.get("display_limit", 4)))
+            ready = feedback.displayed_count > 0
+            filled = feedback.displayed_count >= int(request.get("display_limit", 4))
             progress.update(client_display_seq=feedback.display_seq,
                             client_display_focus_seq=feedback.focus_seq,
                             client_displayed_count=feedback.displayed_count,
                             display_ready=ready,
-                            scheduling="background" if ready else "foreground")
-            request["mode"] = "background" if ready else "foreground"
+                            display_filled=filled,
+                            scheduling="background" if filled else "foreground")
+            request["mode"] = "background" if filled else "foreground"
             db.execute("UPDATE jobs SET request=?,priority=?,progress=?,updated=? WHERE job_id=?",
-                       (json.dumps(request), 70 if ready else 100,
+                       (json.dumps(request), 70 if filled else 100,
                         json.dumps(progress), time.time(), job_id))
-            return {"accepted": True, "display_ready": ready}
+            return {"accepted": True, "display_ready": ready, "display_filled": filled}
 
     def rejected_sources(self, key):
         with self.connect() as db:
@@ -561,6 +563,10 @@ class IndexJobs:
         async def producer():
             token = self.e._hybrid_progress.set(queue)
             try:
+                historical = await self.store_call("latest_results", self.key(req))
+                saved_urls = list(dict.fromkeys(row.get("source_url", "")
+                    for row in historical if isinstance(row, dict)
+                    and isinstance(row.get("source_url"), str)))[:40]
                 request = self.e.HybridDiscoverRequest(
                     city=req.city, procedure=req.procedure,
                     country_code=req.country_code or None,
@@ -575,6 +581,7 @@ class IndexJobs:
                     client_known_clinic_hosts=req.client_known_clinic_hosts,
                     client_known_clinic_names=req.client_known_clinic_names,
                     excluded_source_urls=req.excluded_source_urls,
+                    saved_source_urls=saved_urls,
                 )
                 response = await self.e._discover_hybrid_impl(request)
                 usable = await self.validated_rows(response.candidate_results or response.display_results,
@@ -614,6 +621,7 @@ class IndexJobs:
                     await self.store_call(
                         "update_progress", job, self.row_payload(rows),
                         {"phase": "verified_results", "ttfr_ms": first_result_ms,
+                         "server_display_available": bool(rows),
                          "time_to_6_verified_ms": good_enough_ms},
                     )
                     if len(rows) >= min(6, req.display_limit) and not req.require_client_display_confirmation:
@@ -733,11 +741,19 @@ class IndexJobs:
                 if invalid:
                     await self.store_call("source_check", self.key(req), stored.source_url, invalid)
                     return
+                evidence = await asyncio.to_thread(self.e.extract_price_evidence, html, stored.source_url, req.procedure)
+                ambiguous = await asyncio.to_thread(lambda: any(
+                    self.e.marketplace_menu_scope_conflict(ev, html)
+                    and abs(ev.price_min - stored.price_min) < .011
+                    and ev.currency == stored.currency for ev in evidence))
+                if ambiguous:
+                    await self.store_call("source_check", self.key(req), stored.source_url,
+                                          "ambiguous_marketplace_service_scope")
+                    return
                 if not await asyncio.to_thread(self.e.strong_local_page_evidence,
                     html, text, req.city, stored.source_url,
                 ):
                     return
-                evidence = await asyncio.to_thread(self.e.extract_price_evidence, html, stored.source_url, req.procedure)
                 # A known-source refresh must also repair old hostname-derived
                 # names. Only replace them with source metadata, never another
                 # guessed title or an invented split of the domain.

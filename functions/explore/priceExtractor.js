@@ -816,8 +816,32 @@ function extractPriceEvidence({html, sourceUrl}) {
   });
   const out = [];
   const seen = new Set();
+  // A generic menu amount cannot select between differently priced treatment
+  // options described on that same provider's treatment page.
+  let optionPrices = [];
+  const optionHeading = $('h1').first().text().trim().toLowerCase();
+  try {
+    const url = new URL(sourceUrl);
+    if ((url.hostname === 'bookimed.com' || url.hostname.endsWith('.bookimed.com')) &&
+        url.pathname.includes('/procedure=')) {
+      const description = $('.clinic-page__description').text();
+      if (/\b(?:both options|standard .{0,45}option|treatment options)\b/i.test(description)) {
+        const quotes = description.match(/(?:[$€£]|USD|EUR|GBP|TRY|TL)\s*\d[\d.,]*|\d[\d.,]*\s*(?:USD|EUR|GBP|TRY|TL|[$€£])/gi) || [];
+        optionPrices = quotes.map(parsePriceText).filter(Boolean);
+      }
+    }
+  } catch (_) { /* Other source types keep their existing extraction gates. */ }
+  const genericServices = new Set(['botox', 'botox injections', 'botox injection',
+    'dermal filler', 'fillers injection', 'filler injections', 'chemical peel',
+    'chemical peels', 'rhinoplasty', 'breast augmentation', 'hair transplant']);
   const add = (row) => {
     if (!row || !(row.priceMin > 0)) return;
+    const label = String(row.rawProcedureText || '').split('·').pop().trim().toLowerCase();
+    if (genericServices.has(label) && optionHeading.includes(label)) {
+      const sameCurrency = new Set(optionPrices.filter(p => p.currency === row.currency)
+          .map(p => p.priceMin));
+      if (sameCurrency.size >= 2 && ![...sameCurrency].some(p => Math.abs(p-row.priceMin) < .011)) return;
+    }
     if (!evaluateExtractedPriceCandidate({...row, procedure: row.rawProcedureText,
       pageContext, logRejects: false}).accepted) return;
     if (String(row.rawProcedureText || '').trim().length < 3) return;

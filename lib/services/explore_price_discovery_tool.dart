@@ -204,7 +204,7 @@ class ExploreDiscoveryJob {
 /// Simulator on that Mac. A phone uses [PRICE_DISCOVERY_TOOL_URL]. Search
 /// credentials stay on the server.
 class ExplorePriceDiscoveryTool {
-  static const minimumBackendVersion = '0.11.92';
+  static const minimumBackendVersion = '0.11.93';
 
   /// Older workers can return rows checked with obsolete ownership rules.
   /// Updating Flutter must not turn those rows into freshly verified prices.

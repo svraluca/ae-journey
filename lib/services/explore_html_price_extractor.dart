@@ -238,11 +238,61 @@ List<ExtractedPriceEvidence> extractPriceEvidence({
   final out = <ExtractedPriceEvidence>[];
   final seen = <String>{};
   final headingContext = _PriceHeadingContext();
+  final uri = Uri.tryParse(sourceUrl);
+  final optionHeading =
+      doc.querySelector('h1')?.text.trim().toLowerCase() ?? '';
+  final optionDescription =
+      (uri != null &&
+          (uri.host == 'bookimed.com' || uri.host.endsWith('.bookimed.com')) &&
+          uri.path.contains('/procedure='))
+      ? doc
+            .querySelectorAll('.clinic-page__description')
+            .map((n) => n.text)
+            .join(' ')
+      : '';
+  final optionPrices =
+      cachedRegExp(
+        r'\b(?:both options|standard .{0,45}option|treatment options)\b',
+        caseSensitive: false,
+      ).hasMatch(optionDescription)
+      ? cachedRegExp(
+              r'(?:[$€£]|USD|EUR|GBP|TRY|TL)\s*\d[\d.,]*|\d[\d.,]*\s*(?:USD|EUR|GBP|TRY|TL|[$€£])',
+              caseSensitive: false,
+            )
+            .allMatches(optionDescription)
+            .map((m) => parsePriceText(m.group(0)!))
+            .whereType<ParsedPrice>()
+            .toList()
+      : <ParsedPrice>[];
+  const genericServices = {
+    'botox',
+    'botox injections',
+    'botox injection',
+    'dermal filler',
+    'fillers injection',
+    'filler injections',
+    'chemical peel',
+    'chemical peels',
+    'rhinoplasty',
+    'breast augmentation',
+    'hair transplant',
+  };
 
   void add(ExtractedPriceEvidence? row) {
     if (out.length >= kExploreMaxEvidenceScanRowsPerPage) return;
     if (row == null || !row.hasUsablePrice) return;
     if (row.rawProcedureText.trim().length < 3) return;
+    final genericLabel = row.rawProcedureText.split('·').last.trim().toLowerCase();
+    if (genericServices.contains(genericLabel) &&
+        optionHeading.contains(genericLabel)) {
+      final amounts = optionPrices
+          .where((p) => p.currency == row.currency)
+          .map((p) => p.priceMin)
+          .toSet();
+      if (amounts.length >= 2 &&
+          !amounts.any((p) => (p - row.priceMin).abs() < .011))
+        return;
+    }
     // Truncated Zyte/HTML shells sometimes yield CSS/JS as "labels".
     final label = row.rawProcedureText;
     if (label.contains('<') ||
@@ -586,7 +636,8 @@ void _walkJsonLd(
                   ? PriceExtractionMethod.schemaOffer
                   : PriceExtractionMethod.jsonLd),
         rawEvidence: [
-          proc, rawPrice.trim(),
+          proc,
+          rawPrice.trim(),
           '${o['category'] ?? map['category'] ?? ''}',
           '${o['description'] ?? description}',
           if (o['itemOffered'] is Map)
@@ -710,9 +761,12 @@ void _stripConditionalOfferCards(Document doc) {
     r'ven\s+con\s+una\s+amiga|couples?\s+offer|couples?\s+price|per\s+couple)\b',
     caseSensitive: false,
   );
-  for (final card in doc.querySelectorAll(
-    'article, .promo-card, .pricing-card, .offer-card, .service-card',
-  ).toList()) {
+  for (final card
+      in doc
+          .querySelectorAll(
+            'article, .promo-card, .pricing-card, .offer-card, .service-card',
+          )
+          .toList()) {
     if (conditions.hasMatch(_visibleText(card))) card.remove();
   }
 }
@@ -746,7 +800,8 @@ List<ExtractedPriceEvidence> _extractTables(
       if (_kPriceLike.hasMatch(t) || _kBarePrice.hasMatch(t)) {
         // Gulf menus often put "Cost (AED)" only in the column header.
         final value = !hasCurrencySignal(t) && hasCurrencySignal(header)
-            ? '$t $header' : t;
+            ? '$t $header'
+            : t;
         priceCells.add(value);
         priceHeaders[value] = header;
       } else if (_looksLikeProcedureLabel(t)) {
@@ -773,9 +828,8 @@ List<ExtractedPriceEvidence> _extractTables(
       r'\b\d+\s*(?:viales?|vials?|ml|sessions?|sesiones?|units?|unidades|zones?|zonas?|areas?)\b',
       caseSensitive: false,
     ).hasMatch(basis)) {
-      procedure = '$procedure · ${basis.replaceAll(cachedRegExp(
-        r'\s*\(\s*(?:ahora|now|current)\s*\)', caseSensitive: false,
-      ), '').trim()}';
+      procedure =
+          '$procedure · ${basis.replaceAll(cachedRegExp(r'\s*\(\s*(?:ahora|now|current)\s*\)', caseSensitive: false), '').trim()}';
     }
     final hint = _nearestCurrencyHint(tr);
     final parsed = parsePriceText(
@@ -2164,10 +2218,13 @@ class ExploreHtmlPriceParseCache {
     String normalizedHost(String raw) {
       final value = raw.trim().toLowerCase();
       if (value.isEmpty) return '';
-      return (Uri.tryParse(value.contains('://') ? value : 'https://$value')
-              ?.host ?? '')
+      return (Uri.tryParse(
+                value.contains('://') ? value : 'https://$value',
+              )?.host ??
+              '')
           .replaceFirst(RegExp(r'^www\.'), '');
     }
+
     final wanted = normalizedHost(host);
     final urls = <String>{
       for (final raw in sourceUrls)
