@@ -26,6 +26,17 @@ class Catalog:
         'breast_augmentation': 'breast_augmentation_implants',
         'hair_transplant': 'hair_transplant_fue', 'rhinoplasty': 'rhinoplasty',
     }
+    # Platform taxonomy, not a provider or city list. Let the search result
+    # supply WhatClinic's actual country/province/city hierarchy; guessing
+    # those paths loses cities whose platform URLs differ from their names.
+    whatclinic_categories = {
+        'botox': ('beauty-clinics', 'treatment-for-wrinkles'),
+        'filler': ('beauty-clinics', 'dermal-fillers'),
+        'chemical_peel': ('beauty-clinics', 'chemical-peel'),
+        'breast_augmentation': ('cosmetic-plastic-surgery', 'breast-implants'),
+        'hair_transplant': ('hair-loss', 'hair-transplant'),
+        'rhinoplasty': ('cosmetic-plastic-surgery', 'rhinoplasty'),
+    }
 
     def __init__(self, directory):
         directory = Path(directory)
@@ -81,11 +92,17 @@ class Catalog:
             return [f'Clinics in {city} publishing their own treatment fees for {label}; '
                     'official clinic tariffs and named-provider service menus, not market averages']
         if stage == 'marketplace':
-            # These platforms already have provider-profile verifiers. Search
-            # their published menus, never turn a directory range into a fee.
+            # Find the local procedure directory as a navigation lead, then
+            # verify the named providers' own profile menus. Broad platform
+            # queries otherwise favor a few repeatedly indexed providers and
+            # miss the directory's many explicit treatment-price cards.
             provider_term = 'fillers injection' if procedure == 'filler' else term
-            return [f'site:bookimed.com/clinic/ "{city}" {provider_term} price',
-                    f'site:whatclinic.com "{city}" {term} prices']
+            category = self.whatclinic_categories.get(procedure)
+            whatclinic = (f'site:whatclinic.com/{category[0]}/ "{city}" '
+                          f'inurl:{category[1]} prices' if category else
+                          f'site:whatclinic.com "{city}" {term} prices')
+            return [whatclinic,
+                    f'site:bookimed.com/clinic/ "{city}" {provider_term} price']
         config = self.country(country)
         for language in config.get('search_languages', []):
             if language == 'en':
@@ -141,6 +158,19 @@ class ReasonCache:
 
 REJECTIONS = ReasonCache()
 CITY_COUNTRIES = ReasonCache(capacity=2048)
+
+
+def marketplace_discovery_lead(engine, url, city, country='', hit=None):
+    """Profiles prove fees; a local treatment directory only discovers them."""
+    if engine.classify_source(url) != 'marketplace':
+        return False
+    if engine.is_probable_single_business_page(url):
+        return not hit or engine.is_probable_single_business_hit(hit, city)
+    title = hit.title if hit else ''
+    return (engine.is_whatclinic_category_result(url, title, '', city)
+            and engine.city_in_text(f'{url} {title}', city)
+            and not engine.marketplace_url_geo_conflict(url, city, country)
+            and not engine.foreign_price_source_path(url, city))
 
 
 async def resolve_country(engine, city, supplied=''):
@@ -233,9 +263,8 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
     saved_urls = list(dict.fromkeys(u for u in (saved_source_urls or [])
         if isinstance(u, str) and u.startswith(('https://', 'http://'))
         and u not in excluded and u not in {r.source_url for r in stored}
-        and (engine.classify_source(u) == 'official_clinic' or (
-            engine.classify_source(u) == 'marketplace'
-            and engine.is_probable_single_business_page(u)))))[:8]
+        and (engine.classify_source(u) == 'official_clinic' or
+             marketplace_discovery_lead(engine, u, city, country))))[:8]
     # Re-open actual saved price pages, never use their old amounts as proof.
     # Published menus must not wait behind speculative roots/navigation on
     # every clinic discovered for a different procedure in this city.
@@ -295,8 +324,7 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
                                         engine.local_terms_for, stage='semantic')[0], country)
             exa_calls += provider.calls
             urls = [h.url for h in hits if engine.classify_source(h.url) == 'official_clinic'
-                    or (engine.classify_source(h.url) == 'marketplace'
-                        and engine.is_probable_single_business_hit(h, city))]
+                    or marketplace_discovery_lead(engine, h.url, city, country, h)]
             if not urls:
                 await engine._emit_hybrid_status(round=stage, exa_calls=exa_calls,
                                                 provider_error=provider.last_error)

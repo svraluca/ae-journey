@@ -72,8 +72,8 @@ function miamiRow(overrides = {}) {
 // lib/services/explore_price_sanity.dart, or the client zeroes every price the
 // backend writes. Bump both sides together.
 // e18: exact prices stay exact (no auto /ml from "1 ml"); cross-city cache purge.
-test('extraction revision is e28', () => {
-  assert.equal(EXTRACT_REVISION, 'e30');
+test('extraction revision is e31', () => {
+  assert.equal(EXTRACT_REVISION, 'e31');
 });
 
 test('Miami Skin Spa wrinkle-relaxer paragraph is 13 USD perUnit variant', () => {

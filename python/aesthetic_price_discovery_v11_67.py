@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.94 — balanced search languages and scoped commerce offers
+Aesthetic Procedure Price Discovery v0.11.95 — provider-card discovery and verified marketplace tariffs
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -58,8 +58,9 @@ from pydantic import BaseModel, Field
 import vertical_search
 from injectable_scope import injectable_scope_rejection
 from tariff_scope import ancillary_price_reason, comparison_price_context, calendar_price_reason, medical_qa_price_context
+from amount_policy import procedure_amount_is_plausible
 
-PRICE_EXTRACT_REVISION = "e30"
+PRICE_EXTRACT_REVISION = "e31"
 
 try:
     from google.cloud import firestore
@@ -131,6 +132,9 @@ class SearchHit(BaseModel):
     directory_was_inactive: bool = False
     directory_evidence_pages: int = 0
     directory_verification_source: str = ""
+    # A directory's bounded provider card can prioritize a profile fetch.
+    # This flag is never price evidence; the profile must publish its own fee.
+    marketplace_listed_price: bool = False
 
 
 class PlaceIdentity(BaseModel):
@@ -3183,10 +3187,9 @@ async def _reserve_interactive_fetch(url: str = "") -> bool:
         return True
 
 
-UA = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-    "AppleWebKit/537.36 Chrome/126.0 Safari/537.36"
-)
+# Identify the actual HTTP client. An obsolete browser impersonation caused
+# public marketplace profiles to reject otherwise ordinary HTML requests.
+UA = f"python-httpx/{httpx.__version__}"
 
 
 _FETCH_LOOP_STATE = weakref.WeakKeyDictionary()
@@ -3380,6 +3383,10 @@ WHATCLINIC_CATEGORY_SLUGS = {
     "mesotherapy", "laser-hair-removal", "treatment-for-wrinkles",
     "rhinoplasty", "breast-implants", "breast-augmentation",
     "hair-transplant", "facelift", "blepharoplasty", "liposuction",
+    "cheek-augmentation", "chin-augmentation", "frown-lines-filler",
+    "hyaluronic-acid-filler", "jawline-filler", "liquid-facelift",
+    "nasolabial-folds-filler", "non-surgical-facelift", "non-surgical-nose-job",
+    "tear-trough-filler", "thread-lift", "anti-wrinkle-treatment",
 }
 
 
@@ -3516,6 +3523,21 @@ def bookimed_treatment_profile_url(url: str, procedure: str) -> str:
     parsed = urlparse(url)
     provider = parsed.path.split('/')[2]
     return f'{parsed.scheme}://{parsed.netloc}/clinic/{provider}/procedure={slug}/'
+
+
+def published_marketplace_menu_url(html: str, url: str) -> str:
+    """Link to a price section in the document actually fetched and verified."""
+    parsed = urlparse(url)
+    if parsed.fragment or 'bookimed.com' not in host_of(url):
+        return url
+    soup = BeautifulSoup(html or "", "lxml")
+    section = soup.select_one('.clinic-prices')
+    if section is None or not section.find('table'):
+        return url
+    anchor = section if section.get('id') else section.parent
+    if anchor is None or not anchor.get('id'):
+        return url
+    return urlunparse(parsed._replace(fragment=quote(str(anchor['id']), safe='-._:')))
 
 
 
@@ -3754,7 +3776,11 @@ def expand_marketplace_category_links(
     html: str,
     city: str,
     limit: int = 12,
+    procedure: str = "",
 ) -> list[str]:
+    if "whatclinic.com" in host_of(base_url):
+        return [hit.url for hit in expand_whatclinic_category_hits(
+            base_url, html, city, procedure, limit)]
     soup = BeautifulSoup(html, "lxml")
     base_host = host_of(base_url)
     out: list[str] = []
@@ -3817,6 +3843,75 @@ def expand_marketplace_category_links(
                 break
 
     return out
+
+
+def expand_whatclinic_category_hits(
+    base_url: str, html: str, city: str, procedure: str = "", limit: int = 12,
+) -> list[SearchHit]:
+    """Use clinic cards, never navigation/category links, as provider leads.
+
+    Directory tariffs are a crawl priority only. Do not copy their amounts
+    into snippets or publish them without fetching the individual profile.
+    """
+    soup = BeautifulSoup(html or "", "lxml")
+    candidates = []
+    seen = set()
+    for card in soup.select('.search-listing[data-clinic-id]'):
+        heading = card.select_one('.title-section h3 a[href], h3 a.nocss-brochure-link[href]')
+        if heading is None:
+            continue
+        profile = safe_http_urljoin(base_url, str(heading.get('href') or ''))
+        profile = urlunparse(urlparse(profile)._replace(fragment=""))
+        if (host_of(profile) != host_of(base_url) or profile in seen
+                or not is_probable_single_business_page(profile)):
+            continue
+        address_node = card.select_one('.address')
+        address = address_node.get_text(' ', strip=True) if address_node else ""
+        # Some addresses omit the town while the provider URL names it.
+        # Both are only leads; the fetched profile still proves locality.
+        if not city_in_text(f"{address} {profile}", city):
+            continue
+        services = []
+        priced = False
+        for treatment in card.select('.treatment-container'):
+            label = treatment.select_one('.title')
+            title = label.get_text(' ', strip=True) if label else ""
+            category_label = (canonicalize_procedure(procedure) == 'botox'
+                              and fold(title) in {'treatment for wrinkles', 'anti wrinkle treatment'})
+            if not title or (procedure and not contains_requested_procedure(title, procedure)
+                             and not category_label):
+                continue
+            services.append(title)
+            price = treatment.select_one('.price-holder')
+            if price and any(iter_exact_price_matches(price.get_text(' ', strip=True))):
+                priced = True
+        seen.add(profile)
+        candidates.append(SearchHit(
+            title=heading.get_text(' ', strip=True), url=profile,
+            snippet=" | ".join([address, *services]),
+            marketplace_listed_price=priced,
+        ))
+    candidates.sort(key=lambda hit: not hit.marketplace_listed_price)
+    return candidates[:max(0, limit)]
+
+
+def whatclinic_next_category_url(base_url: str, html: str) -> str:
+    """Follow a published next-page link within the same local category."""
+    if "whatclinic.com" not in host_of(base_url):
+        return ""
+    base = urlparse(base_url)
+    soup = BeautifulSoup(html or "", "lxml")
+    for link in soup.select('a[href]'):
+        if 'next' not in (link.get_text(' ', strip=True).lower()
+                          + ' '.join(link.get('rel') or [])):
+            continue
+        candidate = safe_http_urljoin(base_url, str(link.get('href') or ''))
+        parsed = urlparse(candidate)
+        if (host_of(candidate) == host_of(base_url) and parsed.path == base.path
+                and re.fullmatch(r'page=\d+', parsed.query)
+                and candidate != base_url):
+            return candidate
+    return ""
 
 
 # ============================================================
@@ -4196,7 +4291,7 @@ def strong_local_page_evidence(html: str, text: str, city: str, url: str) -> boo
     if classify_page_source(url, text) == "marketplace":
         # Only the profiled provider can establish locality. A marketplace's
         # publisher, nearby recommendations and global office footer cannot.
-        locations = marketplace_provider_locations(html, url)
+        locations = marketplace_provider_locations(html, url, city)
         if locations:
             return any(address_matches_search_city(location, city) for location in locations)
         soup = BeautifulSoup(html or "", "lxml")
@@ -4303,7 +4398,7 @@ def strong_local_page_evidence(html: str, text: str, city: str, url: str) -> boo
     return city_in_text(f"{title} {meta} {url}", city)
 
 
-def marketplace_provider_locations(html: str, url: str) -> list[str]:
+def marketplace_provider_locations(html: str, url: str, city: str = "") -> list[str]:
     """Addresses of the profile's main medical entity, not its publisher."""
     locations = []
     def provider_url(value):
@@ -4335,7 +4430,27 @@ def marketplace_provider_locations(html: str, url: str) -> list[str]:
                     # platform's administrative country/locale.
                     locality = address.get('addressLocality')
                     if locality:
-                        locations.append(str(locality))
+                        location = str(locality)
+                        full_address = ' '.join(str(address.get(k) or '') for k in
+                            ('streetAddress', 'addressLocality', 'addressRegion', 'addressCountry')).strip()
+                        geography = ' '.join((urlparse(url).path or '').split('/')[3:-1])
+                        district_city = any(re.search(
+                            re.escape(fold(location)) + r'\s*[/,]\s*' + re.escape(fold(alias)) + r'\b',
+                            fold(str(address.get('streetAddress') or '')))
+                            for alias in aliases_for_city(city)) if city else False
+                        city_address = (city_in_text(str(address.get('addressRegion') or ''), city)
+                                        or district_city) if city else False
+                        # Districts are often the locality while the provider's
+                        # region/street and actual profile hierarchy identify
+                        # the city. Require both forms of owned address proof;
+                        # a foreign locality or city-named street alone loses.
+                        if (city and not address_matches_search_city(location, city)
+                                and city_in_text(geography, city)
+                                and city_address
+                                and address_matches_search_city(full_address, city)
+                                and not foreign_city_conflict(location, city)):
+                            location = full_address
+                        locations.append(location)
                     else:
                         locations.append(' '.join(str(address.get(k) or '') for k in
                             ('streetAddress', 'addressRegion', 'addressCountry')).strip())
@@ -4362,7 +4477,7 @@ def marketplace_source_location_conflict(context: str, city: str) -> bool:
 
 
 def marketplace_provider_location_context(html: str, url: str, city: str) -> str:
-    locations = marketplace_provider_locations(html, url)
+    locations = marketplace_provider_locations(html, url, city)
     if not locations:
         soup = BeautifulSoup(html or '', 'lxml')
         for node in soup.select('nav, footer, header, [class*="footer"], [id*="footer"]'):
@@ -4372,6 +4487,31 @@ def marketplace_provider_location_context(html: str, url: str, city: str) -> str
                      soup.select('address, [itemprop="address"], title, h1')
                      if address_matches_search_city(node.get_text(' ', strip=True), city)]
     return '\n'.join('Provider locality: ' + location for location in locations)
+
+
+def marketplace_profile_is_intermediary(html: str, url: str) -> bool:
+    """An operator arranging other clinics is not the named treating clinic."""
+    if classify_source(url) != 'marketplace':
+        return False
+    soup = BeautifulSoup(html or '', 'lxml')
+    for review in soup.select('.review, [typeof="Review"], [itemtype$="/Review"]'):
+        review.decompose()
+    descriptions = []
+    for node in soup.select('[property="description"], [itemprop="description"]'):
+        if node.select_one('[property="description"], [itemprop="description"]'):
+            continue
+        text = node.get_text(' ', strip=True)
+        if len(text) <= 6000:
+            descriptions.append(fold(text))
+    for text in descriptions:
+        if re.search(r'\b(?:we are|we act as|is an?)\s+(?:an?\s+)?(?:medical|health|travel)'
+                     r'\s+(?:tourism\s+)?(?:agency|intermediary)\b', text):
+            return True
+        organizer = re.search(r'\bwe\s+(?:organize|arrange|coordinate)\b', text)
+        outside_clinic = re.search(r'\b(?:see|visit|choose|select)\s+(?:the|your|a|an)\s+clinic\b', text)
+        if organizer and outside_clinic:
+            return True
+    return False
 
 
 # ============================================================
@@ -6061,13 +6201,10 @@ def extract_whatclinic_service_price_evidence(
     url: str,
     procedure: str,
 ) -> list[ExtractedEvidence]:
-    """Extract only treatment-level prices from an individual WhatClinic profile.
+    """Read each individual provider's own service price, excluding reviews.
 
-    WhatClinic can place the numeric price immediately *before* the treatment
-    heading in the DOM. The generic forward-looking parser can miss that. This
-    routine pairs the requested treatment heading only with its closest bounded
-    previous/next siblings, preventing a generic page-level "prices from ..."
-    value from being assigned to the treatment.
+    Named service rows and structured offers keep price and label in one
+    container. Legacy small heading/price layouts use bounded siblings.
     """
     if "whatclinic.com" not in host_of(url):
         return []
@@ -6079,6 +6216,49 @@ def extract_whatclinic_service_price_evidence(
     soup = BeautifulSoup(html or "", "lxml")
     for t in soup(["script", "style", "noscript"]):
         t.decompose()
+    for review in soup.select('.review, .review-container, [typeof="Review"], [itemtype$="/Review"]'):
+        review.decompose()
+
+    # Current menus have an explicit service label and its own price
+    # container. Never climb out of that row: an unpriced service cannot
+    # borrow its neighbour's tariff, and a patient's historic "Paid" amount
+    # cannot become the provider's published menu.
+    named_services = soup.select('div[data-id] > span.name')
+    service_offers = soup.select('.treatment_item[property="makesOffer"][typeof="Offer"]')
+    if named_services or service_offers:
+        rows, seen_rows = [], set()
+        for heading in named_services:
+            title = heading.get_text(' ', strip=True)
+            if not contains_requested_procedure(title, procedure):
+                continue
+            container = heading.parent.find('span', class_='price_container', recursive=False)
+            if container is None:
+                continue
+            price = container.get_text(' ', strip=True)
+            if re.match(r'\s*(?:up\s+to|at\s+most|[<≤])', price, re.I):
+                continue
+            add_evidence(rows, seen_rows, f"{title} | {price}", url, procedure,
+                         "whatclinic_service_pair")
+        for offer in service_offers:
+            heading = offer.select_one('.treatment_body [property="name"], .group_heading')
+            title = heading.get_text(' ', strip=True) if heading else ""
+            own_body = offer.get_text(' ', strip=True)
+            corroborated_wrinkles = (
+                canonicalize_procedure(procedure) == 'botox'
+                and re.search(r'\b(?:treatment for wrinkles|anti wrinkle treatment)\b', fold(title))
+                and contains_requested_procedure(own_body, procedure))
+            if not title or not (contains_requested_procedure(title, procedure) or corroborated_wrinkles):
+                continue
+            container = offer.select_one('.treatment_price .price_container')
+            if container is None:
+                continue
+            price = container.get_text(' ', strip=True)
+            if re.match(r'\s*(?:up\s+to|at\s+most|[<≤])', price, re.I):
+                continue
+            add_evidence(rows, seen_rows,
+                         own_body if corroborated_wrinkles else f"{title} | {price}", url, procedure,
+                         "whatclinic_service_pair")
+        return rows
 
     out: list[ExtractedEvidence] = []
     seen = set()
@@ -6086,7 +6266,6 @@ def extract_whatclinic_service_price_evidence(
     service_headings = soup.find_all(["h2", "h3", "h4", "h5", "strong", "b"])
     # Current provider menus use named spans inside individual service cards.
     # Keep the same small-card binding rather than promoting a page fragment.
-    service_headings += soup.select('div[data-id] > span.name')
     for heading in service_headings:
         title = " ".join(heading.stripped_strings).strip()
         if not title or not contains_requested_procedure(title, procedure):
@@ -7021,6 +7200,15 @@ def extract_price_evidence(
             memo[memo_key] = fresha_offers
         return fresha_offers
 
+    if "whatclinic.com" in host_of(url):
+        # Only the individual provider's bounded service menu can supply a
+        # fee. Generic parent/page extraction also visits patient reviews
+        # and adjacent unpriced services on this platform.
+        whatclinic_rows = extract_whatclinic_service_price_evidence(html, url, procedure)
+        if memo is not None:
+            memo[memo_key] = whatclinic_rows
+        return whatclinic_rows
+
     soup = BeautifulSoup(html, "lxml")
 
     for t in soup(["script", "style", "noscript"]):
@@ -7120,21 +7308,6 @@ def extract_price_evidence(
                         break
                 fragment = f"{label} {' '.join(tail)[:95]}"
                 add_evidence(out, seen, fragment, url, procedure, "service_section")
-
-    # 0. WhatClinic treatment-level blocks. Their markup often places the
-    # price immediately before the service heading.
-    if "whatclinic.com" in host_of(url):
-        wc = extract_whatclinic_service_price_evidence(html, url, procedure)
-        for item in wc:
-            key = (
-                round(item.price_min, 2),
-                round(item.price_max or 0, 2),
-                item.currency,
-                fold(item.raw_evidence),
-            )
-            if key not in seen:
-                seen.add(key)
-                out.append(item)
 
     # 1. Table rows
     for tr in soup.find_all("tr"):
@@ -8890,6 +9063,10 @@ def validate_evidence(
 
     if source == "social":
         return False, False, 0.45, "social_unverified", evidence_type
+
+    if not procedure_amount_is_plausible(
+            evidence.price_min, evidence.currency, canonical, evidence.raw_evidence):
+        return False, False, 0.05, "implausible_amount", evidence_type
 
     if source == "marketplace":
         confidence = 0.90 if evidence_type == "marketplace_service_menu" else 0.76
@@ -12152,6 +12329,9 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
         return "market_context"
     if not literal_price_claim_is_supported(row):
         return "missing_literal_price_evidence"
+    if not procedure_amount_is_plausible(
+            row.price_min, row.currency, row.procedure_canonical, row.raw_evidence):
+        return "implausible_amount"
     if consultation_fee_evidence(row):
         return "consultation_fee"
     if seasonal_offer_needs_confirmation(row.raw_evidence):
@@ -12260,6 +12440,9 @@ def trusted_price_result(row: ClinicPriceResult) -> bool:
     market price must not become a clinic-owned app price.
     """
     if not literal_price_claim_is_supported(row):
+        return False
+    if not procedure_amount_is_plausible(
+            row.price_min, row.currency, row.procedure_canonical, row.raw_evidence):
         return False
     blob = f"{row.raw_procedure_text} {row.procedure_detail} {row.raw_evidence}"
     if injectable_scope_rejection(row.procedure_canonical,
@@ -13876,6 +14059,8 @@ def price_page_signal(hit: SearchHit, procedure: str) -> int:
 
     if src == "marketplace" and is_probable_single_business_page(hit.url):
         score += 10
+        if hit.marketplace_listed_price:
+            score += 6
 
     if any(fold(term) in path for term in PRICE_PAGE_TERMS):
         score += 8
@@ -16450,7 +16635,9 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
         if (urlparse(url).scheme not in {"http", "https"} or bad_host(url)
                 or url in req.previously_fetched_urls
                 or not (source == "official_clinic" or (
-                    source == "marketplace" and is_probable_single_business_page(url)))
+                    source == "marketplace" and (
+                        is_probable_single_business_page(url)
+                        or (is_whatclinic_category_result(url) and city_in_text(url, req.city)))))
                 or foreign_price_source_path(url, req.city)):
             continue
         hits.append(SearchHit(title=domain_brand(url), url=url,
@@ -17081,24 +17268,49 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
         if isinstance(category_html, Exception) or not category_html:
             continue
         diag.marketplace_category_pages_expanded += 1
-        for profile_url in expand_marketplace_category_links(
-            category_hit.url,
-            category_html,
-            req.city,
-            limit=max_profiles_per_category,
-        ):
+        if "whatclinic.com" in host_of(category_hit.url):
+            children = await asyncio.to_thread(
+                expand_whatclinic_category_hits, category_hit.url, category_html,
+                req.city, req.procedure, max_profiles_per_category)
+            # A sparse first page can hide priced providers on subsequent
+            # pages. Follow actual platform links, bounded to two more pages;
+            # never construct a city/province URL or crawl all pagination.
+            current_url, current_html = category_hit.url, category_html
+            visited_categories = {current_url}
+            for _ in range(2):
+                if sum(child.marketplace_listed_price for child in children) >= req.limit:
+                    break
+                next_url = await asyncio.to_thread(
+                    whatclinic_next_category_url, current_url, current_html)
+                if not next_url or next_url in visited_categories:
+                    break
+                visited_categories.add(next_url)
+                try:
+                    next_html = await asyncio.wait_for(
+                        fetch_html(next_url), timeout=4 if req.hybrid_interactive else 18)
+                except Exception:
+                    break
+                if not next_html:
+                    break
+                diag.marketplace_category_pages_expanded += 1
+                more = await asyncio.to_thread(
+                    expand_whatclinic_category_hits, next_url, next_html,
+                    req.city, req.procedure, max_profiles_per_category)
+                by_profile = {child.url: child for child in [*children, *more]}
+                children = sorted(by_profile.values(), key=lambda child: not child.marketplace_listed_price)
+                children = children[:max_profiles_per_category]
+                current_url, current_html = next_url, next_html
+        else:
+            children = [SearchHit(title="", url=url) for url in await asyncio.to_thread(
+                expand_marketplace_category_links, category_hit.url, category_html,
+                req.city, max_profiles_per_category, req.procedure)]
+        for child in children:
+            profile_url = child.url
             if marketplace_url_geo_conflict(profile_url, req.city, country_code):
                 diag.rejected_marketplace_url_geo += 1
                 continue
 
-            marketplace_children.append(
-                SearchHit(
-                    title="",
-                    url=profile_url,
-                    snippet="",
-                    query=category_hit.query,
-                )
-            )
+            marketplace_children.append(child.model_copy(update={"query": category_hit.query}))
 
     if marketplace_children:
         existing_urls = {h.url for h in unique}
@@ -17200,6 +17412,10 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
 
         if status == "nonmedical_business":
             add_reject(diag, hit.url, "nonmedical_financial_business")
+            return
+
+        if status == "marketplace_intermediary":
+            add_reject(diag, hit.url, "marketplace_intermediary")
             return
 
         diag.pages_fetched += 1
@@ -17325,6 +17541,8 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                     or ("Provider locality: " + place.formatted_address if place else ""))
             return context
         source_location_text = await asyncio.to_thread(source_location)
+        menu_source_url = (await asyncio.to_thread(published_marketplace_menu_url, html or "", hit.url)
+                           if src == "marketplace" else hit.url)
 
         for e in evidence:
             if "whatclinic.com" in host_of(e.source_url):
@@ -17439,7 +17657,7 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                     unit=e.unit,
                     original_price_min=e.original_price_min,
                     original_price_max=e.original_price_max,
-                    source_url=e.source_url,
+                    source_url=(menu_source_url if e.source_url == hit.url else e.source_url),
                     source_host=host_of(e.source_url),
                     official_website=(
                         place.website
@@ -17495,7 +17713,8 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                         else ""
                     ),
                     marketplace_source_url=(
-                        e.source_url if src == "marketplace" else ""
+                        (menu_source_url if e.source_url == hit.url else e.source_url)
+                        if src == "marketplace" else ""
                     ),
                     marketplace_source_host=(
                         host_of(e.source_url)
@@ -17536,21 +17755,8 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
         html = await fetch_html(hit.url)
 
         if not html:
-            snippet_evidence = extract_whatclinic_serp_price_evidence(
-                hit, req.procedure, req.city
-            )
-            if snippet_evidence:
-                name = marketplace_profile_name("", hit.url, hit.title, req.city)
-                if name:
-                    text = f"{hit.title} {hit.snippet}".strip()
-                    return (
-                        "ok",
-                        hit,
-                        "",
-                        text,
-                        (name, snippet_evidence),
-                        "whatclinic_serp_price",
-                    )
+            # A search snippet is a discovery lead, not proof that the
+            # current public provider page still publishes this amount.
             failure = _fetch_state().get("failures", {}).get((hit.url, False), "fetch_failed")
             return ("fetch_failed", hit, None, None, None, failure)
 
@@ -17575,6 +17781,10 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
         # medical-tourism platforms and directories are identified after the
         # page has been fetched, before any price ownership decision.
         src = classify_page_source(hit.url, text)
+
+        if src == "marketplace" and await asyncio.to_thread(
+                marketplace_profile_is_intermediary, html, hit.url):
+            return ("marketplace_intermediary", hit, html, text, None, None)
 
         if is_hard_retail_url(hit.url, req.procedure):
             return ("retail_product", hit, html, text, None, None)
@@ -18455,7 +18665,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.94",
+    version="0.11.95",
     lifespan=app_lifespan,
 )
 

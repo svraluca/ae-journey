@@ -1,0 +1,745 @@
+{
+  "backend_version": "0.11.95",
+  "extraction_revision": "e31",
+  "procedure": "filler",
+  "country_code": "TR",
+  "run_type": "directory_to_provider_actual_hybrid",
+  "no_mocked_search_or_fetch": true,
+  "no_production_database_reads_or_writes": true,
+  "no_city_provider_or_price_overrides": true,
+  "cities": {
+    "Istanbul": {
+      "directory_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/dermal-fillers",
+      "started_at": "2026-10-10T13:54:21.916391+00:00",
+      "finished_at": "2026-10-10T13:54:25.660074+00:00",
+      "first_card_ms": 1012,
+      "fourth_card_ms": 2971,
+      "elapsed_ms": 3741,
+      "verified_pool_count": 5,
+      "display_count": 4,
+      "directory_url_lead_count": 1,
+      "search_key_present": false,
+      "serper_network_requests": 0,
+      "exception": null,
+      "search_errors": [],
+      "growth_search_errors": {
+        "primary": [
+          "dermal filler Istanbul price: SERPER_API_KEY is not configured"
+        ],
+        "local": [
+          "dudak dolgusu Istanbul fiyat: SERPER_API_KEY is not configured"
+        ]
+      },
+      "partial_receipts": [
+        {
+          "at_ms": 1012,
+          "event": "partial",
+          "count": 1
+        },
+        {
+          "at_ms": 1774,
+          "event": "partial",
+          "count": 2
+        },
+        {
+          "at_ms": 2375,
+          "event": "partial",
+          "count": 3
+        },
+        {
+          "at_ms": 2971,
+          "event": "partial",
+          "count": 4
+        },
+        {
+          "at_ms": 3329,
+          "event": "partial",
+          "count": 4
+        },
+        {
+          "at_ms": 3549,
+          "event": "partial",
+          "count": 4
+        },
+        {
+          "at_ms": 3605,
+          "event": "partial",
+          "count": 4
+        }
+      ],
+      "consistency": {
+        "partials_at_most_four": true,
+        "partials_non_decreasing": true,
+        "display_at_most_four": true,
+        "distinct_named_profiles": true,
+        "display_rows_match_verified_pool": true,
+        "backend_rows_all_showable": true,
+        "external_database_writes_disabled": true,
+        "no_rotation_database_write": true
+      },
+      "verified_offers": [
+        {
+          "price_extract_revision": "e31",
+          "clinic_name": "Dr. Attila Aydin",
+          "city": "Istanbul",
+          "procedure_canonical": "filler",
+          "procedure_display_name": "Lip filler",
+          "procedure_detail": "Lip",
+          "product_brand": "",
+          "product_line": "",
+          "price_min": 250.0,
+          "price_max": null,
+          "currency": "EUR",
+          "qualifier": "from",
+          "unit": "procedure",
+          "original_price_min": null,
+          "original_price_max": null,
+          "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/dr-attila-aydin",
+          "source_host": "whatclinic.com",
+          "official_website": "",
+          "source_type": "marketplace",
+          "evidence_type": "marketplace_service_menu",
+          "clinic_own_price": false,
+          "city_match": true,
+          "identity_verified": false,
+          "rating": null,
+          "user_rating_count": null,
+          "confidence": 0.9500000000000001,
+          "raw_procedure_text": "Dermal Filler",
+          "raw_evidence": "Lip Filler | from 250 €",
+          "price_scope": "",
+          "source_location_text": "\nProvider locality: Istanbul",
+          "price_verification_status": "marketplace_pending_official_verification",
+          "official_procedure_verified": false,
+          "official_price_found": false,
+          "official_price_override": false,
+          "marketplace_price_capture": "profile_page",
+          "marketplace_source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/dr-attila-aydin",
+          "marketplace_source_host": "whatclinic.com",
+          "marketplace_price_min": 250.0,
+          "marketplace_price_max": null,
+          "marketplace_currency": "EUR",
+          "marketplace_raw_evidence": "Lip Filler | from 250 €",
+          "legal_identifiers": [],
+          "legal_identity_urls": [],
+          "legal_entity_names": [],
+          "operator_contacts": [],
+          "origin": "live_search",
+          "last_verified_at": "2026-10-10T13:54:25.635002+00:00",
+          "cache_age_days": 0,
+          "evidence_receipt": {
+            "http_status": 200,
+            "checked_at": "2026-10-10T13:56:12.329203+00:00",
+            "bounded_current_menu_confirmed": true,
+            "source_html_sha256": "245ee95725bf74788c75d97a5ed4b23eb438d6cb58344b5254535e7821328f49",
+            "price_claims": [
+              "Lip Filler | from 250 €"
+            ],
+            "capture": "istanbul_final_26a1df162d8c.html"
+          }
+        },
+        {
+          "price_extract_revision": "e31",
+          "clinic_name": "Istanbul Anti-Aging Clinic-Dr. Muñoz Paris in Besiktas",
+          "city": "Istanbul",
+          "procedure_canonical": "filler",
+          "procedure_display_name": "Lip Filler",
+          "procedure_detail": "Lip",
+          "product_brand": "",
+          "product_line": "",
+          "price_min": 179.0,
+          "price_max": 357.0,
+          "currency": "EUR",
+          "qualifier": "range",
+          "unit": "procedure",
+          "original_price_min": null,
+          "original_price_max": null,
+          "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/besiktas/istanbul-antiaging-clinicdr-munoz-paris",
+          "source_host": "whatclinic.com",
+          "official_website": "",
+          "source_type": "marketplace",
+          "evidence_type": "marketplace_service_menu",
+          "clinic_own_price": false,
+          "city_match": true,
+          "identity_verified": false,
+          "rating": null,
+          "user_rating_count": null,
+          "confidence": 0.9500000000000001,
+          "raw_procedure_text": "Lip Filler",
+          "raw_evidence": "Lip Filler | 179 € - 357 €",
+          "price_scope": "",
+          "source_location_text": "\nProvider locality: Istanbul",
+          "price_verification_status": "marketplace_pending_official_verification",
+          "official_procedure_verified": false,
+          "official_price_found": false,
+          "official_price_override": false,
+          "marketplace_price_capture": "profile_page",
+          "marketplace_source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/besiktas/istanbul-antiaging-clinicdr-munoz-paris",
+          "marketplace_source_host": "whatclinic.com",
+          "marketplace_price_min": 179.0,
+          "marketplace_price_max": 357.0,
+          "marketplace_currency": "EUR",
+          "marketplace_raw_evidence": "Lip Filler | 179 € - 357 €",
+          "legal_identifiers": [],
+          "legal_identity_urls": [],
+          "legal_entity_names": [],
+          "operator_contacts": [],
+          "origin": "live_search",
+          "last_verified_at": "2026-10-10T13:54:25.635061+00:00",
+          "cache_age_days": 0,
+          "evidence_receipt": {
+            "http_status": 200,
+            "checked_at": "2026-10-10T13:56:12.749510+00:00",
+            "bounded_current_menu_confirmed": true,
+            "source_html_sha256": "4f7a6ac6805e01dd846a13a9f43ea8f66d47b6c27588921b789f1bca2fcb83a6",
+            "price_claims": [
+              "Lip Filler | 179 € - 357 €",
+              "Tear Trough Filler (30 mins) | 179 € - 357 €"
+            ],
+            "capture": "istanbul_final_5559149ef584.html"
+          }
+        },
+        {
+          "price_extract_revision": "e31",
+          "clinic_name": "Dr. Yalçın GÜRSOY in Kadikoy, Istanbul",
+          "city": "Istanbul",
+          "procedure_canonical": "filler",
+          "procedure_display_name": "Lip Filler",
+          "procedure_detail": "Lip",
+          "product_brand": "",
+          "product_line": "",
+          "price_min": 325.0,
+          "price_max": 398.0,
+          "currency": "EUR",
+          "qualifier": "range",
+          "unit": "procedure",
+          "original_price_min": null,
+          "original_price_max": null,
+          "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/kadikoy/dr-yalcin-gursoy",
+          "source_host": "whatclinic.com",
+          "official_website": "",
+          "source_type": "marketplace",
+          "evidence_type": "marketplace_service_menu",
+          "clinic_own_price": false,
+          "city_match": true,
+          "identity_verified": false,
+          "rating": null,
+          "user_rating_count": null,
+          "confidence": 0.9500000000000001,
+          "raw_procedure_text": "Lip Filler",
+          "raw_evidence": "Lip Filler | 325 € - 398 €",
+          "price_scope": "",
+          "source_location_text": "\nProvider locality: CADDEBOSTAN MH. BAGDAT CD. KANTARCI RIZA SK. 4/2 KADIKÖY KADIKOY ISTANBUL Turkey",
+          "price_verification_status": "marketplace_pending_official_verification",
+          "official_procedure_verified": false,
+          "official_price_found": false,
+          "official_price_override": false,
+          "marketplace_price_capture": "profile_page",
+          "marketplace_source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/kadikoy/dr-yalcin-gursoy",
+          "marketplace_source_host": "whatclinic.com",
+          "marketplace_price_min": 325.0,
+          "marketplace_price_max": 398.0,
+          "marketplace_currency": "EUR",
+          "marketplace_raw_evidence": "Lip Filler | 325 € - 398 €",
+          "legal_identifiers": [],
+          "legal_identity_urls": [],
+          "legal_entity_names": [],
+          "operator_contacts": [],
+          "origin": "live_fallback",
+          "last_verified_at": "2026-10-10T13:54:25.635080+00:00",
+          "cache_age_days": 0,
+          "evidence_receipt": {
+            "http_status": 200,
+            "checked_at": "2026-10-10T13:56:12.920519+00:00",
+            "bounded_current_menu_confirmed": true,
+            "source_html_sha256": "c2b75d47b792fc16a06775314ac1f82bcc1e7e221ff2fdb2efbd240076fcfd1c",
+            "price_claims": [
+              "Lip Filler | 325 € - 398 €"
+            ],
+            "capture": "istanbul_final_a063d23f8b2d.html"
+          }
+        },
+        {
+          "price_extract_revision": "e31",
+          "clinic_name": "Dr Cagri Sade",
+          "city": "Istanbul",
+          "procedure_canonical": "filler",
+          "procedure_display_name": "Dermal Filler",
+          "procedure_detail": "",
+          "product_brand": "",
+          "product_line": "",
+          "price_min": 300.0,
+          "price_max": null,
+          "currency": "EUR",
+          "qualifier": "from",
+          "unit": "procedure",
+          "original_price_min": null,
+          "original_price_max": null,
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/istanbul-province/istanbul/dr-cagri-sade",
+          "source_host": "whatclinic.com",
+          "official_website": "",
+          "source_type": "marketplace",
+          "evidence_type": "marketplace_service_menu",
+          "clinic_own_price": false,
+          "city_match": true,
+          "identity_verified": false,
+          "rating": null,
+          "user_rating_count": null,
+          "confidence": 0.9500000000000001,
+          "raw_procedure_text": "Dermal Filler",
+          "raw_evidence": "Dermal Fillers | from 300 €",
+          "price_scope": "",
+          "source_location_text": "\nProvider locality: Istanbul",
+          "price_verification_status": "marketplace_pending_official_verification",
+          "official_procedure_verified": false,
+          "official_price_found": false,
+          "official_price_override": false,
+          "marketplace_price_capture": "profile_page",
+          "marketplace_source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/istanbul-province/istanbul/dr-cagri-sade",
+          "marketplace_source_host": "whatclinic.com",
+          "marketplace_price_min": 300.0,
+          "marketplace_price_max": null,
+          "marketplace_currency": "EUR",
+          "marketplace_raw_evidence": "Dermal Fillers | from 300 €",
+          "legal_identifiers": [],
+          "legal_identity_urls": [],
+          "legal_entity_names": [],
+          "operator_contacts": [],
+          "origin": "live_fallback",
+          "last_verified_at": "2026-10-10T13:54:25.635122+00:00",
+          "cache_age_days": 0,
+          "evidence_receipt": {
+            "http_status": 200,
+            "checked_at": "2026-10-10T13:56:13.102431+00:00",
+            "bounded_current_menu_confirmed": true,
+            "source_html_sha256": "4a39f21096f5d341522241fb5d5d903568d8aba027c3e56cded13c838110f933",
+            "price_claims": [
+              "Dermal Fillers | from 300 €"
+            ],
+            "capture": "istanbul_final_bec23ce42cca.html"
+          }
+        },
+        {
+          "price_extract_revision": "e31",
+          "clinic_name": "Ahmet Bedir Rhinoplasty Clinic in Besiktas, Istanbul",
+          "city": "Istanbul",
+          "procedure_canonical": "filler",
+          "procedure_display_name": "Dermal Fillers",
+          "procedure_detail": "",
+          "product_brand": "",
+          "product_line": "",
+          "price_min": 179.0,
+          "price_max": 893.0,
+          "currency": "EUR",
+          "qualifier": "range",
+          "unit": "procedure",
+          "original_price_min": null,
+          "original_price_max": null,
+          "source_url": "https://www.whatclinic.com/ear-nose-throat/turkey/istanbul-province/istanbul/besiktas/ahmet-bedir-rhinoplasty-clinic",
+          "source_host": "whatclinic.com",
+          "official_website": "",
+          "source_type": "marketplace",
+          "evidence_type": "marketplace_service_menu",
+          "clinic_own_price": false,
+          "city_match": true,
+          "identity_verified": false,
+          "rating": null,
+          "user_rating_count": null,
+          "confidence": 0.9500000000000001,
+          "raw_procedure_text": "Dermal Fillers",
+          "raw_evidence": "Dermal Fillers | 179 € - 893 €",
+          "price_scope": "",
+          "source_location_text": "\nProvider locality: İstanbul",
+          "price_verification_status": "marketplace_pending_official_verification",
+          "official_procedure_verified": false,
+          "official_price_found": false,
+          "official_price_override": false,
+          "marketplace_price_capture": "profile_page",
+          "marketplace_source_url": "https://www.whatclinic.com/ear-nose-throat/turkey/istanbul-province/istanbul/besiktas/ahmet-bedir-rhinoplasty-clinic",
+          "marketplace_source_host": "whatclinic.com",
+          "marketplace_price_min": 179.0,
+          "marketplace_price_max": 893.0,
+          "marketplace_currency": "EUR",
+          "marketplace_raw_evidence": "Dermal Fillers | 179 € - 893 €",
+          "legal_identifiers": [],
+          "legal_identity_urls": [],
+          "legal_entity_names": [],
+          "operator_contacts": [],
+          "origin": "live_fallback",
+          "last_verified_at": "2026-10-10T13:54:25.635138+00:00",
+          "cache_age_days": 0,
+          "evidence_receipt": {
+            "http_status": 200,
+            "checked_at": "2026-10-10T13:56:13.263583+00:00",
+            "bounded_current_menu_confirmed": true,
+            "source_html_sha256": "a114ed2da26ffe26b1288f9b804689edd04899c8fa6a800ef1efea12bf5ed621",
+            "price_claims": [
+              "Dermal Fillers | 179 € - 893 €"
+            ],
+            "capture": "istanbul_final_8f69d0d18d89.html"
+          }
+        }
+      ],
+      "growth_diagnostics": {
+        "saved_sources": {
+          "progressive_stage": "saved_sources",
+          "pages_fetched": 5,
+          "marketplace_category_pages_expanded": 3,
+          "marketplace_profile_urls": 10,
+          "rejected_fetch_failed": 4,
+          "rejected_no_price": 0,
+          "whatclinic_category_results_rejected": 1,
+          "reject_samples": [
+            {
+              "url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/dermal-fillers",
+              "reason": "whatclinic_category_page",
+              "detail": ""
+            },
+            {
+              "url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/istanbul-province/istanbul/besiktas/dr-behram-international-health",
+              "reason": "fetch_failed",
+              "detail": ""
+            },
+            {
+              "url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/istanbul-province/istanbul/kadikoy/rino-istanbul-fonksiyonel-burun-estetigi-cerrahisi-merkezi",
+              "reason": "fetch_failed",
+              "detail": ""
+            },
+            {
+              "url": "https://www.whatclinic.com/hair-loss/turkey/istanbul-province/istanbul/besiktas/dr-said-sadiki",
+              "reason": "fetch_failed",
+              "detail": ""
+            },
+            {
+              "url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/istanbul-province/istanbul/kadikoy/dr-merve-selim-clinic",
+              "reason": "fetch_failed",
+              "detail": ""
+            }
+          ],
+          "serper_requests_attempted": 0,
+          "serper_cache_hits": 0
+        },
+        "primary": {
+          "progressive_stage": "primary",
+          "pages_fetched": 0,
+          "marketplace_category_pages_expanded": 0,
+          "marketplace_profile_urls": 0,
+          "rejected_fetch_failed": 0,
+          "rejected_no_price": 0,
+          "whatclinic_category_results_rejected": 0,
+          "reject_samples": [],
+          "serper_requests_attempted": 0,
+          "serper_cache_hits": 0
+        },
+        "local": {
+          "progressive_stage": "local",
+          "pages_fetched": 0,
+          "marketplace_category_pages_expanded": 0,
+          "marketplace_profile_urls": 0,
+          "rejected_fetch_failed": 0,
+          "rejected_no_price": 0,
+          "whatclinic_category_results_rejected": 0,
+          "reject_samples": [],
+          "serper_requests_attempted": 0,
+          "serper_cache_hits": 0
+        }
+      },
+      "quality_reject_samples": [],
+      "displayed_profile_urls": [
+        "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/dr-attila-aydin",
+        "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/besiktas/istanbul-antiaging-clinicdr-munoz-paris",
+        "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/kadikoy/dr-yalcin-gursoy",
+        "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/istanbul-province/istanbul/dr-cagri-sade"
+      ]
+    },
+    "Ankara": {
+      "directory_url": "https://www.whatclinic.com/beauty-clinics/turkey/ankara-province/ankara/dermal-fillers",
+      "started_at": "2026-10-10T13:54:21.969678+00:00",
+      "finished_at": "2026-10-10T13:54:25.965615+00:00",
+      "first_card_ms": 2638,
+      "fourth_card_ms": null,
+      "elapsed_ms": 3994,
+      "verified_pool_count": 2,
+      "display_count": 2,
+      "directory_url_lead_count": 1,
+      "search_key_present": false,
+      "serper_network_requests": 0,
+      "exception": null,
+      "search_errors": [],
+      "growth_search_errors": {
+        "primary": [
+          "dermal filler Ankara price: SERPER_API_KEY is not configured"
+        ],
+        "marketplace": [
+          "site:whatclinic.com/beauty-clinics/ \"Ankara\" inurl:dermal-fillers prices: SERPER_API_KEY is not configured",
+          "site:bookimed.com/clinic/ \"Ankara\" fillers injection price: SERPER_API_KEY is not configured"
+        ],
+        "local": [
+          "dudak dolgusu Ankara fiyat: SERPER_API_KEY is not configured"
+        ]
+      },
+      "partial_receipts": [
+        {
+          "at_ms": 2638,
+          "event": "partial",
+          "count": 1
+        },
+        {
+          "at_ms": 3581,
+          "event": "partial",
+          "count": 2
+        },
+        {
+          "at_ms": 3890,
+          "event": "partial",
+          "count": 2
+        },
+        {
+          "at_ms": 3913,
+          "event": "partial",
+          "count": 2
+        },
+        {
+          "at_ms": 3942,
+          "event": "partial",
+          "count": 2
+        }
+      ],
+      "consistency": {
+        "partials_at_most_four": true,
+        "partials_non_decreasing": true,
+        "display_at_most_four": true,
+        "distinct_named_profiles": true,
+        "display_rows_match_verified_pool": true,
+        "backend_rows_all_showable": true,
+        "external_database_writes_disabled": true,
+        "no_rotation_database_write": true
+      },
+      "verified_offers": [
+        {
+          "price_extract_revision": "e31",
+          "clinic_name": "DR. ORHAN AYDIN PLASTIC AND AESTHETIC SURGERY CLINIC",
+          "city": "Ankara",
+          "procedure_canonical": "filler",
+          "procedure_display_name": "Lip Filler",
+          "procedure_detail": "Lip",
+          "product_brand": "",
+          "product_line": "",
+          "price_min": 300.0,
+          "price_max": 600.0,
+          "currency": "EUR",
+          "qualifier": "range",
+          "unit": "procedure",
+          "original_price_min": null,
+          "original_price_max": null,
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/ankara-province/ankara/dr-orhan-aydin-plastic-and-aesthetic-surgery-clinic",
+          "source_host": "whatclinic.com",
+          "official_website": "",
+          "source_type": "marketplace",
+          "evidence_type": "marketplace_service_menu",
+          "clinic_own_price": false,
+          "city_match": true,
+          "identity_verified": false,
+          "rating": null,
+          "user_rating_count": null,
+          "confidence": 0.9500000000000001,
+          "raw_procedure_text": "Lip Filler",
+          "raw_evidence": "Lip Filler | 300 € - 600 €",
+          "price_scope": "",
+          "source_location_text": "\nProvider locality: Ankara",
+          "price_verification_status": "marketplace_pending_official_verification",
+          "official_procedure_verified": false,
+          "official_price_found": false,
+          "official_price_override": false,
+          "marketplace_price_capture": "profile_page",
+          "marketplace_source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/ankara-province/ankara/dr-orhan-aydin-plastic-and-aesthetic-surgery-clinic",
+          "marketplace_source_host": "whatclinic.com",
+          "marketplace_price_min": 300.0,
+          "marketplace_price_max": 600.0,
+          "marketplace_currency": "EUR",
+          "marketplace_raw_evidence": "Lip Filler | 300 € - 600 €",
+          "legal_identifiers": [],
+          "legal_identity_urls": [],
+          "legal_entity_names": [],
+          "operator_contacts": [],
+          "origin": "live_search",
+          "last_verified_at": "2026-10-10T13:54:25.954922+00:00",
+          "cache_age_days": 0,
+          "evidence_receipt": {
+            "http_status": 200,
+            "checked_at": "2026-10-10T13:56:13.531018+00:00",
+            "bounded_current_menu_confirmed": true,
+            "source_html_sha256": "22ddd0942967670bf76a6f32beac2681abb817cba397c470fd10301f53333061",
+            "price_claims": [
+              "Lip Filler | 300 € - 600 €"
+            ],
+            "capture": "ankara_final_6c0099dc2905.html"
+          }
+        },
+        {
+          "price_extract_revision": "e31",
+          "clinic_name": "HLC Clinic",
+          "city": "Ankara",
+          "procedure_canonical": "filler",
+          "procedure_display_name": "Dermal Filler",
+          "procedure_detail": "1 ml",
+          "product_brand": "",
+          "product_line": "",
+          "price_min": 270.0,
+          "price_max": null,
+          "currency": "EUR",
+          "qualifier": "from",
+          "unit": "1 ml",
+          "original_price_min": null,
+          "original_price_max": null,
+          "source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/ankara-province/ankara/hlc-clinic",
+          "source_host": "whatclinic.com",
+          "official_website": "",
+          "source_type": "marketplace",
+          "evidence_type": "marketplace_service_menu",
+          "clinic_own_price": false,
+          "city_match": true,
+          "identity_verified": false,
+          "rating": null,
+          "user_rating_count": null,
+          "confidence": 0.9500000000000001,
+          "raw_procedure_text": "Dermal Filler",
+          "raw_evidence": "Dermal Fillers - 1 ML | from 270 €",
+          "price_scope": "",
+          "source_location_text": "\nProvider locality: Ankara",
+          "price_verification_status": "marketplace_pending_official_verification",
+          "official_procedure_verified": false,
+          "official_price_found": false,
+          "official_price_override": false,
+          "marketplace_price_capture": "profile_page",
+          "marketplace_source_url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/ankara-province/ankara/hlc-clinic",
+          "marketplace_source_host": "whatclinic.com",
+          "marketplace_price_min": 270.0,
+          "marketplace_price_max": null,
+          "marketplace_currency": "EUR",
+          "marketplace_raw_evidence": "Dermal Fillers - 1 ML | from 270 €",
+          "legal_identifiers": [],
+          "legal_identity_urls": [],
+          "legal_entity_names": [],
+          "operator_contacts": [],
+          "origin": "live_search",
+          "last_verified_at": "2026-10-10T13:54:25.954963+00:00",
+          "cache_age_days": 0,
+          "evidence_receipt": {
+            "http_status": 200,
+            "checked_at": "2026-10-10T13:56:13.760134+00:00",
+            "bounded_current_menu_confirmed": true,
+            "source_html_sha256": "c8213a5160b4b329d87e5278f44b8959cb80ee0d6efab7080af9d65e06b4a7b9",
+            "price_claims": [
+              "Dermal Fillers - 1 ML | from 270 €"
+            ],
+            "capture": "ankara_final_b300288f42bd.html"
+          }
+        }
+      ],
+      "growth_diagnostics": {
+        "saved_sources": {
+          "progressive_stage": "saved_sources",
+          "pages_fetched": 4,
+          "marketplace_category_pages_expanded": 3,
+          "marketplace_profile_urls": 10,
+          "rejected_fetch_failed": 4,
+          "rejected_no_price": 2,
+          "whatclinic_category_results_rejected": 1,
+          "reject_samples": [
+            {
+              "url": "https://www.whatclinic.com/beauty-clinics/turkey/ankara-province/ankara/dermal-fillers",
+              "reason": "whatclinic_category_page",
+              "detail": ""
+            },
+            {
+              "url": "https://www.whatclinic.com/beauty-clinics/turkey/ankara-province/ankara/dr-esin-yalcinkaya",
+              "reason": "fetch_failed",
+              "detail": ""
+            },
+            {
+              "url": "https://www.whatclinic.com/beauty-clinics/turkey/ankara-province/ankara/dr-betul-temel",
+              "reason": "fetch_failed",
+              "detail": ""
+            },
+            {
+              "url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/ankara-province/ankara/dr-volkan-tayfur",
+              "reason": "fetch_failed",
+              "detail": ""
+            },
+            {
+              "url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/ankara-province/ankara/ecm-aesthetics",
+              "reason": "fetch_failed",
+              "detail": ""
+            },
+            {
+              "url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/ankara-province/ankara/medicasave-consultance",
+              "reason": "marketplace_intermediary",
+              "detail": ""
+            },
+            {
+              "url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/ankara-province/ankara/koru-kavaklidere-hospital",
+              "reason": "no_price_evidence",
+              "detail": ""
+            },
+            {
+              "url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/ankara-province/ankara/opdrcevdet-murat-akagun",
+              "reason": "no_price_evidence",
+              "detail": ""
+            }
+          ],
+          "serper_requests_attempted": 0,
+          "serper_cache_hits": 0
+        },
+        "primary": {
+          "progressive_stage": "primary",
+          "pages_fetched": 0,
+          "marketplace_category_pages_expanded": 0,
+          "marketplace_profile_urls": 0,
+          "rejected_fetch_failed": 0,
+          "rejected_no_price": 0,
+          "whatclinic_category_results_rejected": 0,
+          "reject_samples": [],
+          "serper_requests_attempted": 0,
+          "serper_cache_hits": 0
+        },
+        "marketplace": {
+          "progressive_stage": "marketplace",
+          "pages_fetched": 0,
+          "marketplace_category_pages_expanded": 0,
+          "marketplace_profile_urls": 0,
+          "rejected_fetch_failed": 0,
+          "rejected_no_price": 0,
+          "whatclinic_category_results_rejected": 0,
+          "reject_samples": [],
+          "serper_requests_attempted": 0,
+          "serper_cache_hits": 0
+        },
+        "local": {
+          "progressive_stage": "local",
+          "pages_fetched": 0,
+          "marketplace_category_pages_expanded": 0,
+          "marketplace_profile_urls": 0,
+          "rejected_fetch_failed": 0,
+          "rejected_no_price": 0,
+          "whatclinic_category_results_rejected": 0,
+          "reject_samples": [],
+          "serper_requests_attempted": 0,
+          "serper_cache_hits": 0
+        }
+      },
+      "quality_reject_samples": [],
+      "displayed_profile_urls": [
+        "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/ankara-province/ankara/dr-orhan-aydin-plastic-and-aesthetic-surgery-clinic",
+        "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/ankara-province/ankara/hlc-clinic"
+      ]
+    }
+  },
+  "limitations": [
+    "Only a published local directory URL was supplied; no clinic URLs or prices were supplied.",
+    "Cold search-engine discovery remains unmeasured because SERPER_API_KEY is absent.",
+    "WhatClinic menus are marketplace-published fees, not clinic-own website tariffs.",
+    "No physical-phone or deployed Firebase verification in this audit."
+  ],
+  "finished_at": "2026-10-10T13:56:13.760861+00:00"
+}

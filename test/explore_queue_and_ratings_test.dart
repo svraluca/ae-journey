@@ -184,7 +184,7 @@ void main() {
       final client = MockClient((request) async {
         if (request.url.path == '/health') {
           return http.Response(
-            '{"ok":true,"version":"0.11.94","progressive_jobs":true}',
+            '{"ok":true,"version":"0.11.95","progressive_jobs":true}',
             200,
           );
         }
@@ -251,7 +251,7 @@ void main() {
       final client = MockClient((request) async {
         if (request.url.path == '/health') {
           return http.Response(
-            '{"ok":true,"version":"0.11.94","progressive_jobs":true}',
+            '{"ok":true,"version":"0.11.95","progressive_jobs":true}',
             200,
           );
         }

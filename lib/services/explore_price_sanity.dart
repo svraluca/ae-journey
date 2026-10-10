@@ -30,7 +30,8 @@ import 'explore_price_binding.dart';
 /// e28: complete price paragraphs and backend extraction provenance.
 /// e29: reject unexplained marketplace menu amounts across treatment options.
 /// e30: bind complete commerce offers and distinguish single from combined surgery packages.
-const kExplorePriceExtractRevision = 'e30';
+/// e31: isolate WhatClinic current service menus from reviews and adjacent services.
+const kExplorePriceExtractRevision = 'e31';
 
 /// Hard gate: a number from clinic HTML is not a procedure price until this
 /// passes. AI must never invent a replacement amount.

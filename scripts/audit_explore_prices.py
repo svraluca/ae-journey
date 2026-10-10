@@ -26,7 +26,9 @@ async def main(args):
     report = dict(started_at=datetime.now(timezone.utc).isoformat(),city=args.city,
                   country_code=args.country,backend_version=e.app.version,
                   extraction_revision=e.PRICE_EXTRACT_REVISION,
-                  run_type='known_url_live_recheck' if leads else 'unseeded_city_discovery',
+                  run_type=('directory_to_provider_live_recheck' if args.directory_url
+                            else 'known_url_live_recheck' if leads else 'unseeded_city_discovery'),
+                  directory_url_leads=args.directory_url,
                   no_mocked_search_or_fetch=True, no_external_database_reads_or_writes=True,
                   search_key_present=bool(os.getenv('SERPER_API_KEY')),
                   exa_key_present=bool(os.getenv('EXA_API_KEY')),
@@ -41,7 +43,7 @@ async def main(args):
         for row in known.get('rows', known.get('offers', [])) if isinstance(known, dict) else []:
             if isinstance(row, dict) and row.get('source_url'):
                 urls.append(row['source_url'])
-        urls = list(dict.fromkeys(urls))
+        urls = list(dict.fromkeys([*args.directory_url, *urls]))
         queue = asyncio.Queue()
         token = e._hybrid_progress.set(queue)
         request = e.HybridDiscoverRequest(city=args.city, procedure=proc, country_code=args.country,
@@ -106,6 +108,8 @@ if __name__=='__main__':
     p.add_argument('--procedures',nargs='+',choices=PROCEDURES,default=PROCEDURES)
     p.add_argument('--output',required=True)
     p.add_argument('--source-audit',help='Optional source URLs only; never old fees. Distinct from cold discovery.')
+    p.add_argument('--directory-url',action='append',default=[],
+                   help='Actual local marketplace category URL to discover provider profiles; repeatable, no prices.')
     p.add_argument('--env-file',help='Optional local credentials file; values are never printed.')
     p.add_argument('--timeout',type=float,default=180)
     asyncio.run(main(p.parse_args()))

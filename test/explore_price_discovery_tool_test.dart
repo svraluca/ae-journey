@@ -12,7 +12,7 @@ void main() {
     expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
       {'ok': true, 'version': '0.11.92', 'worker_version': '0.11.92'}), false);
     expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
-      {'ok': true, 'version': '0.11.94', 'worker_version': '0.11.94'}), true);
+      {'ok': true, 'version': '0.11.95', 'worker_version': '0.11.95'}), true);
     expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
       {'ok': true, 'version': '0.12.0', 'worker_version': '0.12.0'}), true);
   });

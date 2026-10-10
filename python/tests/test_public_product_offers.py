@@ -67,7 +67,8 @@ class ProductOffers(unittest.TestCase):
             ('hair_transplant', 'Hair Transplant + Rhinoplasty'),
             ('breast_augmentation', 'Non-Surgical Breast Augmentation'),
         ]:
-            row = quote(amount=5100).model_copy(update={
+            row = quote().model_copy(update={
+                'price_min': 5100, 'price_max': 5100,
                 'procedure_canonical': canonical, 'currency': 'EUR',
                 'raw_procedure_text': label,
                 'raw_evidence': e.display_name(canonical) + ' | 5100 EUR',

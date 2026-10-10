@@ -85,7 +85,9 @@ void main() {
 
   test('every visible priced card has a nonempty price using the card formatter', () {
     final accepted = clinic();
-    final bad = clinic(name: 'Unpriced Lead', amount: 1500, currency: 'USD');
+    // A $1,500 published rhinoplasty fee is eligible. An unpriced lead has
+    // no amount; do not rely on the obsolete $2,500 floor to remove it.
+    final bad = clinic(name: 'Unpriced Lead', amount: 0, currency: 'USD');
     final shown = clinicsForCompareDisplay([accepted, bad], procedure: 'Rhinoplasty', city: 'Abu Dhabi');
     expect(shown.map((c) => c.name), ['Aster Medical Clinic']);
     expect(shown.every((c) => clinicCompareProcedurePriceDisplay(c,

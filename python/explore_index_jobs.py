@@ -25,7 +25,7 @@ import httpx
 from fastapi import HTTPException
 from pydantic import BaseModel, Field
 
-JOB_ENGINE_VERSION = "0.11.94"
+JOB_ENGINE_VERSION = "0.11.95"
 
 # HTML extraction/Firestore calls can occupy asyncio's default executor.
 # Queue acceptance, focus changes and polling must not wait behind crawlers.

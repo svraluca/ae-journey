@@ -26,6 +26,7 @@
 /// e28: complete price paragraphs and backend extraction provenance.
 /// e29: reject unexplained marketplace menu amounts across treatment options.
 /// e30: bind complete commerce offers and distinguish single from combined surgery packages.
-const EXTRACT_REVISION = 'e30';
+/// e31: isolate WhatClinic current service menus from reviews and adjacent services.
+const EXTRACT_REVISION = 'e31';
 
 module.exports = {EXTRACT_REVISION};
