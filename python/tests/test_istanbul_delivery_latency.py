@@ -2,6 +2,7 @@
 import asyncio
 import os
 import tempfile
+import threading
 import unittest
 from pathlib import Path
 from unittest.mock import AsyncMock, patch
@@ -66,6 +67,15 @@ class MenuScope(unittest.TestCase):
             [e.SearchHit(title='Istanbul clinic',url=u) for u in urls],req,lambda h:h.url)
         self.assertEqual(len(selected),2)
 
+    def test_saved_tariff_order_survives_keyword_rich_marketplace_urls(self):
+        urls = ['https://aster.example/pricing', 'https://cedar.example/package/',
+                'https://us-uk.bookimed.com/clinic/birch-clinic/procedure=breast-augmentation/']
+        req = e.DiscoverRequest(city='Izmir', procedure='breast_augmentation',
+            search_mode='site_focus', priority_site_urls=urls, hybrid_interactive=True)
+        hits = [e.SearchHit(title='Clinic', url=url) for url in reversed(urls)]
+        selected, _ = e.select_discovery_work(hits, req, lambda h: h.url)
+        self.assertEqual([hit.url for hit in selected], urls)
+
 
 class FastSourcePolicy(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
@@ -95,14 +105,16 @@ class FastSourcePolicy(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(first.progressive_stage,'saved_sources')
         self.assertEqual(first.priority_site_urls,[url])
         self.assertFalse(first.enable_serper)
-        self.assertEqual(discover.await_args_list[1].args[0].progressive_stage,'marketplace')
+        self.assertEqual(discover.await_args_list[1].args[0].progressive_stage,'primary')
+        self.assertEqual(discover.await_args_list[2].args[0].progressive_stage,'marketplace')
         self.assertLessEqual(sum(c.args[0].serper_request_cap for c in discover.await_args_list),4)
 
     async def test_sparse_market_opens_provider_menus_before_slow_known_hosts(self):
         with patch.object(e,'discover',new=AsyncMock(side_effect=lambda r:self.response(r))) as discover:
             await self.run_search()
-        self.assertEqual(discover.await_args_list[0].args[0].progressive_stage,'marketplace')
-        self.assertEqual(discover.await_args_list[1].args[0].progressive_stage,'known_domains')
+        self.assertEqual(discover.await_args_list[0].args[0].progressive_stage,'primary')
+        self.assertEqual(discover.await_args_list[1].args[0].progressive_stage,'marketplace')
+        self.assertEqual(discover.await_args_list[2].args[0].progressive_stage,'known_domains')
 
     async def test_source_probe_deadline_preserves_a_card_before_fallback_search(self):
         row=quote(amount=350,city='Istanbul').model_copy(update={
@@ -128,6 +140,20 @@ class FastSourcePolicy(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(any(event.get('progress',{}).get('stage_timed_out')
             for event in list(events._queue)))
 
+    async def test_source_probe_deadline_keeps_unfinished_urls_for_next_stage(self):
+        pending = 'https://cedar.example/prices/'
+        calls = []
+        async def discover(req):
+            calls.append(req)
+            if req.progressive_stage == 'saved_sources':
+                await asyncio.Event().wait()
+            return self.response(req)
+        with patch.object(v, 'SAVED_SOURCE_SECONDS', .02), \
+             patch.object(e, 'discover', side_effect=discover):
+            await asyncio.wait_for(self.run_search(saved_source_urls=[pending]), 1)
+        self.assertIn(pending, calls[1].priority_site_urls)
+        self.assertEqual(calls[1].progressive_stage, 'primary')
+
     async def test_old_local_database_price_passes_only_its_url_to_discovery(self):
         with tempfile.TemporaryDirectory() as tmp:
             service=IndexJobs(e,str(Path(tmp)/'jobs.sqlite3'))
@@ -147,6 +173,85 @@ class FastSourcePolicy(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(captured[0].saved_source_urls,[old.source_url])
             self.assertEqual(result.display_results,[])
             self.assertEqual(result.candidate_results,[])
+
+
+class HybridCompletion(unittest.IsolatedAsyncioTestCase):
+    async def test_later_round_keeps_four_earlier_cards_in_every_partial(self):
+        rows = [e.ClinicPriceResult.model_validate(quote(name=name + ' Medical Clinic',
+            host=name.lower() + '.example').model_dump())
+            for name in ['Aster', 'Cedar', 'Birch', 'Oak', 'Pine']]
+        queue = asyncio.Queue()
+        token = e._hybrid_progress.set(queue)
+        async def discover(req):
+            found = rows[:4] if req.progressive_stage == 'saved_sources' else (
+                rows[4:] if req.progressive_stage == 'primary' else [])
+            await e._emit_hybrid_partial([e._display_from_live(r, 'live_search') for r in found])
+            return e.DiscoverResponse(city=req.city, procedure=req.procedure, queries=[],
+                results=found, searched_urls=0, fetched_pages=len(found),
+                diagnostics=e.DiscoveryDiagnostics())
+        try:
+            with patch.dict(os.environ, {'ENABLE_FIRESTORE':'false',
+                    'GOOGLE_PLACES_API_KEY':'', 'ENABLE_MULTILINGUAL_SEARCH':'false'}), \
+                 patch.object(e, 'firestore_load_clinic_directory', new=AsyncMock(return_value=[])), \
+                 patch.object(e, 'firestore_upsert_clinic_directory', new=AsyncMock()), \
+                 patch.object(e, 'discover', side_effect=discover):
+                await v.run_progressive(e, city='Abu Dhabi', procedure='botox', country_code='AE',
+                    stored_pool=[], desired_new=6, limit=8, debug=True,
+                    saved_source_urls=[r.source_url for r in rows[:4]])
+        finally:
+            e._hybrid_progress.reset(token)
+        counts = [len(event['display_results']) for event in list(queue._queue)
+                  if event.get('event') == 'partial']
+        self.assertGreater(len(counts), 1)
+        self.assertEqual(set(counts), {4})
+
+    async def test_six_progressive_stages_keep_verified_cards_and_error_labels(self):
+        stages = ['saved_sources', 'primary', 'marketplace', 'known_domains', 'local', 'places']
+        responses = [e.DiscoverResponse(city='Abu Dhabi', procedure='botox', queries=[],
+            results=[], searched_urls=0, fetched_pages=0,
+            search_errors=[stage + ' unavailable'],
+            diagnostics=e.DiscoveryDiagnostics(progressive_stage=stage)) for stage in stages]
+        row = e.ClinicPriceResult.model_validate(quote().model_dump())
+        with patch.dict(os.environ, {'ENABLE_FIRESTORE':'false', 'ENABLE_APP_BRIDGE':'false'}), \
+             patch.object(e, 'firestore_is_available', new=AsyncMock(return_value=False)), \
+             patch.object(e, 'run_growth_search', new=AsyncMock(return_value=(responses, [row], False))):
+            result = await e._discover_hybrid_impl(e.HybridDiscoverRequest(
+                city='Abu Dhabi', procedure='botox', country_code='AE',
+                stream_progress=True, serper_first=True, debug=True,
+                force_full_growth_search=True, economical_growth=True))
+        self.assertEqual(len(result.display_results), 1)
+        self.assertEqual(set(result.growth_diagnostics), set(stages))
+        self.assertEqual(set(result.growth_search_errors), set(stages))
+
+    async def test_marketplace_identity_parse_leaves_event_loop_available(self):
+        released = threading.Event()
+        observed = []
+        def profile(*args):
+            observed.append(released.wait(timeout=1))
+            return 'Aster Medical Clinic'
+        asyncio.get_running_loop().call_later(.01, released.set)
+        with patch.object(e, 'marketplace_profile_name', side_effect=profile):
+            name = await e.resolve_clinic_name('<title>Aster Medical Clinic</title>',
+                'https://us-uk.bookimed.com/clinic/aster-clinic/', city='Izmir')
+        self.assertEqual(name, 'Aster Medical Clinic')
+        self.assertEqual(observed, [True])
+
+
+class VisibleTextReuse(unittest.TestCase):
+    def test_repeated_consumers_reuse_text_but_changed_html_keeps_new_fee_and_footer(self):
+        token = e._hybrid_parse_memo.set({'__city__':'Izmir'})
+        try:
+            html = '<p>Botox €300</p><div>' + ('clinic information ' * 4000) + '</div><footer>Izmir</footer>'
+            with patch.object(e, 'BeautifulSoup', wraps=e.BeautifulSoup) as parse:
+                first = e.page_text(html)
+                self.assertEqual(e.page_text(html), first)
+                updated = e.page_text(html.replace('€300', '€350'))
+            self.assertIn('Izmir', first)
+            self.assertIn('€350', updated)
+            self.assertNotIn('€300', updated)
+            self.assertEqual(parse.call_count, 2)
+        finally:
+            e._hybrid_parse_memo.reset(token)
 
 
 class DisplayAcknowledgement(unittest.TestCase):

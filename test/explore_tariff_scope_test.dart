@@ -8,6 +8,57 @@ import '../lib/ui/clinic_compare_price_display.dart';
 import 'explore_verified_card_titles_test.dart' as fixture;
 
 void main() {
+  test('single surgery packages survive while additional surgeries do not', () {
+    for (final c in [
+      (
+        'Rhinoplasty',
+        'Closed Rhinoplasty All-Inclusive Package | €3200',
+        3200.0,
+        false,
+      ),
+      (
+        'Breast augmentation',
+        'Breast Augmentation All-Inclusive Package | €4300',
+        4300.0,
+        false,
+      ),
+      ('Rhinoplasty', 'Hair Transplant + Rhinoplasty | €5100', 5100.0, true),
+      (
+        'Hair transplant',
+        'Hair Transplant + Rhinoplasty | €5100',
+        5100.0,
+        true,
+      ),
+      (
+        'Breast augmentation',
+        '360 Lipo + Breast Augmentation | €6100',
+        6100.0,
+        true,
+      ),
+      (
+        'Breast augmentation',
+        'Non-Surgical Breast Augmentation | €8200',
+        8200.0,
+        true,
+      ),
+      (
+        'Rhinoplasty',
+        'Best Friends Rhinoplasty Package (2 People) | €5900',
+        5900.0,
+        true,
+      ),
+    ]) {
+      expect(
+        explorePricedLineIsIncomparablePackage(
+          procedure: c.$1,
+          evidence: c.$2,
+          priceMin: c.$3,
+        ),
+        c.$4,
+        reason: c.$2,
+      );
+    }
+  });
   final cases =
       jsonDecode(
             File('verification/fixtures/tariff_scope.json').readAsStringSync(),

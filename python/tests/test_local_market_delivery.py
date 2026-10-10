@@ -47,8 +47,8 @@ class SourceLanguageTitles(unittest.TestCase):
                          'فيلر الشفاه 1 مل')
 
 
-class LocalFirstSearch(unittest.IsolatedAsyncioTestCase):
-    async def test_local_round_precedes_english_for_every_configured_market(self):
+class BalancedLanguageSearch(unittest.IsolatedAsyncioTestCase):
+    async def test_both_languages_fit_alongside_menus_for_every_configured_market(self):
         with patch.dict(os.environ, {'ENABLE_FIRESTORE': 'false', 'ENABLE_DEEP_DISCOVERY': 'true',
              'ENABLE_MULTILINGUAL_SEARCH': 'true', 'ENABLE_EXA_RESCUE': 'false'}), \
              patch.object(e, 'firestore_load_clinic_directory', new=AsyncMock(return_value=[])), \
@@ -69,8 +69,15 @@ class LocalFirstSearch(unittest.IsolatedAsyncioTestCase):
                         app_fast=True, background_collection=False, client_known_clinic_hosts=[])
                 with self.subTest(country=cc):
                     official = [r for r in requests if r.progressive_stage in {'local','primary'}]
-                    self.assertEqual(official[0].progressive_stage, 'primary' if cc == 'GB' else 'local')
-                    self.assertIn(term, official[0].query_override[0])
+                    self.assertEqual(official[0].progressive_stage, 'primary')
+                    self.assertEqual(official[0].query_override[0], 'botox '+city+' price')
+                    if cc != 'GB':
+                        local = next(r for r in official if r.progressive_stage == 'local')
+                        self.assertIn(term, local.query_override[0])
+                        self.assertEqual(official[0].serper_request_cap, 1)
+                        self.assertEqual(local.serper_request_cap, 1)
+                    menus = next(r for r in requests if r.progressive_stage == 'marketplace')
+                    self.assertEqual(menus.serper_request_cap, 2)
                     self.assertLessEqual(sum(r.serper_request_cap for r in requests), 4)
 
 

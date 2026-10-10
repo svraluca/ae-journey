@@ -252,6 +252,18 @@ function classifyProcedureRelation({
   const blob = `${label}\n${evidence}`;
   const folded = fold(blob);
   const urlFolded = fold(urlPathText(sourceUrl));
+  if (['rhinoplasty', 'breast_augmentation', 'hair'].includes(want)) {
+    if (/\bbest friends|\btwo people|\b2 people|\bper couple|\bcouples? offer/.test(folded)) {
+      return {relation: RELATIONS.bundle, reason: 'multiple_people_package', eligible: false, logToken: 'bundle'};
+    }
+    if (want === 'breast_augmentation' && /\bnon[ -]?surgical\b|\bsin cirugia\b/.test(folded)) {
+      return {relation: RELATIONS.different, reason: 'non_surgical_breast', eligible: false, logToken: 'different_procedure'};
+    }
+    if (/\bliposuction|\blipo\b|tummy\s+tuck|abdominoplast\w*|mommy\s+makeover|blepharoplast\w*|otoplast\w*|face[ -]?lift|veneers?|hollywood\s+smile|dental\s+implants?/.test(folded) &&
+        /\+|&|\b(?:with|and|plus|con|y|cu|ve|ile|package|combo|bundle)\b/.test(folded)) {
+      return {relation: RELATIONS.bundle, reason: 'additional_surgery_package', eligible: false, logToken: 'bundle'};
+    }
+  }
 
   if (looksLikeSpanishMarketPriceQuote(blob)) {
     return {relation: RELATIONS.market, reason: 'spanish_market_price_quote',

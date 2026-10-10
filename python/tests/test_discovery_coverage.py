@@ -210,8 +210,39 @@ class OrganicNavigation(unittest.IsolatedAsyncioTestCase):
         self.stack.enter_context(patch.object(e, "discover", side_effect=discover))
         await e.run_growth_search("Abu Dhabi", "chemical_peel", "AE", [], 8, 20, True,
             app_fast=True, serper_first=True, force_full_growth_search=True, serper_request_budget=12)
-        self.assertEqual(caps, [2, 2])  # primary then local, no repetitive rescue
-        self.assertLessEqual(sum(caps), 12)
+        self.assertEqual(caps, [1, 2, 1])  # English, provider menus, local
+        self.assertEqual(sum(caps), 4)  # the supplied ceiling cannot raise the global cap
+
+    async def test_basic_english_query_finds_four_real_verified_product_pages(self):
+        city = 'Izmir'
+        calls = []
+        async def search(client, query, *args, **kwargs):
+            calls.append((query, client.language))
+            client.requests_attempted += 1
+            if query != f'breast augmentation {city} price':
+                return []
+            return [e.SearchHit(title=f'Aster {i} Clinic {city} Breast Augmentation',
+                url=f'https://provider{i}.example/breast-package/', query=query) for i in range(4)]
+        async def fetch(url):
+            if '/breast-package/' not in url:
+                return None
+            i = e.host_of(url).removeprefix('provider').split('.')[0]
+            return (f'<html><title>Aster {i} Medical Clinic</title>'
+                    '<div class="summary entry-summary"><header><h2>'
+                    'Breast Augmentation All-Inclusive Package</h2></header>'
+                    f'<p class="price">€{4300 + int(i)*100}</p></div>'
+                    f'<footer>Our clinic: Test Street, {city}, Turkey</footer></html>')
+        self.stack.enter_context(patch.dict(os.environ, {'ENABLE_DEEP_DISCOVERY':'true',
+            'ENABLE_MARKETPLACE_RESCUE':'true', 'ENABLE_MULTILINGUAL_SEARCH':'true'}))
+        self.stack.enter_context(patch.object(e.SerperClient, 'search', search))
+        self.stack.enter_context(patch.object(e, 'fetch_html', side_effect=fetch))
+        _, rows, _ = await e.run_growth_search(city, 'breast_augmentation', 'TR', [],
+            6, 8, True, app_fast=True, serper_first=True)
+        self.assertEqual(len(rows), 4)
+        self.assertEqual(calls[0], (f'breast augmentation {city} price', 'en'))
+        self.assertEqual({row.price_min for row in rows}, {4300, 4400, 4500, 4600})
+        self.assertTrue(all(row.clinic_own_price and row.city_match for row in rows))
+        self.assertLessEqual(len(calls), 4)
 
     async def test_discovered_navigation_survives_into_site_focus(self):
         calls = []

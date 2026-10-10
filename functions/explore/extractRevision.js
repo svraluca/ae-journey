@@ -25,6 +25,7 @@
 /// e27: provider-bound marketplace locality, geographic quotes and Q&A price guides.
 /// e28: complete price paragraphs and backend extraction provenance.
 /// e29: reject unexplained marketplace menu amounts across treatment options.
-const EXTRACT_REVISION = 'e29';
+/// e30: bind complete commerce offers and distinguish single from combined surgery packages.
+const EXTRACT_REVISION = 'e30';
 
 module.exports = {EXTRACT_REVISION};

@@ -29,7 +29,8 @@ import 'explore_price_binding.dart';
 /// e27: provider-bound marketplace locality, geographic quotes and Q&A price guides.
 /// e28: complete price paragraphs and backend extraction provenance.
 /// e29: reject unexplained marketplace menu amounts across treatment options.
-const kExplorePriceExtractRevision = 'e29';
+/// e30: bind complete commerce offers and distinguish single from combined surgery packages.
+const kExplorePriceExtractRevision = 'e30';
 
 /// Hard gate: a number from clinic HTML is not a procedure price until this
 /// passes. AI must never invent a replacement amount.
@@ -1670,13 +1671,28 @@ String exploreLineOwningAmount(String evidence, double priceMin) {
     }
   }
   if (hit == null) return text;
+  bool monetary(RegExpMatch match) {
+    const token =
+        r'(?:[$€£₺]|USD|EUR|GBP|TRY|TL|AED|RON|LEI|HUF|ALL|JPY|AUD|CAD|CHF)';
+    return cachedRegExp(
+          '$token\\s*\$',
+          caseSensitive: false,
+        ).hasMatch(text.substring(0, match.start)) ||
+        cachedRegExp(
+          '^\\s*$token',
+          caseSensitive: false,
+        ).hasMatch(text.substring(match.end));
+  }
+
   var start = 0;
   for (final match in matches) {
-    if (match.end <= hit.start) start = match.end;
+    // A graft allowance, product volume, or "2 People" is part of the
+    // treatment's label; only another monetary amount starts a new row.
+    if (match.end <= hit.start && monetary(match)) start = match.end;
   }
   var end = text.length;
   for (final match in matches) {
-    if (match.start >= hit.end) {
+    if (match.start >= hit.end && monetary(match)) {
       end = match.start;
       break;
     }
@@ -1690,7 +1706,7 @@ String exploreLineOwningAmount(String evidence, double priceMin) {
   return text.substring(start, end);
 }
 
-/// Package, kit, travel bundle, or a different surgery on this price's row.
+/// Multiple procedures, kits, or a different surgery on this price's row.
 bool explorePricedLineIsIncomparablePackage({
   required String procedure,
   required String evidence,
@@ -1703,16 +1719,47 @@ bool explorePricedLineIsIncomparablePackage({
   final filler = want.contains('filler') || want.contains('hialur');
   final rhino = want.contains('rhino') || want.contains('nose job');
   final breast =
-      want.contains('breast') || want.contains('augment') || want.contains('boob');
+      want.contains('breast') ||
+      want.contains('augment') ||
+      want.contains('boob');
+  final hair = want.contains('hair') || want.contains('transplant');
   final botox = want.contains('botox') || want.contains('wrinkle');
+  if (rhino || breast || hair) {
+    if (cachedRegExp(
+      r'\bbest friends|\btwo people|\b2 people|\bper couple|\bcouples? offer',
+    ).hasMatch(line)) {
+      return true;
+    }
+    if (breast &&
+        cachedRegExp(r'\bnon[ -]?surgical\b|\bsin cirug[ií]a\b').hasMatch(line)) {
+      return true;
+    }
+    final extra = [
+        if (rhino) r'breast\s+(?:augmentation|implants?|lift)|hair\s+transplant|',
+        if (breast) r'rhinoplast\w*|nose\s+job|hair\s+transplant|',
+        if (hair) r'rhinoplast\w*|nose\s+job|breast\s+(?:augmentation|implants?|lift)|',
+        r'liposuction|\blipo\b|tummy\s+tuck|abdominoplast\w*|mommy\s+makeover|'
+            r'blepharoplast\w*|otoplast\w*|face[ -]?lift|veneers?|hollywood\s+smile|dental\s+implants?',
+    ].join();
+    if (cachedRegExp(extra).hasMatch(line) &&
+        cachedRegExp(
+          r'\+|&|\b(?:with|and|plus|con|y|cu|ve|ile|package|combo|bundle)\b',
+        ).hasMatch(line)) {
+      return true;
+    }
+  }
   if (peel &&
-      (cachedRegExp(r'\bcorporal\w*|\bcuerpo\b|\bbody\b|\bscrub\b|\bsales\b|'
-          r'\bsalt\b|\bsugar\b|autobronceador|enzim[aá]tic|enzymatic|'
-          r'microdermabrasion|peel\s*off|gommage\s+corporel',
-          caseSensitive: false).hasMatch('$procedure $line') ||
-       looksLikeDepigmentationPeelPackage(line) ||
-          cachedRegExp(r'\bdiamond\s+peel|carbon\s+(?:laser|peel)|microdermabrasion',
-              caseSensitive: false).hasMatch(line) ||
+      (cachedRegExp(
+            r'\bcorporal\w*|\bcuerpo\b|\bbody\b|\bscrub\b|\bsales\b|'
+            r'\bsalt\b|\bsugar\b|autobronceador|enzim[aá]tic|enzymatic|'
+            r'microdermabrasion|peel\s*off|gommage\s+corporel',
+            caseSensitive: false,
+          ).hasMatch('$procedure $line') ||
+          looksLikeDepigmentationPeelPackage(line) ||
+          cachedRegExp(
+            r'\bdiamond\s+peel|carbon\s+(?:laser|peel)|microdermabrasion',
+            caseSensitive: false,
+          ).hasMatch(line) ||
           looksLikeMultiSessionSeriesQuote(line))) {
     return true;
   }
@@ -1724,11 +1771,10 @@ bool explorePricedLineIsIncomparablePackage({
   }
   if (rhino &&
       (looksLikeNonGenericRhinoplastyVariant(
-        procedure: procedure,
-        evidence: line,
-      ) ||
+            procedure: procedure,
+            evidence: line,
+          ) ||
           cachedRegExp(
-            r'all[- ]inclusive|tutto incluso|\bflight\b|\bhotel\b|'
             r'ethnic\s+rhino|rinoplastia\s+(?:racial|[eé]tnica)',
           ).hasMatch(line))) {
     return true;
@@ -1741,7 +1787,9 @@ bool explorePricedLineIsIncomparablePackage({
   }
   if (botox &&
       cachedRegExp(r'hyperhidrosis|masseter|bruxism').hasMatch(line) &&
-      !cachedRegExp(r'forehead|glabella|crow|wrinkle|one area').hasMatch(line)) {
+      !cachedRegExp(
+        r'forehead|glabella|crow|wrinkle|one area',
+      ).hasMatch(line)) {
     return true;
   }
   return false;

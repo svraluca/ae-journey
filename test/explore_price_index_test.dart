@@ -34,7 +34,7 @@ http.Response jsonResponse(Object body, [int status = 200]) =>
     http.Response(jsonEncode(body), status,
       headers: {'content-type': 'application/json'});
 
-http.Response health() => jsonResponse({'ok': true, 'version': '0.11.93', 'progressive_jobs': true});
+http.Response health() => jsonResponse({'ok': true, 'version': '0.11.94', 'progressive_jobs': true});
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

@@ -1,0 +1,626 @@
+{
+  "captured_at": "2026-10-10T09:52:14.120206+00:00",
+  "backend_version": "0.11.94",
+  "extract_revision": "e30",
+  "pages": {
+    "https://www.euroistanbul.com/breast-augmentation-package/": {
+      "http_status": 200,
+      "final_url": "https://www.euroistanbul.com/breast-augmentation-package/",
+      "sha256": "638bd6864d39fe40f8cac0abf1a16be22b0ae258b4b0b2be7453e1c7988b4914",
+      "capture_file": "final-365b1af59e78.html",
+      "title": "Breast Augmentation Turkey All-Inclusive Package ⭐ €4,200"
+    },
+    "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/": {
+      "http_status": 200,
+      "final_url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+      "sha256": "5eaa996f189b5683442e575a01f5e0b22b689ec50fcf9b25a1c22c1f7e1eba5e",
+      "capture_file": "final-77ba5dc64302.html",
+      "title": "Turkey Boob Job Cost 2026: Breast Augmentation Prices"
+    },
+    "https://carelyclinic.com/all-inclusive-breast-augmentation-turkey-package/": {
+      "http_status": 200,
+      "final_url": "https://carelyclinic.com/all-inclusive-breast-augmentation-turkey-package/",
+      "sha256": "348a60b37581bdd5075a354bb5055cc862151f313884b8e075cbb067a6005129",
+      "capture_file": "final-13d0df90da0a.html",
+      "title": "All-Inclusive Breast Augmentation Package Turkey 2026"
+    },
+    "https://www.vanityclinic.com/breast-augmentation/": {
+      "http_status": 200,
+      "final_url": "https://www.vanityclinic.com/breast-augmentation/",
+      "sha256": "0713d6757fe7db4dc63cd4fd9549210b887f3ca0819be3cca49f4184110fba34",
+      "capture_file": "final-ebb3d82cabdb.html",
+      "title": "Breast augmentation in Istanbul, Turkey: Cost, Recovery & Surgeons | Vanity"
+    },
+    "https://www.clineca.com/pricing": {
+      "http_status": 200,
+      "final_url": "https://www.clineca.com/pricing",
+      "sha256": "2dca6b58ba0d1bab6396f1f4bea23abea6058743ad2bb08a6df8d097f72236e4",
+      "capture_file": "final-38388c3a5b54.html",
+      "title": "Pricing — Clineca Istanbul"
+    },
+    "https://emreozenalp.com/boob-job/": {
+      "http_status": 200,
+      "final_url": "https://emreozenalp.com/boob-job/",
+      "sha256": "447e82e599300194b160dc3dc79b867665ba262e069ae704da95d7a8bbbda7c3",
+      "capture_file": "final-09654fe46424.html",
+      "title": "Boob Job in Turkey - Cost, Before and After 2026"
+    },
+    "https://www.euroistanbul.com/closed-rhinoplasty-with-piezzo-technique-package/": {
+      "http_status": 200,
+      "final_url": "https://www.euroistanbul.com/closed-rhinoplasty-with-piezzo-technique-package/",
+      "sha256": "39e44d6f7e11dd9229711b39beee43989e0bb7041349b87c4e4403f6064c4da6",
+      "capture_file": "final-5a47e7647190.html",
+      "title": "Closed Rhinoplasty All-Inclusive Package ⭐ €3,250"
+    },
+    "https://carelyclinic.com/all-inclusive-rhinoplasty-turkey-package/": {
+      "http_status": 200,
+      "final_url": "https://carelyclinic.com/all-inclusive-rhinoplasty-turkey-package/",
+      "sha256": "47b9148afd6868d84361542debad1e8529edcce0d92b082eba7cc4f0b15bd244",
+      "capture_file": "final-215e3e470e76.html",
+      "title": "All Inclusive Rhinoplasty Turkey Package 2026 | €2,850"
+    },
+    "https://carelyclinic.com/rhinoplasty-in-turkey/": {
+      "http_status": 200,
+      "final_url": "https://carelyclinic.com/rhinoplasty-in-turkey/",
+      "sha256": "2606add16a52d0805bb1724025927aa17b500171c84ed42e1407a6adf0a93891",
+      "capture_file": "final-bafb39fc0700.html",
+      "title": "Rhinoplasty Turkey 2026 (Nose Job) | €2,850 All-Inclusive"
+    },
+    "https://emreozenalp.com/nose-job/": {
+      "http_status": 200,
+      "final_url": "https://emreozenalp.com/nose-job/",
+      "sha256": "fd88ace6c538171c4192cfe4d9951b040e30acef4d970a4db94ce4e2bab52996",
+      "capture_file": "final-ef2612192bf0.html",
+      "title": "Nose Job in Turkey - Cost, Before and After 2026"
+    },
+    "https://www.alimezdegi.com/meme-buyutme/": {
+      "http_status": 200,
+      "final_url": "https://www.alimezdegi.com/meme-buyutme/",
+      "sha256": "b668b3e03060d9d4d8fc121df9549073992fc9038fb232fd85a6e7c7c499198b",
+      "capture_file": "final-a40637a78d26.html",
+      "title": "Meme Büyütme Ameliyatı - İstanbul - Dr. Ali Mezdeği"
+    }
+  },
+  "accepted_offers": {
+    "breast_augmentation": [
+      {
+        "price_extract_revision": "e30",
+        "clinic_name": "Carely Clinic",
+        "city": "Istanbul",
+        "procedure_canonical": "breast_augmentation",
+        "procedure_display_name": "Breast augmentation",
+        "procedure_detail": "All-inclusive package · Method not specified",
+        "product_brand": "",
+        "product_line": "",
+        "price_min": 3450.0,
+        "price_max": null,
+        "currency": "EUR",
+        "qualifier": "promo",
+        "unit": "procedure",
+        "original_price_min": 4930.0,
+        "original_price_max": null,
+        "source_url": "https://carelyclinic.com/all-inclusive-breast-augmentation-turkey-package/",
+        "source_host": "carelyclinic.com",
+        "official_website": "https://carelyclinic.com/",
+        "source_type": "official_clinic",
+        "evidence_type": "official_price_menu",
+        "clinic_own_price": true,
+        "city_match": true,
+        "identity_verified": false,
+        "rating": null,
+        "user_rating_count": null,
+        "confidence": 0.99,
+        "raw_procedure_text": "All-Inclusive Breast Augmentation Package Turkey",
+        "raw_evidence": "🩷 Breast Surgery All-Inclusive Breast Augmentation Package Turkey €3,450 Save 30% - All-Inclusive Package Premium implants included 5-star hospital 6 nights hotel VIP transfers",
+        "price_scope": "",
+        "source_location_text": "All-Inclusive Breast Augmentation Package Turkey 2026\nAll-Inclusive Breast Augmentation Package Turkey\nWhat's Included in Your Package\nBreast Augmentation Cost Comparison",
+        "price_verification_status": "official_price",
+        "official_procedure_verified": true,
+        "official_price_found": true,
+        "official_price_override": false,
+        "marketplace_price_capture": "",
+        "marketplace_source_url": "",
+        "marketplace_source_host": "",
+        "marketplace_price_min": null,
+        "marketplace_price_max": null,
+        "marketplace_currency": "",
+        "marketplace_raw_evidence": "",
+        "legal_identifiers": [],
+        "legal_identity_urls": [],
+        "legal_entity_names": [],
+        "operator_contacts": []
+      },
+      {
+        "price_extract_revision": "e30",
+        "clinic_name": "Clineca",
+        "city": "Istanbul",
+        "procedure_canonical": "breast_augmentation",
+        "procedure_display_name": "Breast augmentation",
+        "procedure_detail": "Method not specified",
+        "product_brand": "",
+        "product_line": "",
+        "price_min": 3100.0,
+        "price_max": null,
+        "currency": "EUR",
+        "qualifier": "exact",
+        "unit": "procedure",
+        "original_price_min": null,
+        "original_price_max": null,
+        "source_url": "https://www.clineca.com/pricing",
+        "source_host": "clineca.com",
+        "official_website": "https://www.clineca.com/",
+        "source_type": "official_clinic",
+        "evidence_type": "official_price_menu",
+        "clinic_own_price": true,
+        "city_match": true,
+        "identity_verified": false,
+        "rating": null,
+        "user_rating_count": null,
+        "confidence": 0.99,
+        "raw_procedure_text": "Breast Augmentation",
+        "raw_evidence": "Breast Augmentation €3,100",
+        "price_scope": "",
+        "source_location_text": "Pricing — Clineca Istanbul\nPricing & what’s included",
+        "price_verification_status": "official_price",
+        "official_procedure_verified": true,
+        "official_price_found": true,
+        "official_price_override": false,
+        "marketplace_price_capture": "",
+        "marketplace_source_url": "",
+        "marketplace_source_host": "",
+        "marketplace_price_min": null,
+        "marketplace_price_max": null,
+        "marketplace_currency": "",
+        "marketplace_raw_evidence": "",
+        "legal_identifiers": [],
+        "legal_identity_urls": [],
+        "legal_entity_names": [],
+        "operator_contacts": []
+      },
+      {
+        "price_extract_revision": "e30",
+        "clinic_name": "Euro Istanbul Clinic",
+        "city": "Istanbul",
+        "procedure_canonical": "breast_augmentation",
+        "procedure_display_name": "Breast augmentation",
+        "procedure_detail": "All-inclusive package · Method not specified",
+        "product_brand": "",
+        "product_line": "",
+        "price_min": 4200.0,
+        "price_max": null,
+        "currency": "EUR",
+        "qualifier": "exact",
+        "unit": "procedure",
+        "original_price_min": null,
+        "original_price_max": null,
+        "source_url": "https://www.euroistanbul.com/breast-augmentation-package/",
+        "source_host": "euroistanbul.com",
+        "official_website": "https://www.euroistanbul.com/",
+        "source_type": "official_clinic",
+        "evidence_type": "official_price_menu",
+        "clinic_own_price": true,
+        "city_match": true,
+        "identity_verified": false,
+        "rating": null,
+        "user_rating_count": null,
+        "confidence": 0.99,
+        "raw_procedure_text": "Breast Augmentation All-Inclusive Package",
+        "raw_evidence": "Breast Augmentation All-Inclusive Package | € 4,200",
+        "price_scope": "",
+        "source_location_text": "Breast Augmentation Turkey All-Inclusive Package ⭐ €4,200",
+        "price_verification_status": "official_price",
+        "official_procedure_verified": true,
+        "official_price_found": true,
+        "official_price_override": false,
+        "marketplace_price_capture": "",
+        "marketplace_source_url": "",
+        "marketplace_source_host": "",
+        "marketplace_price_min": null,
+        "marketplace_price_max": null,
+        "marketplace_currency": "",
+        "marketplace_raw_evidence": "",
+        "legal_identifiers": [],
+        "legal_identity_urls": [],
+        "legal_entity_names": [],
+        "operator_contacts": []
+      },
+      {
+        "price_extract_revision": "e30",
+        "clinic_name": "HayatMed Clinic",
+        "city": "Istanbul",
+        "procedure_canonical": "breast_augmentation",
+        "procedure_display_name": "Breast augmentation",
+        "procedure_detail": "Method not specified",
+        "product_brand": "",
+        "product_line": "",
+        "price_min": 4250.0,
+        "price_max": null,
+        "currency": "EUR",
+        "qualifier": "from",
+        "unit": "procedure",
+        "original_price_min": null,
+        "original_price_max": null,
+        "source_url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+        "source_host": "hayatmed.com",
+        "official_website": "https://www.hayatmed.com/",
+        "source_type": "official_clinic",
+        "evidence_type": "official_article",
+        "clinic_own_price": true,
+        "city_match": true,
+        "identity_verified": false,
+        "rating": null,
+        "user_rating_count": null,
+        "confidence": 0.91,
+        "raw_procedure_text": "breast augmentation packages",
+        "raw_evidence": "HayatMed breast augmentation packages start from €4,250, with the final quote depending on the individual treatment plan.",
+        "price_scope": "",
+        "source_location_text": "Turkey Boob Job Cost 2026: Breast Augmentation Prices\nBreast Augmentation Cost in Turkey: Complete 2026 Price Guide\nTurkey Boob Job Cost vs UK: Breast Augmentation Prices\nAverage Breast Implant Prices in Turkey 2026\nMotiva vs Mentor Implant Prices in Turkey\nFat Transfer Breast Augmentation Cost in Turkey\nBreast Augmentation Recovery Timeline and Costs\nComplication Rates and Revision Costs\nBreast Augmentation Cost in Turkey: FAQs\nHow much does a boob job cost in Turkey in 2026?\nWhat factors most affect breast augmentation prices in Turkey?\nDoes fat transfer cost less than implants for breast enlargement?",
+        "price_verification_status": "official_price",
+        "official_procedure_verified": true,
+        "official_price_found": true,
+        "official_price_override": false,
+        "marketplace_price_capture": "",
+        "marketplace_source_url": "",
+        "marketplace_source_host": "",
+        "marketplace_price_min": null,
+        "marketplace_price_max": null,
+        "marketplace_currency": "",
+        "marketplace_raw_evidence": "",
+        "legal_identifiers": [],
+        "legal_identity_urls": [],
+        "legal_entity_names": [],
+        "operator_contacts": []
+      }
+    ],
+    "rhinoplasty": [
+      {
+        "price_extract_revision": "e30",
+        "clinic_name": "Clineca",
+        "city": "Istanbul",
+        "procedure_canonical": "rhinoplasty",
+        "procedure_display_name": "Rhinoplasty",
+        "procedure_detail": "",
+        "product_brand": "",
+        "product_line": "",
+        "price_min": 2500.0,
+        "price_max": 3800.0,
+        "currency": "EUR",
+        "qualifier": "range",
+        "unit": "procedure",
+        "original_price_min": null,
+        "original_price_max": null,
+        "source_url": "https://www.clineca.com/pricing",
+        "source_host": "clineca.com",
+        "official_website": "https://www.clineca.com/",
+        "source_type": "official_clinic",
+        "evidence_type": "official_price_menu",
+        "clinic_own_price": true,
+        "city_match": true,
+        "identity_verified": false,
+        "rating": null,
+        "user_rating_count": null,
+        "confidence": 0.99,
+        "raw_procedure_text": "Rhinoplasty",
+        "raw_evidence": "Pricing & what’s included | Rhinoplasty €2,500–3,800",
+        "price_scope": "",
+        "source_location_text": "Pricing — Clineca Istanbul\nPricing & what’s included",
+        "price_verification_status": "official_price",
+        "official_procedure_verified": true,
+        "official_price_found": true,
+        "official_price_override": false,
+        "marketplace_price_capture": "",
+        "marketplace_source_url": "",
+        "marketplace_source_host": "",
+        "marketplace_price_min": null,
+        "marketplace_price_max": null,
+        "marketplace_currency": "",
+        "marketplace_raw_evidence": "",
+        "legal_identifiers": [],
+        "legal_identity_urls": [],
+        "legal_entity_names": [],
+        "operator_contacts": []
+      },
+      {
+        "price_extract_revision": "e30",
+        "clinic_name": "Carely Clinic",
+        "city": "Istanbul",
+        "procedure_canonical": "rhinoplasty",
+        "procedure_display_name": "All-Inclusive Rhinoplasty Package",
+        "procedure_detail": "All-inclusive package",
+        "product_brand": "",
+        "product_line": "",
+        "price_min": 2850.0,
+        "price_max": null,
+        "currency": "EUR",
+        "qualifier": "promo",
+        "unit": "procedure",
+        "original_price_min": 4070.0,
+        "original_price_max": null,
+        "source_url": "https://carelyclinic.com/rhinoplasty-in-turkey/",
+        "source_host": "carelyclinic.com",
+        "official_website": "https://carelyclinic.com/",
+        "source_type": "official_clinic",
+        "evidence_type": "official_price_menu",
+        "clinic_own_price": true,
+        "city_match": true,
+        "identity_verified": false,
+        "rating": null,
+        "user_rating_count": null,
+        "confidence": 0.99,
+        "raw_procedure_text": "All-Inclusive Rhinoplasty Package",
+        "raw_evidence": "All-Inclusive Rhinoplasty Package Hospital Stay 6 Nights 5-Star Hotel VIP Transfers Medications Lifetime Aftercare €2,850 Save 30% View Package →",
+        "price_scope": "",
+        "source_location_text": "Rhinoplasty Turkey Cost Comparison: Turkey vs UK, USA & Europe\nAll-Inclusive Rhinoplasty Package\n3. All-Inclusive Transparent Pricing\n7. Significant Cost Advantage",
+        "price_verification_status": "official_price",
+        "official_procedure_verified": true,
+        "official_price_found": true,
+        "official_price_override": false,
+        "marketplace_price_capture": "",
+        "marketplace_source_url": "",
+        "marketplace_source_host": "",
+        "marketplace_price_min": null,
+        "marketplace_price_max": null,
+        "marketplace_currency": "",
+        "marketplace_raw_evidence": "",
+        "legal_identifiers": [],
+        "legal_identity_urls": [],
+        "legal_entity_names": [],
+        "operator_contacts": []
+      },
+      {
+        "price_extract_revision": "e30",
+        "clinic_name": "Euro Istanbul Clinic",
+        "city": "Istanbul",
+        "procedure_canonical": "rhinoplasty",
+        "procedure_display_name": "Closed Rhinoplasty All-Inclusive Package",
+        "procedure_detail": "All-inclusive package",
+        "product_brand": "",
+        "product_line": "",
+        "price_min": 3250.0,
+        "price_max": null,
+        "currency": "EUR",
+        "qualifier": "promo",
+        "unit": "procedure",
+        "original_price_min": 3750.0,
+        "original_price_max": null,
+        "source_url": "https://www.euroistanbul.com/closed-rhinoplasty-with-piezzo-technique-package/",
+        "source_host": "euroistanbul.com",
+        "official_website": "https://www.euroistanbul.com/",
+        "source_type": "official_clinic",
+        "evidence_type": "official_price_menu",
+        "clinic_own_price": true,
+        "city_match": true,
+        "identity_verified": false,
+        "rating": null,
+        "user_rating_count": null,
+        "confidence": 0.99,
+        "raw_procedure_text": "Closed Rhinoplasty All-Inclusive Package",
+        "raw_evidence": "Closed Rhinoplasty All-Inclusive Package | € 3,250",
+        "price_scope": "",
+        "source_location_text": "Closed Rhinoplasty All-Inclusive Package ⭐ €3,250",
+        "price_verification_status": "official_price",
+        "official_procedure_verified": true,
+        "official_price_found": true,
+        "official_price_override": false,
+        "marketplace_price_capture": "",
+        "marketplace_source_url": "",
+        "marketplace_source_host": "",
+        "marketplace_price_min": null,
+        "marketplace_price_max": null,
+        "marketplace_currency": "",
+        "marketplace_raw_evidence": "",
+        "legal_identifiers": [],
+        "legal_identity_urls": [],
+        "legal_entity_names": [],
+        "operator_contacts": []
+      }
+    ]
+  },
+  "rejections": {
+    "breast_augmentation": [
+      {
+        "url": "https://carelyclinic.com/all-inclusive-breast-augmentation-turkey-package/",
+        "reason": "comparative_market_article",
+        "detail": "Breast Augmentation Package Turkey €3,450"
+      },
+      {
+        "url": "https://www.vanityclinic.com/breast-augmentation/",
+        "reason": "no_price_evidence",
+        "detail": ""
+      },
+      {
+        "url": "https://carelyclinic.com/all-inclusive-breast-augmentation-turkey-package/",
+        "reason": "comparative_market_article",
+        "detail": "Breast Augmentation Package Turkey €3,450"
+      },
+      {
+        "url": "https://carelyclinic.com/all-inclusive-breast-augmentation-turkey-package/",
+        "reason": "comparative_market_article",
+        "detail": "breast augmentation package? The €3,450"
+      },
+      {
+        "url": "https://emreozenalp.com/boob-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "breast implant of boob job with fat grafting) and the complexity of the procedure. In general, the boob job cost in Turkey is lower compared to many western countries such as US, Canada, Australia, New Zealand or UK, mak"
+      },
+      {
+        "url": "https://emreozenalp.com/boob-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "breast implant of boob job with fat grafting) and the complexity of the procedure. In general, the boob job cost in Turkey is lower compared to many western countries such as US, Canada, Australia, New Zealand or UK, mak"
+      },
+      {
+        "url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+        "reason": "comparative_market_article",
+        "detail": "Breast Augmentation Cost in Turkey | Implants alone: £3,000–£4,200"
+      },
+      {
+        "url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+        "reason": "comparative_market_article",
+        "detail": "Breast Augmentation Cost in Turkey | Hybrid approach: £4,200–£5,400"
+      },
+      {
+        "url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+        "reason": "comparative_market_article",
+        "detail": "Breast Augmentation Recovery Timeline and Costs | Longer-term recovery: Your surgeon will confirm when to begin scar management with silicone sheets (£25–£40"
+      },
+      {
+        "url": "https://www.vanityclinic.com/doctors/mert-sizmaz/",
+        "reason": "no_price_evidence",
+        "detail": ""
+      },
+      {
+        "url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+        "reason": "travel_cost_not_procedure",
+        "detail": "Breast Augmentation Recovery Timeline and Costs | Extra hotel night if delayed: £60–£90"
+      },
+      {
+        "url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+        "reason": "comparative_market_article",
+        "detail": "Breast Augmentation Recovery Timeline and Costs | Scar treatment supplies: £25–£40"
+      },
+      {
+        "url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+        "reason": "comparative_market_article",
+        "detail": "Breast Augmentation Recovery Timeline and Costs Standard packages include 14 days of medications and two compression garments. Budget £80–£150"
+      },
+      {
+        "url": "https://www.alimezdegi.com/meme-buyutme/",
+        "reason": "generic_multi_clinic_price",
+        "detail": "Meme büyütme ameliyatı fiyat 2026 Bu alandan ameliyatın fiyatını maalesef paylaşamıyoruz. Çünkü devletimiz tarafından paylaşmak yasak. Ama ekranın hemen altında bulunan WhatsApp butonu na tıklarsanız direk asistanlarımız"
+      },
+      {
+        "url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+        "reason": "comparative_market_article",
+        "detail": "breast augmentation with other procedures? Yes, combining procedures often reduces overall costs. Augmentation plus lift costs £4,300–£5,900"
+      },
+      {
+        "url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+        "reason": "comparative_market_article",
+        "detail": "breast enlargement? Fat transfer starts at £2,800"
+      },
+      {
+        "url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+        "reason": "comparative_market_article",
+        "detail": "Breast Augmentation Recovery Timeline and Costs | Standard packages include 14 days of medications and two compression garments. Budget £80–£150"
+      },
+      {
+        "url": "https://www.alimezdegi.com/meme-buyutme/",
+        "reason": "generic_multi_clinic_price",
+        "detail": "Meme büyütme ameliyatı fiyat 2026 | Avrupa ve Amerika da ortalama olarak meme büyütme ameliyat fiyatı 8 000$ – 12000$"
+      },
+      {
+        "url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+        "reason": "comparative_market_article",
+        "detail": "Breast Augmentation Cost in Turkey: FAQs | How much does a boob job cost in Turkey in 2026? Most patients pay £3,200–£4,200"
+      },
+      {
+        "url": "https://www.hayatmed.com/blog/breast-augmentation/breast-augmentation-surgery-cost/",
+        "reason": "comparative_market_article",
+        "detail": "breast enlargement? Fat transfer starts at £2,800"
+      }
+    ],
+    "rhinoplasty": [
+      {
+        "url": "https://emreozenalp.com/nose-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "Rhinoplasty | Turkey: 5000 - 7000 EUR"
+      },
+      {
+        "url": "https://emreozenalp.com/nose-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "Rhinoplasty | United States of America: 6000-12000 EUR"
+      },
+      {
+        "url": "https://carelyclinic.com/all-inclusive-rhinoplasty-turkey-package/",
+        "reason": "comparative_market_article",
+        "detail": "All Inclusive Rhinoplasty Turkey Package | ✨ Facial Surgery All-Inclusive Rhinoplasty Package Turkey €2,850 Save 30% - All-Inclusive Package 5-star hospital 6 nights hotel VIP transfers Lifetime aftercare"
+      },
+      {
+        "url": "https://emreozenalp.com/nose-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "Rhinoplasty | United Kingdom: 8000-14000 EUR"
+      },
+      {
+        "url": "https://emreozenalp.com/nose-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "Rhinoplasty | Canada: 7000-11000 EUR"
+      },
+      {
+        "url": "https://carelyclinic.com/all-inclusive-rhinoplasty-turkey-package/",
+        "reason": "comparative_market_article",
+        "detail": "All-Inclusive Rhinoplasty Package Turkey €2,850 Save 30% - All-Inclusive Package 5-star hospital 6 nights hotel VIP transfers Lifetime aftercare"
+      },
+      {
+        "url": "https://carelyclinic.com/all-inclusive-rhinoplasty-turkey-package/",
+        "reason": "comparative_market_article",
+        "detail": "All Inclusive Rhinoplasty Turkey Package 2026 | €2,850"
+      },
+      {
+        "url": "https://emreozenalp.com/nose-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "Rhinoplasty | Australia: 8000-14000 EUR"
+      },
+      {
+        "url": "https://carelyclinic.com/all-inclusive-rhinoplasty-turkey-package/",
+        "reason": "comparative_market_article",
+        "detail": "Frequently Asked Questions | What exactly is included in the all-inclusive rhinoplasty package? The €2,850 package includes rhinoplasty surgery at a 5-star hospital, surgeon and anesthesia fees, 1 night hospital stay, 6 "
+      },
+      {
+        "url": "https://emreozenalp.com/nose-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "Rhinoplasty | New Zealand: 7000-16000 EUR"
+      },
+      {
+        "url": "https://emreozenalp.com/nose-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "Rhinoplasty | Mexico: 6000-8000 EUR"
+      },
+      {
+        "url": "https://carelyclinic.com/all-inclusive-rhinoplasty-turkey-package/",
+        "reason": "comparative_market_article",
+        "detail": "All Inclusive Rhinoplasty Turkey Package 2026 | €2,850 Skip to content Home Treatments Close Treatments Open Treatments ✨ Plastic Surgery Body Contouring Facial Aesthetics Breast Aesthetics Genital Aesthetics BBL Tummy T"
+      },
+      {
+        "url": "https://emreozenalp.com/nose-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "Rhinoplasty | India: 5500-8500 EUR"
+      },
+      {
+        "url": "https://emreozenalp.com/nose-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "Rhinoplasty | Czech Republic: 6500-12500 EUR"
+      },
+      {
+        "url": "https://emreozenalp.com/nose-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "How much does nose job cost in Turkey? | In general, the nose job cost in Turkey is lower compared to many Western countries, making it an attractive option for medical tourism. Patients can expect costs to range from €2"
+      },
+      {
+        "url": "https://emreozenalp.com/nose-job/",
+        "reason": "cross_country_price_comparison",
+        "detail": "Cost of Nose Job in Turkey | The price comparison chart indicates that the cost of a Nose Job surgery in Turkey begins at €2000, making it 60% more affordable than prices in the USA, UK, Australia, New Zealand and Europe"
+      },
+      {
+        "url": "https://carelyclinic.com/rhinoplasty-in-turkey/",
+        "reason": "comparative_market_article",
+        "detail": "Rhinoplasty | 🇹🇷 Turkey: €2,850 /"
+      },
+      {
+        "url": "https://carelyclinic.com/rhinoplasty-in-turkey/",
+        "reason": "comparative_market_article",
+        "detail": "Rhinoplasty | 🇺🇸 USA: €11,500 /"
+      },
+      {
+        "url": "https://carelyclinic.com/rhinoplasty-in-turkey/",
+        "reason": "comparative_market_article",
+        "detail": "Rhinoplasty | 🇬🇧 UK: €8,900 /"
+      },
+      {
+        "url": "https://carelyclinic.com/rhinoplasty-in-turkey/",
+        "reason": "comparative_market_article",
+        "detail": "Rhinoplasty | 🇩🇪 Germany: €7,600 /"
+      }
+    ]
+  },
+  "limit": "Only listed pages checked. A rejected snippet or page does not prove a provider has no published fee elsewhere."
+}

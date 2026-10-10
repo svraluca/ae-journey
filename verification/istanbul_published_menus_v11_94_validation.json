@@ -1,0 +1,246 @@
+{
+  "captured_at": "2026-10-10T13:05:29.750190+00:00",
+  "backend_version": "0.11.94",
+  "extraction_revision": "e30",
+  "runtime": {
+    "health": {
+      "ok": true,
+      "version": "0.11.94",
+      "price_extract_revision": "e30",
+      "price_index": true,
+      "discovery_jobs": true,
+      "worker_version": "0.11.94",
+      "progressive_jobs": true
+    },
+    "oversized_display_status": 422,
+    "oversized_display_rejected": true
+  },
+  "source_audit": {
+    "distinct_urls_receipted": 38,
+    "retained_published_claims": 46,
+    "receipt_failures": 0
+  },
+  "tests": {
+    "python": {
+      "passed": 189,
+      "failed": 0
+    },
+    "functions": {
+      "passed": 330,
+      "failed": 0
+    },
+    "flutter_focused": {
+      "passed": 153,
+      "failed": 0
+    },
+    "flutter_broader_layout": {
+      "passed": 147,
+      "failed": 3,
+      "baseline_confirmed": true,
+      "details": "Three existing price_sanity_test reason-order assertions at approximately lines 795, 951, 1050; reproduced from original HEAD in isolated baseline."
+    },
+    "flutter_analyze_changed_files": {
+      "errors": 0,
+      "existing_warnings_and_infos": 59
+    },
+    "git_diff_check": "passed"
+  },
+  "hybrid_live_recheck": {
+    "method": "Actual _discover_hybrid_impl with URL-only leads; no mocked search/fetch, no external database writes. Timings are cloud measurements, not cold SERP or iPhone measurements.",
+    "search_key_present": false,
+    "procedures": {
+      "botox": {
+        "verified_pool_count": 7,
+        "display_count": 4,
+        "first_card_ms": 1671,
+        "fourth_card_ms": 3642,
+        "collection_finished_ms": 8426,
+        "exception": null,
+        "partial_counts": [
+          1,
+          2,
+          3,
+          4,
+          4,
+          4,
+          4
+        ],
+        "source_urls": [
+          "https://us-uk.bookimed.com/clinic/blanc-clinic/",
+          "https://us-uk.bookimed.com/clinic/dr-hasan-duygulu-private-practice/",
+          "https://us-uk.bookimed.com/clinic/trustmed-clinic/",
+          "https://us-uk.bookimed.com/clinic/oezel-okmeydani-hastanesi/",
+          "https://us-uk.bookimed.com/clinic/happy-esthetic/",
+          "https://us-uk.bookimed.com/clinic/soraca-med/procedure=botox-injections/",
+          "https://us-uk.bookimed.com/clinic/dr-kadri-akinci-plastic-surgery-clinic-ai/"
+        ],
+        "growth_search_errors": {}
+      },
+      "filler": {
+        "verified_pool_count": 5,
+        "display_count": 4,
+        "first_card_ms": 3056,
+        "fourth_card_ms": 6818,
+        "collection_finished_ms": 11283,
+        "exception": null,
+        "partial_counts": [
+          1,
+          2,
+          3,
+          4,
+          4,
+          4,
+          4
+        ],
+        "source_urls": [
+          "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=fillers-injection/",
+          "https://us-uk.bookimed.com/clinic/hisar-intercontinental-hospital/",
+          "https://us-uk.bookimed.com/clinic/veysel-ozcan-muayenehanesi/procedure=fillers-injection/",
+          "https://us-uk.bookimed.com/clinic/adameve-medical-center/procedure=fillers-injection/",
+          "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/"
+        ],
+        "growth_search_errors": {
+          "primary": [
+            "dermal filler Istanbul price: SERPER_API_KEY is not configured"
+          ],
+          "local": [
+            "dudak dolgusu Istanbul fiyat: SERPER_API_KEY is not configured"
+          ]
+        }
+      },
+      "breast_augmentation": {
+        "verified_pool_count": 8,
+        "display_count": 4,
+        "first_card_ms": 2389,
+        "fourth_card_ms": 7018,
+        "collection_finished_ms": 23107,
+        "exception": null,
+        "partial_counts": [
+          1,
+          2,
+          3,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "source_urls": [
+          "https://www.clineca.com/pricing",
+          "https://www.euroistanbul.com/breast-augmentation-package/",
+          "https://carelyclinic.com/all-inclusive-breast-augmentation-turkey-package/",
+          "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=breast-augmentation/",
+          "https://us-uk.bookimed.com/clinic/memorial-healthcare-group/procedure=breast-augmentation/",
+          "https://us-uk.bookimed.com/clinic/dr-safa-manav-clinic/",
+          "https://us-uk.bookimed.com/clinic/istanbul-aesthetic-plastic-surgery-clinic/procedure=breast-augmentation/",
+          "https://us-uk.bookimed.com/clinic/doctor-med/"
+        ],
+        "growth_search_errors": {
+          "primary": [
+            "breast augmentation Istanbul price: SERPER_API_KEY is not configured"
+          ]
+        }
+      },
+      "chemical_peel": {
+        "verified_pool_count": 2,
+        "display_count": 2,
+        "first_card_ms": 1938,
+        "fourth_card_ms": null,
+        "collection_finished_ms": 11109,
+        "exception": null,
+        "partial_counts": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "source_urls": [
+          "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+          "https://us-uk.bookimed.com/clinic/lokman-hekim-istanbul/procedure=chemical-peel/"
+        ],
+        "growth_search_errors": {
+          "primary": [
+            "chemical peel Istanbul price: SERPER_API_KEY is not configured"
+          ],
+          "marketplace": [
+            "site:bookimed.com/clinic/ \"Istanbul\" chemical peel price: SERPER_API_KEY is not configured",
+            "site:whatclinic.com \"Istanbul\" chemical peel prices: SERPER_API_KEY is not configured"
+          ],
+          "local": [
+            "kimyasal peeling Istanbul fiyat: SERPER_API_KEY is not configured"
+          ]
+        }
+      },
+      "rhinoplasty": {
+        "verified_pool_count": 6,
+        "display_count": 4,
+        "first_card_ms": 852,
+        "fourth_card_ms": 11152,
+        "collection_finished_ms": 18132,
+        "exception": null,
+        "partial_counts": [
+          1,
+          2,
+          2,
+          3,
+          4,
+          4,
+          4
+        ],
+        "source_urls": [
+          "https://www.clineca.com/pricing",
+          "https://www.euroistanbul.com/closed-rhinoplasty-with-piezzo-technique-package/",
+          "https://carelyclinic.com/rhinoplasty-in-turkey/",
+          "https://us-uk.bookimed.com/clinic/mavidenta/",
+          "https://us-uk.bookimed.com/clinic/aquahealth/",
+          "https://us-uk.bookimed.com/clinic/lokman-hekim-istanbul/"
+        ],
+        "growth_search_errors": {
+          "primary": [
+            "rhinoplasty Istanbul price: SERPER_API_KEY is not configured"
+          ]
+        }
+      },
+      "hair_transplant": {
+        "verified_pool_count": 6,
+        "display_count": 4,
+        "first_card_ms": 3805,
+        "fourth_card_ms": 11952,
+        "collection_finished_ms": 22857,
+        "exception": null,
+        "partial_counts": [
+          1,
+          2,
+          3,
+          3,
+          4,
+          4,
+          4
+        ],
+        "source_urls": [
+          "https://www.euroistanbul.com/best-hair-clinic-turkey/hair-transplant-price-list-turkey/",
+          "https://carelyclinic.com/",
+          "https://us-uk.bookimed.com/clinic/quartz-clinique/",
+          "https://us-uk.bookimed.com/clinic/doctor-med/",
+          "https://us-uk.bookimed.com/clinic/istanbul-aesthetic-plastic-surgery-clinic/procedure=hair-transplant/",
+          "https://us-uk.bookimed.com/clinic/lokman-hekim-istanbul/"
+        ],
+        "growth_search_errors": {
+          "primary": [
+            "hair transplant Istanbul price: SERPER_API_KEY is not configured"
+          ]
+        }
+      }
+    }
+  },
+  "limitations": [
+    "SERPER_API_KEY missing in cloud: complete unseeded search availability/timing cannot be verified.",
+    "Only two distinct peel menus verified; four supported published fees have not been established.",
+    "Mac hunter/LaunchAgent, physical iPhone, production Firestore reads/writes and Functions deployment not performed from cloud.",
+    "Marketplace menus are third-party published prices; preserved labels distinguish them from official own-site fees.",
+    "Diagnostic source URLs and captured fees are not production seed lists."
+  ]
+}

@@ -93,7 +93,7 @@ class ProgressivePolicy(unittest.IsolatedAsyncioTestCase):
         discover.assert_not_awaited();self.exa.assert_not_awaited();self.places.assert_not_awaited()
         self.assertTrue(result[2])
 
-    async def test_local_six_stops_before_english_exa_places(self):
+    async def test_english_six_stops_before_marketplace_local_exa_places(self):
         with patch.object(e,'discover',new=AsyncMock(side_effect=lambda req:self.response(
                 req, 0 if req.progressive_stage == 'marketplace' else 6))) as discover:
             _,rows,_=await self.run_search()
@@ -102,15 +102,16 @@ class ProgressivePolicy(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(self.learned.await_args.args[2]), 6)
         self.assertTrue(all('botox' in hit.directory_capabilities for hit in self.learned.await_args.args[2]))
         self.assertEqual([call.args[0].progressive_stage for call in discover.await_args_list],
-                         ['marketplace','local'])
+                         ['primary'])
         self.exa.assert_not_awaited();self.places.assert_not_awaited()
 
-    async def test_sparse_market_switches_from_menus_to_local_to_exa(self):
+    async def test_sparse_market_reserves_english_menus_and_local_before_exa(self):
         with patch.object(e,'discover',new=AsyncMock(side_effect=lambda req:self.response(req))) as discover:
             await self.run_search()
         stages=[call.args[0] for call in discover.await_args_list]
-        self.assertEqual([r.progressive_stage for r in stages],['marketplace','local'])
+        self.assertEqual([r.progressive_stage for r in stages],['primary','marketplace','local'])
         self.assertEqual(sum(r.serper_request_cap for r in stages),4)
+        self.assertEqual([r.serper_request_cap for r in stages],[1,2,1])
         self.exa.assert_awaited_once()
         self.assertNotIn(self.exa.await_args.args[0],stages[0].query_override)
 

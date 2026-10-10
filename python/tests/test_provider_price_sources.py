@@ -129,9 +129,10 @@ class SparsePriceDiscovery(unittest.IsolatedAsyncioTestCase):
             await v.run_progressive(e, city='İstanbul', procedure='chemical_peel', country_code='TR',
                 stored_pool=[], desired_new=6, limit=8, display_limit=4, debug=False,
                 app_fast=True, background_collection=False, client_known_clinic_hosts=[])
-        self.assertEqual([r.progressive_stage for r in requests], ['marketplace','local'])
-        self.assertTrue(any('site:bookimed.com/clinic/' in q for q in requests[0].query_override))
-        self.assertTrue(any('site:whatclinic.com' in q for q in requests[0].query_override))
+        self.assertEqual([r.progressive_stage for r in requests], ['primary','marketplace','local'])
+        self.assertEqual(requests[0].query_override, ['chemical peel İstanbul price'])
+        self.assertTrue(any('site:bookimed.com/clinic/' in q for q in requests[1].query_override))
+        self.assertTrue(any('site:whatclinic.com' in q for q in requests[1].query_override))
         self.assertLessEqual(sum(r.serper_request_cap for r in requests), 4)
 
 

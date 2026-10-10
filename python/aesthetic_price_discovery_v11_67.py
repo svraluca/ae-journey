@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.93 — bounded source refresh and unambiguous provider menus
+Aesthetic Procedure Price Discovery v0.11.94 — balanced search languages and scoped commerce offers
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -59,7 +59,7 @@ import vertical_search
 from injectable_scope import injectable_scope_rejection
 from tariff_scope import ancillary_price_reason, comparison_price_context, calendar_price_reason, medical_qa_price_context
 
-PRICE_EXTRACT_REVISION = "e29"
+PRICE_EXTRACT_REVISION = "e30"
 
 try:
     from google.cloud import firestore
@@ -3342,18 +3342,27 @@ def normalize_dom_price_boundaries(soup):
 
 
 def page_text(html: str) -> str:
+    memo = _hybrid_parse_memo.get()
+    key = ("page_text_html", html)
+    if memo is not None and key in memo:
+        return memo[key]
     soup = BeautifulSoup(html, "lxml")
     for t in soup(["script", "style", "noscript"]):
         t.decompose()
     normalize_dom_price_boundaries(soup)
     text = " ".join(soup.stripped_strings)
     if len(text) <= 50000:
+        if memo is not None:
+            memo[key] = text
         return text
     # Long hospital menus put their actual address in the footer. Keep that
     # city witness as well as the existing body limit; never infer a city from
     # a search query just because the visible-text slice lost the address.
     tail_start = max(50000, len(text) - 6000)
-    return text[:50000] + "\n" + text[tail_start:]
+    text = text[:50000] + "\n" + text[tail_start:]
+    if memo is not None:
+        memo[key] = text
+    return text
 
 
 # ============================================================
@@ -3970,7 +3979,7 @@ def structured_business_name(html: str, city: str = "", url: str = "",
 
                 if any(
                     t in {
-                        "MedicalClinic", "LocalBusiness", "HealthAndBeautyBusiness",
+                        "MedicalClinic", "MedicalBusiness", "LocalBusiness", "HealthAndBeautyBusiness",
                         "Dentist", "Physician", "Organization", "BeautySalon", "Hospital",
                     }
                     for t in types
@@ -3980,7 +3989,7 @@ def structured_business_name(html: str, city: str = "", url: str = "",
                         # Staff Physician nodes can share the clinic address.
                         # Prefer the clinic identity, preserving doctors as a
                         # fallback for a genuine individual practice.
-                        business = any(t in {"MedicalClinic", "LocalBusiness", "HealthAndBeautyBusiness",
+                        business = any(t in {"MedicalClinic", "MedicalBusiness", "LocalBusiness", "HealthAndBeautyBusiness",
                             "Dentist", "BeautySalon", "Hospital"} for t in types)
                         priority = 0 if business else (1 if "Physician" in types else 2)
                         address = item.get("address")
@@ -4094,7 +4103,8 @@ async def resolve_clinic_name(
 ) -> str:
     page_role = classify_page_source(url, await asyncio.to_thread(page_text, html) if html else "")
     if page_role == "marketplace":
-        marketplace_name = marketplace_profile_name(html, url, serp_title, city)
+        marketplace_name = await asyncio.to_thread(
+            marketplace_profile_name, html, url, serp_title, city)
         if marketplace_name:
             return marketplace_name
 
@@ -6324,7 +6334,7 @@ def retired_price_markup(node) -> bool:
         r'^(?:el precio original era|the original price was|original price(?: was)?)\s*:',
         node.get_text(' ', strip=True), re.I,
     )) or node.name in {"del", "s", "strike"} or bool(re.search(
-        r"(?:^|\s|__)(?:price[-_]+(?:old|original|previous|was)|"
+        r"(?:^|\s|[-_])(?:price[-_]+(?:old|original|previous|was)|"
         r"(?:old|original|previous|was)[-_]+price)(?:[-_][\w-]+)?(?:\s|$)",
         classes, re.I,
     )) or bool(re.search(
@@ -6376,13 +6386,27 @@ def extract_current_dom_price_rows(soup, out, seen, url, procedure):
         if parent.parent is None:
             continue
         text = parent.get_text(" ", strip=True)
+        headings = parent.find_all(['h1', 'h2', 'h3'])
+        current = parent.find(lambda node: node.name in {'span', 'div', 'p', 'strong'}
+            and re.search(r'(?:^|\s|[-_])(?:price[-_]+current|current[-_]+price)(?:\s|$)',
+                          ' '.join(node.get('class', [])), re.I))
+        labeled_offer = (len(headings) == 1 and current is not None
+                         and contains_requested_procedure(headings[0].get_text(' ', strip=True), procedure)
+                         and not market_info(text)
+                         and len(list(iter_exact_price_matches(text))) == 1)
         begin = len(out)
-        add_evidence(out, seen, text, url, procedure, "dom_current_price_row")
+        add_evidence(out, seen, text, url, procedure,
+                     'current_service_offer' if labeled_offer else 'dom_current_price_row')
         for evidence in out[begin:]:
+            if labeled_offer:
+                evidence.raw_procedure_text = headings[0].get_text(' ', strip=True)
+                evidence.raw_evidence = text
             originals = [amount for _, amount, currency in old_prices
                          if currency == evidence.currency and amount != evidence.price_min]
             if len(set(originals)) == 1:
                 evidence.original_price_min = originals[0]
+                if labeled_offer and originals[0] > evidence.price_min:
+                    evidence.qualifier = 'promo'
 
 
 def extract_owned_tariff_lists(soup, out, seen, url, procedure):
@@ -6415,6 +6439,54 @@ def extract_owned_tariff_lists(soup, out, seen, url, procedure):
             add_evidence(out, seen, line, url, procedure, 'owned_tariff_list')
             for ev in out[start:]:
                 ev.raw_evidence = f'At {owner}: | {ev.raw_evidence}'
+
+
+def extract_woocommerce_service_offers(soup, out, seen, url, procedure):
+    """Bind each appointment's full title to its own active commerce price.
+
+    Themes wrap titles in headers, not necessarily in Woo's default H2 class.
+    Remove these bounded items afterwards so flattened fallbacks cannot lose
+    a combo prefix or borrow a neighbouring product's amount.
+    """
+    items = soup.select('li.product, .products .product, .summary, .entry-summary')
+    visited = set()
+    for item in items:
+        if id(item) in visited or item.parent is None:
+            continue
+        visited.add(id(item))
+        if any(set(p.get('class', [])) & {'related', 'upsells', 'cross-sells'} for p in item.parents):
+            continue
+        titles = item.select('.woocommerce-loop-product__title, .product_title, h1, h2, h3')
+        prices = item.select('.price')
+        # Malformed markup can nest the next product. It is a separate offer.
+        nested = {id(n) for n in item.select('.product, .summary, .entry-summary')}
+        def owned(node):
+            return not any(id(p) in nested for p in node.parents if p is not item)
+        title = next((n for n in titles if owned(n)), None)
+        price = next((n for n in prices if owned(n)), None)
+        if title is None or price is None:
+            continue
+        label = title.get_text(' ', strip=True)
+        if not 3 <= len(label) <= 220:
+            continue
+        current = price.find('ins') or price
+        for node in list(current.select('del, s, strike, .screen-reader-text, .sr-only')):
+            node.decompose()
+        amount = current.get_text(' ', strip=True)
+        if contains_requested_procedure(label, procedure):
+            begin = len(out)
+            add_evidence(out, seen, f'{label} | {amount}', url, procedure, 'woocommerce_service_offer')
+            old = price.find('del')
+            originals = list(iter_exact_price_matches(old.get_text(' ', strip=True))) if old else []
+            for ev in out[begin:]:
+                ev.raw_procedure_text = label
+                if len(originals) == 1 and originals[0][2] == ev.currency:
+                    ev.original_price_min = originals[0][1]
+                    if ev.original_price_min > ev.price_min:
+                        ev.qualifier = 'promo'
+        # Keep nested malformed products available to their own iteration.
+        title.decompose()
+        price.decompose()
 
 
 def extract_named_dom_tariff_rows(soup, out, seen, url, procedure):
@@ -6889,6 +6961,44 @@ def extract_parallel_tariff_columns(soup, out, seen, url, procedure):
                              "aligned_tariff_columns")
 
 
+def extract_named_clinic_tariff_paragraphs(soup, out, seen, url, procedure):
+    """Bind a named provider fee separately from nearby market estimates."""
+    # A local clinic blog may state its own tariff in a paragraph beneath a
+    # procedure heading, after a separate national-market comparison. Scope
+    # the price to that paragraph and require the site's own business name.
+    # Also accept "Aster breast augmentation starts from ..." without an
+    # "at ... clinic" preposition. Keep the owner in the evidence: subtype
+    # normalisation otherwise strips it from English breast surgery clauses.
+    for paragraph in list(soup.find_all('p')):
+        consumed = False
+        sentences = re.split(r'(?<=[.!?])\s+(?=[A-Za-z])', paragraph.get_text(' ', strip=True))
+        for index, statement in enumerate(sentences):
+            prices = list(iter_exact_price_matches(statement))
+            attached = find_attached_range(statement, prices[0][2], prices[0][0]) if prices else None
+            if (not prices or len(statement) > 650
+                    or not contains_requested_procedure(statement, procedure)
+                    or not clinic_paragraph_matches_site(statement, url)
+                    or (len(prices) > 1 and not (len(prices) == 2 and attached))):
+                continue
+            # Retain unpriced qualifications after the fee, such as implants
+            # being excluded, without attaching the next monetary claim.
+            for tail in sentences[index + 1:]:
+                if list(iter_exact_price_matches(tail)):
+                    break
+                if re.match(r'(?:please\s+)?(?:call|contact|book|schedule)\b', tail, re.I):
+                    break
+                statement += ' ' + tail
+            begin = len(out)
+            add_evidence(out, seen, statement, url, procedure, 'clinic_owned_paragraph')
+            for ev in out[begin:]:
+                ev.raw_evidence = statement
+            consumed = consumed or len(out) > begin
+        if consumed:
+            # This bounded adapter retains ownership and fee qualifications.
+            # Do not let flattened fallbacks strip and reintroduce this fee.
+            paragraph.decompose()
+
+
 def extract_price_evidence(
     html: str,
     url: str,
@@ -6937,6 +7047,8 @@ def extract_price_evidence(
         return out
 
     remove_market_comparison_tables(soup)
+    extract_named_clinic_tariff_paragraphs(soup, out, seen, url, procedure)
+    extract_woocommerce_service_offers(soup, out, seen, url, procedure)
     extract_owned_currency_tariff_tables(soup, out, seen, url, procedure)
     extract_owned_comparison_columns(soup, out, seen, url, procedure)
     extract_current_dom_price_rows(soup, out, seen, url, procedure)
@@ -7047,9 +7159,6 @@ def extract_price_evidence(
                     and contains_requested_procedure(clause, procedure)):
                 add_evidence(out, seen, clause, url, procedure, "procedure_clause")
 
-    # A local clinic blog may state its own tariff in a paragraph beneath a
-    # procedure heading, after a separate national-market comparison. Scope
-    # the price to that paragraph and require the site's own business name.
     for paragraph in soup.find_all("p"):
         statement = paragraph.get_text(" ", strip=True)
         if not statement or not list(iter_exact_price_matches(statement)):
@@ -7334,7 +7443,7 @@ def market_info(text: str) -> bool:
 def pricing_prose_title(text: str) -> bool:
     """Local-language price headlines are evidence, not service names."""
     return bool(re.search(
-        r"\b(?:precio|precios|coste|costo|promedio|desde|cuanto|entre los|"
+        r"\b(?:offers?\s+(?:a|an|fully)|precio|precios|coste|costo|promedio|desde|cuanto|entre los|"
         r"prix|tarifs?|combien|a partir|prezzo|prezzi|quanto|ab|durchschnitt)\b",
         fold(text),
     ))
@@ -7365,6 +7474,17 @@ def own_language(text: str) -> bool:
 def clinic_paragraph_matches_site(text: str, url: str) -> bool:
     """A named clinic in a tariff paragraph must match this official host."""
     brand = domain_brand(url)
+    key = _clinic_compare_key(brand)
+    first_price = next(iter_exact_price_matches(text), None)
+    prefix = fold(text[:first_price[0].start()]) if first_price else ''
+    if len(key) >= 5 and prefix:
+        brand_match = re.search(r'(?<!\w)' + r'[ -]*'.join(re.escape(c) for c in key) + r'(?!\w)', prefix)
+        if brand_match:
+            claim = prefix[brand_match.end():]
+            if (len(claim) <= 160 and not market_info(claim)
+                    and not generic_multi_clinic_price_context(claim)
+                    and re.search(r'\b(?:starts?\s+(?:from|at)|costs?|charges?|fees?|price|from|prezzo|precio)\b', claim)):
+                return True
     if clinic_identity_similarity(text, brand) >= .55:
         return True
     label = re.search(r'\b(?:ne\s+kliniken|presso\s+la\s+clinica|at)\s+'
@@ -7589,7 +7709,7 @@ def classify_evidence_type(
 
     if (
         is_price_menu_path(url)
-        or evidence.extraction_method in {'owned_currency_tariff_table', 'clinic_comparison_column', 'semantic_tariff_card',
+        or evidence.extraction_method in {'owned_currency_tariff_table', 'clinic_comparison_column', 'woocommerce_service_offer', 'current_service_offer', 'semantic_tariff_card',
                                           'scoped_graft_card', 'standalone_tariff_sentence'}
         or (evidence.extraction_method in {'scoped_tariff_table_row', 'owned_tariff_list', 'dom_tariff_row'}
             and not article_path and not generic_multi_clinic_price_context(full_page_text))
@@ -8450,6 +8570,24 @@ def procedure_line_is_bundle(text: str, procedure: str) -> bool:
     folded = fold(text or "")
     if not folded:
         return False
+    if canonical in {'rhinoplasty', 'breast_augmentation', 'hair_transplant'}:
+        first_price = next(iter_exact_price_matches(text), None)
+        label = fold(text[:first_price[0].start()] if first_price else text)
+        if re.search(r'\b(?:best friends|two people|2 people|per couple|couples? offer)\b', label):
+            return True
+        if canonical == 'breast_augmentation' and re.search(
+                r'\b(?:non[ -]?surgical|sin cirugia|no quirurgic\w*)\b', label):
+            return True
+        extras = [family for family in ('rhinoplasty', 'breast_augmentation', 'hair_transplant')
+                  if family != canonical and contains_requested_procedure(label, family)]
+        surgeries = {
+            'body': r'\b(?:liposuction|lipo|tummy tuck|abdominoplast\w*|mommy makeover)\b',
+            'face': r'\b(?:blepharoplast\w*|otoplast\w*|face[ -]?lift)\b',
+            'dental': r'\b(?:veneers?|hollywood smile|dental implants?)\b',
+        }
+        extras.extend(key for key, pattern in surgeries.items() if re.search(pattern, label))
+        if extras and re.search(r'\+|&|\b(?:with|and|plus|con|y|cu|ve|ile|package|combo|bundle)\b', label):
+            return True
     if canonical in {"botox", "filler"} and re.search(
             r"\b(?:en pareja|couples? offer|couples? price|per couple|"
             r"pack\s+amigas?|ven\s+con\s+una\s+amiga|with\s+a\s+friend|friends?\s+(?:offer|pack))\b", folded):
@@ -8482,12 +8620,7 @@ def procedure_line_is_bundle(text: str, procedure: str) -> bool:
     if canonical == "filler":
         return filler_volume_is_retail_like(folded)
     if canonical == "rhinoplasty":
-        if nonprimary_rhinoplasty_variant(folded):
-            return True
-        return bool(re.search(
-            r"all[- ]inclusive|tutto incluso|flight|hotel|\bvolo\b|\bflug\b",
-            folded,
-        ))
+        return nonprimary_rhinoplasty_variant(folded)
     if canonical == "breast_augmentation":
         return breast_line_is_not_plain_augmentation(folded)
     if canonical == "botox":
@@ -8587,6 +8720,10 @@ def validate_evidence(
     )
     if scope_failure:
         return False, False, 0.05, scope_failure, evidence_type
+    bound = priced_line_text(evidence.raw_evidence, evidence.price_min, evidence.currency)
+    if procedure_line_is_bundle(f'{evidence.raw_procedure_text} | {bound}',
+                                canonicalize_procedure(evidence.raw_procedure_text)):
+        return False, False, 0.10, 'package_not_procedure', evidence_type
     for match, amount, currency in iter_exact_price_matches(evidence.raw_evidence):
         if abs(amount - evidence.price_min) <= .011 and currency == evidence.currency:
             failure = ancillary_price_reason(canonicalize_procedure(evidence.raw_procedure_text),
@@ -8608,7 +8745,7 @@ def validate_evidence(
     if (source == "official_clinic"
             and evidence_type in {"official_price_menu", "official_treatment_page"}
             and evidence.extraction_method in {"owned_currency_tariff_table", "procedure_quick_facts", "scoped_tariff_table_row", "aligned_tariff_columns",
-                                              "scoped_graft_card", "standalone_tariff_sentence", "dom_tariff_row"}):
+                                              "scoped_graft_card", "standalone_tariff_sentence", "dom_tariff_row", "woocommerce_service_offer", "current_service_offer"}):
         # These methods bind an explicit treatment/brand and price in one
         # menu. Article/comparison gates below still run before ownership.
         own_phrase = True
@@ -8618,7 +8755,11 @@ def validate_evidence(
 
     if country_price_guide_path(evidence.source_url):
         return False, False, 0.10, "comparative_market_article", evidence_type
-    if cross_country_price_comparison(full_page_text):
+    if cross_country_price_comparison(full_page_text) and not (
+            (evidence.extraction_method == 'clinic_owned_paragraph'
+             and clinic_paragraph_matches_site(evidence.raw_evidence, evidence.source_url)
+             or evidence.extraction_method in {'woocommerce_service_offer', 'current_service_offer'})
+            and city and strong_local_page_evidence(html, full_page_text, city, evidence.source_url)):
         return False, False, 0.10, "cross_country_price_comparison", evidence_type
     if foreign_quoted_price_country(evidence.raw_evidence, city):
         return False, False, 0.10, "foreign_quoted_price_country", evidence_type
@@ -8646,7 +8787,7 @@ def validate_evidence(
         and comparative_market_article_context(
             evidence.source_url, full_page_text,
         )
-        and evidence.extraction_method not in {"owned_currency_tariff_table", "clinic_owned_paragraph", "clinic_comparison_column"}
+        and evidence.extraction_method not in {"owned_currency_tariff_table", "clinic_owned_paragraph", "clinic_comparison_column", "woocommerce_service_offer", "current_service_offer"}
         and not (evidence.extraction_method == "heading_price_pair"
                  and clinic_paragraph_matches_site(evidence.raw_evidence, evidence.source_url))
     ):
@@ -8682,7 +8823,7 @@ def validate_evidence(
 
     if (source == "official_clinic" and comparison_price_context(full_page_text)
             and not own_language(evidence.raw_evidence)
-            and evidence.extraction_method != "owned_currency_tariff_table"):
+            and evidence.extraction_method not in {"owned_currency_tariff_table", "woocommerce_service_offer", "current_service_offer"}):
         return False, False, 0.10, "market_comparison_table", evidence_type
     if source == "official_clinic" and generic_multi_clinic_price_context(
         evidence.raw_evidence
@@ -11993,6 +12134,9 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
         row.raw_procedure_text, blob, row.clinic_name, row.source_url)
     if scope_failure:
         return scope_failure
+    if procedure_line_is_bundle(f'{row.raw_procedure_text} | ' + priced_line_text(
+            row.raw_evidence, row.price_min, row.currency), row.procedure_canonical):
+        return 'package_not_procedure'
     if row.source_type == "marketplace" and 'Provider locality: ' not in row.source_location_text:
         return "marketplace_provider_location_missing"
     for match, amount, currency in iter_exact_price_matches(row.raw_evidence):
@@ -12120,6 +12264,9 @@ def trusted_price_result(row: ClinicPriceResult) -> bool:
     blob = f"{row.raw_procedure_text} {row.procedure_detail} {row.raw_evidence}"
     if injectable_scope_rejection(row.procedure_canonical,
             row.raw_procedure_text, blob, row.clinic_name, row.source_url):
+        return False
+    if procedure_line_is_bundle(f'{row.raw_procedure_text} | ' + priced_line_text(
+            row.raw_evidence, row.price_min, row.currency), row.procedure_canonical):
         return False
     if (generic_multi_clinic_price_context(row.raw_evidence)
             or consultation_fee_evidence(row)
@@ -13199,6 +13346,9 @@ def procedure_detail(
     raw_price_text: str = "",
 ) -> str:
     parts = []
+    if canonical in {'rhinoplasty', 'breast_augmentation', 'hair_transplant'} and re.search(
+            r'all[- ]inclusive|tutto incluso', raw, re.I):
+        parts.append('All-inclusive package')
 
     if canonical == "botox":
         detail = botox_variant_detail(raw, raw_price_text)
@@ -14083,9 +14233,13 @@ def select_discovery_work(unique: list[SearchHit], req: DiscoverRequest, rank_fn
 
     if req.search_mode == "site_focus":
         # A real discovered URL precedes a guessed /prices/ or another root.
+        # Preserve the caller's ranked saved-page order. Treatment keywords
+        # in long marketplace URLs must not push every owned tariff behind
+        # several large provider profiles during a short refresh deadline.
+        saved_order = {url: index for index, url in enumerate(req.priority_site_urls)}
         discovered = sorted(
             [h for h in unique if h.url in req.priority_site_urls],
-            key=lambda h: (-price_page_signal(h, req.procedure), rank_fn(h)),
+            key=lambda h: saved_order[h.url],
         )
         add(discovered, "price_like", max_total)
         # One homepage per remaining clinic before guessed tariff paths.
@@ -16269,6 +16423,7 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
         queries = req.query_override
     if req.progressive_stage == "primary":
         serper.language = "en"
+    diag.search_language = serper.language
     if req.search_mode == "site_focus" and req.priority_site_hosts:
         # Round 0 fetches /preturi/{city}/ directly. Do not Serper
         # `site:host`, which ranked Cronosmed /preturi/bacau/ for Timișoara.
@@ -16347,7 +16502,7 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
 
     await _emit_hybrid_status(
         phase="searching", round=req.search_mode, queries=queries,
-        search_country_code=country_code, search_language=primary_language,
+        search_country_code=country_code, search_language=serper.language,
         source_lanes=["official_web", "provider_platforms"],
     )
 
@@ -17160,6 +17315,16 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
             return
 
         canonical = canonicalize_procedure(req.procedure)
+        # Keep profile/address parsing off the event loop and reuse it for
+        # every candidate on this page instead of repeating it per tariff.
+        def source_location():
+            context = tariff_location_context(html or "")
+            if src == "marketplace":
+                context += "\n" + (marketplace_provider_location_context(
+                    html or "", hit.url, req.city)
+                    or ("Provider locality: " + place.formatted_address if place else ""))
+            return context
+        source_location_text = await asyncio.to_thread(source_location)
 
         for e in evidence:
             if "whatclinic.com" in host_of(e.source_url):
@@ -17295,10 +17460,7 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                     confidence=max(0, min(0.99, confidence)),
                     raw_procedure_text=e.raw_procedure_text,
                     raw_evidence=e.raw_evidence,
-                    source_location_text=(tariff_location_context(html or "") + "\n" +
-                        (marketplace_provider_location_context(html or "", hit.url, req.city)
-                         or ("Provider locality: " + place.formatted_address if src == "marketplace" and place else ""))
-                        if src == "marketplace" else tariff_location_context(html or "")),
+                    source_location_text=source_location_text,
                     price_scope=(
                         "implant_excluded"
                         if canonical == "breast_augmentation" and implant_cost_excluded(e.raw_evidence)
@@ -17355,6 +17517,10 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                 )
             )
 
+    # Fetches remain concurrent, but large DOMs should not all compete for
+    # Python parser time before any page can emit its first verified card.
+    document_slots = asyncio.Semaphore(2 if req.hybrid_interactive else 4)
+
     async def process(hit: SearchHit):
         src = classify_source(hit.url)
 
@@ -17388,6 +17554,10 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
             failure = _fetch_state().get("failures", {}).get((hit.url, False), "fetch_failed")
             return ("fetch_failed", hit, None, None, None, failure)
 
+        async with document_slots:
+            return await process_document(hit, html)
+
+    async def process_document(hit: SearchHit, html: str):
         if hit.directory_verified and is_obvious_financial_site(html):
             return ("nonmedical_business", hit, html, "", None, None)
 
@@ -18285,7 +18455,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.93",
+    version="0.11.94",
     lifespan=app_lifespan,
 )
 
@@ -19349,6 +19519,15 @@ async def _discover_hybrid_impl(req: HybridDiscoverRequest):
     else:
         normalized_rounds = (["standard", "expanded", "rescue", "site_focus"]
                              if req.economical_growth else ["standard", "expanded", "deep"])[:len(responses)]
+    # Progressive searches can add saved-page and known-domain stages to
+    # those legacy rounds. Never index a four-label list with six responses.
+    normalized_rounds = [
+        (response.diagnostics.progressive_stage
+         if response.diagnostics and response.diagnostics.progressive_stage
+         else normalized_rounds[i] if i < len(normalized_rounds)
+         else f"round_{i + 1}")
+        for i, response in enumerate(responses)
+    ]
 
     newly_discovered_count = novel_live_available
     refreshed_existing_count = max(

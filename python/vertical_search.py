@@ -241,19 +241,25 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
     # every clinic discovered for a different procedure in this city.
     marketplace_first = (deep and engine.env_bool('ENABLE_MARKETPLACE_RESCUE', True)
                          and len(stored) < MIN_DISPLAY)
-    stages = (['saved_sources'] if saved_urls else [])
-    if marketplace_first:
-        stages.append('marketplace')
-    stages.append('known_domains')
-    # Search the market's language first. A slow English round must not hold
-    # local tariff pages behind its fetch/navigation budget. Paid search caps
-    # and verification gates remain the same; English is the fallback round.
     local_queries = CATALOG.queries(selected, city, country, engine.local_terms_for, stage='local')
     local_first = engine.env_bool('ENABLE_MULTILINGUAL_SEARCH', True) and bool(local_queries)
-    stages.append('local' if local_first else 'primary')
+    stages = (['saved_sources'] if saved_urls else [])
+    if marketplace_first:
+        # Reserve one English and one local query alongside the two provider
+        # menu queries. Two marketplace plus two local requests previously
+        # consumed the whole paid budget before the basic English query ran.
+        stages.extend(['primary', 'marketplace'])
+    stages.append('known_domains')
+    # Filled displays still try local tariffs first. Sparse displays reserve
+    # both languages rather than spend all four queries on a single language
+    # plus marketplaces. Fetch budgets and verification gates stay unchanged.
+    if local_first:
+        stages.append('local')
+    elif not marketplace_first:
+        stages.append('primary')
     if deep and engine.env_bool('ENABLE_MARKETPLACE_RESCUE', True) and not marketplace_first:
         stages.append('marketplace')
-    if deep and local_first:
+    if deep and local_first and not marketplace_first:
         stages.append('primary')
     if deep:
         if engine.env_bool('ENABLE_EXA_RESCUE', False):
@@ -277,6 +283,8 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
             if stage == 'marketplace' and len(stored) + len(merged) >= MIN_DISPLAY:
                 continue
             queries = CATALOG.queries(selected, city, country, engine.local_terms_for, stage=stage)
+            if marketplace_first and local_first and stage in {'primary', 'local'}:
+                queries = queries[:1]
             queries = queries[:min(2, max(0, total_serper_cap-spent))]
             if not queries:
                 continue
@@ -325,6 +333,15 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
                 if event.get('event') == 'partial':
                     partial_rows.extend(engine.ClinicPriceResult.model_validate(r)
                                         for r in event.get('display_results', []))
+                    # A new round's first result must not replace the four
+                    # cards already verified by earlier rounds. Publish the
+                    # accumulated pool, with the display cap applied here.
+                    pool = engine._unique_display_rows([
+                        *stored,
+                        *(engine._display_from_live(r, 'live_search')
+                          for r in engine.dedupe_live_results([*merged, *partial_rows]))])
+                    event = {**event, 'display_results': [r.model_dump(mode='json')
+                                                         for r in pool[:display_limit]]}
                 elif event.get('event') == 'progress':
                     partial_progress.update(event.get('progress', {}))
                 if upstream is not None:
@@ -357,7 +374,9 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
                         fetched_pages=max(0, int(partial_progress.get('fetched_pages', 0))
                             - sum(r.fetched_pages for r in responses)),
                         crawled_urls=list(dict.fromkeys(r.source_url for r in partial_rows)),
-                        diagnostics=engine.DiscoveryDiagnostics())
+                        diagnostics=engine.DiscoveryDiagnostics(
+                            pending_price_navigation_urls=[u for u in urls
+                                if u not in {r.source_url for r in partial_rows}]))
                     await engine._emit_hybrid_status(round=stage, stage_timed_out=True)
             else:
                 response = await discovery

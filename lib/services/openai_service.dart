@@ -19214,7 +19214,9 @@ bool isJustifiedProcedurePriceValue({
     return priceMin >= 10 && priceMin <= 100000;
   }
   if (curr == r'$' || curr == 'USD') {
-    if (rhino) return priceMin >= 2500 && priceMin <= 100000;
+    // Use the same surgery floor as the extraction gate. A second, higher
+    // USD-only floor silently dropped already verified provider-menu fees.
+    if (rhino) return priceMin >= 1500 && priceMin <= 100000;
     if (hair || highTicket) return priceMin >= 500 && priceMin <= 100000;
     if (proc.contains('botox') ||
         proc.contains('btx') ||
