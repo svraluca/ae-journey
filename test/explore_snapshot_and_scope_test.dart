@@ -113,7 +113,8 @@ void main() {
     final client=MockClient((request) async {
       Object reply;
       if(request.url.path=='/health') {
-        reply={'ok':true,'version':'0.11.95','progressive_jobs':true};
+        reply={'ok':true,'version':ExplorePriceDiscoveryTool.minimumBackendVersion,
+          'price_extract_revision':kExplorePriceExtractRevision,'progressive_jobs':true};
       } else if(request.url.path=='/discover-jobs') {
         expect((jsonDecode(request.body) as Map)['require_client_display_confirmation'],true);
         reply={'job_id':'active','status':'queued','enqueued':true};

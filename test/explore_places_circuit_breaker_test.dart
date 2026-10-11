@@ -27,11 +27,8 @@ void main() {
     final places = GooglePlacesService(client: client, apiKey: 'test-key');
     expect(GooglePlacesService.quotaCircuitOpen, isFalse);
 
-    final first = await places.lookupClinic(
-      clinicName: 'Cronos Med',
-      city: 'Timisoara',
-    );
-    expect(first, isNull);
+    await expectLater(places.lookupClinic(
+      clinicName: 'Cronos Med', city: 'Timisoara'), throwsStateError);
     expect(GooglePlacesService.quotaCircuitOpen, isTrue);
     expect(calls, 1);
 

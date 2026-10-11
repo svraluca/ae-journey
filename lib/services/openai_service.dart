@@ -249,12 +249,18 @@ class OpenAIService {
     String? apiKey,
     GooglePlacesService? places,
     String? placesApiKey,
+    ExplorePlaceCacheStore? placeCache,
     FirebaseFirestore? firestore,
   }) : _client = client ?? http.Client(),
        _apiKey = apiKey ?? _readKey(),
        _placesApiKey = placesApiKey ?? _readPlacesKey(),
        _places = places ?? GooglePlacesService(),
+       _injectedPlaceCache = placeCache,
        _firestore = firestore ?? FirebaseFirestore.instance;
+
+  final ExplorePlaceCacheStore? _injectedPlaceCache;
+  ExplorePlaceCacheStore get _placeCache =>
+      _injectedPlaceCache ?? ExplorePlaceCacheStore.instance;
 
   /// Curated recovery when web search / AI are unavailable.
   static const Map<String, ({int value, String unit})>
@@ -5047,7 +5053,7 @@ Return JSON only.
       if (c.rating > 0) continue;
       final k = '${city.trim().toLowerCase()}|${c.name.trim().toLowerCase()}';
       if (_ratingBackfillClinicKeys.contains(k)) continue;
-      final miss = ExplorePlaceCacheStore.instance.peekMemory(
+      final miss = _placeCache.peekMemory(
         city: city, clinicName: c.name,
       );
       if (miss != null && !miss.matched) continue;
@@ -6244,6 +6250,9 @@ Return JSON only.
 
     if (aiHost.isNotEmpty && !isMarketplaceOrDirectoryHost(aiHost)) add(aiHost);
     if (!isMarketplaceOrDirectoryHost(aiHost)) add(hostBrand);
+    if (exploreClinicUsesMarketplacePriceSource(clinic)) {
+      add(exploreMarketplaceProviderLookupName(clinic.name));
+    }
     add(_splitPackedClinicBrand(clinic.name));
     if (!_serpTitleLooksLikeSeoHeadline(clinic.name)) add(clinic.name);
     add(_normalizeClinicNameForPlaces(_splitPackedClinicBrand(clinic.name)));
@@ -8486,7 +8495,7 @@ Return JSON only.
       var cacheHits = 0;
       var liveCalls = 0;
       final futures = clinics.map((c) async {
-        final cached = await ExplorePlaceCacheStore.instance.lookupAny(
+        final cached = await _placeCache.lookupAny(
           city: city,
           clinicNames: ExplorePlaceCacheStore.aliasNames(
             clinicName: c.name, websiteHost: exploreClinicWebsiteHost(c),
@@ -13130,7 +13139,7 @@ Return JSON only.
     required String placesHost,
   }) {
     unawaited(
-      ExplorePlaceCacheStore.instance.put(
+      _placeCache.put(
         city: city,
         clinicName: clinic.name,
         rating: matched.rating,
@@ -13198,7 +13207,7 @@ Return JSON only.
       if (place == null) {
         debugPrint('[GP] No Google Maps match: ${clinic.name}');
         if (!lookupFailed) {
-          ExplorePlaceCacheStore.instance.rememberMiss(city: city, clinicName: clinic.name);
+          _placeCache.rememberMiss(city: city, clinicName: clinic.name);
         }
         return null;
       }
@@ -13269,7 +13278,7 @@ Return JSON only.
             '[GP] Filtered wrong-city clinic: ${clinic.name} — '
             'expected "$cityKey", got "${matched.address}"',
           );
-          ExplorePlaceCacheStore.instance.rememberMiss(
+          _placeCache.rememberMiss(
             city: city,
             clinicName: clinic.name,
           );
@@ -13280,7 +13289,7 @@ Return JSON only.
             '[GP] Filtered wrong-city clinic: ${clinic.name} — '
             'expected "$cityKey", got "${matched.address}"',
           );
-          ExplorePlaceCacheStore.instance.rememberMiss(
+          _placeCache.rememberMiss(
             city: city,
             clinicName: clinic.name,
           );
@@ -13309,7 +13318,7 @@ Return JSON only.
           return withMapsRating();
         }
         debugPrint('[GP] Filtered non-aesthetic business: ${clinic.name}');
-        ExplorePlaceCacheStore.instance.rememberMiss(
+        _placeCache.rememberMiss(
           city: city,
           clinicName: clinic.name,
         );
@@ -13357,7 +13366,7 @@ Return JSON only.
       if (_denylistedWebsiteHost(aiHost) ||
           _denylistedWebsiteHost(placesHost)) {
         debugPrint('[GP] Filtered denylisted clinic website: ${clinic.name}');
-        ExplorePlaceCacheStore.instance.rememberMiss(
+        _placeCache.rememberMiss(
           city: city,
           clinicName: clinic.name,
         );
@@ -13374,7 +13383,12 @@ Return JSON only.
           }
         } else if (!_hostsSameDomainOrSubdomain(aiHost, placesHost)) {
           final mapsName = matched.name.trim();
-          final useMapsName = _mapsNameAgreesWithHost(mapsName, aiHost);
+          final useMapsName = _mapsNameAgreesWithHost(mapsName, aiHost) ||
+              exploreMapsProviderIdentityMatches(
+                sourceName: clinic.name, mapsName: mapsName,
+                sourceHost: aiHost, mapsHost: placesHost,
+                marketplace: exploreClinicUsesMarketplacePriceSource(clinic),
+              );
           if (!useMapsName) return clinic;
           debugPrint(
             '[GP] AI domain≠Places website — keep source host: ${clinic.name} '
@@ -13385,7 +13399,7 @@ Return JSON only.
             clinic: clinic,
             city: city,
             matched: matched,
-            placesHost: '',
+            placesHost: placesHost,
           );
           return withMapsRating(
             name: useMapsName
@@ -19444,6 +19458,12 @@ Set<String> exploreClinicIdentityKeys(OpenAIClinic c) {
   if (hostKey.isNotEmpty) keys.add(hostKey);
   final nameKey = exploreClinicNameDedupKey(c.name);
   if (nameKey.isNotEmpty) keys.add(nameKey);
+  // A verified Maps display name may differ from the marketplace title.
+  // Retain the source provider key so its rating patches the original card.
+  if (exploreClinicUsesMarketplacePriceSource(c) &&
+      c.providerClinic.trim().isNotEmpty) {
+    keys.add(exploreClinicNameDedupKey(c.providerClinic));
+  }
   final packed = packedCanonicalClinicName(c.name);
   if (packed.length >= 6) keys.add('name:$packed');
   return keys;
@@ -19542,7 +19562,12 @@ bool exploreMapsProviderIdentityMatches({
   required String sourceHost, required String mapsHost,
   bool marketplace = false,
 }) {
-  if (marketplace) return namesLookLikeSameProvider(sourceName, mapsName);
+  if (marketplace) {
+    String providerName(String raw) => exploreMarketplaceProviderLookupName(raw)
+        .replaceAll(cachedRegExp(r'\b(?:clinique|klinik|poliklinik)\b',
+            caseSensitive: false), 'Clinic');
+    return namesLookLikeSameProvider(providerName(sourceName), providerName(mapsName));
+  }
   String stem(String host) => foldExploreCityText(host.split('.').first)
       .replaceAll(cachedRegExp(r'[^a-z0-9]'), '')
       .replaceFirst(cachedRegExp(r'(?:aesthetic|aesthetics|medical|clinic|clinics|dental)$'), '');

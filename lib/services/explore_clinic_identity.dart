@@ -1209,6 +1209,17 @@ bool looksLikePricingProseProcedureTitle(String raw) {
   ).hasMatch(t);
 }
 
+/// Remove a marketplace's location suffix from a provider title before Maps
+/// lookup. Keep the provider words; a platform title is not a business name.
+String exploreMarketplaceProviderLookupName(String raw) {
+  final name = raw.trim();
+  final match = cachedRegExp(
+    r'^(.+\b(?:clinic|hospital|medical centre|medical center))\s+in\s+[^|,:;\d]{2,50}$',
+    caseSensitive: false,
+  ).firstMatch(name);
+  return match?.group(1)?.trim() ?? name;
+}
+
 bool namesLookLikeSameProvider(String a, String b) {
   final pa = packedCanonicalClinicName(a);
   final pb = packedCanonicalClinicName(b);
