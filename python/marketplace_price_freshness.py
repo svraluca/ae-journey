@@ -2,7 +2,8 @@
 
 Fetching a page today does not make a price last updated last year current.
 Only a date explicitly attached to the selected fee, or its own tariff menu,
-can support this age check. Undated offers keep their date unknown.
+can supply its provenance. A publication date is not an expiry date. Undated
+offers keep their date unknown; dated fees do not expire merely through age.
 """
 
 from __future__ import annotations
@@ -15,9 +16,6 @@ import re
 import unicodedata
 
 from bs4 import BeautifulSoup
-
-
-MAX_MARKETPLACE_PRICE_AGE_DAYS = 365
 
 
 def _fold(value: str) -> str:
@@ -141,9 +139,6 @@ def marketplace_price_date_failure(
     clock = clock.replace(tzinfo=timezone.utc) if clock.tzinfo is None else clock.astimezone(timezone.utc)
     if date > clock + timedelta(days=1):
         return "marketplace_price_date_future"
-    if (clock - date > timedelta(days=MAX_MARKETPLACE_PRICE_AGE_DAYS)
-            and date_basis != "user_retained_published_fee"):
-        return "marketplace_price_outdated"
     return ""
 
 

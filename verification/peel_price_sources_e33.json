@@ -1,0 +1,377 @@
+{
+  "version": "0.11.97",
+  "revision": "e33",
+  "run_type": "actual_public_page_recheck",
+  "no_database_writes": true,
+  "captures": [
+    {
+      "checked_at": "2026-10-11T10:41:50.227664+00:00",
+      "version": "0.11.97",
+      "revision": "e33",
+      "type": "actual_public_page_recheck",
+      "no_database_writes": true,
+      "pages": [
+        {
+          "provider": "Lokman Hekim",
+          "procedure": "chemical_peel",
+          "requested_url": "https://us-uk.bookimed.com/clinic/lokman-hekim-istanbul/procedure=chemical-peel/",
+          "status": 200,
+          "final_url": "https://us-uk.bookimed.com/clinic/lokman-hekim-istanbul/procedure=chemical-peel/",
+          "sha256": "942ffa771da1fcc2eb487183c5714f31099171778f55363b9018d3dec12ef57f",
+          "rows": [
+            {
+              "label": "Chemical Peel",
+              "min": 2735.0,
+              "max": null,
+              "currency": "USD",
+              "accepted": true,
+              "reason": "",
+              "kind": "marketplace_service_menu",
+              "source_date": "2025-01-15T13:15:54.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Chemical Peel: $2735"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 2735.0,
+              "max": null,
+              "currency": "USD",
+              "accepted": true,
+              "reason": "",
+              "kind": "marketplace_service_menu",
+              "source_date": "2025-01-15T13:15:54.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Chemical Peel $2735"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 2735.0,
+              "max": null,
+              "currency": "USD",
+              "accepted": false,
+              "reason": "nonfacial_tariff_scope",
+              "kind": "marketplace_service_menu",
+              "source_date": "2025-01-15T13:15:54.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Accepted payment methods | Treatments prices in the clinic Last price update — 29.03.2025. Prices can be changed depending on the medical case and doctor's recommendations. Aesthetic Medicine and Cosmetology treatment Price Chemical Peel $2735 Laser vaginal rejuvenation Price on request Hair mesotherapy Price on request PRP Hair Loss Treatment Price on request Moustache transplantation Price on request Mole Removal Price on request Show more"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 750.0,
+              "max": null,
+              "currency": "EUR",
+              "accepted": false,
+              "reason": "market_context",
+              "kind": "marketplace_profile",
+              "source_date": "2025-03-29",
+              "date_basis": "provider_tariff_menu",
+              "currency_basis": "",
+              "evidence": "About the clinic | Lokman Hekim Istanbul Hospital offers chemical peel treatments starting at around €750 per session. The JCI-accredited facility in Istanbul provides both single-session options and comprehensive packages costing approximately"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 2735.0,
+              "max": null,
+              "currency": "USD",
+              "accepted": true,
+              "reason": "",
+              "kind": "marketplace_profile",
+              "source_date": "2025-01-15T13:15:54.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Treatments prices in the clinic | Chemical Peel $2735"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 2735.0,
+              "max": null,
+              "currency": "USD",
+              "accepted": false,
+              "reason": "nonfacial_tariff_scope",
+              "kind": "marketplace_profile",
+              "source_date": "2025-01-15T13:15:54.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Treatments prices in the clinic | treatment Price Chemical Peel $2735 Laser vaginal rejuvenation Price on request Hair mesotherapy Price on request PRP Hair Loss Treatment Price on request Moustache transplantation Price on request Mole Removal Price on request"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 750.0,
+              "max": null,
+              "currency": "EUR",
+              "accepted": false,
+              "reason": "weak_marketplace_price_binding",
+              "kind": "marketplace_profile",
+              "source_date": "2025-03-29",
+              "date_basis": "provider_tariff_menu",
+              "currency_basis": "",
+              "evidence": "8 Request a call en en ru ar ua kz jp it es id pt de fr pl AU Patient Safety Legal Documents Treatment abroad See all countries treatment\n in\n            Turkey treatment\n in\n            Istanbul Lokman Hekim Istanbul Hospital Show all photos Overview Prices Certificates reviews Location Turkey, Istanbul Chemical Peel in Lokman Hekim Istanbul Hospital 4.8 Top Clinic Most Popular Clinic for Chemical Peel 278 reviews Most Popular Clinic for Chemical Peel 380\n                  patients chose clinic for Aesthetic Medicine and Cosmetology 95% Patients recommended this clinic About the clinic Lokman Hekim Istanbul Hospital offers chemical peel treatments starting at around €750 per session. The JCI-accredited facility in Istanbul provides both single-session options and comprehensive packages costing approximately"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 750.0,
+              "max": null,
+              "currency": "EUR",
+              "accepted": false,
+              "reason": "weak_marketplace_price_binding",
+              "kind": "marketplace_profile",
+              "source_date": "2025-03-29",
+              "date_basis": "provider_tariff_menu",
+              "currency_basis": "",
+              "evidence": ". Patients benefit from a complete medical tourism experience with included transfers, interpreter services, and hotel stays. About the Procedure Chemical peels remove damaged outer skin layers to reveal healthier skin underneath. The V-Peel method specifically targets melasma and uneven pigmentation. Treatments can be performed on the face, arms, abdomen, and legs. Treatment Options The hospital offers two main approaches: Single session - €750 for the peel procedure only Comprehensive package"
+            }
+          ],
+          "accepted_count": 3
+        },
+        {
+          "provider": "Quartz",
+          "procedure": "chemical_peel",
+          "requested_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+          "status": 200,
+          "final_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+          "sha256": "71071bea62a5dcabd3282e365161bcbaaacde4a66b48bbf10a140bc0eb45fb48",
+          "rows": [
+            {
+              "label": "Chemical Peel",
+              "min": 2200.0,
+              "max": null,
+              "currency": "USD",
+              "accepted": false,
+              "reason": "ambiguous_marketplace_service_scope",
+              "kind": "marketplace_service_menu",
+              "source_date": "2025-05-14T11:14:11.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Chemical Peel: $2200"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 2200.0,
+              "max": null,
+              "currency": "USD",
+              "accepted": false,
+              "reason": "ambiguous_marketplace_service_scope",
+              "kind": "marketplace_service_menu",
+              "source_date": "2025-05-14T11:14:11.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Chemical Peel $2200"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 2200.0,
+              "max": null,
+              "currency": "USD",
+              "accepted": false,
+              "reason": "ambiguous_marketplace_service_scope",
+              "kind": "marketplace_service_menu",
+              "source_date": "2025-05-14T11:14:11.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "treatment Price Chemical Peel $2200 Brow lift Price on request Scar revision Price on request Acne Laser Treatment (per session) Price on request Laser vaginal rejuvenation Price on request Hair mesotherapy Price on request Show more"
+            },
+            {
+              "label": "The chemical peel at Quartz Hospital in Istanbul, Turkey may",
+              "min": 2400.0,
+              "max": null,
+              "currency": "USD",
+              "accepted": false,
+              "reason": "market_context",
+              "kind": "marketplace_profile",
+              "source_date": "2025-03-29",
+              "date_basis": "provider_tariff_menu",
+              "currency_basis": "",
+              "evidence": "About the clinic | The chemical peel at Quartz Hospital in Istanbul, Turkey may cost around $2,400 for the medical-grade"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 2200.0,
+              "max": null,
+              "currency": "USD",
+              "accepted": false,
+              "reason": "ambiguous_marketplace_service_scope",
+              "kind": "marketplace_profile",
+              "source_date": "2025-05-14T11:14:11.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Treatments prices in the clinic | Chemical Peel $2200"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 2200.0,
+              "max": null,
+              "currency": "USD",
+              "accepted": false,
+              "reason": "ambiguous_marketplace_service_scope",
+              "kind": "marketplace_profile",
+              "source_date": "2025-05-14T11:14:11.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Treatments prices in the clinic | treatment Price Chemical Peel $2200 Brow lift Price on request Scar revision Price on request Acne Laser Treatment (per session) Price on request Laser vaginal rejuvenation Price on request Hair mesotherapy Price on request"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 2400.0,
+              "max": null,
+              "currency": "USD",
+              "accepted": false,
+              "reason": "weak_marketplace_price_binding",
+              "kind": "marketplace_profile",
+              "source_date": "2025-03-29",
+              "date_basis": "provider_tariff_menu",
+              "currency_basis": "",
+              "evidence": "call en en ru ar ua kz jp it es id pt de fr pl AU Patient Safety Legal Documents Treatment abroad See all countries treatment\n in\n            Turkey treatment\n in\n            Istanbul Quartz Hospital Show all photos Overview Prices Doctors Certificates reviews Video testimonials Location Turkey, Istanbul Chemical Peel in Quartz Hospital 4.7 159 reviews Doctor\n          4.7 Facilities\n          4.8 Staff\n          4.7 Language assistance\n          4.6 Support\n          4.8 1847\n                  patients chose clinic for Aesthetic Medicine and Cosmetology 88% Patients recommended this clinic Nur Afsar Leading doctor for Aesthetic Medicine and Cosmetology 7 years of experience Top Doctor About the clinic The chemical peel at Quartz Hospital in Istanbul, Turkey may cost around $2,400 for the medical-grade"
+            }
+          ],
+          "accepted_count": 0
+        },
+        {
+          "provider": "Memorial Bahcelievler",
+          "procedure": "chemical_peel",
+          "requested_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+          "status": 200,
+          "final_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+          "sha256": "7f86dc56d853f4bc01e27039be44ffbac6df751f2a7a9b77ae6cc17bf7230abc",
+          "rows": [
+            {
+              "label": "Chemical Peel",
+              "min": 150.0,
+              "max": 300.0,
+              "currency": "USD",
+              "accepted": true,
+              "reason": "",
+              "kind": "marketplace_service_menu",
+              "source_date": "2025-05-22T05:48:41.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Chemical Peel: $150 - $300"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 150.0,
+              "max": 300.0,
+              "currency": "USD",
+              "accepted": true,
+              "reason": "",
+              "kind": "marketplace_service_menu",
+              "source_date": "2025-05-22T05:48:41.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Chemical Peel $150 - $300"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 150.0,
+              "max": 300.0,
+              "currency": "USD",
+              "accepted": true,
+              "reason": "",
+              "kind": "marketplace_service_menu",
+              "source_date": "2025-05-22T05:48:41.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "treatment Price Chemical Peel $150 - $300 Botox injections Price on request Brow lift Price on request Laser scar removal Price on request Scar revision Price on request Acne Laser Treatment (per session) Price on request Show more"
+            },
+            {
+              "label": "A chemical peel at Memorial Bahçelievler Hospital in Istanbul, Turkey may",
+              "min": 150.0,
+              "max": null,
+              "currency": "EUR",
+              "accepted": false,
+              "reason": "market_context",
+              "kind": "marketplace_profile",
+              "source_date": "2025-03-29",
+              "date_basis": "provider_tariff_menu",
+              "currency_basis": "",
+              "evidence": "About the clinic | A chemical peel at Memorial Bahçelievler Hospital in Istanbul, Turkey may cost around €150 per session. The JCI-accredited clinic offers this procedure with Dr. Atilla Adnan Eyuboglu, a plastic surgeon with 17 years of experience and 900+ procedures performed."
+            },
+            {
+              "label": "A chemical peel at Memorial Bahçelievler Hospital in Istanbul, Turkey may",
+              "min": 150.0,
+              "max": null,
+              "currency": "EUR",
+              "accepted": false,
+              "reason": "market_context",
+              "kind": "marketplace_profile",
+              "source_date": "2025-03-29",
+              "date_basis": "provider_tariff_menu",
+              "currency_basis": "",
+              "evidence": "About the clinic | A chemical peel at Memorial Bahçelievler Hospital in Istanbul, Turkey may cost around €150 per session. The JCI-accredited clinic offers this procedure with Dr. Atilla Adnan Eyuboglu, a plastic surgeon with 17 years of experience and 900+ procedures performed. About the Procedure A chemical peel removes damaged outer skin layers. It helps improve skin texture and appearance. The hospital offers standard peels and deep phenol peels for more significant results. Treatment Details The procedure requires one outpatient session with no hospital stay. Patients receive: Chemical peel treatment Plastic surgery consultation Medical interpreter support Doctor Profile Dr. Eyuboglu specializes in plastic and facial surgery. As an ISAPS member, he follows international standards. His experience includes treating sensitive skin conditions. Clinic Advantages The eco-friendly hospital holds JCI and ISO certifications. It maintains a 4.6-4.7 patient rating from 130+ reviews. Additional specialists are available for comprehensive care. Results vary by individual, but most patients see improvement after one session. Contact the clinic for personalized treatment options."
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 150.0,
+              "max": 300.0,
+              "currency": "USD",
+              "accepted": true,
+              "reason": "",
+              "kind": "marketplace_profile",
+              "source_date": "2025-05-22T05:48:41.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Treatments prices in the clinic | Chemical Peel $150 - $300"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 150.0,
+              "max": 300.0,
+              "currency": "USD",
+              "accepted": true,
+              "reason": "",
+              "kind": "marketplace_profile",
+              "source_date": "2025-05-22T05:48:41.000+00:00",
+              "date_basis": "provider_procedure_price_record",
+              "currency_basis": "",
+              "evidence": "Treatments prices in the clinic | treatment Price Chemical Peel $150 - $300 Botox injections Price on request Brow lift Price on request Laser scar removal Price on request Scar revision Price on request Acne Laser Treatment (per session) Price on request"
+            },
+            {
+              "label": "Chemical Peel",
+              "min": 150.0,
+              "max": null,
+              "currency": "EUR",
+              "accepted": false,
+              "reason": "weak_marketplace_price_binding",
+              "kind": "marketplace_service_menu",
+              "source_date": "2025-03-29",
+              "date_basis": "provider_tariff_menu",
+              "currency_basis": "",
+              "evidence": "a kz jp it es id pt de fr pl AU Patient Safety Legal Documents Treatment abroad See all countries treatment\n in\n            Turkey treatment\n in\n            Istanbul Memorial Bahçelievler Hospital Show all photos Overview Prices Doctors Before & after photos Certificates reviews Location Turkey, Istanbul Chemical Peel in Memorial Bahçelievler Hospital 4.7 Top Clinic Most Popular Clinic for Chemical Peel 161 reviews Most Popular Clinic for Chemical Peel 238\n                  patients chose clinic for Aesthetic Medicine and Cosmetology 91% Patients recommended this clinic Direct Price Guarantee The medical center is a Bookimed Official Partner. Thus, we arrange treatment for international patients as a hospital representative with no intermediaries and extra charges. About the clinic A chemical peel at Memorial Bahçelievler Hospital in Istanbul, Turkey may cost around €150 per session. The JCI-accredited clinic offers this procedure with Dr. Atilla Adnan Eyuboglu, a plastic surgeon with"
+            }
+          ],
+          "accepted_count": 5
+        },
+        {
+          "provider": "Dr Siyamek Saleki",
+          "procedure": "chemical_peel",
+          "requested_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/sariyer/dr-siyamek-saleki-esthetics",
+          "status": 200,
+          "final_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/sariyer/dr-siyamek-saleki-esthetics",
+          "sha256": "6e237d55f756ada8071879ea1f6b1951b3993be803c0c9a823d53506e3fe553c",
+          "rows": [
+            {
+              "label": "Chemical Peel",
+              "min": 800.0,
+              "max": 900.0,
+              "currency": "EUR",
+              "accepted": true,
+              "reason": "",
+              "kind": "marketplace_service_menu",
+              "source_date": "",
+              "date_basis": "",
+              "currency_basis": "viewer_localized",
+              "evidence": "Chemical Peel | 800 € - 900 €"
+            }
+          ],
+          "accepted_count": 0
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Known-source page checks do not establish unseeded search coverage.",
+    "Viewer-localized currency is not established original clinic currency."
+  ]
+}

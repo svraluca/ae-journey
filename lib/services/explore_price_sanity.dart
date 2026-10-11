@@ -33,7 +33,8 @@ import 'explore_marketplace_price_freshness.dart';
 /// e30: bind complete commerce offers and distinguish single from combined surgery packages.
 /// e31: isolate WhatClinic current service menus from reviews and adjacent services.
 /// e32: keep source dates and original currencies; reject attributed market estimates.
-const kExplorePriceExtractRevision = 'e32';
+/// e33: publication dates do not expire fees; keep source ownership and currency checks.
+const kExplorePriceExtractRevision = 'e33';
 
 /// Hard gate: a number from clinic HTML is not a procedure price until this
 /// passes. AI must never invent a replacement amount.

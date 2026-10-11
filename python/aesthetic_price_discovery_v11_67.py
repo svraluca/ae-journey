@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.96 — provider-card discovery and verified marketplace tariffs
+Aesthetic Procedure Price Discovery v0.11.97 — provider-card discovery and verified marketplace tariffs
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -61,7 +61,7 @@ from tariff_scope import ancillary_price_reason, comparison_price_context, calen
 from amount_policy import procedure_amount_is_plausible
 from marketplace_price_freshness import bookimed_price_date, marketplace_price_date_failure
 
-PRICE_EXTRACT_REVISION = "e32"
+PRICE_EXTRACT_REVISION = "e33"
 
 try:
     from google.cloud import firestore
@@ -18916,7 +18916,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.96",
+    version="0.11.97",
     lifespan=app_lifespan,
 )
 

@@ -1144,11 +1144,33 @@
           "accepted_count": 0
         }
       ]
+    },
+    {
+      "checked_at": "2026-10-11T10:01:42.958851+00:00",
+      "type": "public_source_connectivity_check",
+      "no_database_writes": true,
+      "pages": [
+        {
+          "provider": "EstePera Poliklinik",
+          "procedure": "filler",
+          "requested_url": "https://www.esteperapoliklinik.com/",
+          "access_reason": "cloud_proxy_connect_denied",
+          "proxy_connect_status": 403,
+          "website_status": null,
+          "price_verified": false,
+          "screenshot_amount": {
+            "min": 10000,
+            "max": 15000,
+            "currency": "TRY"
+          },
+          "note": "Amount transcribed from user screenshot, not extracted or confirmed from website; no website body received."
+        }
+      ]
     }
   ],
   "limitations": [
     "Page rechecks do not demonstrate unseeded search coverage.",
-    "EstePera source URL is not supplied in the screenshot.",
-    "Blocked sources have no live confirmation in this environment."
+    "Blocked sources have no live confirmation in this environment.",
+    "EstePera homepage supplied by user; HTTPS connection denied by this environment proxy before website access. Price remains unverified."
   ]
 }

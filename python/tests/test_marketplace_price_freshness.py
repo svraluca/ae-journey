@@ -67,32 +67,36 @@ class ExplicitMarketplaceDates(unittest.TestCase):
         self.assertEqual(marketplace_price_date_failure("2030-01-01", "user_retained_published_fee", now=now), "marketplace_price_date_future")
         self.assertEqual(marketplace_price_date_failure("not a date", "user_retained_published_fee", now=now), "marketplace_price_date_invalid")
 
-    def test_age_boundary_future_invalid_and_timezones(self):
+    def test_old_source_dates_do_not_expire_fees_but_future_and_invalid_dates_reject(self):
         now = datetime(2026, 10, 10, 12, tzinfo=timezone.utc)
         self.assertEqual(marketplace_price_date_failure((now-timedelta(days=365)).isoformat(), now=now), "")
-        self.assertEqual(marketplace_price_date_failure((now-timedelta(days=366)).isoformat(), now=now), "marketplace_price_outdated")
+        self.assertEqual(marketplace_price_date_failure((now-timedelta(days=366)).isoformat(), now=now), "")
+        self.assertEqual(marketplace_price_date_failure("2001-01-01", now=now), "")
         self.assertEqual(marketplace_price_date_failure("2030-01-01", now=now), "marketplace_price_date_future")
         self.assertEqual(marketplace_price_date_failure("last Tuesday", now=now), "marketplace_price_date_invalid")
         self.assertEqual(marketplace_price_date_failure("2026-10-10T14:00:00+02:00", now=now), "")
 
-    def test_live_validation_preserves_dated_rejection(self):
+    def test_live_validation_keeps_published_fee_and_its_old_source_date(self):
         html = page("01.01.2001", row_date="2001-01-01T00:00:00Z")
         evidence = e.ExtractedEvidence(raw_procedure_text="Fillers injection", raw_price_text="$300",
             price_min=300, currency="USD", raw_evidence="Fillers injection $300",
             source_url="https://us-uk.bookimed.com/clinic/aster/", extraction_method="table_row")
         accepted = e.validate_evidence(evidence, e.page_text(html), html, "Istanbul")
-        self.assertFalse(accepted[0])
-        self.assertEqual(accepted[3], "marketplace_price_outdated")
+        self.assertTrue(accepted[0], accepted[3])
         self.assertEqual(evidence.source_price_updated_at, "2001-01-01T00:00:00Z")
 
     def test_cached_marketplace_date_cannot_be_refreshed_by_serialization(self):
         row = quote().model_copy(update={"source_type": "marketplace",
             "source_url": "https://us-uk.bookimed.com/clinic/aster/",
+            "source_location_text": "Provider locality: Abu Dhabi",
+            "evidence_type": "marketplace_service_menu",
             "source_price_updated_at": "2001-01-01", "source_price_date_basis": "provider_tariff_menu"})
         restored = e.ClinicPriceResult.model_validate(row.model_dump())
         self.assertEqual(restored.source_price_updated_at, "2001-01-01")
-        self.assertFalse(e.trusted_price_result(restored))
-        self.assertEqual(e.trusted_price_failure(restored), "marketplace_price_outdated")
+        self.assertTrue(e.trusted_price_result(restored), e.trusted_price_failure(restored))
+        self.assertTrue(e._app_can_show_row(restored))
+        stale = restored.model_copy(update={"price_extract_revision": "e32"})
+        self.assertFalse(e._app_can_show_row(stale))
 
     def test_official_fee_replacement_uses_its_own_date(self):
         row = quote().model_copy(update={"source_type": "marketplace",

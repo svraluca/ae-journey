@@ -46,21 +46,24 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final clock = DateTime.utc(2026, 10, 10, 12);
 
-  test('the user-kept live peel receipt survives the real clinic DTO', () {
-    final receipt = jsonDecode(File('verification/user_retained_peel_e32.json').readAsStringSync()) as Map;
+  test('the freshly checked published peel survives without an age exception', () {
+    final receipt = jsonDecode(File('verification/published_peel_e33.json').readAsStringSync()) as Map;
     final raw = (receipt['app_row'] as Map).cast<String, Object?>();
     final clinic = OpenAIClinic.fromJson(raw);
     expect(clinic.priceMin, 2735);
     expect(CityCurrency.normalizeCode(clinic.currency), CityCurrency.normalizeCode('USD'));
     expect(clinic.sourcePriceUpdatedAt, '2025-01-15T13:15:54.000+00:00');
-    expect(clinic.sourcePriceDateBasis, 'user_retained_published_fee');
+    expect(clinic.sourcePriceDateBasis, 'provider_procedure_price_record');
     final unretained = stripInvalidCachedPriceJson({...raw,
       'source_price_date_basis': 'provider_procedure_price_record'},
-      procedure: 'chemical peel', logRejects: false);
-    expect(unretained['price_min'], 0);
+      procedure: 'chemical peel', city: 'Istanbul', logRejects: false);
+    expect(unretained['price_min'], 2735);
+    final oldStamp = stripInvalidCachedPriceJson({...raw, 'price_extract_revision': 'e32'},
+      procedure: 'chemical peel', city: 'Istanbul', logRejects: false);
+    expect(oldStamp['price_min'], 0);
   });
 
-  test('365-day source tariff boundary is independent of latest fetch', () {
+  test('published source dates have no maximum age', () {
     expect(
       exploreMarketplacePriceDateFailure(
         updatedAt: '2025-10-10T12:00:00Z',
@@ -73,8 +76,9 @@ void main() {
         updatedAt: '2025-10-10T11:59:59Z',
         now: clock,
       ),
-      'marketplace_price_outdated',
+      isEmpty,
     );
+    expect(exploreMarketplacePriceDateFailure(updatedAt: '2001-01-01', now: clock), isEmpty);
   });
 
   test('explicit user retention keeps dated evidence without rewriting its age', () {
@@ -111,18 +115,16 @@ void main() {
     );
   });
 
-  test('recent checking cannot renew an old cached marketplace tariff', () {
+  test('current cached tariff keeps the published fee and original date', () {
     final raw = _clinicJson(
       date: '2025-03-29', basis: 'provider_tariff_menu',
     );
     final cleaned = stripInvalidCachedPriceJson(raw, procedure: 'Fillers');
-    expect(cleaned['price_min'], 0);
+    expect(cleaned['price_min'], 340);
     expect(cleaned['source_price_updated_at'], '2025-03-29');
-    expect(cleaned['price_rejection_reason'], 'marketplace_price_outdated');
     final clinic = OpenAIClinic.fromJson(raw);
-    expect(clinic.priceMin, 0);
+    expect(clinic.priceMin, 340);
     expect(clinic.sourcePriceUpdatedAt, '2025-03-29');
-    expect(clinic.priceRejectionReason, 'marketplace_price_outdated');
   });
 
   test('viewer-localized currency cannot pass via a cached clinic', () {
@@ -191,7 +193,7 @@ void main() {
     );
   });
 
-  test('full worker cannot memoize outdated or viewer-converted offers', () async {
+  test('full worker keeps dated published fees but rejects invalid dates and viewer currencies', () async {
     ExploreDiscoveryToolRow candidate({String date = '', String currencyBasis = ''}) =>
         ExploreDiscoveryToolRow(
           clinicName: 'Harbor Medical Clinic', priceMin: 340, currency: 'USD',
@@ -204,8 +206,14 @@ void main() {
           sourcePriceUpdatedAt: date, sourceCurrencyBasis: currencyBasis,
           priceExtractRevision: kExplorePriceExtractRevision,
         );
+    final dated = candidate(date: '2025-03-29');
+    final accepted = await validateExploreDiscoveryCompareRows(
+      rows: [dated], city: 'Istanbul', procedure: 'dermal filler', selection: 'Fillers',
+    );
+    expect(accepted.accepted, hasLength(1));
+    expect(accepted.accepted.single.sourcePriceUpdatedAt, '2025-03-29');
     for (final row in [
-      candidate(date: '2025-03-29'),
+      candidate(date: 'not a date'),
       candidate(currencyBasis: 'viewer_localized'),
     ]) {
       final result = await validateExploreDiscoveryCompareRows(

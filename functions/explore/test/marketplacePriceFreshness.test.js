@@ -50,10 +50,11 @@ function row(overrides = {}) {
     evidence: evidence(), city: 'Istanbul'}), ...overrides};
 }
 
-test('explicit fee age uses source date, UTC and a strict 365-day boundary', () => {
+test('publication age does not expire a fee; invalid future dates still reject', () => {
   const atAge = (days) => new Date(clock - days * day).toISOString();
   assert.equal(marketplacePriceDateFailure(atAge(365), '', {now: clock}), '');
-  assert.equal(marketplacePriceDateFailure(atAge(365).replace('12:00:00', '11:59:59'), '', {now: clock}), 'marketplace_price_outdated');
+  assert.equal(marketplacePriceDateFailure(atAge(366), '', {now: clock}), '');
+  assert.equal(marketplacePriceDateFailure('2001-01-01', '', {now: clock}), '');
   assert.equal(marketplacePriceDateFailure('2026-10-10T14:00:00+02:00', '', {now: clock}), '');
   assert.equal(marketplacePriceDateFailure(atAge(-1), '', {now: clock}), '');
   assert.equal(marketplacePriceDateFailure(atAge(-2), '', {now: clock}), 'marketplace_price_date_future');
@@ -82,17 +83,16 @@ test('serialization keeps source date apart from today’s fetch verification', 
   assert.notEqual(doc.source_price_updated_at, doc.price_verified_at);
 });
 
-test('old marketplace fees fail fresh evidence selection and cache trust', () => {
+test('published fees with old source dates survive selection and current cache trust', () => {
   const stale = evidence({source_price_updated_at: old()});
-  assert.equal(evaluateExtractedPriceCandidate({...stale, procedure: 'Fillers', logRejects: false}).reason, 'marketplace_price_outdated');
-  assert.equal(selectEvidenceForProcedure([stale], 'Fillers'), null);
+  assert.equal(evaluateExtractedPriceCandidate({...stale, procedure: 'Fillers', logRejects: false}).accepted, true);
+  assert.ok(selectEvidenceForProcedure([stale], 'Fillers'));
   const cached = row({source_price_updated_at: old(), lastCheckedAt: new Date().toISOString()});
-  assert.equal(evaluatePriceTrust(cached).reason, 'marketplace_price_outdated');
-  assert.equal(usablePoolRow(cached, 'Fillers', 'Istanbul'), false);
+  assert.equal(evaluatePriceTrust(cached).trusted, true);
+  assert.equal(usablePoolRow(cached, 'Fillers', 'Istanbul'), true);
   const cleaned = sanitizeVerifiedPoolRow(cached, 'Fillers', {city: 'Istanbul'});
-  assert.equal(cleaned.price_min, 0);
-  assert.equal(cleaned.priceMin, 0);
-  assert.equal(cleaned.price_rejection_reason, 'marketplace_price_outdated');
+  assert.equal(cleaned.price_min, 300);
+  assert.equal(cleaned.priceMin, 300);
   assert.equal(cleaned.name, 'Aster Clinic');
   assert.equal(cleaned.source_price_updated_at, cached.source_price_updated_at);
 });
@@ -103,8 +103,8 @@ test('undated fees stay eligible without borrowing the fetch date', () => {
   assert.equal(sanitizeVerifiedPoolRow(undated, 'Fillers').source_price_updated_at, '');
 });
 
-test('row invalidation clears both numeric aliases and keeps audit provenance', () => {
-  const stale = row({source_price_updated_at: old()});
+test('invalid source date clears numeric aliases and keeps audit provenance', () => {
+  const stale = row({source_price_updated_at: 'not a date'});
   const cleaned = stripInvalidCachedPrice(stale, 'Fillers', {logRejects: false});
   assert.equal(cleaned.price_min, 0);
   assert.equal(cleaned.priceMin, 0);
@@ -154,13 +154,14 @@ function nuxtRecord(date, extra = '') {
     ]};}(7,8,${JSON.stringify(date)}));</script>`;
 }
 
-test('direct HTML extraction cannot refresh a plainly outdated provider tariff', () => {
+test('direct HTML extraction keeps a published fee without rewriting its old source date', () => {
   const html = menuHtml();
   const source = evidence();
   const date = bookimedPriceDateReader(html)(source);
   assert.equal(date.source_price_updated_at, '2025-03-29');
   assert.equal(date.source_price_date_basis, 'provider_tariff_menu');
-  assert.equal(extractPriceEvidence({html, sourceUrl: source.sourceUrl}).length, 0);
+  const extracted = extractPriceEvidence({html, sourceUrl: source.sourceUrl});
+  assert.ok(extracted.some((r) => r.priceMin === 300 && r.source_price_updated_at === '2025-03-29'));
   const unrelatedDate = menuHtml({dateText: ''}) + '<footer>Last price update 29.03.2025</footer>';
   assert.equal(bookimedPriceDateReader(unrelatedDate)(source).source_price_updated_at, '');
 });

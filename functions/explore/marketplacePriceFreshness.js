@@ -1,7 +1,6 @@
 'use strict';
 
-// Fetching a page now does not reset the date of its published tariff.
-const MAX_MARKETPLACE_PRICE_AGE_DAYS = 365;
+// A publication date is provenance, not an expiry date. Preserve it on fetch.
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 function sourcePriceDateFields(row = {}) {
@@ -40,7 +39,6 @@ function marketplacePriceDateFailure(updatedAt, dateBasis = '', {now = Date.now(
   if (!Number.isFinite(date)) return 'marketplace_price_date_invalid';
   const clock = Number(now);
   if (date > clock + DAY_MS) return 'marketplace_price_date_future';
-  if (clock - date > MAX_MARKETPLACE_PRICE_AGE_DAYS * DAY_MS && dateBasis !== 'user_retained_published_fee') return 'marketplace_price_outdated';
   return '';
 }
 
@@ -196,7 +194,6 @@ function bookimedPriceDateReader(html) {
 }
 
 module.exports = {
-  MAX_MARKETPLACE_PRICE_AGE_DAYS,
   sourcePriceDateFields,
   sourceCurrencyFields,
   explicitIsoDate,

@@ -1,5 +1,9 @@
 # Cursor handoff — Explore 0.11.96 / e32
 
+Historical handoff: the e33 update removes the marketplace price age cutoff.
+Use [the current e33 handoff](explore_e33_no_price_age_cutoff.md) instead of the
+dated-fee exception and e32 deployment instructions below.
+
 Copy this instruction into Cursor after pulling the completed patch:
 
 ```text
@@ -47,4 +51,6 @@ Verified here: Python 242/242, Functions 346/346, focused Flutter 79/79, and
 actual public-page source audits. The local API and worker run 0.11.96/e32.
 Analysis had zero errors but warning/info findings; it is not a clean lint pass.
 See [the source audit](explore_price_audit_e32.md) for confirmed, dated, rejected
-and inaccessible prices. EstePera's exact source link remains requested.
+and inaccessible prices. EstePera's homepage is https://www.esteperapoliklinik.com/;
+the cloud proxy denied the connection. Recheck its treatment pages after network
+access is applied; the ₺10,000–₺15,000 lip filler card remains unverified.

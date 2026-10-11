@@ -1,4 +1,4 @@
-/// A recent fetch cannot renew an explicitly dated marketplace tariff.
+/// A publication date is provenance, not an expiry date; preserve it on fetch.
 /// Undated fees keep an unknown publication date.
 String exploreMarketplacePriceDateFailure({
   required String updatedAt,
@@ -41,10 +41,6 @@ String exploreMarketplacePriceDateFailure({
   final clock = (now ?? DateTime.now()).toUtc();
   if (date.isAfter(clock.add(const Duration(days: 1)))) {
     return 'marketplace_price_date_future';
-  }
-  if (clock.difference(date) > const Duration(days: 365) &&
-      dateBasis != 'user_retained_published_fee') {
-    return 'marketplace_price_outdated';
   }
   return '';
 }

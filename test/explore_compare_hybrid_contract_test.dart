@@ -45,7 +45,7 @@ MockClient _client(
       if (!healthOk) {
         throw http.ClientException('Connection refused', request.url);
       }
-      return http.Response('{"ok":true,"version":"0.11.96"}', 200);
+      return http.Response('{"ok":true,"version":"0.11.97"}', 200);
     }
     final body = onDiscover(request);
     if (body is Future) {

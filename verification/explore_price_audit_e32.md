@@ -1,5 +1,9 @@
 # Price review and tab stability — 0.11.96 / e32
 
+Historical audit: its 365-day rejection and retention exception are superseded
+by [the e33 policy and fresh source checks](explore_e33_no_price_age_cutoff.md).
+The captured e32 results below remain a record of that earlier run.
+
 Actual public pages checked on 11 October 2026. No production Firestore writes,
 Firebase deployment or physical-phone test was performed. Audit URLs and amounts
 are receipts only: production does not import them or contain Istanbul-specific
@@ -17,7 +21,7 @@ counted as additional clinics.
 | Quartz / fillers | [Bookimed menu](https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=fillers-injection/#prices): $350; own operation record updated 25 September 2026 | Matches the $350 marketplace card |
 | Veysel Özcan / fillers | [Bookimed menu](https://us-uk.bookimed.com/clinic/veysel-ozcan-muayenehanesi/procedure=fillers-injection/#prices): $360–$440; own record updated 12 March 2025 | Published, but excluded by the dated-fee policy |
 | Elixirmed / fillers | [Bookimed menu](https://us-uk.bookimed.com/clinic/elixirmed/procedure=fillers-injection/#prices): $840.99–$1,681.99; own record updated 8 February 2025 | The platform publishes it; it is not an invented extraction. Exclude the dated record from new verified results |
-| EstePera / lip filler | Screenshot shows ₺10,000–₺15,000; its source URL is truncated and not supplied | Not verified here; source link requested |
+| EstePera / lip filler | Screenshot shows ₺10,000–₺15,000; user supplied [the official homepage](https://www.esteperapoliklinik.com/). This environment's proxy denied the HTTPS connection before the website could be fetched | Not verified here; the treatment page, exact wording and fee ownership still require a live check |
 | Hastalar Soruyor / Teosyal Kiss | The screenshot names a medical Q&A platform, not a treating clinic | Exclude its discussion prices from clinic cards; this is a source-classification check, not a live price confirmation |
 | Clineca / rhinoplasty | [Official pricing](https://www.clineca.com/pricing): €2,500–€3,800 on the current page | Preserve both range endpoints; discard neighboring “4,800” from the title |
 | Istanbul European Clinic / rhinoplasty | [Own treatment menu](https://istanbuleuropeanclinic.com/treatment-prices-turkey/): €2,300 | Matches the €2,300 card |
