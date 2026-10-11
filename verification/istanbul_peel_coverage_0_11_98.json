@@ -1,0 +1,177 @@
+{
+  "checked_at": "2026-10-11T15:15:20.924741+00:00",
+  "audit_type": "actual_http_provider_menu_research",
+  "application_version_tested": "0.11.98",
+  "price_extract_revision": "e33",
+  "database_writes": false,
+  "medical_providers_with_published_price": 7,
+  "eligible_original_currency_providers": 2,
+  "profile_requests": 76,
+  "http_200_profiles": 70,
+  "sources": [
+    {
+      "provider": "Lokman Hekim",
+      "procedure": "Chemical Peel",
+      "source_url": "https://us-uk.bookimed.com/clinic/lokman-hekim-istanbul/procedure=chemical-peel/",
+      "http_status": 200,
+      "html_sha256": "942ffa771da1fcc2eb487183c5714f31099171778f55363b9018d3dec12ef57f",
+      "published_min": 2735.0,
+      "published_max": null,
+      "published_currency": "USD",
+      "source_date": "2025-01-15T13:15:54.000+00:00",
+      "source_currency_basis": "",
+      "evidence": "Chemical Peel: $2735",
+      "eligible_under_original_currency_policy": true,
+      "blocking_reason": "",
+      "direct_clinic_fee_confirmation": false
+    },
+    {
+      "provider": "Memorial Bahçelievler Hospital",
+      "procedure": "Chemical Peel",
+      "source_url": "https://us-uk.bookimed.com/clinic/memorial-bahcelievler-hospital/procedure=chemical-peel/",
+      "http_status": 200,
+      "html_sha256": "7f86dc56d853f4bc01e27039be44ffbac6df751f2a7a9b77ae6cc17bf7230abc",
+      "published_min": 150.0,
+      "published_max": 300.0,
+      "published_currency": "USD",
+      "source_date": "2025-05-22T05:48:41.000+00:00",
+      "source_currency_basis": "",
+      "evidence": "Chemical Peel: $150 - $300",
+      "eligible_under_original_currency_policy": true,
+      "blocking_reason": "",
+      "direct_clinic_fee_confirmation": false
+    },
+    {
+      "provider": "Dr Siyamek Saleki Esthetics",
+      "procedure": "Chemical Peel",
+      "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/sariyer/dr-siyamek-saleki-esthetics",
+      "http_status": 200,
+      "html_sha256": "6e237d55f756ada8071879ea1f6b1951b3993be803c0c9a823d53506e3fe553c",
+      "published_min": 800.0,
+      "published_max": 900.0,
+      "published_currency": "EUR",
+      "source_date": "",
+      "source_currency_basis": "viewer_localized",
+      "evidence": "Chemical Peel | 800 € - 900 €",
+      "eligible_under_original_currency_policy": false,
+      "blocking_reason": "marketplace_original_currency_unverified",
+      "direct_clinic_fee_confirmation": false
+    },
+    {
+      "provider": "Dr. Ebru Söylemez",
+      "procedure": "Chemical Peel",
+      "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/kadikoy/dr-ebru-soylemez",
+      "http_status": 200,
+      "html_sha256": "adfb793324a083f339fda3614002249f2df2fe31be7857019b33bcd5f58758dc",
+      "published_min": 100.0,
+      "published_max": 200.0,
+      "published_currency": "EUR",
+      "source_date": "",
+      "source_currency_basis": "viewer_localized",
+      "evidence": "Chemical Peel | 100 € - 200 €",
+      "eligible_under_original_currency_policy": false,
+      "blocking_reason": "marketplace_original_currency_unverified",
+      "direct_clinic_fee_confirmation": false
+    },
+    {
+      "provider": "Dr. Faruk Akçadırlı clinic",
+      "procedure": "Chemical Peel",
+      "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/besiktas/dr-faruk-akcadirli-clinic",
+      "http_status": 200,
+      "html_sha256": "08811ffc5fd178d1aaf7ae4816d5f77864f22d713ea08591a6d54ad9a3705c63",
+      "published_min": 109.0,
+      "published_max": 145.0,
+      "published_currency": "EUR",
+      "source_date": "",
+      "source_currency_basis": "viewer_localized",
+      "evidence": "Chemical Peel | 109 € - 145 €",
+      "eligible_under_original_currency_policy": false,
+      "blocking_reason": "marketplace_original_currency_unverified",
+      "direct_clinic_fee_confirmation": false
+    },
+    {
+      "provider": "Dr.İ. Öykü Maraşoğlu Çelen",
+      "procedure": "Chemical Peel",
+      "source_url": "https://www.whatclinic.com/hair-loss/turkey/istanbul-province/istanbul/dri-oyku-marasoglu-celen",
+      "http_status": 200,
+      "html_sha256": "f82a4662844112ff2fddefbad8b9b2388df7d05e1a4853671bbc91bfc193c67d",
+      "published_min": 250.0,
+      "published_max": 350.0,
+      "published_currency": "EUR",
+      "source_date": "",
+      "source_currency_basis": "viewer_localized",
+      "evidence": "Chemical Peel | 250 € - 350 €",
+      "eligible_under_original_currency_policy": false,
+      "blocking_reason": "marketplace_original_currency_unverified",
+      "direct_clinic_fee_confirmation": false
+    },
+    {
+      "provider": "Quartz Hospital",
+      "procedure": "Chemical Peel",
+      "source_url": "https://us-uk.bookimed.com/clinic/quartz-clinique/procedure=chemical-peel/",
+      "http_status": 200,
+      "html_sha256": "71071bea62a5dcabd3282e365161bcbaaacde4a66b48bbf10a140bc0eb45fb48",
+      "published_min": 2200.0,
+      "published_max": null,
+      "published_currency": "USD",
+      "source_date": "2025-05-14T11:14:11.000+00:00",
+      "source_currency_basis": "",
+      "evidence": "Chemical Peel: $2200",
+      "eligible_under_original_currency_policy": false,
+      "blocking_reason": "ambiguous_marketplace_service_scope",
+      "direct_clinic_fee_confirmation": false
+    }
+  ],
+  "additional_nonmedical_provider": {
+    "provider": "Pervin Dinçer Beauty Consultancy Bakırköy",
+    "source_url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/pervin-dincer-beauty-consultancy-bakirkoy",
+    "published_rows": [
+      {
+        "label": "Chemical Peel",
+        "min": 12.0,
+        "max": 45.0,
+        "currency": "EUR",
+        "accepted": true,
+        "reason": "",
+        "kind": "marketplace_service_menu",
+        "source_date": "",
+        "currency_basis": "viewer_localized",
+        "evidence": "Chemical Peel | 12 € - 45 €"
+      }
+    ],
+    "note": "Beauty consultancy; not counted as a medical clinic. Viewer currency, not an established original fee."
+  },
+  "additional_whatclinic_http_200_profiles_without_price": 49,
+  "rate_limited_profiles": [
+    {
+      "provider": "Positive International Medical Group",
+      "url": "https://www.whatclinic.com/doctors/turkey/istanbul-province/istanbul/positive-international-medical-group",
+      "status": 429
+    },
+    {
+      "provider": "Biotech Güzellik ve Sağlık Dünyası",
+      "url": "https://www.whatclinic.com/beauty-salons/turkey/istanbul-province/istanbul/biotech-guzellik-ve-saglik-dunyasi",
+      "status": 429
+    },
+    {
+      "provider": "Daisy Poliklinik - İstanbul",
+      "url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/fatih/daisy-poliklinik-istanbul",
+      "status": 429
+    },
+    {
+      "provider": "Dr.Buket BAYRAM Deri ve Zührevi Hastaliklar Uzmani",
+      "url": "https://www.whatclinic.com/dermatology/turkey/istanbul-province/istanbul/drbuket-bayram-deri-ve-zuhrevi-hastaliklar-uzmani",
+      "status": 429
+    },
+    {
+      "provider": "Op.Dr. Aylin Kurt Karanlık",
+      "url": "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/istanbul-province/istanbul/besiktas/opdr-aylin-kurt-karanlik",
+      "status": 429
+    },
+    {
+      "provider": "Bona Klinik",
+      "url": "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/bona-klinik",
+      "status": 429
+    }
+  ]
+}

@@ -12,9 +12,14 @@ void main() {
     expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
       {'ok': true, 'version': '0.11.92', 'worker_version': '0.11.92'}), false);
     expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
-      {'ok': true, 'version': '0.11.95', 'worker_version': '0.11.95'}), true);
+      {'ok': true, 'version': '0.11.97', 'worker_version': '0.11.97',
+       'price_extract_revision': 'e33'}), false);
     expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
-      {'ok': true, 'version': '0.12.0', 'worker_version': '0.12.0'}), true);
+      {'ok': true, 'version': '0.11.98', 'worker_version': '0.11.98',
+       'price_extract_revision': 'e33'}), true);
+    expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
+      {'ok': true, 'version': '0.12.0', 'worker_version': '0.12.0',
+       'price_extract_revision': 'e33'}), true);
   });
 
   group('price discovery tool mapping', () {

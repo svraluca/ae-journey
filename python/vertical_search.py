@@ -37,6 +37,12 @@ class Catalog:
         'hair_transplant': ('hair-loss', 'hair-transplant'),
         'rhinoplasty': ('cosmetic-plastic-surgery', 'rhinoplasty'),
     }
+    # Treatment taxonomy, shared by every city. Search variants are leads;
+    # the existing verifier still requires a facial provider treatment fee.
+    peel_search_groups = (
+        ('TCA peel', 'glycolic acid peel', 'salicylic acid peel'),
+        ('BioRePeel', 'PRX-T33', 'Cosmelan'),
+    )
 
     def __init__(self, directory):
         directory = Path(directory)
@@ -87,6 +93,11 @@ class Catalog:
             term = procedure.replace('_', ' ')
         if stage == 'primary':
             return [f'{term} {city} price', f'{term} {city} clinic price list']
+        if stage == 'subtypes':
+            if procedure != 'chemical_peel':
+                return []
+            return ['(' + ' OR '.join(f'"{name}"' for name in group)
+                    + f') {city} price' for group in self.peel_search_groups]
         if stage == 'semantic':
             label = term
             return [f'Clinics in {city} publishing their own treatment fees for {label}; '
@@ -128,6 +139,16 @@ class Catalog:
 CATALOG = Catalog(Path(__file__).with_name('config'))
 MIN_DISPLAY, GOOD_ENOUGH, TARGET = 4, 6, 8
 SAVED_SOURCE_SECONDS, KNOWN_STAGE_SECONDS = 8, 6
+
+
+def progressive_serper_cap(procedure, requested_budget=0):
+    """Two optional peel queries, only after the ordinary lanes fall short.
+
+    An explicit caller allowance is a ceiling, including earlier requests.
+    Other families retain their existing four-request policy.
+    """
+    default = 6 if procedure == 'chemical_peel' else 4
+    return min(default, requested_budget) if requested_budget > 0 else default
 
 
 class ReasonCache:
@@ -257,8 +278,8 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
     fetched = set(excluded)
     responses, merged, pending = [], [], []
     spent, exa_calls, places_calls = 0, 0, 0
-    remaining = max(0, serper_request_budget - max(0, initial_serper_requests)) if serper_request_budget > 0 else 4
-    total_serper_cap = min(4, remaining)
+    total_serper_cap = max(0, progressive_serper_cap(selected, serper_request_budget)
+                           - max(0, initial_serper_requests))
     deep = engine.env_bool('ENABLE_DEEP_DISCOVERY', True)
     saved_urls = list(dict.fromkeys(u for u in (saved_source_urls or [])
         if isinstance(u, str) and u.startswith(('https://', 'http://'))
@@ -297,6 +318,9 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
         stages.append('marketplace')
     if deep and local_first and not marketplace_first:
         stages.append('primary')
+    if deep and CATALOG.queries(selected, city, country, engine.local_terms_for,
+                                stage='subtypes'):
+        stages.append('subtypes')
     if deep:
         if engine.env_bool('ENABLE_EXA_RESCUE', False):
             stages.append('exa')
@@ -304,7 +328,7 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
     # Each lane has a network cap; remembered-site probes also have a wall
     # deadline because cached HTML parsing/navigation can bypass GET counters.
     limits = {'saved_sources': 8, 'known_domains': 4, 'primary': 16,
-              'local': 12, 'marketplace': 12, 'exa': 10, 'places': 10}
+              'local': 12, 'marketplace': 12, 'subtypes': 12, 'exa': 10, 'places': 10}
     for stage in stages:
         if len(stored) + len(merged) >= goal:
             break
@@ -315,7 +339,7 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
             stage_hosts = hosts
             if not hosts:
                 continue
-        elif stage in {'primary', 'local', 'marketplace'}:
+        elif stage in {'primary', 'local', 'marketplace', 'subtypes'}:
             queries = CATALOG.queries(selected, city, country, engine.local_terms_for, stage=stage)
             if marketplace_enabled and local_first and stage in {'primary', 'local'}:
                 # Four saved cards satisfy the display, not the requested

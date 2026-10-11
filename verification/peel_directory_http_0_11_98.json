@@ -1,0 +1,60 @@
+{
+  "checked_at": "2026-10-11T15:15:20.924741+00:00",
+  "health": {
+    "ok": true,
+    "version": "0.11.98",
+    "price_extract_revision": "e33",
+    "price_index": true,
+    "discovery_jobs": true,
+    "worker_version": "0.11.98",
+    "progressive_jobs": true
+  },
+  "request": {
+    "city": "Istanbul",
+    "procedure": "chemical_peel",
+    "country_code": "TR",
+    "limit": 8,
+    "persist": false,
+    "debug": true,
+    "search_mode": "site_focus",
+    "priority_site_urls": [
+      "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/chemical-peel"
+    ],
+    "enable_serper": false,
+    "interactive_fast": true,
+    "hybrid_interactive": true,
+    "skip_places_bootstrap": true,
+    "progressive_stop_count": 8
+  },
+  "http_status": 200,
+  "elapsed_seconds": 9.13,
+  "results": [],
+  "diagnostics": {
+    "marketplace_category_pages_expanded": 5,
+    "marketplace_profile_urls": 10,
+    "selected_marketplace_urls": [
+      "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/chemical-peel",
+      "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/sariyer/dr-siyamek-saleki-esthetics",
+      "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/besiktas/dr-faruk-akcadirli-clinic",
+      "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/pervin-dincer-beauty-consultancy-bakirkoy",
+      "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/kadikoy/dr-ebru-soylemez",
+      "https://www.whatclinic.com/hair-loss/turkey/istanbul-province/istanbul/dri-oyku-marasoglu-celen",
+      "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/istanbul-province/istanbul/kartal/doctor-istanbul",
+      "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/istanbul-province/istanbul/bakirkoy/ugurlu-plastic-surgery-clinic",
+      "https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/istanbul-fit-center",
+      "https://www.whatclinic.com/cosmetic-plastic-surgery/turkey/istanbul-province/istanbul/beyoglu/opr-dr-ibrahim-oskui"
+    ],
+    "trust_rejected_rows": 8,
+    "trust_reject_samples": [
+      "Dr Siyamek Saleki Esthetics in Sariyer, Istanbul chemical_peel marketplace_original_currency_unverified url=https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/sariyer/dr-siyamek-saleki-esthetics evidence=Chemical Peel | 800 € - 900 €",
+      "Dr. Ebru Söylemez in Kadikoy, Istanbul chemical_peel marketplace_original_currency_unverified url=https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/kadikoy/dr-ebru-soylemez evidence=Chemical Peel | 100 € - 200 €",
+      "Dr. Ebru Söylemez in Kadikoy, Istanbul chemical_peel marketplace_original_currency_unverified url=https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/kadikoy/dr-ebru-soylemez evidence=Chemical Peel (30 mins) | 100 € - 200 €",
+      "Dr.İ. Öykü Maraşoğlu Çelen chemical_peel marketplace_original_currency_unverified url=https://www.whatclinic.com/hair-loss/turkey/istanbul-province/istanbul/dri-oyku-marasoglu-celen evidence=Chemical Peel | 250 € - 350 €",
+      "Dr.İ. Öykü Maraşoğlu Çelen chemical_peel marketplace_original_currency_unverified url=https://www.whatclinic.com/hair-loss/turkey/istanbul-province/istanbul/dri-oyku-marasoglu-celen evidence=Chemical Peel | 250 € - 400 €",
+      "Dr.İ. Öykü Maraşoğlu Çelen chemical_peel marketplace_original_currency_unverified url=https://www.whatclinic.com/hair-loss/turkey/istanbul-province/istanbul/dri-oyku-marasoglu-celen evidence=Chemical Peel (45 mins) | 250 € - 350 €",
+      "Pervin Dinçer Beauty Consultancy Bakırköy chemical_peel marketplace_original_currency_unverified url=https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/pervin-dincer-beauty-consultancy-bakirkoy evidence=Chemical Peel | 12 € - 45 €",
+      "Dr. Faruk Akçadırlı clinic in Besiktas, Istanbul chemical_peel marketplace_original_currency_unverified url=https://www.whatclinic.com/beauty-clinics/turkey/istanbul-province/istanbul/besiktas/dr-faruk-akcadirli-clinic evidence=Chemical Peel | 109 € - 145 €"
+    ]
+  },
+  "note": "Actual live HTTP discovery without paid search or database writes. Finding profile prices does not establish original currency."
+}

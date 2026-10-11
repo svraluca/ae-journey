@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.97 — provider-card discovery and verified marketplace tariffs
+Aesthetic Procedure Price Discovery v0.11.98 — bounded peel variants and provider-directory pagination
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -14800,7 +14800,7 @@ OFFICIAL_RESOLUTION_BLOCKED_HOSTS = {
     "gjejbiznese.com",
     "cybo.com",
     "wanderlog.com",
-    "booking.com", "tripadvisor.com", "youtube.com", "youtu.be",
+    "booking.com", "tripadvisor.com", "trustpilot.com", "youtube.com", "youtu.be",
     "google.com", "maps.google.com", "maps.app.goo.gl", "goo.gl",
     "freshastatus.com",
 }
@@ -17485,11 +17485,11 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                 expand_whatclinic_category_hits, category_hit.url, category_html,
                 req.city, req.procedure, max_profiles_per_category)
             # A sparse first page can hide priced providers on subsequent
-            # pages. Follow actual platform links, bounded to two more pages;
+            # pages. Follow actual platform links, bounded to four more pages;
             # never construct a city/province URL or crawl all pagination.
             current_url, current_html = category_hit.url, category_html
             visited_categories = {current_url}
-            for _ in range(2):
+            for _ in range(4):
                 if sum(child.marketplace_listed_price for child in children) >= req.limit:
                     break
                 next_url = await asyncio.to_thread(
@@ -18916,7 +18916,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.97",
+    version="0.11.98",
     lifespan=app_lifespan,
 )
 
@@ -20038,7 +20038,8 @@ async def _discover_hybrid_impl(req: HybridDiscoverRequest):
         request_serper_cap = max(request_serper_cap, min(32, max(env_serper_cap, 28)))
     request_serper_cap = min(40, max(0, request_serper_cap))
     if req.stream_progress and req.serper_first and env_bool("ENABLE_PROGRESSIVE_DISCOVERY", True):
-        request_serper_cap = min(req.serper_request_budget or 4, 4)
+        request_serper_cap = vertical_search.progressive_serper_cap(
+            canonicalize_procedure(req.procedure), req.serper_request_budget)
     remaining_serper_budget = max(
         0, request_serper_cap - total_serper_spent,
     ) if req.economical_growth else 0

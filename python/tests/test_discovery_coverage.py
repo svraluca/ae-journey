@@ -210,8 +210,8 @@ class OrganicNavigation(unittest.IsolatedAsyncioTestCase):
         self.stack.enter_context(patch.object(e, "discover", side_effect=discover))
         await e.run_growth_search("Abu Dhabi", "chemical_peel", "AE", [], 8, 20, True,
             app_fast=True, serper_first=True, force_full_growth_search=True, serper_request_budget=12)
-        self.assertEqual(caps, [1, 1, 2])  # English, local, provider menus
-        self.assertEqual(sum(caps), 4)  # the supplied ceiling cannot raise the global cap
+        self.assertEqual(caps, [1, 1, 2, 2])  # English, local, menus, optional peel variants
+        self.assertEqual(sum(caps), 6)  # a larger caller allowance cannot raise the peel policy cap
 
     async def test_basic_english_query_finds_four_real_verified_product_pages(self):
         city = 'Izmir'
