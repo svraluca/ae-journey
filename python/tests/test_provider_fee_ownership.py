@@ -17,6 +17,11 @@ class ProviderFeeOwnership(unittest.TestCase):
         return [row for row in candidates
                 if e.validate_evidence(row, text, html, "Istanbul")[0]]
 
+    def test_qa_portal_price_table_is_not_a_treating_clinic(self):
+        html = ('<title>Hastalar Soruyor</title><h2>Teosyal Kiss Lip Filler</h2>'
+                '<table><tr><td>Teosyal Kiss Lip Filler</td><td>8500 TRY</td></tr></table>')
+        self.assertFalse(self.accepted(html, 'https://www.hastalarsoruyor.com/teosyal-kiss/', 'filler'))
+
     def test_live_hospital_estimate_does_not_become_its_own_fee(self):
         html = ("<title>Nişantaşı Hastanesi</title><h2>Burun estetiği kaç TL 2025?</h2>"
                 "<p>Burun estetiği için 2025’te 40.000 ile 380.000 TL arasında "

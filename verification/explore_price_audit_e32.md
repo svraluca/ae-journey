@@ -18,6 +18,7 @@ counted as additional clinics.
 | Veysel Özcan / fillers | [Bookimed menu](https://us-uk.bookimed.com/clinic/veysel-ozcan-muayenehanesi/procedure=fillers-injection/#prices): $360–$440; own record updated 12 March 2025 | Published, but excluded by the dated-fee policy |
 | Elixirmed / fillers | [Bookimed menu](https://us-uk.bookimed.com/clinic/elixirmed/procedure=fillers-injection/#prices): $840.99–$1,681.99; own record updated 8 February 2025 | The platform publishes it; it is not an invented extraction. Exclude the dated record from new verified results |
 | EstePera / lip filler | Screenshot shows ₺10,000–₺15,000; its source URL is truncated and not supplied | Not verified here; source link requested |
+| Hastalar Soruyor / Teosyal Kiss | The screenshot names a medical Q&A platform, not a treating clinic | Exclude its discussion prices from clinic cards; this is a source-classification check, not a live price confirmation |
 | Clineca / rhinoplasty | [Official pricing](https://www.clineca.com/pricing): €2,500–€3,800 on the current page | Preserve both range endpoints; discard neighboring “4,800” from the title |
 | Istanbul European Clinic / rhinoplasty | [Own treatment menu](https://istanbuleuropeanclinic.com/treatment-prices-turkey/): €2,300 | Matches the €2,300 card |
 | Quartz Clinique / rhinoplasty | [Price article](https://www.quartzclinique.com/burun-estetigi/): ₺75,000–₺150,000 is a citywide example; says exact fees are not published online | Reject as an unowned market estimate |
@@ -56,6 +57,8 @@ remain historical; their prices were not re-stamped as current evidence.
 - Market tables, city starting prices and indicative article ranges cannot
   acquire provider ownership merely because the page belongs to a doctor.
   Clineca's full range cannot become a truncated €2,500 exact price.
+- The uploaded medical Q&A portal exclusion is carried across all three tiers;
+  an information site's Teosyal Kiss table cannot become a treating clinic fee.
 - WhatClinic's actual country-selector markup identifies viewer-localized
   prices. Those numbers are leads to an independently published original fee,
   using actual outbound website/navigation links rather than guessed domains.
@@ -129,9 +132,9 @@ code; a hot reload can preserve already-painted in-memory cards.
 
 ## Verification and limits
 
-- Python: **241 tests passed**.
-- Functions: **345 tests passed**.
-- Flutter: **78 focused tests passed**, covering tab stability, retention/DTO
+- Python: **242 tests passed**.
+- Functions: **346 tests passed**.
+- Flutter: **79 focused tests passed**, covering tab stability, retention/DTO
   provenance, titles, mixed currencies, old receipt rejection, saved-price
   loading and hybrid display. This is not the full Flutter test suite.
 - Flutter analysis reported no errors; it exits nonzero on warning/info findings

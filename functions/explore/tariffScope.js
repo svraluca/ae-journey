@@ -56,6 +56,7 @@ function quoteScopeReason({procedure, rawEvidence, priceMin, currency}) {
 }
 
 function medicalQaPriceContext(sourceUrl, text) {
+  if (/(?:^|[./])hastalarsoruyor\.com(?:[/?#:]|$)/i.test(sourceUrl)) return true;
   return /\/(?:s-s-s|questions?|answers?)\//i.test(sourceUrl) &&
     /\b(?:devlet\s+hastaneler\w*|hastalar\s+soruyor|ask\s+(?:a\s+)?doctor|medical\s+questions?|patient\s+questions?|fiyatlarinin\s+bazi\s+ornekleri|fiyat\w*[^.!?\n]{0,100}ortalama|(?:average|typical|example)\s+(?:\w+\s+){0,3}(?:prices?|fees?))\b/.test(fold(text));
 }

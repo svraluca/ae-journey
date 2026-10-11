@@ -34,6 +34,15 @@ OpenAIClinic clinic({
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
+  test('a Q&A portal tariff cannot certify a clinic fee', () {
+    final verdict = evaluateExtractedPriceCandidate(rawPriceText: '8500 TRY',
+      priceMin: 8500, currency: 'TRY', extractionMethod: 'html_table',
+      rawEvidence: 'Teosyal Kiss Lip Filler | 8500 TRY', procedure: 'dermal filler',
+      sourceUrl: 'https://www.hastalarsoruyor.com/teosyal-kiss/', logRejects: false);
+    expect(verdict.accepted, isFalse);
+    expect(verdict.reason, 'medical_qa_price');
+  });
+
   test('a neighbouring amount cannot become the procedure title', () {
     expect(exploreEnglishProcedureLabel('4,800 Rhinoplasty'), 'Rhinoplasty');
     expect(exploreEnglishProcedureLabel('4800 Rhinoplasty'), 'Rhinoplasty');

@@ -43,7 +43,7 @@ known-source HTTP smoke test took 14 seconds, so do not claim cold discovery is
 instant or that every tab has four verified providers.
 ```
 
-Verified here: Python 241/241, Functions 345/345, focused Flutter 78/78, and
+Verified here: Python 242/242, Functions 346/346, focused Flutter 79/79, and
 actual public-page source audits. The local API and worker run 0.11.96/e32.
 Analysis had zero errors but warning/info findings; it is not a clean lint pass.
 See [the source audit](explore_price_audit_e32.md) for confirmed, dated, rejected

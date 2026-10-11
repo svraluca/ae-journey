@@ -47,6 +47,8 @@ def comparison_price_context(raw):
 
 def medical_qa_price_context(url, raw):
     """FAQ portals discuss fees; they are not the provider of the treatment."""
+    if re.search(r'(?:^|[./])hastalarsoruyor\.com(?:[/?#:]|$)', str(url).lower()):
+        return True
     return bool(re.search(r'/(?:s-s-s|questions?|answers?)/', str(url).lower())
                 and re.search(r'\b(?:devlet\s+hastaneler\w*|hastalar\s+soruyor|'
                               r'ask\s+(?:a\s+)?doctor|medical\s+questions?|'

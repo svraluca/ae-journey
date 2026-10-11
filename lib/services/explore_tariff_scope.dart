@@ -39,6 +39,8 @@ String? exploreCalendarPriceReason(double amount, String prefix, String tail) {
 }
 
 bool exploreMedicalQaPriceContext(String sourceUrl, String text) =>
+    cachedRegExp(r'(?:^|[./])hastalarsoruyor\.com(?:[/?#:]|$)', caseSensitive: false)
+        .hasMatch(sourceUrl) ||
     cachedRegExp(r'/(?:s-s-s|questions?|answers?)/', caseSensitive: false).hasMatch(sourceUrl) &&
     cachedRegExp(r'\b(?:devlet\s+hastaneler\w*|hastalar\s+soruyor|ask\s+(?:a\s+)?doctor|medical\s+questions?|patient\s+questions?|fiyatlarinin\s+bazi\s+ornekleri|fiyat\w*[^.!?\n]{0,100}ortalama|(?:average|typical|example)\s+(?:\w+\s+){0,3}(?:prices?|fees?))\b')
         .hasMatch(foldExploreCityText(text));

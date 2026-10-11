@@ -17,6 +17,15 @@ const clock = Date.parse('2026-10-10T12:00:00Z');
 const recent = () => new Date(Date.now() - day).toISOString();
 const old = () => new Date(Date.now() - 366 * day).toISOString();
 
+test('a Q&A portal tariff cannot certify a clinic fee', () => {
+  const verdict = evaluateExtractedPriceCandidate({rawPriceText: '8500 TRY',
+    priceMin: 8500, currency: 'TRY', extractionMethod: 'html_table',
+    rawEvidence: 'Teosyal Kiss Lip Filler | 8500 TRY', procedure: 'dermal filler',
+    sourceUrl: 'https://www.hastalarsoruyor.com/teosyal-kiss/'});
+  assert.equal(verdict.accepted, false);
+  assert.equal(verdict.reason, 'medical_qa_price');
+});
+
 test('a fresh cache timestamp cannot certify missing or old extraction stamps', () => {
   const cached = {updatedAtMs: Date.now()};
   assert.equal(catalogIsFresh(cached), false);
