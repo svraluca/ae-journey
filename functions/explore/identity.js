@@ -1,4 +1,5 @@
 'use strict';
+const {sourcePriceDateFields, sourceCurrencyFields} = require('./marketplacePriceFreshness');
 const {providerLocationConflicts} = require('./providerLocation');
 
 const MARKETPLACE_EXACT_HOSTS = [
@@ -446,6 +447,13 @@ function mergeClinicRecords(prev, next) {
     }
   }
   const merged = {...a, ...b};
+  // Tariff-date provenance belongs to the selected amount, never its competitor.
+  Object.assign(merged, sourcePriceDateFields(preferBPrice ? b : aMin > 0 ? a : b));
+  Object.assign(merged, sourceCurrencyFields(preferBPrice ? b : aMin > 0 ? a : b));
+  delete merged.sourcePriceUpdatedAt;
+  delete merged.sourcePriceDateText;
+  delete merged.sourcePriceDateBasis;
+  delete merged.sourceCurrencyBasis;
   merged.place_id = String(b.place_id || b.placeId || a.place_id || a.placeId || '');
   merged.placeId = merged.place_id;
   const aName = String(a.name || '');

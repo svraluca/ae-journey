@@ -96,8 +96,8 @@ void main() {
     });
   });
 
-  group('e17 → e18 migration', () {
-    test('valid e17 evidence becomes e18 without HTTP', () {
+  group('stale extraction revision requires source verification', () {
+    test('complete e17 evidence cannot become current without HTTP', () {
       final row = <String, Object?>{
         'name': 'Olariuclinics',
         'price_min': 1600,
@@ -121,10 +121,9 @@ void main() {
         city: 'Timisoara',
         logRejects: false,
       );
-      expect(out['price_extract_revision'], kExplorePriceExtractRevision);
-      expect(out['price_min'], 1600);
-      expect('${out['price_type']}', 'fixed');
-      expect('${out['price_unit']}', isNot('ml'));
+      expect(out['price_extract_revision'], isEmpty);
+      expect(out['price_min'], 0);
+      expect(out['price_rejection_reason'], 'stale_extract_revision');
     });
 
     test('cross-city e17 is not migrated as trusted', () {

@@ -106,15 +106,17 @@ class FastSourcePolicy(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(first.priority_site_urls,[url])
         self.assertFalse(first.enable_serper)
         self.assertEqual(discover.await_args_list[1].args[0].progressive_stage,'primary')
-        self.assertEqual(discover.await_args_list[2].args[0].progressive_stage,'marketplace')
+        self.assertEqual(discover.await_args_list[2].args[0].progressive_stage,'local')
+        self.assertEqual(discover.await_args_list[3].args[0].progressive_stage,'marketplace')
         self.assertLessEqual(sum(c.args[0].serper_request_cap for c in discover.await_args_list),4)
 
     async def test_sparse_market_opens_provider_menus_before_slow_known_hosts(self):
         with patch.object(e,'discover',new=AsyncMock(side_effect=lambda r:self.response(r))) as discover:
             await self.run_search()
         self.assertEqual(discover.await_args_list[0].args[0].progressive_stage,'primary')
-        self.assertEqual(discover.await_args_list[1].args[0].progressive_stage,'marketplace')
-        self.assertEqual(discover.await_args_list[2].args[0].progressive_stage,'known_domains')
+        self.assertEqual(discover.await_args_list[1].args[0].progressive_stage,'local')
+        self.assertEqual(discover.await_args_list[2].args[0].progressive_stage,'marketplace')
+        self.assertEqual(discover.await_args_list[3].args[0].progressive_stage,'known_domains')
 
     async def test_source_probe_deadline_preserves_a_card_before_fallback_search(self):
         row=quote(amount=350,city='Istanbul').model_copy(update={

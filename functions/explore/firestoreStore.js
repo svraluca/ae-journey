@@ -12,6 +12,7 @@ const {evaluatePriceTrust} = require('./trustRules');
 const {EXTRACT_REVISION} = require('./clinicCatalog');
 const {classifyProcedureRelation} = require('./procedureRelation');
 const {exploreUrlConflictsWithSearchCity} = require('./cityIdentity');
+const {marketplaceRowPriceDateFailure, marketplaceRowCurrencyFailure} = require('./marketplacePriceFreshness');
 
 const COLLECTION = 'explore_google_prices';
 const REVISION = 'v14';
@@ -104,53 +105,14 @@ function sanitizeVerifiedPoolRow(row, procedure = '', {city = ''} = {}) {
   if (providerLocationConflicts(next.source_location_text, city || next.city)) {
     return toReverifyIdentityStub(next, 'foreign_provider_locality');
   }
-  let rev = String(next.price_extract_revision || next.extractRevision || '').trim();
-  // Deterministic e17 → e18 when locked evidence is complete.
-  if (rev === 'e17') {
-    const rawPrice = String(next.raw_price_text || next.rawPriceText ||
-        next.price_label || '').trim();
-    const rawProc = String(next.raw_procedure_text || next.rawProcedureText ||
-        next.brand || '').trim();
-    const sourceUrl = String(next.price_source_url || next.sourceUrl || '').trim();
-    const method = String(next.extraction_method || next.extractionMethod || '').trim();
-    const currency = String(next.currency || '').trim();
-    const evidence = String(next.price_evidence_text || next.rawEvidence || '').trim();
-    const hash = String(next.evidence_hash || next.evidenceHash || '').trim();
-    if (rawPrice && rawProc && sourceUrl && method && currency &&
-        (evidence || hash)) {
-      const searchCity = String(city || next.source_city || next.sourceCity ||
-          next.city || '').trim();
-      if (searchCity && sourceUrl &&
-          exploreUrlConflictsWithSearchCity(sourceUrl, searchCity)) {
-        return toReverifyIdentityStub(next, 'other_city_source_url');
-      }
-      const blob = `${rawPrice} ${evidence} ${rawProc}`.toLowerCase();
-      const perUnit = /(?:per|\/)\s*(?:ml|cc|iu|unit|units|syringe)/i.test(blob);
-      const from = /\b(?:from|starting\s+from|de la|desde|a partir)\b/i.test(blob);
-      const range = /\d[\d.,]*\s*[–\-—]\s*\d/.test(blob);
-      let priceType = 'fixed';
-      if (perUnit) priceType = 'perUnit';
-      else if (from) priceType = 'from';
-      else if (range) priceType = 'range';
-      next = {
-        ...next,
-        price_type: priceType,
-        priceType,
-        price_extract_revision: EXTRACT_REVISION,
-        extractRevision: EXTRACT_REVISION,
-        needs_revalidation: false,
-      };
-      if (!perUnit && /^(?:ml|cc)$/i.test(String(next.price_unit || next.unit || ''))) {
-        next.price_unit = '';
-        next.unit = '';
-      }
-      rev = EXTRACT_REVISION;
-    }
-  }
+  const rev = String(next.price_extract_revision || next.extractRevision || '').trim();
+  // Old extraction stamps require a fresh source check, never relabeling.
   if (rev !== EXTRACT_REVISION) {
     return toReverifyIdentityStub(next, 'stale_extract_revision');
   }
   const min = Number(next.price_min || next.priceMin || 0);
+  const provenanceFailure = marketplaceRowPriceDateFailure(next) || marketplaceRowCurrencyFailure(next);
+  if (provenanceFailure) return toReverifyIdentityStub(next, provenanceFailure);
   if (min > 0 && !String(next.currency || '').trim()) {
     return toReverifyIdentityStub(next, 'missing_currency');
   }

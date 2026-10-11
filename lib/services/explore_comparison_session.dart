@@ -637,6 +637,10 @@ OpenAIClinic mergeExploreClinicRecord(OpenAIClinic prev, OpenAIClinic next) {
     brand: preferNextPrice ? next.brand : prev.brand,
     priceSourceUrl: preferNextPrice ? next.priceSourceUrl : prev.priceSourceUrl,
     sourceLocationText: preferNextPrice ? next.sourceLocationText : prev.sourceLocationText,
+    sourcePriceUpdatedAt: preferNextPrice ? next.sourcePriceUpdatedAt : prev.sourcePriceUpdatedAt,
+    sourcePriceDateText: preferNextPrice ? next.sourcePriceDateText : prev.sourcePriceDateText,
+    sourcePriceDateBasis: preferNextPrice ? next.sourcePriceDateBasis : prev.sourcePriceDateBasis,
+    sourceCurrencyBasis: preferNextPrice ? next.sourceCurrencyBasis : prev.sourceCurrencyBasis,
     priceEvidenceText: preferNextPrice
         ? next.priceEvidenceText
         : prev.priceEvidenceText,

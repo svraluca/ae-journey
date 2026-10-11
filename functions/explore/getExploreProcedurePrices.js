@@ -1,4 +1,5 @@
 'use strict';
+const {sourcePriceDateFields, sourceCurrencyFields} = require('./marketplacePriceFreshness');
 const {providerLocationContext} = require('./providerLocation');
 
 const {HttpsError} = require('firebase-functions/v2/https');
@@ -201,6 +202,8 @@ function clinicJson({place, evidence, city}) {
     source_type: sourceType,
     source_platform: evidence.sourcePlatform || '',
     source_location_text: evidence.sourceLocationText || '',
+    ...sourcePriceDateFields(evidence),
+    ...sourceCurrencyFields(evidence),
     provider_clinic: evidence.providerClinic || place.providerClinic || '',
     raw_procedure_text: evidence.rawProcedureText,
     rawProcedureText: evidence.rawProcedureText,
@@ -553,6 +556,9 @@ async function verifyPlace(fetcher, place, {
     return {permanentReject: identityReason};
   }
   const sanity = evaluateExtractedPriceCandidate({
+    ...sourcePriceDateFields(picked),
+    ...sourceCurrencyFields(picked),
+    sourceType: picked.sourceType || '',
     rawPriceText: picked.rawPriceText,
     priceMin: picked.priceMin,
     currency: picked.currency,
@@ -571,6 +577,8 @@ async function verifyPlace(fetcher, place, {
 
   // Lock numeric evidence BEFORE any semantic LLM call.
   const verifiedNumericEvidence = {
+    ...sourcePriceDateFields(picked),
+    ...sourceCurrencyFields(picked),
     priceMin: picked.priceMin,
     priceMax: picked.priceMax,
     currency: picked.currency,

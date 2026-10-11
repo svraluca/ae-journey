@@ -29,7 +29,7 @@ void main() {
     final procedures = cities[city] as Map;
     for (final canonical in procedures.keys) {
       test(
-        'captured $city $canonical offers survive the complete Flutter worker',
+        'captured $city $canonical old offers require fresh source verification',
         () async {
           // Replay source evidence; refreshing the fixture's clock is not a new
           // live verification claim. The audit retains its actual capture time.
@@ -48,18 +48,10 @@ void main() {
             procedure: explorePillAiSearchQuery(tabPills[canonical]!),
             selection: tabPills[canonical]!,
           );
-          expect(result.rejectedUrls, isEmpty);
-          expect(result.accepted, hasLength(rows.length));
-          for (final accepted in result.accepted) {
-            final original = rows.singleWhere(
-              (r) => r.sourceUrl == accepted.priceSourceUrl,
-            );
-            expect(accepted.currency, original.currency);
-            expect(accepted.priceMin, original.priceMin);
-            expect(accepted.priceMax, original.priceMax ?? original.priceMin);
-            expect(accepted.priceExtractRevision, kExplorePriceExtractRevision);
-            expect(accepted.sourceLocationText, contains('Provider locality:'));
-            expect(accepted.sourceLocationText, original.sourceLocationText);
+          expect(result.accepted, isEmpty);
+          for (final row in rows) {
+            expect(row.priceExtractRevision, 'e31');
+            expect(result.rejectedUrls, contains(row.sourceUrl));
           }
         },
       );
@@ -70,7 +62,7 @@ void main() {
     'reading an old backend result cannot certify it under the current revision',
     () async {
       // Keep the previous live receipt at its real extraction revision.
-      // Reading it cannot certify those old fees under e31.
+      // Reading it cannot certify those old fees under e32.
       final oldSnapshot =
           jsonDecode(
                 File(
@@ -82,7 +74,7 @@ void main() {
         ((oldSnapshot['procedures'] as Map)['botox'] as Map)['rows'][0] as Map,
       );
       expect(raw['price_extract_revision'], 'e30');
-      for (final stale in ['', 'e20', 'e27', 'e28', 'e29', 'e30']) {
+      for (final stale in ['', 'e20', 'e27', 'e28', 'e29', 'e30', 'e31']) {
         final row = ExplorePriceDiscoveryTool.rowFromJson({
           ...raw,
           'price_extract_revision': stale,

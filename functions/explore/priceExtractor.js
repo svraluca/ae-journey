@@ -1,6 +1,7 @@
 'use strict';
 
 const cheerio = require('cheerio');
+const {bookimedPriceDateReader} = require('./marketplacePriceFreshness');
 const {comparisonPriceContext, ancillaryPriceReason} = require('./tariffScope');
 const {detectCurrencyToken} = require('./currencyTokens');
 const {injectableScopeRejection} = require('./injectableScope');
@@ -796,6 +797,16 @@ function extractCardsAndLists($, sourceUrl) {
 
 function extractPriceEvidence({html, sourceUrl}) {
   if (!String(html || '').trim()) return [];
+  let priceDate = () => ({});
+  let sourceCurrencyBasis = '';
+  try {
+    const host = new URL(sourceUrl).hostname;
+    if (host === 'bookimed.com' || host.endsWith('.bookimed.com')) priceDate = bookimedPriceDateReader(html);
+    if ((host === 'whatclinic.com' || host.endsWith('.whatclinic.com')) &&
+        /class\s*=\s*["'][^"']*\b(?:link-country-selector|country-selector-menu)\b/i.test(html)) {
+      sourceCurrencyBasis = 'viewer_localized';
+    }
+  } catch (_) { /* Other source types keep their existing extraction gates. */ }
   const $ = cheerio.load(html);
   $('nav, header, footer, [role="navigation"], .mega-menu, .mega-menu-wrap, #mega-menu-wrap').remove();
   const contextDoc = $.root().clone();
@@ -836,6 +847,8 @@ function extractPriceEvidence({html, sourceUrl}) {
     'chemical peels', 'rhinoplasty', 'breast augmentation', 'hair transplant']);
   const add = (row) => {
     if (!row || !(row.priceMin > 0)) return;
+    Object.assign(row, priceDate(row));
+    if (sourceCurrencyBasis) row.source_currency_basis = sourceCurrencyBasis;
     const label = String(row.rawProcedureText || '').split('·').pop().trim().toLowerCase();
     if (genericServices.has(label) && optionHeading.includes(label)) {
       const sameCurrency = new Set(optionPrices.filter(p => p.currency === row.currency)

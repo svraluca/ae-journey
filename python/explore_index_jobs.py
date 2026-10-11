@@ -25,7 +25,7 @@ import httpx
 from fastapi import HTTPException
 from pydantic import BaseModel, Field
 
-JOB_ENGINE_VERSION = "0.11.95"
+JOB_ENGINE_VERSION = "0.11.96"
 
 # HTML extraction/Firestore calls can occupy asyncio's default executor.
 # Queue acceptance, focus changes and polling must not wait behind crawlers.
@@ -159,6 +159,11 @@ class JobStore:
                 if priority >= row["priority"]:
                     old_request = json.loads(row["request"])
                     merged = {**old_request, **request}
+                    if old_request.get("reason") == "user":
+                        # City warmups and focus acknowledgements must not
+                        # turn an explicit fresh-provider search back into a
+                        # cache-sufficiency pass while it is still running.
+                        merged["reason"] = "user"
                     for field in ("client_known_clinic_hosts", "client_known_clinic_names", "excluded_source_urls"):
                         merged[field] = list(dict.fromkeys([*old_request.get(field, []), *request.get(field, [])]))[:40]
                     details = json.loads(row["progress"] or "{}")
@@ -577,6 +582,9 @@ class IndexJobs:
                     enable_growth_search=True, max_growth_rounds=3,
                     fast_interactive_search=False, force_full_growth_search=True,
                     economical_growth=True, stream_progress=True, debug=True, serper_first=True,
+                    # Find more must search beyond the six-card fast-pass
+                    # threshold, even when a usable pool already exists.
+                    background_collection=req.reason == "user",
                     client_stored_count=req.client_stored_count,
                     client_known_clinic_hosts=req.client_known_clinic_hosts,
                     client_known_clinic_names=req.client_known_clinic_names,
@@ -590,6 +598,7 @@ class IndexJobs:
                 # durable job may now collect its larger pool at low priority.
                 # Do not retry an exhausted thin market in another full pass.
                 if (self.e.env_bool("ENABLE_PROGRESSIVE_DISCOVERY", True)
+                        and not request.background_collection
                         and 6 <= len(usable) < req.collection_target
                         and self.e.firestore_enabled()):
                     if not req.require_client_display_confirmation:
@@ -642,6 +651,14 @@ class IndexJobs:
                 del self.active[job_id]
             else:
                 entry["state"] = await self.store_call("get", job_id)
+                if (entry["state"]["request"].get("reason") == "user"
+                        and entry.get("request_reason") != "user"):
+                    # A running warmup captured its request before Find more
+                    # was pressed. Restart the same durable ticket with the
+                    # new intent, retaining every validated partial row.
+                    entry["task"].cancel()
+                    await asyncio.gather(entry["task"], return_exceptions=True)
+                    del self.active[job_id]
 
         waiting = await self.store_call("waiting", "foreground")
         if waiting and len(self.active) >= 2:
@@ -665,7 +682,10 @@ class IndexJobs:
             job = await self.store_call("claim", timeout + 60, lane)
             if job:
                 task = asyncio.create_task(self.run_one(job))
-                self.active[job["job_id"]] = {"task": task, "state": job, "lane": lane}
+                self.active[job["job_id"]] = {
+                    "task": task, "state": job, "lane": lane,
+                    "request_reason": job["request"].get("reason"),
+                }
                 task.add_done_callback(lambda _: self.wake.set())
 
     async def run(self):

@@ -18,7 +18,7 @@ function catalogId(host) {
 function catalogIsFresh(data) {
   if (!data || typeof data !== 'object') return false;
   const rev = String(data.extractRevision || data.price_extract_revision || '');
-  if (rev && rev !== EXTRACT_REVISION) return false;
+  if (rev !== EXTRACT_REVISION) return false;
   const updated = data.updatedAt && data.updatedAt.toDate
     ? data.updatedAt.toDate()
     : (data.updatedAtMs ? new Date(Number(data.updatedAtMs)) : null);
@@ -39,6 +39,7 @@ async function loadHostCatalog(url) {
   const rows = data.evidence;
   if (!Array.isArray(rows)) return [];
   return rows.filter((row) => evaluateExtractedPriceCandidate({
+    ...row,
     rawPriceText: String(row.rawPriceText || row.raw_price_text || ''),
     priceMin: Number(row.priceMin || row.price_min || 0),
     currency: String(row.currency || ''),
@@ -53,6 +54,7 @@ async function saveHostCatalog({url, clinicName, city, evidence}) {
   const host = hostOf(url);
   if (!host || !Array.isArray(evidence) || !evidence.length) return;
   const clean = evidence.filter((row) => evaluateExtractedPriceCandidate({
+    ...row,
     rawPriceText: String(row.rawPriceText || ''),
     priceMin: Number(row.priceMin || 0),
     currency: String(row.currency || ''),

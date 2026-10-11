@@ -268,8 +268,8 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
     # Re-open actual saved price pages, never use their old amounts as proof.
     # Published menus must not wait behind speculative roots/navigation on
     # every clinic discovered for a different procedure in this city.
-    marketplace_first = (deep and engine.env_bool('ENABLE_MARKETPLACE_RESCUE', True)
-                         and len(stored) < MIN_DISPLAY)
+    marketplace_enabled = deep and engine.env_bool('ENABLE_MARKETPLACE_RESCUE', True)
+    marketplace_first = marketplace_enabled and len(stored) < MIN_DISPLAY
     local_queries = CATALOG.queries(selected, city, country, engine.local_terms_for, stage='local')
     local_first = engine.env_bool('ENABLE_MULTILINGUAL_SEARCH', True) and bool(local_queries)
     stages = (['saved_sources'] if saved_urls else [])
@@ -277,16 +277,23 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
         # Reserve one English and one local query alongside the two provider
         # menu queries. Two marketplace plus two local requests previously
         # consumed the whole paid budget before the basic English query ran.
-        stages.extend(['primary', 'marketplace'])
-    stages.append('known_domains')
+        # Try both direct-clinic price intents before provider directories can
+        # fill the fast-pass goal. Speculative remembered-root crawls still
+        # follow marketplace rescue so they cannot delay the first menu.
+        stages.append('primary')
+        if local_first:
+            stages.append('local')
+        stages.extend(['marketplace', 'known_domains'])
+    else:
+        stages.append('known_domains')
     # Filled displays still try local tariffs first. Sparse displays reserve
     # both languages rather than spend all four queries on a single language
     # plus marketplaces. Fetch budgets and verification gates stay unchanged.
-    if local_first:
+    if local_first and not marketplace_first:
         stages.append('local')
     elif not marketplace_first:
         stages.append('primary')
-    if deep and engine.env_bool('ENABLE_MARKETPLACE_RESCUE', True) and not marketplace_first:
+    if marketplace_enabled and not marketplace_first:
         stages.append('marketplace')
     if deep and local_first and not marketplace_first:
         stages.append('primary')
@@ -309,10 +316,13 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
             if not hosts:
                 continue
         elif stage in {'primary', 'local', 'marketplace'}:
-            if stage == 'marketplace' and len(stored) + len(merged) >= MIN_DISPLAY:
-                continue
             queries = CATALOG.queries(selected, city, country, engine.local_terms_for, stage=stage)
-            if marketplace_first and local_first and stage in {'primary', 'local'}:
+            if marketplace_enabled and local_first and stage in {'primary', 'local'}:
+                # Four saved cards satisfy the display, not the requested
+                # collection or fresh-provider goal. Keep one local and one
+                # English query alongside the two marketplace queries while
+                # that goal remains unmet; otherwise filled displays never
+                # reach the local procedure directory.
                 queries = queries[:1]
             queries = queries[:min(2, max(0, total_serper_cap-spent))]
             if not queries:
@@ -368,8 +378,10 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
                         *stored,
                         *(engine._display_from_live(r, 'live_search')
                           for r in engine.dedupe_live_results([*merged, *partial_rows]))])
-                    event = {**event, 'display_results': [r.model_dump(mode='json')
-                                                         for r in pool[:display_limit]]}
+                    event = {**event,
+                             'candidate_results': [r.model_dump(mode='json') for r in pool],
+                             'display_results': [r.model_dump(mode='json')
+                                                 for r in pool[:display_limit]]}
                 elif event.get('event') == 'progress':
                     partial_progress.update(event.get('progress', {}))
                 if upstream is not None:

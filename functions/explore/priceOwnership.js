@@ -36,6 +36,10 @@ function looksLikeConditionalCompanionOffer(raw) {
 
 function looksLikeLocalizedMarketPriceEstimate(raw) {
   const t = ownershipFold(raw).replace(/ı/g, 'i');
+  // Geographic/indicative statements describe a market, not this provider.
+  if (/\b(?:in|at)\s+our\s+(?:clinic|hospital|practice)\b|\b(?:klinigimiz\w*|hastanemiz\w*)\b|\bonze\s+kliniek\b/.test(t)) return false;
+  if (/\bsehirlere\s+gore\b|\bsehir\s+bazli\b|\btaban\s+fiyat\b|\btavan\s+fiyat\b|\borneg(?:in|i)?\b|\b[a-z]+\s+genelinde\b.{0,110}\b(?:fiyat|ucret|maliyet)\w*\b|\b(?:indicative|estimated|market\s+range)\b|\b(?:fiyat|ucret|maliyet)\w*[^!?\n|]{0,35}\bbeklen\w*\b/.test(t)) return true;
+  if (/\b(?:prices?|costs?|fees?)\b[^.!?\n|]{0,95}\bin\s+(?:the\s+)?[a-z][a-z '\-]{1,45}[^.!?\n|]{0,60}\b(?:start\w*|from|range\w*|between|typically|generally|are)\b|\b[a-z][a-z\-]{2,}(?:'da|'de|'daki|'deki)\b[^!?\n|]{0,100}\b(?:fiyat\w*|ucret\w*|maliyet\w*|tl|eur)\b/.test(t.replace(/’/g, "'"))) return true;
   return /\b(?:fiyat\w*|ucret\w*|maliyet\w*)\b(?:[^.!?\n|]|\.(?=\d)){0,100}\b(?:genellikle|ortalama|degis\w*|arasinda)\b|\b(?:genellikle|ortalama|genel olarak)\b(?:[^.!?\n|]|\.(?=\d)){0,100}\b(?:fiyat\w*|ucret\w*|maliyet\w*|tl|try)\b|\bne kadar ortalama\b/.test(t);
 }
 

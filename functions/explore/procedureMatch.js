@@ -556,6 +556,7 @@ function selectEvidenceForProcedure(rows, procedure) {
       }
     }
     if (!isValidExtractedPriceCandidate({
+      ...row,
       rawPriceText: row.rawPriceText,
       priceMin: row.priceMin,
       currency: row.currency,

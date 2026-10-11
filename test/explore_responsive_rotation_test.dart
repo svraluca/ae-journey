@@ -135,6 +135,24 @@ void main() {
     },
   );
 
+  test('returning between tabs preserves providers, amounts, and order without reads', () {
+    final client = MockClient((_) async => throw StateError('Unexpected HTTP'));
+    addTearDown(client.close);
+    final service = OpenAIService(client: client, apiKey: '', placesApiKey: '',
+      places: GooglePlacesService(client: client, apiKey: ''), firestore: _NoFirestore());
+    final initial = OpenAIComparisonResult(city: 'Madrid', topic: 'Botox',
+      topicType: OpenAISearchItemType.procedure, summary: '', rangeLabel: '',
+      mapCenter: const OpenAICoord(40.4, -3.7), clinics: [for (var i = 0; i < 8; i++) clinic(i)]);
+    service.putCachedComparison('stable', initial);
+    final first = service.restoreCachedExploreComparison('stable')!;
+    final second = service.restoreCachedExploreComparison('stable')!;
+    expect(first.clinics, hasLength(4));
+    expect(second.clinics.map((c) => [c.name, c.priceMin, c.currency, c.brand]).toList(),
+      first.clinics.map((c) => [c.name, c.priceMin, c.currency, c.brand]).toList());
+    final refreshed = service.rotateCachedExploreComparison('stable')!;
+    expect(refreshed.clinics, hasLength(4));
+  });
+
   test(
     'memory rotation retains the full pool and cannot perform network reads',
     () {

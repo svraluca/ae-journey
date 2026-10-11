@@ -5,6 +5,7 @@ import '../lib/services/explore_price_sanity.dart';
 import '../lib/services/explore_price_verification.dart';
 import '../lib/services/explore_search_locale.dart';
 import '../lib/ui/clinic_compare_price_display.dart';
+import '../lib/ui/explore_english_procedure_label.dart';
 
 OpenAIClinic clinic({
   String name = 'Aster Medical Clinic',
@@ -32,6 +33,13 @@ OpenAIClinic clinic({
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  test('a neighbouring amount cannot become the procedure title', () {
+    expect(exploreEnglishProcedureLabel('4,800 Rhinoplasty'), 'Rhinoplasty');
+    expect(exploreEnglishProcedureLabel('4800 Rhinoplasty'), 'Rhinoplasty');
+    expect(exploreEnglishProcedureLabel('Botox 100 units'), 'Botox 100 units');
+    expect(exploreEnglishProcedureLabel('Lip filler 1 ml'), 'Lip filler 1 ml');
+  });
 
   test('generic peel cache keeps the named peel from the priced row', () {
     final row = clinic(procedure: 'Chemical peel', canonical: 'chemical_peel',

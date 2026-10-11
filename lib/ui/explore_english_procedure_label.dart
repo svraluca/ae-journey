@@ -158,5 +158,14 @@ String exploreEnglishProcedureLabel(String source) {
   for (final (pattern, english) in _terms) {
     label = label.replaceAll(pattern, english);
   }
+  // Flattened tariff tables can prepend an unrelated naked amount. Preserve
+  // labelled doses/volumes and keep the original verification evidence intact.
+  label = label.replaceFirst(
+    cachedRegExp(
+      r'^(?:[$€£₺]\s*)?(?:\d{1,3}(?:[., ]\d{3})+|\d{3,})\s*(?:EUR|USD|GBP|TRY|RON)?\s+(?=(?:Rhinoplasty|Botox|Dermal\s+fillers?|Lip\s+filler|Chemical\s+peel|Breast\s+augmentation|Hair\s+transplant)\b)',
+      caseSensitive: false,
+    ),
+    '',
+  );
   return label.replaceAll(RegExp(r'\s+'), ' ').trim();
 }

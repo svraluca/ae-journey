@@ -1,6 +1,8 @@
 'use strict';
 const {quoteScopeReason, medicalQaPriceContext} = require('./tariffScope');
 const {injectableScopeRejection} = require('./injectableScope');
+const {marketplaceRowPriceDateFailure, marketplaceRowCurrencyFailure,
+  sourcePriceDateFields, sourceCurrencyFields} = require('./marketplacePriceFreshness');
 
 const {looksLikeSurgicalChinTreatment,
   looksLikeCombinedToxinSkinTreatment, looksLikeCreditLimitQuote,
@@ -800,6 +802,16 @@ function evaluateExtractedPriceCandidate({
   pageTitle = '',
   pageContext = '',
   clinicName = '',
+  sourceType = '',
+  source_type = '',
+  source_price_updated_at = '',
+  sourcePriceUpdatedAt = '',
+  source_price_date_text = '',
+  sourcePriceDateText = '',
+  source_price_date_basis = '',
+  sourcePriceDateBasis = '',
+  source_currency_basis = '',
+  sourceCurrencyBasis = '',
 }) {
   const blob = `${rawPriceText || ''}\n${rawEvidence || ''}`.replace(/\u00a0/g, ' ');
   const method = String(extractionMethod || '').trim();
@@ -810,6 +822,14 @@ function evaluateExtractedPriceCandidate({
   if (amount <= 0) {
     return {accepted: false, reason: 'missing_price_semantics'};
   }
+  const dateFailure = marketplaceRowPriceDateFailure({sourceUrl, sourceType: sourceType || source_type,
+    source_price_updated_at: source_price_updated_at || sourcePriceUpdatedAt,
+    source_price_date_text: source_price_date_text || sourcePriceDateText,
+    source_price_date_basis: source_price_date_basis || sourcePriceDateBasis});
+  if (dateFailure) return {accepted: false, reason: dateFailure};
+  const currencyFailure = marketplaceRowCurrencyFailure({sourceUrl, sourceType: sourceType || source_type,
+    source_currency_basis: source_currency_basis || sourceCurrencyBasis});
+  if (currencyFailure) return {accepted: false, reason: currencyFailure};
   if (medicalQaPriceContext(sourceUrl, pageText || rawEvidence)) return {accepted: false, reason: 'medical_qa_price'};
   const scopeFailure = quoteScopeReason({procedure, rawEvidence, priceMin: amount, currency});
   if (scopeFailure) return {accepted: false, reason: scopeFailure};
@@ -1090,6 +1110,9 @@ function stripInvalidCachedPrice(row, procedure, {logRejects = true} = {}) {
   const sourceUrl = String(row.price_source_url || row.priceSourceUrl ||
       row.source_url || row.sourceUrl || '').trim();
   const verdict = evaluateExtractedPriceCandidate({
+    ...sourcePriceDateFields(row),
+    ...sourceCurrencyFields(row),
+    sourceType: row.source_type || row.sourceType || '',
     rawPriceText: rawPrice,
     priceMin: min,
     currency,
@@ -1107,9 +1130,13 @@ function stripInvalidCachedPrice(row, procedure, {logRejects = true} = {}) {
     ...row,
     price_min: 0,
     price_max: 0,
+    priceMin: 0,
+    priceMax: 0,
     price_gbp: 0,
     price_label: '',
+    priceLabel: '',
     price_verified: false,
+    priceVerified: false,
     verified: false,
     price_verification_status: 'legacy_unverified',
     needs_revalidation: true,

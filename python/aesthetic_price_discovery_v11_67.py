@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.95 — provider-card discovery and verified marketplace tariffs
+Aesthetic Procedure Price Discovery v0.11.96 — provider-card discovery and verified marketplace tariffs
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -59,8 +59,9 @@ import vertical_search
 from injectable_scope import injectable_scope_rejection
 from tariff_scope import ancillary_price_reason, comparison_price_context, calendar_price_reason, medical_qa_price_context
 from amount_policy import procedure_amount_is_plausible
+from marketplace_price_freshness import bookimed_price_date, marketplace_price_date_failure
 
-PRICE_EXTRACT_REVISION = "e31"
+PRICE_EXTRACT_REVISION = "e32"
 
 try:
     from google.cloud import firestore
@@ -160,6 +161,12 @@ class ExtractedEvidence(BaseModel):
     raw_evidence: str
     source_url: str
     extraction_method: str
+    source_price_updated_at: str = ""
+    source_price_date_text: str = ""
+    source_price_date_basis: str = ""
+    # A viewer-localized marketplace number does not identify the clinic's
+    # original amount/currency. Keep it as a lead, never reverse an FX rate.
+    source_currency_basis: str = ""
 
 
 class ClinicPriceResult(BaseModel):
@@ -204,6 +211,11 @@ class ClinicPriceResult(BaseModel):
     price_scope: str = ""  # e.g. package_including_travel; shown with the price
     # Preserve tariff headings separately from price evidence and branch menus.
     source_location_text: str = ""
+    # A source's fee update date is distinct from our page-fetch/cache time.
+    source_price_updated_at: str = ""
+    source_price_date_text: str = ""
+    source_price_date_basis: str = ""
+    source_currency_basis: str = ""
 
     # Verification/provenance added in v0.11.41.
     price_verification_status: str = ""
@@ -640,6 +652,7 @@ PROCEDURES = {
             "rinoplastie", "rinoplastika", "rinoplastikë",
             "rinoplastikës", "rinoplastikën", "ринопластика",
             "nasenkorrektur", "rhinoplastik",
+            "neuscorrectie",
             "orrplasztika",
         ],
     },
@@ -3539,6 +3552,20 @@ def published_marketplace_menu_url(html: str, url: str) -> str:
         return url
     return urlunparse(parsed._replace(fragment=quote(str(anchor['id']), safe='-._:')))
 
+
+def marketplace_currency_basis(html: str, url: str) -> str:
+    """Identify viewer-localized menus without inferring an original fee.
+
+    WhatClinic's country selector controls the rendered amounts. The same
+    provider can arrive as RON on one server and EUR on another. That HTML
+    identifies a published viewer price, not the clinic's original currency;
+    only a separately verified original-price source can replace it.
+    """
+    if 'whatclinic.com' not in host_of(url) or not html:
+        return ''
+    if re.search(r'class\s*=\s*[\"\'][^\"\']*\b(?:link-country-selector|country-selector-menu)\b', html, re.I):
+        return 'viewer_localized'
+    return ''
 
 
 MARKETPLACE_LOCALE_COUNTRY = {
@@ -7156,7 +7183,7 @@ def extract_named_clinic_tariff_paragraphs(soup, out, seen, url, procedure):
             attached = find_attached_range(statement, prices[0][2], prices[0][0]) if prices else None
             if (not prices or len(statement) > 650
                     or not contains_requested_procedure(statement, procedure)
-                    or not clinic_paragraph_matches_site(statement, url)
+                    or not provider_fee_claim(statement, url)
                     or (len(prices) > 1 and not (len(prices) == 2 and attached))):
                 continue
             # Retain unpriced qualifications after the fee, such as implants
@@ -7644,6 +7671,126 @@ def own_language(text: str) -> bool:
     return any(re.search(p, text, re.I) for p in POSITIVE_OWNERSHIP_PATTERNS)
 
 
+def provider_fee_claim(text: str, url: str) -> bool:
+    """Require a fee owner, rather than a booking link or 'starting from'.
+
+    An article on a surgeon's website can contain both a country estimate
+    and their own fee. Only an explicit first-person clinic claim or the
+    matching provider named in the priced statement proves ownership.
+    """
+    raw = text or ""
+    local = fold(raw).replace("ı", "i")
+    first = next(iter_exact_price_matches(raw), None)
+    prefix = local[:first[0].start()] if first else local
+    if re.search(
+        r"\b(?:in|at|from)\s+our\s+(?:clinic|hospital|practice)|"
+        r"\bour\s+(?:botox|filler|rhinoplast\w*|chemical|breast|hair)\b[^.!?\n|]{0,100}\b(?:fees?|prices?|costs?|tariffs?)\b|"
+        r"\bour\s+(?:(?:clinic|hospital|practice|rhinoplasty|botox|filler|breast|augmentation|treatment|surgery)\s+){0,3}"
+        r"(?:fees?|prices?|costs?|packages?|tariffs?)\b|"
+        r"\b(?:klinigimiz\w*|hastanemiz\w*|muayenehanemiz\w*)\b|"
+        r"\b(?:onze\s+(?:kliniek|praktijk|prijzen|tarieven)|bij\s+ons)\b|"
+        r"\b(?:nuestra\s+clinica|nuestro\s+(?:precio|tarifa)|"
+        r"notre\s+(?:clinique|tarif)|nostra\s+clinica|"
+        r"unserer?\s+(?:klinik|praxis))\b",
+        prefix,
+    ):
+        return True
+    # Restrict the existing name matcher to the actual priced statement.
+    # Generic city/country wording after a provider name remains an estimate.
+    return (not destination_price_claim(raw)
+            and not informational_price_claim(raw)
+            and clinic_paragraph_matches_site(raw, url))
+
+
+def destination_price_claim(text: str) -> bool:
+    """Recognize a city/country cost claim without a fixed place dictionary."""
+    local = fold(text or "").replace("ı", "i").replace("’", "'")
+    return bool(re.search(
+        r"\b(?:prices?|costs?|fees?)\b[^.!?\n|]{0,95}\bin\s+"
+        r"(?:the\s+)?[a-z][a-z '\-]{1,45}[^.!?\n|]{0,60}"
+        r"\b(?:start\w*|from|range\w*|between|typically|generally|are)\b|"
+        r"\b[a-z][a-z\-]{2,}(?:'da|'de|'daki|'deki)\b[^!?\n|]{0,100}"
+        r"\b(?:fiyat\w*|ucret\w*|maliyet\w*|tl|eur)\b|"
+        r"\b(?:fiyat\w*|ucret\w*|maliyet\w*)\b[^!?\n|]{0,100}"
+        r"\b[a-z][a-z\-]{2,}(?:'da|'de|'daki|'deki)\b|"
+        r"\b(?:prijzen|kosten)\b[^.!?\n|]{0,70}\bin\s+"
+        r"[a-z][a-z '\-]{2,40}",
+        local,
+    ))
+
+
+def informational_price_claim(text: str) -> bool:
+    """A literal amount can still be an indicative market price."""
+    local = fold(text or "").replace("ı", "i")
+    return (market_info(text) or localized_market_price_context(text)
+            or destination_price_claim(text) or bool(re.search(
+                r"\b(?:indicative|indicatively|estimated|estimate|market\s+range)\b|"
+                r"\borneg(?:in|i)?\b|\b[a-z]+\s+genelinde\b.{0,110}\b(?:fiyat|ucret|maliyet)\w*\b|"
+                r"\bnet\s+fiyat\b.{0,55}\bpaylasim\w*\s+yapilmamaktadir\b|"
+                r"\b(?:fiyat|ucret|maliyet)\b[^!?\n|]{0,35}\bbeklen\w*\b|"
+                r"\b(?:fiyat|ucret|maliyet)\w*[^!?\n|]{0,55}"
+                r"\b(?:tahmini|yaklasik|ornek|tahmin\w*|ortalama\w*)\b|"
+                r"\b(?:tahmini|yaklasik|ornek|ortalama\w*)\b"
+                r"[^!?\n|]{0,55}\b(?:fiyat|ucret|maliyet)\w*\b",
+                local,
+            )))
+
+
+def official_price_ownership_failure(
+    text: str, url: str, evidence_type: str,
+) -> str:
+    if provider_fee_claim(text, url):
+        return ""
+    if informational_price_claim(text):
+        return "unowned_market_price"
+    if evidence_type == "official_article":
+        return "provider_fee_not_confirmed"
+    return ""
+
+
+def official_price_context_failure(evidence: ExtractedEvidence, html: str) -> str:
+    """Keep an estimate heading when a table adapter extracts only its row."""
+    raw = evidence.raw_evidence or ""
+    if provider_fee_claim(raw, evidence.source_url):
+        return ""
+    if informational_price_claim(raw):
+        return "unowned_market_price"
+    if not html:
+        return ""
+    soup = BeautifulSoup(html, "lxml")
+    contexts = []
+    for node in soup.find_all(["p", "tr", "li"]):
+        # Nested paragraphs/list rows are read once at their narrowest scope.
+        if node.find(["p", "tr", "li"]):
+            continue
+        text = node.get_text(" ", strip=True)
+        if len(text) > 1200:
+            continue
+        if not any(abs(amount - evidence.price_min) < .011 and cur == evidence.currency
+                   for _, amount, cur in iter_exact_price_matches(text)):
+            continue
+        context = contextual_block_text(node, text)
+        if contains_requested_procedure(context, evidence.raw_procedure_text):
+            contexts.append(context)
+    if any(provider_fee_claim(text, evidence.source_url) for text in contexts):
+        return ""
+    if any(informational_price_claim(text) for text in contexts):
+        return "unowned_market_price"
+    return ""
+
+
+def quoted_range_was_truncated(evidence) -> bool:
+    """A source's printed range must not silently become its lower endpoint."""
+    for match, amount, cur in iter_exact_price_matches(evidence.raw_evidence or ""):
+        if cur != evidence.currency or abs(amount - evidence.price_min) >= .011:
+            continue
+        attached = find_attached_range(evidence.raw_evidence, cur, match)
+        if attached and abs(attached[0] - evidence.price_min) < .011:
+            return (evidence.price_max is None
+                    or abs(attached[1] - evidence.price_max) >= .011)
+    return False
+
+
 def clinic_paragraph_matches_site(text: str, url: str) -> bool:
     """A named clinic in a tariff paragraph must match this official host."""
     brand = domain_brand(url)
@@ -7863,7 +8010,7 @@ def classify_evidence_type(
     article_path = bool(
         re.search(
             r"(?:/blog/|/news/|/author/|/unpublished/|/artikull/|/article/|/lajme/|/opinion/|-vs-|how-much|"
-            r"button-nose-|"
+            r"button-nose-|(?:[-/])fiyat(?:i|lari)(?:/|$)|"
             r"cost-(?:uk|italy|turkey|albania)|"
             r"(?:surgery|fillers?|botox)-in-[a-z-]+-prices|2026)",
             path,
@@ -8216,6 +8363,8 @@ def cached_market_or_third_party_row_needs_revalidation(
         return False
 
     raw = row.raw_evidence or ""
+    if official_price_ownership_failure(raw, row.source_url, row.evidence_type):
+        return True
     if (row.evidence_type != "official_price_menu"
             and not own_language(raw)
             and not clinic_paragraph_matches_site(raw, row.source_url)
@@ -8878,7 +9027,7 @@ def validate_evidence(
     source = classify_page_source(evidence.source_url, full_page_text)
     own_phrase = own_language(evidence.raw_evidence)
     if evidence.extraction_method == "clinic_owned_paragraph":
-        own_phrase = clinic_paragraph_matches_site(evidence.raw_evidence, evidence.source_url)
+        own_phrase = provider_fee_claim(evidence.raw_evidence, evidence.source_url)
     if evidence.extraction_method == "owned_tariff_list":
         own_phrase = clinic_paragraph_matches_site(evidence.raw_evidence, evidence.source_url)
     evidence_type = classify_evidence_type(
@@ -8887,6 +9036,26 @@ def validate_evidence(
         full_page_text,
         evidence,
     )
+    if quoted_range_was_truncated(evidence):
+        return False, False, 0.05, "quoted_range_truncated", evidence_type
+    if source == "marketplace":
+        evidence.source_currency_basis = (
+            marketplace_currency_basis(html, evidence.source_url)
+            or evidence.source_currency_basis)
+        if html and "bookimed.com" in host_of(evidence.source_url):
+            updated_at, date_text, date_basis = bookimed_price_date(
+                html, evidence.raw_procedure_text, evidence.price_min,
+                evidence.price_max, evidence.currency, evidence.raw_evidence,
+                memo=_hybrid_parse_memo.get())
+            if date_basis:
+                evidence.source_price_updated_at = updated_at
+                evidence.source_price_date_text = date_text
+                if evidence.source_price_date_basis != "user_retained_published_fee":
+                    evidence.source_price_date_basis = date_basis
+        date_failure = marketplace_price_date_failure(
+            evidence.source_price_updated_at, evidence.source_price_date_basis)
+        if date_failure:
+            return False, False, 0.05, date_failure, evidence_type
     scope_failure = injectable_scope_rejection(
         canonicalize_procedure(evidence.raw_procedure_text),
         evidence.raw_procedure_text, evidence.raw_evidence, source_url=evidence.source_url,
@@ -8930,7 +9099,7 @@ def validate_evidence(
         return False, False, 0.10, "comparative_market_article", evidence_type
     if cross_country_price_comparison(full_page_text) and not (
             (evidence.extraction_method == 'clinic_owned_paragraph'
-             and clinic_paragraph_matches_site(evidence.raw_evidence, evidence.source_url)
+             and provider_fee_claim(evidence.raw_evidence, evidence.source_url)
              or evidence.extraction_method in {'woocommerce_service_offer', 'current_service_offer'})
             and city and strong_local_page_evidence(html, full_page_text, city, evidence.source_url)):
         return False, False, 0.10, "cross_country_price_comparison", evidence_type
@@ -9060,6 +9229,13 @@ def validate_evidence(
         and evidence_type != "official_price_menu"
     ):
         return False, False, 0.25, "market_context", evidence_type
+
+    if source == "official_clinic":
+        ownership_failure = official_price_ownership_failure(
+            evidence.raw_evidence, evidence.source_url, evidence_type)
+        ownership_failure = ownership_failure or official_price_context_failure(evidence, html)
+        if ownership_failure:
+            return False, False, 0.10, ownership_failure, evidence_type
 
     if source == "social":
         return False, False, 0.45, "social_unverified", evidence_type
@@ -12287,6 +12463,15 @@ def stabilize_live_clinic_names(
 
 def trusted_price_failure(row: ClinicPriceResult) -> str:
     """Why trusted_price_result rejected this row. Empty when it is trusted."""
+    if quoted_range_was_truncated(row):
+        return "quoted_range_truncated"
+    if row.source_type == "marketplace":
+        date_failure = marketplace_price_date_failure(
+            row.source_price_updated_at, row.source_price_date_basis)
+        if date_failure:
+            return date_failure
+    if row.source_type == 'marketplace' and row.source_currency_basis == 'viewer_localized':
+        return 'marketplace_original_currency_unverified'
     if news_report_url(row.source_url):
         return "news_report"
     if country_price_guide_path(row.source_url):
@@ -12408,6 +12593,11 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
         return "unowned_official_page"
     if row.confidence < float(os.getenv("MIN_TRUSTED_PRICE_CONFIDENCE", "0.70")):
         return "confidence"
+    if row.source_type == "official_clinic":
+        failure = official_price_ownership_failure(
+            row.raw_evidence, row.source_url, row.evidence_type)
+        if failure:
+            return failure
     if cached_market_or_third_party_row_needs_revalidation(row):
         return "cached_market_context"
     if not trusted_price_result(row):
@@ -12439,6 +12629,16 @@ def trusted_price_result(row: ClinicPriceResult) -> bool:
     In particular, an official clinic article that merely quotes a general
     market price must not become a clinic-owned app price.
     """
+    if quoted_range_was_truncated(row):
+        return False
+    if (row.source_type == "official_clinic" and official_price_ownership_failure(
+            row.raw_evidence, row.source_url, row.evidence_type)):
+        return False
+    if row.source_type == 'marketplace' and row.source_currency_basis == 'viewer_localized':
+        return False
+    if (row.source_type == "marketplace" and marketplace_price_date_failure(
+            row.source_price_updated_at, row.source_price_date_basis)):
+        return False
     if not literal_price_claim_is_supported(row):
         return False
     if not procedure_amount_is_plausible(
@@ -13628,6 +13828,14 @@ def clean_published_procedure_title(text: str) -> str:
     source evidence. Cleaning an article title cannot verify its amount.
     """
     title = re.sub(r'\s+', ' ', text or '').strip(' |:;-–')
+    # A neighbouring unlabelled price can precede a service heading in a
+    # flattened table. It is display noise, not a dose or a procedure subtype.
+    # Keep labelled quantities such as "100 units" and "1 ml" untouched.
+    title = re.sub(r'^(?:[$€£₺]\s*)?(?:\d{1,3}(?:[., ]\d{3})+|\d{3,})'
+                   r'\s*(?:EUR|USD|GBP|TRY|RON)?\s+'
+                   r'(?=(?:rhinoplasty|botox|botoks|dermal\s+fillers?|lip\s+filler|'
+                   r'chemical\s+peel|breast\s+augmentation|hair\s+transplant)\b)',
+                   '', title, flags=re.I)
     tail = re.search(
         r'\b(?:fiyat\w*|[üu]cret\w*|prices?|pricing|costs?|precios?|prix|'
         r'tarifs?|prezzi|preise|pre[tț]uri|cennik|prijzen)\b', title, re.I)
@@ -15728,6 +15936,10 @@ def apply_official_marketplace_verification(
         payload["currency"] = evidence.currency
         payload["qualifier"] = evidence.qualifier
         payload["unit"] = evidence.unit
+        payload["source_price_updated_at"] = evidence.source_price_updated_at
+        payload["source_price_date_text"] = evidence.source_price_date_text
+        payload["source_price_date_basis"] = evidence.source_price_date_basis
+        payload["source_currency_basis"] = evidence.source_currency_basis
         payload["original_price_min"] = evidence.original_price_min
         payload["original_price_max"] = evidence.original_price_max
         payload["source_url"] = evidence.source_url
@@ -17679,6 +17891,10 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                     raw_procedure_text=e.raw_procedure_text,
                     raw_evidence=e.raw_evidence,
                     source_location_text=source_location_text,
+                    source_price_updated_at=e.source_price_updated_at,
+                    source_price_date_text=e.source_price_date_text,
+                    source_price_date_basis=e.source_price_date_basis,
+                    source_currency_basis=e.source_currency_basis,
                     price_scope=(
                         "implant_excluded"
                         if canonical == "breast_augmentation" and implant_cost_excluded(e.raw_evidence)
@@ -17827,9 +18043,10 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
     published_prices = None
     navigation_seen_urls = {h.url for h in work} | set(req.previously_fetched_urls)
     immediate_processed = []
+    marketplace_official_navigation_started = 0
 
     async def process_and_publish(hit, follow_navigation=True):
-        nonlocal published_prices
+        nonlocal published_prices, marketplace_official_navigation_started
         if req.progressive_stage:
             eligible_now = dedupe_live_results([r for r in rows if _app_can_show_row(r)])
             if len(eligible_now) >= req.progressive_stop_count:
@@ -17912,6 +18129,40 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                     and await asyncio.to_thread(strong_local_page_evidence,
                                                 html, text or "", req.city, lead.url)
                     and not any(row.source_url == lead.url and _app_can_show_row(row) for row in rows)):
+                evidence = payload[1] if payload else []
+                if (not evidence or any(getattr(quote, "source_currency_basis", "")
+                                        == "viewer_localized" for quote in evidence)):
+                    # A viewer-currency fee cannot establish the provider's
+                    # original amount. Reuse an actual website link on this
+                    # fetched profile, never guess a domain or spend a search
+                    # request. At most two providers get one outbound probe
+                    # each; the existing round fetch budget also applies.
+                    outbound = await asyncio.to_thread(
+                        marketplace_outbound_official_candidates, lead.url, html)
+                    outbound = [url for url in outbound
+                                if url not in navigation_seen_urls
+                                and not foreign_price_source_path(url, req.city)]
+                    if outbound and marketplace_official_navigation_started < 2:
+                        url = outbound[0]
+                        marketplace_official_navigation_started += 1
+                        navigation_seen_urls.add(url)
+                        official = await verify_official_candidate(
+                            SearchHit(title=domain_brand(url), url=url,
+                                      query="marketplace_outbound"),
+                            payload[0] if payload else "", req.city)
+                        if official:
+                            if official.url not in diag.pending_price_navigation_urls:
+                                diag.pending_price_navigation_urls.append(official.url)
+                            diag.pages_attempted += 1
+                            # The linked site's own page must establish fee
+                            # locality. Resolver hints may identify its brand,
+                            # but must not relabel a tariff for another city.
+                            child = official.model_copy(update={
+                                "query": "marketplace_outbound", "snippet": "",
+                                "directory_verified": False, "place_id": "",
+                                "place_name": "", "place_address": "",
+                            })
+                            immediate_processed.append(await process_and_publish(child))
                 # The default profile may show only popular services. Fetch one
                 # treatment-specific menu instead of searching unrelated sites.
                 url = bookimed_treatment_profile_url(lead.url, req.procedure)
@@ -18665,7 +18916,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.95",
+    version="0.11.96",
     lifespan=app_lifespan,
 )
 

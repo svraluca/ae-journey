@@ -109,9 +109,9 @@ class ProgressivePolicy(unittest.IsolatedAsyncioTestCase):
         with patch.object(e,'discover',new=AsyncMock(side_effect=lambda req:self.response(req))) as discover:
             await self.run_search()
         stages=[call.args[0] for call in discover.await_args_list]
-        self.assertEqual([r.progressive_stage for r in stages],['primary','marketplace','local'])
+        self.assertEqual([r.progressive_stage for r in stages],['primary','local','marketplace'])
         self.assertEqual(sum(r.serper_request_cap for r in stages),4)
-        self.assertEqual([r.serper_request_cap for r in stages],[1,2,1])
+        self.assertEqual([r.serper_request_cap for r in stages],[1,1,2])
         self.exa.assert_awaited_once()
         self.assertNotIn(self.exa.await_args.args[0],stages[0].query_override)
 
@@ -126,6 +126,18 @@ class ProgressivePolicy(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(req.priority_site_hosts,['new.example'])
         self.exa.assert_not_awaited()
 
+    async def test_local_owned_tariffs_can_fill_the_goal_before_marketplace_search(self):
+        calls = []
+        async def discover(req):
+            calls.append(req)
+            return self.response(req, 6 if req.progressive_stage == 'local' else 0)
+        with patch.object(e, 'discover', side_effect=discover):
+            _, rows, _ = await self.run_search()
+        self.assertEqual([r.progressive_stage for r in calls], ['primary', 'local'])
+        self.assertEqual(sum(r.serper_request_cap for r in calls), 2)
+        self.assertEqual(len(rows), 6)
+        self.assertTrue(all(r.source_type == 'official_clinic' and r.clinic_own_price for r in rows))
+
     async def test_background_pass_can_continue_after_six_are_stored(self):
         req=e.DiscoverRequest(city='Valencia',procedure='botox')
         stored=self.response(req,6).results
@@ -133,6 +145,41 @@ class ProgressivePolicy(unittest.IsolatedAsyncioTestCase):
             await self.run_search(stored, background_collection=True)
         self.assertTrue(discover.await_count)
         self.assertTrue(all(call.args[0].progressive_stop_count == 6 for call in discover.await_args_list))
+
+    async def test_four_saved_cards_still_search_local_marketplace_directory(self):
+        req = e.DiscoverRequest(city='Valencia', procedure='botox')
+        stored = self.response(req, 4).results
+        with patch.object(e, 'discover', new=AsyncMock(side_effect=lambda r: self.response(r))) as discover:
+            await self.run_search(stored)
+        calls = [call.args[0] for call in discover.await_args_list]
+        self.assertEqual([r.progressive_stage for r in calls], ['local', 'marketplace', 'primary'])
+        self.assertEqual([r.serper_request_cap for r in calls], [1, 2, 1])
+        self.assertIn('site:whatclinic.com/', calls[1].query_override[0])
+        self.assertEqual(sum(r.serper_request_cap for r in calls), 4)
+
+    async def test_fifth_verified_candidate_streams_before_final_completion(self):
+        req = e.DiscoverRequest(city='Valencia', procedure='botox')
+        stored = self.response(req, 4).results
+        novel = quote('Cypress Medical Clinic', 'cypress.example', city='Valencia', age=0)
+        queue = asyncio.Queue()
+        token = e._hybrid_progress.set(queue)
+        async def discover(request):
+            await e._emit_hybrid_partial([novel])
+            return self.response(request)
+        try:
+            with patch.object(e, 'discover', side_effect=discover):
+                await self.run_search(stored)
+            events = []
+            while not queue.empty():
+                event = queue.get_nowait()
+                if event.get('event') == 'partial' and event.get('candidate_results'):
+                    events.append(event)
+        finally:
+            e._hybrid_progress.reset(token)
+        self.assertTrue(events)
+        self.assertEqual(len(events[0]['display_results']), 4)
+        self.assertEqual(len(events[0]['candidate_results']), 5)
+        self.assertIn(novel.source_url, [r['source_url'] for r in events[0]['candidate_results']])
 
     async def test_arbitrary_city_country_lookup_cached(self):
         v.CITY_COUNTRIES.rows.clear()

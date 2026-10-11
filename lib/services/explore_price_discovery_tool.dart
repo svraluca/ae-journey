@@ -48,6 +48,10 @@ class ExploreDiscoveryToolRow {
     this.unit = '',
     this.lastVerifiedAt,
     this.priceExtractRevision = '',
+    this.sourcePriceUpdatedAt = '',
+    this.sourcePriceDateText = '',
+    this.sourcePriceDateBasis = '',
+    this.sourceCurrencyBasis = '',
   });
 
   final String clinicName;
@@ -70,6 +74,10 @@ class ExploreDiscoveryToolRow {
   final String unit;
   final DateTime? lastVerifiedAt;
   final String priceExtractRevision;
+  final String sourcePriceUpdatedAt;
+  final String sourcePriceDateText;
+  final String sourcePriceDateBasis;
+  final String sourceCurrencyBasis;
   final String qualifier;
   final double rating;
   final int reviews;
@@ -167,6 +175,8 @@ class ExploreDiscoveryJob {
     row.procedureDisplayName, row.procedureCanonical, row.procedureDetail,
     row.unit, row.qualifier, row.rating, row.reviews, row.origin,
     row.lastVerifiedAt?.toIso8601String(),
+    row.sourcePriceUpdatedAt, row.sourcePriceDateText, row.sourcePriceDateBasis,
+    row.sourceCurrencyBasis,
   ]).toList());
 
   factory ExploreDiscoveryJob.fromJson(Map<String, Object?> data) {
@@ -204,7 +214,7 @@ class ExploreDiscoveryJob {
 /// Simulator on that Mac. A phone uses [PRICE_DISCOVERY_TOOL_URL]. Search
 /// credentials stay on the server.
 class ExplorePriceDiscoveryTool {
-  static const minimumBackendVersion = '0.11.95';
+  static const minimumBackendVersion = '0.11.96';
 
   /// Older workers can return rows checked with obsolete ownership rules.
   /// Updating Flutter must not turn those rows into freshly verified prices.
@@ -1543,6 +1553,10 @@ class ExplorePriceDiscoveryTool {
       lastVerifiedAt: DateTime.tryParse('${json['last_verified_at'] ?? ''}'),
       origin: '${json['origin'] ?? ''}'.trim(),
       priceExtractRevision: '${json['price_extract_revision'] ?? ''}'.trim(),
+      sourcePriceUpdatedAt: '${json['source_price_updated_at'] ?? ''}'.trim(),
+      sourcePriceDateText: '${json['source_price_date_text'] ?? ''}'.trim(),
+      sourcePriceDateBasis: '${json['source_price_date_basis'] ?? ''}'.trim(),
+      sourceCurrencyBasis: '${json['source_currency_basis'] ?? ''}'.trim(),
     );
   }
 

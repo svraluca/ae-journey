@@ -27,6 +27,7 @@
 /// e29: reject unexplained marketplace menu amounts across treatment options.
 /// e30: bind complete commerce offers and distinguish single from combined surgery packages.
 /// e31: isolate WhatClinic current service menus from reviews and adjacent services.
-const EXTRACT_REVISION = 'e31';
+/// e32: keep source dates and original currencies; reject attributed market estimates.
+const EXTRACT_REVISION = 'e32';
 
 module.exports = {EXTRACT_REVISION};

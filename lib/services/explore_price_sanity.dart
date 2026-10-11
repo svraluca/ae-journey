@@ -10,6 +10,7 @@ import 'explore_price_ownership.dart';
 import 'explore_search_locale.dart';
 import 'explore_clinic_identity.dart';
 import 'explore_price_binding.dart';
+import 'explore_marketplace_price_freshness.dart';
 
 /// Bump when HTML extraction rules change. Cached Firestore/Google numbers
 /// without this stamp are dropped on read and re-fetched. Do not bump
@@ -31,7 +32,8 @@ import 'explore_price_binding.dart';
 /// e29: reject unexplained marketplace menu amounts across treatment options.
 /// e30: bind complete commerce offers and distinguish single from combined surgery packages.
 /// e31: isolate WhatClinic current service menus from reviews and adjacent services.
-const kExplorePriceExtractRevision = 'e31';
+/// e32: keep source dates and original currencies; reject attributed market estimates.
+const kExplorePriceExtractRevision = 'e32';
 
 /// Hard gate: a number from clinic HTML is not a procedure price until this
 /// passes. AI must never invent a replacement amount.
@@ -2687,8 +2689,7 @@ void logPriceAccept({
 
 /// Drop a poisoned cached numeric price. Ratings stay.
 ///
-/// Valid e17 rows with complete locked evidence are migrated to e18 in-place
-/// (no HTTP) by recalculating exact/from/unit semantics from stored text.
+/// Old extraction stamps require a fresh source check, never relabeling.
 Map<String, Object?> stripInvalidCachedPriceJson(
   Map<String, Object?> row, {
   String procedure = '',
@@ -2697,6 +2698,23 @@ Map<String, Object?> stripInvalidCachedPriceJson(
 }) {
   final min = (row['price_min'] as num?)?.toDouble() ?? 0;
   if (min <= 0) return row;
+  final sourceIsMarketplace = '${row['source_type'] ?? ''}' == 'marketplace' ||
+      isMarketplaceOrDirectoryHost(
+    '${row['price_source_url'] ?? row['source_url'] ?? ''}',
+  );
+  final sourceDateFailure = sourceIsMarketplace &&
+      '${row['source_currency_basis'] ?? ''}' == 'viewer_localized'
+      ? 'marketplace_original_currency_unverified'
+      : sourceIsMarketplace ? exploreMarketplacePriceDateFailure(
+    updatedAt: '${row['source_price_updated_at'] ?? ''}',
+    dateBasis: '${row['source_price_date_basis'] ?? ''}',
+  ) : '';
+  if (sourceDateFailure.isNotEmpty) return {
+    ...row, 'price_min': 0, 'price_max': 0, 'price_gbp': 0, 'price_label': '',
+    'price_verified': false, 'verified': false, 'needs_revalidation': true,
+    'price_verification_status': 'legacy_unverified',
+    'price_rejection_reason': sourceDateFailure,
+  };
   final scopeFailure = exploreProviderLocationConflicts(
     '${row['source_location_text'] ?? ''}', city,
   ) ? 'foreign_provider_locality' : exploreInjectableScopeRejection(
@@ -2725,29 +2743,9 @@ Map<String, Object?> stripInvalidCachedPriceJson(
       : '${row['brand'] ?? row['raw_procedure_text'] ?? ''}'.trim();
   final rawProc =
       '${row['raw_procedure_text'] ?? row['brand'] ?? ''}'.trim();
-  final extractRev = '${row['price_extract_revision'] ?? ''}'.trim();
   final sourceUrl =
       '${row['price_source_url'] ?? row['source_url'] ?? ''}'.trim();
-  final evidenceHash = '${row['evidence_hash'] ?? ''}'.trim();
-
-  var working = Map<String, Object?>.from(row);
-  if (extractRev == 'e17' &&
-      rawPrice.isNotEmpty &&
-      rawProc.isNotEmpty &&
-      sourceUrl.isNotEmpty &&
-      method.isNotEmpty &&
-      currency.isNotEmpty &&
-      (evidence.isNotEmpty || evidenceHash.isNotEmpty)) {
-    final migrated = migrateE17CachedPriceRow(
-      working,
-      procedure: proc,
-      city: city,
-      logRejects: logRejects,
-    );
-    if (migrated != null) {
-      working = migrated;
-    }
-  }
+  final working = Map<String, Object?>.from(row);
 
   final stampOk =
       '${working['price_extract_revision'] ?? ''}'.trim() ==
@@ -2837,7 +2835,7 @@ Map<String, Object?>? migrateE17CachedPriceRow(
       next['unit'] = '';
     }
   }
-  next['price_extract_revision'] = kExplorePriceExtractRevision;
+  next['price_extract_revision'] = 'e18';
   next['extractRevision'] = kExplorePriceExtractRevision;
   next['needs_revalidation'] = false;
   if (logRejects) {

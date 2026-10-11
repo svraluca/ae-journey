@@ -26,6 +26,7 @@ import 'explore_site_url_cache_store.dart';
 import 'explore_url_discovery.dart';
 import 'explore_procedure_translation.dart';
 import 'explore_price_verification.dart';
+import 'explore_marketplace_price_freshness.dart';
 import 'explore_price_evidence.dart' hide isInvalidClinicIdentity;
 import 'explore_price_evidence_lock.dart';
 import 'explore_html_price_extractor.dart';
@@ -817,8 +818,24 @@ Return JSON only.
     );
   }
 
-  /// Synchronous tab return: choose from the retained verified pool, with no
-  /// Firestore, Places or discovery request. Background events keep this window.
+  /// Ordinary tab return restores the same eligible providers in their order.
+  /// New pool members are selected only by an explicit refresh/load-more action.
+  OpenAIComparisonResult? restoreCachedExploreComparison(String cacheKey) {
+    final current = _comparisonMemoryCache[cacheKey];
+    if (current == null) return null;
+    final kept = current.clinics.where((c) => exploreClinicEligibleForVerifiedPool(
+      c, procedure: current.topic, city: current.city,
+    )).take(kExploreCompareMaxClinics).toList();
+    if (kept.isEmpty) return null;
+    final restored = _postprocessPreviewComparison(
+      current.copyWith(clinics: kept), preserveOrder: true,
+    );
+    _comparisonMemoryCache[cacheKey] = restored;
+    return restored;
+  }
+
+  /// Explicit selection refresh from the retained verified pool, with no
+  /// Firestore, Places or discovery request. Ordinary tab returns use restore.
   OpenAIComparisonResult? rotateCachedExploreComparison(String cacheKey) {
     final current = _comparisonMemoryCache[cacheKey];
     if (current == null) return null;
@@ -1269,6 +1286,10 @@ Return JSON only.
       'price_source_url': sourceUrl,
       'price_evidence_text': sanitizePriceEvidence(c.priceEvidenceText),
       'source_location_text': c.sourceLocationText,
+      'source_price_updated_at': c.sourcePriceUpdatedAt,
+      'source_price_date_text': c.sourcePriceDateText,
+      'source_price_date_basis': c.sourcePriceDateBasis,
+      'source_currency_basis': c.sourceCurrencyBasis,
       'price_verification_status': c.priceVerificationStatus.wire,
       'price_verification_confidence': c.priceVerificationConfidence,
       if (c.priceVerifiedAt != null)
@@ -10684,6 +10705,9 @@ Return JSON only.
   }) {
     final now = DateTime.now().toUtc();
     final url = sourceUrl.trim();
+    final originalProviderSource = !isMarketplaceOrDirectoryHost(
+      url.isNotEmpty ? url : clinic.priceSourceUrl,
+    );
     final max = (priceMax != null && priceMax >= priceMin)
         ? priceMax
         : priceMin;
@@ -10741,6 +10765,10 @@ Return JSON only.
       pricePending: false,
       hasProcedure: true,
       priceSourceUrl: url.isNotEmpty ? url : clinic.priceSourceUrl,
+      sourcePriceUpdatedAt: originalProviderSource ? '' : clinic.sourcePriceUpdatedAt,
+      sourcePriceDateText: originalProviderSource ? '' : clinic.sourcePriceDateText,
+      sourcePriceDateBasis: originalProviderSource ? '' : clinic.sourcePriceDateBasis,
+      sourceCurrencyBasis: originalProviderSource ? '' : clinic.sourceCurrencyBasis,
       priceEvidenceText: sanitizePriceEvidence(
         priceEvidence?.rawEvidence ?? evidence,
       ),
@@ -10953,6 +10981,14 @@ Return JSON only.
     required ExtractedPriceEvidence locked,
     required ProcedureRelationResult relation,
   }) {
+    final sourceProvenanceFailure = exploreLegacyMarketplaceProvenanceFailure(
+      sourceUrl: locked.sourceUrl,
+      html: ExploreHtmlPriceParseCache.instance.htmlByUrl[locked.sourceUrl] ?? '',
+    );
+    if (sourceProvenanceFailure.isNotEmpty) {
+      logPriceReject(sourceProvenanceFailure);
+      return null;
+    }
     if (city.trim().isNotEmpty &&
         exploreQuotedPriceConflictsWithSearchCity(
           city: city,
@@ -11549,6 +11585,7 @@ Return JSON only.
     required String pageText,
     required String sourceUrl,
   }) {
+    if (isMarketplaceOrDirectoryHost(sourceUrl)) return null;
     final own = pickClinicOwnPublishedPrice(pageText, procedure: procedure);
     if (own == null || sourceUrl.trim().isEmpty) return null;
     if (!_pageOffersProcedure(
@@ -21217,6 +21254,12 @@ DateTime? _parseExploreDate(Object? raw) {
 /// [ExploreCuratedPriceStore] produces, so an AI or search-snippet row cannot
 /// reach this branch by omitting its evidence.
 bool exploreCuratedPriceIsTrusted(OpenAIClinic c) {
+  if (isMarketplaceOrDirectoryHost(c.priceSourceUrl) &&
+      (c.sourceCurrencyBasis == 'viewer_localized' ||
+          exploreMarketplacePriceDateFailure(
+            updatedAt: c.sourcePriceUpdatedAt,
+            dateBasis: c.sourcePriceDateBasis,
+          ).isNotEmpty)) return false;
   if (c.priceVerificationStatus != PriceVerificationStatus.curatedPublicSite) {
     return false;
   }
@@ -21258,6 +21301,24 @@ ExploreValidatedRows _validateToolCompareRows(
 
     if (row.priceExtractRevision != kExplorePriceExtractRevision) {
       dropRow('extraction_revision');
+      continue;
+    }
+
+    final sourceDateFailure = (row.sourceType == 'marketplace' ||
+            isMarketplaceOrDirectoryHost(row.sourceUrl))
+        ? exploreMarketplacePriceDateFailure(
+            updatedAt: row.sourcePriceUpdatedAt,
+            dateBasis: row.sourcePriceDateBasis,
+          )
+        : '';
+    if (sourceDateFailure.isNotEmpty) {
+      dropRow(sourceDateFailure);
+      continue;
+    }
+    if ((row.sourceType == 'marketplace' ||
+            isMarketplaceOrDirectoryHost(row.sourceUrl)) &&
+        row.sourceCurrencyBasis == 'viewer_localized') {
+      dropRow('marketplace_original_currency_unverified');
       continue;
     }
 
@@ -21474,6 +21535,10 @@ OpenAIClinic? _clinicFromDiscoveryToolRow(
         : row.procedureDisplayName,
     providerClinic: row.clinicName,
     sourceLocationText: row.sourceLocationText,
+    sourcePriceUpdatedAt: row.sourcePriceUpdatedAt,
+    sourcePriceDateText: row.sourcePriceDateText,
+    sourcePriceDateBasis: row.sourcePriceDateBasis,
+    sourceCurrencyBasis: row.sourceCurrencyBasis,
     sourcePlatform: marketplace ? marketplacePlatformLabel(host) : '',
     priceExtractRevision: row.priceExtractRevision,
     procedureRelation: 'exact',
@@ -21497,6 +21562,14 @@ bool explorePriceIsVerified(OpenAIClinic c) {
 }
 
 bool _explorePriceIsVerifiedUncached(OpenAIClinic c) {
+  if ((c.sourceType == 'marketplace' ||
+          isMarketplaceOrDirectoryHost(c.priceSourceUrl)) &&
+      c.sourceCurrencyBasis == 'viewer_localized') return false;
+  if ((c.sourceType == 'marketplace' || isMarketplaceOrDirectoryHost(c.priceSourceUrl)) &&
+      exploreMarketplacePriceDateFailure(
+        updatedAt: c.sourcePriceUpdatedAt,
+        dateBasis: c.sourcePriceDateBasis,
+      ).isNotEmpty) return false;
   if (exploreInjectableScopeRejection(
     procedure: c.procedureCanonical.isNotEmpty ? c.procedureCanonical : c.brand,
     label: c.rawProcedureText,
@@ -22125,6 +22198,10 @@ class OpenAIClinic {
     this.sourcePlatform = '',
     this.providerClinic = '',
     this.priceExtractRevision = '',
+    this.sourcePriceUpdatedAt = '',
+    this.sourcePriceDateText = '',
+    this.sourcePriceDateBasis = '',
+    this.sourceCurrencyBasis = '',
     this.procedureRelation = '',
   });
 
@@ -22199,6 +22276,13 @@ class OpenAIClinic {
   final String providerClinic;
   final String priceExtractRevision;
 
+  /// Source tariff publication date, separate from our latest fetch/check.
+  /// Preserve the literal ISO text so invalid source dates cannot become unknown.
+  final String sourcePriceUpdatedAt;
+  final String sourcePriceDateText;
+  final String sourcePriceDateBasis;
+  final String sourceCurrencyBasis;
+
   /// exact | variant | bundle | add_on | different | market | ambiguous
   final String procedureRelation;
 
@@ -22249,6 +22333,10 @@ class OpenAIClinic {
     String? sourcePlatform,
     String? providerClinic,
     String? priceExtractRevision,
+    String? sourcePriceUpdatedAt,
+    String? sourcePriceDateText,
+    String? sourcePriceDateBasis,
+    String? sourceCurrencyBasis,
     String? procedureRelation,
   }) {
     final nextLat = lat ?? coord.lat;
@@ -22304,6 +22392,10 @@ class OpenAIClinic {
       sourcePlatform: sourcePlatform ?? this.sourcePlatform,
       providerClinic: providerClinic ?? this.providerClinic,
       priceExtractRevision: priceExtractRevision ?? this.priceExtractRevision,
+      sourcePriceUpdatedAt: sourcePriceUpdatedAt ?? this.sourcePriceUpdatedAt,
+      sourcePriceDateText: sourcePriceDateText ?? this.sourcePriceDateText,
+      sourcePriceDateBasis: sourcePriceDateBasis ?? this.sourcePriceDateBasis,
+      sourceCurrencyBasis: sourceCurrencyBasis ?? this.sourceCurrencyBasis,
       procedureRelation: procedureRelation ?? this.procedureRelation,
     );
   }
@@ -22351,6 +22443,25 @@ class OpenAIClinic {
       status = PriceVerificationStatus.legacyUnverified;
     }
     var priceStripped = false;
+    final sourcePriceUpdatedAt = '${json['source_price_updated_at'] ?? ''}'.trim();
+    final sourcePriceDateText = '${json['source_price_date_text'] ?? ''}'.trim();
+    final sourcePriceDateBasis = '${json['source_price_date_basis'] ?? ''}'.trim();
+    final sourceCurrencyBasis = '${json['source_currency_basis'] ?? ''}'.trim();
+    final sourceDateFailure = (sourceType == 'marketplace' ||
+            isMarketplaceOrDirectoryHost(sourceUrl)) &&
+            sourceCurrencyBasis == 'viewer_localized'
+        ? 'marketplace_original_currency_unverified'
+        : (sourceType == 'marketplace' || isMarketplaceOrDirectoryHost(sourceUrl))
+        ? exploreMarketplacePriceDateFailure(
+            updatedAt: sourcePriceUpdatedAt,
+            dateBasis: sourcePriceDateBasis,
+          )
+        : '';
+    if (pMin > 0 && sourceDateFailure.isNotEmpty) {
+      status = PriceVerificationStatus.legacyUnverified;
+      pMin = 0;
+      priceStripped = true;
+    }
     final extractRev =
         (json['price_extract_revision'] as String?)?.trim() ?? '';
     if (pMin > 0 && !isCurated && extractRev != kExplorePriceExtractRevision) {
@@ -22421,6 +22532,10 @@ class OpenAIClinic {
         (json['price_evidence_text'] as String?)?.trim() ?? '',
       ),
       sourceLocationText: sanitizeUtf16('${json['source_location_text'] ?? ''}'),
+      sourcePriceUpdatedAt: sourcePriceUpdatedAt,
+      sourcePriceDateText: sourcePriceDateText,
+      sourcePriceDateBasis: sourcePriceDateBasis,
+      sourceCurrencyBasis: sourceCurrencyBasis,
       priceVerificationStatus: status,
       priceVerificationConfidence:
           (json['price_verification_confidence'] as num?)?.toDouble() ?? 0,
@@ -22428,7 +22543,8 @@ class OpenAIClinic {
       lastCheckedAt: _parseExploreDate(json['last_checked_at']),
       discoveredAt: _parseExploreDate(json['discovered_at']),
       priceRejectionReason:
-          (json['price_rejection_reason'] as String?)?.trim() ?? '',
+          sourceDateFailure.isNotEmpty ? sourceDateFailure
+          : (json['price_rejection_reason'] as String?)?.trim() ?? '',
       rawProcedureText: sanitizeUtf16(
         (json['raw_procedure_text'] as String?)?.trim() ?? '',
       ),

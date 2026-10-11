@@ -1,0 +1,1311 @@
+{
+  "scope": "User-requested Istanbul price-cache review; generated possible IDs, not a Firestore scan",
+  "no_database_writes": true,
+  "required_extract_revision": "e32",
+  "keep_user_retained_fee": "user_retained_peel_e32.json",
+  "explore_google_prices_possible_documents": [
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v14_7Cistanbul_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v14_7Cistanbul_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v13_7Cistanbul_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v13_7Cistanbul_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v12_7Cistanbul_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v12_7Cistanbul_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v11_7Cistanbul_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v11_7Cistanbul_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v10_7Cistanbul_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v10_7Cistanbul_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Cbotox"
+    },
+    {
+      "procedure": "botox",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Cbotox_20anti-wrinkle_20injection"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v14_7Cistanbul_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v14_7Cistanbul_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v14_7Cistanbul_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v13_7Cistanbul_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v13_7Cistanbul_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v13_7Cistanbul_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v12_7Cistanbul_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v12_7Cistanbul_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v12_7Cistanbul_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v11_7Cistanbul_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v11_7Cistanbul_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v11_7Cistanbul_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v10_7Cistanbul_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v10_7Cistanbul_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v10_7Cistanbul_7Cfiller"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Cdermal_20filler"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Cdermal_20filler_20lips_20cheeks"
+    },
+    {
+      "procedure": "filler",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Cfiller"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v14_7Cistanbul_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v14_7Cistanbul_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v14_7Cistanbul_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v13_7Cistanbul_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v13_7Cistanbul_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v13_7Cistanbul_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v12_7Cistanbul_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v12_7Cistanbul_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v12_7Cistanbul_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v11_7Cistanbul_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v11_7Cistanbul_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v11_7Cistanbul_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v10_7Cistanbul_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v10_7Cistanbul_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v10_7Cistanbul_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Cchemical_20peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Cchemical_peel"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Cchemical_20peel_20facial"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v14_7Cistanbul_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v14_7Cistanbul_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v13_7Cistanbul_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v13_7Cistanbul_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v12_7Cistanbul_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v12_7Cistanbul_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v11_7Cistanbul_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v11_7Cistanbul_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v10_7Cistanbul_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v10_7Cistanbul_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Crhinoplasty"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Crhinoplasty_20nose_20job"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v14_7Cistanbul_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v14_7Cistanbul_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v13_7Cistanbul_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v13_7Cistanbul_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v12_7Cistanbul_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v12_7Cistanbul_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v11_7Cistanbul_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v11_7Cistanbul_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v10_7Cistanbul_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v10_7Cistanbul_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Cbreast_augmentation"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Cbreast_20augmentation"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v14_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v14_7Cistanbul_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v14_7Cistanbul_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v14_7Ci_CC_87stanbul_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v13_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v13_7Cistanbul_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v13_7Cistanbul_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v13_7Ci_CC_87stanbul_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v12_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v12_7Cistanbul_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v12_7Cistanbul_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v12_7Ci_CC_87stanbul_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v11_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v11_7Cistanbul_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v11_7Cistanbul_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v11_7Ci_CC_87stanbul_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v10_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v10_7Cistanbul_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v10_7Cistanbul_7Chair_transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Chair_20transplant"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "explore_google_prices/v10_7Ci_CC_87stanbul_7Chair_transplant"
+    }
+  ],
+  "ai_cache_possible_documents": [
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv39_7CBotox_20anti-wrinkle_20injection_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv39_7CBotox_20anti-wrinkle_20injection_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv39_7CBotox_20anti-wrinkle_20injection_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv38_7CBotox_20anti-wrinkle_20injection_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv38_7CBotox_20anti-wrinkle_20injection_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv38_7CBotox_20anti-wrinkle_20injection_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv37_7CBotox_20anti-wrinkle_20injection_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv37_7CBotox_20anti-wrinkle_20injection_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv37_7CBotox_20anti-wrinkle_20injection_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv34_7CBotox_20anti-wrinkle_20injection_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv34_7CBotox_20anti-wrinkle_20injection_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv34_7CBotox_20anti-wrinkle_20injection_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv33_7CBotox_20anti-wrinkle_20injection_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv33_7CBotox_20anti-wrinkle_20injection_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv33_7CBotox_20anti-wrinkle_20injection_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv32_7CBotox_20anti-wrinkle_20injection_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv32_7CBotox_20anti-wrinkle_20injection_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "botox",
+      "path": "ai_cache/comparison_7Cv32_7CBotox_20anti-wrinkle_20injection_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv39_7Cdermal_20filler_20lips_20cheeks_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv39_7Cdermal_20filler_20lips_20cheeks_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv39_7Cdermal_20filler_20lips_20cheeks_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv38_7Cdermal_20filler_20lips_20cheeks_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv38_7Cdermal_20filler_20lips_20cheeks_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv38_7Cdermal_20filler_20lips_20cheeks_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv37_7Cdermal_20filler_20lips_20cheeks_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv37_7Cdermal_20filler_20lips_20cheeks_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv37_7Cdermal_20filler_20lips_20cheeks_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv34_7Cdermal_20filler_20lips_20cheeks_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv34_7Cdermal_20filler_20lips_20cheeks_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv34_7Cdermal_20filler_20lips_20cheeks_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv33_7Cdermal_20filler_20lips_20cheeks_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv33_7Cdermal_20filler_20lips_20cheeks_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv33_7Cdermal_20filler_20lips_20cheeks_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv32_7Cdermal_20filler_20lips_20cheeks_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv32_7Cdermal_20filler_20lips_20cheeks_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "filler",
+      "path": "ai_cache/comparison_7Cv32_7Cdermal_20filler_20lips_20cheeks_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv39_7Cchemical_20peel_20facial_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv39_7Cchemical_20peel_20facial_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv39_7Cchemical_20peel_20facial_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv38_7Cchemical_20peel_20facial_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv38_7Cchemical_20peel_20facial_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv38_7Cchemical_20peel_20facial_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv37_7Cchemical_20peel_20facial_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv37_7Cchemical_20peel_20facial_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv37_7Cchemical_20peel_20facial_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv34_7Cchemical_20peel_20facial_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv34_7Cchemical_20peel_20facial_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv34_7Cchemical_20peel_20facial_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv33_7Cchemical_20peel_20facial_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv33_7Cchemical_20peel_20facial_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv33_7Cchemical_20peel_20facial_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv32_7Cchemical_20peel_20facial_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv32_7Cchemical_20peel_20facial_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "chemical_peel",
+      "path": "ai_cache/comparison_7Cv32_7Cchemical_20peel_20facial_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv39_7Crhinoplasty_20nose_20job_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv39_7Crhinoplasty_20nose_20job_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv39_7Crhinoplasty_20nose_20job_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv38_7Crhinoplasty_20nose_20job_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv38_7Crhinoplasty_20nose_20job_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv38_7Crhinoplasty_20nose_20job_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv37_7Crhinoplasty_20nose_20job_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv37_7Crhinoplasty_20nose_20job_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv37_7Crhinoplasty_20nose_20job_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv34_7Crhinoplasty_20nose_20job_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv34_7Crhinoplasty_20nose_20job_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv34_7Crhinoplasty_20nose_20job_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv33_7Crhinoplasty_20nose_20job_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv33_7Crhinoplasty_20nose_20job_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv33_7Crhinoplasty_20nose_20job_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv32_7Crhinoplasty_20nose_20job_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv32_7Crhinoplasty_20nose_20job_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "rhinoplasty",
+      "path": "ai_cache/comparison_7Cv32_7Crhinoplasty_20nose_20job_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv39_7Cbreast_20augmentation_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv39_7Cbreast_20augmentation_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv39_7Cbreast_20augmentation_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv38_7Cbreast_20augmentation_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv38_7Cbreast_20augmentation_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv38_7Cbreast_20augmentation_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv37_7Cbreast_20augmentation_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv37_7Cbreast_20augmentation_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv37_7Cbreast_20augmentation_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv34_7Cbreast_20augmentation_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv34_7Cbreast_20augmentation_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv34_7Cbreast_20augmentation_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv33_7Cbreast_20augmentation_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv33_7Cbreast_20augmentation_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv33_7Cbreast_20augmentation_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv32_7Cbreast_20augmentation_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv32_7Cbreast_20augmentation_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "breast_augmentation",
+      "path": "ai_cache/comparison_7Cv32_7Cbreast_20augmentation_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv39_7Chair_20transplant_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv39_7Chair_20transplant_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv39_7Chair_20transplant_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv38_7Chair_20transplant_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv38_7Chair_20transplant_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv38_7Chair_20transplant_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv37_7Chair_20transplant_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv37_7Chair_20transplant_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv37_7Chair_20transplant_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv34_7Chair_20transplant_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv34_7Chair_20transplant_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv34_7Chair_20transplant_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv33_7Chair_20transplant_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv33_7Chair_20transplant_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv33_7Chair_20transplant_7C_C4_B0stanbul_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv32_7Chair_20transplant_7Cplace_ChIJawhoAASnyhQR0LABvJj-zOE_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv32_7Chair_20transplant_7CIstanbul_7Cprocedure"
+    },
+    {
+      "procedure": "hair_transplant",
+      "path": "ai_cache/comparison_7Cv32_7Chair_20transplant_7C_C4_B0stanbul_7Cprocedure"
+    }
+  ],
+  "row_collections": [
+    {
+      "collection": "aesthetic_price_results",
+      "filter": {
+        "city_key": "istanbul"
+      },
+      "price_field": "result",
+      "action": "For rejected price rows set active=false; preserve accepted/retained rows."
+    },
+    {
+      "collection": "explore_python_price_staging",
+      "filter": {
+        "cityKey": [
+          "istanbul",
+          "i̇stanbul"
+        ]
+      },
+      "price_field": "evidence",
+      "action": "Staging is audit-only. Remove only invalid price evidence if cleanup is needed."
+    },
+    {
+      "collection": "explore_curated_prices",
+      "filter": {
+        "city_key": "istanbul"
+      },
+      "action": "Only if a disputed source/amount exists here, remove the corresponding price row."
+    }
+  ],
+  "note": "For shared clinic_price_catalog documents, clear only disputed evidence rows; retain URLs and provider identity. Do not delete a whole Bookimed/WhatClinic host catalog just to remove one provider."
+}

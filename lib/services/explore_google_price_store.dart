@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 import 'explore_price_sanity.dart';
+import 'explore_marketplace_price_freshness.dart';
 import 'explore_clinic_identity.dart';
 import 'explore_search_locale.dart';
 import 'explore_backend_service.dart';
@@ -221,6 +222,7 @@ class ExploreGooglePriceStore {
     final incoming = clinics.where((c) {
       final name = '${c['name'] ?? ''}'.trim();
       if (name.isEmpty) return false;
+      if (_sourceProvenanceFailure(c).isNotEmpty) return false;
       if (clinicIdentityRejectReason(name) != null) return false;
       final source = '${c['price_source_url'] ?? c['source_url'] ?? ''}'.trim();
       if (source.isNotEmpty &&
@@ -389,6 +391,7 @@ class ExploreGooglePriceStore {
   }
 
   static bool _cachedRowHasUsablePrice(Map<String, Object?> row) {
+    if (_sourceProvenanceFailure(row).isNotEmpty) return false;
     final min = (row['price_min'] as num?)?.toDouble() ?? 0;
     if (min <= 0) return false;
     final status = '${row['price_verification_status'] ?? ''}'
@@ -424,6 +427,19 @@ class ExploreGooglePriceStore {
 
   static String mergeKey(Map<String, Object?> row) => _rowMergeKey(row);
 
+  static String _sourceProvenanceFailure(Map<String, Object?> row) {
+    final source = '${row['price_source_url'] ?? row['source_url'] ?? ''}';
+    if ('${row['source_type'] ?? ''}' != 'marketplace' &&
+        !isMarketplaceOrDirectoryHost(source)) return '';
+    if ('${row['source_currency_basis'] ?? ''}' == 'viewer_localized') {
+      return 'marketplace_original_currency_unverified';
+    }
+    return exploreMarketplacePriceDateFailure(
+      updatedAt: '${row['source_price_updated_at'] ?? ''}',
+      dateBasis: '${row['source_price_date_basis'] ?? ''}',
+    );
+  }
+
   static String _rowMergeKey(Map<String, Object?> row) {
     final placeId = '${row['place_id'] ?? row['placeId'] ?? ''}'.trim();
     if (placeId.isNotEmpty) return 'id:$placeId';
@@ -447,6 +463,10 @@ class ExploreGooglePriceStore {
       '${row['price_verified_at'] ?? ''}',
       '${row['price_source_url'] ?? row['source_url'] ?? ''}'.trim(),
       '${row['price_verification_status'] ?? ''}',
+      '${row['source_price_updated_at'] ?? ''}',
+      '${row['source_price_date_text'] ?? ''}',
+      '${row['source_price_date_basis'] ?? ''}',
+      '${row['source_currency_basis'] ?? ''}',
     ].join('|');
   }
 

@@ -223,3 +223,58 @@ class DisplayAndRotationPools(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result['status'], 'failed')
         self.assertEqual(len(result['display_results']), 4)
         self.assertEqual(result['candidate_results'], self.payload)
+
+    async def test_find_more_searches_beyond_the_fast_pass_cache_threshold(self):
+        req = self.req.model_copy(update={'reason': 'user', 'mode': 'foreground'})
+        self.service.store.enqueue(self.service.key(req), req.model_dump())
+        job = self.service.store.claim()
+        response = e.HybridDiscoverResponse(city=req.city, procedure=req.procedure,
+            candidate_results=self.rows, display_results=self.rows[:4])
+        with patch.object(e, '_discover_hybrid_impl', new=AsyncMock(return_value=response)) as discover, \
+                patch.object(e, 'firestore_enabled', return_value=True):
+            await self.service.discover_with_progress(job, req)
+        self.assertEqual(discover.await_count, 1)
+        self.assertTrue(discover.await_args.args[0].background_collection)
+
+    async def test_background_warmup_cannot_erase_find_more_intent(self):
+        req = self.req.model_copy(update={'reason': 'user', 'mode': 'foreground'})
+        store = self.service.store
+        store.enqueue(self.service.key(req), req.model_dump())
+        job = store.claim()
+        store.continue_in_background(job)
+        updated = store.enqueue(self.service.key(self.req), self.req.model_dump())
+        self.assertEqual(updated['request']['reason'], 'user')
+
+    async def test_find_more_restarts_running_warmup_and_retains_validated_pool(self):
+        store = self.service.store
+        store.enqueue(self.service.key(self.req), self.req.model_dump())
+        job = store.claim()
+        store.update_progress(job, self.payload[:5])
+        started = asyncio.Event()
+        async def warmup():
+            try:
+                started.set()
+                await asyncio.Event().wait()
+            except asyncio.CancelledError:
+                store.release(job)
+                raise
+        task = asyncio.create_task(warmup())
+        await started.wait()
+        self.service.active[job['job_id']] = {
+            'task': task, 'state': job, 'lane': 'background', 'request_reason': 'thin_market'}
+        req = self.req.model_copy(update={'reason': 'user', 'mode': 'foreground'})
+        store.enqueue(self.service.key(req), req.model_dump())
+        async def new_search(restarted):
+            store.release(restarted)
+        try:
+            with patch.object(self.service, 'run_one', side_effect=new_search):
+                await self.service.dispatch()
+                await asyncio.gather(*(entry['task'] for entry in self.service.active.values()))
+            result = store.get(job['job_id'])
+            self.assertTrue(task.cancelled())
+            self.assertEqual(result['request']['reason'], 'user')
+            self.assertEqual(result['candidate_results'], self.payload[:5])
+        finally:
+            for entry in self.service.active.values():
+                entry['task'].cancel()
+            await asyncio.gather(*(entry['task'] for entry in self.service.active.values()), return_exceptions=True)

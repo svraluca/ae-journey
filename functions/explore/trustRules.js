@@ -9,6 +9,7 @@ const {clinicIdentityRejectReason} = require('./identity');
 const {isValidExtractedPriceCandidate} = require('./priceSanity');
 const {isMarketplaceOrDirectoryHost} = require('./identity');
 const {hostOf} = require('./parsePrice');
+const {marketplaceRowPriceDateFailure, marketplaceRowCurrencyFailure} = require('./marketplacePriceFreshness');
 
 const TRUSTED_RELATIONS = new Set(['exact', 'variant']);
 const UNTRUSTED_STATUSES = new Set([
@@ -117,6 +118,10 @@ function evaluatePriceTrust(row) {
   }
   if (!relationOk(row)) {
     return {trusted: false, reason: 'bad_procedure_relation', removeClinic: false};
+  }
+  const provenanceFailure = marketplaceRowPriceDateFailure(row) || marketplaceRowCurrencyFailure(row);
+  if (provenanceFailure) {
+    return {trusted: false, reason: provenanceFailure, removeClinic: false};
   }
 
   const min = Number(row.price_min || row.priceMin || 0);

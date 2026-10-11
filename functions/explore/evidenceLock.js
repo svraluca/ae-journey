@@ -105,6 +105,7 @@ function lockPriceEvidence({
   }
 
   if (!isValidExtractedPriceCandidate({
+    ...candidate,
     rawPriceText: candidate.rawPriceText,
     priceMin: candidate.priceMin,
     currency: candidate.currency,

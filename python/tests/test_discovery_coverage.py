@@ -47,7 +47,7 @@ class DiscoveryCoverage(unittest.TestCase):
 
     def test_iran_quote_is_not_a_local_uae_price_despite_saved_city_match(self):
         row = quote(amount=1500).model_copy(update={
-            "procedure_canonical": "rhinoplasty", "currency": "USD",
+            "procedure_canonical": "rhinoplasty", "currency": "USD", "price_max": 3500,
             "raw_procedure_text": "Rhinoplasty", "procedure_detail": "Primary rhinoplasty",
             "raw_evidence": "The cost of rhinoplasty in Iran ranges from 1500 USD to 3500 USD.",
         })
@@ -210,7 +210,7 @@ class OrganicNavigation(unittest.IsolatedAsyncioTestCase):
         self.stack.enter_context(patch.object(e, "discover", side_effect=discover))
         await e.run_growth_search("Abu Dhabi", "chemical_peel", "AE", [], 8, 20, True,
             app_fast=True, serper_first=True, force_full_growth_search=True, serper_request_budget=12)
-        self.assertEqual(caps, [1, 2, 1])  # English, provider menus, local
+        self.assertEqual(caps, [1, 1, 2])  # English, local, provider menus
         self.assertEqual(sum(caps), 4)  # the supplied ceiling cannot raise the global cap
 
     async def test_basic_english_query_finds_four_real_verified_product_pages(self):

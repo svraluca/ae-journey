@@ -5,6 +5,7 @@ import '../services/explore_price_ownership.dart';
 import '../services/explore_price_sanity.dart';
 import '../services/explore_procedure_family.dart';
 import '../services/explore_price_binding.dart';
+import '../services/filter_currency.dart';
 import 'explore_english_procedure_label.dart';
 
 String _formatComparePriceNum(double v, {bool compactThousands = true}) {
@@ -265,15 +266,29 @@ List<OpenAIClinic> _justifiedPricedClinics(
       .toList();
 }
 
-/// Topic header: "from 200–1.400 RON" using only plausible clinic prices.
-/// When clinics mix currencies, the range uses the most common currency only.
+/// Whether a summary would compare prices in different currencies.
+/// Individual cards retain their published currency until the user selects FX.
+bool clinicComparePricesHaveMixedCurrencies(
+  List<OpenAIClinic> clinics, {
+  String? procedure,
+}) => _justifiedPricedClinics(clinics, procedure: procedure)
+    .map((c) => CityCurrency.normalizeCode(c.currency))
+    .toSet()
+    .length > 1;
+
+/// Topic header using comparable published starting prices in one currency.
+/// A mixed-currency set has no shared range without an explicit FX choice.
 String clinicCompareAggregateRangeDisplay(
   List<OpenAIClinic> clinics, {
   String? procedure,
 }) {
   final priced = _justifiedPricedClinics(clinics, procedure: procedure);
   if (priced.length < 2) return '';
-  final sameCurrency = clinicsSharingDominantCurrency(priced);
+  if (priced.map((c) => CityCurrency.normalizeCode(c.currency)).toSet().length >
+      1) {
+    return '';
+  }
+  final sameCurrency = priced;
   sameCurrency.sort((a, b) => a.priceMin.compareTo(b.priceMin));
   final lo = sameCurrency.first.priceMin;
   // Current listed starting prices only — ignore sale "was" amounts in priceMax.
@@ -300,6 +315,10 @@ String clinicCompareAggregateFromDisplay(
 }) {
   final priced = _justifiedPricedClinics(clinics, procedure: procedure);
   if (priced.isEmpty) return '';
+  if (priced.map((c) => CityCurrency.normalizeCode(c.currency)).toSet().length >
+      1) {
+    return '';
+  }
   priced.sort((a, b) => a.priceMin.compareTo(b.priceMin));
   final lowest = priced.first;
   return _formatFromComparePrice(lowest.priceMin, lowest.currency);

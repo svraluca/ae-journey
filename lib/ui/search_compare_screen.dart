@@ -428,7 +428,7 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     final key =
         'comparison|$kExploreComparisonCacheRevision|'
         '${explorePillAiSearchQuery(pill)}|$_localityCacheSeg|$_modeString';
-    final rotated = _openAI.rotateCachedExploreComparison(key);
+    final rotated = _openAI.restoreCachedExploreComparison(key);
     if (rotated != null) {
       setState(() => _comparison = _withResolvedMapCenter(rotated));
       _storePillComparison(pill, _comparison!);
@@ -716,7 +716,7 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     final cachedVisit =
         _pill == 'All' || WorldwideCuratedClinics.isWorldwide(city)
         ? null
-        : _openAI.rotateCachedExploreComparison(
+        : _openAI.restoreCachedExploreComparison(
             'comparison|$kExploreComparisonCacheRevision|${explorePillAiSearchQuery(_pill)}|'
             '${picked.storageKey.isNotEmpty ? picked.storageKey : city}|$_modeString',
           );
@@ -1139,7 +1139,7 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
         : explorePillAiSearchQuery(pill);
     var cached = pill == 'All'
         ? _comparisonByPill[pill]
-        : _openAI.rotateCachedExploreComparison(
+        : _openAI.restoreCachedExploreComparison(
             'comparison|$kExploreComparisonCacheRevision|$selection|$_localityCacheSeg|$_modeString',
           );
     cached ??= _comparisonByPill[pill];
@@ -3050,7 +3050,12 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
               procedure: cmp.topic,
             );
       var pricePart = rangePrice;
-      if (pricePart.isEmpty && !isAll) {
+      if (pricePart.isEmpty &&
+          !isAll &&
+          !clinicComparePricesHaveMixedCurrencies(
+            mapClinics,
+            procedure: cmp.topic,
+          )) {
         final fallback = cmp.rangeLabel.trim();
         final digits = fallback.replaceAll(RegExp(r'\D'), '');
         if (fallback.isNotEmpty && digits.length < 8) pricePart = fallback;
@@ -4633,7 +4638,6 @@ class _ClinicCompareCard extends StatelessWidget {
     final canOpenSource =
         sourceUrl != null &&
         (sourceUrl.scheme == 'https' || sourceUrl.scheme == 'http');
-    final platform = marketplacePlatformLabel(clinic.priceSourceUrl);
     final cardTitle = procedureName.startsWith('Breast augmentation · ')
         ? procedureName.replaceFirst(' · ', '\n')
         : procedureName;
@@ -4712,26 +4716,40 @@ class _ClinicCompareCard extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 4),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.place_outlined,
-                        size: 10,
-                        color: ProcedureSelectionTheme.muted,
-                      ),
-                      const SizedBox(width: 3),
-                      Expanded(
-                        child: Text(
-                          place,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: ProcedureSelectionTypography.body(
-                            size: 10,
-                            color: ProcedureSelectionTheme.muted,
-                          ),
+                  Tooltip(
+                    message: canOpenSource ? 'Open published price page' : '',
+                    child: Semantics(
+                      link: canOpenSource,
+                      child: InkWell(
+                        onTap: canOpenSource
+                            ? () => launchUrl(
+                                sourceUrl,
+                                mode: LaunchMode.externalApplication,
+                              )
+                            : null,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.place_outlined,
+                              size: 10,
+                              color: ProcedureSelectionTheme.muted,
+                            ),
+                            const SizedBox(width: 3),
+                            Expanded(
+                              child: Text(
+                                place,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: ProcedureSelectionTypography.body(
+                                  size: 10,
+                                  color: ProcedureSelectionTheme.muted,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -4741,23 +4759,6 @@ class _ClinicCompareCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 if (price.isNotEmpty) _PriceLabel(price: price),
-                if (price.isNotEmpty && canOpenSource)
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 3),
-                      minimumSize: const Size(0, 26),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      foregroundColor: ProcedureSelectionTheme.muted,
-                    ),
-                    onPressed: () => launchUrl(
-                      sourceUrl!,
-                      mode: LaunchMode.externalApplication,
-                    ),
-                    child: Text(
-                      platform.isEmpty ? 'Published price' : '$platform price',
-                      style: const TextStyle(fontSize: 10),
-                    ),
-                  ),
                 if (price.isNotEmpty) const SizedBox(height: 12),
                 Material(
                   color: saved
