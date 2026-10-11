@@ -1,0 +1,20 @@
+{
+  "version": "0.11.99",
+  "extract_revision": "e34",
+  "fixture_cases": 17,
+  "python_tests": 102,
+  "functions_test_files": 41,
+  "functions_tests": 360,
+  "flutter_tests": 37,
+  "health": {
+    "ok": true,
+    "version": "0.11.99",
+    "price_extract_revision": "e34",
+    "price_index": true,
+    "discovery_jobs": true,
+    "worker_version": "0.11.99",
+    "progressive_jobs": true
+  },
+  "production_database_mutated": false,
+  "live_paid_discovery_tested": false
+}

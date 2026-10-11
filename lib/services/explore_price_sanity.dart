@@ -34,7 +34,8 @@ import 'explore_marketplace_price_freshness.dart';
 /// e31: isolate WhatClinic current service menus from reviews and adjacent services.
 /// e32: keep source dates and original currencies; reject attributed market estimates.
 /// e33: publication dates do not expire fees; keep source ownership and currency checks.
-const kExplorePriceExtractRevision = 'e33';
+/// e34: reject peel product/container quotes even on a clinic price page.
+const kExplorePriceExtractRevision = 'e34';
 
 /// Hard gate: a number from clinic HTML is not a procedure price until this
 /// passes. AI must never invent a replacement amount.
@@ -2193,6 +2194,12 @@ PriceSanityResult evaluateExtractedPriceCandidate({
   }
   final sourceUri = Uri.tryParse(sourceUrl);
   final sourceHost = sourceUri?.host.toLowerCase() ?? '';
+  if (cachedRegExp(r'peels?|biorepeel|prx.?t33|cosmelan', caseSensitive: false)
+          .hasMatch(procedure) &&
+      cachedRegExp(r'/(?:product-page|products?|shop|collections|store)/|/cart(?:[/?#]|$)',
+              caseSensitive: false).hasMatch(sourceUri?.path ?? '')) {
+    return const PriceSanityResult.reject('peel_product_not_procedure');
+  }
   if (const ['beautyforqueens.com', 'cliniciestetice.ro', 'clinici-estetice.ro']
       .any((host) => sourceHost == host || sourceHost.endsWith('.$host')) ||
       cachedRegExp(r'(?:^|/)(?:demo|template|example)(?:[-/]|$)', caseSensitive: false)

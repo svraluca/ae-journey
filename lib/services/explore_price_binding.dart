@@ -173,6 +173,11 @@ String? exploreNonTreatmentPriceReason({
   if (_publishedPriceIsSuperseded(evidence, priceMin, currency, prices)) {
     return 'superseded_price';
   }
+  if (cachedRegExp(r'peels?|biorepeel|prx.?t33|cosmelan', caseSensitive: false)
+          .hasMatch(procedure) && prices.length == 1 && evidence.length <= 300) {
+    final productFailure = exploreAncillaryPriceReason(procedure, evidence);
+    if (productFailure != null) return productFailure;
+  }
   String? rejected;
   for (var i = 0; i < prices.length; i++) {
     final p = prices[i];

@@ -16,7 +16,10 @@ void main() {
        'price_extract_revision': 'e33'}), false);
     expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
       {'ok': true, 'version': '0.11.98', 'worker_version': '0.11.98',
-       'price_extract_revision': 'e33'}), true);
+       'price_extract_revision': 'e33'}), false);
+    expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
+      {'ok': true, 'version': '0.11.99', 'worker_version': '0.11.99',
+       'price_extract_revision': 'e34'}), true);
     expect(ExplorePriceDiscoveryTool.supportsCurrentPriceRules(
       {'ok': true, 'version': '0.12.0', 'worker_version': '0.12.0',
        'price_extract_revision': 'e33'}), true);

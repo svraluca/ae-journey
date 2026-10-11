@@ -97,7 +97,7 @@ class Catalog:
             if procedure != 'chemical_peel':
                 return []
             return ['(' + ' OR '.join(f'"{name}"' for name in group)
-                    + f') {city} price' for group in self.peel_search_groups]
+                    + f') {city} treatment price' for group in self.peel_search_groups]
         if stage == 'semantic':
             label = term
             return [f'Clinics in {city} publishing their own treatment fees for {label}; '

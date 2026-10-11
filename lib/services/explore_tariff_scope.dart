@@ -9,6 +9,19 @@ bool exploreMarketComparisonContext(String raw) => cachedRegExp(
 
 String? exploreAncillaryPriceReason(String procedure, String prefix) {
   final t = foldExploreCityText(prefix);
+  if (cachedRegExp(r'peels?|biorepeel|prx.?t33|cosmelan', caseSensitive: false)
+      .hasMatch(procedure)) {
+    final purchase = cachedRegExp(
+      r'\b(?:add\s+to\s+cart|buy\s+now|buy\s+online|shopping\s+cart|wholesale|supplier|distributor|at[- ]home|home[- ]use|take[- ]home|sepete\s+ekle|satin\s+al)\b',
+    ).hasMatch(t);
+    final container = cachedRegExp(
+      r'\b(?:bottles?|vials?|ampoules?|flacons?|kits?|sise\w*|siseler|solutions?|solusyon\w*|\d+(?:[.,]\d+)?\s*ml)\b',
+    ).hasMatch(t);
+    final session = cachedRegExp(
+      r'\b(?:per\s+session|single\s+session|treatment\s+session|professional\s+application|clinic\s+application|(?:face|facial|peel|peeling)\s+application|seans|sedinta)\b',
+    ).hasMatch(t);
+    if (purchase || (container && !session)) return 'peel_product_not_procedure';
+  }
   if (cachedRegExp(
     r'\b(?:international\s+flights?|flights?|airfare|travel\s+insurance|extra\s+hotel\s+nights?|companion\s+accommodation|personal\s+meals|vuelos?|seguro\s+de\s+viaje|ucak\s+bilet\w*|seyahat\s+sigorta\w*|vols?|assurance\s+voyage|flug\w*|reiseversicherung|voli|assicurazione\s+viaggio)\b[^|\n€$£₺]{0,60}$',
   ).hasMatch(t)) {

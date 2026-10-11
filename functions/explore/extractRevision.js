@@ -29,6 +29,7 @@
 /// e31: isolate WhatClinic current service menus from reviews and adjacent services.
 /// e32: keep source dates and original currencies; reject attributed market estimates.
 /// e33: publication dates do not expire fees; keep source ownership and currency checks.
-const EXTRACT_REVISION = 'e33';
+// e34: reject peel product/container quotes even on a clinic price page.
+const EXTRACT_REVISION = 'e34';
 
 module.exports = {EXTRACT_REVISION};

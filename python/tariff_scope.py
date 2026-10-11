@@ -30,6 +30,19 @@ HAIR_ADJUNCT_OWNER = re.compile(
 
 def ancillary_price_reason(procedure, price_prefix):
     prefix = fold(price_prefix)
+    if procedure == 'chemical_peel':
+        # Apply to the priced row, not the whole clinic page. A mixed menu
+        # may contain both genuine sessions and take-home products.
+        purchase = re.search(r'\b(?:add\s+to\s+cart|buy\s+now|buy\s+online|shopping\s+cart|'
+                             r'wholesale|supplier|distributor|at[- ]home|home[- ]use|take[- ]home|sepete\s+ekle|satin\s+al)\b', prefix)
+        container = re.search(r'\b(?:bottles?|vials?|ampoules?|flacons?|kits?|sise\w*|siseler|'
+                              r'solutions?|solusyon\w*|'
+                              r'\d+(?:[.,]\d+)?\s*ml)\b', prefix)
+        session = re.search(r'\b(?:per\s+session|single\s+session|treatment\s+session|'
+                            r'professional\s+application|clinic\s+application|'
+                            r'(?:face|facial|peel|peeling)\s+application|seans|sedinta)\b', prefix)
+        if purchase or (container and not session):
+            return 'peel_product_not_procedure'
     if TRAVEL_OWNER.search(prefix):
         return 'travel_cost_not_procedure'
     if procedure == 'hair_transplant' and HAIR_ADJUNCT_OWNER.search(prefix):

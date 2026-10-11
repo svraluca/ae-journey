@@ -831,7 +831,7 @@ function evaluateExtractedPriceCandidate({
     source_currency_basis: source_currency_basis || sourceCurrencyBasis});
   if (currencyFailure) return {accepted: false, reason: currencyFailure};
   if (medicalQaPriceContext(sourceUrl, pageText || rawEvidence)) return {accepted: false, reason: 'medical_qa_price'};
-  const scopeFailure = quoteScopeReason({procedure, rawEvidence, priceMin: amount, currency});
+  const scopeFailure = quoteScopeReason({procedure, rawEvidence, priceMin: amount, currency, sourceUrl, rawProcedureText});
   if (scopeFailure) return {accepted: false, reason: scopeFailure};
   const injectableFailure = injectableScopeRejection({procedure,
     label: rawProcedureText, evidence: rawEvidence, provider: clinicName, sourceUrl});

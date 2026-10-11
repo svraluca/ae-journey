@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.98 — bounded peel variants and provider-directory pagination
+Aesthetic Procedure Price Discovery v0.11.99 — reject peel product prices independently of clinic identity
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -61,7 +61,7 @@ from tariff_scope import ancillary_price_reason, comparison_price_context, calen
 from amount_policy import procedure_amount_is_plausible
 from marketplace_price_freshness import bookimed_price_date, marketplace_price_date_failure
 
-PRICE_EXTRACT_REVISION = "e33"
+PRICE_EXTRACT_REVISION = "e34"
 
 try:
     from google.cloud import firestore
@@ -2459,11 +2459,21 @@ def is_hard_retail_url(url: str, procedure: str) -> bool:
     Reject the whole page only for explicit shop/product URL structures.
     Mixed clinic price lists are allowed through and filtered block-by-block.
     """
-    if canonicalize_procedure(procedure) != "filler":
+    if canonicalize_procedure(procedure) not in {"filler", "chemical_peel"}:
         return False
 
     u = url.lower()
     return any(tok in u for tok in RETAIL_URL_TOKENS)
+
+
+def peel_product_scope_reason(procedure: str, label: str, evidence: str) -> str | None:
+    if canonicalize_procedure(procedure) != 'chemical_peel':
+        return None
+    # Compact single-price rows can put the fee before the product label.
+    # Never scan a whole multi-price menu for shopping words.
+    if len(evidence) <= 300 and len(list(iter_exact_price_matches(evidence))) == 1:
+        label = f'{label} {evidence}'
+    return ancillary_price_reason('chemical_peel', label)
 
 
 def is_retail_evidence_block(text: str, procedure: str) -> bool:
@@ -9063,6 +9073,11 @@ def validate_evidence(
     if scope_failure:
         return False, False, 0.05, scope_failure, evidence_type
     bound = priced_line_text(evidence.raw_evidence, evidence.price_min, evidence.currency)
+    product_failure = peel_product_scope_reason(
+        canonicalize_procedure(evidence.raw_procedure_text),
+        evidence.raw_procedure_text, evidence.raw_evidence)
+    if product_failure:
+        return False, False, 0.05, product_failure, evidence_type
     if procedure_line_is_bundle(f'{evidence.raw_procedure_text} | {bound}',
                                 canonicalize_procedure(evidence.raw_procedure_text)):
         return False, False, 0.10, 'package_not_procedure', evidence_type
@@ -12496,6 +12511,10 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
         row.raw_procedure_text, blob, row.clinic_name, row.source_url)
     if scope_failure:
         return scope_failure
+    product_failure = peel_product_scope_reason(row.procedure_canonical,
+        row.raw_procedure_text, row.raw_evidence)
+    if product_failure:
+        return product_failure
     if procedure_line_is_bundle(f'{row.raw_procedure_text} | ' + priced_line_text(
             row.raw_evidence, row.price_min, row.currency), row.procedure_canonical):
         return 'package_not_procedure'
@@ -12648,6 +12667,14 @@ def trusted_price_result(row: ClinicPriceResult) -> bool:
     if injectable_scope_rejection(row.procedure_canonical,
             row.raw_procedure_text, blob, row.clinic_name, row.source_url):
         return False
+    if peel_product_scope_reason(row.procedure_canonical,
+            row.raw_procedure_text, row.raw_evidence):
+        return False
+    for match, amount, currency in iter_exact_price_matches(row.raw_evidence):
+        if abs(amount - row.price_min) <= .011 and currency == row.currency:
+            if ancillary_price_reason(row.procedure_canonical,
+                    row.raw_evidence[max(0, match.start()-150):match.start()]):
+                return False
     if procedure_line_is_bundle(f'{row.raw_procedure_text} | ' + priced_line_text(
             row.raw_evidence, row.price_min, row.currency), row.procedure_canonical):
         return False
@@ -18916,7 +18943,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.98",
+    version="0.11.99",
     lifespan=app_lifespan,
 )
 

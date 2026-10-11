@@ -46,9 +46,15 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final clock = DateTime.utc(2026, 10, 10, 12);
 
-  test('the freshly checked published peel survives without an age exception', () {
+  test('dated published peel survives current verification; old revisions are quarantined', () {
     final receipt = jsonDecode(File('verification/published_peel_e33.json').readAsStringSync()) as Map;
-    final raw = (receipt['app_row'] as Map).cast<String, Object?>();
+    final audited = (receipt['app_row'] as Map).cast<String, Object?>();
+    final obsolete = stripInvalidCachedPriceJson(audited,
+      procedure: 'chemical peel', city: 'Istanbul', logRejects: false);
+    expect(obsolete['price_min'], 0);
+    // Policy fixture for a newly verified row, not a restamp of production data.
+    // Preserve the historical audit file and its actual verification revision.
+    final raw = {...audited, 'price_extract_revision': kExplorePriceExtractRevision};
     final clinic = OpenAIClinic.fromJson(raw);
     expect(clinic.priceMin, 2735);
     expect(CityCurrency.normalizeCode(clinic.currency), CityCurrency.normalizeCode('USD'));

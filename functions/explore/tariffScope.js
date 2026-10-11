@@ -11,6 +11,12 @@ function comparisonPriceContext(raw) {
 
 function ancillaryPriceReason(procedure, prefix) {
   const t = fold(prefix);
+  if (/peels?|biorepeel|prx.?t33|cosmelan/i.test(procedure)) {
+    const purchase = /\b(?:add\s+to\s+cart|buy\s+now|buy\s+online|shopping\s+cart|wholesale|supplier|distributor|at[- ]home|home[- ]use|take[- ]home|sepete\s+ekle|satin\s+al)\b/.test(t);
+    const container = /\b(?:bottles?|vials?|ampoules?|flacons?|kits?|sise\w*|siseler|solutions?|solusyon\w*|\d+(?:[.,]\d+)?\s*ml)\b/.test(t);
+    const session = /\b(?:per\s+session|single\s+session|treatment\s+session|professional\s+application|clinic\s+application|(?:face|facial|peel|peeling)\s+application|seans|sedinta)\b/.test(t);
+    if (purchase || (container && !session)) return 'peel_product_not_procedure';
+  }
   if (/\b(?:international\s+flights?|flights?|airfare|travel\s+insurance|extra\s+hotel\s+nights?|companion\s+accommodation|personal\s+meals|vuelos?|seguro\s+de\s+viaje|ucak\s+bilet\w*|seyahat\s+sigorta\w*|vols?|assurance\s+voyage|flug\w*|reiseversicherung|voli|assicurazione\s+viaggio)\b[^|\n€$£₺]{0,60}$/.test(t)) {
     return 'travel_cost_not_procedure';
   }
@@ -37,14 +43,24 @@ function number(raw) {
   return Number(t.replace(',', '.'));
 }
 
-function quoteScopeReason({procedure, rawEvidence, priceMin, currency}) {
+function quoteScopeReason({procedure, rawEvidence, priceMin, currency, sourceUrl = '', rawProcedureText = ''}) {
+  if (/peels?|biorepeel|prx.?t33|cosmelan/i.test(procedure) &&
+      /\/(?:product-page|products?|shop|collections|store)\/|\/cart(?:[/?#]|$)/i.test(sourceUrl)) {
+    return 'peel_product_not_procedure';
+  }
   if (comparisonPriceContext(rawEvidence)) return 'market_comparison_table';
   const codes = {EUR: 'EUR\\b|euros?\\b|€', USD: 'USD\\b|\\$', GBP: 'GBP\\b|£',
     TRY: 'TRY\\b|TL\\b|₺', RON: 'RON\\b|lei\\b'};
   const cur = codes[String(currency).toUpperCase()] || `${String(currency).replace(/[^A-Z]/gi, '')}\\b`;
   const num = '(?:\\d{1,3}(?:[., \\u00a0\\u202f]\\d{3})+(?:[.,]\\d{1,2})?|\\d+(?:[.,]\\d{1,2})?)';
   const regex = new RegExp(`(?<![\\d.,])(?:(?:${cur})\\s*(${num})|(${num})\\s*(?:${cur}))(?!\\d|[.,]\\d)`, 'gi');
-  for (const match of String(rawEvidence || '').matchAll(regex)) {
+  const matches = [...String(rawEvidence || '').matchAll(regex)];
+  if (/peels?|biorepeel|prx.?t33|cosmelan/i.test(procedure)) {
+    const row = matches.length === 1 && String(rawEvidence || '').length <= 300 ? rawEvidence : '';
+    const product = ancillaryPriceReason(procedure, `${rawProcedureText} ${row}`);
+    if (product) return product;
+  }
+  for (const match of matches) {
     const amount = number(match[1] || match[2]);
     if (Math.abs(amount - Number(priceMin)) > .011) continue;
     const prefix = rawEvidence.slice(Math.max(0, match.index - 150), match.index);

@@ -1,0 +1,106 @@
+[
+  {
+    "id": "bottle",
+    "label": "Our PRX-T33 bottle 4 ml",
+    "amount": 85,
+    "reject": true
+  },
+  {
+    "id": "acid_solution",
+    "label": "Our TCA peel solution 30 ml",
+    "amount": 25,
+    "reject": true
+  },
+  {
+    "id": "vial",
+    "label": "Our BioRePeel vial 6 ml",
+    "amount": 120,
+    "reject": true
+  },
+  {
+    "id": "ambiguous_volume",
+    "label": "Our PRX-T33 4 ml",
+    "amount": 90,
+    "reject": true
+  },
+  {
+    "id": "turkish_bottle",
+    "label": "Our BioRePeel şişe 6 ml",
+    "amount": 120,
+    "reject": true
+  },
+  {
+    "id": "cart_overrides_treatment_keyword",
+    "label": "Buy online PRX-T33 facial treatment bottle 4 ml",
+    "amount": 85,
+    "reject": true
+  },
+  {
+    "id": "retail_treatment_marketing",
+    "label": "Our PRX-T33 facial treatment 4 ml",
+    "amount": 85,
+    "reject": true
+  },
+  {
+    "id": "acid_solution_no_volume",
+    "label": "Our TCA peel solution",
+    "amount": 25,
+    "reject": true
+  },
+  {
+    "id": "kit",
+    "label": "Our BioRePeel kit",
+    "amount": 180,
+    "reject": true
+  },
+  {
+    "id": "take_home",
+    "label": "Our glycolic acid peel at-home treatment",
+    "amount": 85,
+    "reject": true
+  },
+  {
+    "id": "biorepeel_session",
+    "label": "Our BioRePeel facial treatment per session",
+    "amount": 150,
+    "reject": false
+  },
+  {
+    "id": "prx_session",
+    "label": "Our PRX-T33 facial treatment per session",
+    "amount": 180,
+    "reject": false
+  },
+  {
+    "id": "clinic_application",
+    "label": "Our PRX-T33 facial treatment 4 ml per session",
+    "amount": 180,
+    "reject": false
+  },
+  {
+    "id": "glycolic_session",
+    "label": "Our glycolic acid peel per session",
+    "amount": 100,
+    "reject": false
+  },
+  {
+    "id": "salicylic_session",
+    "label": "Our salicylic acid peel per session",
+    "amount": 110,
+    "reject": false
+  },
+  {
+    "id": "product_url",
+    "label": "Our PRX-T33 facial treatment per session",
+    "amount": 180,
+    "url": "https://aster.example/products/prx-t33/",
+    "reject": true
+  },
+  {
+    "id": "price_before_product_label",
+    "label": "Our PRX-T33 bottle 4 ml",
+    "amount": 85,
+    "price_first": true,
+    "reject": true
+  }
+]
