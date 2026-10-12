@@ -58,12 +58,12 @@ class PeelSearchPolicy(unittest.IsolatedAsyncioTestCase):
                 serper_request_budget=budget, initial_serper_requests=initial)
         return calls
 
-    async def test_sparse_peels_try_variants_after_broad_local_and_marketplace(self):
+    async def test_sparse_peels_reach_priced_menus_before_broad_articles_and_variants(self):
         calls = await self.run_search()
         self.assertEqual([r.progressive_stage for r in calls],
-                         ['primary', 'local', 'marketplace', 'subtypes'])
+                         ['marketplace', 'primary', 'local', 'subtypes'])
         self.assertEqual(sum(r.serper_request_cap for r in calls), 6)
-        self.assertEqual(calls[0].query_override, ['chemical peel Ankara price'])
+        self.assertEqual(calls[1].query_override, ['chemical peel Ankara price'])
         self.assertEqual(calls[-1].procedure, 'chemical_peel')
 
     async def test_four_request_allowance_and_prior_requests_leave_no_extra_spend(self):
@@ -75,7 +75,7 @@ class PeelSearchPolicy(unittest.IsolatedAsyncioTestCase):
 
     async def test_goal_met_does_not_buy_variant_queries(self):
         calls = await self.run_search(primary_succeeds=True)
-        self.assertEqual([r.progressive_stage for r in calls], ['primary'])
+        self.assertEqual([r.progressive_stage for r in calls], ['marketplace', 'primary'])
 
 
 class PeelDirectoryNavigation(unittest.IsolatedAsyncioTestCase):

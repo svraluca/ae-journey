@@ -431,9 +431,11 @@ class ExploreGooglePriceStore {
     final source = '${row['price_source_url'] ?? row['source_url'] ?? ''}';
     if ('${row['source_type'] ?? ''}' != 'marketplace' &&
         !isMarketplaceOrDirectoryHost(source)) return '';
-    if ('${row['source_currency_basis'] ?? ''}' == 'viewer_localized') {
-      return 'marketplace_original_currency_unverified';
-    }
+    final currencyFailure = exploreMarketplaceCurrencyFailure(
+      sourceUrl: source, basis: '${row['source_currency_basis'] ?? ''}',
+      currency: '${row['currency'] ?? ''}',
+    );
+    if (currencyFailure.isNotEmpty) return currencyFailure;
     return exploreMarketplacePriceDateFailure(
       updatedAt: '${row['source_price_updated_at'] ?? ''}',
       dateBasis: '${row['source_price_date_basis'] ?? ''}',

@@ -827,7 +827,7 @@ function evaluateExtractedPriceCandidate({
     source_price_date_text: source_price_date_text || sourcePriceDateText,
     source_price_date_basis: source_price_date_basis || sourcePriceDateBasis});
   if (dateFailure) return {accepted: false, reason: dateFailure};
-  const currencyFailure = marketplaceRowCurrencyFailure({sourceUrl, sourceType: sourceType || source_type,
+  const currencyFailure = marketplaceRowCurrencyFailure({sourceUrl, currency, sourceType: sourceType || source_type,
     source_currency_basis: source_currency_basis || sourceCurrencyBasis});
   if (currencyFailure) return {accepted: false, reason: currencyFailure};
   if (medicalQaPriceContext(sourceUrl, pageText || rawEvidence)) return {accepted: false, reason: 'medical_qa_price'};

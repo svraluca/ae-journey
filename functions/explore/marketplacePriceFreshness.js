@@ -57,6 +57,12 @@ function marketplaceRowCurrencyFailure(row) {
   const sourceType = String(row.source_type || row.sourceType || '').toLowerCase();
   const sourceUrl = row.price_source_url || row.priceSourceUrl || row.source_url || row.sourceUrl || '';
   if (sourceType !== 'marketplace' && !isMarketplaceOrDirectoryHost(sourceUrl)) return '';
+  if (sourceCurrencyFields(row).source_currency_basis === 'platform_converted') {
+    let host = '';
+    try { host = new URL(sourceUrl).hostname.toLowerCase(); } catch (_) { /* Reject below. */ }
+    return (host === 'whatclinic.com' || host === 'www.whatclinic.com') && row.currency === 'EUR'
+      ? '' : 'marketplace_conversion_currency_unstable';
+  }
   return sourceCurrencyFields(row).source_currency_basis === 'viewer_localized'
     ? 'marketplace_original_currency_unverified' : '';
 }

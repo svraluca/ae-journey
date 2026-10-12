@@ -16,6 +16,7 @@ import 'location_change_sheet.dart';
 import 'clinics_for_procedure_screen.dart';
 import 'clinic_profile_screen.dart';
 import 'clinic_compare_price_display.dart';
+import 'explore_price_details.dart';
 import '../services/auth_service.dart';
 import '../services/explore_backend_service.dart';
 import '../services/explore_seed_catalog.dart';
@@ -155,6 +156,11 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     if (_visibleCompareComplete) return '';
     final note = _openAI.backgroundHuntNote.value;
     if (note == null || note.city != _city || note.pill != _pill) return '';
+    if ((note.isSearching || note.jobId.isNotEmpty) &&
+        clinicsForCompareDisplay(_comparison?.clinics ?? const [],
+          procedure: exploreVisibleComparePill(_pill), city: _city).isNotEmpty) {
+      return '';
+    }
     return note.message;
   }
 
@@ -294,6 +300,13 @@ class _SearchCompareScreenState extends State<SearchCompareScreen>
     final note = _openAI.backgroundHuntNote.value;
     // Other city/pill jobs must not rebuild and revalidate the visible list.
     if (note != null && (note.pill != _pill || note.city != _city)) return;
+    if (note != null && (note.isSearching || note.jobId.isNotEmpty) &&
+        clinicsForCompareDisplay(_comparison?.clinics ?? const [],
+          procedure: exploreVisibleComparePill(_pill), city: _city).isNotEmpty) {
+      // New rows arrive through the comparison callback. Page counters and
+      // hidden background status need not rebuild a usable map/card list.
+      return;
+    }
     // Job progress is hidden once four cards are visible. Rebuilding the
     // entire map/list for invisible status updates caused scroll stalls.
     if (_comparison != null &&
@@ -4411,19 +4424,12 @@ class _ProcedureResultCard extends StatelessWidget {
                       ),
                     ),
                   ],
-                  if (loadingMore) ...[
-                    const SizedBox(height: 16),
-                    ExploreClinicLoading(
-                      city: subtitleCity.trim().isEmpty ? city : subtitleCity,
-                      compact: true,
-                    ),
-                  ],
                 ],
               );
             },
           ),
         if (!showInitialSearch &&
-            !loadingMore &&
+            (!loadingMore || sortedClinics.isNotEmpty) &&
             backgroundNote.isNotEmpty) ...[
           const SizedBox(height: 10),
           Text(
@@ -4435,7 +4441,7 @@ class _ProcedureResultCard extends StatelessWidget {
             ),
           ),
         ],
-        if (!showInitialSearch && !loadingMore && onFindMore != null)
+        if (!showInitialSearch && onFindMore != null)
           Align(
             alignment: Alignment.centerLeft,
             child: TextButton(
@@ -4758,7 +4764,8 @@ class _ClinicCompareCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                if (price.isNotEmpty) _PriceLabel(price: price),
+                if (price.isNotEmpty) ExplorePriceDetailsButton(
+                  clinic: clinic, child: _PriceLabel(price: price)),
                 if (price.isNotEmpty) const SizedBox(height: 12),
                 Material(
                   color: saved

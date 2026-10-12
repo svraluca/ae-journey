@@ -1,6 +1,6 @@
 
 """
-Aesthetic Procedure Price Discovery v0.11.99 — reject peel product prices independently of clinic identity
+Aesthetic Procedure Price Discovery v0.12.0 — reuse verified partials and retain explicitly identified platform conversions
 
 Main fixes vs v0.5:
 - hard reject retail skincare/product pages for injectable procedures
@@ -3279,7 +3279,8 @@ async def _fetch_document(url: str, *, xml: bool = False) -> str | None:
                             headers={"Accept": (
                                 "application/xml,text/xml,text/plain,text/html,*/*;q=0.5"
                                 if xml else "text/html,application/xhtml+xml"
-                            )},
+                            ), **({"Cookie": "cc=fr"} if host_of(url) in {
+                                "whatclinic.com", "www.whatclinic.com"} else {})},
                         )
                     # Procedure microsites are trusted by parent-domain
                     # ownership. A root subdomain redirecting to an unrelated
@@ -3569,12 +3570,13 @@ def marketplace_currency_basis(html: str, url: str) -> str:
     WhatClinic's country selector controls the rendered amounts. The same
     provider can arrive as RON on one server and EUR on another. That HTML
     identifies a published viewer price, not the clinic's original currency;
-    only a separately verified original-price source can replace it.
+    The user permits these published conversions when their provenance is
+    retained. Fetching uses the site's EUR viewer setting consistently.
     """
     if 'whatclinic.com' not in host_of(url) or not html:
         return ''
     if re.search(r'class\s*=\s*[\"\'][^\"\']*\b(?:link-country-selector|country-selector-menu)\b', html, re.I):
-        return 'viewer_localized'
+        return 'platform_converted'
     return ''
 
 
@@ -12487,6 +12489,10 @@ def trusted_price_failure(row: ClinicPriceResult) -> str:
             return date_failure
     if row.source_type == 'marketplace' and row.source_currency_basis == 'viewer_localized':
         return 'marketplace_original_currency_unverified'
+    if row.source_currency_basis == 'platform_converted' and (
+            host_of(row.source_url) not in {'whatclinic.com', 'www.whatclinic.com'}
+            or row.currency != 'EUR'):
+        return 'marketplace_conversion_currency_unstable'
     if news_report_url(row.source_url):
         return "news_report"
     if country_price_guide_path(row.source_url):
@@ -12654,6 +12660,10 @@ def trusted_price_result(row: ClinicPriceResult) -> bool:
             row.raw_evidence, row.source_url, row.evidence_type)):
         return False
     if row.source_type == 'marketplace' and row.source_currency_basis == 'viewer_localized':
+        return False
+    if row.source_currency_basis == 'platform_converted' and (
+            host_of(row.source_url) not in {'whatclinic.com', 'www.whatclinic.com'}
+            or row.currency != 'EUR'):
         return False
     if (row.source_type == "marketplace" and marketplace_price_date_failure(
             row.source_price_updated_at, row.source_price_date_basis)):
@@ -18158,7 +18168,7 @@ async def discover(req: DiscoverRequest) -> DiscoverResponse:
                     and not any(row.source_url == lead.url and _app_can_show_row(row) for row in rows)):
                 evidence = payload[1] if payload else []
                 if (not evidence or any(getattr(quote, "source_currency_basis", "")
-                                        == "viewer_localized" for quote in evidence)):
+                                        in {"viewer_localized", "platform_converted"} for quote in evidence)):
                     # A viewer-currency fee cannot establish the provider's
                     # original amount. Reuse an actual website link on this
                     # fetched profile, never guess a domain or spend a search
@@ -18943,7 +18953,7 @@ async def app_lifespan(_app):
 
 app = FastAPI(
     title="Aesthetic Procedure Price Discovery",
-    version="0.11.99",
+    version="0.12.0",
     lifespan=app_lifespan,
 )
 

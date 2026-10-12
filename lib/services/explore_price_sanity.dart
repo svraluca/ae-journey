@@ -2710,9 +2710,12 @@ Map<String, Object?> stripInvalidCachedPriceJson(
       isMarketplaceOrDirectoryHost(
     '${row['price_source_url'] ?? row['source_url'] ?? ''}',
   );
-  final sourceDateFailure = sourceIsMarketplace &&
-      '${row['source_currency_basis'] ?? ''}' == 'viewer_localized'
-      ? 'marketplace_original_currency_unverified'
+  final sourceCurrencyFailure = exploreMarketplaceCurrencyFailure(
+    sourceUrl: '${row['price_source_url'] ?? row['source_url'] ?? ''}',
+    basis: '${row['source_currency_basis'] ?? ''}', currency: '${row['currency'] ?? ''}',
+  );
+  final sourceDateFailure = sourceIsMarketplace && sourceCurrencyFailure.isNotEmpty
+      ? sourceCurrencyFailure
       : sourceIsMarketplace ? exploreMarketplacePriceDateFailure(
     updatedAt: '${row['source_price_updated_at'] ?? ''}',
     dateBasis: '${row['source_price_date_basis'] ?? ''}',

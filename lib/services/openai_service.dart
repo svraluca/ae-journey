@@ -2507,9 +2507,10 @@ Return JSON only.
                 lastPublishedRows = state.rowsFingerprint;
                 completionPublished = completionPublished || firstCompletion;
                 await publishToolRows(state.rows, replace: state.status == 'completed');
-                // Intermediate rows are shown while final identity checks run.
-                // Persist only the completed accepted set to the app cache.
-                if (state.status == 'completed') unawaited(persistAcceptedRows());
+                // These rows already passed provider, locality and fee checks.
+                // Save each accepted partial so reopening never needs to wait
+                // for the rest of a long discovery job to finish.
+                unawaited(persistAcceptedRows());
               }
               if (canPublishNote()) reportCompareDisplayCount(cacheKey, shown.length);
               if (canPublishNote() && backgroundHuntNote.value?.jobId == job.id) {
@@ -21280,7 +21281,7 @@ DateTime? _parseExploreDate(Object? raw) {
 /// reach this branch by omitting its evidence.
 bool exploreCuratedPriceIsTrusted(OpenAIClinic c) {
   if (isMarketplaceOrDirectoryHost(c.priceSourceUrl) &&
-      (c.sourceCurrencyBasis == 'viewer_localized' ||
+      (exploreMarketplaceCurrencyFailure(sourceUrl: c.priceSourceUrl, basis: c.sourceCurrencyBasis, currency: CityCurrency.normalizeCode(c.currency)).isNotEmpty ||
           exploreMarketplacePriceDateFailure(
             updatedAt: c.sourcePriceUpdatedAt,
             dateBasis: c.sourcePriceDateBasis,
@@ -21342,8 +21343,8 @@ ExploreValidatedRows _validateToolCompareRows(
     }
     if ((row.sourceType == 'marketplace' ||
             isMarketplaceOrDirectoryHost(row.sourceUrl)) &&
-        row.sourceCurrencyBasis == 'viewer_localized') {
-      dropRow('marketplace_original_currency_unverified');
+        exploreMarketplaceCurrencyFailure(sourceUrl: row.sourceUrl, basis: row.sourceCurrencyBasis, currency: row.currency).isNotEmpty) {
+      dropRow(exploreMarketplaceCurrencyFailure(sourceUrl: row.sourceUrl, basis: row.sourceCurrencyBasis, currency: row.currency));
       continue;
     }
 
@@ -21589,7 +21590,7 @@ bool explorePriceIsVerified(OpenAIClinic c) {
 bool _explorePriceIsVerifiedUncached(OpenAIClinic c) {
   if ((c.sourceType == 'marketplace' ||
           isMarketplaceOrDirectoryHost(c.priceSourceUrl)) &&
-      c.sourceCurrencyBasis == 'viewer_localized') return false;
+      exploreMarketplaceCurrencyFailure(sourceUrl: c.priceSourceUrl, basis: c.sourceCurrencyBasis, currency: CityCurrency.normalizeCode(c.currency)).isNotEmpty) return false;
   if ((c.sourceType == 'marketplace' || isMarketplaceOrDirectoryHost(c.priceSourceUrl)) &&
       exploreMarketplacePriceDateFailure(
         updatedAt: c.sourcePriceUpdatedAt,
@@ -22474,8 +22475,8 @@ class OpenAIClinic {
     final sourceCurrencyBasis = '${json['source_currency_basis'] ?? ''}'.trim();
     final sourceDateFailure = (sourceType == 'marketplace' ||
             isMarketplaceOrDirectoryHost(sourceUrl)) &&
-            sourceCurrencyBasis == 'viewer_localized'
-        ? 'marketplace_original_currency_unverified'
+            exploreMarketplaceCurrencyFailure(sourceUrl: sourceUrl, basis: sourceCurrencyBasis, currency: CityCurrency.normalizeCode('${json['currency'] ?? ''}')).isNotEmpty
+        ? exploreMarketplaceCurrencyFailure(sourceUrl: sourceUrl, basis: sourceCurrencyBasis, currency: CityCurrency.normalizeCode('${json['currency'] ?? ''}'))
         : (sourceType == 'marketplace' || isMarketplaceOrDirectoryHost(sourceUrl))
         ? exploreMarketplacePriceDateFailure(
             updatedAt: sourcePriceUpdatedAt,

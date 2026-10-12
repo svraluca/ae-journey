@@ -45,6 +45,19 @@ String exploreMarketplacePriceDateFailure({
   return '';
 }
 
+/// Published WhatClinic conversions use a stable EUR viewer presentation.
+/// The marker never means that EUR was the provider's original currency.
+String exploreMarketplaceCurrencyFailure({
+  required String sourceUrl, required String basis, required String currency,
+}) {
+  if (basis == 'viewer_localized') return 'marketplace_original_currency_unverified';
+  if (basis != 'platform_converted') return '';
+  final host = Uri.tryParse(sourceUrl)?.host.toLowerCase() ?? '';
+  return (host == 'whatclinic.com' || host == 'www.whatclinic.com') &&
+          (currency == 'EUR' || currency == '€')
+      ? '' : 'marketplace_conversion_currency_unstable';
+}
+
 /// Legacy HTML readers cannot certify Bookimed tariff dates. Let the backend
 /// bind its selected procedure record to the source date before showing it.
 /// WhatClinic's actual country selector marks viewer-converted menu amounts.

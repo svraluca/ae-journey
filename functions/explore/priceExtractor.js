@@ -804,7 +804,7 @@ function extractPriceEvidence({html, sourceUrl}) {
     if (host === 'bookimed.com' || host.endsWith('.bookimed.com')) priceDate = bookimedPriceDateReader(html);
     if ((host === 'whatclinic.com' || host.endsWith('.whatclinic.com')) &&
         /class\s*=\s*["'][^"']*\b(?:link-country-selector|country-selector-menu)\b/i.test(html)) {
-      sourceCurrencyBasis = 'viewer_localized';
+      sourceCurrencyBasis = 'platform_converted';
     }
   } catch (_) { /* Other source types keep their existing extraction gates. */ }
   const $ = cheerio.load(html);

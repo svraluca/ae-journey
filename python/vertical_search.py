@@ -325,6 +325,12 @@ async def run_progressive(engine, *, city, procedure, country_code, stored_pool,
         if engine.env_bool('ENABLE_EXA_RESCUE', False):
             stages.append('exa')
         stages.append('places')
+    if selected == 'chemical_peel' and marketplace_first and 'marketplace' in stages:
+        # Sparse peel searches now accept explicitly identified platform
+        # conversions. Reach the priced provider menus before spending time
+        # on dozens of broad articles. Keep ordinary/local queries and caps.
+        stages.remove('marketplace')
+        stages.insert(1 if saved_urls else 0, 'marketplace')
     # Each lane has a network cap; remembered-site probes also have a wall
     # deadline because cached HTML parsing/navigation can bypass GET counters.
     limits = {'saved_sources': 8, 'known_domains': 4, 'primary': 16,

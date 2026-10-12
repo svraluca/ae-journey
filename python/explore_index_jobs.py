@@ -25,7 +25,7 @@ import httpx
 from fastapi import HTTPException
 from pydantic import BaseModel, Field
 
-JOB_ENGINE_VERSION = "0.11.99"
+JOB_ENGINE_VERSION = "0.12.0"
 
 # HTML extraction/Firestore calls can occupy asyncio's default executor.
 # Queue acceptance, focus changes and polling must not wait behind crawlers.
@@ -351,7 +351,7 @@ class JobStore:
     def latest_results(self, key):
         with self.connect() as db:
             rows = db.execute(
-                "SELECT results FROM jobs WHERE market_key=? AND status='completed' "
+                "SELECT results FROM jobs WHERE market_key=? AND results!='[]' "
                 "ORDER BY updated DESC LIMIT 8", (key,),
             ).fetchall()
             return [item for row in rows for item in json.loads(row["results"])]
@@ -444,10 +444,10 @@ class IndexJobs:
             req.city, req.procedure, max_results=60,
             include_stale=True, read_only=True,
         )
-        if not self.e.firestore_enabled():
-            # Useful for local development without ADC. Production always
-            # reads the configured Firestore result collection.
-            stored = await self.store_call("latest_results", self.key(req))
+        # Accepted partials are durable before the crawl finishes or Firestore
+        # catches up. Every entry still passes the ordinary serving gates.
+        partials = await self.store_call("latest_results", self.key(req))
+        stored = [*partials, *stored]
         rows = (await self.validated_rows(stored, req,
                                          include_quarantined=include_quarantined))[:req.limit]
         rejected_sources = await self.store_call("rejected_sources", self.key(req))
